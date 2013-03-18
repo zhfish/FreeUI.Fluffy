@@ -1,0 +1,101 @@
+## Interface: 50200
+## Title: FreeUI
+## Notes: Minimalistic user interface.
+## Author: Haleth/Freethinker
+## Version: 6.3.1
+## RequiredDeps: Blizzard_CombatText
+## OptionalDeps: Clique, FreeUI_Options, MyRolePlay, oUF
+## SavedVariables: FreeUIGlobalConfig
+## SavedVariablesPerCharacter: FreeUIConfig
+
+core\core.lua
+
+options.lua
+profiles.lua
+
+core\api.lua
+core\gui.lua
+core\slash.lua
+core\notifications.lua
+
+oUF\oUF.xml
+
+scripts\actionbars.lua
+scripts\arena.lua
+scripts\automation.lua
+scripts\bags.lua
+scripts\bubbles.lua
+scripts\buffreminder.lua
+scripts\buffs.lua
+scripts\bufftracker.lua
+scripts\buttons.lua
+scripts\chat.lua
+scripts\chattabs.lua
+scripts\colours.lua
+scripts\combattext.lua
+scripts\combo.lua
+## scripts\cooldowns.lua
+scripts\corners.lua
+scripts\dbm.lua
+scripts\disable.lua
+scripts\durability.lua
+scripts\errors.lua
+scripts\events.lua
+scripts\expbar.lua
+scripts\fonts.lua
+scripts\globals.lua
+scripts\interrupt.lua
+scripts\itemglow.lua
+scripts\loot.lua
+scripts\lootroll.lua
+scripts\mail.lua
+scripts\map.lua
+scripts\marking.lua
+scripts\micromenu.lua
+scripts\minimap.lua
+scripts\mirrorbars.lua
+scripts\nameplates.lua
+scripts\panel.lua
+scripts\petbattles.lua
+scripts\rangecolor.lua
+scripts\role.lua
+scripts\stats.lua
+scripts\tekkrush.lua
+scripts\theme.lua
+scripts\threatmeter.lua
+scripts\tolbarad.lua
+## scripts\tooltip.lua
+scripts\unitframes.lua
+scripts\variables.lua
+scripts\watchframe.lua
+scripts\worldmarker.lua
+scripts\worldstateframe.lua
+
+class\paladin.lua
+class\shaman.lua
+
+scripts_extra\Filger\load.xml
+scripts_extra\CooldownPulse.lua
+scripts_extra\achievementpopup.lua
+scripts_extra\AlreadyKnown.lua
+scripts_extra\AltPowerBar.lua
+scripts_extra\autoscreenshots.lua
+scripts_extra\BGSpamRemove.lua
+scripts_extra\BgSpecIcon.lua
+scripts_extra\ChatFilter.lua
+scripts_extra\colorpicker.lua
+scripts_extra\DragEmAll.lua
+scripts_extra\emergency.lua
+scripts_extra\Focuser.lua
+scripts_extra\HiddenRaidNames.lua
+scripts_extra\idTip.lua
+scripts_extra\interruptsound.lua
+scripts_extra\MergeDamageMeterSpam.lua
+scripts_extra\Misc.lua
+scripts_extra\ncShadow.lua
+scripts_extra\NightFall.lua
+scripts_extra\saysapped.lua
+## scripts_extra\SafeQueue.lua
+scripts_extra\TabBinder.lua
+scripts_extra\UnitSounds.lua
+scripts_extra\WhisperSound.lua

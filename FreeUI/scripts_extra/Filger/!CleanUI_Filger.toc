@@ -1,0 +1,12 @@
+## Interface: 50100
+## Title: !|cff6633CCCleanUI|r_|cffFF0000Filger|r
+## Notes: Minimal buff/debuff/proc/cooldown tracking
+## Author: Nils Ruesch
+## Credits: Affli, Ildyria, SinaC
+## Thanks: Erratic, Wetxius
+
+
+Settings.lua
+config.lua
+CleanUI_Filger.lua
+## Cooldowns.lua

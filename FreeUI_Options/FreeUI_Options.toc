@@ -1,0 +1,11 @@
+## Interface: 50200
+## Version: 6.3
+## Title: FreeUI Options
+## Notes: Options GUI for FreeUI.
+## Author: Haleth/Freethinker
+## SavedVariables: FreeUIOptionsGlobal, FreeUIOptions
+## SavedVariablesPerCharacter: FreeUIOptionsPerChar
+
+freeui_options.lua
+localization\english.lua
+frames.lua
