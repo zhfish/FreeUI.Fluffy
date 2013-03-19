@@ -75,7 +75,7 @@ QuestFont_Shadow_Small:SetFont(NORDB, 14)
 QuestFont_Large:SetFont(Pepsi, 15)
 QuestFont_Large:SetShadowColor(0, 0, 0)
 QuestFont_Large:SetShadowOffset(1, -1)
-QuestFont_Shadow_Huge:SetFont(NORDB, 20) -- 任务面板右侧描述里的标题
+QuestFont_Shadow_Huge:SetFont(broadband, 20) -- 任务面板右侧描述里的标题
 QuestFont_Super_Huge:SetFont(font, 24)
 QuestFont_Super_Huge:SetShadowColor(0, 0, 0)
 QuestFont_Super_Huge:SetShadowOffset(1, -1)

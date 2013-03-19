@@ -95,7 +95,7 @@ scripts_extra\Misc.lua
 scripts_extra\ncShadow.lua
 scripts_extra\NightFall.lua
 scripts_extra\saysapped.lua
-## scripts_extra\SafeQueue.lua
+scripts_extra\SafeQueue.lua
 scripts_extra\TabBinder.lua
 scripts_extra\UnitSounds.lua
 scripts_extra\WhisperSound.lua

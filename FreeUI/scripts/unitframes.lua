@@ -1256,27 +1256,7 @@ local UnitSpecific = {
 
 		Power.value = PowerPoints
 
-		local tt = CreateFrame("Frame", nil, self)
-		local a1, p, a2, x, y = Health:GetPoint()
-		if C.unitframes.targettarget then y = y + 10 end
-		tt:SetPoint(a1, p, a2, x+60, y+26)
-		tt:SetWidth(110)
-		tt:SetHeight(12)
-
-		ttt = F.CreateFS(tt, 8, "RIGHT")
-		ttt:SetAllPoints(tt)
-
-		tt:RegisterEvent("UNIT_TARGET")
-		tt:RegisterEvent("PLAYER_TARGET_CHANGED")
-		tt:SetScript("OnEvent", function()
-			if(UnitName("targettarget")==UnitName("player")) then
-				ttt:SetText("> YOU <")
-				ttt:SetTextColor(1, 0, 0)
-			else
-				ttt:SetText(UnitName"targettarget")
-				ttt:SetTextColor(1, 1, 1)
-			end
-		end)
+		
 
 		-- Castbar:SetAllPoints(Health)
 		-- Castbar.Width = self:GetWidth()
@@ -1306,11 +1286,22 @@ local UnitSpecific = {
 		Name:SetPoint("BOTTOMLEFT", Power.value, "BOTTOMRIGHT")
 		Name:SetPoint("RIGHT", self)
 		Name:SetJustifyH"RIGHT"
-		Name:SetFont(font_CN, 8, 'OUTLINEMONOCHROME')
 		Name:SetTextColor(1, 1, 1)
 
 		self:Tag(Name, '[name]')
 		self.Name = Name
+
+		local f = CreateFrame("Frame")
+		f:RegisterEvent("PLAYER_TARGET_CHANGED")
+      	f:SetScript("OnEvent", function(self, event)
+			if (UnitIsPlayer("target")) then
+				Name:SetFont(font_CN, font_CN_Size, "OUTLINEMONOCHROME")
+			else
+				Name:SetFont(font_EN, font_EN_Size, "OUTLINEMONOCHROME")
+			end
+		end)
+
+
 
 		local Auras = CreateFrame("Frame", nil, self)
 		Auras:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -4)
@@ -1365,6 +1356,28 @@ local UnitSpecific = {
 
 		Spark:SetHeight(Health:GetHeight())
 
+		local Name = F.CreateFS(self, 8)
+		Name:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -2)
+		Name:SetPoint("LEFT", self)
+		Name:SetWidth(120)
+		Name:SetHeight(8)
+		Name:SetJustifyH"LEFT"
+		Name:SetTextColor(1, 1, 1)
+
+		self:Tag(Name, '[name]')
+		self.Name = Name
+
+		local f = CreateFrame("Frame")
+		f:RegisterEvent("PLAYER_FOCUS_CHANGED")
+      	f:SetScript("OnEvent", function(self, event)
+			if (UnitIsPlayer("focus")) then
+				Name:SetFont(font_CN, font_CN_Size, "OUTLINEMONOCHROME")
+			else
+				Name:SetFont(font_EN, font_EN_Size, "OUTLINEMONOCHROME")
+			end
+		end)
+
+
 		local Debuffs = CreateFrame("Frame", nil, self)
 		Debuffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
 		Debuffs.initialAnchor = "BOTTOMLEFT"
@@ -1388,26 +1401,34 @@ local UnitSpecific = {
 
 		Health:SetHeight(targettargetHeight - powerHeight - 1)
 
-		local f = CreateFrame("Frame") 
-     	f:SetScript("OnUpdate", function(self)
-			if UnitIsPlayer("focustarget") then 
-     			oUF_FreeFocusTarget.Name:SetFont(font_CN, font_CN_Size, "OUTLINEMONOCHROME") 
-   			else 
-      			oUF_FreeFocusTarget.Name:SetFont(font_EN, font_EN_Size, "OUTLINEMONOCHROME") 
-   			end 
-        end)  
-
 		local Name = F.CreateFS(self, 8)
 		Name:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -2)
 		Name:SetPoint("LEFT", self)
-		Name:SetFont(font_CN, font_CN_Size, 'OUTLINEMONOCHROME')
-		Name:SetWidth(74)
+		Name:SetWidth(80)
 		Name:SetHeight(8)
 		Name:SetJustifyH"LEFT"
-		Name:SetTextColor(1, 1, 1)
+--		Name:SetTextColor(1, 1, 1)
 
-		self:Tag(Name, '[name]')
-		self.Name = Name
+--		self:Tag(Name, '[name]')
+--		self.Name = Name
+
+		local f = CreateFrame("Frame")
+		f:RegisterEvent("UNIT_TARGET")
+		f:RegisterEvent("PLAYER_FOCUS_CHANGED")
+      	f:SetScript("OnEvent", function(self, event)
+			if(UnitName("focustarget")==UnitName("player")) then
+				Name:SetText("> YOU <")
+				Name:SetTextColor(1, 0, 0)
+			else
+				Name:SetText(UnitName"focustarget")
+				Name:SetTextColor(1, 1, 1)
+			end
+			if (UnitIsPlayer("focustarget")) then
+				Name:SetFont(font_CN, font_CN_Size, "OUTLINEMONOCHROME")
+			else
+				Name:SetFont(font_EN, font_EN_Size, "OUTLINEMONOCHROME")
+			end
+		end)
 
 	end,
 
@@ -1424,6 +1445,37 @@ local UnitSpecific = {
 		-- Castbar.Width = self:GetWidth()
 
 		Spark:SetHeight(Health:GetHeight())
+
+		local Name = F.CreateFS(self, 8)
+		Name:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -2)
+		Name:SetPoint("LEFT", self)
+		Name:SetWidth(80)
+		Name:SetHeight(8)
+		Name:SetJustifyH"LEFT"
+--		Name:SetTextColor(1, 1, 1)
+
+--		self:Tag(Name, '[name]')
+--		self.Name = Name
+
+		local f = CreateFrame("Frame")
+		f:RegisterEvent("UNIT_TARGET")
+		f:RegisterEvent("PLAYER_TARGET_CHANGED")
+      	f:SetScript("OnEvent", function(self, event)
+			if(UnitName("targettarget")==UnitName("player")) then
+				Name:SetText("> YOU <")
+				Name:SetTextColor(1, 0, 0)
+			else
+				Name:SetText(UnitName"targettarget")
+				Name:SetTextColor(1, 1, 1)
+			end
+			if (UnitIsPlayer("target")) then
+				Name:SetFont(font_CN, font_CN_Size, "OUTLINEMONOCHROME")
+			else
+				Name:SetFont(font_EN, font_EN_Size, "OUTLINEMONOCHROME")
+			end
+		end)
+
+
 	end,
 
 	boss = function(self, ...)
@@ -1572,6 +1624,7 @@ local UnitSpecific = {
 		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 2)
 		Name:SetWidth(110)
 		Name:SetHeight(8)
+		Name:SetFont(font_CN, 8, 'OUTLINEMONOCHROME')
 
 		self:Tag(Name, '[name]')
 		self.Name = Name
@@ -1612,7 +1665,7 @@ local UnitSpecific = {
 		Buffs:SetHeight(22)
 		Buffs:SetWidth(arenaWidth)
 		Buffs.num = C.unitframes.num_arena_buffs
-		Buffs.size = 26
+		Buffs.size = 22
 
 		self.Buffs = Buffs
 
