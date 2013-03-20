@@ -1468,7 +1468,7 @@ local UnitSpecific = {
 				Name:SetText(UnitName"targettarget")
 				Name:SetTextColor(1, 1, 1)
 			end
-			if (UnitIsPlayer("target")) then
+			if (UnitIsPlayer("targettarget")) then
 				Name:SetFont(font_CN, font_CN_Size, "OUTLINEMONOCHROME")
 			else
 				Name:SetFont(font_EN, font_EN_Size, "OUTLINEMONOCHROME")

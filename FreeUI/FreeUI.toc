@@ -90,6 +90,7 @@ scripts_extra\Focuser.lua
 scripts_extra\HiddenRaidNames.lua
 scripts_extra\idTip.lua
 scripts_extra\interruptsound.lua
+scripts_extra\losecontrol.lua
 scripts_extra\MergeDamageMeterSpam.lua
 scripts_extra\Misc.lua
 scripts_extra\ncShadow.lua

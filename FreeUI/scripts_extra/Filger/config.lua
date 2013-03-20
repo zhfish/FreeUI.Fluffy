@@ -369,6 +369,8 @@ Filger_Spells = {
 			{spellID = 126577, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Jade Spirit
 			{spellID = 104993, unitID = "player", caster = "all", filter = "BUFF"},
+			-- acceleration
+			{spellID = 138703, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
 			Name = "PVP_P_DEBUFF",
