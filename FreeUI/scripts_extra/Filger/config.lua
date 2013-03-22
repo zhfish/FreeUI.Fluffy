@@ -72,6 +72,8 @@ Filger_Spells = {
 			{spellID = 108683, unitID = "player", caster = "player", filter = "BUFF"},
 			-- blood horror
 			{spellID = 111397, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Shadow Bulwark
+			{spellID = 132413, unitID = "player", caster = "player", filter = "BUFF"},
 
 
 		},
@@ -202,6 +204,8 @@ Filger_Spells = {
 			{spellID = 126577, filter = "ICD", trigger = "BUFF", duration = 45},
 			-- yu'lon
 			{spellID = 128985, filter = "ICD", trigger = "BUFF", duration = 50},
+			-- Volatile Talisman of the Shado-Pan Assault
+			{spellID = 138703, filter = "ICD", trigger = "BUFF", duration = 45},
 			
 
 		},
@@ -889,6 +893,8 @@ Filger_Spells = {
 			{spellID = 137422, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- 浸电之水
 			{spellID = 138006, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Fluidity
+			{spellID = 138002, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 		},
 	},

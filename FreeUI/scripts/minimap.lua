@@ -306,3 +306,5 @@ end
 
 frame1px(Minimap)
 CreateShadow(Minimap)
+
+FRAMELOCK_STATES["PETBATTLES"]["MinimapCluster"]=""
