@@ -79,7 +79,7 @@ scripts_extra\CooldownPulse.lua
 scripts_extra\achievementpopup.lua
 scripts_extra\AlreadyKnown.lua
 scripts_extra\AltPowerBar.lua
-scripts_extra\autoscreenshots.lua
+## scripts_extra\autoscreenshots.lua
 scripts_extra\BGSpamRemove.lua
 scripts_extra\BgSpecIcon.lua
 scripts_extra\ChatFilter.lua
