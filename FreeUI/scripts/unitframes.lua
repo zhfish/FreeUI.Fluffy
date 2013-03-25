@@ -312,8 +312,6 @@ end
 --[[ Global ]]
 
 local Shared = function(self, unit, isSingle)
-	self.menu = addon.menu
-
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 
@@ -1851,7 +1849,7 @@ oUF:Factory(function(self)
 		spawnHelper(self, 'targettarget', "BOTTOMLEFT", target, "BOTTOMRIGHT", 4, 0)
 	end
 
-	for n = 1, 5 do
+	for n = 1, MAX_BOSS_FRAMES do
 		spawnHelper(self, 'boss' .. n, 'TOPLEFT', player, 'BOTTOMRIGHT', 350, 510 - (56 * n))
 	end
 
