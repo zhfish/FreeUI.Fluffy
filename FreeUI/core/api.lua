@@ -12,7 +12,7 @@ C.media = {
 	["font"] = "Interface\\AddOns\\FreeUI\\media\\Hooge0655.ttf", -- default pixel font
 	["font2"] = "Interface\\AddOns\\FreeUI\\media\\font.ttf", -- default font
 	["glow"] = "Interface\\AddOns\\FreeUI\\media\\glowTex", -- glow/shadow texture
-	["texture"] = "Interface\\AddOns\\FreeUI\\media\\Skullflower", -- statusbar texture
+	["texture"] = "Interface\\AddOns\\FreeUI\\media\\Texture1", -- statusbar texture
 	["bgFile"] = "Interface\\AddOns\\FreeUI\\media\\button_background_flat", 
 	["edgeFile"] = "Interface\\AddOns\\FreeUI\\media\\outer_shadow", 
 }

@@ -11,13 +11,45 @@ local function InitStyle()
 				local texture = _G[name.."BarTexture"]
 				local text = _G[name.."BarName"]
 				local timer = _G[name.."BarTimer"]
+				local icon1 = _G[name.."BarIcon1"]
+				local icon2 = _G[name.."BarIcon2"]
 
 				tbar:SetHeight(16)
 
 				F.CreateBDFrame(tbar, 0)
 
+				--[[ Left icon start
+				local ibg = CreateFrame("Frame", icon1)
+				ibg:SetPoint("TOPRIGHT", icon1, 1, 1)
+				ibg:SetPoint("BOTTOMLEFT", icon1, -1, -1)
+				ibg:SetBackdrop({
+					bgFile = "", 
+					edgeFile = C.media.backdrop,
+					edgeSize = 1,
+				})
+				ibg:SetBackdropBorderColor(0, 0, 0)
+				ibg:SetParent(tbar)
+				Left icon end ]]
+
+				local ibg = CreateFrame("Frame", icon2)
+				ibg:SetPoint("TOPRIGHT", icon2, 1, 1)
+				ibg:SetPoint("BOTTOMLEFT", icon2, -1, -1)
+				ibg:SetBackdrop({
+					bgFile = "", 
+					edgeFile = C.media.backdrop,
+					edgeSize = 1,
+				})
+				ibg:SetBackdropBorderColor(0, 0, 0)
+				ibg:SetParent(tbar)
+
 				texture:SetTexture(C.media.texture)
 				texture.SetTexture = F.dummy
+				icon1:SetTexCoord(.1,.9,.1,.9) 
+				icon1:ClearAllPoints()
+				icon1:SetPoint("LEFT", tbar, "LEFT", -23, 0)
+				icon2:SetTexCoord(.1,.9,.1,.9)
+				icon2:ClearAllPoints()
+				icon2:SetPoint("LEFT", tbar, "RIGHT", 4, 0)
 				text:SetPoint("CENTER")
 				text:SetPoint("LEFT", 4, 0)
 				text:SetFont(C.media.font, 8, "OUTLINEMONOCHROME")

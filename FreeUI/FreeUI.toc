@@ -76,7 +76,7 @@ class\shaman.lua
 
 scripts_extra\Filger\load.xml
 scripts_extra\CooldownPulse.lua
-scripts_extra\achievementpopup.lua
+## scripts_extra\achievementpopup.lua
 scripts_extra\AlreadyKnown.lua
 scripts_extra\AltPowerBar.lua
 ## scripts_extra\autoscreenshots.lua
@@ -89,6 +89,7 @@ scripts_extra\emergency.lua
 scripts_extra\Focuser.lua
 scripts_extra\HiddenRaidNames.lua
 scripts_extra\idTip.lua
+scripts_extra\itemlevel.lua
 scripts_extra\interruptsound.lua
 scripts_extra\losecontrol.lua
 scripts_extra\MergeDamageMeterSpam.lua

@@ -895,6 +895,9 @@ Filger_Spells = {
 			{spellID = 138006, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Fluidity
 			{spellID = 138002, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- tortos
+			-- 甲壳
+			{spellID = 137633, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 		},
 	},
