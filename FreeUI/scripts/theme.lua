@@ -140,10 +140,6 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 
-		F.ReskinRadio(RolePollPopupRoleButtonTank.checkButton)
-		F.ReskinRadio(RolePollPopupRoleButtonHealer.checkButton)
-		F.ReskinRadio(RolePollPopupRoleButtonDPS.checkButton)
-
 		-- [[ Backdrop frames ]]
 
 		F.SetBD(DressUpFrame, 10, -12, -34, 74)
@@ -151,14 +147,12 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		F.SetBD(SpellBookFrame)
 		F.SetBD(RaidParentFrame)
 
-		local FrameBDs = {"GameMenuFrame", "InterfaceOptionsFrame", "VideoOptionsFrame", "AudioOptionsFrame", "LFGDungeonReadyStatus", "ChatConfigFrame", "StackSplitFrame", "AddFriendFrame", "FriendsFriendsFrame", "ColorPickerFrame", "ReadyCheckFrame", "LFGDungeonReadyDialog", "LFDRoleCheckPopup", "RolePollPopup", "GuildInviteFrame", "ChannelFrameDaughterFrame", "LFGInvitePopup"}
+		local FrameBDs = {"GameMenuFrame", "InterfaceOptionsFrame", "VideoOptionsFrame", "AudioOptionsFrame", "ChatConfigFrame", "StackSplitFrame", "AddFriendFrame", "FriendsFriendsFrame", "ColorPickerFrame", "ReadyCheckFrame", "GuildInviteFrame", "ChannelFrameDaughterFrame"}
 		for i = 1, #FrameBDs do
 			FrameBD = _G[FrameBDs[i]]
 			F.CreateBD(FrameBD)
 			F.CreateSD(FrameBD)
 		end
-
-		LFGDungeonReadyDialog.SetBackdrop = F.dummy
 
 		-- Dropdown lists
 
@@ -621,57 +615,86 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		F.ReskinTab(PVEFrameTab1)
 		F.ReskinTab(PVEFrameTab2)
 
-		-- LFG frame (common)
+		-- LFG frame
 
-		LFGDungeonReadyDialogRoleIconTexture:SetTexture("Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES")
+		LFGDungeonReadyDialogBackground:Hide()
+		LFGDungeonReadyDialogBottomArt:Hide()
+		LFGDungeonReadyDialogFiligree:Hide()
 
-		for i = 1, 2 do
-			local reward = _G["LFGDungeonReadyDialogRewardsFrameReward"..i]
-			local border = _G["LFGDungeonReadyDialogRewardsFrameReward"..i.."Border"]
+		LFGDungeonReadyDialogRoleIconTexture:SetTexture(C.media.roleIcons)
+		LFGDungeonReadyDialogRoleIconLeaderIcon:SetTexture(C.media.roleIcons)
+		LFGDungeonReadyDialogRoleIconLeaderIcon:SetTexCoord(0, 0.296875, 0.015625, 0.2875)
 
-			reward.texture:SetTexCoord(.08, .92, .08, .92)
+		local leaderBg = F.CreateBG(LFGDungeonReadyDialogRoleIconLeaderIcon)
+		leaderBg:SetDrawLayer("ARTWORK", 2)
+		leaderBg:SetPoint("TOPLEFT", LFGDungeonReadyDialogRoleIconLeaderIcon, 2, 0)
+		leaderBg:SetPoint("BOTTOMRIGHT", LFGDungeonReadyDialogRoleIconLeaderIcon, -3, 4)
 
-			border:SetTexture(0, 0, 0)
-			border:SetDrawLayer("BACKGROUND")
-			border:SetPoint("TOPLEFT", reward.texture, -1, 1)
-			border:SetPoint("BOTTOMRIGHT", reward.texture, 1, -1)
-		end
+		hooksecurefunc("LFGDungeonReadyPopup_Update", function()
+			leaderBg:SetShown(LFGDungeonReadyDialogRoleIconLeaderIcon:IsShown())
+		end)
 
 		do
 			local left = LFGDungeonReadyDialogRoleIcon:CreateTexture(nil, "OVERLAY")
 			left:SetWidth(1)
 			left:SetTexture(C.media.backdrop)
 			left:SetVertexColor(0, 0, 0)
-			left:SetPoint("TOPLEFT", 10, -8)
-			left:SetPoint("BOTTOMLEFT", 10, 11)
+			left:SetPoint("TOPLEFT", 9, -7)
+			left:SetPoint("BOTTOMLEFT", 9, 10)
 
 			local right = LFGDungeonReadyDialogRoleIcon:CreateTexture(nil, "OVERLAY")
 			right:SetWidth(1)
 			right:SetTexture(C.media.backdrop)
 			right:SetVertexColor(0, 0, 0)
-			right:SetPoint("TOPRIGHT", -9, -8)
-			right:SetPoint("BOTTOMRIGHT", -9, 11)
+			right:SetPoint("TOPRIGHT", -8, -7)
+			right:SetPoint("BOTTOMRIGHT", -8, 10)
 
 			local top = LFGDungeonReadyDialogRoleIcon:CreateTexture(nil, "OVERLAY")
 			top:SetHeight(1)
 			top:SetTexture(C.media.backdrop)
 			top:SetVertexColor(0, 0, 0)
-			top:SetPoint("TOPLEFT", 10, -8)
-			top:SetPoint("TOPRIGHT", -9, -8)
+			top:SetPoint("TOPLEFT", 9, -7)
+			top:SetPoint("TOPRIGHT", -8, -7)
 
 			local bottom = LFGDungeonReadyDialogRoleIcon:CreateTexture(nil, "OVERLAY")
 			bottom:SetHeight(1)
 			bottom:SetTexture(C.media.backdrop)
 			bottom:SetVertexColor(0, 0, 0)
-			bottom:SetPoint("BOTTOMLEFT", 10, 11)
-			bottom:SetPoint("BOTTOMRIGHT", -9, 11)
+			bottom:SetPoint("BOTTOMLEFT", 9, 10)
+			bottom:SetPoint("BOTTOMRIGHT", -8, 10)
 		end
 
 		hooksecurefunc("LFGDungeonReadyDialogReward_SetMisc", function(button)
+			if not button.styled then
+				local border = _G[button:GetName().."Border"]
+
+				button.texture:SetTexCoord(.08, .92, .08, .92)
+
+				border:SetTexture(0, 0, 0)
+				border:SetDrawLayer("BACKGROUND")
+				border:SetPoint("TOPLEFT", button.texture, -1, 1)
+				border:SetPoint("BOTTOMRIGHT", button.texture, 1, -1)
+
+				button.styled = true
+			end
+
 			button.texture:SetTexture("Interface\\Icons\\inv_misc_coin_02")
 		end)
 
 		hooksecurefunc("LFGDungeonReadyDialogReward_SetReward", function(button, dungeonID, rewardIndex, rewardType, rewardArg)
+			if not button.styled then
+				local border = _G[button:GetName().."Border"]
+
+				button.texture:SetTexCoord(.08, .92, .08, .92)
+
+				border:SetTexture(0, 0, 0)
+				border:SetDrawLayer("BACKGROUND")
+				border:SetPoint("TOPLEFT", button.texture, -1, 1)
+				border:SetPoint("BOTTOMRIGHT", button.texture, 1, -1)
+
+				button.styled = true
+			end
+
 			local name, texturePath, quantity
 			if rewardType == "reward" then
 				name, texturePath, quantity = GetLFGDungeonRewardInfo(dungeonID, rewardIndex);
@@ -679,16 +702,32 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 				name, texturePath, quantity = GetLFGDungeonShortageRewardInfo(dungeonID, rewardArg, rewardIndex);
 			end
 			if texturePath then
-				button.texture:SetTexture("Interface\\Icons\\inv_misc_coin_02")
+				button.texture:SetTexture(texturePath)
 			end
 		end)
 
-		for _, roleButton in pairs({LFDQueueFrameRoleButtonTank, LFDQueueFrameRoleButtonHealer, LFDQueueFrameRoleButtonDPS, LFDQueueFrameRoleButtonLeader, LFRQueueFrameRoleButtonTank, LFRQueueFrameRoleButtonHealer, LFRQueueFrameRoleButtonDPS, LFDRoleCheckPopupRoleButtonTank, LFDRoleCheckPopupRoleButtonHealer, LFDRoleCheckPopupRoleButtonDPS, RaidFinderQueueFrameRoleButtonTank, RaidFinderQueueFrameRoleButtonHealer, RaidFinderQueueFrameRoleButtonDPS, RaidFinderQueueFrameRoleButtonLeader, LFGInvitePopupRoleButtonTank, LFGInvitePopupRoleButtonHealer, LFGInvitePopupRoleButtonDPS}) do
+		F.CreateBD(LFGDungeonReadyDialog)
+		LFGDungeonReadyDialog.SetBackdrop = F.dummy
+		F.CreateSD(LFGDungeonReadyDialog)
+		F.CreateBD(LFGInvitePopup)
+		F.CreateSD(LFGInvitePopup)
+		F.CreateBD(LFGDungeonReadyStatus)
+		F.CreateSD(LFGDungeonReadyStatus)
+
+		F.Reskin(LFGDungeonReadyDialogEnterDungeonButton)
+		F.Reskin(LFGDungeonReadyDialogLeaveQueueButton)
+		F.Reskin(LFGInvitePopupAcceptButton)
+		F.Reskin(LFGInvitePopupDeclineButton)
+		F.ReskinClose(LFGDungeonReadyDialogCloseButton)
+		F.ReskinClose(LFGDungeonReadyStatusCloseButton)
+
+		for _, roleButton in pairs({LFDQueueFrameRoleButtonTank, LFDQueueFrameRoleButtonHealer, LFDQueueFrameRoleButtonDPS, LFDQueueFrameRoleButtonLeader, LFRQueueFrameRoleButtonTank, LFRQueueFrameRoleButtonHealer, LFRQueueFrameRoleButtonDPS, RaidFinderQueueFrameRoleButtonTank, RaidFinderQueueFrameRoleButtonHealer, RaidFinderQueueFrameRoleButtonDPS, RaidFinderQueueFrameRoleButtonLeader}) do
 			if roleButton.background then
 				roleButton.background:SetTexture("")
 			end
 
-			roleButton:SetNormalTexture("Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES")
+			roleButton.cover:SetTexture(C.media.roleIcons)
+			roleButton:SetNormalTexture(C.media.roleIcons)
 
 			roleButton.checkButton:SetFrameLevel(roleButton:GetFrameLevel() + 2)
 
@@ -746,6 +785,92 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 			F.ReskinCheck(roleButton.checkButton)
 		end
 
+		for _, roleButton in pairs({LFDRoleCheckPopupRoleButtonTank, LFDRoleCheckPopupRoleButtonHealer, LFDRoleCheckPopupRoleButtonDPS, LFGInvitePopupRoleButtonTank, LFGInvitePopupRoleButtonHealer, LFGInvitePopupRoleButtonDPS}) do
+			roleButton.cover:SetTexture(C.media.roleIcons)
+			roleButton:SetNormalTexture(C.media.roleIcons)
+
+			roleButton.checkButton:SetFrameLevel(roleButton:GetFrameLevel() + 2)
+
+			for i = 1, 2 do
+				local left = roleButton:CreateTexture(nil, "OVERLAY")
+				left:SetWidth(1)
+				left:SetTexture(C.media.backdrop)
+				left:SetVertexColor(0, 0, 0)
+				left:SetPoint("TOPLEFT", roleButton, 9, -7)
+				left:SetPoint("BOTTOMLEFT", roleButton, 9, 11)
+				roleButton["leftLine"..i] = left
+
+				local right = roleButton:CreateTexture(nil, "OVERLAY")
+				right:SetWidth(1)
+				right:SetTexture(C.media.backdrop)
+				right:SetVertexColor(0, 0, 0)
+				right:SetPoint("TOPRIGHT", roleButton, -9, -7)
+				right:SetPoint("BOTTOMRIGHT", roleButton, -9, 11)
+				roleButton["rightLine"..i] = right
+
+				local top = roleButton:CreateTexture(nil, "OVERLAY")
+				top:SetHeight(1)
+				top:SetTexture(C.media.backdrop)
+				top:SetVertexColor(0, 0, 0)
+				top:SetPoint("TOPLEFT", roleButton, 9, -7)
+				top:SetPoint("TOPRIGHT", roleButton, -9, -7)
+				roleButton["topLine"..i] = top
+
+				local bottom = roleButton:CreateTexture(nil, "OVERLAY")
+				bottom:SetHeight(1)
+				bottom:SetTexture(C.media.backdrop)
+				bottom:SetVertexColor(0, 0, 0)
+				bottom:SetPoint("BOTTOMLEFT", roleButton, 9, 11)
+				bottom:SetPoint("BOTTOMRIGHT", roleButton, -9, 11)
+				roleButton["bottomLine"..i] = bottom
+			end
+
+			F.ReskinCheck(roleButton.checkButton)
+		end
+
+		do
+			local roleButtons = {LFGDungeonReadyStatusGroupedTank, LFGDungeonReadyStatusGroupedHealer, LFGDungeonReadyStatusGroupedDamager, LFGDungeonReadyStatusRolelessReady}
+
+			for i = 1, 5 do
+				tinsert(roleButtons, _G["LFGDungeonReadyStatusIndividualPlayer"..i])
+			end
+
+			for _, roleButton in pairs(roleButtons) do
+				roleButton.texture:SetTexture(C.media.roleIcons)
+				roleButton.statusIcon:SetDrawLayer("OVERLAY", 2)
+
+				local left = roleButton:CreateTexture(nil, "OVERLAY")
+				left:SetWidth(1)
+				left:SetTexture(C.media.backdrop)
+				left:SetVertexColor(0, 0, 0)
+				left:SetPoint("TOPLEFT", 7, -6)
+				left:SetPoint("BOTTOMLEFT", 7, 8)
+
+				local right = roleButton:CreateTexture(nil, "OVERLAY")
+				right:SetWidth(1)
+				right:SetTexture(C.media.backdrop)
+				right:SetVertexColor(0, 0, 0)
+				right:SetPoint("TOPRIGHT", -7, -6)
+				right:SetPoint("BOTTOMRIGHT", -7, 8)
+
+				local top = roleButton:CreateTexture(nil, "OVERLAY")
+				top:SetHeight(1)
+				top:SetTexture(C.media.backdrop)
+				top:SetVertexColor(0, 0, 0)
+				top:SetPoint("TOPLEFT", 7, -6)
+				top:SetPoint("TOPRIGHT", -7, -6)
+
+				local bottom = roleButton:CreateTexture(nil, "OVERLAY")
+				bottom:SetHeight(1)
+				bottom:SetTexture(C.media.backdrop)
+				bottom:SetVertexColor(0, 0, 0)
+				bottom:SetPoint("BOTTOMLEFT", 7, 8)
+				bottom:SetPoint("BOTTOMRIGHT", -7, 8)
+			end
+		end
+
+		LFGDungeonReadyStatusRolelessReady.texture:SetTexCoord(0.5234375, 0.78750, 0, 0.25875)
+
 		hooksecurefunc("LFG_SetRoleIconIncentive", function(roleButton, incentiveIndex)
 			if incentiveIndex then
 				local tex
@@ -795,6 +920,50 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 				button.bottomLine2:SetVertexColor(1, .9, .06)
 			end
 		end)
+
+		-- Role poll
+
+		F.CreateBD(RolePollPopup)
+		F.CreateSD(RolePollPopup)
+		F.Reskin(RolePollPopupAcceptButton)
+		F.ReskinClose(RolePollPopupCloseButton)
+
+		for _, roleButton in pairs({RolePollPopupRoleButtonTank, RolePollPopupRoleButtonHealer, RolePollPopupRoleButtonDPS}) do
+			roleButton.cover:SetTexture(C.media.roleIcons)
+			roleButton:SetNormalTexture(C.media.roleIcons)
+
+			roleButton.checkButton:SetFrameLevel(roleButton:GetFrameLevel() + 2)
+
+			local left = roleButton:CreateTexture(nil, "OVERLAY")
+			left:SetWidth(1)
+			left:SetTexture(C.media.backdrop)
+			left:SetVertexColor(0, 0, 0)
+			left:SetPoint("TOPLEFT", 9, -7)
+			left:SetPoint("BOTTOMLEFT", 9, 11)
+
+			local right = roleButton:CreateTexture(nil, "OVERLAY")
+			right:SetWidth(1)
+			right:SetTexture(C.media.backdrop)
+			right:SetVertexColor(0, 0, 0)
+			right:SetPoint("TOPRIGHT", -9, -7)
+			right:SetPoint("BOTTOMRIGHT", -9, 11)
+
+			local top = roleButton:CreateTexture(nil, "OVERLAY")
+			top:SetHeight(1)
+			top:SetTexture(C.media.backdrop)
+			top:SetVertexColor(0, 0, 0)
+			top:SetPoint("TOPLEFT", 9, -7)
+			top:SetPoint("TOPRIGHT", -9, -7)
+
+			local bottom = roleButton:CreateTexture(nil, "OVERLAY")
+			bottom:SetHeight(1)
+			bottom:SetTexture(C.media.backdrop)
+			bottom:SetVertexColor(0, 0, 0)
+			bottom:SetPoint("BOTTOMLEFT", 9, 11)
+			bottom:SetPoint("BOTTOMRIGHT", -9, 11)
+
+			F.ReskinRadio(roleButton.checkButton)
+		end
 
 		-- LFD frame
 
@@ -854,6 +1023,10 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		bonusValor.BonusText:SetPoint("LEFT", bonusValor.Border, "RIGHT", -5, -1)
 		F.CreateBG(bonusValor.Icon)
 
+		F.CreateBD(LFDRoleCheckPopup)
+		F.CreateSD(LFDRoleCheckPopup)
+		F.Reskin(LFDRoleCheckPopupAcceptButton)
+		F.Reskin(LFDRoleCheckPopupDeclineButton)
 		F.Reskin(LFDQueueFrameRandomScrollFrameChildFrame.bonusRepFrame.ChooseButton)
 
 		-- Raid Finder
@@ -3327,9 +3500,6 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		WhoListScrollFrame:GetRegions():Hide()
 		select(2, WhoListScrollFrame:GetRegions()):Hide()
 		select(2, GuildChallengeAlertFrame:GetRegions()):Hide()
-		LFGDungeonReadyDialogBackground:Hide()
-		LFGDungeonReadyDialogBottomArt:Hide()
-		LFGDungeonReadyDialogFiligree:Hide()
 		InterfaceOptionsFrameTab1TabSpacer:SetAlpha(0)
 		for i = 1, 2 do
 			_G["InterfaceOptionsFrameTab"..i.."Left"]:SetAlpha(0)
@@ -3523,7 +3693,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		-- [[ Buttons ]]
 
-		local buttons = {"VideoOptionsFrameOkay", "VideoOptionsFrameCancel", "VideoOptionsFrameDefaults", "VideoOptionsFrameApply", "AudioOptionsFrameOkay", "AudioOptionsFrameCancel", "AudioOptionsFrameDefaults", "InterfaceOptionsFrameDefaults", "InterfaceOptionsFrameOkay", "InterfaceOptionsFrameCancel", "ChatConfigFrameOkayButton", "ChatConfigFrameDefaultButton", "DressUpFrameCancelButton", "DressUpFrameResetButton", "WhoFrameWhoButton", "WhoFrameAddFriendButton", "WhoFrameGroupInviteButton", "SendMailMailButton", "SendMailCancelButton", "OpenMailReplyButton", "OpenMailDeleteButton", "OpenMailCancelButton", "OpenMailReportSpamButton", "aMailButton", "ChannelFrameNewButton", "RaidFrameRaidInfoButton", "RaidFrameConvertToRaidButton", "GearManagerDialogPopupOkay", "GearManagerDialogPopupCancel", "StackSplitOkayButton", "StackSplitCancelButton", "GameMenuButtonHelp", "GameMenuButtonOptions", "GameMenuButtonUIOptions", "GameMenuButtonKeybindings", "GameMenuButtonMacros", "GameMenuButtonLogout", "GameMenuButtonQuit", "GameMenuButtonContinue", "GameMenuButtonMacOptions", "LFDQueueFrameFindGroupButton", "LFRQueueFrameFindGroupButton", "LFRQueueFrameAcceptCommentButton", "AddFriendEntryFrameAcceptButton", "AddFriendEntryFrameCancelButton", "FriendsFriendsSendRequestButton", "FriendsFriendsCloseButton", "ColorPickerOkayButton", "ColorPickerCancelButton", "LFGDungeonReadyDialogEnterDungeonButton", "LFGDungeonReadyDialogLeaveQueueButton", "LFRBrowseFrameSendMessageButton", "LFRBrowseFrameInviteButton", "LFRBrowseFrameRefreshButton", "LFDRoleCheckPopupAcceptButton", "LFDRoleCheckPopupDeclineButton", "GuildInviteFrameJoinButton", "GuildInviteFrameDeclineButton", "FriendsFramePendingButton1AcceptButton", "FriendsFramePendingButton1DeclineButton", "RaidInfoExtendButton", "RaidInfoCancelButton", "PaperDollEquipmentManagerPaneEquipSet", "PaperDollEquipmentManagerPaneSaveSet", "HelpFrameAccountSecurityOpenTicket", "HelpFrameCharacterStuckStuck", "HelpFrameOpenTicketHelpTopIssues", "HelpFrameOpenTicketHelpOpenTicket", "ReadyCheckFrameYesButton", "ReadyCheckFrameNoButton", "RolePollPopupAcceptButton", "HelpFrameTicketSubmit", "HelpFrameTicketCancel", "HelpFrameKnowledgebaseSearchButton", "GhostFrame", "HelpFrameGM_ResponseNeedMoreHelp", "HelpFrameGM_ResponseCancel", "GMChatOpenLog", "HelpFrameKnowledgebaseNavBarHomeButton", "AddFriendInfoFrameContinueButton", "LFDQueueFramePartyBackfillBackfillButton", "LFDQueueFramePartyBackfillNoBackfillButton", "ChannelFrameDaughterFrameOkayButton", "ChannelFrameDaughterFrameCancelButton", "PendingListInfoFrameContinueButton", "LFDQueueFrameNoLFDWhileLFRLeaveQueueButton", "InterfaceOptionsHelpPanelResetTutorials", "RaidFinderFrameFindRaidButton", "RaidFinderQueueFrameIneligibleFrameLeaveQueueButton", "SideDressUpModelResetButton", "LFGInvitePopupAcceptButton", "LFGInvitePopupDeclineButton", "RaidFinderQueueFramePartyBackfillBackfillButton", "RaidFinderQueueFramePartyBackfillNoBackfillButton", "ScrollOfResurrectionSelectionFrameAcceptButton", "ScrollOfResurrectionSelectionFrameCancelButton", "ScrollOfResurrectionFrameAcceptButton", "ScrollOfResurrectionFrameCancelButton", "HelpFrameReportBugSubmit", "HelpFrameSubmitSuggestionSubmit", "ReportPlayerNameDialogReportButton", "ReportPlayerNameDialogCancelButton", "ReportCheatingDialogReportButton", "ReportCheatingDialogCancelButton", "HelpFrameOpenTicketHelpItemRestoration"}
+		local buttons = {"VideoOptionsFrameOkay", "VideoOptionsFrameCancel", "VideoOptionsFrameDefaults", "VideoOptionsFrameApply", "AudioOptionsFrameOkay", "AudioOptionsFrameCancel", "AudioOptionsFrameDefaults", "InterfaceOptionsFrameDefaults", "InterfaceOptionsFrameOkay", "InterfaceOptionsFrameCancel", "ChatConfigFrameOkayButton", "ChatConfigFrameDefaultButton", "DressUpFrameCancelButton", "DressUpFrameResetButton", "WhoFrameWhoButton", "WhoFrameAddFriendButton", "WhoFrameGroupInviteButton", "SendMailMailButton", "SendMailCancelButton", "OpenMailReplyButton", "OpenMailDeleteButton", "OpenMailCancelButton", "OpenMailReportSpamButton", "aMailButton", "ChannelFrameNewButton", "RaidFrameRaidInfoButton", "RaidFrameConvertToRaidButton", "GearManagerDialogPopupOkay", "GearManagerDialogPopupCancel", "StackSplitOkayButton", "StackSplitCancelButton", "GameMenuButtonHelp", "GameMenuButtonOptions", "GameMenuButtonUIOptions", "GameMenuButtonKeybindings", "GameMenuButtonMacros", "GameMenuButtonLogout", "GameMenuButtonQuit", "GameMenuButtonContinue", "GameMenuButtonMacOptions", "LFDQueueFrameFindGroupButton", "LFRQueueFrameFindGroupButton", "LFRQueueFrameAcceptCommentButton", "AddFriendEntryFrameAcceptButton", "AddFriendEntryFrameCancelButton", "FriendsFriendsSendRequestButton", "FriendsFriendsCloseButton", "ColorPickerOkayButton", "ColorPickerCancelButton", "LFRBrowseFrameSendMessageButton", "LFRBrowseFrameInviteButton", "LFRBrowseFrameRefreshButton", "GuildInviteFrameJoinButton", "GuildInviteFrameDeclineButton", "FriendsFramePendingButton1AcceptButton", "FriendsFramePendingButton1DeclineButton", "RaidInfoExtendButton", "RaidInfoCancelButton", "PaperDollEquipmentManagerPaneEquipSet", "PaperDollEquipmentManagerPaneSaveSet", "HelpFrameAccountSecurityOpenTicket", "HelpFrameCharacterStuckStuck", "HelpFrameOpenTicketHelpTopIssues", "HelpFrameOpenTicketHelpOpenTicket", "ReadyCheckFrameYesButton", "ReadyCheckFrameNoButton", "HelpFrameTicketSubmit", "HelpFrameTicketCancel", "HelpFrameKnowledgebaseSearchButton", "GhostFrame", "HelpFrameGM_ResponseNeedMoreHelp", "HelpFrameGM_ResponseCancel", "GMChatOpenLog", "HelpFrameKnowledgebaseNavBarHomeButton", "AddFriendInfoFrameContinueButton", "LFDQueueFramePartyBackfillBackfillButton", "LFDQueueFramePartyBackfillNoBackfillButton", "ChannelFrameDaughterFrameOkayButton", "ChannelFrameDaughterFrameCancelButton", "PendingListInfoFrameContinueButton", "LFDQueueFrameNoLFDWhileLFRLeaveQueueButton", "InterfaceOptionsHelpPanelResetTutorials", "RaidFinderFrameFindRaidButton", "RaidFinderQueueFrameIneligibleFrameLeaveQueueButton", "SideDressUpModelResetButton", "RaidFinderQueueFramePartyBackfillBackfillButton", "RaidFinderQueueFramePartyBackfillNoBackfillButton", "ScrollOfResurrectionSelectionFrameAcceptButton", "ScrollOfResurrectionSelectionFrameCancelButton", "ScrollOfResurrectionFrameAcceptButton", "ScrollOfResurrectionFrameCancelButton", "HelpFrameReportBugSubmit", "HelpFrameSubmitSuggestionSubmit", "ReportPlayerNameDialogReportButton", "ReportPlayerNameDialogCancelButton", "ReportCheatingDialogReportButton", "ReportCheatingDialogCancelButton", "HelpFrameOpenTicketHelpItemRestoration"}
 		for i = 1, #buttons do
 			local reskinbutton = _G[buttons[i]]
 			if reskinbutton then
@@ -3541,7 +3711,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 			F.ReskinArrow(_G[f:GetName().."ButtonFrameBottomButton"], "down")
 		end)
 
-		local closebuttons = {"SpellBookFrameCloseButton", "HelpFrameCloseButton", "RaidInfoCloseButton", "RolePollPopupCloseButton", "ItemRefCloseButton", "TokenFramePopupCloseButton", "ReputationDetailCloseButton", "ChannelFrameDaughterFrameDetailCloseButton", "LFGDungeonReadyStatusCloseButton", "RaidParentFrameCloseButton", "SideDressUpModelCloseButton", "LFGDungeonReadyDialogCloseButton"}
+		local closebuttons = {"SpellBookFrameCloseButton", "HelpFrameCloseButton", "RaidInfoCloseButton", "ItemRefCloseButton", "TokenFramePopupCloseButton", "ReputationDetailCloseButton", "ChannelFrameDaughterFrameDetailCloseButton", "RaidParentFrameCloseButton", "SideDressUpModelCloseButton"}
 		for i = 1, #closebuttons do
 			F.ReskinClose(_G[closebuttons[i]])
 		end
@@ -3595,6 +3765,11 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		end
 
 		ArchaeologyFrameInfoButton:SetPoint("TOPLEFT", 3, -3)
+
+		ArchaeologyFrameSummarytButton:SetPoint("TOPLEFT", ArchaeologyFrame, "TOPRIGHT", 1, -50)
+		ArchaeologyFrameSummarytButton:SetFrameLevel(ArchaeologyFrame:GetFrameLevel()-1)
+		ArchaeologyFrameCompletedButton:SetPoint("TOPLEFT", ArchaeologyFrame, "TOPRIGHT", 1, -120)
+		ArchaeologyFrameCompletedButton:SetFrameLevel(ArchaeologyFrame:GetFrameLevel()-1)
 
 		F.ReskinDropDown(ArchaeologyFrameRaceFilter)
 		F.ReskinClose(ArchaeologyFrameCloseButton)
@@ -4027,6 +4202,8 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 			bottom:SetPoint("BOTTOMLEFT", tex, -1, -1)
 			bottom:SetPoint("BOTTOMRIGHT", tex, 1, -1)
 		end
+
+		AchievementFrameAchievementsContainerButton1.background:SetPoint("TOPLEFT", AchievementFrameAchievementsContainerButton1, "TOPLEFT", 2, -3)
 
 		hooksecurefunc("AchievementButton_DisplayAchievement", function(button, category, achievement)
 			local _, _, _, completed = GetAchievementInfo(category, achievement)
@@ -5881,11 +6058,47 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		LookingForGuildFrameTopBorder:Hide()
 		LookingForGuildFrameTopRightCorner:Hide()
 
+		for _, roleButton in pairs({LookingForGuildTankButton, LookingForGuildHealerButton, LookingForGuildDamagerButton}) do
+			roleButton.cover:SetTexture(C.media.roleIcons)
+			roleButton:SetNormalTexture(C.media.roleIcons)
+
+			roleButton.checkButton:SetFrameLevel(roleButton:GetFrameLevel() + 2)
+
+			local left = roleButton:CreateTexture(nil, "OVERLAY")
+			left:SetWidth(1)
+			left:SetTexture(C.media.backdrop)
+			left:SetVertexColor(0, 0, 0)
+			left:SetPoint("TOPLEFT", 5, -4)
+			left:SetPoint("BOTTOMLEFT", 5, 6)
+
+			local right = roleButton:CreateTexture(nil, "OVERLAY")
+			right:SetWidth(1)
+			right:SetTexture(C.media.backdrop)
+			right:SetVertexColor(0, 0, 0)
+			right:SetPoint("TOPRIGHT", -5, -4)
+			right:SetPoint("BOTTOMRIGHT", -5, 6)
+
+			local top = roleButton:CreateTexture(nil, "OVERLAY")
+			top:SetHeight(1)
+			top:SetTexture(C.media.backdrop)
+			top:SetVertexColor(0, 0, 0)
+			top:SetPoint("TOPLEFT", 5, -4)
+			top:SetPoint("TOPRIGHT", -5, -4)
+
+			local bottom = roleButton:CreateTexture(nil, "OVERLAY")
+			bottom:SetHeight(1)
+			bottom:SetTexture(C.media.backdrop)
+			bottom:SetVertexColor(0, 0, 0)
+			bottom:SetPoint("BOTTOMLEFT", 5, 6)
+			bottom:SetPoint("BOTTOMRIGHT", -5, 6)
+
+			F.ReskinCheck(roleButton.checkButton)
+		end
+
 		F.Reskin(LookingForGuildBrowseButton)
 		F.Reskin(LookingForGuildRequestButton)
 		F.Reskin(GuildFinderRequestMembershipFrameAcceptButton)
 		F.Reskin(GuildFinderRequestMembershipFrameCancelButton)
-
 		F.ReskinScroll(LookingForGuildBrowseFrameContainerScrollBar)
 		F.ReskinClose(LookingForGuildFrameCloseButton)
 		F.ReskinCheck(LookingForGuildQuestButton)
@@ -5895,9 +6108,6 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		F.ReskinCheck(LookingForGuildRPButton)
 		F.ReskinCheck(LookingForGuildWeekdaysButton)
 		F.ReskinCheck(LookingForGuildWeekendsButton)
-		F.ReskinCheck(LookingForGuildTankButton:GetChildren())
-		F.ReskinCheck(LookingForGuildHealerButton:GetChildren())
-		F.ReskinCheck(LookingForGuildDamagerButton:GetChildren())
 		F.ReskinInput(GuildFinderRequestMembershipFrameInputFrame)
 	elseif addon == "Blizzard_MacroUI" then
 		select(18, MacroFrame:GetRegions()):Hide()

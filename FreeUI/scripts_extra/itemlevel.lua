@@ -1,4 +1,4 @@
-local DECIMAL_PLACES = 1
+﻿local DECIMAL_PLACES = 1
 
 -- additional strings. if you don't like it just assign 'nil'. but do not delete these variables themselves.
 local UPDATED = CANNOT_COOPERATE_LABEL -- '*'
@@ -29,6 +29,9 @@ local upgradeTable = {
 	[460]	=  8, -- 2/4
 	[461]	= 12, -- 3/4
 	[462]	= 16, -- 4/4
+	[465] 	=  0, -- 0/2
+ 	[468] 	=  0, -- 0/2
+  	[470] 	=  8, -- 2/4
 };
 -- output prefix. has to have unique strings to update the tooltip correctly
 local PREFIX = STAT_FORMAT:format(STAT_AVERAGE_ITEM_LEVEL) .. '|Heqppditmlvl|h |h' .. HIGHLIGHT_FONT_COLOR_CODE

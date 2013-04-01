@@ -4,19 +4,22 @@ local bubbleHook = CreateFrame("Frame")
 local bubblefont = 'Fonts\\cy_emblem.ttf'
 
 local function styleBubble(frame)
+	local scale = UIParent:GetScale()
+
 	for i = 1, frame:GetNumRegions() do
 		local region = select(i, frame:GetRegions())
 		if region:GetObjectType() == "Texture" then
 			region:SetTexture(nil)
 		elseif region:GetObjectType() == "FontString" then
 			region:SetFont(bubblefont, 13)
+			region:SetShadowOffset(scale, -scale)
 		end
 	end
 
 	frame:SetBackdrop({
 		bgFile = C.media.backdrop,
 		edgeFile = C.media.backdrop,
-		edgeSize = UIParent:GetScale(),
+		edgeSize = scale,
 	})
 	frame:SetBackdropColor(0, 0, 0, .5)
 	frame:SetBackdropBorderColor(0, 0, 0)
