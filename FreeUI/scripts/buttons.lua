@@ -10,6 +10,62 @@ local _G = _G
 
 local showHotKey = C.actionbars.hotkey
 
+local shadows = {
+	edgeFile = "Interface\\Addons\\FreeUI\\media\\glowTex", 
+	edgeSize = 4,
+	insets = { left = 3, right = 3, top = 3, bottom = 3 }
+	}
+	function CreateShadow(f)
+	if f.shadow then return end
+	local shadow = CreateFrame("Frame", nil, f)
+		shadow:SetFrameLevel(1)
+		shadow:SetFrameStrata(f:GetFrameStrata())
+		shadow:SetPoint("TOPLEFT", -4, 4)
+		shadow:SetPoint("BOTTOMRIGHT", 4, -4)
+		shadow:SetBackdrop(shadows)
+		shadow:SetBackdropColor(0, 0, 0, 0)
+		shadow:SetBackdropBorderColor(0, 0, 0, 1)
+		f.shadow = shadow
+		return shadow
+	end
+
+	function CreateInnerBorder(f)
+	if f.iborder then return end
+	f.iborder = CreateFrame("Frame", nil, f)
+		f.iborder:SetPoint("TOPLEFT", 1, -1)
+		f.iborder:SetPoint("BOTTOMRIGHT", -1, 1)
+		f.iborder:SetFrameLevel(f:GetFrameLevel())
+		f.iborder:SetBackdrop({
+	 	 edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1,
+	  	insets = { left = -1, right = -1, top = -1, bottom = -1}
+		})
+		f.iborder:SetBackdropBorderColor(0, 0, 0)
+		return f.iborder
+	end
+	function frame1px(f)
+	f:SetBackdrop({
+		bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
+        edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1, 
+		insets = {left = -1, right = -1, top = -1, bottom = -1} 
+	})
+	f:SetBackdropColor(.06,.06,.06,0)
+	f:SetBackdropBorderColor(.15,.15,.15,1)
+	CreateInnerBorder(f)	
+	end
+
+	local function StripTextures(object, kill)
+		for i=1, object:GetNumRegions() do
+			local region = select(i, object:GetRegions())
+			if region:GetObjectType() == "Texture" then
+				if kill then
+					region:Hide()
+				else
+					region:SetTexture(nil)
+				end
+			end
+		end		
+	end
+
 F.AddOptionsCallback("actionbars", "hotkey", function()
 	showHotKey = C.actionbars.hotkey
 	for k, frame in pairs(ActionBarButtonEventsFrame.frames) do
@@ -32,21 +88,25 @@ local function updateHotkey(self)
 end
 
 local function applyBackground(bu)
-	if bu:GetFrameLevel() < 1 then bu:SetFrameLevel(1) end
-
-	bu.bg = CreateFrame("Frame", nil, bu)
-	bu.bg:SetAllPoints(bu)
-	bu.bg:SetFrameLevel(0)
-
-	bu.bg:SetBackdrop({
+	bu:SetBackdrop({
 		edgeFile = C.media.backdrop,
 		edgeSize = 1,
 	})
-	bu.bg:SetBackdropBorderColor(0, 0, 0)
+	bu:SetBackdropBorderColor(0, 0, 0)
+
+	bu.bg = true
 end
 
 local function styleExtraActionButton(bu)
 	if not bu or (bu and bu.styled) then return end
+
+	bu.style:SetTexture(nil)
+
+	hooksecurefunc(bu.style, "SetTexture", function(self, texture)
+		if texture then
+			self:SetTexture(nil)
+		end
+	end)
 
 	bu:SetNormalTexture("")
 	bu:SetPushedTexture("")
@@ -70,6 +130,10 @@ local function styleExtraActionButton(bu)
 	if not bu.bg then applyBackground(bu) end
 
 	bu.styled = true
+
+	frame1px(bu)
+	CreateShadow(bu)
+
 end
 
 local function styleActionButton(bu)
@@ -112,81 +176,8 @@ local function styleActionButton(bu)
 
 	bu.styled = true
 
-
-
-
-
-
-	local shadows = {
-	edgeFile = "Interface\\Addons\\FreeUI\\media\\glowTex", 
-	edgeSize = 4,
-	insets = { left = 3, right = 3, top = 3, bottom = 3 }
-}
-function CreateShadow(f)
-	if f.shadow then return end
-	local shadow = CreateFrame("Frame", nil, f)
-	shadow:SetFrameLevel(1)
-	shadow:SetFrameStrata(f:GetFrameStrata())
-	shadow:SetPoint("TOPLEFT", -4, 4)
-	shadow:SetPoint("BOTTOMRIGHT", 4, -4)
-	shadow:SetBackdrop(shadows)
-	shadow:SetBackdropColor(0, 0, 0, 0)
-	shadow:SetBackdropBorderColor(0, 0, 0, 1)
-	f.shadow = shadow
-	return shadow
-end
-function CreateInnerBorder(f)
-	if f.iborder then return end
-	f.iborder = CreateFrame("Frame", nil, f)
-	f.iborder:SetPoint("TOPLEFT", 1, -1)
-	f.iborder:SetPoint("BOTTOMRIGHT", -1, 1)
-	f.iborder:SetFrameLevel(f:GetFrameLevel())
-	f.iborder:SetBackdrop({
-	  edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1,
-	  insets = { left = -1, right = -1, top = -1, bottom = -1}
-	})
-	f.iborder:SetBackdropBorderColor(0, 0, 0)
-	return f.iborder
-end
-function frame1px(f)
-	f:SetBackdrop({
-		bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
-        edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1, 
-		insets = {left = -1, right = -1, top = -1, bottom = -1} 
-	})
-	f:SetBackdropColor(.06,.06,.06,0)
-	f:SetBackdropBorderColor(.15,.15,.15,1)
-CreateInnerBorder(f)	
-end
-
-local function StripTextures(object, kill)
-	for i=1, object:GetNumRegions() do
-		local region = select(i, object:GetRegions())
-		if region:GetObjectType() == "Texture" then
-			if kill then
-				region:Hide()
-			else
-				region:SetTexture(nil)
-			end
-		end
-	end		
-end
-
-
---frame1px(oUF_FreePlayer)
-CreateShadow(bu)
-
-
-
-
-
-
-
-
-
-
-
-
+	frame1px(bu)
+	CreateShadow(bu)
 
 end
 
@@ -217,6 +208,10 @@ local function stylePetButton(bu)
 	if not bu.bg then applyBackground(bu) end
 
 	bu.styled = true
+
+	frame1px(bu)
+	CreateShadow(bu)
+
 end
 
 local function styleStanceButton(bu)
@@ -228,6 +223,10 @@ local function styleStanceButton(bu)
 
 	bu.icon:SetDrawLayer("ARTWORK")
 	bu.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+
+	frame1px(bu)
+	CreateShadow(bu)
+	
 end
 
 local buttons = 0

@@ -381,8 +381,8 @@ end
 --[[ Extra bar ]]
 
 local barextra = CreateFrame("Frame", "FreeUI_ExtraActionBar", UIParent, "SecureHandlerStateTemplate")
-barextra:SetSize(39, 39)
-barextra:SetPoint("BOTTOM", bar2, "TOP", 150, 80)
+barextra:SetSize(26, 26)
+barextra:SetPoint("CENTER", 0, -380)
 
 ExtraActionBarFrame:SetParent(barextra)
 ExtraActionBarFrame:EnableMouse(false)

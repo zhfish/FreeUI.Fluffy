@@ -898,8 +898,11 @@ Filger_Spells = {
 			-- Fluidity
 			{spellID = 138002, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- tortos
-			-- 甲壳
+			-- 水晶龟壳
 			{spellID = 137633, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- JI Kun
+			-- 原始营养
+			{spellID = 140741, unitID = "player", caster = "all", filter = "BUFF"},
 
 		},
 	},
