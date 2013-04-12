@@ -375,8 +375,10 @@ Filger_Spells = {
 			{spellID = 104993, unitID = "player", caster = "all", filter = "BUFF"},
 			-- acceleration
 			{spellID = 138703, unitID = "player", caster = "all", filter = "BUFF"},
-			-- breath of the hydra 543 ilevel
+			-- breath of the hydra 
 			{spellID = 138898, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Cha-Ye's Essence of Brilliance
+			{spellID = 139133, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
 			Name = "PVP_P_DEBUFF",
@@ -903,6 +905,15 @@ Filger_Spells = {
 			-- JI Kun
 			-- 原始营养
 			{spellID = 140741, unitID = "player", caster = "all", filter = "BUFF"},
+			-- iron Qon
+			-- 弧形闪电
+			{spellID = 136193, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 炙燃余烬
+			{spellID = 137668, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 风暴雷云
+			{spellID = 137669, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 攻击盲区
+			{spellID = 135147, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 		},
 	},
