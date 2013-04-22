@@ -28,7 +28,7 @@ f:SetScript("OnUpdate", function(self, elapsed)
 	end
 
 	if last >= 1 then
-		text:SetText("|cffffffff"..floor(GetFramerate() + .5).."|r fps   |cffffffff"..home.."|r/|cffffffff"..world.."|r ms   |cffffffff"..GameTime_GetTime(false))
+		text:SetText("|cffffffff"..floor(GetFramerate() + .5).."|r fps   |cffffffff"..(home + 186).."|r/|cffffffff"..(world + 123).."|r ms   |cffffffff"..GameTime_GetTime(false))
 		last = 0
 	end
 end)
@@ -54,11 +54,11 @@ f:SetScript("OnEnter", function()
 	sort(addons, order)
 
 	GameTooltip:SetOwner(Minimap, "ANCHOR_NONE")
-	if BagsHolder:IsShown() then
-		GameTooltip:SetPoint("BOTTOMRIGHT", BagsHolder, "BOTTOMLEFT", 0, -1)
-	else
+--	if BagsHolder:IsShown() then
+--		GameTooltip:SetPoint("BOTTOMRIGHT", BagsHolder, "BOTTOMLEFT", 0, -1)
+--	else
 		GameTooltip:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -1, -2)
-	end
+--	end
 	GameTooltip:AddDoubleLine("Addons", format("%.1f kb", total), r, g, b, 1, 1, 1)
 
 	GameTooltip:AddLine(" ")

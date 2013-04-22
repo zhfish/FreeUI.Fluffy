@@ -905,6 +905,8 @@ Filger_Spells = {
 			-- JI Kun
 			-- 原始营养
 			{spellID = 140741, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 飞行
+			{spellID = 133755, unitID = "player", caster = "all", filter = "BUFF"},
 			-- iron Qon
 			-- 弧形闪电
 			{spellID = 136193, unitID = "player", caster = "all", filter = "DEBUFF"},
@@ -914,6 +916,25 @@ Filger_Spells = {
 			{spellID = 137669, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- 攻击盲区
 			{spellID = 135147, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 冻结之血
+			{spellID = 137664, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Council of Elders
+			-- 刺骨之寒
+			{spellID = 136992, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 霜寒刺骨
+			{spellID = 136922, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 诱捕
+			{spellID = 136878, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 流沙
+			{spellID = 136860, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 定身
+			{spellID = 136857, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 灵魂残片
+			{spellID = 137641, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 暗影之魂
+			{spellID = 137650, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 身体过热
+			{spellID = 137084, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 		},
 	},

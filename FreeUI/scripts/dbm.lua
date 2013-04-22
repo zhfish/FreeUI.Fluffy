@@ -5,61 +5,41 @@ local function InitStyle()
 		for bar in self:GetBarIterator() do
 			if not bar.styled then
 				local frame = bar.frame
-				local name = frame:GetName()
+				local name = frame:GetName().."Bar"
 
-				local tbar = _G[name.."Bar"]
-				local texture = _G[name.."BarTexture"]
-				local text = _G[name.."BarName"]
-				local timer = _G[name.."BarTimer"]
-				local icon1 = _G[name.."BarIcon1"]
-				local icon2 = _G[name.."BarIcon2"]
+				local tbar = _G[name]
+				local texture = _G[name.."Texture"]
+				local text = _G[name.."Name"]
+				local timer = _G[name.."Timer"]
+				local spark = _G[name.."Spark"]
+				local icon = _G[name.."Icon1"]
 
-				tbar:SetHeight(16)
+				tbar:SetHeight(4)
 
 				F.CreateBDFrame(tbar, 0)
 
-				--[[ Left icon start
-				local ibg = CreateFrame("Frame", icon1)
-				ibg:SetPoint("TOPRIGHT", icon1, 1, 1)
-				ibg:SetPoint("BOTTOMLEFT", icon1, -1, -1)
-				ibg:SetBackdrop({
-					bgFile = "", 
-					edgeFile = C.media.backdrop,
-					edgeSize = 1,
-				})
-				ibg:SetBackdropBorderColor(0, 0, 0)
-				ibg:SetParent(tbar)
-				Left icon end ]]
-
-				local ibg = CreateFrame("Frame", icon2)
-				ibg:SetPoint("TOPRIGHT", icon2, 1, 1)
-				ibg:SetPoint("BOTTOMLEFT", icon2, -1, -1)
-				ibg:SetBackdrop({
-					bgFile = "", 
-					edgeFile = C.media.backdrop,
-					edgeSize = 1,
-				})
-				ibg:SetBackdropBorderColor(0, 0, 0)
-				ibg:SetParent(tbar)
-
 				texture:SetTexture(C.media.texture)
 				texture.SetTexture = F.dummy
-				icon1:SetTexCoord(.1,.9,.1,.9) 
-				icon1:ClearAllPoints()
-				icon1:SetPoint("LEFT", tbar, "LEFT", -23, 0)
-				icon2:SetTexCoord(.1,.9,.1,.9)
-				icon2:ClearAllPoints()
-				icon2:SetPoint("LEFT", tbar, "RIGHT", 4, 0)
-				text:SetPoint("CENTER")
-				text:SetPoint("LEFT", 4, 0)
+
+				text:SetPoint("CENTER", 0, 10)
+				text:SetPoint("LEFT", 2, 10)
 				text:SetFont(C.media.font, 8, "OUTLINEMONOCHROME")
 				text:SetShadowColor(0, 0, 0, 0)
 				text.SetFont = F.dummy
-				timer:SetPoint("CENTER")
-				timer:SetPoint("RIGHT", -4, 0)
+
+				timer:SetPoint("CENTER", 0, 10)
+				timer:SetPoint("RIGHT", -2, 10)
 				timer:SetFont(C.media.font, 8, "OUTLINEMONOCHROME")
 				timer:SetShadowColor(0, 0, 0, 0)
 				timer.SetFont = F.dummy
+
+				spark:SetSize(8, 16)
+				spark:SetTexture("Interface\\AddOns\\FreeUI\\media\\DBMSpark")
+
+				icon:ClearAllPoints()
+				icon:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -3, 0)
+				icon:SetTexCoord(.08, .92, .08, .92)
+				F.CreateBG(icon)
 
 				bar.styled = true
 			end

@@ -1,12 +1,13 @@
+
 ----------------------------------------------------------------------------------------
 --	Based on AchievementMover
 ----------------------------------------------------------------------------------------
 local AchievementAnchor = CreateFrame("Frame", "AchievementAnchor", UIParent)
 AchievementAnchor:SetWidth(DungeonCompletionAlertFrame1:GetWidth() - 36)
 AchievementAnchor:SetHeight(DungeonCompletionAlertFrame1:GetHeight() - 4)
-AchievementAnchor:SetPoint("CENTER", UIParent, "CENTER", 0, 200)
+AchievementAnchor:SetPoint("CENTER", UIParent, "CENTER", 0, 130)
 
-local POSITION, ANCHOR_POINT, YOFFSET = "BOTTOM", "TOP", -16
+local POSITION, ANCHOR_POINT, YOFFSET = "BOTTOM", "TOP", -9
 
 local function fixAnchors()
 	local point = select(1, AchievementAnchor:GetPoint())
@@ -14,11 +15,11 @@ local function fixAnchors()
 	if string.find(point, "TOP") or point == "CENTER" or point == "LEFT" or point == "RIGHT" then
 		POSITION = "TOP"
 		ANCHOR_POINT = "BOTTOM"
-		YOFFSET = 16
+		YOFFSET = 9
 	else
 		POSITION = "BOTTOM"
 		ANCHOR_POINT = "TOP"
-		YOFFSET = -16
+		YOFFSET = -9
 	end
 
 	AlertFrame:ClearAllPoints()
@@ -137,3 +138,4 @@ hooksecurefunc(GroupLootContainer, "SetPoint", function(self, point, anchorTo, a
 		fixAnchors()
 	end
 end)
+

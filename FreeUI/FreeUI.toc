@@ -23,7 +23,7 @@ oUF\oUF.xml
 scripts\actionbars.lua
 scripts\arena.lua
 scripts\automation.lua
-scripts\bags.lua
+## scripts\bags.lua
 scripts\bubbles.lua
 scripts\buffreminder.lua
 scripts\buffs.lua
@@ -76,15 +76,16 @@ class\shaman.lua
 
 scripts_extra\Filger\load.xml
 scripts_extra\CooldownPulse.lua
-## scripts_extra\achievementpopup.lua
+scripts_extra\AlertFrameMove.lua
 scripts_extra\AlreadyKnown.lua
 scripts_extra\AltPowerBar.lua
-## scripts_extra\autoscreenshots.lua
+scripts_extra\autoscreenshots.lua
 scripts_extra\BGSpamRemove.lua
 scripts_extra\BgSpecIcon.lua
 scripts_extra\ChatFilter.lua
 scripts_extra\colorpicker.lua
 scripts_extra\DragEmAll.lua
+scripts_extra\DurumuLifeDrain.lua
 scripts_extra\emergency.lua
 scripts_extra\Focuser.lua
 scripts_extra\HiddenRaidNames.lua
@@ -96,6 +97,7 @@ scripts_extra\MergeDamageMeterSpam.lua
 scripts_extra\Misc.lua
 scripts_extra\ncShadow.lua
 scripts_extra\NightFall.lua
+scripts_extra\NoMapEmote.lua
 scripts_extra\saysapped.lua
 scripts_extra\SafeQueue.lua
 scripts_extra\TabBinder.lua
