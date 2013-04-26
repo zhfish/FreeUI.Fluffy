@@ -1,0 +1,6 @@
+## Interface: 50200
+## Title: Baud Error Frame
+## Notes: Improved error reporting
+## Author: Baudzilla, wolftankk, Affli@RU-Howling Fjord
+
+BaudErrorFrame.xml
