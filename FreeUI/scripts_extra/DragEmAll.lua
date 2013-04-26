@@ -1,4 +1,3 @@
-local _G = _G
 local addon = CreateFrame("Frame")
 
 -- Used to detect 4.0 and 5.0 clients
@@ -116,6 +115,8 @@ local lodFrames = {
   Blizzard_BlackMarketUI = { ["BlackMarketFrame"] = false }, -- UNTESTED
   Blizzard_ChallengesUI = { ["ChallengesLeaderboardFrame"] = false }, -- UNTESTED
   Blizzard_ItemUpgradeUI = { ["ItemUpgradeFrame"] = false, }, -- UNTESTED
+
+  Blizzard_PVPUI = { ["PVPUIFrame"] = false },
 }
 
 local parentFrame = {}

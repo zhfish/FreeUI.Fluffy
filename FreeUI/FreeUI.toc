@@ -82,6 +82,7 @@ scripts_extra\AltPowerBar.lua
 scripts_extra\autoscreenshots.lua
 scripts_extra\BGSpamRemove.lua
 scripts_extra\BgSpecIcon.lua
+scripts_extra\BattlePetTabs.lua
 scripts_extra\ChatFilter.lua
 scripts_extra\colorpicker.lua
 scripts_extra\DragEmAll.lua

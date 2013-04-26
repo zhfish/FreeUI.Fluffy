@@ -3,14 +3,14 @@ local F, C, L = unpack(select(2, ...))
 local wf = WatchFrame
 
 local function moveTracker()
-	if MultiBarLeft:IsShown() then
-		wf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -105, -160)
-	elseif MultiBarRight:IsShown() then
-		wf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -75, -160)
-	else
-		wf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -37, -160)
-	end
-	wf:SetPoint("TOP", Minimap, "BOTTOM", 0, -20)
+	-- if MultiBarLeft:IsShown() then
+	-- 	wf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -105, -160)
+	-- elseif MultiBarRight:IsShown() then
+	-- 	wf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -75, -160)
+	-- else
+	-- 	wf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -37, -160)
+	-- end
+	wf:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -80, -200)
 end
 
 hooksecurefunc(wf, "SetPoint", function(_, _, _, point)
@@ -21,8 +21,7 @@ end)
 
 F.ReskinExpandOrCollapse(WatchFrameCollapseExpandButton)
 WatchFrameCollapseExpandButton:SetSize(15, 15)
-
-WatchFrameCollapseExpandButton:SetPoint("TOPRIGHT", -12, -3)
+WatchFrameCollapseExpandButton:SetPoint("TOPRIGHT", -12, 0)
 WatchFrameCollapseExpandButton.plus:Hide()
 
 hooksecurefunc("WatchFrame_Collapse", function()
@@ -36,6 +35,7 @@ WatchFrameTitle:SetFont(C.media.font, 8, "OUTLINEMONOCHROME")
 WatchFrameTitle:SetShadowColor(0, 0, 0, 0)
 
 local index = 1
+local itemIndex = 1
 
 hooksecurefunc("WatchFrame_Update", function()
 	local line = _G["WatchFrameLine"..index]
@@ -46,26 +46,29 @@ hooksecurefunc("WatchFrame_Update", function()
 		line.dash:SetShadowColor(0, 0, 0, 0)
 		line.text:SetSpacing(2)
 
+		line.text:ClearAllPoints()
+		line.text:SetPoint("LEFT", line.dash, "RIGHT", -2, 3)
+
 		index = index + 1
 		line = _G["WatchFrameLine"..index]
 	end
 
-	for i = 1, WATCHFRAME_MAXQUESTS do
-		local bu = _G["WatchFrameItem"..i]
-		if bu and not bu.styled then
-			local hotkey = _G["WatchFrameItem"..i.."HotKey"]
-			bu:SetNormalTexture("")
-			bu:SetPushedTexture("")
-			F.CreateBG(bu)
+	local bu = _G["WatchFrameItem"..itemIndex]
+	while bu do
+		local hotkey = _G["WatchFrameItem"..itemIndex.."HotKey"]
 
-			_G["WatchFrameItem"..i.."IconTexture"]:SetTexCoord(.08, .92, .08, .92)
+		bu:SetNormalTexture("")
+		bu:SetPushedTexture("")
+		F.CreateBG(bu)
 
-			hotkey:ClearAllPoints()
-			hotkey:SetPoint("TOP", bu, -1, 0)
-			hotkey:SetFont(C.media.font, 8, "OUTLINEMONOCHROME")
-			hotkey:SetJustifyH("CENTER")
+		_G["WatchFrameItem"..itemIndex.."IconTexture"]:SetTexCoord(.08, .92, .08, .92)
 
-			bu.styled = true
-		end
+		hotkey:ClearAllPoints()
+		hotkey:SetPoint("TOP", bu, -1, 0)
+		hotkey:SetFont(C.media.font, 8, "OUTLINEMONOCHROME")
+		hotkey:SetJustifyH("CENTER")
+
+		itemIndex = itemIndex + 1
+		bu = _G["WatchFrameItem"..itemIndex]
 	end
 end)
