@@ -19,6 +19,9 @@ WorldMapPing.Ping:SetScript("OnLoop", function(self, loopState)
 	end
 end)
 
+WorldMapPlayerUpper:EnableMouse(false)
+WorldMapPlayerLower:EnableMouse(false)
+
 local mapbg = CreateFrame ("Frame", nil, WorldMapDetailFrame)
 mapbg:SetBackdrop({
 	bgFile = C.media.backdrop,
@@ -258,8 +261,3 @@ panel.toggle = function()
 end
 
 button:HookScript("OnMouseDown", panel.toggle)
-
-
-WorldMapPlayerLower:SetFrameStrata("MEDIUM"); --sets the "lower" part of the player marker to medium strata.
-WorldMapPlayerUpper:SetFrameStrata("FULLSCREEN"); -- sets the upper part to the fullscreen strata (apparently how blizz have it)
-WorldMapPlayerUpper:EnableMouse("false"); --stop the mouse being used on the upper part of the marker.

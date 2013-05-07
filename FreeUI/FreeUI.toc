@@ -23,7 +23,7 @@ oUF\oUF.xml
 scripts\actionbars.lua
 scripts\arena.lua
 scripts\automation.lua
-## scripts\bags.lua
+scripts\bags.lua
 scripts\bubbles.lua
 scripts\buffreminder.lua
 scripts\buffs.lua
@@ -93,7 +93,6 @@ scripts_extra\HiddenRaidNames.lua
 scripts_extra\idTip.lua
 scripts_extra\itemlevel.lua
 scripts_extra\interruptsound.lua
-scripts_extra\losecontrol.lua
 scripts_extra\MergeDamageMeterSpam.lua
 scripts_extra\Misc.lua
 scripts_extra\ncShadow.lua

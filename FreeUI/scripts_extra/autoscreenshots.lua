@@ -1,6 +1,11 @@
 ----------------------------------------------------------------------------------------
 --	Take screenshots of Achievements(Based on Achievement Screenshotter by Blamdarot)
 ----------------------------------------------------------------------------------------
+
+local class = select(2, UnitClass("player"))
+
+if class == "WARLOCK" then
+
 local function TakeScreen(delay, func, ...)
 	local waitTable = {}
 	local waitFrame = CreateFrame("Frame", "WaitFrame", UIParent)
@@ -31,3 +36,5 @@ end
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ACHIEVEMENT_EARNED")
 frame:SetScript("OnEvent", OnEvent)
+
+end

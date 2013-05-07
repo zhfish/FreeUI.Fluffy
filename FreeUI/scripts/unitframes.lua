@@ -1371,6 +1371,7 @@ local UnitSpecific = {
       	f:SetScript("OnEvent", function(self, event)
 			if(UnitName("focustarget")==UnitName("player")) then
 				Name:SetText("> YOU <")
+				Name:SetFont(font_EN, font_EN_Size, "OUTLINEMONOCHROME")
 				Name:SetTextColor(1, 0, 0)
 			else
 				Name:SetText(UnitName"focustarget")
