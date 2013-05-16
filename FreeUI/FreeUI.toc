@@ -13,8 +13,8 @@ core\core.lua
 options.lua
 profiles.lua
 
-core\api.lua
 core\gui.lua
+core\api.lua
 core\slash.lua
 core\notifications.lua
 
@@ -103,3 +103,4 @@ scripts_extra\SafeQueue.lua
 scripts_extra\TabBinder.lua
 scripts_extra\UnitSounds.lua
 scripts_extra\WhisperSound.lua
+scripts_extra\UnerringVision.lua

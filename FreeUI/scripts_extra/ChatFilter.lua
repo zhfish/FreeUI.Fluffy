@@ -5,7 +5,7 @@ local Config = {
 	["Enabled"] = true, --Enable the ChatFilter. // 是否开启本插件
 	["ScanOurself"] = nil, --Scan ourself. // 是否扫描自己的聊天信息
 	["ScanFriend"] = nil, --Scan friends. // 是否扫描好友的聊天信息
-	["ScanTeam"] = nil, --Scan raid/party members. // 是否扫描队友的聊天信息
+	["ScanTeam"] = true, --Scan raid/party members. // 是否扫描队友的聊天信息
 	["ScanGuild"] = true, --Scan guildies. // 是否扫描公会成员的聊天信息
 	
 	["noprofanityFilter"] = true, --Disable the profanityFilter. // 关闭语言过滤器

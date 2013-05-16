@@ -12,6 +12,7 @@ C.media = {
 	["font"] = "Interface\\AddOns\\FreeUI\\media\\Hooge0655.ttf", -- default pixel font
 	["font2"] = "Interface\\AddOns\\FreeUI\\media\\font.ttf", -- default font
 	["glow"] = "Interface\\AddOns\\FreeUI\\media\\glowTex", -- glow/shadow texture
+	["gradient"] = "Interface\\AddOns\\FreeUI\\media\\gradient", 
 	["texture"] = "Interface\\AddOns\\FreeUI\\media\\Texture", -- statusbar texture
 	["bgFile"] = "Interface\\AddOns\\FreeUI\\media\\button_background_flat", 
 	["edgeFile"] = "Interface\\AddOns\\FreeUI\\media\\outer_shadow", 
@@ -123,13 +124,15 @@ F.CreatePulse = function(frame) -- pulse function originally by nightcracker
 end
 
 local r, g, b = C.classcolours[class].r, C.classcolours[class].g, C.classcolours[class].b
+local buttonR, buttonG, buttonB, buttonA = unpack(C.general.buttonColour)
+local buttonColourGradient = C.general.buttonColourGradient
 
 local CreateGradient = function(f)
 	local tex = f:CreateTexture(nil, "BORDER")
 	tex:SetPoint("TOPLEFT", 1, -1)
 	tex:SetPoint("BOTTOMRIGHT", -1, 1)
-	tex:SetTexture(C.media.backdrop)
-	tex:SetGradientAlpha("VERTICAL", 0, 0, 0, .3, .35, .35, .35, .35)
+	tex:SetTexture(buttonColourGradient and C.media.gradient or C.media.backdrop)
+	tex:SetVertexColor(buttonR, buttonG, buttonB, buttonA) 
 
 	return tex
 end

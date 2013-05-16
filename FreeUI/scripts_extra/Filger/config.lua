@@ -379,6 +379,10 @@ Filger_Spells = {
 			{spellID = 138898, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Cha-Ye's Essence of Brilliance
 			{spellID = 139133, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Unerring Vision of Lei-Shen (Crit, Proc)
+			{spellID = 138963, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Sinister Primal Diamond (Caster DPS)
+			{spellID = 137590, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
 			Name = "PVP_P_DEBUFF",
@@ -935,6 +939,16 @@ Filger_Spells = {
 			{spellID = 137650, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- 身体过热
 			{spellID = 137084, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Dark Animus
+			-- Matter Swap
+			{spellID = 138609, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Lei Shen
+			-- Static Shock
+			{spellID = 135695, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Overcharged
+			{spellID = 136295, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Helm of Command
+			{spellID = 139011, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 		},
 	},
