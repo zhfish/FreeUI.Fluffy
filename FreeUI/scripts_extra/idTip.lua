@@ -1,4 +1,4 @@
-﻿-- 显示法术ID和来源：取自SpellID插件并改进
+-- 显示法术ID和来源：取自SpellID插件并改进
 local fontcolor = { r=0.44, g=0.83, b=1 }
 local SPELLID, FROM
 
