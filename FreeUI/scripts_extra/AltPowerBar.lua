@@ -18,7 +18,7 @@ PlayerPowerBarAlt:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 -- AltPowerBar
 local bar = CreateFrame("Frame", "UIAltPowerBar", UIParent)
-bar:SetSize(221, 16)
+bar:SetSize(220, 20)
 bar:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 --bar:SetTemplate("Default")
 
@@ -67,14 +67,14 @@ bar:SetScript("OnLeave", GameTooltip_Hide)
 -- StatusBar
 local status = CreateFrame("StatusBar", "UIAltPowerBarStatus", bar)
 status:SetFrameLevel(bar:GetFrameLevel() + 1)
-status:SetStatusBarTexture("Interface\\AddOns\\MediaStorage\\statusbar\\Texture1")
+status:SetStatusBarTexture("Interface\\AddOns\\MediaStorage\\statusbar\\Texture1.tga")
 status:SetMinMaxValues(0, 100)
 status:SetPoint("TOPLEFT", bar, "TOPLEFT", 2, -2)
 status:SetPoint("BOTTOMRIGHT", bar, "BOTTOMRIGHT", -2, 2)
 
 status.bg = status:CreateTexture(nil, "BACKGROUND")
 status.bg:SetAllPoints(status)
-status.bg:SetTexture("Interface\\AddOns\\MediaStorage\\statusbar\\Texture1")
+status.bg:SetTexture("Interface\\AddOns\\MediaStorage\\statusbar\\Texture1.tga")
 
 status.text = status:CreateFontString(nil, "OVERLAY")
 status.text:SetFont("Interface\\AddOns\\FreeUI\\media\\Hooge0655.ttf", 8, "OUTLINEMONOCHROME")

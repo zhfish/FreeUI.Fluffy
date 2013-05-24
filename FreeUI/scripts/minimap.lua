@@ -247,6 +247,21 @@ local gmtext = F.CreateFS(HelpOpenTicketButton, 8)
 gmtext:SetPoint("CENTER")
 gmtext:SetText(gsub(CHAT_FLAG_GM, "[<>]", "")) -- magic!
 
+HelpOpenWebTicketButton:SetParent(Minimap)
+HelpOpenWebTicketButton:ClearAllPoints()
+HelpOpenWebTicketButton:SetPoint("TOP", HelpOpenTicketButton, "BOTTOM", 0, -3)
+
+HelpOpenTicketButtonTutorial:Hide()
+HelpOpenTicketButtonTutorial.Show = F.dummy
+
+HelpOpenWebTicketButton:SetNormalTexture("")
+HelpOpenWebTicketButton:SetHighlightTexture("")
+HelpOpenWebTicketButton:SetPushedTexture("")
+
+local gmtext = F.CreateFS(HelpOpenWebTicketButton, 8)
+gmtext:SetPoint("CENTER")
+gmtext:SetText(gsub(CHAT_FLAG_GM, "[<>]", "")) -- magic!
+
 
 local shadows = {
 	edgeFile = "Interface\\Addons\\FreeUI\\media\\glowTex", 
