@@ -1,5 +1,4 @@
-## Interface: 50200
-## Version: 6.3
+## Interface: 50300
 ## Title: FreeUI Options
 ## Notes: Options GUI for FreeUI.
 ## Author: Haleth/Freethinker

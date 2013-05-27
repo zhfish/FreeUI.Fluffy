@@ -32,7 +32,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		-- [[ Simple backdrops ]]
 
-		local bds = {"AutoCompleteBox", "BNToastFrame", "TicketStatusFrameButton", "FriendsTooltip", "GearManagerDialogPopup", "TokenFramePopup", "RaidInfoFrame", "ScrollOfResurrectionSelectionFrame", "ScrollOfResurrectionFrame", "VoiceChatTalkers", "ReportPlayerNameDialog", "ReportCheatingDialog", "QueueStatusFrame"}
+		local bds = {"AutoCompleteBox", "TicketStatusFrameButton", "FriendsTooltip", "GearManagerDialogPopup", "TokenFramePopup", "RaidInfoFrame", "ScrollOfResurrectionSelectionFrame", "ScrollOfResurrectionFrame", "VoiceChatTalkers", "ReportPlayerNameDialog", "ReportCheatingDialog", "QueueStatusFrame"}
 
 		for i = 1, #bds do
 			local bd = _G[bds[i]]
@@ -1619,6 +1619,12 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		F.Reskin(FriendsFrameUnsquelchButton)
 		F.Reskin(FriendsFrameMutePlayerButton)
 		F.ReskinDropDown(FriendsFrameStatusDropDown)
+
+		-- Battlenet toast frame
+
+		F.CreateBD(BNToastFrame)
+		F.CreateBD(BNToastFrame.TooltipFrame)
+		BNToastFrameCloseButton:SetAlpha(0)
 
 		-- Battletag invite frame
 
@@ -3544,7 +3550,6 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		MerchantNextPageButton:GetRegions():Hide()
 		select(2, MerchantPrevPageButton:GetRegions()):Hide()
 		select(2, MerchantNextPageButton:GetRegions()):Hide()
-		BNToastFrameCloseButton:SetAlpha(0)
 		LFDQueueFrameRandomScrollFrameScrollBackground:Hide()
 		ChannelFrameDaughterFrameCorner:Hide()
 		LFDQueueFrameSpecificListScrollFrameScrollBackgroundTopLeft:Hide()
@@ -6659,8 +6664,6 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		BonusFrame.WorldPVPHeader:Hide()
 		BonusFrame.ShadowOverlay:Hide()
 
-		--BonusFrame.DiceButton:SetNormalTexture("")
-		--BonusFrame.DiceButton:SetPushedTexture("")
 		F.Reskin(BonusFrame.DiceButton)
 
 		for _, bu in pairs({BonusFrame.RandomBGButton, BonusFrame.CallToArmsButton, BonusFrame.WorldPVP1Button, BonusFrame.WorldPVP2Button}) do
@@ -6694,6 +6697,8 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 				frame.Icon:SetTexture("Interface\\Icons\\PVPCurrency-Honor-"..englishFaction)
 			end
 		end)
+
+		IncludedBattlegroundsDropDown:SetPoint("TOPRIGHT", BonusFrame.DiceButton, 40, 26)
 
 		-- Role buttons
 
@@ -7885,7 +7890,10 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		F.CreateBD(DBM_GUI_OptionsFrame)
 		F.CreateSD(DBM_GUI_OptionsFrame)
+		F.Reskin(DBM_GUI_OptionsFramecheck)
+		F.Reskin(DBM_GUI_OptionsFramecheck2)
 		F.Reskin(DBM_GUI_OptionsFrameOkay)
+		F.Reskin(DBM_GUI_OptionsFrameWebsiteButton)
 		F.ReskinScroll(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
 	end
 end)
