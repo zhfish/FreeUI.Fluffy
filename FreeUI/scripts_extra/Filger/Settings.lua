@@ -1,4 +1,4 @@
--- 设置
+﻿-- 设置
 local Misc = CreateFrame("Frame")
 local Media = "Interface\\AddOns\\FreeUI\\scripts_extra\\Filger\\Media\\"
 	Misc.Media = Media

@@ -245,7 +245,7 @@ local StyleFrame = function(frame)
 	castBar.shieldedRegion = shieldedRegion
 	castBar:SetStatusBarTexture(C.media.texture)
 
-	castShadowRegion:SetTexture("")
+	castShadowRegion:SetAlpha(0)
 	castTextRegion:SetFont(C.media.font, 8 * UIParent:GetScale(), "OUTLINEMONOCHROME")
 	castTextRegion:ClearAllPoints()
 	castTextRegion:SetPoint("TOP", castBar, "BOTTOM", 0, -2)

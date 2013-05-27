@@ -74,8 +74,6 @@ Filger_Spells = {
 			{spellID = 111397, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Shadow Bulwark
 			{spellID = 132413, unitID = "player", caster = "player", filter = "BUFF"},
-			-- mc
-			{spellID = 140074, unitID = "player", caster = "player", filter = "BUFF"},
 
 
 		},
@@ -136,9 +134,6 @@ Filger_Spells = {
 			{spellID = 5484, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Mortal Coil
 			{spellID = 6789, unitID = "target", caster = "player", filter = "DEBUFF"},
-
-			-- hand of gul'dan
-			{spellID = 47960, unitID = "target", caster = "player", filter = "DEBUFF"},
 
 		},
 		{
@@ -378,7 +373,6 @@ Filger_Spells = {
 			{spellID = 126577, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Jade Spirit
 			{spellID = 104993, unitID = "player", caster = "all", filter = "BUFF"},
-			{spellID = 142535, unitID = "player", caster = "all", filter = "BUFF"},
 			-- acceleration
 			{spellID = 138703, unitID = "player", caster = "all", filter = "BUFF"},
 			-- breath of the hydra 
