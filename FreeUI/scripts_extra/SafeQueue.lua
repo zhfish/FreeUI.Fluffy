@@ -9,8 +9,11 @@ SafeQueueDB = SafeQueueDB or { announce = "self" }
 SafeQueue:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 SafeQueue:SetScript("OnUpdate", function(self) self:Timer() end)
 SafeQueue:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
-StaticPopupDialogs["CONFIRM_BATTLEFIELD_ENTRY"].button2 = nil
-StaticPopupDialogs["CONFIRM_BATTLEFIELD_ENTRY"].hideOnEscape = false
+
+_G.PVPReadyDialog.leaveButton:Hide()
+_G.PVPReadyDialog.enterButton:ClearAllPoints()
+_G.PVPReadyDialog.enterButton:SetPoint("BOTTOM", PVPReadyDialog, "BOTTOM", 0, 25)
+_G.PVPReadyDialog.label:SetPoint("TOP", 0, -22)
 
 function SafeQueue:UPDATE_BATTLEFIELD_STATUS()
 	local queued
@@ -52,7 +55,7 @@ function SafeQueue:TimeWaited()
 			str = str .. secs .. "s"
 		end
 	end
-	if SafeQueueDB.announce == "self" then
+	if SafeQueueDB.announce == "self" or not IsInGroup() then
 		self:Print(str)
 	else
 		local group = IsInRaid() and "RAID" or "PARTY"
@@ -61,16 +64,12 @@ function SafeQueue:TimeWaited()
 end
 
 function SafeQueue:Timer()
-	local secs = GetBattlefieldPortExpiration(queue)
-	if secs > 0 then
-		local p = StaticPopup_Visible("CONFIRM_BATTLEFIELD_ENTRY")
-		if p and remaining ~= secs then
+	if _G.PVPReadyDialog:IsShown() then
+		local secs = GetBattlefieldPortExpiration(queue)
+		if secs and secs > 0 and remaining ~= secs then
 			remaining = secs
 			local color = secs > 20 and "f20ff20" or secs > 10 and "fffff00" or "fff0000"
-			_G[p .. "Text"]:SetText(string.gsub(
-				_G[p .. "Text"]:GetText(), 
-				".+ to enter",
-				"You have |cf"..color.. SecondsToTime(secs) .. "|r to enter"))
+			_G.PVPReadyDialog.label:SetText("Expires in |cf"..color.. SecondsToTime(secs) .. "|r")
 		end
 	end
 end
@@ -89,7 +88,7 @@ function SafeQueue:Command(msg)
 			self:Print("Announce types are \"off\", \"self\", and \"group\"")
 		end
 	else
-		DEFAULT_CHAT_FRAME:AddMessage("|cff33ff99SafeQueue v1.8|r")
+		DEFAULT_CHAT_FRAME:AddMessage("|cff33ff99SafeQueue v2.0|r")
 		self:Print("/sq announce : " .. SafeQueueDB.announce)
 	end
 end
@@ -97,4 +96,3 @@ end
 SlashCmdList["SafeQueue"] = function(...) SafeQueue:Command(...) end
 SLASH_SafeQueue1 = "/safequeue"
 SLASH_SafeQueue2 = "/sq"
-

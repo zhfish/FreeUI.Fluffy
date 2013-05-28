@@ -1,6 +1,6 @@
-## Interface: 50200
-## Version: 6.3
+## Interface: 50300
 ## Title: FreeUI Options
+## Version: 6.5
 ## Notes: Options GUI for FreeUI.
 ## Author: Haleth/Freethinker
 ## SavedVariables: FreeUIOptionsGlobal, FreeUIOptions
