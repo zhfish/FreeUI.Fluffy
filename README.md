@@ -7,4 +7,4 @@ simple, clean and awesome ;)
 
 
 
-![FreeUI.Fluffy](http://ww2.sinaimg.cn/large/bfadf3bejw1e34y2qohmpj.jpg)
+![FreeUI.Fluffy](http://bcs.duapp.com/picstore/wupaaNCPYU.jpg)
