@@ -90,6 +90,7 @@ local function updateHotkey(self)
 
 			local text = ho:GetText()
 
+			if text then
 			text = text:gsub("(s%-)", "S")
 			text = text:gsub("(a%-)", "A")
 			text = text:gsub("(c%-)", "C")
@@ -107,6 +108,7 @@ local function updateHotkey(self)
 			text = text:gsub("Home", "Hm")
 
 			ho:SetText("|cffffffff"..text)
+		end
 	else
 		ho:Hide()
 	end

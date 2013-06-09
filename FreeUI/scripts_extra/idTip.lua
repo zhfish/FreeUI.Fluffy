@@ -1,52 +1,56 @@
-local select, UnitBuff, UnitDebuff, UnitAura, tonumber, strfind, hooksecurefunc =
-	select, UnitBuff, UnitDebuff, UnitAura, tonumber, strfind, hooksecurefunc
+-- 显示法术ID和来源：取自SpellID插件并改进
+local fontcolor = { r=0.44, g=0.83, b=1 }
+local SPELLID, FROM
 
-local function addLine(self,id,isItem)
-	if isItem then
-		self:AddDoubleLine("ItemID:","|cffffffff"..id)
-	else
-		self:AddDoubleLine("SpellID:","|cffffffff"..id)
-	end
-	self:Show()
+if GetLocale() == "zhCN" then
+	SPELLID = "法术编号："
+	FROM = "源自："
+elseif GetLocale() == "zhTW" then
+	SPELLID = "法術編號："
+	FROM = "源自："
+else
+	SPELLID = "SpellID: "
+	FROM = " from: "
+end
+
+local function UnitToColorText(unit)
+	local ClassColor = RAID_CLASS_COLORS[select(2,UnitClass(unit))] or fontcolor;
+	if (not UnitIsPlayer(unit)) then ClassColor = fontcolor end;
+	return format("|cFF%s%s|r",format("%02X%02X%02X",ClassColor.r*255,ClassColor.g*255,ClassColor.b*255),UnitName(unit));
 end
 
 hooksecurefunc(GameTooltip, "SetUnitBuff", function(self,...)
-	local id = select(11,UnitBuff(...))
-	if id then addLine(self,id) end
+	local _,_,_,_,_,_,_,unitCaster,_,_,id = UnitBuff(...);
+	if id then
+		if unitCaster then
+			self:AddDoubleLine("|cFF00FF00"..SPELLID.."|cFF71D5FF"..id.."|r","|cFF00FF00Buff"..FROM..UnitToColorText(unitCaster));
+		else
+			self:AddLine("|cFF00FF00"..SPELLID.."|cFF71D5FF"..id.."|r");
+		end
+		self:Show();
+	end
 end)
 
 hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self,...)
-	local id = select(11,UnitDebuff(...))
-	if id then addLine(self,id) end
+	local _,_,_,_,_,_,_,unitCaster,_,_,id = UnitDebuff(...);
+	if id then
+		if unitCaster then
+			self:AddDoubleLine("|cFF00FF00"..SPELLID.."|cFF71D5FF"..id.."|r","|cFF00FF00Debuff"..FROM..UnitToColorText(unitCaster));
+		else
+			self:AddLine("|cFF00FF00"..SPELLID.."|cFF71D5FF"..id.."|r");
+		end
+		self:Show();
+	end
 end)
 
 hooksecurefunc(GameTooltip, "SetUnitAura", function(self,...)
-	local id = select(11,UnitAura(...))
-	if id then addLine(self,id) end
+	local _,_,_,_,_,_,_,unitCaster,_,_,id = UnitAura(...);
+	if id then
+		if unitCaster then
+			self:AddDoubleLine("|cFF00FF00"..SPELLID.."|cFF71D5FF"..id.."|r","|cFF00FF00Aura"..FROM..UnitToColorText(unitCaster));
+		else
+			self:AddLine("|cFF00FF00"..SPELLID.."|cFF71D5FF"..id.."|r");
+		end
+		self:Show();
+	end
 end)
-
-GameTooltip:HookScript("OnTooltipSetSpell", function(self)
-	local id = select(3,self:GetSpell())
-	if id then addLine(self,id) end
-end)
-
-hooksecurefunc("SetItemRef", function(link, ...)
-	local id = tonumber(link:match("spell:(%d+)"))
-	if id then addLine(ItemRefTooltip,id) end
-end)
-
-local function attachItemTooltip(self)
-	local link = select(2,self:GetItem())
-	if not link then return end
-	local id = select(3,strfind(link, "^|%x+|Hitem:(%-?%d+):(%d+):(%d+):(%d+):(%d+):(%d+):(%-?%d+):(%-?%d+)"))
-	if id then addLine(self,id,true) end
-end
-
-GameTooltip:HookScript("OnTooltipSetItem", attachItemTooltip)
-ItemRefTooltip:HookScript("OnTooltipSetItem", attachItemTooltip)
-ItemRefShoppingTooltip1:HookScript("OnTooltipSetItem", attachItemTooltip)
-ItemRefShoppingTooltip2:HookScript("OnTooltipSetItem", attachItemTooltip)
-ItemRefShoppingTooltip3:HookScript("OnTooltipSetItem", attachItemTooltip)
-ShoppingTooltip1:HookScript("OnTooltipSetItem", attachItemTooltip)
-ShoppingTooltip2:HookScript("OnTooltipSetItem", attachItemTooltip)
-ShoppingTooltip3:HookScript("OnTooltipSetItem", attachItemTooltip)

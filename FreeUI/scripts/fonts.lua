@@ -2,7 +2,7 @@ local F, C, L = unpack(select(2, ...))
 
 local font = 'Fonts\\cy_emblem.ttf'
 local Zpix = 'Fonts\\Zpix.ttf'
-local DamageFont = 'Fonts\\PEPSI_pl.ttf'
+local DamageFont = 'Fonts\\FruityMicrofont.ttf'
 local Lihei = 'Fonts\\lihei.ttf'
 local CuYuan = 'Fonts\\cuyuan.ttf'
 local ZhunYuan = 'Fonts\\zhunyuan.ttf'

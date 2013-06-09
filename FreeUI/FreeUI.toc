@@ -73,6 +73,7 @@ scripts\worldstateframe.lua
 
 class\paladin.lua
 class\shaman.lua
+class\warlock.lua
 
 scripts_extra\Filger\load.xml
 scripts_extra\CooldownPulse.lua
