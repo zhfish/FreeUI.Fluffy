@@ -955,6 +955,7 @@ Filger_Spells = {
 			{spellID = 136295, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- Helm of Command
 			{spellID = 139011, unitID = "player", caster = "all", filter = "DEBUFF"},
+			{spellID = 138308, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 		},
 	},

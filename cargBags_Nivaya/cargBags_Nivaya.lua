@@ -6,7 +6,138 @@ cargBags_Nivaya:SetScript('OnEvent', function(self, event, ...) self[event](self
 cargBags_Nivaya:RegisterEvent("ADDON_LOADED")
 
 local cbNivaya = cargBags:GetImplementation("Nivaya")
-cbNivCatDropDown = CreateFrame("Frame", "cbNivCatDropDown", UIParent, "UIDropDownMenuTemplate")
+--cbNivCatDropDown = CreateFrame("Frame", "cbNivCatDropDown", UIParent, "UIDropDownMenuTemplate")
+
+do	--Replacement for UIDropDownMenu
+
+	local font = [[Interface\AddOns\cargBags_Nivaya\media\pixel.ttf]]	--ns.options.fonts.standard
+	local fontsize = 10
+	local fontanim = nil	--"OUTLINE"
+	local frameHeight = 14
+	local defaultWidth = 120
+	local frameInset = 16
+
+	local f = cbNivCatDropDown or CreateFrame("Frame", "cbNivCatDropDown", UIParent)
+	f.ActiveButtons = 0
+	f.Buttons = {}
+	
+	f:SetFrameStrata("FULLSCREEN_DIALOG")
+	f:SetSize(defaultWidth+frameInset,32)
+
+	local inset = 1
+	f:SetBackdrop({bgFile = "Interface\\Buttons\\WHITE8x8", 
+		edgeFile = "Interface\\Buttons\\WHITE8x8", 
+		tile = true, tileSize = 16, edgeSize = 1, 
+		insets = { left = inset, right = inset, top = inset, bottom = inset }})
+	f:SetBackdropColor(unpack(ns.options.colors.background))
+	f:SetBackdropBorderColor(0, 0, 0)
+	
+	f:SetClampedToScreen(true)
+
+	function f:CreateButton()
+		
+		local button = CreateFrame("Button", nil, self)
+		button:SetWidth(defaultWidth)
+		button:SetHeight(frameHeight)
+		
+		local fstr = button:CreateFontString()
+		fstr:SetJustifyH("LEFT")
+		fstr:SetJustifyV("MIDDLE")
+		fstr:SetFont(font,fontsize,fontanim)	--(unpack(font))
+		fstr:SetPoint("LEFT", button, "LEFT", 0, 0)
+		button.Text = fstr
+		
+		function button:SetText(str)
+			button.Text:SetText(str)
+		end
+		
+		button:SetText("test")
+		
+		local ntex = button:CreateTexture()
+		ntex:SetTexture(1,1,1,0)
+		ntex:SetAllPoints()	
+		button:SetNormalTexture(ntex)
+		
+		local htex = button:CreateTexture()
+		htex:SetTexture(1,1,1,0.2)
+		htex:SetAllPoints()
+		button:SetHighlightTexture(htex)
+		
+		local ptex = button:CreateTexture()
+		ptex:SetTexture(1,1,1,0.4)
+		ptex:SetAllPoints()
+		button:SetPushedTexture(ptex)
+		
+		return button
+		
+	end
+
+	function f:AddButton(text, value, func)
+		
+		local bID = self.ActiveButtons+1
+		
+		local btn = self.Buttons[bID] or self:CreateButton()
+		
+		btn:SetText(text or "")
+		btn.value = value
+		btn.func = func or function() end
+		
+		btn:SetScript("OnClick", function(self, ...) self:func(...) self:GetParent():Hide() end)
+		
+		btn:ClearAllPoints()
+		if bID == 1 then
+			btn:SetPoint("TOP", self, "TOP", 0, -(frameInset/2))
+		else
+			btn:SetPoint("TOP", self.Buttons[bID-1], "BOTTOM", 0, 0)
+		end
+		
+		self.Buttons[bID] = btn
+		self.ActiveButtons = bID
+		
+		self:UpdateSize()
+
+	end
+
+	function f:UpdatePosition(frame, point, relativepoint, ofsX, ofsY)
+		
+		point, relativepoint, ofsX, ofsY = point or "TOPLEFT", relativepoint or "BOTTOMLEFT", ofsX or 0, ofsY or 0
+		
+		self:ClearAllPoints()
+		self:SetPoint(point, frame, relativepoint, ofsX, ofsY)
+		
+	end
+
+	function f:UpdateSize()
+
+		local maxButtons = self.ActiveButtons
+		local maxwidth = defaultWidth
+		
+		for i=1,maxButtons do
+		
+			local width = self.Buttons[i].Text:GetWidth()
+			if width > maxwidth then maxwidth = width end
+		
+		end
+		
+		for i=1,maxButtons do
+			self.Buttons[i]:SetWidth(maxwidth)
+		end
+		
+		local height = maxButtons * frameHeight
+		
+		self:SetSize(maxwidth+frameInset, height+frameInset)
+		
+	end
+
+	function f:Toggle(frame, point, relativepoint, ofsX, ofsY)
+		cbNivaya:CatDropDownInit()
+		self:UpdatePosition(frame, point, relativepoint, ofsX, ofsY)
+		self:Show()
+	end
+	
+	tinsert(UISpecialFrames,f:GetName())
+	
+end
 
 ---------------------------------------------
 ---------------------------------------------
@@ -62,7 +193,7 @@ function cargBags_Nivaya:ADDON_LOADED(event, addon)
 	self:UnregisterEvent(event)
 	
 	LoadDefaults()
-	UIDropDownMenu_Initialize(cbNivCatDropDown, cbNivaya.CatDropDownInit, "MENU")
+	--UIDropDownMenu_Initialize(cbNivCatDropDown, cbNivaya.CatDropDownInit, "MENU")
 	
 	cB_filterEnabled["Armor"] = cBnivCfg.Armor
 	cB_filterEnabled["TradeGoods"] = cBnivCfg.TradeGoods
@@ -147,8 +278,8 @@ function cargBags_Nivaya:ADDON_LOADED(event, addon)
 	cB_Bags.main		:SetMultipleFilters(true, cB_Filters.fBags, cB_Filters.fHideEmpty)
 	for _,v in pairs(cB_CustomBags) do cB_Bags[v.name]:SetExtendedFilter(cB_Filters.fItemClass, v.name) end
 
-	cB_Bags.main:SetPoint("BOTTOMRIGHT", -50, 29)
-	cB_Bags.bank:SetPoint("TOPLEFT", 15, -20)
+	cB_Bags.main:SetPoint("BOTTOMRIGHT", -80, 80)
+	cB_Bags.bank:SetPoint("TOPLEFT", 20, -20)
 	
 	cbNivaya:CreateAnchors()
 	cbNivaya:Init()
@@ -239,12 +370,12 @@ function cbNivaya:UpdateAnchors(self)
 		if t then
 			local h = cB_BagHidden[t.name]
 			v:ClearAllPoints()
-			if	not h		and u == "Top"		then v:SetPoint("BOTTOM", t, "TOP", 0, 10)
+			if	not h		and u == "Top"		then v:SetPoint("BOTTOM", t, "TOP", 0, 9)
 			elseif	h		and u == "Top"		then v:SetPoint("BOTTOM", t, "BOTTOM")
-			elseif	not h	and u == "Bottom"	then v:SetPoint("TOP", t, "BOTTOM", 0, -10)
+			elseif	not h	and u == "Bottom"	then v:SetPoint("TOP", t, "BOTTOM", 0, -9)
 			elseif	h		and u == "Bottom"	then v:SetPoint("TOP", t, "TOP")
-			elseif	u == "Left"					then v:SetPoint("BOTTOMRIGHT", t, "BOTTOMLEFT", -10, 0)
-			elseif	u == "Right"				then v:SetPoint("TOPLEFT", t, "TOPRIGHT", 10, 0) end
+			elseif	u == "Left"					then v:SetPoint("BOTTOMRIGHT", t, "BOTTOMLEFT", -9, 0)
+			elseif	u == "Right"				then v:SetPoint("TOPLEFT", t, "TOPRIGHT", 9, 0) end
 		end
 	end
 end
@@ -314,9 +445,12 @@ local SetFrameMovable = function(f, v)
 	end
 end
 
+local DropDownInitialized
 function cbNivaya:CatDropDownInit()
+	if DropDownInitialized then return end
+	DropDownInitialized = true
 	level = 1
-	local info = UIDropDownMenu_CreateInfo()
+	local info = {}--UIDropDownMenu_CreateInfo()
   
 	local function AddInfoItem(type)
 		local caption = "cBniv_"..type
@@ -330,8 +464,10 @@ function cbNivaya:CatDropDownInit()
 			info.func = function(self) cbNivaya:CatDropDownOnClick(self, type) end
 		end
 		
-		info.owner = self:GetParent()
-		UIDropDownMenu_AddButton(info, level)
+	--	info.owner = self:GetParent()
+	--	UIDropDownMenu_AddButton(info, level)
+		
+		cbNivCatDropDown:AddButton(info.text, type, info.func)
 	end
 
 	AddInfoItem("MarkAsNew")
@@ -345,6 +481,8 @@ function cbNivaya:CatDropDownInit()
 	AddInfoItem("Junk")
 	AddInfoItem("Bag")
 	for _,v in ipairs(cB_CustomBags) do if v.active then AddInfoItem(v.name) end end
+	
+	hooksecurefunc(NivayacBniv_Bag, "Hide", function() cbNivCatDropDown:Hide() end)
 end
 
 function cbNivaya:CatDropDownOnClick(self, type)
@@ -520,10 +658,25 @@ end
 SLASH_CBNIV1 = '/cbniv'
 SlashCmdList.CBNIV = HandleSlash
 
+local buttonCollector = {}
 local Event =  CreateFrame('Frame', nil)
 Event:RegisterEvent("PLAYER_ENTERING_WORLD")
 Event:SetScript('OnEvent', function(self, event, ...)
 	if event == "PLAYER_ENTERING_WORLD" then
+		for bagID = -2, 11 do
+			local slots = GetContainerNumSlots(bagID)
+			for slotID=1,slots do
+				local button = cbNivaya.buttonClass:New(bagID, slotID)
+				buttonCollector[#buttonCollector+1] = button
+				cbNivaya:SetButton(bagID, slotID, nil)
+			end
+		end
+		for i,button in pairs(buttonCollector) do
+			if button.container then
+				button.container:RemoveButton(button)
+			end
+			button:Free()
+		end
 		cbNivaya:UpdateBags()
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end

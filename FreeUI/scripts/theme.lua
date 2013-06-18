@@ -1218,15 +1218,23 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 			local name = self:GetName();
 			local subSpellString = _G[name.."SubSpellName"]
 
+			local isOffSpec = self.offSpecID ~= 0 and SpellBookFrame.bookType == BOOKTYPE_SPELL
+
 			subSpellString:SetTextColor(1, 1, 1)
+
 			if slotType == "FUTURESPELL" then
 				local level = GetSpellAvailableLevel(slot, SpellBookFrame.bookType)
-				if (level and level > UnitLevel("player")) then
-					self.RequiredLevelString:SetTextColor(.7, .7, .7)
+				if level and level > UnitLevel("player") then
 					self.SpellName:SetTextColor(.7, .7, .7)
 					subSpellString:SetTextColor(.7, .7, .7)
 				end
+			else
+				if slotType == "SPELL" and isOffSpec then
+					subSpellString:SetTextColor(.7, .7, .7)
+				end
 			end
+
+			self.RequiredLevelString:SetTextColor(.7, .7, .7)
 
 			local ic = _G[name.."IconTexture"]
 			if not ic.bg then return end
@@ -6070,6 +6078,9 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		F.Reskin(ItemSocketingSocketButton)
 		F.ReskinScroll(ItemSocketingScrollFrameScrollBar)
 	elseif addon == "Blizzard_ItemUpgradeUI" then
+		local ItemUpgradeFrame = ItemUpgradeFrame
+		local ItemButton = ItemUpgradeFrame.ItemButton
+
 		ItemUpgradeFrame:DisableDrawLayer("BACKGROUND")
 		ItemUpgradeFrame:DisableDrawLayer("BORDER")
 		ItemUpgradeFrameMoneyFrameLeft:Hide()
@@ -6078,40 +6089,42 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		ItemUpgradeFrame.ButtonFrame:GetRegions():Hide()
 		ItemUpgradeFrame.ButtonFrame.ButtonBorder:Hide()
 		ItemUpgradeFrame.ButtonFrame.ButtonBottomBorder:Hide()
-		ItemUpgradeFrame.ItemButton.Frame:Hide()
-		ItemUpgradeFrame.ItemButton.Grabber:Hide()
-		ItemUpgradeFrame.ItemButton.TextFrame:Hide()
-		ItemUpgradeFrame.ItemButton.TextGrabber:Hide()
+		ItemButton.Frame:Hide()
+		ItemButton.Grabber:Hide()
+		ItemButton.TextFrame:Hide()
+		ItemButton.TextGrabber:Hide()
 
-		F.CreateBD(ItemUpgradeFrame.ItemButton, .25)
-		ItemUpgradeFrame.ItemButton:SetHighlightTexture("")
-		ItemUpgradeFrame.ItemButton:SetPushedTexture("")
-		ItemUpgradeFrame.ItemButton.IconTexture:SetPoint("TOPLEFT", 1, -1)
-		ItemUpgradeFrame.ItemButton.IconTexture:SetPoint("BOTTOMRIGHT", -1, 1)
+		F.CreateBD(ItemButton, .25)
+		ItemButton:SetHighlightTexture("")
+		ItemButton:SetPushedTexture("")
+		ItemButton.IconTexture:SetPoint("TOPLEFT", 1, -1)
+		ItemButton.IconTexture:SetPoint("BOTTOMRIGHT", -1, 1)
 
-		local bg = CreateFrame("Frame", nil, ItemUpgradeFrame.ItemButton)
+		local bg = CreateFrame("Frame", nil, ItemButton)
 		bg:SetSize(341, 50)
-		bg:SetPoint("LEFT", ItemUpgradeFrame.ItemButton, "RIGHT", -1, 0)
-		bg:SetFrameLevel(ItemUpgradeFrame.ItemButton:GetFrameLevel()-1)
+		bg:SetPoint("LEFT", ItemButton, "RIGHT", -1, 0)
+		bg:SetFrameLevel(ItemButton:GetFrameLevel()-1)
 		F.CreateBD(bg, .25)
 
-		ItemUpgradeFrame.ItemButton:HookScript("OnEnter", function(self)
+		ItemButton:HookScript("OnEnter", function(self)
 			self:SetBackdropBorderColor(1, .56, .85)
 		end)
-		ItemUpgradeFrame.ItemButton:HookScript("OnLeave", function(self)
+		ItemButton:HookScript("OnLeave", function(self)
 			self:SetBackdropBorderColor(0, 0, 0)
 		end)
 
+		ItemButton.Cost.Icon:SetTexCoord(.08, .92, .08, .92)
+		ItemButton.Cost.Icon.bg = F.CreateBG(ItemButton.Cost.Icon)
+
 		hooksecurefunc("ItemUpgradeFrame_Update", function()
 			if GetItemUpgradeItemInfo() then
-				ItemUpgradeFrame.ItemButton.IconTexture:SetTexCoord(.08, .92, .08, .92)
+				ItemButton.IconTexture:SetTexCoord(.08, .92, .08, .92)
+				ItemButton.Cost.Icon.bg:Show()
 			else
-				ItemUpgradeFrame.ItemButton.IconTexture:SetTexture("")
+				ItemButton.IconTexture:SetTexture("")
+				ItemButton.Cost.Icon.bg:Hide()
 			end
 		end)
-
-		ItemUpgradeFrame.ItemButton.Cost.Icon:SetTexCoord(.08, .92, .08, .92)
-		F.CreateBG(ItemUpgradeFrame.ItemButton.Cost.Icon)
 
 		local currency = ItemUpgradeFrameMoneyFrame.Currency
 		currency.icon:SetPoint("LEFT", currency.count, "RIGHT", 1, 0)
@@ -6784,32 +6797,24 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 			local bg = CreateFrame("Frame", nil, bu)
 			bg:SetPoint("TOPLEFT", 2, 0)
-			bg:SetPoint("BOTTOMRIGHT", 0, 2)
+			bg:SetPoint("BOTTOMRIGHT", -1, 2)
 			F.CreateBD(bg, 0)
 			bg:SetFrameLevel(bu:GetFrameLevel()-1)
 
 			bu.tex = F.CreateGradient(bu)
 			bu.tex:SetDrawLayer("BACKGROUND")
-			bu.tex:SetPoint("TOPLEFT", 3, -1)
-			bu.tex:SetPoint("BOTTOMRIGHT", -1, 3)
+			bu.tex:SetPoint("TOPLEFT", bg, 1, -1)
+			bu.tex:SetPoint("BOTTOMRIGHT", bg, -1, 1)
 
 			bu.SelectedTexture:SetDrawLayer("BACKGROUND")
 			bu.SelectedTexture:SetTexture(r, g, b, .2)
-			bu.SelectedTexture:SetPoint("TOPLEFT", 2, 0)
-			bu.SelectedTexture:SetPoint("BOTTOMRIGHT", 0, 2)
+			bu.SelectedTexture:SetAllPoints(bu.tex)
 
 			bu.Icon:SetTexCoord(.08, .92, .08, .92)
 			bu.Icon.bg = F.CreateBG(bu.Icon)
 			bu.Icon.bg:SetDrawLayer("BACKGROUND", 1)
 			bu.Icon:SetPoint("TOPLEFT", 5, -3)
 		end
-
-		-- if scroll frames aren't bugged then they are terribly implemented
-		local bu1 = HonorFrame.SpecificFrame.buttons[1]
-		bu1.tex:SetPoint("TOPLEFT", 3, 0)
-		bu1.tex:SetPoint("BOTTOMRIGHT", -1, 3)
-		bu1.Icon:SetPoint("TOPLEFT", 4, -2)
-		bu1.SelectedTexture:SetPoint("BOTTOMRIGHT", 0, 3)
 
 		-- Conquest Frame
 
@@ -7904,8 +7909,6 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		F.CreateBD(DBM_GUI_OptionsFrame)
 		F.CreateSD(DBM_GUI_OptionsFrame)
-		F.Reskin(DBM_GUI_OptionsFramecheck)
-		F.Reskin(DBM_GUI_OptionsFramecheck2)
 		F.Reskin(DBM_GUI_OptionsFrameOkay)
 		F.Reskin(DBM_GUI_OptionsFrameWebsiteButton)
 		F.ReskinScroll(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)

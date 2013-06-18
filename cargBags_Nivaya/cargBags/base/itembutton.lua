@@ -22,6 +22,10 @@ local cargBags = ns.cargBags
 
 local _G = _G
 
+local function retrieveFont()
+	return ns.options.fonts.itemCount
+end
+
 --[[!
 	@class ItemButton
 		This class serves as the basis for all itemSlots in a container
@@ -69,6 +73,7 @@ end
 ]]
 local bFS
 function ItemButton:Create(tpl)
+	local font = retrieveFont()
 	local impl = self.implementation
 	impl.numSlots = (impl.numSlots or 0) + 1
 	local name = ("%sSlot%d"):format(impl.name, impl.numSlots)
@@ -80,11 +85,11 @@ function ItemButton:Create(tpl)
 	local btnNT = _G[button:GetName().."NormalTexture"]
 	if btnNT then btnNT:SetTexture(nil) end
 	
-	button:SetSize(32, 32)
+	button:SetSize(ns.options.itemSlotSize, ns.options.itemSlotSize)
 	bFS = _G[button:GetName().."Count"]
 	bFS:ClearAllPoints()
-	bFS:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 0.5, 0.5);
-	bFS:SetFont("Fonts\\Hooge0655.ttf", 8, "OUTLINEMONOCHROME")
+	bFS:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 1.5, 1.5);
+	bFS:SetFont(unpack(font))
 
 	return button
 end

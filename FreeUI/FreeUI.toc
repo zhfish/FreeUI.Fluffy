@@ -23,7 +23,7 @@ oUF\oUF.xml
 scripts\actionbars.lua
 scripts\arena.lua
 scripts\automation.lua
-scripts\bags.lua
+## scripts\bags.lua
 scripts\bubbles.lua
 scripts\buffreminder.lua
 scripts\buffs.lua

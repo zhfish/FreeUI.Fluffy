@@ -4,27 +4,20 @@ local cargBags = ns.cargBags
 local _
 local L = cBnivL
 
-
-local LSM
-if LibStub then
-	LSM = LibStub("LibSharedMedia-3.0")
-end
-
-local Font = {[[Interface\AddOns\cargBags_Nivaya\media\pixel.ttf]], 8, "OUTLINEMONOCHROME"}
+local mediaPath = [[Interface\AddOns\cargBags_Nivaya\media\]]
 local Textures = {
-	Background = [[Interface\AddOns\cargBags_Nivaya\media\texture]],
-	Border = [[Interface\AddOns\cargBags_Nivaya\media\glowTex]],
-	Search = [[Interface\AddOns\cargBags_Nivaya\media\Search]],
-	BagToggle = [[Interface\AddOns\cargBags_Nivaya\media\BagToggle]],
-	ResetNew = [[Interface\AddOns\cargBags_Nivaya\media\ResetNew]],
-	Restack = [[Interface\AddOns\cargBags_Nivaya\media\Restack]],
-	Config = [[Interface\AddOns\cargBags_Nivaya\media\Config]],
-	SellJunk = [[Interface\AddOns\cargBags_Nivaya\media\SellJunk]],
-	TooltipIcon = [[Interface\AddOns\cargBags_Nivaya\media\TooltipIcon]],
-	Up = [[Interface\AddOns\cargBags_Nivaya\media\Up]],
-	Down = [[Interface\AddOns\cargBags_Nivaya\media\Down]],
-	Left = [[Interface\AddOns\cargBags_Nivaya\media\Left]],
-	Right = [[Interface\AddOns\cargBags_Nivaya\media\Right]],
+	Background =	mediaPath .. "texture",
+	Search =		mediaPath .. "Search",
+	BagToggle =		mediaPath .. "BagToggle",
+	ResetNew =		mediaPath .. "ResetNew",
+	Restack =		mediaPath .. "Restack",
+	Config =		mediaPath .. "Config",
+	SellJunk =		mediaPath .. "SellJunk",
+	TooltipIcon =	mediaPath .. "TooltipIcon",
+	Up =			mediaPath .. "Up",
+	Down =			mediaPath .. "Down",
+	Left =			mediaPath .. "Left",
+	Right =			mediaPath .. "Right",
 }
 
 CharacterBag0Slot:Hide()
@@ -32,7 +25,7 @@ CharacterBag1Slot:Hide()
 CharacterBag2Slot:Hide()
 CharacterBag3Slot:Hide()
 
-local itemSlotSize = 32
+local itemSlotSize = ns.options.itemSlotSize
 ------------------------------------------
 -- MyContainer specific
 ------------------------------------------
@@ -112,8 +105,8 @@ function MyContainer:OnContentsChanged()
 		local button = v[3]
 		button:ClearAllPoints()
 	  
-		local xPos = col * (itemSlotSize + 2) + 2
-		local yPos = (-1 * row * (itemSlotSize + 2)) - yPosOffs
+		local xPos = col * (itemSlotSize + ns.options.itemSlotPadding) + ns.options.itemSlotPadding
+		local yPos = (-1 * row * (itemSlotSize + ns.options.itemSlotPadding)) - yPosOffs
 
 		button:SetPoint("TOPLEFT", self, "TOPLEFT", xPos, yPos)
 		if(col >= self.Columns-1) then
@@ -126,8 +119,8 @@ function MyContainer:OnContentsChanged()
 	end
 
 	if cBnivCfg.CompressEmpty then
-		local xPos = col * (itemSlotSize + 2) + 2
-		local yPos = (-1 * row * (itemSlotSize + 2)) - yPosOffs
+		local xPos = col * (itemSlotSize + ns.options.itemSlotPadding) + ns.options.itemSlotPadding
+		local yPos = (-1 * row * (itemSlotSize + ns.options.itemSlotPadding)) - yPosOffs
 
 		local tDrop = self.DropTarget
 		if tDrop then
@@ -146,7 +139,7 @@ function MyContainer:OnContentsChanged()
 	end
 	
 	-- This variable stores the size of the item button container
-	self.ContainerHeight = (row + (col > 0 and 1 or 0)) * (itemSlotSize + 2)
+	self.ContainerHeight = (row + (col > 0 and 1 or 0)) * (itemSlotSize + ns.options.itemSlotPadding)
 
 	if (self.UpdateDimensions) then self:UpdateDimensions() end -- Update the bag's height
 	local t = (tName == "cBniv_Bag") or (tName == "cBniv_Bank") 
@@ -337,7 +330,6 @@ local resetNewItems = function(self)
 					if (strsub(tLink, 13, 21) == "battlepet") then
 						local _, tName = strmatch(tLink, "|H(.-)|h(.-)|h")
 						local _,tStackCount = GetContainerItemInfo(i,j)
-						tStackCount:SetFont("Fonts\\Hooge0655.ttf", 8, "OUTLINEMONOCHROME")
 						if cB_KnownItems[tName] then
 							cB_KnownItems[tName] = cB_KnownItems[tName] + tStackCount
 						else
@@ -365,18 +357,18 @@ end
 local UpdateDimensions = function(self)
 	local height = 0			-- Normal margin space
 	if self.BagBar and self.BagBar:IsShown() then
-		height = height + 39	-- Bag button space
+		height = height + 40	-- Bag button space
 	end
 	if self.Space then
 		height = height + 16	-- additional info display space
 	end
 	if self.bagToggle then
 		local tBag = (self.name == "cBniv_Bag")
-		local extraHeight = (tBag and self.hintShown) and 12 or 0
+		local extraHeight = (tBag and self.hintShown) and (ns.options.fonts.standard[2] + 4) or 0
 		height = height + 24 + extraHeight
 	end
 	if self.Caption then		-- Space for captions
-		height = height + 20
+		height = height + ns.options.fonts.standard[2] + 12
 	end
 	self:SetHeight(self.ContainerHeight + height)
 end
@@ -402,11 +394,7 @@ local function IconButton_OnEnter(self)
 	self.mouseover = true
 	
 	if not classColor then
-		if RealUI then
-			classColor = RealUI:GetClassColor(RealUI.class)
-		else
-			classColor = GetClassColor(select(2, UnitClass("player")))
-		end
+		classColor = GetClassColor(select(2, UnitClass("player")))
 	end
 	self.icon:SetVertexColor(classColor[1], classColor[2], classColor[3])
 	
@@ -434,18 +422,7 @@ local function IconButton_OnLeave(self)
 end
 
 local function retrieveFont()
-	local font = Font
-	if RealUI then
-		font = RealUI.font.pixeltiny
-	elseif LSM then
-		font = LSM:Fetch("font", "pixel_lr_small")
-		if font == nil then 
-			font = Font
-		else
-			font = {font, 8, "OUTLINEMONOCHROME"}
-		end
-	end
-	return font
+	return ns.options.fonts.standard
 end
 
 local createMoverButton = function (parent, texture, tag)
@@ -491,7 +468,7 @@ local createIconButton = function (name, parent, texture, point, hint, isBag)
 	
 	button.tooltip = button:CreateFontString()
 	-- button.tooltip:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", isBag and -76 or -59, 4.5)
-	button.tooltip:SetFont("Fonts\\Hooge0655.ttf", 8, "OUTLINEMONOCHROME")
+	button.tooltip:SetFont(unpack(font))
 	button.tooltip:SetJustifyH("RIGHT")
 	button.tooltip:SetText(hint)
 	button.tooltip:SetTextColor(0.8, 0.8, 0.8)
@@ -570,9 +547,9 @@ function MyContainer:OnCreate(name, settings)
 	end
 
 	if tBank or tBankBags then
-		self.Columns = (usedSlotsBank > 96) and 14 or 12
+		self.Columns = (usedSlotsBank > ns.options.sizes.bank.largeItemCount) and ns.options.sizes.bank.columnsLarge or ns.options.sizes.bank.columnsSmall
 	else
-		self.Columns = (usedSlotsBag > 64) and 7 or 7
+		self.Columns = (usedSlotsBag > ns.options.sizes.bags.largeItemCount) and ns.options.sizes.bags.columnsLarge or ns.options.sizes.bags.columnsSmall
 	end
 	self.ContainerHeight = 0
 	self:UpdateDimensions()
@@ -580,10 +557,10 @@ function MyContainer:OnCreate(name, settings)
 
 	-- The frame background
 	local tBankCustom = (tBankBags and not cBnivCfg.BankBlack)
-	local color_rb = 0.05
-	local color_gb = tBankCustom and .4 or 0.05
-	local color_bb = tBankCustom and .6 or 0.05
-	local alpha_fb = RealUI and RealUI.media.backgroundalpha or 0.8
+	local color_rb = ns.options.colors.background[1]
+	local color_gb = tBankCustom and .2 or ns.options.colors.background[2]
+	local color_bb = tBankCustom and .3 or ns.options.colors.background[3]
+	local alpha_fb = ns.options.colors.background[4]
 
 	-- The frame background
 	local background = CreateFrame("Frame", nil, self)
@@ -603,7 +580,7 @@ function MyContainer:OnCreate(name, settings)
 
 	-- Caption, close button
 	local caption = background:CreateFontString(background, "OVERLAY", nil)
-	caption:SetFont("Fonts\\Hooge0655.ttf", 8, "OUTLINEMONOCHROME")
+	caption:SetFont(unpack(font))
 	if(caption) then
 		local t = L.bagCaptions[self.name] or (tBankBags and strsub(self.name, 5))
 		if not t then t = self.name end
@@ -614,9 +591,6 @@ function MyContainer:OnCreate(name, settings)
 		
 		if tBag or tBank then
 			local close = CreateFrame("Button", nil, self, "UIPanelCloseButton")
---			if Aurora then
---				local F = Aurora[1]
---				F.ReskinClose(close, "TOPRIGHT", self, "TOPRIGHT", 1, 1)
 			if FreeUI then
 				local F, C = unpack(FreeUI)
 				F.ReskinClose(close, "TOPRIGHT", self, "TOPRIGHT", 1, 1)
@@ -695,7 +669,9 @@ function MyContainer:OnCreate(name, settings)
 		bagButtons.isGlobal = true
 		
 		bagButtons:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -2, 25)
-		bagButtons:Hide()
+		if not(ns.options.bagsShownAtStartup) then
+			bagButtons:Hide()
+		end
 
 		-- main window gets a fake bag button for toggling key ring
 		self.BagBar = bagButtons
@@ -706,12 +682,8 @@ function MyContainer:OnCreate(name, settings)
 		self.bagToggle:SetScript("OnClick", function()
 			if(self.BagBar:IsShown()) then 
 				self.BagBar:Hide()
-				if self.hint then self.hint:Show() end
-				self.hintShown = true
 			else
 				self.BagBar:Show()
-				if self.hint then self.hint:Hide() end
-				self.hintShown = false
 			end
 			self:UpdateDimensions()
 		end)
@@ -809,16 +781,16 @@ function MyContainer:OnCreate(name, settings)
 		self.DropTarget:SetHeight(itemSlotSize - 1)
 		
 		local DropTargetProcessItem = function()
-			if CursorHasItem() then
+			-- if CursorHasItem() then	-- Commented out to fix Guild Bank -> Bags item dragging
 				local bID, sID = GetFirstFreeSlot(tBag and "bag" or "bank")
 				if bID then PickupContainerItem(bID, sID) end
-			end
+			-- end
 		end
 		self.DropTarget:SetScript("OnMouseUp", DropTargetProcessItem)
 		self.DropTarget:SetScript("OnReceiveDrag", DropTargetProcessItem)
 		
 		local fs = self:CreateFontString(nil, "OVERLAY")
-		fs:SetFont("Fonts\\Hooge0655.ttf", 8, "OUTLINEMONOCHROME")
+		fs:SetFont(unpack(font))
 		fs:SetJustifyH("LEFT")
 		fs:SetPoint("BOTTOMRIGHT", self.DropTarget, "BOTTOMRIGHT", 1.5, 1.5)
 		self.EmptySlotCounter = fs
@@ -850,18 +822,19 @@ function MyContainer:OnCreate(name, settings)
 		searchIcon:SetWidth(16)
 		searchIcon:SetHeight(16)
 		
-		-- Hint
+		--[[ Hint
 		self.hint = background:CreateFontString(nil, "OVERLAY", nil)
-		self.hint:SetPoint("BOTTOMLEFT", infoFrame, -0.5, 32.5)
-		self.hint:SetFont("Fonts\\Hooge0655.ttf", 8, "OUTLINEMONOCHROME")
+		self.hint:SetPoint("BOTTOMLEFT", infoFrame, -0.5, 31.5)
+		self.hint:SetFont(unpack(font))
 		self.hint:SetTextColor(1, 1, 1, 0.4)
-		self.hint:SetText("")
-		self.hintShown = false
+		self.hint:SetText("Alt + Right Click an item to assign category")
+		self.hintShown = true
+		]]
 		
 		-- The money display
 		local money = self:SpawnPlugin("TagDisplay", "[money]", self)
 		money:SetPoint("TOPRIGHT", self, -25.5, -2.5)
-		money:SetFont("Fonts\\Hooge0655.ttf", 8, "OUTLINEMONOCHROME")
+		money:SetFont(unpack(font))
 		money:SetJustifyH("RIGHT")
 		money:SetShadowColor(0, 0, 0, 0)
 	end
@@ -883,7 +856,8 @@ function MyButton:OnAdd()
 			if tID then 
 				cbNivCatDropDown.itemName = GetItemInfo(tID)
 				cbNivCatDropDown.itemID = tID
-				ToggleDropDownMenu(1, nil, cbNivCatDropDown, self, 0, 0)
+				--ToggleDropDownMenu(1, nil, cbNivCatDropDown, self, 0, 0)
+				cbNivCatDropDown:Toggle(self, nil, nil, 0, 0)
 			end
 		end
 	end)
