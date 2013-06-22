@@ -1,6 +1,5 @@
 ## Interface: 50300
 ## Title: FreeUI
-## Version: 6.5
 ## Notes: Minimalistic user interface.
 ## Author: Haleth/Freethinker
 ## RequiredDeps: Blizzard_CombatText

@@ -9,7 +9,7 @@ bagsShownAtStartup = true,		-- Show Bags (Toggle Bags) by default
 sizes = {
 	bags = {
 		columnsSmall = 8,
-		columnsLarge = 10,
+		columnsLarge = 8,
 		largeItemCount = 64,	-- Switch to columnsLarge when >= this number of items in your bags
 	},
 	bank = {
