@@ -37,6 +37,7 @@ C["automation"] = {
 	["autoSetRole"] = true,			-- automatically set role and hide dialog where possible
 		["autoSetRole_useSpec"] = true,		-- attempt to set role based on your current spec
 		["autoSetRole_verbose"] = false,	-- tells you what happens when setting role
+	["questRewardHighlight"] = true, -- highlights the quest reward with highest vendor price
 }
 
 C["actionbars"] = {
@@ -134,6 +135,7 @@ C["classmod"] = {
 C["performance"] = {
 	["mapcoords"] = .1, 	-- update interval for map coords in seconds (only with map open)
 	["nameplates"] = .1, 	-- update interval for nameplates in seconds (always)
+	["nameplatesHealth"] = .2,   -- update interval for nameplate health bar colour (only with name plates shown)
 	["tolbarad"] = 10, 	-- update interval for TB timer in seconds (always)
 }
 
