@@ -4,7 +4,9 @@ ns.options = {
 itemSlotSize = 32,		-- Size of item slots
 itemSlotPadding = 2,	-- Gap between item slots
 
-bagsShownAtStartup = true,		-- Show Bags (Toggle Bags) by default
+bagsShownAtStartup = false,		-- Show Bags (Toggle Bags) by default
+
+currencyIcons = false,	-- Use Gold, Silver, Copper icons instead of G, S, C
 
 sizes = {
 	bags = {

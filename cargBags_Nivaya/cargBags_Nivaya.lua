@@ -155,6 +155,8 @@ local optDefaults = {
 					CoolStuff = false,
 					Junk = true,
 					ItemSets = true,
+					Consumables = true,
+					Quest = true,
 					BankBlack = true,
 					scale = 1,
 					FilterBank = true,
@@ -199,6 +201,8 @@ function cargBags_Nivaya:ADDON_LOADED(event, addon)
 	cB_filterEnabled["TradeGoods"] = cBnivCfg.TradeGoods
 	cB_filterEnabled["Junk"] = cBnivCfg.Junk
 	cB_filterEnabled["ItemSets"] = cBnivCfg.ItemSets
+	cB_filterEnabled["Consumables"] = cBnivCfg.Consumables
+	cB_filterEnabled["Quest"] = cBnivCfg.Quest
 	cBniv.BankCustomBags = cBnivCfg.BankCustomBags
 	cBniv.BagPos = true
 
@@ -553,6 +557,14 @@ local function HandleSlash(str)
 		cBnivCfg.ItemSets = not cBnivCfg.ItemSets
 		cB_filterEnabled["ItemSets"] = cBnivCfg.ItemSets
 		StatusMsg('The "ItemSets" filters are now ', '.', cBnivCfg.ItemSets, true, false)
+	elseif str == 'consumables' then
+		cBnivCfg.Consumables = not cBnivCfg.Consumables
+		cB_filterEnabled["Consumables"] = cBnivCfg.Consumables
+		StatusMsg('The "Consumables" filters are now ', '.', cBnivCfg.Consumables, true, false)
+	elseif str == 'quest' then
+		cBnivCfg.Quest = not cBnivCfg.Quest
+		cB_filterEnabled["Quest"] = cBnivCfg.Quest
+		StatusMsg('The "Quest" filters are now ', '.', cBnivCfg.Quest, true, false)
 	elseif str == 'bankbg' then
 		cBnivCfg.BankBlack = not cBnivCfg.BankBlack
 		StatusMsg('Black background color for the bank is now ', '. Reload your UI for this change to take effect!', cBnivCfg.BankBlack, true, false)
@@ -639,6 +651,8 @@ local function HandleSlash(str)
 		StatusMsg('(', ') |cFFFFFF00armor|r - Toggle the "Armor and Weapons" filter .', cBnivCfg.Armor, false, true)
 		StatusMsg('(', ') |cFFFFFF00junk|r - Toggle the "Junk" filter.', cBnivCfg.Junk, false, true)
 		StatusMsg('(', ') |cFFFFFF00sets|r - Toggle the "ItemSets" filters.', cBnivCfg.ItemSets, false, true)
+		StatusMsg('(', ') |cFFFFFF00sets|r - Toggle the "Consumables" filters.', cBnivCfg.Consumables, false, true)
+		StatusMsg('(', ') |cFFFFFF00sets|r - Toggle the "Quest" filters.', cBnivCfg.Quest, false, true)
 		StatusMsg('(', ') |cFFFFFF00bankbg|r - Toggle black bank background color.', cBnivCfg.BankBlack, false, true)
 		StatusMsg('(', ') |cFFFFFF00bankfilter|r - Toggle bank filtering.', cBnivCfg.FilterBank, false, true)
 		StatusMsg('(', ') |cFFFFFF00empty|r - Toggle empty bagspace compression.', cBnivCfg.CompressEmpty, false, true)
