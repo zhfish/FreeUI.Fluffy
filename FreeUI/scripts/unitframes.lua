@@ -678,33 +678,33 @@ local UnitSpecific = {
 		-- 	IconFrame:SetSize(44, 44)
 		-- end
 
-		if C.unitframes.pvp then
-			local PvP = F.CreateFS(self, 8)
-			PvP:SetPoint("BOTTOMRIGHT", Health, "TOPRIGHT", -50, 3)
-			PvP:SetText("P")
+		-- if C.unitframes.pvp then
+		-- 	local PvP = F.CreateFS(self, 8)
+		-- 	PvP:SetPoint("BOTTOMRIGHT", Health, "TOPRIGHT", -50, 3)
+		-- 	PvP:SetText("P")
 
-			local UpdatePvP = function(self, event, unit)
-				if(unit ~= self.unit) then return end
+		-- 	local UpdatePvP = function(self, event, unit)
+		-- 		if(unit ~= self.unit) then return end
 
-				local pvp = self.PvP
+		-- 		local pvp = self.PvP
 
-				local factionGroup = UnitFactionGroup(unit)
-				if(UnitIsPVPFreeForAll(unit) or (factionGroup and factionGroup ~= "Neutral" and UnitIsPVP(unit))) then
-					if factionGroup == "Alliance" then
-						PvP:SetTextColor(0, 0.68, 0.94)
-					else
-						PvP:SetTextColor(1, 0, 0)
-					end
+		-- 		local factionGroup = UnitFactionGroup(unit)
+		-- 		if(UnitIsPVPFreeForAll(unit) or (factionGroup and factionGroup ~= "Neutral" and UnitIsPVP(unit))) then
+		-- 			if factionGroup == "Alliance" then
+		-- 				PvP:SetTextColor(0, 0.68, 0.94)
+		-- 			else
+		-- 				PvP:SetTextColor(1, 0, 0)
+		-- 			end
 
-					pvp:Show()
-				else
-					pvp:Hide()
-				end
-			end
+		-- 			pvp:Show()
+		-- 		else
+		-- 			pvp:Hide()
+		-- 		end
+		-- 	end
 
-			self.PvP = PvP
-			PvP.Override = UpdatePvP
-		end
+		-- 	self.PvP = PvP
+		-- 	PvP.Override = UpdatePvP
+		-- end
 
 		-- We position these later on
 		local Debuffs = CreateFrame("Frame", nil, self)
