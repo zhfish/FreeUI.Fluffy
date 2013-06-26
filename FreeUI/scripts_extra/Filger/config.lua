@@ -914,7 +914,7 @@ Filger_Spells = {
 			{spellID = 137633, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- JI Kun
 			-- 原始营养
-			{spellID = 140741, unitID = "player", caster = "all", filter = "BUFF"},
+			{spellID = 112879, unitID = "player", caster = "all", filter = "BUFF"},
 			-- 飞行
 			{spellID = 133755, unitID = "player", caster = "all", filter = "BUFF"},
 			-- iron Qon
