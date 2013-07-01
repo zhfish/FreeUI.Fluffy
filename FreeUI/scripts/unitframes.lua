@@ -1865,7 +1865,7 @@ oUF:Factory(function(self)
 	end
 
 	for n = 1, MAX_BOSS_FRAMES do
-		spawnHelper(self, 'boss' .. n, 'RIGHT', UIParent, 'RIGHT', -160, 180 - (64 * n))
+		spawnHelper(self, 'boss' .. n, 'RIGHT', UIParent, 'RIGHT', -120, 180 - (60 * n))
 	end
 
 	if C.unitframes.enableArena then
