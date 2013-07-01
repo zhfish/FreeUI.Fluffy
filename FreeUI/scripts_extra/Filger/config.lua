@@ -230,8 +230,36 @@ Filger_Spells = {
 
 
 			-- Buffs
-			-- thrill
+			-- Deterrence
+			{spellID = 19263, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Rapid Fire
+			{spellID = 3045, unitID = "player", caster = "player", filter = "BUFF"},
+			-- The Beast Within
+			{spellID = 34471, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Focus Fire
+			{spellID = 82692, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Spirit Mend
+			{spellID = 90361, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Posthaste
+			{spellID = 118922, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Ready, Set, Aim...
+			{spellID = 82925, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fire!
+			{spellID = 82926, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Steady Focus
+			{spellID = 53220, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Lock and Load
+			{spellID = 56453, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Thrill of the Hunt
 			{spellID = 34720, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Frenzy
+			{spellID = 19615, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Mend Pet
+			{spellID = 136, unitID = "pet", caster = "player", filter = "BUFF"},
+			-- camouflage
+			{spellID = 51755, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- feign death
+			{spellID = 5384, unitID = "player", caster = "player", filter = "BUFF"},
 
 
 		},
@@ -246,8 +274,12 @@ Filger_Spells = {
 
 
 			-- Self
-			-- Curse of the Elements
-			{spellID = 1490, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- serpent sting
+			{spellID = 118253, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Wyvern Sting
+			{spellID = 19386, unitID = "focus", caster = "player", filter = "DEBUFF"},
+			-- Silencing Shot
+			{spellID = 34490, unitID = "focus", caster = "player", filter = "DEBUFF"},
 
 		},
 		{
@@ -260,8 +292,115 @@ Filger_Spells = {
 			Position = {unpack(Filger_Settings.player_cooldown_icon)},
 
 			-- Self
-			-- Devour Magic (Felhunter)
-			{spellID = 19505, filter = "CD"},
+			-- Concussive Shot
+			{spellID = 5116, filter = "CD"},
+			-- Silencing Shot
+			{spellID = 34490, filter = "CD"},
+			-- Scatter Shot
+			{spellID = 19503, filter = "CD"},
+			-- Binding Shot
+			{spellID = 117526, filter = "CD"},
+			-- Kill Command
+			{spellID = 34026, filter = "CD"},
+			-- Explosive Shot
+			{spellID = 53301, filter = "CD"},
+			-- Chimera Shot
+			{spellID = 53209, filter = "CD"},
+			-- Kill Shot
+			{spellID = 53351, filter = "CD"},
+			-- Glaive Toss
+			{spellID = 117050, filter = "CD"},
+			-- Disengage
+			{spellID = 781, filter = "CD"},
+			-- Dire Beast
+			{spellID = 120679, filter = "CD"},
+			-- Fervor
+			{spellID = 82726, filter = "CD"},
+			-- Barrage
+			{spellID = 120360, filter = "CD"},
+			-- Misdirection
+			{spellID = 34477, filter = "CD"},
+			-- Feign Death
+			{spellID = 5384, filter = "CD"},
+			-- Snake Trap
+			{spellID = 34600, filter = "CD"},
+			-- Explosive Trap
+			{spellID = 13813, filter = "CD"},
+			-- Ice Trap
+			{spellID = 13809, filter = "CD"},
+			-- Master's Call
+			{spellID = 53271, filter = "CD"},
+			-- Powershot
+			{spellID = 109259, filter = "CD"},
+			-- Wyvern Sting
+			{spellID = 19386, filter = "CD"},
+			-- Intimidation
+			{spellID = 19577, filter = "CD"},
+			-- Bestial Wrath
+			{spellID = 19574, filter = "CD"},
+			-- Lynx Rush
+			{spellID = 120697, filter = "CD"},
+			-- A Murder of Crows
+			{spellID = 131894, filter = "CD"},
+			-- Exhilaration
+			{spellID = 109304, filter = "CD"},
+			-- Deterrence
+			{spellID = 19263, filter = "CD"},
+			-- Rapid Fire
+			{spellID = 3045, filter = "CD"},
+			-- Readiness
+			{spellID = 23989, filter = "CD"},
+			-- Spirit Mend (Pet)
+			{spellID = 90361, filter = "CD"},
+			-- Web (Pet)
+			{spellID = 4167, filter = "CD"},
+			-- Venom Web Spray (Pet)
+			{spellID = 54706, filter = "CD"},
+			-- Web Wrap (Pet)
+			{spellID = 96201, filter = "CD"},
+			-- Bad Manner (Pet)
+			{spellID = 90337, filter = "CD"},
+			-- Lullaby (Pet)
+			{spellID = 126246, filter = "CD"},
+
+			-- Racial
+			-- Every Man for Himself (Human)
+			{spellID = 59752, filter = "CD"},
+			-- Stoneform (Dwarf)
+			{spellID = 20594, filter = "CD"},
+			-- Shadowmeld (Night Elf)
+			{spellID = 58984, filter = "CD"},
+			-- Gift of the Naaru (Draenei)
+			{spellID = 28880, filter = "CD"},
+			-- Darkflight (Worgen)
+			{spellID = 68992, filter = "CD"},
+			-- Blood Fury (Orc)
+			{spellID = 20572, filter = "CD"},
+			-- Will of the Forsaken (Forsaken)
+			{spellID = 7744, filter = "CD"},
+			-- Cannibalize (Forsaken)
+			{spellID = 20577, filter = "CD"},
+			-- War Stomp (Tauren)
+			{spellID = 20549, filter = "CD"},
+			-- Berserking (Troll)
+			{spellID = 26297, filter = "CD"},
+			-- Arcane Torrent (Blood Elf)
+			{spellID = 69179, filter = "CD"},
+			-- Rocket Jump (Goblin)
+			{spellID = 69070, filter = "CD"},
+			-- Quaking Palm (Pandaren)
+			{spellID = 107079, filter = "CD"},
+
+			-- Items
+			-- Gloves
+			{slotID = 10, filter = "CD"},
+			-- Belt
+			{slotID = 6, filter = "CD"},
+			-- Back
+			{slotID = 15, filter = "CD"},
+			-- Trinkets
+			{slotID = 13, filter = "CD"},
+			{slotID = 14, filter = "CD"},
 		},
 
 	},
