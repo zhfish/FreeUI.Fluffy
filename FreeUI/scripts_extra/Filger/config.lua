@@ -100,10 +100,8 @@ Filger_Spells = {
 			{spellID = 1098, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Shadowsnare
 			{spellID = 63311, unitID = "target", caster = "player", filter = "DEBUFF"},
-
 			-- Havoc
 			{spellID = 80240, unitID = "target", caster = "player", filter = "DEBUFF"},	
-
 			-- CoE group
 			-- Master Poisoner (Rogue)
 			{spellID = 93068, unitID = "target", caster = "all", filter = "DEBUFF"},
@@ -125,7 +123,6 @@ Filger_Spells = {
 			{spellID = 30108, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Haunt
 			{spellID = 48181, unitID = "target", caster = "player", filter = "DEBUFF"},
-
 			-- Fear
 			{spellID = 5782, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Blood Fear
@@ -136,7 +133,6 @@ Filger_Spells = {
 			{spellID = 5484, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Mortal Coil
 			{spellID = 6789, unitID = "target", caster = "player", filter = "DEBUFF"},
-
 			-- hand of gul'dan
 			{spellID = 47960, unitID = "target", caster = "player", filter = "DEBUFF"},
 
@@ -177,12 +173,8 @@ Filger_Spells = {
 			{spellID = 110913, filter = "CD"},
 			-- Soul Swap
 			{spellID = 86211, filter = "CD"},
-			-- Archimonde's Vengeance
-			{spellID = 108505, filter = "CD"},
 			-- Dark Regeneration
 			{spellID = 108359, filter = "CD"},
-			-- Blood Fear
-			{spellID = 111397, filter = "CD"},
 			-- Racial
 			-- Will of the Forsaken (Forsaken)
 			{spellID = 7744, filter = "CD"},
@@ -200,18 +192,6 @@ Filger_Spells = {
 			{slotID = 14, filter = "CD"},
 			-- potion of jade serpent
 			{spellID = 105702, filter = "ICD", trigger = "BUFF", duration = 60},
-			-- Internal
-			-- Lightweave
-			{spellID = 125487, filter = "ICD", trigger = "BUFF", duration = 60},
-			-- Jade Spirit
---			{spellID = 104993, filter = "ICD", trigger = "BUFF", duration = 50},
-			-- Light of the Cosmos
-			{spellID = 126577, filter = "ICD", trigger = "BUFF", duration = 45},
-			-- yu'lon
-			{spellID = 128985, filter = "ICD", trigger = "BUFF", duration = 50},
-			-- Volatile Talisman of the Shado-Pan Assault
-			{spellID = 138703, filter = "ICD", trigger = "BUFF", duration = 45},
-			
 
 		},
 
@@ -483,50 +463,46 @@ Filger_Spells = {
 			{spellID = 33206, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Guardian Spirit
 			{spellID = 47788, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Life Cocoon
-			{spellID = 116849, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Unholy Frenzy
 			{spellID = 49016, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Tricks of the Trade
 			{spellID = 57933, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Rallying Cry
+			-- Rallying Cry 集结呐喊
 			{spellID = 97462, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Stampeding Roar
+			-- 骷髅战旗
+			{spellID = 114206, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Stampeding Roar 德鲁伊群奔
 			{spellID = 77764, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Grounding Totem
+			-- Grounding Totem 根基图腾
 			{spellID = 8178, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Innervate
+			-- Innervate 激活
 			{spellID = 29166, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Slow Fall
 			{spellID = 130, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Levitate
+			-- Levitate 牧师漂浮
 			{spellID = 1706, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Body and Soul
 			{spellID = 65081, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Angelic Feather
 			{spellID = 121557, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Stormlash Totem
-			{spellID = 120676, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Tiger's Lust
+			-- Tiger's Lust 迅如猛虎
 			{spellID = 116841, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Life Cocoon 作茧缚命
+			{spellID = 116849, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 豹群
+			{spellID = 13159, unitID = "player", caster = "all", filter = "BUFF"},
 
 
-			-- yu'lon
-			{spellID = 128985, unitID = "player", caster = "all", filter = "BUFF"},
-			-- light of the cosmos
-			{spellID = 126577, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Jade Spirit
 			{spellID = 104993, unitID = "player", caster = "all", filter = "BUFF"},
 			{spellID = 142535, unitID = "player", caster = "all", filter = "BUFF"},
-			-- acceleration
-			{spellID = 138703, unitID = "player", caster = "all", filter = "BUFF"},
-			-- breath of the hydra 
+			-- breath of the hydra 九头蛇
 			{spellID = 138898, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Cha-Ye's Essence of Brilliance
+			-- Cha-Ye's Essence of Brilliance 张叶
 			{spellID = 139133, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Unerring Vision of Lei-Shen (Crit, Proc)
+			-- Unerring Vision of Lei-Shen (Crit, Proc) 精准
 			{spellID = 138963, unitID = "player", caster = "all", filter = "BUFF"},
-			-- Sinister Primal Diamond (Caster DPS)
+			-- Sinister Primal Diamond (Caster DPS) 阴险源钻
 			{spellID = 137590, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
@@ -809,7 +785,7 @@ Filger_Spells = {
 			-- Seduction (Succubus)
 			{spellID = 6358, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Unstable Affliction
-			{spellID = 31117, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
+			{spellID = 31117, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Spell Lock (Felhunter)
 			{spellID = 24259, unitID = "target", caster = "all", filter = "DEBUFF"},
 
@@ -1053,7 +1029,7 @@ Filger_Spells = {
 			{spellID = 137633, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- JI Kun
 			-- 原始营养
-			{spellID = 112879, unitID = "player", caster = "all", filter = "BUFF"},
+			{spellID = 112879, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- 飞行
 			{spellID = 133755, unitID = "player", caster = "all", filter = "BUFF"},
 			-- iron Qon
