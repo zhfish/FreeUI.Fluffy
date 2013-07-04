@@ -5,13 +5,12 @@ Filger_Settings = {
 	config_mode = false,		
 	max_test_icon = 3,		
 
-	player_buff_icon = {"CENTER", UIParent, "CENTER", 15, -110},				-- player's buff
-	player_special_buff_icon = {"CENTER", UIParent, "CENTER", -15, -110},		-- special buff on player
+	player_buff_icon = {"CENTER", UIParent, "CENTER", 15, -110},				-- player's important aura proc
+	player_special_buff_icon = {"CENTER", UIParent, "CENTER", -15, -110},		-- special aura on player 'cast by other guys'
 	player_cooldown_icon = {"RIGHT", UIParent, "CENTER", -260, -240},			-- player cooldown
-	target_debuff_icon = {"BOTTOMLEFT", UIParent, "CENTER", 120, 0},			-- target's debuff
-	target_buff_icon = {"CENTER", UIParent, "CENTER", 0, 220},					-- target's buff 'PVP'
-	player_debuff_pvp = {"CENTER", UIParent, "CENTER", -100, 40},				-- debuff on player 'CC'
-	pve_alert = {"CENTER", UIParent, "CENTER", -100, -10}						-- raid alert 'PVE'
+	target_debuff_icon = {"BOTTOMLEFT", UIParent, "CENTER", 140, -30},			-- target's debuff 'cast by player'
+	target_buff_icon = {"BOTTOMLEFT", UIParent, "CENTER", 140, 20},			-- target's important aura 'PVP'
+	pve_alert = {"CENTER", UIParent, "CENTER", -120, -10}						-- important raid aura 'PVE'
 
 
 
@@ -506,25 +505,12 @@ Filger_Spells = {
 			{spellID = 137590, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
-			Name = "PVP_P_DEBUFF",
-			Direction = "LEFT",
-			Mode = "ICON",
-			Interval = 1,
-			Alpha = 1,
-			IconSize = 38,
-			Position = {unpack(Filger_Settings.player_debuff_pvp)},
-
-			-- Other
-			-- Rocket Fuel Leak
-			{spellID = 94794, unitID = "player", caster = "player", filter = "DEBUFF"},
-		},
-		{
 			Name = "T_BUFF",
 			Direction = "RIGHT",
 			Mode = "ICON",
 			Interval = 1,
 			Alpha = 1,
-			IconSize = 44,
+			IconSize = 38,
 			Position = {unpack(Filger_Settings.target_buff_icon)},
 
 
@@ -844,6 +830,9 @@ Filger_Spells = {
 			IconSize = 44,
 			Position = {unpack(Filger_Settings.pve_alert)},
 
+			-- Other
+			-- Rocket Fuel Leak
+			{spellID = 94794, unitID = "player", caster = "player", filter = "DEBUFF"},
 			-- mop raid
 			-- [[ HEART OF FEAR ]] --
 			-- Imperial Vizier Zor'lok
@@ -1029,7 +1018,7 @@ Filger_Spells = {
 			{spellID = 137633, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- JI Kun
 			-- 原始营养
-			{spellID = 112879, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			{spellID = 140741, unitID = "player", caster = "all", filter = "BUFF", absID = true},
 			-- 飞行
 			{spellID = 133755, unitID = "player", caster = "all", filter = "BUFF"},
 			-- iron Qon
