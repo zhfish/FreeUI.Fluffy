@@ -5,7 +5,7 @@ local F, C, L = unpack(select(2, ...))
 PVP_ENABLED = ""
 
 hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)
-	if C.general.tooltip_cursor == true then
+	if C.tooltip.anchorCursor then
 		self:SetOwner(parent, "ANCHOR_CURSOR")
 	else
 		self:SetOwner(parent, "ANCHOR_NONE")
@@ -133,10 +133,13 @@ local function OnTooltipSetUnit(self)
 
 	local color = GetColor(unit)
 
-	if unitRealm and unitRealm ~= "" then
-		_G["GameTooltipTextLeft1"]:SetFormattedText(color.."%s - %s", unitName, unitRealm)
-	else
-		_G["GameTooltipTextLeft1"]:SetText(color..unitName)
+	do
+		local name = C.tooltip.title and UnitPVPName(unit) or unitName
+		if unitRealm and unitRealm ~= "" then
+			_G["GameTooltipTextLeft1"]:SetFormattedText(color.."%s - %s", name, unitRealm)
+		else
+			_G["GameTooltipTextLeft1"]:SetText(color..name)
+		end
 	end
 
 	if UnitIsPlayer(unit) then
@@ -145,7 +148,7 @@ local function OnTooltipSetUnit(self)
 		local guildName, guildRankName = GetGuildInfo(unit)
 
 		if guildName then
-			if C.general.tooltip_guildranks then
+			if C.tooltip.guildrank then
 				_G["GameTooltipTextLeft2"]:SetFormattedText("%s ("..color.."%s|r)", guildName, guildRankName)
 			else
 				_G["GameTooltipTextLeft2"]:SetText(guildName)
@@ -204,11 +207,16 @@ local function OnTooltipSetUnit(self)
 			GameTooltipTextRight1:Show()
 			local cu = msp.char[unitName].field["CU"]
 			if cu ~= "" then
-				if cu:len() > 50 then cu = cu:sub(1, 50).."..." end
+				local len = cu:len()
+				if len > 50 then
+					cu = format("%s-\n%s", cu:sub(1, 50), cu:sub(51, min(len, 100)))
+					if len > 100 then
+						cu = cu.."..."
+					end
+				end
+
 				GameTooltip:AddLine("|cffdddddd"..cu)
 			end
-		else
-			msp:Request(unitName, "CU")
 		end
 	end
 end
@@ -223,7 +231,14 @@ if msp then
 			GameTooltipTextRight1:Show()
 			local cu = msp.char[unitName].field["CU"]
 			if cu ~= "" then
-				if cu:len() > 50 then cu = cu:sub(1, 50).."..." end
+				local len = cu:len()
+				if len > 50 then
+					cu = format("%s-\n%s", cu:sub(1, 50), cu:sub(51, min(len, 100)))
+					if len > 100 then
+						cu = cu.."..."
+					end
+				end
+
 				GameTooltip:AddLine("|cffdddddd"..cu)
 			end
 			GameTooltip:Show()
