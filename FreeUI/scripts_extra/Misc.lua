@@ -85,6 +85,7 @@ PAPERDOLL_STATCATEGORIES = {
 			"FOCUS_REGEN",
 			"CRITCHANCE",
 			"RANGED_HITCHANCE",
+			"EXPERTISE",
 			"MASTERY",
 		},
 	},
@@ -262,17 +263,3 @@ GameTooltip:HookScript("OnTooltipSetItem", function(self)
 		end
 	end
 end)
-
-
------------------------------------------------------------
--- FixedGetTradeSkillReagentItemLink 
------------------------------------------------------------
-
-local GameTooltip = CreateFrame("GameTooltip", "TradeSkillFix", UIParent, "GameTooltipTemplate") 
-function GetTradeSkillReagentItemLink(skillId, reagentId) 
-    GameTooltip:SetOwner(UIParent, "ANCHOR_TOPRIGHT") 
-    GameTooltip:SetTradeSkillItem(skillId, reagentId) 
-    local _, link = GameTooltip:GetItem() 
-    GameTooltip:Hide() 
-    return link 
-end 
