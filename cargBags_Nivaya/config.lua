@@ -10,15 +10,15 @@ currencyIcons = false,	-- Use Gold, Silver, Copper icons instead of G, S, C
 
 sizes = {
 	bags = {
-		columnsSmall = 8,
-		columnsLarge = 10,
+		columnsSmall = 6,
+		columnsLarge = 8,
 		largeItemCount = 64,	-- Switch to columnsLarge when >= this number of items in your bags
 	},
 	bank = {
 		columnsSmall = 12,
 		columnsLarge = 14,
 		largeItemCount = 96,	-- Switch to columnsLarge when >= this number of items in the bank
-	},	
+	},
 },
 
 fonts = {
@@ -28,11 +28,11 @@ fonts = {
 		8, 						-- Font Size
 		"OUTLINEMONOCHROME",	-- Flags
 	},
-	
+
 	--Font to use for the dropdown menu
 	dropdown = {
 		[[Interface\AddOns\cargBags_Nivaya\media\pixel.ttf]], 	-- Font path
-		10, 						-- Font Size
+		8, 						-- Font Size
 		nil,	-- Flags
 	},
 
