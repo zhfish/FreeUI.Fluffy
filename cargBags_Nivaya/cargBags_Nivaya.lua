@@ -10,9 +10,7 @@ local cbNivaya = cargBags:GetImplementation("Nivaya")
 
 do	--Replacement for UIDropDownMenu
 
-	local font = [[Interface\AddOns\cargBags_Nivaya\media\pixel.ttf]]	--ns.options.fonts.standard
-	local fontsize = 10
-	local fontanim = nil	--"OUTLINE"
+	local font = ns.options.fonts.dropdown
 	local frameHeight = 14
 	local defaultWidth = 120
 	local frameInset = 16
@@ -43,7 +41,7 @@ do	--Replacement for UIDropDownMenu
 		local fstr = button:CreateFontString()
 		fstr:SetJustifyH("LEFT")
 		fstr:SetJustifyV("MIDDLE")
-		fstr:SetFont(font,fontsize,fontanim)	--(unpack(font))
+		fstr:SetFont(unpack(font))
 		fstr:SetPoint("LEFT", button, "LEFT", 0, 0)
 		button.Text = fstr
 		
@@ -651,8 +649,8 @@ local function HandleSlash(str)
 		StatusMsg('(', ') |cFFFFFF00armor|r - Toggle the "Armor and Weapons" filter .', cBnivCfg.Armor, false, true)
 		StatusMsg('(', ') |cFFFFFF00junk|r - Toggle the "Junk" filter.', cBnivCfg.Junk, false, true)
 		StatusMsg('(', ') |cFFFFFF00sets|r - Toggle the "ItemSets" filters.', cBnivCfg.ItemSets, false, true)
-		StatusMsg('(', ') |cFFFFFF00sets|r - Toggle the "Consumables" filters.', cBnivCfg.Consumables, false, true)
-		StatusMsg('(', ') |cFFFFFF00sets|r - Toggle the "Quest" filters.', cBnivCfg.Quest, false, true)
+		StatusMsg('(', ') |cFFFFFF00consumables|r - Toggle the "Consumables" filters.', cBnivCfg.Consumables, false, true)
+		StatusMsg('(', ') |cFFFFFF00quest|r - Toggle the "Quest" filters.', cBnivCfg.Quest, false, true)
 		StatusMsg('(', ') |cFFFFFF00bankbg|r - Toggle black bank background color.', cBnivCfg.BankBlack, false, true)
 		StatusMsg('(', ') |cFFFFFF00bankfilter|r - Toggle bank filtering.', cBnivCfg.FilterBank, false, true)
 		StatusMsg('(', ') |cFFFFFF00empty|r - Toggle empty bagspace compression.', cBnivCfg.CompressEmpty, false, true)

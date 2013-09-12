@@ -20,11 +20,6 @@ local Textures = {
 	Right =			mediaPath .. "Right",
 }
 
-CharacterBag0Slot:Hide()
-CharacterBag1Slot:Hide()
-CharacterBag2Slot:Hide()
-CharacterBag3Slot:Hide()
-
 local itemSlotSize = ns.options.itemSlotSize
 ------------------------------------------
 -- MyContainer specific
@@ -591,8 +586,8 @@ function MyContainer:OnCreate(name, settings)
 		
 		if tBag or tBank then
 			local close = CreateFrame("Button", nil, self, "UIPanelCloseButton")
-			if FreeUI then
-				local F, C = unpack(FreeUI)
+			if Aurora then
+				local F = Aurora[1]
 				F.ReskinClose(close, "TOPRIGHT", self, "TOPRIGHT", 1, 1)
 			else
 				close:SetPoint("TOPRIGHT", 8, 8)

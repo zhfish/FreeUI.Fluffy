@@ -132,7 +132,7 @@ end
 	@param item <table> The itemTable holding information, see Implementation:GetItemInfo()
 	@callback OnUpdate(item)
 ]]
-local ilvlTypes = {Armor = false, Weapon = false}
+local ilvlTypes = {Armor = true, Weapon = true}
 local function ItemButton_Update(self, item)
 	self.Icon:SetTexture(item.texture or self.bgTex)
     self.Icon:SetTexCoord(.08, .92, .08, .92)
