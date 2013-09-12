@@ -199,35 +199,38 @@ rd:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 5, -5)
 rd:RegisterEvent("PLAYER_ENTERING_WORLD")
 rd:RegisterEvent("PLAYER_DIFFICULTY_CHANGED")
 rd:RegisterEvent("GUILD_PARTY_STATE_UPDATED")
+rd:RegisterEvent("INSTANCE_GROUP_SIZE_CHANGED")
 
 local rdt = F.CreateFS(rd, 8, "LEFT")
 rdt:SetPoint("TOPLEFT")
 
 rd:SetScript("OnEvent", function()
-	local _, _, difficulty, _, maxPlayers = GetInstanceInfo()
+	local _, _, difficultyID, _, maxPlayers, _, _, _, instanceGroupSize = GetInstanceInfo()
 
-	if difficulty == 0 then
+	if difficultyID == 0 then
 		rdt:SetText("")
 	elseif maxPlayers == 3 then
 		rdt:SetText("|cff33FFFF3|r")
-	elseif difficulty == 1 then
+	elseif difficultyID == 1 then
 		rdt:SetText("|cff33FFFF5|r")
-	elseif difficulty == 2 then
+	elseif difficultyID == 2 then
 		rdt:SetText("|cff33FFFF5H|r")
-	elseif difficulty == 3 then
+	elseif difficultyID == 3 then
 		rdt:SetText("|cff33FFFF10|r")
-	elseif difficulty == 4 then
+	elseif difficultyID == 4 then
 		rdt:SetText("|cff33FFFF25|r")
-	elseif difficulty == 5 then
+	elseif difficultyID == 5 then
 		rdt:SetText("|cff33FFFF10H|r")
-	elseif difficulty == 6 then
+	elseif difficultyID == 6 then
 		rdt:SetText("|cff33FFFF25H|r")
-	elseif difficulty == 7 then
+	elseif difficultyID == 7 then
 		rdt:SetText("|cff33FFFFLFR|r")
-	elseif difficulty == 8 then
+	elseif difficultyID == 8 then
 		rdt:SetText("|cff33FFFF5CM|r")
-	elseif difficulty == 9 then
+	elseif difficultyID == 9 then
 		rdt:SetText("|cff33FFFF40|r")
+	elseif difficultyID == 14 then
+		rdt:SetText(instanceGroupSize.."F")
 	end
 
 	if GuildInstanceDifficulty:IsShown() then
@@ -277,7 +280,7 @@ end
 
 
 local shadows = {
-	edgeFile = "Interface\\Addons\\FreeUI\\media\\glowTex", 
+	edgeFile = "Interface\\Addons\\FreeUI\\media\\glowTex",
 	edgeSize = 4,
 	insets = { left = 3, right = 3, top = 3, bottom = 3 }
 }
@@ -310,12 +313,12 @@ end
 function frame1px(f)
 	f:SetBackdrop({
 		bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
-        edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1, 
-		insets = {left = -1, right = -1, top = -1, bottom = -1} 
+        edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1,
+		insets = {left = -1, right = -1, top = -1, bottom = -1}
 	})
 	f:SetBackdropColor(.06,.06,.06,1)
 	f:SetBackdropBorderColor(.15,.15,.15,1)
-CreateInnerBorder(f)	
+CreateInnerBorder(f)
 end
 
 local function StripTextures(object, kill)
@@ -328,7 +331,7 @@ local function StripTextures(object, kill)
 				region:SetTexture(nil)
 			end
 		end
-	end		
+	end
 end
 
 
