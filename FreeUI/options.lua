@@ -21,6 +21,7 @@ C["general"] = {
 	["nameplates"] = true, 			-- enable nameplates
 	["threatMeter"] = true,			-- threat bar above the target frame in dps/healer layout
 	["rareAlert"] = true,       -- raid warning when a rare mob is spotted (5.4)
+		["rareAlert_playSound"] = true,       -- play sound
 	["tolbarad"] = false,			-- Tol barad timer on the minimap
 	["uiScaleAuto"] = true,			-- force the correct UI scale
 	["undressButton"] = true, 		-- undress button on dressup frame
