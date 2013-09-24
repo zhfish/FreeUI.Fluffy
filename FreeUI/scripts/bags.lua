@@ -33,7 +33,7 @@ end
 
 -- [[ Function to reskin buttons and hide default bags]]
 
-local ReskinButton = function(buName, gridFrame)
+local RestyleButton = function(buName, gridFrame)
 	local bu = _G[buName]
 
 	bu:SetSize(C.bags.size, C.bags.size)
@@ -51,7 +51,7 @@ local ReskinButton = function(buName, gridFrame)
 	co:ClearAllPoints()
 	co:SetPoint("TOP", bu, 1, -2)
 
-	_G[buName.."IconTexture"]:SetTexCoord(.08, .92, .08, .92)
+	bu.icon:SetTexCoord(.08, .92, .08, .92)
 	_G[buName.."IconQuestTexture"]:SetAlpha(0)
 
 	local bg = CreateFrame("Frame", nil, gridFrame)
@@ -114,7 +114,7 @@ end
 --[[ Bags ]]
 
 local holder = CreateFrame("Button", "BagsHolder", UIParent)
-holder:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -70, 80)
+holder:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -49, 49)
 holder:SetFrameStrata("HIGH")
 holder:Hide()
 F.CreateBD(holder, .6)
@@ -129,7 +129,7 @@ local ReanchorButtons = function()
 
 		for i = GetContainerNumSlots(f-1), 1, -1  do
 			bu = con.."Item"..i
-			ReskinButton(bu, grid)
+			RestyleButton(bu, grid)
 			tinsert(buttons, bu)
 		end
 	end
@@ -190,7 +190,7 @@ local ReanchorBankButtons = function()
 	table.wipe(bankbuttons)
 	for i = 1, 28 do
 		bu = "BankFrameItem"..i
-		ReskinButton(bu, bankGrid)
+		RestyleButton(bu, bankGrid)
 		tinsert(bankbuttons, bu)
 	end
 
@@ -207,7 +207,7 @@ local ReanchorBankButtons = function()
 
 		for i = GetContainerNumSlots(f), 1, -1  do
 			bu = con.."Item"..i
-			ReskinButton(bu, bankGrid)
+			RestyleButton(bu, bankGrid)
 			tinsert(bankbuttons, bu)
 		end
 	end

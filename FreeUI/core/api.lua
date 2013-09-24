@@ -12,10 +12,10 @@ C.media = {
 	["font"] = "Interface\\AddOns\\FreeUI\\media\\Hooge0655.ttf", -- default pixel font
 	["font2"] = "Interface\\AddOns\\FreeUI\\media\\font.ttf", -- default font
 	["glow"] = "Interface\\AddOns\\FreeUI\\media\\glowTex", -- glow/shadow texture
-	["gradient"] = "Interface\\AddOns\\FreeUI\\media\\gradient", 
+	["gradient"] = "Interface\\AddOns\\FreeUI\\media\\gradient",
 	["texture"] = "Interface\\AddOns\\FreeUI\\media\\Texture", -- statusbar texture
-	["bgFile"] = "Interface\\AddOns\\FreeUI\\media\\button_background_flat", 
-	["edgeFile"] = "Interface\\AddOns\\FreeUI\\media\\outer_shadow", 
+	["bgFile"] = "Interface\\AddOns\\FreeUI\\media\\button_background_flat",
+	["edgeFile"] = "Interface\\AddOns\\FreeUI\\media\\outer_shadow",
 	["roleIcons"] = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
 }
 
@@ -132,7 +132,7 @@ local CreateGradient = function(f)
 	tex:SetPoint("TOPLEFT", 1, -1)
 	tex:SetPoint("BOTTOMRIGHT", -1, 1)
 	tex:SetTexture(buttonColourGradient and C.media.gradient or C.media.backdrop)
-	tex:SetVertexColor(buttonR, buttonG, buttonB, buttonA) 
+	tex:SetVertexColor(buttonR, buttonG, buttonB, buttonA)
 
 	return tex
 end
@@ -350,7 +350,7 @@ F.ReskinClose = function(f, a1, p, a2, x, y)
 		f:ClearAllPoints()
 		f:SetPoint(a1, p, a2, x, y)
 	else
-		f:SetPoint("TOPRIGHT", -4, -4)
+		f:SetPoint("TOPRIGHT", -6, -6)
 	end
 
 	f:SetNormalTexture("")
@@ -550,7 +550,6 @@ F.SetBD = function(f, x, y, x2, y2)
 	end
 	bg:SetFrameLevel(0)
 	F.CreateBD(bg)
-	F.CreateSD(bg)
 end
 
 F.ReskinPortraitFrame = function(f, isButtonFrame)
@@ -580,7 +579,6 @@ F.ReskinPortraitFrame = function(f, isButtonFrame)
 	end
 
 	F.CreateBD(f)
-	F.CreateSD(f)
 	F.ReskinClose(_G[name.."CloseButton"])
 end
 
