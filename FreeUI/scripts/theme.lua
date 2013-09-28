@@ -3006,12 +3006,19 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		-- Loot history
 
+		local LootHistoryFrame = LootHistoryFrame
+
 		for i = 1, 9 do
 			select(i, LootHistoryFrame:GetRegions()):Hide()
 		end
+		LootHistoryFrame.LootIcon:Hide()
+		LootHistoryFrame.Divider:SetAlpha(0)
 		LootHistoryFrameScrollFrame:GetRegions():Hide()
 
-		LootHistoryFrame.ResizeButton:SetPoint("TOP", LootHistoryFrame, "BOTTOM", 0, -1)
+		LootHistoryFrame.Label:ClearAllPoints()
+		LootHistoryFrame.Label:SetPoint("TOP", LootHistoryFrame, "TOP", 0, -8)
+
+		LootHistoryFrame.ResizeButton:SetPoint("TOP", LootHistoryFrame, "BOTTOM", 0, 1)
 		LootHistoryFrame.ResizeButton:SetFrameStrata("LOW")
 
 		F.ReskinArrow(LootHistoryFrame.ResizeButton, "down")
@@ -6334,7 +6341,6 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		F.Reskin(TransmogrifyApplyButton)
 		F.ReskinClose(TransmogrifyArtFrameCloseButton)
 	elseif addon == "Blizzard_ItemSocketingUI" then
-		ItemSocketingFrame:DisableDrawLayer("BORDER")
 		ItemSocketingFrame:DisableDrawLayer("ARTWORK")
 		ItemSocketingScrollFrameTop:SetAlpha(0)
 		ItemSocketingScrollFrameMiddle:SetAlpha(0)
@@ -6346,8 +6352,17 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		ItemSocketingSocket3Left:SetAlpha(0)
 		ItemSocketingSocket3Right:SetAlpha(0)
 
+		for i = 36, 51 do
+			select(i, ItemSocketingFrame:GetRegions()):Hide()
+		end
+
+		local title = select(18, ItemSocketingFrame:GetRegions())
+		title:ClearAllPoints()
+		title:SetPoint("TOP", 0, -5)
+
 		for i = 1, MAX_NUM_SOCKETS do
 			local bu = _G["ItemSocketingSocket"..i]
+			local shine = _G["ItemSocketingSocket"..i.."Shine"]
 
 			_G["ItemSocketingSocket"..i.."BracketFrame"]:Hide()
 			_G["ItemSocketingSocket"..i.."Background"]:SetAlpha(0)
@@ -6356,25 +6371,17 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 			bu:SetPushedTexture("")
 			bu.icon:SetTexCoord(.08, .92, .08, .92)
 
-			local bg = CreateFrame("Frame", nil, bu)
-			bg:SetAllPoints(bu)
-			bg:SetFrameLevel(bu:GetFrameLevel()-1)
-			F.CreateBD(bg, .25)
+			shine:ClearAllPoints()
+			shine:SetPoint("TOPLEFT", bu)
+			shine:SetPoint("BOTTOMRIGHT", bu, 1, 0)
 
-			bu.glow = CreateFrame("Frame", nil, bu)
-			bu.glow:SetBackdrop({
-				edgeFile = C.media.glow,
-				edgeSize = 4,
-			})
-			bu.glow:SetPoint("TOPLEFT", -4, 4)
-			bu.glow:SetPoint("BOTTOMRIGHT", 4, -4)
+			bu.bg = F.CreateBDFrame(bu, .25)
 		end
 
 		hooksecurefunc("ItemSocketingFrame_Update", function()
 			for i = 1, MAX_NUM_SOCKETS do
 				local color = GEM_TYPE_INFO[GetSocketTypes(i)]
-				_G["ItemSocketingSocket"..i].glow:SetBackdropBorderColor(color.r, color.g, color.b)
-
+				_G["ItemSocketingSocket"..i].bg:SetBackdropBorderColor(color.r, color.g, color.b)
 			end
 
 			local num = GetNumSockets()

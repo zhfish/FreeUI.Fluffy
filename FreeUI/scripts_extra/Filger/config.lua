@@ -312,6 +312,18 @@ Filger_Spells = {
 			{spellID = 138963, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Sinister Primal Diamond (Caster DPS) 阴险源钻
 			{spellID = 137590, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Kardris' Toxic Totem
+			{spellID = 148906, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Purified Bindings of Immerseus (智力, 觸發)
+			{spellID = 146046, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Yu'lon's Bite (暴擊, 觸發)
+			{spellID = 146218, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Black Blood of Y'Shaarj (智力, 觸發)
+			{spellID = 146184, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Frenzied Crystal of Rage (智力, 觸發)
+			{spellID = 148897, unitID = "player", caster = "all", filter = "BUFF"},
+			-- warlock affliction t16 2piece
+			{spellID = 145082, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
 			Name = "T_BUFF",
