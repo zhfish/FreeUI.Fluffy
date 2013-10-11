@@ -133,10 +133,11 @@ oUF.Tags.Methods['free:health'] = function(unit)
 	if(not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit)) then return end
 
 	local min, max = UnitHealth(unit), UnitHealthMax(unit)
-	if(unit=="target" or(unit and unit:find("boss%d"))) then
-		return format("|cffffffff%s|r %.0f", siValue(min), (min/max)*100)
-	else
+
+	if unit == "player" then
 		return siValue(min)
+	else
+		return format("|cffffffff%s|r %.0f", siValue(min), (min/max)*100)
 	end
 end
 oUF.Tags.Events['free:health'] = oUF.Tags.Events.missinghp
@@ -226,7 +227,7 @@ local PostUpdateHealth = function(Health, unit, min, max)
 		r, g, b = unpack(reaction)
 	end
 
-	if unit == "target" then
+	if unit == "target" or unit:find("arena") then
 		Health.value:SetTextColor(unpack(reaction))
 	end
 
@@ -1217,7 +1218,7 @@ local UnitSpecific = {
 
 		Power.value = PowerPoints
 
-		
+
 
 		-- Castbar:SetAllPoints(Health)
 		-- Castbar.Width = self:GetWidth()
@@ -1355,7 +1356,7 @@ local UnitSpecific = {
 		Debuffs.PostUpdateIcon = PostUpdateIcon
 	end,
 
-	focustarget = function(self, ...)   
+	focustarget = function(self, ...)
 		Shared(self, ...)
 
 		local Health = self.Health
@@ -1878,7 +1879,7 @@ oUF:Factory(function(self)
 
 	-- add some shadow around
 	local shadows = {
-	edgeFile = "Interface\\Addons\\FreeUI\\media\\glowTex", 
+	edgeFile = "Interface\\Addons\\FreeUI\\media\\glowTex",
 	edgeSize = 4,
 	insets = { left = 3, right = 3, top = 3, bottom = 3 }
 	}
