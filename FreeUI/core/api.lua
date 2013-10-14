@@ -97,7 +97,6 @@ end
 F.CreateFS = function(parent, size, justify)
     local f = parent:CreateFontString(nil, "OVERLAY")
     f:SetFont(C.media.font, size, "OUTLINEMONOCHROME")
-    f:SetShadowColor(0, 0, 0, 0)
     if(justify) then f:SetJustifyH(justify) end
     return f
 end
@@ -124,14 +123,13 @@ F.CreatePulse = function(frame) -- pulse function originally by nightcracker
 end
 
 local r, g, b = C.classcolours[class].r, C.classcolours[class].g, C.classcolours[class].b
-local buttonR, buttonG, buttonB, buttonA = unpack(C.general.buttonColour)
-local buttonColourGradient = C.general.buttonColourGradient
+local buttonR, buttonG, buttonB, buttonA = .3, .3, .3, .3
 
 local CreateGradient = function(f)
 	local tex = f:CreateTexture(nil, "BORDER")
 	tex:SetPoint("TOPLEFT", 1, -1)
 	tex:SetPoint("BOTTOMRIGHT", -1, 1)
-	tex:SetTexture(buttonColourGradient and C.media.gradient or C.media.backdrop)
+	tex:SetTexture(C.media.gradient)
 	tex:SetVertexColor(buttonR, buttonG, buttonB, buttonA)
 
 	return tex
@@ -139,22 +137,19 @@ end
 
 F.CreateGradient = CreateGradient
 
-local function StartGlow(f)
+local function colourButton(f)
 	if not f:IsEnabled() then return end
-	f:SetBackdropColor(r, g, b, .1)
+
+	f:SetBackdropColor(r, g, b, buttonA)
 	f:SetBackdropBorderColor(r, g, b)
-	f.glow:SetAlpha(1)
-	F.CreatePulse(f.glow)
 end
 
-local function StopGlow(f)
+local function clearButton(f)
 	f:SetBackdropColor(0, 0, 0, 0)
 	f:SetBackdropBorderColor(0, 0, 0)
-	f.glow:SetScript("OnUpdate", nil)
-	f.glow:SetAlpha(0)
 end
 
-F.Reskin = function(f, noGlow)
+F.Reskin = function(f, noHighlight)
 	f:SetNormalTexture("")
 	f:SetHighlightTexture("")
 	f:SetPushedTexture("")
@@ -168,21 +163,11 @@ F.Reskin = function(f, noGlow)
 
 	F.CreateBD(f, 0)
 
-	CreateGradient(f)
+	f.tex = CreateGradient(f)
 
-	if not noGlow then
-		f.glow = CreateFrame("Frame", nil, f)
-		f.glow:SetBackdrop({
-			edgeFile = C.media.glow,
-			edgeSize = 5,
-		})
-		f.glow:SetPoint("TOPLEFT", -6, 6)
-		f.glow:SetPoint("BOTTOMRIGHT", 6, -6)
-		f.glow:SetBackdropBorderColor(r, g, b)
-		f.glow:SetAlpha(0)
-
-		f:HookScript("OnEnter", StartGlow)
- 		f:HookScript("OnLeave", StopGlow)
+	if not noHighlight then
+		f:HookScript("OnEnter", colourButton)
+ 		f:HookScript("OnLeave", clearButton)
 	end
 end
 
