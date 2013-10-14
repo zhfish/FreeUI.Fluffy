@@ -714,6 +714,54 @@ Filger_Spells = {
 			{spellID = 138308, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 			-- SoO
+			-- the fallen protectors
+			-- 锁喉
+			{spellID = 143198, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 暗言术：蛊
+			{spellID = 143434, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 苦痛印记
+			{spellID = 143840, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 暗影虚弱
+			{spellID = 144176, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 炼狱打击
+			{spellID = 143962, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 煞能灼烧
+			{spellID = 143423, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 蚀骨酒
+			{spellID = 143023, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- sha of pride
+			-- 傲慢标记
+			{spellID = 144351, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 压制
+			{spellID = 144843, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 泰坦之赐
+			{spellID = 146594, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 泰坦之力
+			{spellID = 144364, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 动摇的决心
+			{spellID = 147207, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 傲气光环
+			{spellID = 146817, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 投影
+			{spellID = 146822, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- galakras
+			-- 迦拉克隆之焰 点名
+			{spellID = 147068, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 迦拉克隆之焰 叠加
+			{spellID = 147029, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- iron juggernaut
+			-- 切割激光
+			{spellID = 146325, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- kor'kron dark shaman
+			-- 钢铁囚笼
+			{spellID = 144330, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 剧毒之雾
+			{spellID = 144089, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- nazgrim
+			-- 刺客印记
+			{spellID = 143480, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 猎人印记
+			{spellID = 143882, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- malkorok
 			-- 上古毒瘴
 			{spellID = 142861, unitID = "player", caster = "all", filter = "DEBUFF"},
@@ -721,6 +769,43 @@ Filger_Spells = {
 			{spellID = 143919, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- 散逸能量
 			{spellID = 142913, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- spoils
+			-- 折磨
+			{spellID = 142983, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 硬化血肉
+			{spellID = 145218, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 严重瘫痪
+			{spellID = 146289, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 设置炸药
+			{spellID = 145987, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- thok
+			-- 鲜血淋漓
+			{spellID = 143452, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 冰冻之血
+			{spellID = 143800, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 腐蚀之血
+			{spellID = 143791, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 锁定
+			{spellID = 143445, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- klaxxi
+			-- 毒素：黄色
+			{spellID = 142534, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 毒素：蓝色
+			{spellID = 142532, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 毒素：红色
+			{spellID = 142533, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 瞄准
+			{spellID = 142948, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 饥饿
+			{spellID = 143358, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 異常突變
+			{spellID = 143337, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 暈頭轉向
+			{spellID = 143702, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 催眠术
+			{spellID = 142671, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 炎界
+			{spellID = 142808, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 		},
 	},
