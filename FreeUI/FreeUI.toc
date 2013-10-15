@@ -80,12 +80,7 @@ class\warlock.lua
 scripts_extra\Filger\load.xml
 scripts_extra\CooldownPulse.lua
 
-scripts_extra\Fixes.lua
-scripts_extra\AlertFrameMove.lua
-scripts_extra\ColorPicker.lua
-scripts_extra\AlreadyKnown.lua
-scripts_extra\AltPowerBar.lua
-scripts_extra\idTip.lua
+
 scripts_extra\SafeQueue.lua
 
 scripts_extra\BGSpamRemove.lua
@@ -98,9 +93,9 @@ scripts_extra\DurumuLifeDrain.lua
 scripts_extra\emergency.lua
 scripts_extra\Focuser.lua
 scripts_extra\HiddenRaidNames.lua
-scripts_extra\itemlevel.lua
+
 scripts_extra\interruptsound.lua
-scripts_extra\Misc.lua
+
 scripts_extra\ncShadow.lua
 scripts_extra\NightFall.lua
 scripts_extra\NoMapEmote.lua
@@ -109,3 +104,21 @@ scripts_extra\TabBinder.lua
 scripts_extra\UnitSounds.lua
 scripts_extra\WhisperSound.lua
 scripts_extra\UnerringVision.lua
+
+scripts_extra\Blizzard\Achievement.lua
+scripts_extra\Blizzard\AltPowerBar.lua
+scripts_extra\Blizzard\ColorPicker.lua
+scripts_extra\Blizzard\Fixes.lua
+
+scripts_extra\Tooltip\Achievement.lua
+scripts_extra\Tooltip\AuraSource.lua
+scripts_extra\Tooltip\idTip.lua
+scripts_extra\Tooltip\ItemLevel.lua
+scripts_extra\Tooltip\ItemIcons.lua
+scripts_extra\Tooltip\Talents.lua
+
+scripts_extra\Misc\AlreadyKnown.lua
+scripts_extra\Misc\Author.lua
+scripts_extra\Misc\Merchant.lua
+scripts_extra\Misc\Misc.lua
+scripts_extra\Misc\OneClickBuyOut.lua

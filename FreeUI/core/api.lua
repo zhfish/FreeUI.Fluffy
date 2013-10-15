@@ -61,7 +61,7 @@ local CreateBD = function(f, a)
 		edgeFile = C.media.backdrop,
 		edgeSize = 1,
 	})
-	f:SetBackdropColor(0, 0, 0, a or .5)
+	f:SetBackdropColor(0, 0, 0, a or .65)
 	f:SetBackdropBorderColor(0, 0, 0)
 end
 

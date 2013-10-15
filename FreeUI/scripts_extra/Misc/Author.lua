@@ -1,52 +1,59 @@
-----------------------------------------------------------------------------------------
---	Force readycheck warning
-----------------------------------------------------------------------------------------
-local ShowReadyCheckHook = function(self, initiator, timeLeft)
-	if initiator ~= "player" then
-		PlaySound("ReadyCheck", "Master")
-	end
-end
-hooksecurefunc("ShowReadyCheck", ShowReadyCheckHook)
-
 
 
 ----------------------------------------------------------------------------------------
 --	Force other warning
 ----------------------------------------------------------------------------------------
 local ForceWarning = CreateFrame("Frame")
-ForceWarning:RegisterEvent("UPDATE_BATTLEFIELD_STATUS")
-ForceWarning:RegisterEvent("LFG_PROPOSAL_SHOW")
 ForceWarning:RegisterEvent("PARTY_INVITE_REQUEST")
 ForceWarning:RegisterEvent("CONFIRM_SUMMON")
-ForceWarning:RegisterEvent("PET_BATTLE_QUEUE_PROPOSE_MATCH")
 ForceWarning:SetScript("OnEvent", function(self, event)
-	if event == "UPDATE_BATTLEFIELD_STATUS" and StaticPopup_Visible("CONFIRM_BATTLEFIELD_ENTRY") then
-		PlaySound("ReadyCheck", "Master")
-	elseif event == "LFG_PROPOSAL_SHOW" or event == "PARTY_INVITE_REQUEST" or event == "CONFIRM_SUMMON" or event == "PET_BATTLE_QUEUE_PROPOSE_MATCH" then
+	if event == "PARTY_INVITE_REQUEST" or event == "CONFIRM_SUMMON" then
 		PlaySound("ReadyCheck", "Master")
 	end
 end)
 
-
-
+----------------------------------------------------------------------------------------
+--	Auto SetFilter for AchievementUI
+----------------------------------------------------------------------------------------
+local AchFilter = CreateFrame("Frame")
+AchFilter:RegisterEvent("ADDON_LOADED")
+AchFilter:SetScript("OnEvent", function(self, event, addon)
+	if addon == "Blizzard_AchievementUI" then
+		AchievementFrame_SetFilter(3)
+	end
+end)
 
 ----------------------------------------------------------------------------------------
---	Misclicks for some popups
+--	Force quit
 ----------------------------------------------------------------------------------------
-StaticPopupDialogs.RESURRECT.hideOnEscape = nil
-StaticPopupDialogs.PARTY_INVITE.hideOnEscape = nil
-StaticPopupDialogs.PARTY_INVITE_XREALM.hideOnEscape = nil
-StaticPopupDialogs.CONFIRM_SUMMON.hideOnEscape = nil
---StaticPopupDialogs.PET_BATTLE_QUEUE_PROPOSE_MATCH.hideOnEscape = nil
-StaticPopupDialogs.CONFIRM_BATTLEFIELD_ENTRY.button2 = nil
-StaticPopupDialogs.ADDON_ACTION_FORBIDDEN.button1 = nil
-StaticPopupDialogs.TOO_MANY_LUA_ERRORS.button1 = nil
+local CloseWoW = CreateFrame("Frame")
+CloseWoW:RegisterEvent("CHAT_MSG_SYSTEM")
+CloseWoW:SetScript("OnEvent", function(self, event, msg)
+	if event == "CHAT_MSG_SYSTEM" then
+		if msg and msg == IDLE_MESSAGE then
+			ForceQuit()
+		end
+	end
+end)
 
+----------------------------------------------------------------------------------------
+--	Delete Replace Enchant popup
+----------------------------------------------------------------------------------------
+local EnchantPopup = CreateFrame("Frame")
+EnchantPopup:RegisterEvent("REPLACE_ENCHANT")
+EnchantPopup:SetScript("OnEvent", function(self, event)
+	if event == "REPLACE_ENCHANT" then
+		ReplaceEnchant()
+		StaticPopup_Hide("REPLACE_ENCHANT")
+	end
+end)
 
-
-
-
-
+----------------------------------------------------------------------------------------
+--	Hide character controls
+----------------------------------------------------------------------------------------
+CharacterModelFrameControlFrame:HookScript("OnShow", function(self) self:Hide() end)
+DressUpModelControlFrame:HookScript("OnShow", function(self) self:Hide() end)
+SideDressUpModelControlFrame:HookScript("OnShow", function(self) self:Hide() end)
 
 
 
@@ -85,7 +92,6 @@ PAPERDOLL_STATCATEGORIES = {
 			"FOCUS_REGEN",
 			"CRITCHANCE",
 			"RANGED_HITCHANCE",
-			"EXPERTISE",
 			"MASTERY",
 		},
 	},
@@ -155,7 +161,6 @@ local specs = {
 
 local handler = CreateFrame("Frame")
 handler:RegisterEvent("PLAYER_TALENT_UPDATE")
-handler:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 handler:SetScript("OnEvent", function()
 	spec = GetSpecialization()
 
@@ -213,53 +218,3 @@ do
 		setBlock(self, ...)
 	end
 end
-
-
-----------------------------------------------------------------------------------------
---	ALT+Click to buy a stack
-----------------------------------------------------------------------------------------
-hooksecurefunc("MerchantItemButton_OnModifiedClick", function(self, button)
-	if MerchantFrame.selectedTab == 1 then
-		if IsAltKeyDown() then
-			local id = self:GetID()
-			local quantity = select(4, GetMerchantItemInfo(id))
-			local extracost = select(7, GetMerchantItemInfo(id))
-			if not extracost then
-				local stack
-				if quantity > 1 then
-					stack = quantity * GetMerchantItemMaxStack(id)
-				else
-					stack = GetMerchantItemMaxStack(id)
-				end
-				local amount = 1
-				if self.count < stack then
-					amount = stack / self.count
-				end
-				if self.numInStock ~= -1 and self.numInStock < amount then
-					amount = self.numInStock
-				end
-				local money = GetMoney()
-				if (self.price * amount) > money then
-					amount = floor(money / self.price)
-				end
-				if amount > 0 then
-					BuyMerchantItem(id, amount)
-				end
-			end
-		end
-	end
-end)
-
-local function IsMerchantButtonOver()
-	return GetMouseFocus():GetName() and GetMouseFocus():GetName():find("MerchantItem%d")
-end
-
-GameTooltip:HookScript("OnTooltipSetItem", function(self)
-	if MerchantFrame:IsShown() and IsMerchantButtonOver() then
-		for i = 2, GameTooltip:NumLines() do
-			if _G["GameTooltipTextLeft"..i]:GetText():find(ITEM_VENDOR_STACK_BUY) then
-				GameTooltip:AddLine("|cff00ff00<"..L_MISC_BUY_STACK..">|r")
-			end
-		end
-	end
-end)
