@@ -522,6 +522,7 @@ local Shared = function(self, unit, isSingle)
 			myBar = mhpb,
 			otherBar = ohpb,
 			maxOverflow = 1,
+			frequentUpdates = true,
 		}
 
 		if C.unitframes.absorb then

@@ -105,7 +105,7 @@ scripts_extra\UnitSounds.lua
 scripts_extra\WhisperSound.lua
 scripts_extra\UnerringVision.lua
 
-scripts_extra\Blizzard\Achievement.lua
+scripts_extra\Blizzard\Achievements.lua
 scripts_extra\Blizzard\AltPowerBar.lua
 scripts_extra\Blizzard\ColorPicker.lua
 scripts_extra\Blizzard\Fixes.lua
