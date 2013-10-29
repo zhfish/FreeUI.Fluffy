@@ -319,7 +319,7 @@ Filger_Spells = {
 			-- Yu'lon's Bite (暴擊, 觸發)
 			{spellID = 146218, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Black Blood of Y'Shaarj (智力, 觸發)
-			{spellID = 146184, unitID = "player", caster = "all", filter = "BUFF"},
+			{spellID = 146202, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Frenzied Crystal of Rage (智力, 觸發)
 			{spellID = 148897, unitID = "player", caster = "all", filter = "BUFF"},
 			-- warlock affliction t16 2piece
@@ -806,6 +806,9 @@ Filger_Spells = {
 			{spellID = 142671, unitID = "player", caster = "all", filter = "DEBUFF"},
 			-- 炎界
 			{spellID = 142808, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Blackfuse
+			-- 过热
+			{spellID = 143856, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 		},
 	},
