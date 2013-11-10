@@ -49,7 +49,7 @@ C.reactioncolours = {
 
 C.myClass = class
 C.myName = UnitName("player")
-C.myRealm = GetCVar("realmName")
+C.myRealm = GetRealmName()
 
 -- [[ Functions ]]
 

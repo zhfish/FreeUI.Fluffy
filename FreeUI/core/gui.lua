@@ -2,8 +2,8 @@ local F, C = unpack(select(2, ...))
 
 if not IsAddOnLoaded("FreeUI_Options") then return end
 
-local realm = GetCVar("realmName")
-local name = UnitName("player") 
+local realm = GetRealmName()
+local name = UnitName("player")
 
 -- create the profile boolean
 if not FreeUIOptionsGlobal then FreeUIOptionsGlobal = {} end
@@ -30,7 +30,7 @@ for group, options in pairs(profile) do
 			if C[group][option] == nil or (group == "unitframes" and (tonumber(profile[group][option]) or type(profile[group][option]) == "table")) then
 				profile[group][option] = nil
 			else
-				C[group][option] = value 
+				C[group][option] = value
 			end
 		end
 	else

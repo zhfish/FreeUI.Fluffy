@@ -809,6 +809,31 @@ Filger_Spells = {
 			-- Blackfuse
 			-- 过热
 			{spellID = 143856, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- Blackfuse
+			-- 亚煞极之境
+			{spellID = 144954, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 亚煞极之触
+			{spellID = 145065, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 強化亚煞极之触
+			{spellID = 145171, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 亵渎
+			{spellID = 144762, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- 亵渎
+			{spellID = 144817, unitID = "player", caster = "all", filter = "DEBUFF", absID = true},
+			-- 信念
+			{spellID = 148994, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 勇氣
+			{spellID = 148983, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 希望
+			{spellID = 149004, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 惡意
+			{spellID = 147209, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 惡意衝擊
+			{spellID = 147235, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 凝視
+			{spellID = 147665, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 液態火焰
+			{spellID = 147136, unitID = "player", caster = "all", filter = "DEBUFF"},
 
 		},
 	},
