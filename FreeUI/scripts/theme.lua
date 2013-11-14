@@ -55,7 +55,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		-- [[ Scroll bars ]]
 
-		local scrollbars = {"FriendsFrameFriendsScrollFrameScrollBar", "CharacterStatsPaneScrollBar", "LFDQueueFrameSpecificListScrollFrameScrollBar", "HelpFrameKnowledgebaseScrollFrameScrollBar", "HelpFrameReportBugScrollFrameScrollBar", "HelpFrameSubmitSuggestionScrollFrameScrollBar", "HelpFrameTicketScrollFrameScrollBar", "PaperDollTitlesPaneScrollBar", "PaperDollEquipmentManagerPaneScrollBar", "SendMailScrollFrameScrollBar", "OpenMailScrollFrameScrollBar", "RaidInfoScrollFrameScrollBar", "ChannelRosterScrollFrameScrollBar", "FriendsFriendsScrollFrameScrollBar", "HelpFrameGM_ResponseScrollFrame1ScrollBar", "HelpFrameGM_ResponseScrollFrame2ScrollBar", "HelpFrameKnowledgebaseScrollFrame2ScrollBar", "WhoListScrollFrameScrollBar", "GearManagerDialogPopupScrollFrameScrollBar", "LFDQueueFrameRandomScrollFrameScrollBar", "BCMCopyScrollScrollBar", "ScrollOfResurrectionSelectionFrameListScrollFrameScrollBar"}
+		local scrollbars = {"CharacterStatsPaneScrollBar", "LFDQueueFrameSpecificListScrollFrameScrollBar", "HelpFrameKnowledgebaseScrollFrameScrollBar", "HelpFrameReportBugScrollFrameScrollBar", "HelpFrameSubmitSuggestionScrollFrameScrollBar", "HelpFrameTicketScrollFrameScrollBar", "PaperDollTitlesPaneScrollBar", "PaperDollEquipmentManagerPaneScrollBar", "SendMailScrollFrameScrollBar", "OpenMailScrollFrameScrollBar", "RaidInfoScrollFrameScrollBar", "ChannelRosterScrollFrameScrollBar", "FriendsFriendsScrollFrameScrollBar", "HelpFrameGM_ResponseScrollFrame1ScrollBar", "HelpFrameGM_ResponseScrollFrame2ScrollBar", "HelpFrameKnowledgebaseScrollFrame2ScrollBar", "WhoListScrollFrameScrollBar", "GearManagerDialogPopupScrollFrameScrollBar", "LFDQueueFrameRandomScrollFrameScrollBar", "BCMCopyScrollScrollBar", "ScrollOfResurrectionSelectionFrameListScrollFrameScrollBar"}
 		for i = 1, #scrollbars do
 			local scrollbar = _G[scrollbars[i]]
 			if scrollbar then
@@ -1608,6 +1608,16 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		-- Friends Frame
 
+		FriendsFrameFriendsScrollFrameTop:Hide()
+		FriendsFrameFriendsScrollFrameMiddle:Hide()
+		FriendsFrameFriendsScrollFrameBottom:Hide()
+		IgnoreListFrameTop:Hide()
+		IgnoreListFrameMiddle:Hide()
+		IgnoreListFrameBottom:Hide()
+		PendingListFrameTop:Hide()
+		PendingListFrameMiddle:Hide()
+		PendingListFrameBottom:Hide()
+
 		for i = 1, 4 do
 			F.ReskinTab(_G["FriendsFrameTab"..i])
 		end
@@ -1655,12 +1665,11 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		FriendsFrameStatusDropDown:ClearAllPoints()
 		FriendsFrameStatusDropDown:SetPoint("TOPLEFT", FriendsFrame, "TOPLEFT", 10, -28)
 
-		FriendsTabHeaderSoRButton:SetPushedTexture("")
-		FriendsTabHeaderSoRButtonIcon:SetTexCoord(.08, .92, .08, .92)
-		local SoRBg = CreateFrame("Frame", nil, FriendsTabHeaderSoRButton)
-		SoRBg:SetPoint("TOPLEFT", -1, 1)
-		SoRBg:SetPoint("BOTTOMRIGHT", 1, -1)
-		F.CreateBD(SoRBg, 0)
+		for _, button in pairs({FriendsTabHeaderSoRButton, FriendsTabHeaderRecruitAFriendButton}) do
+			button:SetPushedTexture("")
+			button:GetRegions():SetTexCoord(.08, .92, .08, .92)
+			F.CreateBDFrame(button)
+		end
 
 		F.CreateBD(FriendsFrameBattlenetFrame.UnavailableInfoFrame)
 		FriendsFrameBattlenetFrame.UnavailableInfoFrame:SetPoint("TOPLEFT", FriendsFrame, "TOPRIGHT", 1, -18)
@@ -1705,6 +1714,8 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		F.Reskin(FriendsFrameIgnorePlayerButton)
 		F.Reskin(FriendsFrameUnsquelchButton)
 		F.Reskin(FriendsFrameMutePlayerButton)
+		F.ReskinScroll(FriendsFrameFriendsScrollFrameScrollBar)
+		F.ReskinScroll(FriendsFrameIgnoreScrollFrameScrollBar)
 		F.ReskinDropDown(FriendsFrameStatusDropDown)
 
 		-- Battlenet toast frame
@@ -3742,6 +3753,54 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 			end
 		end)
 
+		-- Recruit A Friend frame
+
+		local RecruitAFriendFrame = RecruitAFriendFrame
+		local RecruitAFriendSentFrame = RecruitAFriendSentFrame
+
+		RecruitAFriendFrame.NoteFrame:DisableDrawLayer("BACKGROUND")
+
+		F.CreateBD(RecruitAFriendFrame)
+		F.ReskinClose(RecruitAFriendFrameCloseButton)
+		F.Reskin(RecruitAFriendFrame.SendButton)
+		F.ReskinInput(RecruitAFriendNameEditBox)
+
+		F.CreateBDFrame(RecruitAFriendFrame.NoteFrame, .25)
+
+		F.CreateBD(RecruitAFriendSentFrame)
+		F.Reskin(RecruitAFriendSentFrame.OKButton)
+		F.ReskinClose(RecruitAFriendSentFrameCloseButton)
+
+		-- Product Choice frame
+
+		local ProductChoiceFrame = ProductChoiceFrame
+
+		ProductChoiceFrame.Inset.Bg:Hide()
+		ProductChoiceFrame.Inset:DisableDrawLayer("BORDER")
+
+		F.ReskinPortraitFrame(ProductChoiceFrame)
+		F.Reskin(ProductChoiceFrame.Inset.ClaimButton)
+
+		-- Model Preview frame
+
+		local ModelPreviewFrame = ModelPreviewFrame
+		local Display = ModelPreviewFrame.Display
+
+		Display.YesMountsTex:Hide()
+		Display.ShadowOverlay:Hide()
+
+		F.ReskinPortraitFrame(ModelPreviewFrame, true)
+		F.Reskin(ModelPreviewFrame.CloseButton)
+		F.ReskinArrow(Display.Model.RotateLeftButton, "left")
+		F.ReskinArrow(Display.Model.RotateRightButton, "right")
+
+		local bg = F.CreateBDFrame(Display.Model, .25)
+		bg:SetPoint("TOPLEFT", -1, 0)
+		bg:SetPoint("BOTTOMRIGHT", 2, -2)
+
+		Display.Model.RotateLeftButton:SetPoint("TOPRIGHT", Display.Model, "BOTTOM", -5, -10)
+		Display.Model.RotateRightButton:SetPoint("TOPLEFT", Display.Model, "BOTTOM", 5, -10)
+
 		-- [[ Hide regions ]]
 
 		local bglayers = {"LFDParentFrame", "LFDParentFrameInset", "WhoFrameColumnHeader1", "WhoFrameColumnHeader2", "WhoFrameColumnHeader3", "WhoFrameColumnHeader4", "RaidInfoInstanceLabel", "RaidInfoIDLabel", "CharacterFrameInsetRight", "LFRQueueFrame", "LFRBrowseFrame", "HelpFrameMainInset", "CharacterModelFrame", "HelpFrame", "HelpFrameLeftInset", "VideoOptionsFrameCategoryFrame", "InterfaceOptionsFrameCategories", "InterfaceOptionsFrameAddOns", "RaidParentFrame"}
@@ -3878,9 +3937,6 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		end
 		ChannelRosterScrollFrameTop:SetAlpha(0)
 		ChannelRosterScrollFrameBottom:SetAlpha(0)
-		FriendsFrameFriendsScrollFrameTop:Hide()
-		FriendsFrameFriendsScrollFrameMiddle:Hide()
-		FriendsFrameFriendsScrollFrameBottom:Hide()
 		WhoFrameListInsetBg:Hide()
 		WhoFrameEditBoxInsetBg:Hide()
 		ChannelFrameLeftInsetBg:Hide()
@@ -3897,12 +3953,6 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		LFRQueueFrameListInsetBg:Hide()
 		LFRQueueFrameCommentInsetBg:Hide()
 		select(5, SideDressUpModelCloseButton:GetRegions()):Hide()
-		IgnoreListFrameTop:Hide()
-		IgnoreListFrameMiddle:Hide()
-		IgnoreListFrameBottom:Hide()
-		PendingListFrameTop:Hide()
-		PendingListFrameMiddle:Hide()
-		PendingListFrameBottom:Hide()
 		ScrollOfResurrectionSelectionFrameBackground:Hide()
 
 		ReadyCheckFrame:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end)
@@ -7172,12 +7222,14 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		F.CreateBD(ConquestTooltip)
 
-		ConquestTooltip:HookScript("OnShow", function(self)
-			self:SetScale(UIParent:GetScale())
+		local ConquestFrameButton_OnEnter = function(self)
+			ConquestTooltip:SetPoint("TOPLEFT", self, "TOPRIGHT", 1, 0)
+		end
 
-			local p1, anchor, p2 = self:GetPoint()
-			self:SetPoint(p1, anchor, p2, 1, 0)
-		end)
+		ConquestFrame.Arena2v2:HookScript("OnEnter", ConquestFrameButton_OnEnter)
+		ConquestFrame.Arena3v3:HookScript("OnEnter", ConquestFrameButton_OnEnter)
+		ConquestFrame.Arena5v5:HookScript("OnEnter", ConquestFrameButton_OnEnter)
+		ConquestFrame.RatedBG:HookScript("OnEnter", ConquestFrameButton_OnEnter)
 
 		for _, bu in pairs({ConquestFrame.Arena2v2, ConquestFrame.Arena3v3, ConquestFrame.Arena5v5, ConquestFrame.RatedBG}) do
 			F.Reskin(bu, true)
