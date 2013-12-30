@@ -54,6 +54,8 @@ local microMenu = {
 	end},
 	{text = ENCOUNTER_JOURNAL,
 	func = function() ToggleEncounterJournal() F.menuShown = false end},
+	{text = BLIZZARD_STORE,
+	func = function() StoreMicroButton:Click() end},
 }
 
 -- spellbook need at least 1 opening else it taint in combat
@@ -69,5 +71,5 @@ end
 F.RegisterEvent("ADDON_LOADED", taint)
 
 F.MicroMenu = function()
-	EasyMenu(microMenu, menuFrame, Minimap, -185, 253, 1)
+	EasyMenu(microMenu, menuFrame, Minimap, -185, 269, 1)
 end
