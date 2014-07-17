@@ -123,17 +123,3 @@ function old_nocomplete_filter_init()
 		{text = ACHIEVEMENTFRAME_FILTER_INCOMPLETE.." ("..ALL.." )", func = AchievementFrame_GetCategoryNumAchievements_OldIncomplete}
 	}
 end
-
-local filter = CreateFrame("Frame")
-filter:RegisterEvent("ADDON_LOADED")
-filter:SetScript("OnEvent", function(self, event, addon, ...)
-	if addon == "Blizzard_AchievementUI" then
-		if AchievementFrame then
-			old_nocomplete_filter_init()
-			if C.skins.blizzard_frames == true then
-				AchievementFrameFilterDropDown:SetWidth(AchievementFrameFilterDropDown:GetWidth() + 20)
-			end
-			filter:UnregisterEvent("ADDON_LOADED")
-		end
-	end
-end)

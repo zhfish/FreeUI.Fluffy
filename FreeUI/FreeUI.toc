@@ -115,7 +115,7 @@ scripts_extra\Tooltip\AuraSource.lua
 scripts_extra\Tooltip\idTip.lua
 scripts_extra\Tooltip\ItemLevel.lua
 scripts_extra\Tooltip\ItemIcons.lua
-scripts_extra\Tooltip\Talents.lua
+
 
 scripts_extra\Misc\AlreadyKnown.lua
 scripts_extra\Misc\Author.lua
