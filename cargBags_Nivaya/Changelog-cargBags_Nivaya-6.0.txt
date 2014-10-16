@@ -1,0 +1,56 @@
+------------------------------------------------------------------------
+r16 | humfras | 2014-10-14 23:06:57 +0000 (Tue, 14 Oct 2014) | 1 line
+Changed paths:
+   A /tags/6.0 (from /trunk:15)
+
+Update for 6.0
+------------------------------------------------------------------------
+r15 | humfras | 2014-10-14 23:05:26 +0000 (Tue, 14 Oct 2014) | 1 line
+Changed paths:
+   M /trunk/style.lua
+
+bugfix
+------------------------------------------------------------------------
+r14 | humfras | 2014-10-13 08:50:48 +0000 (Mon, 13 Oct 2014) | 3 lines
+Changed paths:
+   M /trunk/cargBags/base/implementation.lua
+   M /trunk/cargBags/base/itembutton.lua
+   M /trunk/cargBags/mixins/parseBags.lua
+   M /trunk/cargBags/mixins-add/default.scaffold.lua
+   M /trunk/cargBags/mixins-add/plugins/tagDisplay.lua
+   M /trunk/cargBags/tests/README.mkd
+   M /trunk/cargBags_Nivaya.lua
+   M /trunk/cargBags_Nivaya.toc
+   M /trunk/config.lua
+   M /trunk/filters.lua
+   M /trunk/localization.lua
+   A /trunk/media/BagHighlight.BLP
+   A /trunk/media/BagSlot.BLP
+   A /trunk/media/BagToggle.BLP
+   A /trunk/media/Config.BLP
+   A /trunk/media/Deposit.BLP
+   A /trunk/media/Down.BLP
+   A /trunk/media/Left.BLP
+   A /trunk/media/ResetNew.BLP
+   A /trunk/media/ResetNew_Large.BLP
+   A /trunk/media/Restack.BLP
+   A /trunk/media/Right.BLP
+   A /trunk/media/Search.BLP
+   A /trunk/media/SellJunk.BLP
+   A /trunk/media/TooltipIcon.BLP
+   A /trunk/media/Up.BLP
+   A /trunk/media/glowTex.BLP
+   A /trunk/media/texture.BLP
+   M /trunk/style.lua
+
+Update for 6.0
+
+Should be working with or without RealUI (no compatibility issues anymore!)
+------------------------------------------------------------------------
+r13 | humfras | 2013-10-13 13:52:37 +0000 (Sun, 13 Oct 2013) | 2 lines
+Changed paths:
+   M /trunk/cargBags_Nivaya.lua
+
+- added additional cancel button in the dropdown list
+- various minor code changes
+------------------------------------------------------------------------
