@@ -2,9 +2,6 @@ local F, C, L = unpack(select(2, ...))
 
 local font = C.media.font7
 
-local font1 = C.media.font9
-local font2 = C.media.font11
-
 local unitfont = C.media.font3
 local damagefont = C.media.font4
 
@@ -57,7 +54,7 @@ QuestFont_Shadow_Small:SetFont(font, 15)
 QuestFont_Large:SetFont(font, 17)
 QuestFont_Large:SetShadowColor(0, 0, 0)
 QuestFont_Large:SetShadowOffset(1, -1)
-QuestFont_Shadow_Huge:SetFont(font1, 20)
+QuestFont_Shadow_Huge:SetFont(font, 20)
 QuestFont_Huge:SetFont(font, 18)
 QuestFont_Super_Huge:SetFont(font, 24)
 QuestFont_Super_Huge:SetShadowColor(0, 0, 0)

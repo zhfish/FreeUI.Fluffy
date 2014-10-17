@@ -19,13 +19,11 @@ C.media = {
 	["font3"] = "Fonts\\yahei__.ttf", 				-- 微软雅黑
 	["font4"] = "Fonts\\FruityMicrofont.ttf", 		-- (for damage float)
 	["font5"] = "Fonts\\Hooge0655.ttf", 			-- 
-	["font5"] = "Fonts\\Zpix.ttf", 					-- 最像素-中文点阵
-	["font6"] = "Fonts\\lihei.ttf", 				-- 丽黑
+	["font6"] = "Fonts\\Zpix.ttf", 					-- 最像素-中文点阵
 	["font7"] = "Fonts\\cuyuan.ttf", 				-- 方正粗圆
 	["font8"] = "Fonts\\diablo.ttf", 				-- AvQest from Diablo
-	["font9"] = "Fonts\\cy_emblem.ttf", 			-- emblem+方正粗圆
-	["font10"] = "Fonts\\cy_expressway.ttf", 		-- expressway+方正粗圆
-	["font11"] = "Fonts\\cy_pepsi.ttf", 		-- expressway+方正粗圆
+	["font9"] = "Fonts\\FRIZQT__.ttf", 				-- emblem+方正粗圆
+	["font10"] = "Fonts\\ARIALN.ttf", 				-- expressway+方正粗圆
 }
 
 local mainFont
@@ -33,7 +31,7 @@ local mainFont
 if C.appearance.fontUseAlternativeFont then
 	mainFont = C.media.font2
 elseif GetLocale() == "zhCN" then
-	mainFont = "Fonts\\cy_emblem.ttf"
+	mainFont = "Fonts\\ARIALN.ttf"
 else
 	mainFont = C.media.font
 end
@@ -42,7 +40,7 @@ F.AddOptionsCallback("appearance", "fontUseAlternativeFont", function()
 	if C.appearance.fontUseAlternativeFont then
 		mainFont = C.media.font2
 	elseif GetLocale() == "zhCN" then
-		mainFont = "Fonts\\cy_emblem.ttf"
+		mainFont = "Fonts\\ARIALN.ttf"
 	else
 		mainFont = C.media.font
 	end
