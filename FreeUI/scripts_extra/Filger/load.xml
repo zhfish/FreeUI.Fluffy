@@ -1,0 +1,12 @@
+﻿<!-- -->
+
+
+
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+
+	<Script file="Settings.lua"/>
+	<Script file="Spells.lua"/>
+	<Script file="Filger.lua"/>
+
+</Ui>
