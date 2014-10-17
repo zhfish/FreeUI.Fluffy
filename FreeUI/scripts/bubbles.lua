@@ -10,7 +10,7 @@ local function styleBubble(frame)
 		if region:GetObjectType() == "Texture" then
 			region:SetTexture(nil)
 		elseif region:GetObjectType() == "FontString" then
-			region:SetFont(C.media.font2, 13)
+			region:SetFont(C.media.font9, 13)
 			region:SetShadowOffset(scale, -scale)
 		end
 	end
