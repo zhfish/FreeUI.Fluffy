@@ -5,6 +5,8 @@ if not C.unitframes.enable then return end
 local parent, ns = ...
 local oUF = ns.oUF
 
+local font_CN      = C.media.font5
+
 local class = select(2, UnitClass("player"))
 
 local colors = setmetatable({
@@ -31,6 +33,8 @@ local targettargetWidth = C.unitframes.targettarget_width
 local targettargetHeight = C.unitframes.targettarget_height
 local focusWidth = C.unitframes.focus_width
 local focusHeight = C.unitframes.focus_height
+local focustargetWidth = C.unitframes.focustarget_width
+local focustargetHeight = C.unitframes.focustarget_height
 local petWidth = C.unitframes.pet_width
 local petHeight = C.unitframes.pet_height
 local bossWidth = C.unitframes.boss_width
@@ -339,7 +343,6 @@ local Shared = function(self, unit, isSingle)
 	end
 		CreateShadow(bd)
 
-----------------------------------------------------------------------
 
 
 	--[[ Health ]]
@@ -557,6 +560,8 @@ local Shared = function(self, unit, isSingle)
 			self:SetSize(arenaWidth, arenaHeight)
 		elseif unit == "focus" then
 			self:SetSize(focusWidth, focusHeight)
+		elseif unit == "focustarget" then
+			self:SetSize(focustargetWidth, focustargetHeight)
 		elseif unit == "pet" then
 			self:SetSize(petWidth, petHeight)
 		elseif unit and unit:find("boss%d") then
@@ -615,50 +620,6 @@ local UnitSpecific = {
 		PowerPoints:SetTextColor(.4, .7, 1)
 		self:Tag(PowerPoints, '[free:power]')
 
-		-- Cast bar
-
-		Castbar.Width = self:GetWidth()
-		Spark:SetHeight(self.Health:GetHeight())
-		Castbar.Text = F.CreateFS(Castbar)
-		Castbar.Text:SetDrawLayer("ARTWORK")
-
-		local IconFrame = CreateFrame("Frame", nil, Castbar)
-
-		local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
-		Icon:SetAllPoints(IconFrame)
-		Icon:SetTexCoord(.08, .92, .08, .92)
-
-		Castbar.Icon = Icon
-
-		self.Iconbg = IconFrame:CreateTexture(nil, "BACKGROUND")
-		self.Iconbg:SetPoint("TOPLEFT", -1 , 1)
-		self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
-		self.Iconbg:SetTexture(C.media.backdrop)
-
-		if C.unitframes.castbarSeparate and (class == "MAGE" or class == "PRIEST" or class == "WARLOCK" or not C.unitframes.castbarSeparateOnlyCasters) then
-			Castbar:SetStatusBarTexture(C.media.texture)
-			Castbar:SetStatusBarColor(unpack(C.class))
-			Castbar:SetWidth(self:GetWidth())
-			Castbar:SetHeight(self:GetHeight())
-			Castbar:SetPoint(unpack(C.unitframes.cast))
-			Castbar.Text:SetAllPoints(Castbar)
-			local sf = Castbar:CreateTexture(nil, "OVERLAY")
-			sf:SetVertexColor(.5, .5, .5, .5)
-			Castbar.SafeZone = sf
-			IconFrame:SetPoint("LEFT", Castbar, "RIGHT", 3, 0)
-			IconFrame:SetSize(22, 22)
-
-			local bg = CreateFrame("Frame", nil, Castbar)
-			bg:SetPoint("TOPLEFT", -1, 1)
-			bg:SetPoint("BOTTOMRIGHT", 1, -1)
-			bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
-			F.CreateBD(bg)
-		else
-			Castbar:SetAllPoints(Health)
-			Castbar.Text:SetAllPoints(Health)
-			IconFrame:SetPoint("RIGHT", self, "LEFT", -10, 0)
-			IconFrame:SetSize(44, 44)
-		end
 
 		-- PVP
 
@@ -1198,8 +1159,6 @@ local UnitSpecific = {
 
 		local Health = self.Health
 		local Power = self.Power
-		local Castbar = self.Castbar
-		local Spark = Castbar.Spark
 
 		Health:SetHeight(targetHeight - powerHeight - 1)
 
@@ -1220,6 +1179,7 @@ local UnitSpecific = {
 
 		ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", tt)
+		ttt:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
 
 		tt:RegisterEvent("UNIT_TARGET")
 		tt:RegisterEvent("PLAYER_TARGET_CHANGED")
@@ -1233,34 +1193,12 @@ local UnitSpecific = {
 			end
 		end)
 
-		Castbar:SetAllPoints(Health)
-		Castbar.Width = self:GetWidth()
-
-		Spark:SetHeight(self.Health:GetHeight())
-
-		Castbar.Text = F.CreateFS(Castbar)
-		Castbar.Text:SetDrawLayer("ARTWORK")
-		Castbar.Text:SetAllPoints(Health)
-
-		local IconFrame = CreateFrame("Frame", nil, Castbar)
-		IconFrame:SetPoint("LEFT", self, "RIGHT", 3, 0)
-		IconFrame:SetSize(44, 44)
-
-		local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
-		Icon:SetAllPoints(IconFrame)
-		Icon:SetTexCoord(.08, .92, .08, .92)
-
-		Castbar.Icon = Icon
-
-		self.Iconbg = IconFrame:CreateTexture(nil, "BACKGROUND")
-		self.Iconbg:SetPoint("TOPLEFT", -1 , 1)
-		self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
-		self.Iconbg:SetTexture(C.media.backdrop)
 
 		local Name = F.CreateFS(self)
 		Name:SetPoint("BOTTOMLEFT", PowerPoints, "BOTTOMRIGHT")
 		Name:SetPoint("RIGHT", self)
 		Name:SetJustifyH("RIGHT")
+		Name:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
 		Name:SetTextColor(1, 1, 1)
 
 		self:Tag(Name, '[name]')
@@ -1277,7 +1215,7 @@ local UnitSpecific = {
 		Auras.numBuffs = C.unitframes.num_target_buffs
 		Auras:SetHeight(500)
 		Auras:SetWidth(targetWidth)
-		Auras.size = 26
+		Auras.size = 18
 		Auras.gap = true
 
 		self.Auras = Auras
@@ -1340,6 +1278,31 @@ local UnitSpecific = {
 
 		Spark:SetHeight(Health:GetHeight())
 
+		local Name = F.CreateFS(self, 8)
+		Name:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 2)
+		Name:SetPoint("LEFT", self)
+		Name:SetWidth(80)
+		Name:SetHeight(8)
+		Name:SetJustifyH"RIGHT"
+		Name:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
+		Name:SetTextColor(1, 1, 1)
+
+		self:Tag(Name, '[name]')
+		self.Name = Name
+
+		local f = CreateFrame("Frame")
+		f:RegisterEvent("UNIT_TARGET")
+		f:RegisterEvent("PLAYER_FOCUS_CHANGED")
+      	f:SetScript("OnEvent", function(self, event)
+			if(UnitName("focustarget")==UnitName("player")) then
+				Name:SetText("> YOU <")
+				Name:SetTextColor(1, 0, 0)
+			else
+				Name:SetText(UnitName"focus")
+				Name:SetTextColor(1, 1, 1)
+			end
+		end)
+
 		local Debuffs = CreateFrame("Frame", nil, self)
 		Debuffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
 		Debuffs.initialAnchor = "BOTTOMLEFT"
@@ -1351,6 +1314,49 @@ local UnitSpecific = {
 		Debuffs.size = 22
 		Debuffs.num = C.unitframes.num_focus_debuffs
 		self.Debuffs = Debuffs
+		self.Debuffs.onlyShowPlayer = true
+
+		Debuffs.PostUpdateIcon = PostUpdateIcon
+	end,
+
+	focustarget = function(self, ...)
+		Shared(self, ...)
+
+		local Health = self.Health
+		local Castbar = self.Castbar
+		local Spark = Castbar.Spark
+
+		Health:SetHeight(focustargetHeight - powerHeight - 1)
+
+		Castbar:SetAllPoints(Health)
+		Castbar.Width = self:GetWidth()
+
+		Spark:SetHeight(Health:GetHeight())
+
+		local Name = F.CreateFS(self, 8)
+		Name:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 2)
+		Name:SetPoint("LEFT", self)
+		Name:SetWidth(80)
+		Name:SetHeight(8)
+		Name:SetJustifyH"RIGHT"
+		Name:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
+		Name:SetTextColor(1, 1, 1)
+
+		self:Tag(Name, '[name]')
+		self.Name = Name
+
+		local Debuffs = CreateFrame("Frame", nil, self)
+		Debuffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
+		Debuffs.initialAnchor = "BOTTOMLEFT"
+		Debuffs["growth-x"] = "RIGHT"
+		Debuffs["growth-y"] = "UP"
+		Debuffs["spacing-x"] = 3
+		Debuffs:SetHeight(22)
+		Debuffs:SetWidth(focusWidth)
+		Debuffs.size = 22
+		Debuffs.num = C.unitframes.num_focus_debuffs
+		self.Debuffs = Debuffs
+		self.Debuffs.onlyShowPlayer = true
 
 		Debuffs.PostUpdateIcon = PostUpdateIcon
 	end,
@@ -1791,7 +1797,8 @@ oUF:Factory(function(self)
 		end
 	end
 
-	spawnHelper(self, 'focus', "BOTTOMRIGHT", player, "TOPRIGHT", 0, C.appearance.fontSizeNormal + 7)
+	spawnHelper(self, 'focus', "TOPRIGHT", player, "BOTTOMRIGHT", 0, -80)
+	spawnHelper(self, 'focustarget', "TOPLEFT", player, "BOTTOMLEFT", 0, -80)
 	spawnHelper(self, 'pet', "BOTTOMLEFT", player, "TOPLEFT", 0, C.appearance.fontSizeNormal + 7)
 
 	if C.unitframes.targettarget then

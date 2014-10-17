@@ -116,8 +116,8 @@ C["unitframes"] = {
 	["party"] = {"TOP", UIParent, "CENTER", 0, -225}, 	-- only applies with healer layout enabled
 	["raid"] = {"TOP", UIParent, "CENTER", 0, -185}, 	-- only applies with healer layout enabled
 
-	["altpower_height"] = 1,
-	["power_height"] = 1,
+	["altpower_height"] = 2,
+	["power_height"] = 2,
 
 	["player_width"] = 229,
 	["player_height"] = 14,
@@ -125,9 +125,11 @@ C["unitframes"] = {
 	["target_height"] = 14,
 	["targettarget_width"] = 229,
 	["targettarget_height"] = 8,
-	["focus_width"] = 113,
-	["focus_height"] = 8,
-	["pet_width"] = 113,
+	["focus_width"] = 110,
+	["focus_height"] = 14,
+	["focustarget_width"] = 110,
+	["focustarget_height"] = 14,
+	["pet_width"] = 110,
 	["pet_height"] = 8,
 	["boss_width"] = 170,
 	["boss_height"] = 14,

@@ -70,7 +70,18 @@ scripts\variables.lua
 scripts\worldmarker.lua
 scripts\worldstateframe.lua
 
+scripts_extra\Filger\load.xml
+
 scripts_extra\misc.lua
+scripts_extra\Screenshots.lua
+scripts_extra\TabBinder.lua
+scripts_extra\ColorPicker.lua
+## scripts_extra\AuraSource.lua
+scripts_extra\DragEmAll.lua
+scripts_extra\idTip.lua
+scripts_extra\ncShadow.lua
+scripts_extra\Align.lua
+scripts_extra\Focuser.lua
 
 class\paladin.lua
 
