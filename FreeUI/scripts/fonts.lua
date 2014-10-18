@@ -1,9 +1,9 @@
 local F, C, L = unpack(select(2, ...))
 
-local font = C.media.font7
+local font = C.media.font9
 
-local unitfont = C.media.font3
-local damagefont = C.media.font4
+local font1 = C.media.font3
+local font2 = C.media.font4
 
 RaidWarningFrame.slot1:SetFont(font, 20, "OUTLINE")
 RaidWarningFrame.slot2:SetFont(font, 20, "OUTLINE")
@@ -13,13 +13,13 @@ RaidBossEmoteFrame.slot2:SetFont(font, 20, "OUTLINE")
 F.SetFS(UIErrorsFrame)
 
 STANDARD_TEXT_FONT = font
-UNIT_NAME_FONT     = unitfont
-DAMAGE_TEXT_FONT   = damagefont
+UNIT_NAME_FONT     = font1
+DAMAGE_TEXT_FONT   = font2
 
 AchievementFont_Small:SetFont(font, 10)
 AchievementFont_Small:SetShadowColor(0, 0, 0)
 AchievementFont_Small:SetShadowOffset(1, -1)
-CoreAbilityFont:SetFont(font, 32)
+CoreAbilityFont:SetFont(font1, 32)
 CoreAbilityFont:SetShadowColor(0, 0, 0)
 CoreAbilityFont:SetShadowOffset(1, -1)
 DestinyFontHuge:SetFont(font, 32)
