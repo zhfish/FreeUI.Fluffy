@@ -322,26 +322,7 @@ local Shared = function(self, unit, isSingle)
 	self.bd = bd
 
 
-	-- add some shadow around
-	local shadows = {
-	edgeFile = "Interface\\Addons\\FreeUI\\media\\glowTex",
-	edgeSize = 4,
-	insets = { left = 3, right = 3, top = 3, bottom = 3 }
-	}
-	function CreateShadow(f)
-	if f.shadow then return end
-	local shadow = CreateFrame("Frame", nil, f)
-		shadow:SetFrameLevel(1)
-		shadow:SetFrameStrata(f:GetFrameStrata())
-		shadow:SetPoint("TOPLEFT", -4, 4)
-		shadow:SetPoint("BOTTOMRIGHT", 4, -4)
-		shadow:SetBackdrop(shadows)
-		shadow:SetBackdropColor(0, 0, 0, 0)
-		shadow:SetBackdropBorderColor(0, 0, 0, 1)
-		f.shadow = shadow
-		return shadow
-	end
-		CreateShadow(bd)
+
 
 
 
@@ -664,7 +645,7 @@ local UnitSpecific = {
 		Debuffs:SetHeight(60)
 		Debuffs:SetWidth(playerWidth)
 		Debuffs.num = C.unitframes.num_player_debuffs
-		Debuffs.size = 26
+		Debuffs.size = 18
 
 		self.Debuffs = Debuffs
 		Debuffs.PostUpdateIcon = PostUpdateIcon
@@ -1571,18 +1552,20 @@ do
 		Text:SetPoint("CENTER", 1, 0)
 		self.Text = Text
 
-		if FreeUIConfig.layout == 2 then
-			Health:SetHeight(partyHeightHealer - powerHeight - 1)
-			self:Tag(Text, '[free:missinghealth]')
+		self:Tag(Text, '[dead][offline]')
 
-		else
-			Health:SetHeight(partyHeight - powerHeight - 1)
-			if C.unitframes.partyNameAlways then
-				self:Tag(Text, '[free:name]')
-			else
-				self:Tag(Text, '[dead][offline]')
-			end
-		end
+		-- if FreeUIConfig.layout == 2 then
+		-- 	Health:SetHeight(partyHeightHealer - powerHeight - 1)
+		-- 	self:Tag(Text, '[free:missinghealth]')
+
+		-- else
+		-- 	Health:SetHeight(partyHeight - powerHeight - 1)
+		-- 	if C.unitframes.partyNameAlways then
+		-- 		self:Tag(Text, '[free:name]')
+		-- 	else
+		-- 		self:Tag(Text, '[dead][offline]')
+		-- 	end
+		-- end
 
 		self.ResurrectIcon = self:CreateTexture(nil, "OVERLAY")
 		self.ResurrectIcon:SetSize(16, 16)
@@ -1689,7 +1672,7 @@ do
 			Buffs["spacing-x"] = 3
 
 			Buffs:SetSize(43, 12)
-			Buffs.num = 3
+			Buffs.num = 0 			-- remove aura icon from raid grid
 			Buffs.size = 12
 
 			self.Buffs = Buffs
@@ -1815,6 +1798,76 @@ oUF:Factory(function(self)
 
 	if not C.unitframes.enableGroup then return end
 
+	local shadows = {
+	edgeFile = "Interface\\Addons\\FreeUI\\media\\glowTex",
+	edgeSize = 4,
+	insets = { left = 3, right = 3, top = 3, bottom = 3 }
+}
+function CreateShadow(f)
+	if f.shadow then return end
+	local shadow = CreateFrame("Frame", nil, f)
+	shadow:SetFrameLevel(1)
+	shadow:SetFrameStrata(f:GetFrameStrata())
+	shadow:SetPoint("TOPLEFT", -4, 4)
+	shadow:SetPoint("BOTTOMRIGHT", 4, -4)
+	shadow:SetBackdrop(shadows)
+	shadow:SetBackdropColor(0, 0, 0, 0)
+	shadow:SetBackdropBorderColor(0, 0, 0, 1)
+	f.shadow = shadow
+	return shadow
+end
+function CreateInnerBorder(f)
+	if f.iborder then return end
+	f.iborder = CreateFrame("Frame", nil, f)
+	f.iborder:SetPoint("TOPLEFT", 1, -1)
+	f.iborder:SetPoint("BOTTOMRIGHT", -1, 1)
+	f.iborder:SetFrameLevel(f:GetFrameLevel())
+	f.iborder:SetBackdrop({
+	  edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1,
+	  insets = { left = -1, right = -1, top = -1, bottom = -1}
+	})
+	f.iborder:SetBackdropBorderColor(0, 0, 0)
+	return f.iborder
+end
+function frame1px(f)
+	f:SetBackdrop({
+		bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
+        edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1,
+		insets = {left = -1, right = -1, top = -1, bottom = -1}
+	})
+	f:SetBackdropColor(.06,.06,.06,1)
+	f:SetBackdropBorderColor(.15,.15,.15,1)
+CreateInnerBorder(f)
+end
+
+local function StripTextures(object, kill)
+	for i=1, object:GetNumRegions() do
+		local region = select(i, object:GetRegions())
+		if region:GetObjectType() == "Texture" then
+			if kill then
+				region:Hide()
+			else
+				region:SetTexture(nil)
+			end
+		end
+	end
+end
+
+
+--frame1px(oUF_FreePlayer)
+CreateShadow(oUF_FreePlayer)
+CreateShadow(oUF_FreeTarget)
+	CreateShadow(oUF_FreeTargetTarget)
+		CreateShadow(oUF_FreeFocus)
+	CreateShadow(oUF_FreeFocusTarget)
+		CreateShadow(oUF_FreeBoss1)
+	CreateShadow(oUF_FreeBoss2)
+	CreateShadow(oUF_FreeBoss3)
+	CreateShadow(oUF_FreeBoss4)
+	CreateShadow(oUF_FreeBoss5)
+
+
+
 	self:SetActiveStyle'Free - Party'
 
 	local party_width, party_height
@@ -1834,7 +1887,7 @@ oUF:Factory(function(self)
 		'maxColumns', 5,
 		'unitsperColumn', 1,
 		'columnSpacing', 3,
-		'columnAnchorPoint', "RIGHT",
+		'columnAnchorPoint', "LEFT",
 		'oUF-initialConfigFunction', ([[
 			self:SetHeight(%d)
 			self:SetWidth(%d)

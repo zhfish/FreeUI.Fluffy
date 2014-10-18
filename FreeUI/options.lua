@@ -113,8 +113,8 @@ C["unitframes"] = {
 	["player"] = {"BOTTOM", UIParent, "CENTER", -275, -105},
 	["target"] = {"TOP", UIParent, "CENTER", 0, -225},
 	["target_heal"] = {"BOTTOM", UIParent, "CENTER", 0, -180},
-	["party"] = {"TOP", UIParent, "CENTER", 0, -225}, 	-- only applies with healer layout enabled
-	["raid"] = {"TOP", UIParent, "CENTER", 0, -185}, 	-- only applies with healer layout enabled
+	["party"] = {"RIGHT", UIParent, "CENTER", -170, -220}, 	-- only applies with healer layout enabled
+	["raid"] = {"TOPRIGHT", UIParent, "RIGHT", -20, -300}, 	-- only applies with healer layout enabled
 
 	["altpower_height"] = 2,
 	["power_height"] = 2,
@@ -137,8 +137,8 @@ C["unitframes"] = {
 	["arena_height"] = 14,
 	["party_width"] = 38,
 	["party_height"] = 24,
-	["party_width_healer"] = 56,
-	["party_height_healer"] = 42,
+	["party_width_healer"] = 48,
+	["party_height_healer"] = 30,
 
 	["num_player_debuffs"] = 8,
 	["num_target_debuffs"] = 16,
