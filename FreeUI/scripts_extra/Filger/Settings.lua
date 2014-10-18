@@ -1,15 +1,15 @@
 ﻿-- 设置(初次调整 位置,图标大小等, 请对照主楼置顶的标注图)
 Filger_Settings = {
-	config_mode = false,				-- 开\关测试模式
+	config_mode = true,				-- 开\关测试模式
 	max_test_icon = 5,					-- 测试模式下,每组显示最大图标数量
-	player_buff_icon = {"TOPRIGHT", UIParent, "CENTER", -4, -250},	-- "P_BUFF_ICON"		(player_buff_icon 位置坐标 - 主图标注号 1)
-	player_proc_icon = {"TOPLEFT", UIParent, "CENTER", 4, -250},	-- "P_PROC_ICON"		(player_proc_icon 位置坐标 - 主图标注号 2)
-	special_proc_icon = {"TOPLEFT", UIParent, "CENTER", 4, -200},	-- "SPECIAL_P_BUFF_ICON"	(special_proc_icon 位置坐标 - 主图标注号 3)
-	target_debuff_icon = {"TOPLEFT", UIParent, "CENTER", 160, 30},	-- "T_DEBUFF_ICON"		(target_debuff_icon 位置坐标 - 主图标注号 4)
-	target_buff_icon = {"TOPLEFT", UIParent, "CENTER", 0, 200},		-- "T_BUFF"				(target_buff_icon 位置坐标 - 主图标注号 5)
-	RAID_AURA_ICON = {"TOPRIGHT", UIParent, "CENTER", -160, 20},			-- "PVE/PVP_DEBUFF"		(pve_debuff 位置坐标 - 主图标注号 6)
+	player_buff_icon = {"TOPRIGHT", "oUF_FreePlayer", "BOTTOMRIGHT", 0, -30},	-- "P_BUFF_ICON"		(player_buff_icon 位置坐标 - 主图标注号 1)
+	player_proc_icon = {"TOPLEFT", "oUF_FreeTarget", "BOTTOMLEFT", 0, -50},	-- "P_PROC_ICON"		(player_proc_icon 位置坐标 - 主图标注号 2)
+	special_proc_icon = {"TOPLEFT", "oUF_FreeTarget", "BOTTOMLEFT", 0, -80},	-- "SPECIAL_P_BUFF_ICON"	(special_proc_icon 位置坐标 - 主图标注号 3)
+	target_debuff_icon = {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 20},	-- "T_DEBUFF_ICON"		(target_debuff_icon 位置坐标 - 主图标注号 4)
+	target_buff_icon = {"TOPLEFT", UIParent, "CENTER", 0, 260},		-- "T_BUFF"				(target_buff_icon 位置坐标 - 主图标注号 5)
+	RAID_AURA_ICON = {"BOTTOMRIGHT", "oUF_FreePlayer", "TOPRIGHT", 0, 100},			-- "PVE/PVP_DEBUFF"		(pve_debuff 位置坐标 - 主图标注号 6)
 	pve_cc = {"TOPLEFT", UIParent, "LEFT", 50, 0},						-- "PVE/PVP_CC"			(pve_cc 位置坐标 - 主图标注号 7)
-	cooldown = {"TOPRIGHT", UIParent, "CENTER", -160, -110},				-- "COOLDOWN"			(cooldown 位置坐标 - 主图标注号 8)
+	cooldown = {"TOPRIGHT", "oUF_FreePlayer", "BOTTOMRIGHT", 0, -70},				-- "COOLDOWN"			(cooldown 位置坐标 - 主图标注号 8)
 	target_bar = {"TOPRIGHT", UIParent, "RIGHT", -260, 0},				-- "T_DE/BUFF_BAR"		(target_bar 位置坐标 - 主图标注号 9)
 }
 
@@ -38,12 +38,12 @@ local Media = "Interface\\AddOns\\FreeUI\\scripts_extra\\Filger\\Media\\"
 	Misc.CDnum = 6					-- COOLDOWN 冷却图标每行显示几个 - (主图标注号 8)
 	Misc.IconSize = 38				-- 图标大小 - (主图标注号 1,2,3,4,5,6)
 	Misc.IconSizePBuff = 32
-	Misc.IconSizePProc = 32
-	Misc.IconSizePSpec = 40
+	Misc.IconSizePProc = 28
+	Misc.IconSizePSpec = 28
 	Misc.IconSizeRaidAura = 42
 	Misc.IconSizeTBuff = 40
-	Misc.IconSizeTDebuff = 32
-	Misc.CDIconSize = 32			-- COOLDOWN 冷却图标大小 - (主图标注号 8)
+	Misc.IconSizeTDebuff = 28
+	Misc.CDIconSize = 28			-- COOLDOWN 冷却图标大小 - (主图标注号 8)
 	Misc.barIconSize = 25			-- 计时条上的图标大小 - (主图标注号 7,9)
 
 -------------------------------------------------------- 
