@@ -95,8 +95,6 @@ scripts_extra\HiddenRaidNames.lua
 scripts_extra\ItemLevel.lua
 scripts_extra\ItemIcons.lua
 scripts_extra\ItemCount.lua
-## scripts_extra\Achievement.lua
-scripts_extra\MultiItemRef.lua
 scripts_extra\BGSpam.lua
 scripts_extra\interruptsound.lua
 scripts_extra\emergency.lua
