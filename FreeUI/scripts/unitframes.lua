@@ -5,7 +5,7 @@ if not C.unitframes.enable then return end
 local parent, ns = ...
 local oUF = ns.oUF
 
-local font_CN      = C.media.font5
+local font_CN = C.media.font6
 
 local class = select(2, UnitClass("player"))
 
@@ -712,13 +712,13 @@ local UnitSpecific = {
 
 			self.Runes = runes
 			self.SpecialPowerBar = runes
-		elseif class == "DRUID" and C.classmod.druid then
-			local DruidMana, eclipseBar
+		elseif class == "DRUID" and (C.classmod.druidEclipse or C.classmod.druidMana) then
+			local druidMana, eclipseBar
 
 			local function moveDebuffAnchors()
-				if DruidMana:IsShown() or eclipseBar:IsShown() then
+				if (druidMana and druidMana:IsShown()) or (eclipseBar and eclipseBar:IsShown()) then
 					local offset
-					if DruidMana:IsShown() then
+					if (druidMana and druidMana:IsShown()) then
 						offset = 1
 					else
 						offset = 2
@@ -736,104 +736,102 @@ local UnitSpecific = {
 					end
 				end
 			end
+			if C.classmod.druidMana then
+				druidMana = CreateFrame("StatusBar", nil, self)
+				druidMana:SetStatusBarTexture(C.media.backdrop)
+				druidMana:SetStatusBarColor(0, 0.76, 1)
+				druidMana:SetSize(playerWidth, 1)
+				druidMana:SetPoint("BOTTOMRIGHT", Debuffs, "TOPRIGHT", 0, 3)
 
-			DruidMana = CreateFrame("StatusBar", nil, self)
-			DruidMana:SetStatusBarTexture(C.media.backdrop)
-			DruidMana:SetStatusBarColor(0, 0.76, 1)
-			DruidMana:SetSize(playerWidth, 1)
-			DruidMana:SetPoint("BOTTOMRIGHT", Debuffs, "TOPRIGHT", 0, 3)
+				F.CreateBDFrame(druidMana, .25)
 
-			F.CreateBDFrame(DruidMana, .25)
+				self.DruidMana = druidMana
 
-			self.DruidMana = DruidMana
-
-			DruidMana.PostUpdate = moveDebuffAnchors
-
-			eclipseBar = CreateFrame("Frame", nil, self)
-			eclipseBar:SetWidth(playerWidth)
-			eclipseBar:SetHeight(2)
-			eclipseBar:SetPoint("BOTTOMRIGHT", Debuffs, "TOPRIGHT", 0, 3)
-
-			F.CreateBDFrame(eclipseBar, .25)
-
-			local glow = CreateFrame("Frame", nil, eclipseBar)
-			glow:SetBackdrop({
-				edgeFile = C.media.glow,
-				edgeSize = 5,
-			})
-			glow:SetPoint("TOPLEFT", -6, 6)
-			glow:SetPoint("BOTTOMRIGHT", 6, -6)
-
-			local hasEclipse = function(self, unit)
-				if self.hasSolarEclipse then
-					glow:SetBackdropBorderColor(.80, .82, .60, 1)
-				elseif self.hasLunarEclipse then
-					glow:SetBackdropBorderColor(.30, .52, .90, 1)
-				else
-					glow:SetBackdropBorderColor(0, 0, 0, 0)
-				end
+				druidMana.PostUpdate = moveDebuffAnchors
 			end
 
-			local LunarBar = CreateFrame("StatusBar", nil, eclipseBar)
-			LunarBar:SetPoint("LEFT", eclipseBar, "LEFT")
-			LunarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
-			LunarBar:SetStatusBarTexture(C.media.texture)
-			LunarBar:SetStatusBarColor(.80, .82, .60)
-			eclipseBar.LunarBar = LunarBar
+			if C.classmod.druidEclipse then
+				eclipseBar = CreateFrame("Frame", nil, self)
+				eclipseBar:SetWidth(playerWidth)
+				eclipseBar:SetHeight(2)
+				eclipseBar:SetPoint("BOTTOMRIGHT", Debuffs, "TOPRIGHT", 0, 3)
 
-			SmoothBar(LunarBar)
+				F.CreateBDFrame(eclipseBar, .25)
 
-			local SolarBar = CreateFrame("StatusBar", nil, eclipseBar)
-			SolarBar:SetPoint("LEFT", LunarBar:GetStatusBarTexture(), "RIGHT")
-			SolarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
-			SolarBar:SetStatusBarTexture(C.media.texture)
-			SolarBar:SetStatusBarColor(.30, .52, .90)
-			eclipseBar.SolarBar = SolarBar
+				local glow = CreateFrame("Frame", nil, eclipseBar)
+				glow:SetBackdrop({
+					edgeFile = C.media.glow,
+					edgeSize = 5,
+				})
+				glow:SetPoint("TOPLEFT", -6, 6)
+				glow:SetPoint("BOTTOMRIGHT", 6, -6)
 
-			SmoothBar(SolarBar)
+				local LunarBar = CreateFrame("StatusBar", nil, eclipseBar)
+				LunarBar:SetPoint("LEFT", eclipseBar, "LEFT")
+				LunarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
+				LunarBar:SetStatusBarTexture(C.media.texture)
+				LunarBar:SetStatusBarColor(.80, .82, .60)
+				eclipseBar.LunarBar = LunarBar
 
-			local spark = SolarBar:CreateTexture(nil, "OVERLAY")
-			spark:SetTexture("Interface\\CastingBar\\UI-CastingBar-Spark")
-			spark:SetBlendMode("ADD")
-			spark:SetHeight(4)
-			spark:SetPoint("CENTER", SolarBar:GetStatusBarTexture(), "LEFT")
+				SmoothBar(LunarBar)
 
-			local eclipseBarText = F.CreateFS(eclipseBar, 24)
-			eclipseBarText:SetPoint("LEFT", self, "RIGHT", 10, 0)
-			eclipseBarText:Hide()
+				local SolarBar = CreateFrame("StatusBar", nil, eclipseBar)
+				SolarBar:SetPoint("LEFT", LunarBar:GetStatusBarTexture(), "RIGHT")
+				SolarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
+				SolarBar:SetStatusBarTexture(C.media.texture)
+				SolarBar:SetStatusBarColor(.30, .52, .90)
+				eclipseBar.SolarBar = SolarBar
 
-			self.EclipseBar = eclipseBar
+				SmoothBar(SolarBar)
 
-			self.EclipseBar.PostUnitAura = hasEclipse
+				local spark = SolarBar:CreateTexture(nil, "OVERLAY")
+				spark:SetTexture("Interface\\CastingBar\\UI-CastingBar-Spark")
+				spark:SetBlendMode("ADD")
+				spark:SetHeight(4)
+				spark:SetPoint("CENTER", SolarBar:GetStatusBarTexture(), "LEFT")
 
-			eclipseBar:RegisterEvent("PLAYER_REGEN_ENABLED")
-			eclipseBar:RegisterEvent("PLAYER_REGEN_DISABLED")
-			eclipseBar:HookScript("OnEvent", function(self, event)
-				if event == "PLAYER_REGEN_DISABLED" then
-					eclipseBarText:Show()
-				elseif event == "PLAYER_REGEN_ENABLED" then
-					eclipseBarText:Hide()
+				local eclipseBarText = F.CreateFS(eclipseBar, 24)
+				eclipseBarText:SetPoint("LEFT", self, "RIGHT", 10, 0)
+				eclipseBarText:Hide()
+
+				self.EclipseBar = eclipseBar
+
+				eclipseBar:RegisterEvent("PLAYER_REGEN_ENABLED")
+				eclipseBar:RegisterEvent("PLAYER_REGEN_DISABLED")
+				eclipseBar:HookScript("OnEvent", function(self, event)
+					if event == "PLAYER_REGEN_DISABLED" then
+						eclipseBarText:Show()
+					elseif event == "PLAYER_REGEN_ENABLED" then
+						eclipseBarText:Hide()
+					end
+				end)
+
+				eclipseBar.PostUnitAura = function(self, unit)
+					if self.hasSolarEclipse then
+						glow:SetBackdropBorderColor(.80, .82, .60, 1)
+					elseif self.hasLunarEclipse then
+						glow:SetBackdropBorderColor(.30, .52, .90, 1)
+					else
+						glow:SetBackdropBorderColor(0, 0, 0, 0)
+					end
 				end
-			end)
 
-			self.EclipseBar.PostUpdatePower = function(self)
-				if GetEclipseDirection() == "sun" then
-					eclipseBarText:SetTextColor(.30, .52, .90)
-				elseif GetEclipseDirection() == "moon" then
-					eclipseBarText:SetTextColor(.80, .82, .60)
-				else
-					eclipseBarText:SetTextColor(1, 1, 1)
+				eclipseBar.PostUpdatePower = function(self, unit, power)
+					if power == 0 then
+						eclipseBarText:SetText("")
+					else
+						eclipseBarText:SetText(math.abs(power))
+
+						if power < 0 then
+							eclipseBarText:SetTextColor(.30, .52, .90)
+						else
+							eclipseBarText:SetTextColor(.80, .82, .60)
+						end
+					end
 				end
 
-				local power = UnitPower("player", SPELL_POWER_ECLIPSE)
-				if power == 0 then
-					eclipseBarText:SetText("")
-				else
-					eclipseBarText:SetText(math.abs(power))
-				end
+				eclipseBar.PostUpdateVisibility = moveDebuffAnchors
 			end
-
-			self.EclipseBar.PostUpdateVisibility = moveDebuffAnchors
 
 			self.AltPowerBar:HookScript("OnShow", moveDebuffAnchors)
 			self.AltPowerBar:HookScript("OnHide", moveDebuffAnchors)
@@ -1178,7 +1176,7 @@ local UnitSpecific = {
 		tt:SetHeight(12)
 
 		ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
-		ttt:SetPoint("BOTTOMRIGHT", tt)
+		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 118, 2)
 		ttt:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
 
 		tt:RegisterEvent("UNIT_TARGET")
@@ -1797,12 +1795,12 @@ oUF:Factory(function(self)
 		end
 	end
 
-	spawnHelper(self, 'focus', "TOPRIGHT", player, "BOTTOMRIGHT", 0, -80)
-	spawnHelper(self, 'focustarget', "TOPLEFT", player, "BOTTOMLEFT", 0, -80)
-	spawnHelper(self, 'pet', "BOTTOMLEFT", player, "TOPLEFT", 0, C.appearance.fontSizeNormal + 7)
+	spawnHelper(self, 'focus', "LEFT", target, "RIGHT", 8, -60)
+	spawnHelper(self, 'focustarget', "LEFT", target, "RIGHT", 126, -60)
+	spawnHelper(self, 'pet', "RIGHT", player, "LEFT", -8, 0)
 
 	if C.unitframes.targettarget then
-		spawnHelper(self, 'targettarget', "BOTTOM", target, "TOP", 0, C.appearance.fontSizeNormal + 7)
+		spawnHelper(self, 'targettarget', "LEFT", target, "RIGHT", 8, 0)
 	end
 
 	for n = 1, MAX_BOSS_FRAMES do
@@ -1814,14 +1812,6 @@ oUF:Factory(function(self)
 			spawnHelper(self, 'arena' .. n, 'TOP', player, 'TOP', 0, 0 - (56 * n))
 		end
 	end
-
-
-
-
-
-
-
-	
 
 	if not C.unitframes.enableGroup then return end
 

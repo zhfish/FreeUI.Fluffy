@@ -112,7 +112,7 @@ C["unitframes"] = {
 
 	["player"] = {"BOTTOM", UIParent, "CENTER", -275, -105},
 	["target"] = {"TOP", UIParent, "CENTER", 0, -225},
-	["target_heal"] = {"BOTTOM", UIParent, "CENTER", 275, -105},
+	["target_heal"] = {"BOTTOM", UIParent, "CENTER", 0, -180},
 	["party"] = {"TOP", UIParent, "CENTER", 0, -225}, 	-- only applies with healer layout enabled
 	["raid"] = {"TOP", UIParent, "CENTER", 0, -185}, 	-- only applies with healer layout enabled
 
@@ -123,14 +123,14 @@ C["unitframes"] = {
 	["player_height"] = 14,
 	["target_width"] = 229,
 	["target_height"] = 14,
-	["targettarget_width"] = 229,
-	["targettarget_height"] = 8,
+	["targettarget_width"] = 110,
+	["targettarget_height"] = 14,
 	["focus_width"] = 110,
 	["focus_height"] = 14,
 	["focustarget_width"] = 110,
 	["focustarget_height"] = 14,
 	["pet_width"] = 110,
-	["pet_height"] = 8,
+	["pet_height"] = 14,
 	["boss_width"] = 170,
 	["boss_height"] = 14,
 	["arena_width"] = 229,
@@ -150,14 +150,15 @@ C["unitframes"] = {
 }
 
 C["classmod"] = {
-	["deathknight"] = true, -- runes
-	["druid"] = true, 		-- eclipse bar, shapeshift mana bar
-	["mage"] = true, 		-- rune of power
-	["monk"] = true, 		-- chi, stagger bar
-	["paladinHP"] = true, 	-- holy power
-	["paladinRF"] = true, 	-- righteous fury
-	["priest"] = true,		-- shadow orbs
-	["warlock"] = true, 	-- spec bar
+	["deathknight"] = true, 	-- runes
+	["druidEclipse"] = true, 	-- eclipse bar
+	["druidMana"] = true, 		-- shapeshift mana bar
+	["mage"] = true, 			-- rune of power
+	["monk"] = true, 			-- chi, stagger bar
+	["paladinHP"] = true, 		-- holy power
+	["paladinRF"] = true, 		-- righteous fury
+	["priest"] = true,			-- shadow orbs
+	["warlock"] = true, 		-- spec bar
 }
 
 -- lower = smoother = more CPU usage

@@ -3,7 +3,7 @@ local F, C, L = unpack(select(2, ...))
 local r, g, b = unpack(C.class)
 
 Minimap:ClearAllPoints()
-Minimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -20, -20)
+Minimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -10, -20)
 Minimap:SetMaskTexture("Interface\\Buttons\\WHITE8X8")
 F.CreateBG(Minimap)
 
@@ -206,33 +206,35 @@ rd:RegisterEvent("INSTANCE_GROUP_SIZE_CHANGED")
 local rdt = F.CreateFS(rd, C.FONT_SIZE_NORMAL, "LEFT")
 rdt:SetPoint("TOPLEFT")
 
+local instanceTexts = {
+	[0] = "",
+	[1] = "5",
+	[2] = "5H",
+	[3] = "10",
+	[4] = "25",
+	[5] = "10H",
+	[6] = "25H",
+	[7] = "RF",
+	[8] = "CM",
+	[9] = "40",
+	[11] = "3H",
+	[12] = "3",
+	[16] = "M",
+}
+
 rd:SetScript("OnEvent", function()
 	local _, _, difficultyID, _, maxPlayers, _, _, _, instanceGroupSize = GetInstanceInfo()
 
-	if difficultyID == 0 then
-		rdt:SetText("")
-	elseif maxPlayers == 3 then
-		rdt:SetText("3")
-	elseif difficultyID == 1 then
-		rdt:SetText("5")
-	elseif difficultyID == 2 then
-		rdt:SetText("5H")
-	elseif difficultyID == 3 then
-		rdt:SetText("10")
-	elseif difficultyID == 4 then
-		rdt:SetText("25")
-	elseif difficultyID == 5 then
-		rdt:SetText("10H")
-	elseif difficultyID == 6 then
-		rdt:SetText("25H")
-	elseif difficultyID == 7 then
-		rdt:SetText("LFR")
-	elseif difficultyID == 8 then
-		rdt:SetText("5CM")
-	elseif difficultyID == 9 then
-		rdt:SetText("40")
-	elseif difficultyID == 14 then
-		rdt:SetText(instanceGroupSize.."F")
+	if instanceTexts[difficultyID] ~= nil then
+		rdt:SetText(instanceTexts[difficultyID])
+	else
+		if difficultyID == 14 then
+			rdt:SetText(instanceGroupSize.."N")
+		elseif difficultyID == 15 then
+			rdt:SetText(instanceGroupSize.."H")
+		else
+			rdt:SetText("")
+		end
 	end
 
 	if GuildInstanceDifficulty:IsShown() then
@@ -279,7 +281,6 @@ for _, ticketButton in pairs({HelpOpenTicketButton, HelpOpenWebTicketButton}) do
 	ticketButton:HookScript("OnShow", positionTicketButtons)
 	ticketButton:HookScript("OnHide", positionTicketButtons)
 end
-
 
 
 local shadows = {
