@@ -744,12 +744,12 @@ function MyContainer:OnCreate(name, settings)
 		searchIcon:SetHeight(16)
 		
 		-- Hint
-		self.hint = background:CreateFontString(nil, "OVERLAY", nil)
-		self.hint:SetPoint("BOTTOMLEFT", infoFrame, -0.5, 31.5)
-		self.hint:SetFont(unpack(font))
-		self.hint:SetTextColor(1, 1, 1, 0.4)
-		self.hint:SetText("Ctrl + Alt + Right Click an item to assign category")
-		self.hintShown = true
+		-- self.hint = background:CreateFontString(nil, "OVERLAY", nil)
+		-- self.hint:SetPoint("BOTTOMLEFT", infoFrame, -0.5, 31.5)
+		-- self.hint:SetFont(unpack(font))
+		-- self.hint:SetTextColor(1, 1, 1, 0.4)
+		-- self.hint:SetText("Ctrl + Alt + Right Click an item to assign category")
+		-- self.hintShown = true
 		
 		-- The money display
 		local money = self:SpawnPlugin("TagDisplay", "[money]", self)
