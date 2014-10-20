@@ -6,7 +6,7 @@ Filger_Spells = {
 	["WARLOCK"] = {			--[术士]
 		{
 			Name = "P_BUFF_ICON",
-			Direction = "LEFT",
+			Direction = "RIGHT",
 			Mode = "ICON",
 			Interval = 1,
 			Alpha = 1,
@@ -34,9 +34,9 @@ Filger_Spells = {
 		},
 		{
 			Name = "P_PROC_ICON",
-			Direction = "RIGHT",
+			Direction = "LEFT",
 			Mode = "ICON",
-			Interval = 1,
+			Interval = 0,
 			Alpha = 1,
 			IconSize = Misc.IconSizePProc,
 			Position = {unpack(Filger_Settings.player_proc_icon)},
@@ -185,10 +185,10 @@ Filger_Spells = {
 		{
 			Name = "COOLDOWN",
 			enable = Misc.CD,
-			Direction = "LEFT",
+			Direction = "RIGHT",
 			Mode = "ICON",
 			NumPerLine = Misc.CDnum,
-			Interval = 1,
+			Interval = 0,
 			Alpha = 1,
 			IconSize = Misc.CDIconSize,
 			Position = {unpack(Filger_Settings.cooldown)},
@@ -263,7 +263,7 @@ Filger_Spells = {
 			Name = "SPECIAL_P_BUFF_ICON",
 			Direction = "RIGHT",
 			Mode = "ICON",
-			Interval = 1,
+			Interval = 0,
 			Alpha = 1,
 			IconSize = Misc.IconSizePSpec,
 			Position = {unpack(Filger_Settings.special_proc_icon)},

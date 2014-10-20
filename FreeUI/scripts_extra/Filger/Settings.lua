@@ -1,15 +1,15 @@
 ﻿-- 设置(初次调整 位置,图标大小等, 请对照主楼置顶的标注图)
 Filger_Settings = {
-	config_mode = false,				-- 开\关测试模式
-	max_test_icon = 5,					-- 测试模式下,每组显示最大图标数量
-	player_buff_icon = {"TOPRIGHT", "oUF_FreePlayer", "BOTTOMRIGHT", 0, -30},	-- "P_BUFF_ICON"		(player_buff_icon 位置坐标 - 主图标注号 1)
-	player_proc_icon = {"TOPLEFT", "oUF_FreeTarget", "BOTTOMLEFT", 0, -50},	-- "P_PROC_ICON"		(player_proc_icon 位置坐标 - 主图标注号 2)
-	special_proc_icon = {"TOPLEFT", "oUF_FreeTarget", "BOTTOMLEFT", 0, -80},	-- "SPECIAL_P_BUFF_ICON"	(special_proc_icon 位置坐标 - 主图标注号 3)
+	config_mode = true,				-- 开\关测试模式
+	max_test_icon = 4,					-- 测试模式下,每组显示最大图标数量
+	player_buff_icon = {"LEFT", "oUF_FreePlayer", "RIGHT", 6, 0},	-- "P_BUFF_ICON"		(player_buff_icon 位置坐标 - 主图标注号 1)
+	player_proc_icon = {"RIGHT", "oUF_FreePlayer", "CENTER", 0, 40},	-- "P_PROC_ICON"		(player_proc_icon 位置坐标 - 主图标注号 2)
+	special_proc_icon = {"LEFT", "oUF_FreePlayer", "CENTER", 0, 40},	-- "SPECIAL_P_BUFF_ICON"	(special_proc_icon 位置坐标 - 主图标注号 3)
 	target_debuff_icon = {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 20},	-- "T_DEBUFF_ICON"		(target_debuff_icon 位置坐标 - 主图标注号 4)
-	target_buff_icon = {"TOPLEFT", UIParent, "CENTER", 0, 260},		-- "T_BUFF"				(target_buff_icon 位置坐标 - 主图标注号 5)
-	RAID_AURA_ICON = {"BOTTOMRIGHT", "oUF_FreePlayer", "TOPRIGHT", 0, 100},			-- "PVE/PVP_DEBUFF"		(pve_debuff 位置坐标 - 主图标注号 6)
+	target_buff_icon = {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 100},		-- "T_BUFF"				(target_buff_icon 位置坐标 - 主图标注号 5)
+	RAID_AURA_ICON = {"RIGHT", "oUF_FreePlayer", "LEFT", -40, 240},			-- "PVE/PVP_DEBUFF"		(pve_debuff 位置坐标 - 主图标注号 6)
 	pve_cc = {"TOPLEFT", UIParent, "LEFT", 50, 0},						-- "PVE/PVP_CC"			(pve_cc 位置坐标 - 主图标注号 7)
-	cooldown = {"TOPRIGHT", "oUF_FreePlayer", "BOTTOMRIGHT", 0, -70},				-- "COOLDOWN"			(cooldown 位置坐标 - 主图标注号 8)
+	cooldown = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -50},				-- "COOLDOWN"			(cooldown 位置坐标 - 主图标注号 8)
 	target_bar = {"TOPRIGHT", UIParent, "RIGHT", -260, 0},				-- "T_DE/BUFF_BAR"		(target_bar 位置坐标 - 主图标注号 9)
 }
 
@@ -42,8 +42,8 @@ local Media = "Interface\\AddOns\\FreeUI\\scripts_extra\\Filger\\Media\\"
 	Misc.IconSizePSpec = 28
 	Misc.IconSizeRaidAura = 42
 	Misc.IconSizeTBuff = 40
-	Misc.IconSizeTDebuff = 28
-	Misc.CDIconSize = 28			-- COOLDOWN 冷却图标大小 - (主图标注号 8)
+	Misc.IconSizeTDebuff = 32
+	Misc.CDIconSize = 34			-- COOLDOWN 冷却图标大小 - (主图标注号 8)
 	Misc.barIconSize = 25			-- 计时条上的图标大小 - (主图标注号 7,9)
 
 -------------------------------------------------------- 

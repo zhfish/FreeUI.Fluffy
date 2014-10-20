@@ -1153,11 +1153,11 @@ local UnitSpecific = {
 
 		local tt = CreateFrame("Frame", nil, self)
 		tt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 7 + C.appearance.fontSizeNormal + (C.unitframes.targettarget and 10 or 0))
-		tt:SetWidth(110)
+		tt:SetWidth(80)
 		tt:SetHeight(12)
 
 		ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
-		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 118, 2)
+		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
 		ttt:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
 
 		tt:RegisterEvent("UNIT_TARGET")
@@ -1779,7 +1779,7 @@ oUF:Factory(function(self)
 	end
 
 	spawnHelper(self, 'focus', "LEFT", target, "RIGHT", 8, -60)
-	spawnHelper(self, 'focustarget', "LEFT", target, "RIGHT", 126, -60)
+	spawnHelper(self, 'focustarget', "LEFT", target, "RIGHT", 96, -60)
 	spawnHelper(self, 'pet', "RIGHT", player, "LEFT", -8, 0)
 
 	if C.unitframes.targettarget then
@@ -1855,12 +1855,13 @@ end
 
 
 --frame1px(oUF_FreePlayer)
-CreateShadow(oUF_FreePlayer)
-CreateShadow(oUF_FreeTarget)
+	CreateShadow(oUF_FreePlayer)
+	CreateShadow(oUF_FreePet)
+	CreateShadow(oUF_FreeTarget)
 	CreateShadow(oUF_FreeTargetTarget)
-		CreateShadow(oUF_FreeFocus)
+	CreateShadow(oUF_FreeFocus)
 	CreateShadow(oUF_FreeFocusTarget)
-		CreateShadow(oUF_FreeBoss1)
+	CreateShadow(oUF_FreeBoss1)
 	CreateShadow(oUF_FreeBoss2)
 	CreateShadow(oUF_FreeBoss3)
 	CreateShadow(oUF_FreeBoss4)
@@ -1882,7 +1883,7 @@ CreateShadow(oUF_FreeTarget)
 	local party = self:SpawnHeader(nil, nil, "party,raid",
 		'showParty', true,
 		'showPlayer', FreeUIConfig.layout == 2,
-		'showSolo', false,
+		'showSolo', true,
 		'yoffset', -3,
 		'maxColumns', 5,
 		'unitsperColumn', 1,
