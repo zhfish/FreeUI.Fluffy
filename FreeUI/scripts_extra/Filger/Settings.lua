@@ -1,6 +1,6 @@
 ﻿-- 设置(初次调整 位置,图标大小等, 请对照主楼置顶的标注图)
 Filger_Settings = {
-	config_mode = true,				-- 开\关测试模式
+	config_mode = false,				-- 开\关测试模式
 	max_test_icon = 4,					-- 测试模式下,每组显示最大图标数量
 	player_buff_icon = {"LEFT", "oUF_FreePlayer", "RIGHT", 6, 0},	-- "P_BUFF_ICON"		(player_buff_icon 位置坐标 - 主图标注号 1)
 	player_proc_icon = {"RIGHT", "oUF_FreePlayer", "CENTER", 0, 40},	-- "P_PROC_ICON"		(player_proc_icon 位置坐标 - 主图标注号 2)
