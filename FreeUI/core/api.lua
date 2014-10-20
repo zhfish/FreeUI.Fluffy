@@ -16,7 +16,6 @@ C.media = {
 	["roleIcons"] = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
 	["texture"] = "Interface\\AddOns\\FreeUI\\media\\statusbar", -- statusbar texture
 	-- custom font (Chinese fonts support)
-	["font3"] = "Fonts\\yahei__.ttf", 				-- 微软雅黑
 	["font4"] = "Fonts\\FruityMicrofont.ttf", 		-- (for damage float)
 	["font5"] = "Fonts\\Hooge0655.ttf", 			-- 
 	["font6"] = "Fonts\\Zpix.ttf", 					-- 最像素-中文点阵
