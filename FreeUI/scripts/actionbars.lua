@@ -221,7 +221,7 @@ local numpet = NUM_PET_ACTION_SLOTS
 local petbar = CreateFrame("Frame", "FreeUI_PetBar", UIParent, "SecureHandlerStateTemplate")
 petbar:SetWidth((27 * numpet) - 1)
 petbar:SetHeight(54)
-petbar:SetPoint("BOTTOMRIGHT", -29, 2)
+petbar:SetPoint("BOTTOM", 0, 0)
 
 PetActionBarFrame:SetParent(petbar)
 PetActionBarFrame:SetHeight(0.001)
@@ -244,6 +244,43 @@ for i = 1, numpet do
 end
 
 RegisterStateDriver(petbar, "visibility", "[petbattle][overridebar][vehicleui][possessbar,@vehicle,exists] hide; [@pet,exists,nomounted] show; hide")
+
+
+--[[ Petbar on mouseover ]]
+
+
+	petbar:EnableMouse(true)
+
+	local function setButtonAlpha(alpha)
+		petbar:SetAlpha(alpha)
+
+		for i = 1, numpet do
+			local ab1 = _G["PetActionButton"..i]
+
+			ab1.cooldown:SetSwipeColor(0, 0, 0, 0.8 * alpha)
+			ab1.cooldown:SetDrawBling(alpha == 1)
+		end
+	end
+
+	local function showButtons()
+		setButtonAlpha(1)
+	end
+
+	local function hideButtons()
+		setButtonAlpha(0)
+	end
+
+	for i = 1, numpet do
+		local ab1 = _G["PetActionButton"..i]
+
+		ab1:HookScript("OnEnter", showButtons)
+		ab1:HookScript("OnLeave", hideButtons)
+	end
+
+	petbar:HookScript("OnEnter", showButtons)
+	petbar:HookScript("OnLeave", hideButtons)
+	hideButtons()
+
 
 --[[ Stance/possess bar]]
 
