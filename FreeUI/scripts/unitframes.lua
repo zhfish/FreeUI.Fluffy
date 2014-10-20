@@ -1802,8 +1802,8 @@ oUF:Factory(function(self)
 	edgeFile = "Interface\\Addons\\FreeUI\\media\\glowTex",
 	edgeSize = 4,
 	insets = { left = 3, right = 3, top = 3, bottom = 3 }
-}
-function CreateShadow(f)
+	}
+	function CreateShadow(f)
 	if f.shadow then return end
 	local shadow = CreateFrame("Frame", nil, f)
 	shadow:SetFrameLevel(1)
@@ -1815,8 +1815,8 @@ function CreateShadow(f)
 	shadow:SetBackdropBorderColor(0, 0, 0, 1)
 	f.shadow = shadow
 	return shadow
-end
-function CreateInnerBorder(f)
+	end
+	function CreateInnerBorder(f)
 	if f.iborder then return end
 	f.iborder = CreateFrame("Frame", nil, f)
 	f.iborder:SetPoint("TOPLEFT", 1, -1)
@@ -1828,8 +1828,8 @@ function CreateInnerBorder(f)
 	})
 	f.iborder:SetBackdropBorderColor(0, 0, 0)
 	return f.iborder
-end
-function frame1px(f)
+	end
+	function frame1px(f)
 	f:SetBackdrop({
 		bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
         edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1,
@@ -1837,8 +1837,8 @@ function frame1px(f)
 	})
 	f:SetBackdropColor(.06,.06,.06,1)
 	f:SetBackdropBorderColor(.15,.15,.15,1)
-CreateInnerBorder(f)
-end
+	CreateInnerBorder(f)
+	end
 
 local function StripTextures(object, kill)
 	for i=1, object:GetNumRegions() do
@@ -1853,12 +1853,8 @@ local function StripTextures(object, kill)
 	end
 end
 
-
---frame1px(oUF_FreePlayer)
 	CreateShadow(oUF_FreePlayer)
-	CreateShadow(oUF_FreePet)
 	CreateShadow(oUF_FreeTarget)
-	CreateShadow(oUF_FreeTargetTarget)
 	CreateShadow(oUF_FreeFocus)
 	CreateShadow(oUF_FreeFocusTarget)
 	CreateShadow(oUF_FreeBoss1)
@@ -1866,6 +1862,14 @@ end
 	CreateShadow(oUF_FreeBoss3)
 	CreateShadow(oUF_FreeBoss4)
 	CreateShadow(oUF_FreeBoss5)
+
+	if class == "WARLOCK" then
+		CreateShadow(oUF_FreePet)
+	end
+
+	if C.unitframes.targettarget then
+		CreateShadow(oUF_FreeTargetTarget)
+	end
 
 
 
