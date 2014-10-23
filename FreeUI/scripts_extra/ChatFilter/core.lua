@@ -307,12 +307,11 @@ local function ChatFilter_Rubbish(self, event, msg, player, _, _, _, flag, _, _,
 			end
 		end
 		local Time, Name, Server = GetTime()
-		if (guid and tonumber(guid)) then
-			if (tonumber(guid:sub(-12, -9), 16) > 0) then return end
+		if (guid and guid:find("Player")) then
 			Name = select(6, GetPlayerInfoByGUID(guid))
 			Server = select(7, GetPlayerInfoByGUID(guid))
 			player = Name
-			if (Server and strlen(Server) > 0) then
+			if (Server and strlen(Server) > 0 and Server ~= GetRealmName()) then
 				player = Name.."-"..Server
 			end
 		end
@@ -325,7 +324,7 @@ local function ChatFilter_Rubbish(self, event, msg, player, _, _, _, flag, _, _,
 			tremove(LevelTable, 1)
 		end
 		if (_ShieldTable[player]) then
-			if (Config.Debug and event == Config.Debug) then
+			if (Config.Debug) then
 				if (_ShieldTable[player] > 0) then
 					print("|cFF33FF99ChatFilter:|r [[''"..player.."'']]的发言被过滤，过滤原因：屏蔽小号，玩家等级：".._ShieldTable[player])
 				else
@@ -349,7 +348,7 @@ local function ChatFilter_Rubbish(self, event, msg, player, _, _, _, flag, _, _,
 		end
 		for i = 1, getn(Config.BlackList) do
 			if (msg:find(Config.BlackList[i]) or orgmsg:find(Config.BlackList[i])) then
-				if (Config.Debug and event == Config.Debug) then
+				if (Config.Debug) then
 					print("|cFF33FF99ChatFilter:|r [[''"..player.."'']]的发言被过滤，过滤原因：消息中有黑名单词汇。")
 				end
 				return true
@@ -374,7 +373,7 @@ local function ChatFilter_Rubbish(self, event, msg, player, _, _, _, flag, _, _,
 							lines = lines + 1
 						end
 						if (lines >= AllowLines) then
-							if (Config.Debug and event == Config.Debug) then
+							if (Config.Debug) then
 								print("|cFF33FF99ChatFilter:|r [[''"..player.."'']]的发言被过滤，过滤原因：多行刷屏，数量："..lines.."行，本次消息为："..msg)
 							end
 							return true
@@ -382,7 +381,7 @@ local function ChatFilter_Rubbish(self, event, msg, player, _, _, _, flag, _, _,
 					end
 					if (Config.FilterRepeat and interval < RepeatInterval and (cache.Name == player or (event == "CHAT_MSG_CHANNEL" and strlen(msg) > 20))) then
 						if (cache.Msg == msg) then
-							if (Config.Debug and event == Config.Debug) then
+							if (Config.Debug) then
 								print("|cFF33FF99ChatFilter:|r [[''"..player.."'']]的发言被过滤，过滤原因：重复消息刷屏，两次信息间隔："..interval.."秒，本次消息为："..msg.."，上次消息为："..cache.Msg)
 							end
 							return true
@@ -402,7 +401,7 @@ local function ChatFilter_Rubbish(self, event, msg, player, _, _, _, flag, _, _,
 								end
 							end
 							if (count / strlen(bigs) * 100 > RepeatAlike) then
-								if (Config.Debug and event == Config.Debug) then
+								if (Config.Debug) then
 									print("|cFF33FF99ChatFilter:|r [[''"..player.."'']]的发言被过滤，过滤原因：重复消息刷屏，两次信息间隔："..interval.."秒，本次消息为："..msg.."，上次消息为："..cache.Msg)
 								end
 								return true
@@ -436,7 +435,7 @@ local function ChatFilter_Rubbish(self, event, msg, player, _, _, _, flag, _, _,
 				matchs = matchs - 1
 			end
 			if (matchs > Config.AllowMatchs) then
-				if (Config.Debug and event == Config.Debug) then
+				if (Config.Debug) then
 					print("|cFF33FF99ChatFilter:|r [[''"..player.."'']]的发言被过滤，过滤原因：消息中含有广告，广告数量："..matchs.."个，本次消息为："..msg)
 				end
 				tinsert(ShieldTable, Player_Data)
@@ -446,7 +445,7 @@ local function ChatFilter_Rubbish(self, event, msg, player, _, _, _, flag, _, _,
 		end
 		if (Config.FilterByLevel and (event == "CHAT_MSG_WHISPER" or (not Config.OnlyOnWhisper and event ~= "CHAT_MSG_WHISPER"))) then
 			local AllowLevel, added = Config.AllowLevel, nil
-			if (Server and strlen(Server) > 0) then
+			if (Server and strlen(Server) > 0 and Server ~= GetRealmName()) then
 				if (event == "CHAT_MSG_GUILD" or channel == L["Channel"]) then
 					ServerTable[Server] = true
 				else
@@ -455,7 +454,7 @@ local function ChatFilter_Rubbish(self, event, msg, player, _, _, _, flag, _, _,
 					end
 				end
 			end
-			if (guid and tonumber(guid) and select(2, GetPlayerInfoByGUID(guid)) == DEATHKNIGHT) then
+			if (guid and select(2, GetPlayerInfoByGUID(guid)) == DEATHKNIGHT) then
 				if (Config.AllowLevel <= 10) then
 					AllowLevel = 55 + Config.AllowLevel / 2
 				elseif (Config.AllowLevel <= 60) then
@@ -469,7 +468,7 @@ local function ChatFilter_Rubbish(self, event, msg, player, _, _, _, flag, _, _,
 				end
 			end
 			if (matchs > Config.AllowMatchs) then
-				if (Config.Debug and event == Config.Debug) then
+				if (Config.Debug) then
 					print("|cFF33FF99ChatFilter:|r [[''"..player.."'']]的发言被过滤，过滤原因：消息中含有广告且不是满级，广告数量："..(matchs - 1).."个，玩家等级：".._LevelTable[player].."级，本次消息为："..msg)
 				end
 				tinsert(ShieldTable, Player_Data)
@@ -753,6 +752,14 @@ SlashCmdList["CHATFILTER"] = function(msg)
 		else
 			Config.FilterQuestReport = true
 			print("FilterQuestReport has been enabled.")
+		end
+	elseif cmd == "debug" then
+		if (Config.Debug) then
+			Config.Debug = nil
+			print("Debug has been disabled.")
+		else
+			Config.Debug = true
+			print("Debug has been enabled.")
 		end
 	elseif (cmd == "cache") then
 		print("缓存信息："..getn(CacheTable).."条 -- 缓存等级："..getn(LevelTable).."个 -- 屏蔽人物："..getn(Config.ShieldPlayers) + getn(ShieldTable).."个")

@@ -7,7 +7,7 @@ cf.Config = {
 	["Enabled"] = true, --Enable the ChatFilter. // 是否开启本插件
 
 	["noprofanityFilter"] = true, --Disable the profanityFilter. // 关闭语言过滤器
-	["nowhisperSticky"] = false, --Disable the sticky of Whisper. // 取消持续密语
+	["nowhisperSticky"] = true, --Disable the sticky of Whisper. // 取消持续密语
 	["noaltArrowkey"] = true, --Disable the AltArrowKeyMode. // 取消按住ALT才能移动光标
 	["nojoinleaveChannel"] = true, --Disable the alert joinleaveChannel. // 关闭进出频道提示
 
@@ -33,12 +33,12 @@ cf.Config = {
 	["AllowLines"] = 3, --How many lines can be allowd. // 允许的最大行数
 
 	["FilterRepeat"] = true, --Filter the repeat messages. // 过滤重复聊天信息
-	["RepeatAlike"] = 85, --Set the similarity between the messages. // 设定重复信息相似度
+	["RepeatAlike"] = 75, --Set the similarity between the messages. // 设定重复信息相似度
 	["RepeatInterval"] = 60, --Set the interval between the messages. // 设定重复信息间隔时间(秒)
 
-	["FilterByLevel"] = false, --Filter the messages by level. // 屏蔽小号发言
+	["FilterByLevel"] = true, --Filter the messages by level. // 屏蔽小号发言
 	["OnlyOnWhisper"] = nil, --Only filter the whisper messages. // 只过滤密语
-	["AllowLevel"] = 0, --Filter the messages by level. // 屏蔽多少级以下的发言
+	["AllowLevel"] = 10, --Filter the messages by level. // 屏蔽多少级以下的发言
 
 	["Debug"] = nil,
 
