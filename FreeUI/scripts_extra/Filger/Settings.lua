@@ -40,10 +40,10 @@ local Media = "Interface\\AddOns\\FreeUI\\scripts_extra\\Filger\\Media\\"
 	Misc.IconSizePBuff = 32
 	Misc.IconSizePProc = 28
 	Misc.IconSizePSpec = 28
-	Misc.IconSizeRaidAura = 42
+	Misc.IconSizeRaidAura = 40
 	Misc.IconSizeTBuff = 40
 	Misc.IconSizeTDebuff = 32
-	Misc.CDIconSize = 34			-- COOLDOWN 冷却图标大小 - (主图标注号 8)
+	Misc.CDIconSize = 30			-- COOLDOWN 冷却图标大小 - (主图标注号 8)
 	Misc.barIconSize = 25			-- 计时条上的图标大小 - (主图标注号 7,9)
 
 -------------------------------------------------------- 
