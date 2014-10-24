@@ -25,7 +25,7 @@ C["general"] = {
 }
 
 C["appearance"] = {
-	["useCustomColour"] = false,
+	["colourScheme"] = 1,			-- 1 = class coloured, 2 = custom
 		["customColour"] = {r = 1, g = 1, b = 1},
 	["fontUseAlternativeFont"] = false,
 	["fontSizeNormal"] = 8,
@@ -113,7 +113,7 @@ C["unitframes"] = {
 	["player"] = {"BOTTOM", UIParent, "CENTER", 0, -180},
 	["target"] = {"TOP", UIParent, "CENTER", 0, -225},
 	["target_heal"] = {"LEFT", UIParent, "CENTER", 120, -80},
-	["party"] = {"RIGHT", UIParent, "CENTER", -220, -120}, 	-- only applies with healer layout enabled
+	["party"] = {"RIGHT", UIParent, "CENTER", -220, -240}, 	-- only applies with healer layout enabled
 	["raid"] = {"TOPRIGHT", UIParent, "RIGHT", -40, -300}, 	-- only applies with healer layout enabled
 
 	["altpower_height"] = 2,
@@ -137,8 +137,8 @@ C["unitframes"] = {
 	["arena_height"] = 12,
 	["party_width"] = 38,
 	["party_height"] = 24,
-	["party_width_healer"] = 48,
-	["party_height_healer"] = 30,
+	["party_width_healer"] = 58,
+	["party_height_healer"] = 28,
 
 	["num_player_debuffs"] = 8,
 	["num_target_debuffs"] = 16,
