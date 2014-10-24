@@ -1283,14 +1283,14 @@ local UnitSpecific = {
 		end)
 
 		local Debuffs = CreateFrame("Frame", nil, self)
-		Debuffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
+		Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -4)
 		Debuffs.initialAnchor = "BOTTOMLEFT"
 		Debuffs["growth-x"] = "RIGHT"
 		Debuffs["growth-y"] = "UP"
 		Debuffs["spacing-x"] = 3
-		Debuffs:SetHeight(22)
+		Debuffs:SetHeight(18)
 		Debuffs:SetWidth(focusWidth)
-		Debuffs.size = 22
+		Debuffs.size = 18
 		Debuffs.num = C.unitframes.num_focus_debuffs
 		self.Debuffs = Debuffs
 		self.Debuffs.onlyShowPlayer = true
@@ -1897,7 +1897,7 @@ oUF:Factory(function(self)
 		'maxColumns', 5,
 		'unitsperColumn', 1,
 		'columnSpacing', 3,
-		'columnAnchorPoint', "LEFT",
+		'columnAnchorPoint', "TOP",
 		'oUF-initialConfigFunction', ([[
 			self:SetHeight(%d)
 			self:SetWidth(%d)
