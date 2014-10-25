@@ -20,6 +20,7 @@ ns.localization.notificationPreviewText = "This is an example of a notification.
 ns.localization.notificationPreviewCallbackText = "Banner clicked! Most notifications have a relevant on-click action."
 ns.localization.author = "FreeUI by Haleth on wowinterface.com"
 ns.localization.authorSubText = "Lightsword @ Argent Dawn - EU"
+ns.localization.NEW = "NEW!"
 
 ns.localization.general = "General"
 ns.localization.generalSubText = "These options control most of the common settings in the UI."
@@ -118,6 +119,8 @@ ns.localization.bagsstyle2 = "Restyle default"
 ns.localization.bagsstyle3 = "Disable"
 ns.localization.bagsslotsShowAlways = "Always show item slots"
 ns.localization.bagsslotsShowAlwaysTooltip = "Enable to show the border of empty bag slots even when not moving any items."
+ns.localization.bagshideSlots = "Hide bag slots"
+ns.localization.bagshideSlotsTooltip = "Disable this option when you want to add or a replace a bag."
 
 ns.localization.menubar = "Menu bar"
 ns.localization.menubarSubText = "The menu bar is the panel at the bottom of the screen. Moving your mouse over it reveals additional functionality and information."
