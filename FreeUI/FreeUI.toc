@@ -54,6 +54,7 @@ scripts\menubar.lua
 scripts\micromenu.lua
 scripts\minimap.lua
 scripts\mirrorbars.lua
+scripts\moneytext.lua
 scripts\nameplates.lua
 scripts\objectivetracker.lua
 scripts\petbattles.lua
@@ -66,7 +67,6 @@ scripts\tekkrush.lua
 scripts\threatmeter.lua
 ## scripts\tooltip.lua
 scripts\unitframes.lua
-scripts\variables.lua
 scripts\worldmarker.lua
 scripts\worldstateframe.lua
 
@@ -135,7 +135,9 @@ theme\AddOns\DBM-GUI.lua
 theme\AddOns\KayrChat.lua
 
 theme\FrameXML\AlertFrames.lua
+theme\FrameXML\BankFrame.lua
 theme\FrameXML\CharacterFrame.lua
+theme\FrameXML\ContainerFrame.lua
 theme\FrameXML\EquipmentFlyout.lua
 theme\FrameXML\LFDFrame.lua
 theme\FrameXML\LFGFrame.lua

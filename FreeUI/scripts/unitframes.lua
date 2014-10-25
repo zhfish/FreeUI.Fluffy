@@ -7,6 +7,8 @@ local oUF = ns.oUF
 
 local font_CN = C.media.font6
 
+local name = UnitName("player")
+local realm = GetRealmName()
 local class = select(2, UnitClass("player"))
 
 local colors = setmetatable({
@@ -45,6 +47,22 @@ local partyWidth = C.unitframes.party_width
 local partyHeight = C.unitframes.party_height
 local partyWidthHealer = C.unitframes.party_width_healer
 local partyHeightHealer = C.unitframes.party_height_healer
+
+-- [[ Initialize / load layout option ]]
+
+-- this can't use the normal options system
+-- because we want users to be able to switch layout using /commands even when options gui is disabled
+local addonLoaded
+addonLoaded = function(_, addon)
+	if addon ~= "FreeUI" then return end
+
+	if FreeUIConfig.layout == nil then FreeUIConfig.layout = 1 end
+
+	F.UnregisterEvent("ADDON_LOADED", addonLoaded)
+	addonLoaded = nil
+end
+
+F.RegisterEvent("ADDON_LOADED", addonLoaded)
 
 --[[ Short values ]]
 
@@ -150,7 +168,7 @@ end
 oUF.Tags.Events['free:bosshealth'] = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_TARGETABLE_CHANGED"
 
 local function shortName(unit)
-	name = UnitName(unit)
+	local name = UnitName(unit)
 	if name and name:len() > 4 then name = name:sub(1, 4) end
 
 	return name
@@ -1156,7 +1174,7 @@ local UnitSpecific = {
 		tt:SetWidth(80)
 		tt:SetHeight(12)
 
-		ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
+		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
 		ttt:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
 
@@ -1221,26 +1239,24 @@ local UnitSpecific = {
 			return true
 		end
 
-		if C.unitframes.questIcon then
-			local QuestIcon = F.CreateFS(self)
-			QuestIcon:SetText("!")
-			QuestIcon:SetTextColor(228/255, 225/255, 16/255)
-			QuestIcon:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 2)
+		local QuestIcon = F.CreateFS(self)
+		QuestIcon:SetText("!")
+		QuestIcon:SetTextColor(228/255, 225/255, 16/255)
+		QuestIcon:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 2)
 
-			QuestIcon.PostUpdate = function(self, isQuestBoss)
-				if isQuestBoss then
-					Name:ClearAllPoints()
-					Name:SetPoint("BOTTOMLEFT", PowerPoints, "BOTTOMRIGHT")
-					Name:SetPoint("RIGHT", QuestIcon, "LEFT", 0, 0)
-				else
-					Name:ClearAllPoints()
-					Name:SetPoint("BOTTOMLEFT", PowerPoints, "BOTTOMRIGHT")
-					Name:SetPoint("RIGHT", self)
-				end
+		QuestIcon.PostUpdate = function(self, isQuestBoss)
+			if isQuestBoss then
+				Name:ClearAllPoints()
+				Name:SetPoint("BOTTOMLEFT", PowerPoints, "BOTTOMRIGHT")
+				Name:SetPoint("RIGHT", QuestIcon, "LEFT", 0, 0)
+			else
+				Name:ClearAllPoints()
+				Name:SetPoint("BOTTOMLEFT", PowerPoints, "BOTTOMRIGHT")
+				Name:SetPoint("RIGHT", self)
 			end
-
-			self.QuestIcon = QuestIcon
 		end
+
+		self.QuestIcon = QuestIcon
 	end,
 
 	focus = function(self, ...)

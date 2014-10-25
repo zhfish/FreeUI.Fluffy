@@ -57,7 +57,7 @@ C["actionbars"] = {
 }
 
 C["bags"] = {
-	["enable"] = true,					-- enable the bag addon
+	["style"] = 1,						-- 1 = all-in-one, 2 = restyle default bags, 3 = do nothing
 
 	["size"] = 37,						-- change the size of the bags/bank, default = 37
 	["slotsShowAlways"] = false, 		-- always show the bag item slots
@@ -106,7 +106,6 @@ C["unitframes"] = {
 	["castbarSeparate"] = true, 				-- true for a separate player cast bar
 		["castbarSeparateOnlyCasters"] = true, 		-- separate bar only for mages/warlocks/priests
 	["pvp"] = true, 							-- show pvp icon on player frame
-	["questIcon"] = true,						-- show quest icon on target frame
 	["statusIndicator"] = false,					-- show combat/resting status on player frame
 		["statusIndicatorCombat"] = true,				-- show combat status (else: only resting)
 

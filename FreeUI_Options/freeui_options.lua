@@ -146,19 +146,19 @@ local function toggleRadio(self)
 	local previousValue
 
 	local index = 1
-	local otherButton = self.parent[self.option..index]
-	while otherButton do
-		if otherButton ~= self then
-			if otherButton.isChecked then
-				previousValue = index
-				otherButton.isChecked = false
-			end
+	local radioButton = self.parent[self.option..index]
+	while radioButton do
+		if radioButton.isChecked then
+			previousValue = index
 
-			otherButton:SetChecked(false)
+			if radioButton ~= self then
+				radioButton.isChecked = false
+				radioButton:SetChecked(false)
+			end
 		end
 
 		index = index + 1
-		otherButton = self.parent[self.option..index]
+		radioButton = self.parent[self.option..index]
 	end
 
 	self:SetChecked(true) -- don't allow deselecting
@@ -206,12 +206,15 @@ ns.CreateRadioButtonGroup = function(parent, option, numValues, tooltipText, nee
 		f.text:SetText(ns.localization[parent.tag..option..i])
 		if tooltipText then
 			f.tooltipText = ns.localization[parent.tag..option..i.."Tooltip"]
-			f:HookScript("OnEnter", radioOnEnter)
-			f:HookScript("OnLeave", radioOnLeave)
 		end
 
 		if needsReload then
 			f.tooltipText = f.tooltipText and format("%s\n\n%s", f.tooltipText, ns.localization.requiresReload) or ns.localization.requiresReload
+		end
+
+		if f.tooltipText then
+			f:HookScript("OnEnter", radioOnEnter)
+			f:HookScript("OnLeave", radioOnLeave)
 		end
 
 		f.needsReload = needsReload
@@ -545,8 +548,10 @@ local function displaySettings()
 	end
 
 	for _, radio in pairs(radiobuttons) do
-		radio:SetChecked(C[radio.group][radio.option] == radio.index)
-		radio.isChecked = true -- need this for storing the previous value when user changes setting
+		local isChecked = C[radio.group][radio.option] == radio.index
+
+		radio:SetChecked(isChecked)
+		radio.isChecked = isChecked -- need this for storing the previous value when user changes setting
 	end
 
 	userChangedSlider = false
@@ -737,8 +742,12 @@ init:SetScript("OnEvent", function()
 	F.AddOptionsCallback("appearance", "fontOutlineStyle", updateFontSamples, "radio")
 	F.AddOptionsCallback("appearance", "fontShadow", updateFontSamples)
 
+	local function testNotificationCallback()
+		print(ns.localization.notificationPreviewCallbackText)
+	end
+
 	FreeUIOptionsPanel.notifications.previewButton:SetScript("OnClick", function()
-		F.Notification("FreeUI", ns.localization.notificationPreviewText)
+		F.Notification("FreeUI", ns.localization.notificationPreviewText, testNotificationCallback)
 	end)
 
 	displaySettings()
