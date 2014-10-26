@@ -1,7 +1,7 @@
 local F, C, L = unpack(select(2, ...))
 
-local font = C.media.font9
-local font1 = C.media.font4
+local font = 'Fonts\\FRIZQT__.TTF'
+local font1 = 'Fonts\\FruityMicrofont.ttf'
 
 RaidWarningFrame.slot1:SetFont(font, 20, "OUTLINE")
 RaidWarningFrame.slot2:SetFont(font, 20, "OUTLINE")

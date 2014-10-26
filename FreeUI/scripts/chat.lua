@@ -2,6 +2,8 @@ local F, C, L = unpack(select(2, ...))
 
 local _G = _G
 
+local font_Chat = "Fonts\\FRIZQT__.TTF"
+
 DEFAULT_CHATFRAME_ALPHA = 0
 CHAT_FRAME_FADE_OUT_TIME = CHAT_FRAME_FADE_TIME -- speed up fading out
 CHAT_TAB_HIDE_DELAY = CHAT_TAB_SHOW_DELAY -- ditto
@@ -142,7 +144,7 @@ local function StyleWindow(f)
 
 	frame:SetFading(false)
 
-	frame:SetFont(C.media.font9, 13, "OUTLINE")
+	frame:SetFont(font_Chat, 13, "OUTLINE")
 	frame:SetShadowOffset(0, 0, 0, 0)
 
 	frame:SetMinResize(0,0)
@@ -151,8 +153,8 @@ local function StyleWindow(f)
 	frame.editBox:ClearAllPoints()
 	frame.editBox:SetPoint("BOTTOMLEFT",  _G.ChatFrame1, "TOPLEFT", -5, 18)
 	frame.editBox:SetPoint("BOTTOMRIGHT", _G.ChatFrame1, "TOPRIGHT", 5, 18)
-	frame.editBox:SetFont(C.media.font10, 14, "OUTLINE")
-	frame.editBox.header:SetFont(C.media.font10, 14, "OUTLINE")
+	frame.editBox:SetFont(font_Chat, 14, "OUTLINE")
+	frame.editBox.header:SetFont(font_Chat, 14, "OUTLINE")
 	frame.editBox.header:SetShadowColor(0, 0, 0, 0)
 	frame.editBox:SetShadowColor(0, 0, 0, 0)
 
@@ -296,7 +298,7 @@ editBox:SetMultiLine(true)
 editBox:SetMaxLetters(20000)
 editBox:EnableMouse(true)
 editBox:SetAutoFocus(true)
-editBox:SetFont(C.media.font10, 14, "OUTLINE")
+editBox:SetFont(font_Chat, 14, "OUTLINE")
 editBox:SetWidth(ChatFrame1:GetWidth())
 editBox:SetScript("OnEscapePressed", function() frame:Hide() wipe(lines) end)
 

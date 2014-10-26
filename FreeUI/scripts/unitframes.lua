@@ -5,7 +5,7 @@ if not C.unitframes.enable then return end
 local parent, ns = ...
 local oUF = ns.oUF
 
-local font_CN = C.media.font6
+local font_CN = 'Fonts\\Zpix.ttf'
 
 local name = UnitName("player")
 local realm = GetRealmName()

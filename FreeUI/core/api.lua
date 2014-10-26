@@ -15,14 +15,6 @@ C.media = {
 	["gradient"] = "Interface\\AddOns\\FreeUI\\media\\gradient",
 	["roleIcons"] = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
 	["texture"] = "Interface\\AddOns\\FreeUI\\media\\statusbar", -- statusbar texture
-	-- custom font (Chinese fonts support)
-	["font4"] = "Fonts\\FruityMicrofont.ttf", 		-- (for damage float)
-	["font5"] = "Fonts\\Hooge0655.ttf", 			-- 
-	["font6"] = "Fonts\\Zpix.ttf", 					-- 最像素-中文点阵
-	["font7"] = "Fonts\\cuyuan.ttf", 				-- 方正粗圆
-	["font8"] = "Fonts\\diablo.ttf", 				-- AvQest from Diablo
-	["font9"] = "Fonts\\FRIZQT__.ttf", 				-- emblem+方正粗圆
-	["font10"] = "Fonts\\ARIALN.ttf", 				-- expressway+方正粗圆
 }
 
 local mainFont
