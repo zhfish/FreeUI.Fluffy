@@ -1,8 +1,18 @@
 local BATTLEGROUNDS = {
+   ["Wintergrasp"] = true,
+   ["Tol Barad"] = true,
+   ["Isle of Conquest"] = true,
+   ["Strand of the Ancients"] = true,
+   ["Alterac Valley"] = true,
+
+   ["Warsong Gulch"] = true,
+   ["Twin Peaks"] = true,
+
 	["Arathi Basin"] = true,
-	["Wintergrasp"] = true,
-	["Strand of the Ancients"] = true,
-	["Tol Barad"] = true,
+	["Eye of the Storm"] = true,
+   ["Battle for Gilneas"] = true,
+   ["Deepwind Gorge"] = true,
+   ["Silvershard Mines"] = true,
 	["The Battle for Gilneas"] = true,
 	["Temple of Kotmogu"] = true,
 }
