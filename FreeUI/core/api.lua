@@ -93,7 +93,7 @@ local CreateBD = function(f, a)
 		edgeFile = C.media.backdrop,
 		edgeSize = 1,
 	})
-	f:SetBackdropColor(0, 0, 0, a or .7)
+	f:SetBackdropColor(0, 0, 0, a or .6)
 	f:SetBackdropBorderColor(0, 0, 0)
 end
 
@@ -124,6 +124,20 @@ F.CreateSD = function(parent, size, r, g, b, alpha, offset)
 	sd:SetPoint("BOTTOMRIGHT", parent, sd.size + 1 + sd.offset, -sd.size - 1 - sd.offset)
 	sd:SetBackdropBorderColor(r or 0, g or 0, b or 0)
 	sd:SetAlpha(alpha or 1)
+end
+
+F.CreateSB = function(parent, size, r, g, b, alpha, offset)
+	local sb = CreateFrame("Frame", nil, parent)
+	sb.size = size or 5
+	sb.offset = offset or 0
+	sb:SetBackdrop({
+		edgeFile = C.media.glow,
+		edgeSize = sb.size,
+	})
+	sb:SetPoint("TOPLEFT", parent, -sb.size - 0 - sb.offset, sb.size + 0 + sb.offset)
+	sb:SetPoint("BOTTOMRIGHT", parent, sb.size + 0 + sb.offset, -sb.size - 0 - sb.offset)
+	sb:SetBackdropBorderColor(r or 0, g or 0, b or 0)
+	sb:SetAlpha(alpha or 1)
 end
 
 F.CreateFS = function(parent, fontSize, justify)
@@ -605,6 +619,7 @@ F.SetBD = function(f, x, y, x2, y2)
 	end
 	bg:SetFrameLevel(0)
 	F.CreateBD(bg)
+	F.CreateSD(bg)
 end
 
 F.ReskinPortraitFrame = function(f, isButtonFrame)
@@ -634,6 +649,7 @@ F.ReskinPortraitFrame = function(f, isButtonFrame)
 	end
 
 	F.CreateBD(f)
+	F.CreateSD(f)
 	F.ReskinClose(_G[name.."CloseButton"])
 end
 

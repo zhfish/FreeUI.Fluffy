@@ -34,9 +34,10 @@ tinsert(C.themes["FreeUI"], function()
 		tab:SetCheckedTexture(C.media.checked)
 		if i == 1 then
 			local a1, p, a2, x, y = tab:GetPoint()
-			tab:SetPoint(a1, p, a2, x + 2, y)
+			tab:SetPoint(a1, p, a2, x + 11, y)
 		end
 		F.CreateBG(tab)
+		F.CreateSD(tab, 5, 0, 0, 0, 1, 1)
 		select(2, tab:GetRegions()):SetTexCoord(.08, .92, .08, .92)
 	end
 

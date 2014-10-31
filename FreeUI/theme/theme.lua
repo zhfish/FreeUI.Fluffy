@@ -126,6 +126,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		for i = 1, #FrameBDs do
 			local FrameBD = _G[FrameBDs[i]]
 			F.CreateBD(FrameBD)
+			F.CreateSD(FrameBD)
 		end
 
 		-- Dropdown lists
@@ -1021,6 +1022,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		-- Battletag invite frame
 
 		F.CreateBD(BattleTagInviteFrame)
+		F.CreateSD(BattleTagInviteFrame)
 
 		local send, cancel = BattleTagInviteFrame:GetChildren()
 		F.Reskin(send)
@@ -1267,6 +1269,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		-- Tutorial Frame
 
 		F.CreateBD(TutorialFrame)
+		F.CreateSD(TutorialFrame)
 
 		TutorialFrameBackground:Hide()
 		TutorialFrameBackground.Show = F.dummy
@@ -1466,6 +1469,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		if IsMacClient() then
 			F.CreateBD(MacOptionsFrame)
+			F.CreateSD(MacOptionsFrame)
 
 			MacOptionsFrameHeader:SetTexture("")
 			MacOptionsFrameHeader:ClearAllPoints()
@@ -1535,6 +1539,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 			self:SetScale(UIParent:GetScale())
 		end)
 		F.CreateBD(CinematicFrameCloseDialog)
+		F.CreateSD(CinematicFrameCloseDialog)
 		F.Reskin(CinematicFrameCloseDialogConfirmButton)
 		F.Reskin(CinematicFrameCloseDialogResumeButton)
 
@@ -1723,12 +1728,14 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		end)
 
 		F.CreateBD(MovieFrame.CloseDialog)
+		F.CreateSD(MovieFrame.CloseDialog)
 		F.Reskin(MovieFrame.CloseDialog.ConfirmButton)
 		F.Reskin(MovieFrame.CloseDialog.ResumeButton)
 
 		-- Pet battle queue popup
 
 		F.CreateBD(PetBattleQueueReadyFrame)
+		F.CreateSD(PetBattleQueueReadyFrame)
 		F.CreateBG(PetBattleQueueReadyFrame.Art)
 		F.Reskin(PetBattleQueueReadyFrame.AcceptButton)
 		F.Reskin(PetBattleQueueReadyFrame.DeclineButton)
@@ -1775,6 +1782,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		F.CreateBD(PVPReadyDialog)
 		PVPReadyDialog.SetBackdrop = F.dummy
+		F.CreateSD(PVPReadyDialog)
 
 		F.Reskin(PVPReadyDialog.enterButton)
 		F.Reskin(PVPReadyDialog.leaveButton)
@@ -2000,6 +2008,24 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		WhoFrameAddFriendButton:SetPoint("RIGHT", WhoFrameGroupInviteButton, "LEFT", -1, 0)
 		FriendsFrameTitleText:SetPoint("TOP", FriendsFrame, "TOP", 0, -8)
 		InterfaceOptionsFrameOkay:SetPoint("BOTTOMRIGHT", InterfaceOptionsFrameCancel, "BOTTOMLEFT", -1, 0)
+
+		-- [[ Tabs ]]		
+		
+		-- for i = 1, 5 do		
+		-- 	F.ReskinTab(_G["SpellBookFrameTabButton"..i])		
+		-- end		
+		
+		-- for i = 1, 4 do		
+		-- 	F.ReskinTab(_G["FriendsFrameTab"..i])		
+		-- 	if _G["CharacterFrameTab"..i] then		
+		-- 		F.ReskinTab(_G["CharacterFrameTab"..i])		
+		-- 	end		
+		-- end		
+		
+		-- for i = 1, 2 do		
+		-- 	F.ReskinTab(_G["MerchantFrameTab"..i])		
+		-- 	F.ReskinTab(_G["MailFrameTab"..i])		
+		-- end
 
 		-- [[ Buttons ]]
 

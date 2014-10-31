@@ -152,8 +152,11 @@ tinsert(C.themes["FreeUI"], function()
 
 	F.CreateBD(LFGDungeonReadyDialog)
 	LFGDungeonReadyDialog.SetBackdrop = F.dummy
+	F.CreateSD(LFGDungeonReadyDialog)
 	F.CreateBD(LFGInvitePopup)
+	F.CreateSD(LFGInvitePopup)
 	F.CreateBD(LFGDungeonReadyStatus)
+	F.CreateSD(LFGDungeonReadyStatus)
 
 	F.Reskin(LFGDungeonReadyDialogEnterDungeonButton)
 	F.Reskin(LFGDungeonReadyDialogLeaveQueueButton)

@@ -70,7 +70,7 @@ tinsert(C.themes["FreeUI"], function()
 		end
 	end)
 
-	SpellBookSkillLineTab1:SetPoint("TOPLEFT", SpellBookSideTabsFrame, "TOPRIGHT", 2, -36)
+	SpellBookSkillLineTab1:SetPoint("TOPLEFT", SpellBookSideTabsFrame, "TOPRIGHT", 11, -36)
 
 	hooksecurefunc("SpellBookFrame_UpdateSkillLineTabs", function()
 		for i = 1, GetNumSpellTabs() do
@@ -81,6 +81,7 @@ tinsert(C.themes["FreeUI"], function()
 				tab:SetCheckedTexture(C.media.checked)
 
 				F.CreateBG(tab)
+				F.CreateSD(tab, 5, 0, 0, 0, 1, 1)
 
 				tab:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
 
@@ -100,11 +101,12 @@ tinsert(C.themes["FreeUI"], function()
 			tab:SetCheckedTexture(C.media.checked)
 
 			F.CreateBG(tab)
+			F.CreateSD(tab, 5, 0, 0, 0, 1, 1)
 
 			tab:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
 
 			if i == 1 then
-				tab:SetPoint("TOPLEFT", SpellBookCoreAbilitiesFrame, "TOPRIGHT", 2, -53)
+				tab:SetPoint("TOPLEFT", SpellBookCoreAbilitiesFrame, "TOPRIGHT", 11, -53)
 			end
 		end
 	end)
