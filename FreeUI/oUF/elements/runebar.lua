@@ -13,9 +13,9 @@ local oUF = ns.oUF
 
 oUF.colors.runes = {
 	{1, 0, 0},   -- blood
-	{0, .5, 0},  -- unholy
-	{0, 1, 1},   -- frost
-	{.9, .1, 1}, -- death
+	{131/255, 219/255, 93/255},  -- unholy -- green
+	{88/255, 194/255, 237/255},   -- frost -- blue
+	{237/255, 55/255, 220/255}, -- death
 }
 
 local runemap = { 1, 2, 5, 6, 3, 4 }
