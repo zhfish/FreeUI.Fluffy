@@ -286,7 +286,7 @@ RegisterStateDriver(petbar, "visibility", "[petbattle][overridebar][vehicleui][p
 
 local stancebar = CreateFrame("Frame", "FreeUI_StanceBar", UIParent, "SecureHandlerStateTemplate")
 stancebar:SetHeight(26)
-stancebar:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
+stancebar:SetPoint("BOTTOMLEFT", bar1, "TOPLEFT", 4, 4)
 
 StanceBarFrame:SetParent(stancebar)
 StanceBarFrame:EnableMouse(false)

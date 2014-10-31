@@ -6,6 +6,7 @@ Minimap:ClearAllPoints()
 Minimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -10, -20)
 Minimap:SetMaskTexture("Interface\\Buttons\\WHITE8X8")
 F.CreateBG(Minimap)
+F.CreateSB(Minimap)
 
 Minimap:EnableMouseWheel(true)
 MinimapCluster:EnableMouse(false)
@@ -281,63 +282,3 @@ for _, ticketButton in pairs({HelpOpenTicketButton, HelpOpenWebTicketButton}) do
 	ticketButton:HookScript("OnShow", positionTicketButtons)
 	ticketButton:HookScript("OnHide", positionTicketButtons)
 end
-
-
-local shadows = {
-	edgeFile = "Interface\\Addons\\FreeUI\\media\\glowTex",
-	edgeSize = 4,
-	insets = { left = 3, right = 3, top = 3, bottom = 3 }
-}
-function CreateShadow(f)
-	if f.shadow then return end
-	local shadow = CreateFrame("Frame", nil, f)
-	shadow:SetFrameLevel(1)
-	shadow:SetFrameStrata(f:GetFrameStrata())
-	shadow:SetPoint("TOPLEFT", -4, 4)
-	shadow:SetPoint("BOTTOMRIGHT", 4, -4)
-	shadow:SetBackdrop(shadows)
-	shadow:SetBackdropColor(0, 0, 0, 0)
-	shadow:SetBackdropBorderColor(0, 0, 0, 1)
-	f.shadow = shadow
-	return shadow
-end
-function CreateInnerBorder(f)
-	if f.iborder then return end
-	f.iborder = CreateFrame("Frame", nil, f)
-	f.iborder:SetPoint("TOPLEFT", 1, -1)
-	f.iborder:SetPoint("BOTTOMRIGHT", -1, 1)
-	f.iborder:SetFrameLevel(f:GetFrameLevel())
-	f.iborder:SetBackdrop({
-	  edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1,
-	  insets = { left = -1, right = -1, top = -1, bottom = -1}
-	})
-	f.iborder:SetBackdropBorderColor(0, 0, 0)
-	return f.iborder
-end
-function frame1px(f)
-	f:SetBackdrop({
-		bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
-        edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1,
-		insets = {left = -1, right = -1, top = -1, bottom = -1}
-	})
-	f:SetBackdropColor(.06,.06,.06,1)
-	f:SetBackdropBorderColor(.15,.15,.15,1)
-CreateInnerBorder(f)
-end
-
-local function StripTextures(object, kill)
-	for i=1, object:GetNumRegions() do
-		local region = select(i, object:GetRegions())
-		if region:GetObjectType() == "Texture" then
-			if kill then
-				region:Hide()
-			else
-				region:SetTexture(nil)
-			end
-		end
-	end
-end
-
-
-frame1px(Minimap)
-CreateShadow(Minimap)
