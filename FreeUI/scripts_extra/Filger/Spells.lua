@@ -31,6 +31,7 @@ Filger_Spells = {
 			{spellID = 111400, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fire and Brimstone 硫磺烈火
 			{spellID = 108683, unitID = "player", caster = "player", filter = "BUFF"},
+			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -110,6 +111,7 @@ Filger_Spells = {
 
 			-- Rocket Fuel Leak 火箭鞋漏油
 			{spellID = 94794, unitID = "player", caster = "player", filter = "DEBUFF"},
+			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -137,6 +139,7 @@ Filger_Spells = {
 			{spellID = 30108, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Haunt
 			{spellID = 48181, unitID = "target", caster = "player", filter = "DEBUFF"},
+			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DE/BUFF_BAR",
@@ -255,7 +258,295 @@ Filger_Spells = {
 			{spellID = 125487, filter = "ICD", trigger = "BUFF", duration = 60},
 			-- Purified Bindings of Immerseus (Intellect, Proc)
 			{spellID = 146046, filter = "ICD", trigger = "BUFF", duration = 115},
+			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
+	},
+
+	["DEATHKNIGHT"] = {
+
+		{
+			Name = "P_BUFF_ICON",
+			Direction = "RIGHT",
+			Mode = "ICON",
+			Interval = 1,
+			Alpha = 1,
+			IconSize = Misc.IconSizePBuff,
+			Position = {unpack(Filger_Settings.player_buff_icon)},
+
+			-- Bone Shield
+			{spellID = 49222, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Bone Wall (T16)
+			{spellID = 144948, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Vampiric Blood
+			{spellID = 55233, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Icebound Fortitude
+			{spellID = 48792, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Anti-Magic Shell
+			{spellID = 48707, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dancing Rune Weapon
+			{spellID = 81256, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Lichborne
+			{spellID = 49039, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Pillar of Frost
+			{spellID = 51271, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Death's Advance
+			{spellID = 96268, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Unholy Blight
+			{spellID = 115989, unitID = "player", caster = "player", filter = "BUFF"},
+
+		},
+		{
+			Name = "P_PROC_ICON",
+			Direction = "LEFT",
+			Mode = "ICON",
+			Interval = 0,
+			Alpha = 1,
+			IconSize = Misc.IconSizePProc,
+			Position = {unpack(Filger_Settings.player_proc_icon)},
+
+			-- Buffs
+			-- Scent of Blood
+			{spellID = 50421, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Crimson Scourge
+			{spellID = 81141, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Freezing Fog
+			{spellID = 59052, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Killing Machine
+			{spellID = 51124, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Sudden Doom
+			{spellID = 81340, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Unholy Strength
+			{spellID = 53365, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Dark Transformation
+			{spellID = 63560, unitID = "pet", caster = "player", filter = "BUFF"},
+			-- Dark Succor
+			{spellID = 101568, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Trinkets
+			-- General
+			-- Darkmoon Cards (Proc)
+			{spellID = 128985, unitID = "player", caster = "player", filter = "BUFF"},
+			-- PvP Trinkets (Health, Use)
+			{spellID = 126697, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Tank
+			-- Rook's Unlucky Talisman (Reduces damage, Use)
+			{spellID = 146343, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Resolve of Niuzao (Dodge, Use)
+			{spellID = 146344, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Steadfast Talisman of the Shado-Pan Assault (Dodge, Use)
+			{spellID = 138728, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Delicate Vial of the Sanguinaire (Mastery, Proc)
+			{spellID = 138864, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Stuff of Nightmares (Dodge, Proc)
+			{spellID = 126646, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Vial of Dragon's Blood (Dodge, Proc)
+			{spellID = 126533, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Jade Warlord Figurine (Mastery, Use)
+			{spellID = 126597, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Physical Strength DPS
+			-- Evil Eye of Galakras (Strength, Proc)
+			{spellID = 146245, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Thok's Tail Tip (Strength, Proc)
+			{spellID = 146250, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Skeer's Bloodsoaked Talisman (Strength, Proc)
+			{spellID = 146285, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fusion-Fire Core (Strength, Proc)
+			{spellID = 148899, unitID = "player", caster = "player", filter = "BUFF", absID = true},
+			-- Celestial Celerity (Haste, Proc) [Alacrity of Xuen]
+			{spellID = 146296, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Brutal Talisman of the Shado-Pan Assault (Strength, Proc)
+			{spellID = 138702, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fabled Feather of Ji-Kun (Strength, Proc)
+			{spellID = 138759, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Spark of Zandalar (Strength, Proc)
+			{spellID = 138958, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Primordius' Talisman of Rage (Strength, Proc)
+			{spellID = 138870, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Gaze of the Twins (Crit, Proc)
+			{spellID = 139170, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Helmbreaker Medallion (Crit, Use)
+			{spellID = 136084, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Darkmist Vortex (Haste, Proc)
+			{spellID = 126657, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Lei Shin's Final Orders (Strength, Proc)
+			{spellID = 126582, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Jade Charioteer Figurine (Strength, Use)
+			{spellID = 126599, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Iron Belly Wok (Haste, Use)
+			{spellID = 129812, unitID = "player", caster = "player", filter = "BUFF"},
+			-- PvP Trinkets (Strength, Use)
+			{spellID = 126679, unitID = "player", caster = "player", filter = "BUFF"},
+			-- PvP Trinkets (Strength, Proc)
+			{spellID = 126700, unitID = "player", caster = "player", filter = "BUFF"},
+
+			-- Enchants
+			-- General
+			-- Tank
+			-- River's Song (Dodge)
+			{spellID = 116660, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Physical General
+			-- Physical Melee
+			-- Dancing Steel (Strength)
+			{spellID = 120032, unitID = "player", caster = "all", filter = "BUFF"},
+
+			-- Legendary Meta Gems
+			-- Indomitable Primal Diamond (Tank)
+			{spellID = 137593, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+		},
+		{
+			Name = "T_DEBUFF_ICON",
+			Direction = "RIGHT",
+			Mode = "ICON",
+			Interval = 1,
+			Alpha = 1,
+			IconSize = Misc.IconSizeTDebuff,
+			Position = {unpack(Filger_Settings.target_debuff_icon)},
+
+			-- Frost Fever
+			{spellID = 55095, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Blood Fever
+			{spellID = 55078, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Asphyxiate
+			{spellID = 108194, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Chains of Ice
+			{spellID = 45524, unitID = "target", caster = "player", filter = "DEBUFF"},
+		},
+				{
+			Name = "T_DE/BUFF_BAR",
+			enable = Misc.Tbar,
+			Direction = "UP",
+			IconSide = "LEFT",
+			Mode = "BAR",
+			Interval = 3,
+			Alpha = 1,
+			IconSize = Misc.barIconSize,
+			BarWidth = Misc.barw,
+			Position = {unpack(Filger_Settings.target_bar)},
+
+			-- Doom
+			{spellID = 603, unitID = "target", caster = "player", filter = "DEBUFF"},
+		},
+		{
+			Name = "PVE/PVP_CC",
+			enable = Misc.Pbar,
+			Direction = "DOWN",
+			IconSide = "LEFT",
+			Mode = "BAR",
+			Interval = 3,
+			Alpha = 1,
+			IconSize = Misc.barIconSize,
+			BarWidth = Misc.barw,
+			Position = {unpack(Filger_Settings.pve_cc)},
+
+			-- Fear
+			{spellID = 118699, unitID = "focus", caster = "player", filter = "DEBUFF"},
+		},
+		{
+			Name = "COOLDOWN",
+			enable = Misc.CD,
+			Direction = "RIGHT",
+			Mode = "ICON",
+			NumPerLine = Misc.CDnum,
+			Interval = 0,
+			Alpha = 1,
+			IconSize = Misc.CDIconSize,
+			Position = {unpack(Filger_Settings.cooldown)},
+
+			-- Mind Freeze
+			{spellID = 47528, filter = "CD"},
+			-- Strangulate
+			{spellID = 47476, filter = "CD"},
+			-- Gnaw (Ghoul)
+			{spellID = 47481, filter = "CD"},
+			-- Remorseless Winter
+			{spellID = 108200, filter = "CD"},
+			-- Soul Reaper
+			{spellID = 130736, filter = "CD"},
+			-- Death Grip
+			{spellID = 49576, filter = "CD"},
+			-- Plague Leech
+			{spellID = 123693, filter = "CD"},
+			-- Rune Tap
+			{spellID = 48982, filter = "CD"},
+			-- Death and Decay
+			{spellID = 43265, filter = "CD"},
+			-- Death's Advance
+			{spellID = 96268, filter = "CD"},
+			-- Anti-Magic Shell
+			{spellID = 48707, filter = "CD"},
+			-- Vampiric Blood
+			{spellID = 55233, filter = "CD"},
+			-- Outbreak
+			{spellID = 77575, filter = "CD"},
+			-- Pillar of Frost
+			{spellID = 51271, filter = "CD"},
+			-- Gorefiend's Grasp
+			{spellID = 108199, filter = "CD"},
+			-- Dancing Rune Weapon
+			{spellID = 49028, filter = "CD"},
+			-- Unholy Blight
+			{spellID = 115989, filter = "CD"},
+			-- Lichborne
+			{spellID = 49039, filter = "CD"},
+			-- Desecrated Ground
+			{spellID = 108201, filter = "CD"},
+			-- Death Pact
+			{spellID = 48743, filter = "CD"},
+			-- Raise Dead
+			{spellID = 46584, filter = "CD"},
+			-- Anti-Magic Zone
+			{spellID = 51052, filter = "CD"},
+			-- Icebound Fortitude
+			{spellID = 48792, filter = "CD"},
+			-- Summon Gargoyle
+			{spellID = 49206, filter = "CD"},
+
+			-- Racial
+			-- Every Man for Himself (Human)
+			{spellID = 59752, filter = "CD"},
+			-- Stoneform (Dwarf)
+			{spellID = 20594, filter = "CD"},
+			-- Shadowmeld (Night Elf)
+			{spellID = 58984, filter = "CD"},
+			-- Escape Artist (Gnome)
+			{spellID = 20589, filter = "CD"},
+			-- Gift of the Naaru (Draenei)
+			{spellID = 28880, filter = "CD"},
+			-- Darkflight (Worgen)
+			{spellID = 68992, filter = "CD"},
+			-- Blood Fury (Orc)
+			{spellID = 20572, filter = "CD"},
+			-- Will of the Forsaken (Forsaken)
+			{spellID = 7744, filter = "CD"},
+			-- Cannibalize (Forsaken)
+			{spellID = 20577, filter = "CD"},
+			-- War Stomp (Tauren)
+			{spellID = 20549, filter = "CD"},
+			-- Berserking (Troll)
+			{spellID = 26297, filter = "CD"},
+			-- Arcane Torrent (Blood Elf)
+			{spellID = 69179, filter = "CD"},
+			-- Rocket Jump (Goblin)
+			{spellID = 69070, filter = "CD"},
+
+			-- Items
+			-- Gloves
+			{slotID = 10, filter = "CD"},
+			-- Belt
+			{slotID = 6, filter = "CD"},
+			-- Back
+			{slotID = 15, filter = "CD"},
+			-- Trinkets
+			{slotID = 13, filter = "CD"},
+			{slotID = 14, filter = "CD"},
+
+			-- Internal
+			-- Shroud of Purgatory
+			{spellID = 116888, filter = "ICD", trigger = "BUFF", duration = 180},
+		},
+
+
+
 	},
 
 	["ALL"] = {			--[集体]
@@ -365,6 +656,7 @@ Filger_Spells = {
 			{spellID = 121557, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Fear Ward
 			{spellID = 6346, unitID = "player", caster = "all", filter = "BUFF"},
+			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "RAID_AURA_ICON",
@@ -818,6 +1110,7 @@ Filger_Spells = {
 			
 			-- 心智 [尤格萨隆]
 			{spellID = 63050, unitID = "player", caster = "all", filter = "DEBUFF"},
+			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_BUFF",
@@ -1121,6 +1414,7 @@ Filger_Spells = {
 			{spellID = 66271, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Drink
 			{spellID = 80167, unitID = "target", caster = "all", filter = "BUFF"},
+			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 	},
 }

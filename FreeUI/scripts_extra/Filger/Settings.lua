@@ -6,10 +6,10 @@ Filger_Settings = {
 	player_proc_icon = {"RIGHT", "oUF_FreePlayer", "CENTER", 0, 40},	-- "P_PROC_ICON"		(player_proc_icon 位置坐标 - 主图标注号 2)
 	special_proc_icon = {"LEFT", "oUF_FreePlayer", "CENTER", 0, 40},	-- "SPECIAL_P_BUFF_ICON"	(special_proc_icon 位置坐标 - 主图标注号 3)
 	target_debuff_icon = {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 20},	-- "T_DEBUFF_ICON"		(target_debuff_icon 位置坐标 - 主图标注号 4)
-	target_buff_icon = {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 100},		-- "T_BUFF"				(target_buff_icon 位置坐标 - 主图标注号 5)
+	target_buff_icon = {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 80},		-- "T_BUFF"				(target_buff_icon 位置坐标 - 主图标注号 5)
 	RAID_AURA_ICON = {"RIGHT", "oUF_FreePlayer", "LEFT", -40, 240},			-- "PVE/PVP_DEBUFF"		(pve_debuff 位置坐标 - 主图标注号 6)
 	pve_cc = {"TOPLEFT", UIParent, "LEFT", 50, 0},						-- "PVE/PVP_CC"			(pve_cc 位置坐标 - 主图标注号 7)
-	cooldown = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -50},				-- "COOLDOWN"			(cooldown 位置坐标 - 主图标注号 8)
+	cooldown = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -20},				-- "COOLDOWN"			(cooldown 位置坐标 - 主图标注号 8)
 	target_bar = {"TOPRIGHT", UIParent, "RIGHT", -260, 0},				-- "T_DE/BUFF_BAR"		(target_bar 位置坐标 - 主图标注号 9)
 }
 
@@ -43,7 +43,7 @@ local Media = "Interface\\AddOns\\FreeUI\\scripts_extra\\Filger\\Media\\"
 	Misc.IconSizeRaidAura = 40
 	Misc.IconSizeTBuff = 40
 	Misc.IconSizeTDebuff = 32
-	Misc.CDIconSize = 30			-- COOLDOWN 冷却图标大小 - (主图标注号 8)
+	Misc.CDIconSize = 32			-- COOLDOWN 冷却图标大小 - (主图标注号 8)
 	Misc.barIconSize = 25			-- 计时条上的图标大小 - (主图标注号 7,9)
 
 -------------------------------------------------------- 

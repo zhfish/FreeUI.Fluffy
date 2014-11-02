@@ -1300,7 +1300,7 @@ local UnitSpecific = {
 		end)
 
 		local Debuffs = CreateFrame("Frame", nil, self)
-		Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -4)
+		Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, 4)
 		Debuffs.initialAnchor = "BOTTOMLEFT"
 		Debuffs["growth-x"] = "RIGHT"
 		Debuffs["growth-y"] = "UP"
@@ -1341,20 +1341,6 @@ local UnitSpecific = {
 		self:Tag(Name, '[name]')
 		self.Name = Name
 
-		local Debuffs = CreateFrame("Frame", nil, self)
-		Debuffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
-		Debuffs.initialAnchor = "BOTTOMLEFT"
-		Debuffs["growth-x"] = "RIGHT"
-		Debuffs["growth-y"] = "UP"
-		Debuffs["spacing-x"] = 3
-		Debuffs:SetHeight(22)
-		Debuffs:SetWidth(focusWidth)
-		Debuffs.size = 22
-		Debuffs.num = C.unitframes.num_focus_debuffs
-		self.Debuffs = Debuffs
-		self.Debuffs.onlyShowPlayer = true
-
-		Debuffs.PostUpdateIcon = PostUpdateIcon
 	end,
 
 	targettarget = function(self, ...)
@@ -1385,13 +1371,13 @@ local UnitSpecific = {
 		Health:SetHeight(bossHeight - powerHeight - 1)
 
 		local HealthPoints = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "RIGHT")
-		HealthPoints:SetPoint("RIGHT", self, "TOPRIGHT", 0, 6)
+		HealthPoints:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 4)
 		self:Tag(HealthPoints, '[dead][free:bosshealth]')
 
 		Health.value = HealthPoints
 
 		local Name = F.CreateFS(self, C.FONT_SIZE_NORMAL, "LEFT")
-		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 2)
+		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
 		Name:SetWidth((bossWidth / 2) + 10)
 		Name:SetHeight(8)
 
@@ -1437,7 +1423,7 @@ local UnitSpecific = {
 		Castbar.Text:SetAllPoints(Health)
 
 		local IconFrame = CreateFrame("Frame", nil, Castbar)
-		IconFrame:SetPoint("LEFT", self, "RIGHT", 3, 0)
+		IconFrame:SetPoint("RIGHT", self, "LEFT", -4, 0)
 		IconFrame:SetHeight(22)
 		IconFrame:SetWidth(22)
 
@@ -1804,7 +1790,7 @@ oUF:Factory(function(self)
 	end
 
 	for n = 1, MAX_BOSS_FRAMES do
-		spawnHelper(self, 'boss' .. n, 'LEFT', 30, 0 - (56 * n))
+		spawnHelper(self, 'boss' .. n, 'RIGHT', -70, 220 - (60 * n))
 	end
 
 	if C.unitframes.enableArena then
@@ -1829,12 +1815,12 @@ oUF:Factory(function(self)
 	local party = self:SpawnHeader(nil, nil, "party,raid",
 		'showParty', true,
 		'showPlayer', FreeUIConfig.layout == 2,
-		'showSolo', true,
+		'showSolo', false,
 		'yoffset', -8,
 		'maxColumns', 5,
 		'unitsperColumn', 1,
-		'columnSpacing', 8,
-		'columnAnchorPoint', "TOP",
+		'columnSpacing', 6,
+		'columnAnchorPoint', "RIGHT",
 		'oUF-initialConfigFunction', ([[
 			self:SetHeight(%d)
 			self:SetWidth(%d)
