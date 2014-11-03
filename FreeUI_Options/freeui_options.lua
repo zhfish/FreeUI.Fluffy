@@ -620,11 +620,19 @@ init:SetScript("OnEvent", function()
 		FreeUIOptionsPanel:HookScript("OnShow", function()
 			oUF_FreePlayer:SetAlpha(0)
 			oUF_FreeTarget:SetAlpha(0)
+			oUF_FreePet:SetAlpha(0)
+			oUF_FreeTargetTarget:SetAlpha(0)
+			oUF_FreeFocus:SetAlpha(0)
+			oUF_FreeFocusTarget:SetAlpha(0)
 		end)
 
 		FreeUIOptionsPanel:HookScript("OnHide", function()
 			oUF_FreePlayer:SetAlpha(1)
 			oUF_FreeTarget:SetAlpha(1)
+			oUF_FreePet:SetAlpha(1)
+			oUF_FreeTargetTarget:SetAlpha(1)
+			oUF_FreeFocus:SetAlpha(1)
+			oUF_FreeFocusTarget:SetAlpha(1)
 		end)
 	end
 
@@ -665,7 +673,13 @@ init:SetScript("OnEvent", function()
 		displaySettings()
 	end)
 
-	layout:SetText((FreeUIConfig.layout == 2) and "Dps/Tank Layout" or "Healer Layout")
+
+	if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+		layout:SetText((FreeUIConfig.layout == 2) and "输出/坦克 布局" or "治疗 布局")
+	else
+		layout:SetText((FreeUIConfig.layout == 2) and "Dps/Tank Layout" or "Healer Layout")
+	end
+
 	layout:SetScript("OnClick", function()
 		FreeUIConfig.layout = (FreeUIConfig.layout == 2) and 1 or 2
 		ReloadUI()

@@ -113,7 +113,7 @@ C["unitframes"] = {
 
 	["player"] = {"BOTTOM", UIParent, "CENTER", 0, -200},
 	["target"] = {"TOP", UIParent, "CENTER", 0, -225},
-	["target_heal"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, 80},
+	["target_heal"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 20, 100},
 	["party"] = {"TOPRIGHT", 'oUF_FreePlayer', "TOPLEFT", -80, 100}, 	-- only applies with healer layout enabled
 	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -80, 40}, 	-- only applies with healer layout enabled
 

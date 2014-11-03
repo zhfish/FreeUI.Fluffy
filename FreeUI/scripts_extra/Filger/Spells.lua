@@ -31,7 +31,6 @@ Filger_Spells = {
 			{spellID = 111400, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fire and Brimstone 硫磺烈火
 			{spellID = 108683, unitID = "player", caster = "player", filter = "BUFF"},
-			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "P_PROC_ICON",
@@ -111,7 +110,6 @@ Filger_Spells = {
 
 			-- Rocket Fuel Leak 火箭鞋漏油
 			{spellID = 94794, unitID = "player", caster = "player", filter = "DEBUFF"},
-			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DEBUFF_ICON",
@@ -139,7 +137,6 @@ Filger_Spells = {
 			{spellID = 30108, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Haunt
 			{spellID = 48181, unitID = "target", caster = "player", filter = "DEBUFF"},
-			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_DE/BUFF_BAR",
@@ -258,7 +255,6 @@ Filger_Spells = {
 			{spellID = 125487, filter = "ICD", trigger = "BUFF", duration = 60},
 			-- Purified Bindings of Immerseus (Intellect, Proc)
 			{spellID = 146046, filter = "ICD", trigger = "BUFF", duration = 115},
-			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 	},
 
@@ -656,7 +652,6 @@ Filger_Spells = {
 			{spellID = 121557, unitID = "player", caster = "all", filter = "BUFF"},
 			-- Fear Ward
 			{spellID = 6346, unitID = "player", caster = "all", filter = "BUFF"},
-			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "RAID_AURA_ICON",
@@ -1110,7 +1105,6 @@ Filger_Spells = {
 			
 			-- 心智 [尤格萨隆]
 			{spellID = 63050, unitID = "player", caster = "all", filter = "DEBUFF"},
-			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
 			Name = "T_BUFF",
@@ -1414,7 +1408,6 @@ Filger_Spells = {
 			{spellID = 66271, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Drink
 			{spellID = 80167, unitID = "target", caster = "all", filter = "BUFF"},
-			{spellID = 109773, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 	},
 }
