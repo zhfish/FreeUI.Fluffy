@@ -70,6 +70,10 @@ local frames = {
   ["PVEFrame"] = false, -- dungeon finder + challenges
   ["GuildInviteFrame"] = false,
 
+  -- WoD
+  ["AddonList"] = false,
+  ["SplashFrame"] = false,
+
   -- AddOns
   ["LudwigFrame"] = false,
 }
@@ -109,7 +113,7 @@ local lodFrames = {
   --Blizzard_GlyphUI = { ["GlyphFrame"] = true },
   Blizzard_BarbershopUI = { ["BarberShopFrame"] = false },
   Blizzard_Calendar = { ["CalendarFrame"] = false, ["CalendarCreateEventFrame"] = true },
-  Blizzard_GuildUI = { ["GuildFrame"] = false, ["GuildRosterFrame"] = true },
+  Blizzard_GuildUI = { ["GuildFrame"] = false, ["GuildRosterFrame"] = true, ["GuildFrame.TitleMouseover"] = true },
   Blizzard_ReforgingUI = { ["ReforgingFrame"] = false, ["ReforgingFrameInvisibleButton"] = true, ["ReforgingFrame.InvisibleButton"] = true },
   Blizzard_ArchaeologyUI = { ["ArchaeologyFrame"] = false },
   Blizzard_LookingForGuildUI = { ["LookingForGuildFrame"] = false },
@@ -123,8 +127,12 @@ local lodFrames = {
   Blizzard_ChallengesUI = { ["ChallengesLeaderboardFrame"] = false }, -- UNTESTED
   Blizzard_ItemUpgradeUI = { ["ItemUpgradeFrame"] = false, }, -- UNTESTED
 
-  Blizzard_PVPUI = { ["PVPUIFrame"] = false },
 }
+
+if not wod then
+  lodFrames["Blizzard_PVPUI"] = { ["PVPUIFrame"] = false }
+end
+
 
 local parentFrame = {}
 local hooked = {}
