@@ -1,3 +1,5 @@
+local _, class = UnitClass("player")
+
 local lowHealth = .2
 local lowMana 	= .3
 
@@ -15,6 +17,7 @@ f:SetScript("OnEvent", function(self, event, unit, pType)
 			playedHp = false
 		end
 	elseif event == "UNIT_POWER" or event == "UNIT_MAXPOWER" and pType == "MANA" then
+		if class == "ROGUE" or class == "WARRIOR" or class == "HUNTER" or class == "DEATHKNIGHT" or class == "DRUID" then return end
 		if UnitPower("player") / UnitPowerMax("player") < lowMana then
 			if not playedMp then
 				playedMp = true
