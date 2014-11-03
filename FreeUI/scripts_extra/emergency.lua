@@ -1,7 +1,3 @@
-local class = select(2, UnitClass("player"))
-
-if class == "WARLOCK" then
-
 local lowHealth = .2
 local lowMana 	= .3
 
@@ -35,4 +31,3 @@ f:RegisterEvent("UNIT_POWER")
 f:RegisterEvent("UNIT_MAXHEALTH")
 f:RegisterEvent("UNIT_MAXPOWER")
 
-end
