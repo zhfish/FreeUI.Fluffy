@@ -87,7 +87,6 @@ scripts_extra\WhisperSound.lua
 scripts_extra\SpamageMeters.lua
 scripts_extra\Fixes.lua
 scripts_extra\AlreadyKnown.lua
-scripts_extra\Merchant.lua
 scripts_extra\UnitSounds.lua
 scripts_extra\BgSpecIcon.lua
 scripts_extra\HiddenRaidNames.lua

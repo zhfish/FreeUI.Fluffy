@@ -1459,9 +1459,9 @@ local UnitSpecific = {
 		Buffs['spacing-y'] = 3
 
 		Buffs:SetHeight(22)
-		Buffs:SetWidth(bossWidth - 24)
+		Buffs:SetWidth(bossWidth - 22)
 		Buffs.num = C.unitframes.num_boss_buffs
-		Buffs.size = 26
+		Buffs.size = 22
 
 		self.Buffs = Buffs
 
@@ -1802,7 +1802,7 @@ oUF:Factory(function(self)
 	end
 
 	for n = 1, MAX_BOSS_FRAMES do
-		spawnHelper(self, 'boss' .. n, 'RIGHT', -70, 220 - (60 * n))
+		spawnHelper(self, 'boss' .. n, 'RIGHT', -30, 220 - (60 * n))
 	end
 
 	if C.unitframes.enableArena then
