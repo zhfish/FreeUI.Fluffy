@@ -94,14 +94,14 @@ C["tooltip"] = {
 C["unitframes"] = {
 	["enable"] = true, 						-- enable the unit frames and their included modules
 
-	["autoPosition"] = true,				-- automatically postion unit frames based on resolution
+	["autoPosition"] = false,				-- automatically postion unit frames based on resolution
 
 	["enableGroup"] = true,					-- enable party/raid frames
 		["healerClasscolours"] = false,				-- colour unitframes by class in healer layout
 		["limitRaidSize"] = false, 					-- show a maximum of 25 players in a raid
 		["partyNameAlways"] = false,				-- show name on party/raid frames in dps/tank layout
-	["enableArena"] = true,					-- enable arena/flag carrier frames
-	["targettarget"] = false, 					-- show target of target frame
+	["enableArena"] = false,					-- enable arena/flag carrier frames
+	["targettarget"] = true, 					-- show target of target frame
 
 	["absorb"] = true, 							-- absorb bar/over absorb glow
 	["cast"] = {"BOTTOM", UIParent, "CENTER", 0, -105}, 	-- only applies with 'castbar' set to 2

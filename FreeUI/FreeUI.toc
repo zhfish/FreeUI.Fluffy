@@ -35,7 +35,6 @@ scripts\chattabs.lua
 scripts\colours.lua
 scripts\combattext.lua
 scripts\combo.lua
-## scripts\cooldowns.lua
 scripts\dbm.lua
 scripts\disable.lua
 scripts\durability.lua
@@ -56,7 +55,6 @@ scripts\minimap.lua
 scripts\mirrorbars.lua
 scripts\moneytext.lua
 scripts\nameplates.lua
-## scripts\objectivetracker.lua
 scripts\petbattles.lua
 scripts\queuetimer.lua
 scripts\rangecolor.lua
@@ -65,35 +63,32 @@ scripts\role.lua
 scripts\stats.lua
 scripts\tekkrush.lua
 scripts\threatmeter.lua
-## scripts\tooltip.lua
 scripts\unitframes.lua
 scripts\worldmarker.lua
 scripts\worldstateframe.lua
 
-scripts_extra\Filger\load.xml
 scripts_extra\ChatFilter\load.xml
+scripts_extra\Filger\load.xml
 
-scripts_extra\misc.lua
-scripts_extra\Screenshots.lua
+scripts_extra\Align.lua
+scripts_extra\AlreadyKnown.lua
+scripts_extra\BGSpam.lua
+scripts_extra\BgSpecIcon.lua
 scripts_extra\ColorPicker.lua
 scripts_extra\DragEmAll.lua
-scripts_extra\idTip.lua
-scripts_extra\ncShadow.lua
-scripts_extra\Align.lua
+scripts_extra\Emergency.lua
 scripts_extra\Focuser.lua
-scripts_extra\PulseCD.lua
-scripts_extra\Invite.lua
-scripts_extra\WhisperSound.lua
-scripts_extra\SpamageMeters.lua
-scripts_extra\Fixes.lua
-scripts_extra\AlreadyKnown.lua
-scripts_extra\UnitSounds.lua
-scripts_extra\BgSpecIcon.lua
 scripts_extra\HiddenRaidNames.lua
-scripts_extra\ItemLevel.lua
-scripts_extra\BGSpam.lua
+scripts_extra\idTip.lua
 scripts_extra\interruptsound.lua
-scripts_extra\emergency.lua
+scripts_extra\Invite.lua
+scripts_extra\ItemLevel.lua
+scripts_extra\ncShadow.lua
+scripts_extra\PulseCD.lua
+scripts_extra\Screenshots.lua
+scripts_extra\SpamageMeters.lua
+scripts_extra\UnitSounds.lua
+scripts_extra\WhisperSound.lua
 
 class\paladin.lua
 

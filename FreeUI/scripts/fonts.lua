@@ -1,16 +1,15 @@
 local F, C, L = unpack(select(2, ...))
 
 local locale = GetLocale()
+
+if locale == "zhCN" or locale == "zhTW" then return end
+
 local font = 'Fonts\\FRIZQT__.TTF'
 local font1 = 'Interface\\Addons\\FreeUI\\media\\supereffective.ttf'
+local Diablo = 'Interface\\Addons\\FreeUI\\media\\diablo.ttf'
+local Nordica = 'Interface\\Addons\\FreeUI\\media\\nordica.ttf'
+local damagefont = 'Interface\\Addons\\FreeUI\\media\\supereffective.ttf'
 
-local damagefont
-
-if locale == "zhCN" or locale == "zhTW" then
-	damagefont = "Fonts\\ARIALN.ttf"
-else
-	damagefont = 'Interface\\Addons\\FreeUI\\media\\supereffective.ttf'
-end
 
 RaidWarningFrame.slot1:SetFont(font, 20, "OUTLINE")
 RaidWarningFrame.slot2:SetFont(font, 20, "OUTLINE")
@@ -23,33 +22,50 @@ STANDARD_TEXT_FONT = font
 UNIT_NAME_FONT     = font
 DAMAGE_TEXT_FONT   = damagefont
 
-AchievementFont_Small:SetFont(font, 10)
+UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
+CHAT_FONT_HEIGHTS = {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+
+AchievementFont_Small:SetFont(Nordica, 12) -- 成就日期
 AchievementFont_Small:SetShadowColor(0, 0, 0)
 AchievementFont_Small:SetShadowOffset(1, -1)
-CoreAbilityFont:SetFont(font1, 32)
+
+CoreAbilityFont:SetFont(Nordica, 32) -- 核心技能面板大字体
 CoreAbilityFont:SetShadowColor(0, 0, 0)
 CoreAbilityFont:SetShadowOffset(1, -1)
+
 DestinyFontHuge:SetFont(font, 32)
 DestinyFontHuge:SetShadowColor(0, 0, 0)
 DestinyFontHuge:SetShadowOffset(1, -1)
 DestinyFontLarge:SetFont(font, 18)
 DestinyFontLarge:SetShadowColor(0, 0, 0)
 DestinyFontLarge:SetShadowOffset(1, -1)
-FriendsFont_Normal:SetFont(font, 12)
-FriendsFont_Small:SetFont(font, 10)
+
+FriendsFont_Normal:SetFont(font, 13) -- 好友名字
+FriendsFont_Small:SetFont(font, 11) -- 好友位置
 FriendsFont_Large:SetFont(font, 14)
-FriendsFont_UserText:SetFont(font, 11)
+FriendsFont_UserText:SetFont(font, 11) -- 好友战网更新
+
 GameFont_Gigantic:SetFont(font, 32)
-GameTooltipHeader:SetFont(font, 14)
+GameTooltipHeader:SetFont(font, 13) -- tooltip 头部
 GameTooltipHeader:SetShadowColor(0, 0, 0)
 GameTooltipHeader:SetShadowOffset(1, -1)
+
+Tooltip_Med:SetFont(font, 11)
+Tooltip_Med:SetShadowColor(0, 0, 0)
+Tooltip_Med:SetShadowOffset(1, -1)
+Tooltip_Small:SetFont(font, 10)
+Tooltip_Small:SetShadowColor(0, 0, 0)
+Tooltip_Small:SetShadowOffset(1, -1)
+
 InvoiceFont_Small:SetFont(font, 10)
 InvoiceFont_Small:SetShadowColor(0, 0, 0)
 InvoiceFont_Small:SetShadowOffset(1, -1)
 InvoiceFont_Med:SetFont(font, 12)
 InvoiceFont_Med:SetShadowColor(0, 0, 0)
 InvoiceFont_Med:SetShadowOffset(1, -1)
-MailFont_Large:SetFont(font, 15)
+
+MailFont_Large:SetFont(font, 15) -- 邮件内容
+
 NumberFont_GameNormal:SetFont(font, 10)
 NumberFont_OutlineThick_Mono_Small:SetFont(font, 12, "OUTLINE")
 NumberFont_Outline_Huge:SetFont(font, 30, "OUTLINE")
@@ -57,12 +73,13 @@ NumberFont_Outline_Large:SetFont(font, 16, "OUTLINE")
 NumberFont_Outline_Med:SetFont(font, 14, "OUTLINE")
 NumberFont_Shadow_Med:SetFont(font, 14)
 NumberFont_Shadow_Small:SetFont(font, 12)
+
 QuestFont_Shadow_Small:SetFont(font, 15)
 QuestFont_Large:SetFont(font, 17)
 QuestFont_Large:SetShadowColor(0, 0, 0)
 QuestFont_Large:SetShadowOffset(1, -1)
-QuestFont_Shadow_Huge:SetFont(font, 20)
-QuestFont_Huge:SetFont(font, 18)
+QuestFont_Shadow_Huge:SetFont(Nordica, 24) -- 任务标题/地下城任务标题
+QuestFont_Huge:SetFont(Nordica, 18) -- rewards
 QuestFont_Super_Huge:SetFont(font, 24)
 QuestFont_Super_Huge:SetShadowColor(0, 0, 0)
 QuestFont_Super_Huge:SetShadowOffset(1, -1)
@@ -72,10 +89,12 @@ if locale ~= "zhCN" and locale ~= "zhTW" then -- I don't even know
 	QuestFont_Enormous:SetShadowOffset(1, -1)
 end
 
-ReputationDetailFont:SetFont(font, 10)
-SpellFont_Small:SetFont(font, 10)
+ReputationDetailFont:SetFont(font, 12) -- 声望面板描述
+
+SpellFont_Small:SetFont(Nordica, 12) -- 技能面板小字体
 SpellFont_Small:SetShadowColor(0, 0, 0)
 SpellFont_Small:SetShadowOffset(1, -1)
+
 SystemFont_InverseShadow_Small:SetFont(font, 10)
 SystemFont_Large:SetFont(font, 16)
 SystemFont_Large:SetShadowColor(0, 0, 0)
@@ -120,12 +139,22 @@ SystemFont_Small2:SetShadowOffset(1, -1)
 SystemFont_Tiny:SetFont(font, 9)
 SystemFont_Tiny:SetShadowColor(0, 0, 0)
 SystemFont_Tiny:SetShadowOffset(1, -1)
-Tooltip_Med:SetFont(font, 12)
-Tooltip_Med:SetShadowColor(0, 0, 0)
-Tooltip_Med:SetShadowOffset(1, -1)
-Tooltip_Small:SetFont(font, 10)
-Tooltip_Small:SetShadowColor(0, 0, 0)
-Tooltip_Small:SetShadowOffset(1, -1)
+
+
+
+ZoneTextFont:SetFont(Diablo, 100)
+ZoneTextFont:SetShadowColor(0, 0, 0)
+ZoneTextFont:SetShadowOffset(1, -1)
+SubZoneTextFont:SetFont(Diablo, 68)
+SubZoneTextFont:SetShadowColor(0, 0, 0)
+SubZoneTextFont:SetShadowOffset(1, -1)
+PVPInfoTextFont:SetFont(Diablo, 48)
+PVPInfoTextFont:SetShadowColor(0, 0, 0)
+PVPInfoTextFont:SetShadowOffset(1, -1)
+
+WorldMapTextFont:SetFont(Diablo, 100) 
+WorldMapTextFont:SetShadowColor(0, 0, 0)
+WorldMapTextFont:SetShadowOffset(1, -1)
 
 -- Why?
 HelpFrameKnowledgebaseNavBarHomeButtonText:SetFont(font, 12)

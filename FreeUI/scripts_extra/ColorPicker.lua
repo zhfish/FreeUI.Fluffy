@@ -1,4 +1,4 @@
-local F, C, L = unpack(FreeUI)
+local F, C, L = unpack(select(2, ...))
 
 ----------------------------------------------------------------------------------------
 --	Improved ColorPicker(ColorPickerPlus by Jaslm)
@@ -142,7 +142,7 @@ load:SetScript("OnEvent", function(self, event)
 
 	-- Add copy button to the ColorPickerFrame
 	local b = CreateFrame("Button", "ColorPPCopy", ColorPickerFrame, "UIPanelButtonTemplate")
---	b:SkinButton()
+	F.Reskin(b)
 	b:SetText(CALENDAR_COPY_EVENT)
 	b:SetWidth(85)
 	b:SetHeight(22)
@@ -168,7 +168,7 @@ load:SetScript("OnEvent", function(self, event)
 	-- Paste button
 	b = CreateFrame("Button", "ColorPPPaste", ColorPickerFrame, "UIPanelButtonTemplate")
 	b:SetText(CALENDAR_PASTE_EVENT)
---	b:SkinButton()
+	F.Reskin(b)
 	b:SetWidth(85)
 	b:SetHeight(22)
 	b:SetPoint("TOPLEFT", "ColorPPCopy", "BOTTOMLEFT", 0, -7)
@@ -182,22 +182,6 @@ load:SetScript("OnEvent", function(self, event)
 			if colorBuffer.a then -- Color copied had an alpha value
 				OpacitySliderFrame:SetValue(colorBuffer.a)
 			end
-		end
-	end)
-
-	-- ClassColor button
-	b = CreateFrame("Button", "ColorPPClass", ColorPickerFrame, "UIPanelButtonTemplate")
---	b:SkinButton()
-	b:SetText("C")
-	b:SetWidth(18)
-	b:SetHeight(22)
-	b:SetPoint("TOPRIGHT", "ColorPPPaste", "BOTTOMRIGHT", 0, -7)
-
-	b:SetScript("OnClick", function()
-		ColorPickerFrame:SetColorRGB(T.color.r, T.color.g, T.color.b)
-		ColorSwatch:SetTexture(T.color.r, T.color.g, T.color.b)
-		if ColorPickerFrame.hasOpacity then
-			OpacitySliderFrame:SetValue(0)
 		end
 	end)
 
@@ -215,7 +199,7 @@ load:SetScript("OnEvent", function(self, event)
 	for i = 1, table.getn(boxes) do
 		local rgb = boxes[i]
 		local box = CreateFrame("EditBox", "ColorPPBox"..rgb, ColorPickerFrame, "InputBoxTemplate")
---		T.SkinEditBox(box)
+		F.ReskinInput(box)
 		box:SetID(i)
 		box:SetFrameStrata("DIALOG")
 		box:SetAutoFocus(false)

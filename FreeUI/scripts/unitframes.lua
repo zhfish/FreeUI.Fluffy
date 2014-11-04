@@ -543,6 +543,38 @@ local Shared = function(self, unit, isSingle)
 
 	self.RaidIcon = RaidIcon
 
+	-- [[ Counter bar ]]
+
+	if unit == "player" or unit == "pet" then
+		local CounterBar = CreateFrame("StatusBar", nil, self)
+		CounterBar:SetWidth(playerWidth)
+		CounterBar:SetHeight(16)
+		CounterBar:SetStatusBarTexture(C.media.texture)
+		CounterBar:SetPoint("TOP", UIParent, "TOP", 0, -100)
+
+		local cbd = CreateFrame("Frame", nil, CounterBar)
+		cbd:SetPoint("TOPLEFT", -1, 1)
+		cbd:SetPoint("BOTTOMRIGHT", 1, -1)
+		cbd:SetFrameLevel(CounterBar:GetFrameLevel()-1)
+		F.CreateBD(cbd)
+
+		CounterBar.Text = F.CreateFS(CounterBar)
+		CounterBar.Text:SetPoint("CENTER")
+
+		local r, g, b
+		local max
+
+		CounterBar:SetScript("OnValueChanged", function(_, value)
+			_, max = CounterBar:GetMinMaxValues()
+			r, g, b = self.ColorGradient(value, max, unpack(self.colors.smooth))
+			CounterBar:SetStatusBarColor(r, g, b)
+
+			CounterBar.Text:SetText(floor(value))
+		end)
+
+		self.CounterBar = CounterBar
+	end
+
 	--[[ Set up the layout ]]
 
 	self.colors = colors
@@ -1078,36 +1110,6 @@ local UnitSpecific = {
 			self.SpecialPowerBar:HookScript("OnHide", moveDebuffAnchors)
 		end
 		moveDebuffAnchors()
-
-		-- Counter bar
-
-		local CounterBar = CreateFrame("StatusBar", nil, self)
-		CounterBar:SetWidth(playerWidth)
-		CounterBar:SetHeight(16)
-		CounterBar:SetStatusBarTexture(C.media.texture)
-		CounterBar:SetPoint("TOP", UIParent, "TOP", 0, -100)
-
-		local cbd = CreateFrame("Frame", nil, CounterBar)
-		cbd:SetPoint("TOPLEFT", -1, 1)
-		cbd:SetPoint("BOTTOMRIGHT", 1, -1)
-		cbd:SetFrameLevel(CounterBar:GetFrameLevel()-1)
-		F.CreateBD(cbd)
-
-		CounterBar.Text = F.CreateFS(CounterBar)
-		CounterBar.Text:SetPoint("CENTER")
-
-		local r, g, b
-		local max
-
-		CounterBar:SetScript("OnValueChanged", function(_, value)
-			_, max = CounterBar:GetMinMaxValues()
-			r, g, b = self.ColorGradient(value, max, unpack(self.colors.smooth))
-			CounterBar:SetStatusBarColor(r, g, b)
-
-			CounterBar.Text:SetText(floor(value))
-		end)
-
-		self.CounterBar = CounterBar
 
 		-- Status indicator
 
@@ -1796,10 +1798,7 @@ oUF:Factory(function(self)
 	spawnHelper(self, 'focus', "LEFT", target, "RIGHT", 8, -60)
 	spawnHelper(self, 'focustarget', "LEFT", target, "RIGHT", 96, -60)
 	spawnHelper(self, 'pet', "RIGHT", player, "LEFT", -8, 0)
-
-	if C.unitframes.targettarget then
-		spawnHelper(self, 'targettarget', "LEFT", target, "RIGHT", 8, 0)
-	end
+	spawnHelper(self, 'targettarget', "LEFT", target, "RIGHT", 8, 0)
 
 	for n = 1, MAX_BOSS_FRAMES do
 		spawnHelper(self, 'boss' .. n, 'RIGHT', -30, 220 - (60 * n))
