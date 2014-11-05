@@ -76,6 +76,7 @@ scripts_extra\BGSpam.lua
 scripts_extra\BgSpecIcon.lua
 scripts_extra\ColorPicker.lua
 scripts_extra\DragEmAll.lua
+scripts_extra\Doom_CooldownPulse.lua
 scripts_extra\Emergency.lua
 scripts_extra\Focuser.lua
 scripts_extra\HiddenRaidNames.lua
