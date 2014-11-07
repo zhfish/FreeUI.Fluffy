@@ -35,6 +35,12 @@ tinsert(C.themes["FreeUI"], function()
 		end
 	end)
 
+	-- [[ Nothing available ]]
+
+	local NothingAvailable = LFGListFrame.NothingAvailable
+
+	NothingAvailable.Inset:DisableDrawLayer("BORDER")
+
 	-- [[ Search panel ]]
 
 	local SearchPanel = LFGListFrame.SearchPanel
@@ -194,4 +200,17 @@ tinsert(C.themes["FreeUI"], function()
 	F.Reskin(ActivityFinder.Dialog.CancelButton)
 	F.ReskinInput(ActivityFinder.Dialog.EntryBox)
 	F.ReskinScroll(LFGListEntryCreationSearchScrollFrameScrollBar)
+
+	-- [[ Application dialog ]]
+
+	local LFGListApplicationDialog = LFGListApplicationDialog
+
+	for i = 1, 9 do
+		select(i, LFGListApplicationDialog.Description:GetRegions()):Hide()
+	end
+
+	F.CreateBD(LFGListApplicationDialog)
+	F.CreateBD(LFGListApplicationDialog.Description, .25)
+	F.Reskin(LFGListApplicationDialog.SignUpButton)
+	F.Reskin(LFGListApplicationDialog.CancelButton)
 end)
