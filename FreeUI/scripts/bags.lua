@@ -2,6 +2,8 @@
 
 local F, C, L = unpack(select(2, ...))
 
+local _G = _G
+
 if C.bags.style ~= 1 then
 	local function toggleBagSlots()
 		local parent = C.bags.hideSlots and FreeUIHider or MainMenuBarArtFrame
@@ -18,7 +20,6 @@ if C.bags.style ~= 1 then
 	return
 end
 
-local _G = _G
 
 local r, g, b = unpack(C.class)
 
@@ -617,7 +618,7 @@ local function bagOnMouseover(self, isEnter)
 		for j = 1, GetContainerNumSlots(0) do
 			local bu = _G["ContainerFrame1Item"..j]
 			bu.bg:SetBackdropBorderColor(bgR, bgG, bgB)
-			bu.bg:SetShown(isEnter)
+			bu.bg:SetShown(isEnter or C.bags.slotsShowAlways)
 			bu.IconBorder:SetAlpha(isEnter and 0 or 1)
 		end
 	else
@@ -629,7 +630,7 @@ local function bagOnMouseover(self, isEnter)
 				for j = 1, GetContainerNumSlots(frame:GetID()) do
 					local bu = _G["ContainerFrame"..i.."Item"..j]
 					bu.bg:SetBackdropBorderColor(bgR, bgG, bgB)
-					bu.bg:SetShown(isEnter)
+					bu.bg:SetShown(isEnter or C.bags.slotsShowAlways)
 					bu.IconBorder:SetAlpha(isEnter and 0 or 1)
 				end
 
@@ -726,7 +727,7 @@ local function bankBagOnMouseover(self, isEnter)
 			for j = 1, GetContainerNumSlots(frame:GetID()) do
 				local bu = _G["ContainerFrame"..i.."Item"..j]
 				bu.bg:SetBackdropBorderColor(bgR, bgG, bgB)
-				bu.bg:SetShown(isEnter)
+				bu.bg:SetShown(isEnter or C.bags.slotsShowAlways)
 				bu.IconBorder:SetAlpha(isEnter and 0 or 1)
 			end
 
