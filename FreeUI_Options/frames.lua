@@ -561,16 +561,16 @@ do
 	local absorb = ns.CreateCheckBox(unitframes, "absorb", true, true)
 	absorb:SetPoint("LEFT", autoPosition, "RIGHT", 240, 0)
 
-	local castbarSeparate = ns.CreateCheckBox(unitframes, "castbarSeparate", true, true)
-	castbarSeparate:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -8)
+	-- local castbarSeparate = ns.CreateCheckBox(unitframes, "castbarSeparate", true, true)
+	-- castbarSeparate:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -8)
 
-	local castbarSeparateOnlyCasters = ns.CreateCheckBox(unitframes, "castbarSeparateOnlyCasters", true, true)
-	castbarSeparateOnlyCasters:SetPoint("TOPLEFT", castbarSeparate, "BOTTOMLEFT", 16, -8)
+	-- local castbarSeparateOnlyCasters = ns.CreateCheckBox(unitframes, "castbarSeparateOnlyCasters", true, true)
+	-- castbarSeparateOnlyCasters:SetPoint("TOPLEFT", castbarSeparate, "BOTTOMLEFT", 16, -8)
 
-	castbarSeparate.children = {castbarSeparateOnlyCasters}
+	-- castbarSeparate.children = {castbarSeparateOnlyCasters}
 
 	local pvp = ns.CreateCheckBox(unitframes, "pvp", true, true)
-	pvp:SetPoint("TOPLEFT", castbarSeparate, "BOTTOMLEFT", 0, -42)
+	pvp:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -42)
 
 	local statusIndicator = ns.CreateCheckBox(unitframes, "statusIndicator", true)
 	statusIndicator:SetPoint("TOPLEFT", pvp, "BOTTOMLEFT", 0, -8)
@@ -602,8 +602,8 @@ do
 		pvp:SetShown(shown)
 		statusIndicator:SetShown(shown)
 		statusIndicatorCombat:SetShown(shown)
-		castbarSeparate:SetShown(shown)
-		castbarSeparateOnlyCasters:SetShown(shown)
+--		castbarSeparate:SetShown(shown)
+--		castbarSeparateOnlyCasters:SetShown(shown)
 		enableArena:SetShown(shown)
 		layoutText:SetShown(shown)
 		unitframes.Layout:SetShown(shown)

@@ -299,10 +299,14 @@ end
 
 --[[ Update power value ]]
 
-local PostUpdatePower = function(Power, unit, min, max)
+local PostUpdatePower = function(Power, unit, cur, max, min)
 	local Health = Power:GetParent().Health
-	if min == 0 or max == 0 or not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
+	if max == 0 or not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		Power:SetValue(0)
+	end
+
+	if Power.Text then
+		Power.Text:SetTextColor(Power:GetStatusBarColor())
 	end
 end
 
@@ -338,10 +342,6 @@ local Shared = function(self, unit, isSingle)
 	bd:SetFrameStrata("BACKGROUND")
 
 	self.bd = bd
-
-
-
-
 
 
 	--[[ Health ]]
@@ -657,13 +657,53 @@ local UnitSpecific = {
 		self:Tag(HealthPoints, '[dead][offline][free:playerHealth]')
 		Health.value = HealthPoints
 
-		local PowerPoints = F.CreateFS(Power, C.FONT_SIZE_NORMAL, "RIGHT")
-		PowerPoints:SetPoint("BOTTOMRIGHT", Health, "TOPRIGHT", 0, 3)
-		PowerPoints:SetTextColor(.4, .7, 1)
-		self:Tag(PowerPoints, '[free:power]')
+		local PowerText = F.CreateFS(Power, C.FONT_SIZE_NORMAL, "RIGHT")
+		PowerText:SetPoint("BOTTOMRIGHT", Health, "TOPRIGHT", 0, 3)
+		self:Tag(PowerText, '[free:power]')
+		Power.Text = PowerText
 
 		self.RaidIcon:ClearAllPoints()
 		self.RaidIcon:Hide()
+
+		-- Cast bar
+
+		Castbar.Width = self:GetWidth()
+		Spark:SetHeight(self.Health:GetHeight())
+		Castbar.Text = F.CreateFS(Castbar)
+		Castbar.Text:SetDrawLayer("ARTWORK")
+
+		local IconFrame = CreateFrame("Frame", nil, Castbar)
+
+		local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
+		Icon:SetAllPoints(IconFrame)
+		Icon:SetTexCoord(.08, .92, .08, .92)
+		F.CreateSB(IconFrame)
+
+		Castbar.Icon = Icon
+
+		self.Iconbg = IconFrame:CreateTexture(nil, "BACKGROUND")
+		self.Iconbg:SetPoint("TOPLEFT", -1 , 1)
+		self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
+		self.Iconbg:SetTexture(C.media.backdrop)
+
+		Castbar:SetStatusBarTexture(C.media.texture)
+		Castbar:SetStatusBarColor(unpack(C.class))
+		Castbar:SetWidth(self:GetWidth())
+		Castbar:SetHeight(self:GetHeight())
+		Castbar:SetPoint("TOP", Health, "BOTTOM", 0, -160)
+		Castbar.Text:SetAllPoints(Castbar)
+		local sf = Castbar:CreateTexture(nil, "OVERLAY")
+		sf:SetVertexColor(.5, .5, .5, .5)
+		Castbar.SafeZone = sf
+		IconFrame:SetPoint("RIGHT", Castbar, "LEFT", -10, 0)
+		IconFrame:SetSize(22, 22)
+
+		local bg = CreateFrame("Frame", nil, Castbar)
+		bg:SetPoint("TOPLEFT", -1, 1)
+		bg:SetPoint("BOTTOMRIGHT", 1, -1)
+		bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
+		F.CreateBD(bg)
+		F.CreateSB(bg)
 
 
 		-- PVP
@@ -1168,6 +1208,8 @@ local UnitSpecific = {
 
 		local Health = self.Health
 		local Power = self.Power
+		local Castbar = self.Castbar
+		local Spark = Castbar.Spark
 
 		Health:SetHeight(targetHeight - powerHeight - 1)
 
@@ -1176,10 +1218,49 @@ local UnitSpecific = {
 		self:Tag(HealthPoints, '[dead][offline][free:health]')
 		Health.value = HealthPoints
 
-		local PowerPoints = F.CreateFS(Power)
-		PowerPoints:SetPoint("BOTTOMLEFT", HealthPoints, "BOTTOMRIGHT", 3, 0)
-		PowerPoints:SetTextColor(.4, .7, 1)
-		self:Tag(PowerPoints, '[free:power]')
+		local PowerText = F.CreateFS(Power)
+		PowerText:SetPoint("BOTTOMLEFT", HealthPoints, "BOTTOMRIGHT", 3, 0)
+		self:Tag(PowerText, '[free:power]')
+
+		-- Cast bar
+
+		Castbar.Width = self:GetWidth()
+		Spark:SetHeight(self.Health:GetHeight())
+		Castbar.Text = F.CreateFS(Castbar)
+		Castbar.Text:SetDrawLayer("ARTWORK")
+
+		local IconFrame = CreateFrame("Frame", nil, Castbar)
+
+		local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
+		Icon:SetAllPoints(IconFrame)
+		Icon:SetTexCoord(.08, .92, .08, .92)
+		F.CreateSB(IconFrame)
+
+		Castbar.Icon = Icon
+
+		self.Iconbg = IconFrame:CreateTexture(nil, "BACKGROUND")
+		self.Iconbg:SetPoint("TOPLEFT", -1 , 1)
+		self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
+		self.Iconbg:SetTexture(C.media.backdrop)
+
+		Castbar:SetStatusBarTexture(C.media.texture)
+		Castbar:SetStatusBarColor(unpack(C.class))
+		Castbar:SetWidth(229)
+		Castbar:SetHeight(4)
+		Castbar:SetPoint("TOPLEFT", Health, "BOTTOMLEFT", 0, -64)
+		Castbar.Text:SetAllPoints(Castbar)
+		local sf = Castbar:CreateTexture(nil, "OVERLAY")
+		sf:SetVertexColor(.5, .5, .5, .5)
+		Castbar.SafeZone = sf
+		IconFrame:SetPoint("LEFT", Castbar, "RIGHT", 10, 0)
+		IconFrame:SetSize(14, 14)
+
+		local bg = CreateFrame("Frame", nil, Castbar)
+		bg:SetPoint("TOPLEFT", -1, 1)
+		bg:SetPoint("BOTTOMRIGHT", 1, -1)
+		bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
+		F.CreateBD(bg)
+		F.CreateSB(bg)
 
 		local tt = CreateFrame("Frame", nil, self)
 		tt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 7 + C.appearance.fontSizeNormal + (C.unitframes.targettarget and 10 or 0))
@@ -1204,7 +1285,7 @@ local UnitSpecific = {
 
 
 		local Name = F.CreateFS(self)
-		Name:SetPoint("BOTTOMLEFT", PowerPoints, "BOTTOMRIGHT")
+		Name:SetPoint("BOTTOMLEFT", PowerText, "BOTTOMRIGHT")
 		Name:SetPoint("RIGHT", self)
 		Name:SetJustifyH("RIGHT")
 		Name:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
@@ -1259,11 +1340,11 @@ local UnitSpecific = {
 		QuestIcon.PostUpdate = function(self, isQuestBoss)
 			if isQuestBoss then
 				Name:ClearAllPoints()
-				Name:SetPoint("BOTTOMLEFT", PowerPoints, "BOTTOMRIGHT")
+				Name:SetPoint("BOTTOMLEFT", PowerText, "BOTTOMRIGHT")
 				Name:SetPoint("RIGHT", QuestIcon, "LEFT", 0, 0)
 			else
 				Name:ClearAllPoints()
-				Name:SetPoint("BOTTOMLEFT", PowerPoints, "BOTTOMRIGHT")
+				Name:SetPoint("BOTTOMLEFT", PowerText, "BOTTOMRIGHT")
 				Name:SetPoint("RIGHT", self)
 			end
 		end
@@ -1299,10 +1380,45 @@ local UnitSpecific = {
 
 		Health:SetHeight(focusHeight - powerHeight - 1)
 
-		Castbar:SetAllPoints(Health)
-		Castbar.Width = self:GetWidth()
+		-- Cast bar
 
-		Spark:SetHeight(Health:GetHeight())
+		Castbar.Width = self:GetWidth()
+		Spark:SetHeight(self.Health:GetHeight())
+		Castbar.Text = F.CreateFS(Castbar)
+		Castbar.Text:SetDrawLayer("ARTWORK")
+
+		local IconFrame = CreateFrame("Frame", nil, Castbar)
+
+		local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
+		Icon:SetAllPoints(IconFrame)
+		Icon:SetTexCoord(.08, .92, .08, .92)
+		F.CreateSB(IconFrame)
+
+		Castbar.Icon = Icon
+
+		self.Iconbg = IconFrame:CreateTexture(nil, "BACKGROUND")
+		self.Iconbg:SetPoint("TOPLEFT", -1 , 1)
+		self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
+		self.Iconbg:SetTexture(C.media.backdrop)
+
+		Castbar:SetStatusBarTexture(C.media.texture)
+		Castbar:SetStatusBarColor(unpack(C.class))
+		Castbar:SetWidth(168)
+		Castbar:SetHeight(4)
+		Castbar:SetPoint("TOPLEFT", Health, "BOTTOMLEFT", 0, -40)
+		Castbar.Text:SetAllPoints(Castbar)
+		local sf = Castbar:CreateTexture(nil, "OVERLAY")
+		sf:SetVertexColor(.5, .5, .5, .5)
+		Castbar.SafeZone = sf
+		IconFrame:SetPoint("LEFT", Castbar, "RIGHT", 10, 0)
+		IconFrame:SetSize(14, 14)
+
+		local bg = CreateFrame("Frame", nil, Castbar)
+		bg:SetPoint("TOPLEFT", -1, 1)
+		bg:SetPoint("BOTTOMRIGHT", 1, -1)
+		bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
+		F.CreateBD(bg)
+		F.CreateSB(bg)
 
 		local tt = CreateFrame("Frame", nil, self)
 		tt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 7 + C.appearance.fontSizeNormal + (C.unitframes.focustarget and 10 or 0))
@@ -1795,8 +1911,8 @@ oUF:Factory(function(self)
 		end
 	end
 
-	spawnHelper(self, 'focus', "LEFT", target, "RIGHT", 8, -60)
-	spawnHelper(self, 'focustarget', "LEFT", target, "RIGHT", 96, -60)
+	spawnHelper(self, 'focus', "LEFT", target, "RIGHT", 8, -100)
+	spawnHelper(self, 'focustarget', "LEFT", target, "RIGHT", 96, -100)
 	spawnHelper(self, 'pet', "RIGHT", player, "LEFT", -8, 0)
 	spawnHelper(self, 'targettarget', "LEFT", target, "RIGHT", 8, 0)
 

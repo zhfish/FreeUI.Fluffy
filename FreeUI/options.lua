@@ -104,16 +104,13 @@ C["unitframes"] = {
 	["targettarget"] = true, 					-- show target of target frame
 
 	["absorb"] = true, 							-- absorb bar/over absorb glow
-	["cast"] = {"BOTTOM", UIParent, "CENTER", 0, -105}, 	-- only applies with 'castbar' set to 2
-	["castbarSeparate"] = true, 				-- true for a separate player cast bar
-		["castbarSeparateOnlyCasters"] = true, 		-- separate bar only for mages/warlocks/priests
 	["pvp"] = true, 							-- show pvp icon on player frame
 	["statusIndicator"] = false,					-- show combat/resting status on player frame
 		["statusIndicatorCombat"] = true,				-- show combat status (else: only resting)
 
 	["player"] = {"BOTTOM", UIParent, "CENTER", 0, -200},
-	["target"] = {"LEFT", UIParent, "CENTER", 140, -100},
-	["target_heal"] = {"LEFT", UIParent, "CENTER", 140, -100},
+	["target"] = {"LEFT", UIParent, "CENTER", 140, -140},
+	["target_heal"] = {"LEFT", UIParent, "CENTER", 140, -80},
 	["party"] = {"TOPRIGHT", 'oUF_FreePlayer', "TOPLEFT", -80, 100}, 	-- only applies with healer layout enabled
 	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -80, 40}, 	-- only applies with healer layout enabled
 
