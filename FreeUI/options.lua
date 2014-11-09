@@ -108,9 +108,9 @@ C["unitframes"] = {
 	["statusIndicator"] = false,					-- show combat/resting status on player frame
 		["statusIndicatorCombat"] = true,				-- show combat status (else: only resting)
 
-	["player"] = {"BOTTOM", UIParent, "CENTER", 0, -200},
-	["target"] = {"LEFT", UIParent, "CENTER", 140, -140},
-	["target_heal"] = {"LEFT", UIParent, "CENTER", 140, -80},
+	["player"] = {"RIGHT", UIParent, "CENTER", -120, -100},
+	["target"] = {"BOTTOM", UIParent, "CENTER", 0, -160},
+	["target_heal"] = {"BOTTOM", UIParent, "CENTER", 0, -160},
 	["party"] = {"TOPRIGHT", 'oUF_FreePlayer', "TOPLEFT", -80, 100}, 	-- only applies with healer layout enabled
 	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -80, 40}, 	-- only applies with healer layout enabled
 

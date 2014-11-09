@@ -690,7 +690,7 @@ local UnitSpecific = {
 		Castbar:SetStatusBarColor(unpack(C.class))
 		Castbar:SetWidth(self:GetWidth())
 		Castbar:SetHeight(self:GetHeight())
-		Castbar:SetPoint("TOP", Health, "BOTTOM", 0, -160)
+		Castbar:SetPoint("CENTER", UIParent, "CENTER", 0, -340)
 		Castbar.Text:SetAllPoints(Castbar)
 		local sf = Castbar:CreateTexture(nil, "OVERLAY")
 		sf:SetVertexColor(.5, .5, .5, .5)
