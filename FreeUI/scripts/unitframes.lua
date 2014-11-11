@@ -1922,7 +1922,7 @@ oUF:Factory(function(self)
 
 	if C.unitframes.enableArena then
 		for n = 1, 5 do
-			spawnHelper(self, 'arena' .. n, 'TOP', player, 'TOP', 0, 0 - (56 * n))
+			spawnHelper(self, 'arena' .. n, 'LEFT', UIParent, 20, 100 - (56 * n))
 		end
 	end
 
