@@ -561,16 +561,11 @@ do
 	local absorb = ns.CreateCheckBox(unitframes, "absorb", true, true)
 	absorb:SetPoint("LEFT", autoPosition, "RIGHT", 240, 0)
 
-	-- local castbarSeparate = ns.CreateCheckBox(unitframes, "castbarSeparate", true, true)
-	-- castbarSeparate:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -8)
-
-	-- local castbarSeparateOnlyCasters = ns.CreateCheckBox(unitframes, "castbarSeparateOnlyCasters", true, true)
-	-- castbarSeparateOnlyCasters:SetPoint("TOPLEFT", castbarSeparate, "BOTTOMLEFT", 16, -8)
-
-	-- castbarSeparate.children = {castbarSeparateOnlyCasters}
+	local castbar = ns.CreateCheckBox(unitframes, "castbar", true, true)
+	castbar:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -8)
 
 	local pvp = ns.CreateCheckBox(unitframes, "pvp", true, true)
-	pvp:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -42)
+	pvp:SetPoint("TOPLEFT", castbar, "BOTTOMLEFT", 0, -42)
 
 	local statusIndicator = ns.CreateCheckBox(unitframes, "statusIndicator", true)
 	statusIndicator:SetPoint("TOPLEFT", pvp, "BOTTOMLEFT", 0, -8)

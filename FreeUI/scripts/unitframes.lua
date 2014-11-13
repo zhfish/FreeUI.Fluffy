@@ -667,44 +667,45 @@ local UnitSpecific = {
 
 		-- Cast bar
 
-		Castbar.Width = self:GetWidth()
-		Spark:SetHeight(self.Health:GetHeight())
-		Castbar.Text = F.CreateFS(Castbar)
-		Castbar.Text:SetDrawLayer("ARTWORK")
+		if C.unitframes.castbar then
+			Castbar.Width = self:GetWidth()
+			Spark:SetHeight(self.Health:GetHeight())
+			Castbar.Text = F.CreateFS(Castbar)
+			Castbar.Text:SetDrawLayer("ARTWORK")
 
-		local IconFrame = CreateFrame("Frame", nil, Castbar)
+			local IconFrame = CreateFrame("Frame", nil, Castbar)
 
-		local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
-		Icon:SetAllPoints(IconFrame)
-		Icon:SetTexCoord(.08, .92, .08, .92)
-		F.CreateSB(IconFrame)
+			local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
+			Icon:SetAllPoints(IconFrame)
+			Icon:SetTexCoord(.08, .92, .08, .92)
+			F.CreateSB(IconFrame)
 
-		Castbar.Icon = Icon
+			Castbar.Icon = Icon
 
-		self.Iconbg = IconFrame:CreateTexture(nil, "BACKGROUND")
-		self.Iconbg:SetPoint("TOPLEFT", -1 , 1)
-		self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
-		self.Iconbg:SetTexture(C.media.backdrop)
+			self.Iconbg = IconFrame:CreateTexture(nil, "BACKGROUND")
+			self.Iconbg:SetPoint("TOPLEFT", -1 , 1)
+			self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
+			self.Iconbg:SetTexture(C.media.backdrop)
 
-		Castbar:SetStatusBarTexture(C.media.texture)
-		Castbar:SetStatusBarColor(unpack(C.class))
-		Castbar:SetWidth(self:GetWidth())
-		Castbar:SetHeight(self:GetHeight())
-		Castbar:SetPoint("CENTER", UIParent, "CENTER", 0, -340)
-		Castbar.Text:SetAllPoints(Castbar)
-		local sf = Castbar:CreateTexture(nil, "OVERLAY")
-		sf:SetVertexColor(.5, .5, .5, .5)
-		Castbar.SafeZone = sf
-		IconFrame:SetPoint("RIGHT", Castbar, "LEFT", -10, 0)
-		IconFrame:SetSize(22, 22)
+			Castbar:SetStatusBarTexture(C.media.texture)
+			Castbar:SetStatusBarColor(unpack(C.class))
+			Castbar:SetWidth(self:GetWidth())
+			Castbar:SetHeight(self:GetHeight())
+			Castbar:SetPoint("CENTER", UIParent, "CENTER", 0, -340)
+			Castbar.Text:SetAllPoints(Castbar)
+			local sf = Castbar:CreateTexture(nil, "OVERLAY")
+			sf:SetVertexColor(.5, .5, .5, .5)
+			Castbar.SafeZone = sf
+			IconFrame:SetPoint("RIGHT", Castbar, "LEFT", -10, 0)
+			IconFrame:SetSize(22, 22)
 
-		local bg = CreateFrame("Frame", nil, Castbar)
-		bg:SetPoint("TOPLEFT", -1, 1)
-		bg:SetPoint("BOTTOMRIGHT", 1, -1)
-		bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
-		F.CreateBD(bg)
-		F.CreateSB(bg)
-
+			local bg = CreateFrame("Frame", nil, Castbar)
+			bg:SetPoint("TOPLEFT", -1, 1)
+			bg:SetPoint("BOTTOMRIGHT", 1, -1)
+			bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
+			F.CreateBD(bg)
+			F.CreateSB(bg)
+		end
 
 		-- PVP
 
@@ -1224,43 +1225,45 @@ local UnitSpecific = {
 
 		-- Cast bar
 
-		Castbar.Width = self:GetWidth()
-		Spark:SetHeight(self.Health:GetHeight())
-		Castbar.Text = F.CreateFS(Castbar)
-		Castbar.Text:SetDrawLayer("ARTWORK")
+		if C.unitframes.castbar then
+			Castbar.Width = self:GetWidth()
+			Spark:SetHeight(self.Health:GetHeight())
+			Castbar.Text = F.CreateFS(Castbar)
+			Castbar.Text:SetDrawLayer("ARTWORK")
 
-		local IconFrame = CreateFrame("Frame", nil, Castbar)
+			local IconFrame = CreateFrame("Frame", nil, Castbar)
 
-		local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
-		Icon:SetAllPoints(IconFrame)
-		Icon:SetTexCoord(.08, .92, .08, .92)
-		F.CreateSB(IconFrame)
+			local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
+			Icon:SetAllPoints(IconFrame)
+			Icon:SetTexCoord(.08, .92, .08, .92)
+			F.CreateSB(IconFrame)
 
-		Castbar.Icon = Icon
+			Castbar.Icon = Icon
 
-		self.Iconbg = IconFrame:CreateTexture(nil, "BACKGROUND")
-		self.Iconbg:SetPoint("TOPLEFT", -1 , 1)
-		self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
-		self.Iconbg:SetTexture(C.media.backdrop)
+			self.Iconbg = IconFrame:CreateTexture(nil, "BACKGROUND")
+			self.Iconbg:SetPoint("TOPLEFT", -1 , 1)
+			self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
+			self.Iconbg:SetTexture(C.media.backdrop)
 
-		Castbar:SetStatusBarTexture(C.media.texture)
-		Castbar:SetStatusBarColor(unpack(C.class))
-		Castbar:SetWidth(229)
-		Castbar:SetHeight(4)
-		Castbar:SetPoint("TOPLEFT", Health, "BOTTOMLEFT", 0, -64)
-		Castbar.Text:SetAllPoints(Castbar)
-		local sf = Castbar:CreateTexture(nil, "OVERLAY")
-		sf:SetVertexColor(.5, .5, .5, .5)
-		Castbar.SafeZone = sf
-		IconFrame:SetPoint("LEFT", Castbar, "RIGHT", 10, 0)
-		IconFrame:SetSize(14, 14)
+			Castbar:SetStatusBarTexture(C.media.texture)
+			Castbar:SetStatusBarColor(unpack(C.class))
+			Castbar:SetWidth(229)
+			Castbar:SetHeight(4)
+			Castbar:SetPoint("TOPLEFT", Health, "BOTTOMLEFT", 0, -64)
+			Castbar.Text:SetAllPoints(Castbar)
+			local sf = Castbar:CreateTexture(nil, "OVERLAY")
+			sf:SetVertexColor(.5, .5, .5, .5)
+			Castbar.SafeZone = sf
+			IconFrame:SetPoint("LEFT", Castbar, "RIGHT", 10, 0)
+			IconFrame:SetSize(14, 14)
 
-		local bg = CreateFrame("Frame", nil, Castbar)
-		bg:SetPoint("TOPLEFT", -1, 1)
-		bg:SetPoint("BOTTOMRIGHT", 1, -1)
-		bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
-		F.CreateBD(bg)
-		F.CreateSB(bg)
+			local bg = CreateFrame("Frame", nil, Castbar)
+			bg:SetPoint("TOPLEFT", -1, 1)
+			bg:SetPoint("BOTTOMRIGHT", 1, -1)
+			bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
+			F.CreateBD(bg)
+			F.CreateSB(bg)
+		end
 
 		local tt = CreateFrame("Frame", nil, self)
 		tt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 7 + C.appearance.fontSizeNormal + (C.unitframes.targettarget and 10 or 0))
@@ -1382,43 +1385,45 @@ local UnitSpecific = {
 
 		-- Cast bar
 
-		Castbar.Width = self:GetWidth()
-		Spark:SetHeight(self.Health:GetHeight())
-		Castbar.Text = F.CreateFS(Castbar)
-		Castbar.Text:SetDrawLayer("ARTWORK")
+		if C.unitframes.castbar then
+			Castbar.Width = self:GetWidth()
+			Spark:SetHeight(self.Health:GetHeight())
+			Castbar.Text = F.CreateFS(Castbar)
+			Castbar.Text:SetDrawLayer("ARTWORK")
 
-		local IconFrame = CreateFrame("Frame", nil, Castbar)
+			local IconFrame = CreateFrame("Frame", nil, Castbar)
 
-		local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
-		Icon:SetAllPoints(IconFrame)
-		Icon:SetTexCoord(.08, .92, .08, .92)
-		F.CreateSB(IconFrame)
+			local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
+			Icon:SetAllPoints(IconFrame)
+			Icon:SetTexCoord(.08, .92, .08, .92)
+			F.CreateSB(IconFrame)
 
-		Castbar.Icon = Icon
+			Castbar.Icon = Icon
 
-		self.Iconbg = IconFrame:CreateTexture(nil, "BACKGROUND")
-		self.Iconbg:SetPoint("TOPLEFT", -1 , 1)
-		self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
-		self.Iconbg:SetTexture(C.media.backdrop)
+			self.Iconbg = IconFrame:CreateTexture(nil, "BACKGROUND")
+			self.Iconbg:SetPoint("TOPLEFT", -1 , 1)
+			self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
+			self.Iconbg:SetTexture(C.media.backdrop)
 
-		Castbar:SetStatusBarTexture(C.media.texture)
-		Castbar:SetStatusBarColor(unpack(C.class))
-		Castbar:SetWidth(168)
-		Castbar:SetHeight(4)
-		Castbar:SetPoint("TOPLEFT", Health, "BOTTOMLEFT", 0, -40)
-		Castbar.Text:SetAllPoints(Castbar)
-		local sf = Castbar:CreateTexture(nil, "OVERLAY")
-		sf:SetVertexColor(.5, .5, .5, .5)
-		Castbar.SafeZone = sf
-		IconFrame:SetPoint("LEFT", Castbar, "RIGHT", 10, 0)
-		IconFrame:SetSize(14, 14)
+			Castbar:SetStatusBarTexture(C.media.texture)
+			Castbar:SetStatusBarColor(unpack(C.class))
+			Castbar:SetWidth(168)
+			Castbar:SetHeight(4)
+			Castbar:SetPoint("TOPLEFT", Health, "BOTTOMLEFT", 0, -40)
+			Castbar.Text:SetAllPoints(Castbar)
+			local sf = Castbar:CreateTexture(nil, "OVERLAY")
+			sf:SetVertexColor(.5, .5, .5, .5)
+			Castbar.SafeZone = sf
+			IconFrame:SetPoint("LEFT", Castbar, "RIGHT", 10, 0)
+			IconFrame:SetSize(14, 14)
 
-		local bg = CreateFrame("Frame", nil, Castbar)
-		bg:SetPoint("TOPLEFT", -1, 1)
-		bg:SetPoint("BOTTOMRIGHT", 1, -1)
-		bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
-		F.CreateBD(bg)
-		F.CreateSB(bg)
+			local bg = CreateFrame("Frame", nil, Castbar)
+			bg:SetPoint("TOPLEFT", -1, 1)
+			bg:SetPoint("BOTTOMRIGHT", 1, -1)
+			bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
+			F.CreateBD(bg)
+			F.CreateSB(bg)
+		end
 
 		local tt = CreateFrame("Frame", nil, self)
 		tt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 7 + C.appearance.fontSizeNormal + (C.unitframes.focustarget and 10 or 0))

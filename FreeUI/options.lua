@@ -104,6 +104,7 @@ C["unitframes"] = {
 	["targettarget"] = true, 					-- show target of target frame
 
 	["absorb"] = true, 							-- absorb bar/over absorb glow
+	["castbar"] = true,
 	["pvp"] = true, 							-- show pvp icon on player frame
 	["statusIndicator"] = false,					-- show combat/resting status on player frame
 		["statusIndicatorCombat"] = true,				-- show combat status (else: only resting)
