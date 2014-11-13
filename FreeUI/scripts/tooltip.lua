@@ -2,6 +2,8 @@
 
 local F, C, L = unpack(select(2, ...))
 
+if not C.tooltip.enable then return end
+
 PVP_ENABLED = ""
 
 hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)
@@ -9,7 +11,7 @@ hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)
 		self:SetOwner(parent, "ANCHOR_CURSOR")
 	else
 		self:SetOwner(parent, "ANCHOR_NONE")
-		self:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -30, 282)
+		self:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -10, 410)
 	end
 end)
 

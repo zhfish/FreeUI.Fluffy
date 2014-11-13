@@ -184,6 +184,8 @@ ns.localization.unitframesenableArenaTooltip = "打开竞技场敌对目标和�
 
 ns.localization.tooltip = "鼠标提示"
 ns.localization.tooltipSubText = "调整鼠标信息的外观和功能。"
+ns.localization.tooltipenable = "启用"
+ns.localization.tooltipenableTooltip = "禁用这个选项如果你想使用其他的鼠标提示插件"
 ns.localization.tooltipanchorCursor = "跟随鼠标"
 ns.localization.tooltipguildrank = "公会阶级"
 ns.localization.tooltiptitle = "玩家头衔"

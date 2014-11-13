@@ -63,7 +63,7 @@ scripts\role.lua
 scripts\stats.lua
 scripts\tekkrush.lua
 scripts\threatmeter.lua
-## scripts\tooltip.lua
+scripts\tooltip.lua
 scripts\unitframes.lua
 scripts\worldmarker.lua
 scripts\worldstateframe.lua

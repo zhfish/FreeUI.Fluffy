@@ -614,8 +614,11 @@ do
 	local tooltip = FreeUIOptionsPanel.tooltip
 	tooltip.tab.Icon:SetTexture("Interface\\Icons\\INV_Enchant_FormulaEpic_01")
 
+	local enable = ns.CreateCheckBox(tooltip, "enable", true, true)
+	enable:SetPoint("TOPLEFT", tooltip.subText, "BOTTOMLEFT", 0, -8)
+
 	local anchorCursor = ns.CreateCheckBox(tooltip, "anchorCursor")
-	anchorCursor:SetPoint("TOPLEFT", tooltip.subText, "BOTTOMLEFT", 0, -8)
+	anchorCursor:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -8)
 
 	local guildrank = ns.CreateCheckBox(tooltip, "guildrank")
 	guildrank:SetPoint("TOPLEFT", anchorCursor, "BOTTOMLEFT", 0, -8)

@@ -86,6 +86,7 @@ C["notifications"] = {
 }
 
 C["tooltip"] = {
+	["enable"] = true,
 	["anchorCursor"] = false,
 	["guildrank"] = true,
 	["title"] = false,
