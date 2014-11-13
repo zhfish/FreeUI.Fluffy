@@ -163,7 +163,7 @@ ns.localization.unitframespartyNameAlways = "Always show group member names"
 ns.localization.unitframespartyNameAlwaysTooltip = "Check to show group member names in the dps/tank layout."
 
 ns.localization.unitframescastbar = "Castbar"
-ns.localization.unitframescastbarTooltip = ""
+ns.localization.unitframescastbarTooltip = "Disable this option if you want to use another castbar addon."
 
 ns.localization.unitframesabsorb = "Absorb amount"
 ns.localization.unitframesabsorbTooltip = "Shows absorb amounts as well as an over-absorb glow on unit frames."
