@@ -5,7 +5,7 @@ local locale = GetLocale()
 if locale == "zhCN" or locale == "zhTW" then return end
 
 local font = 'Fonts\\FRIZQT__.TTF'
-local font1 = 'Interface\\Addons\\FreeUI\\media\\supereffective.ttf'
+local unitnamefont = 'Fonts\\yahei__.ttf'
 local Diablo = 'Interface\\Addons\\FreeUI\\media\\diablo.ttf'
 local Nordica = 'Interface\\Addons\\FreeUI\\media\\nordica.ttf'
 local damagefont = 'Interface\\Addons\\FreeUI\\media\\supereffective.ttf'
@@ -19,7 +19,7 @@ RaidBossEmoteFrame.slot2:SetFont(font, 20, "OUTLINE")
 F.SetFS(UIErrorsFrame)
 
 STANDARD_TEXT_FONT = font
-UNIT_NAME_FONT     = font
+UNIT_NAME_FONT     = unitnamefont
 DAMAGE_TEXT_FONT   = damagefont
 
 UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
