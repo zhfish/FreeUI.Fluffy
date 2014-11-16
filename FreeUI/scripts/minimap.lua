@@ -43,7 +43,7 @@ MiniMapMailFrame:HookScript("OnMouseUp", function(self)
 end)
 
 local mt = F.CreateFS(mail)
-mt:SetText("Mail")
+mt:SetText("|cfff6ff83Mail")
 mt:SetPoint("BOTTOM", Minimap, 0, 6)
 
 MiniMapMailFrame:SetAlpha(0)
@@ -118,7 +118,7 @@ GameTimeFrame:SetHighlightTexture("")
 
 local _, _, _, _, dateText = GameTimeFrame:GetRegions()
 F.SetFS(dateText)
-dateText:SetTextColor(1, 1, 1)
+dateText:SetTextColor(80/255, 232/255, 255/255)
 dateText:SetShadowOffset(0, 0)
 dateText:SetPoint("CENTER")
 
