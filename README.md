@@ -1,9 +1,9 @@
-﻿#FreeUI.Fluffy
-***
-FreeUI.Fluffy is an user interface for World of Warcraft. It is based on amazing [FreeUI](https://github.com/Haleth/FreeUI) by [Haleth](https://github.com/Haleth).
+﻿###FreeUI.Fluffy
 
+>A World of Warcraft user interface.
 
-**important：Put Fonts to your WOW installation directory, Chinese cilent supported**
+FreeUI.Fluffy is a personal edition of [FreeUI](https://github.com/Haleth/FreeUI). 
 
+All credits should go to [Haleth](https://github.com/Haleth) for his amazing work.
 
 ![FreeUI.Fluffy ScreenShot](https://raw.githubusercontent.com/solor/FreeUI.Fluffy/master/screenshot.png)
