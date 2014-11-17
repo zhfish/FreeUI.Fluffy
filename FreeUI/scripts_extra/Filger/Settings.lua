@@ -2,15 +2,19 @@
 Filger_Settings = {
 	config_mode = false,				-- 开\关测试模式
 	max_test_icon = 4,					-- 测试模式下,每组显示最大图标数量
-	player_buff_icon = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -10},	-- "P_BUFF_ICON"		(player_buff_icon 位置坐标 - 主图标注号 1)
-	player_proc_icon = {"RIGHT", "oUF_FreePlayer", "CENTER", 0, 40},	-- "P_PROC_ICON"		(player_proc_icon 位置坐标 - 主图标注号 2)
-	special_proc_icon = {"LEFT", "oUF_FreePlayer", "CENTER", 0, 40},	-- "SPECIAL_P_BUFF_ICON"	(special_proc_icon 位置坐标 - 主图标注号 3)
-	target_debuff_icon = {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 20},	-- "T_DEBUFF_ICON"		(target_debuff_icon 位置坐标 - 主图标注号 4)
-	target_buff_icon = {"BOTTOMRIGHT", "oUF_FreeTarget", "TOPRIGHT", 0, 20},		-- "T_BUFF"				(target_buff_icon 位置坐标 - 主图标注号 5)
-	RAID_AURA_ICON = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -100},			-- "PVE/PVP_DEBUFF"		(pve_debuff 位置坐标 - 主图标注号 6)
-	pve_cc = {"TOPLEFT", UIParent, "LEFT", 50, 0},						-- "PVE/PVP_CC"			(pve_cc 位置坐标 - 主图标注号 7)
-	cooldown = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -50},				-- "COOLDOWN"			(cooldown 位置坐标 - 主图标注号 8)
-	target_bar = {"TOPRIGHT", UIParent, "RIGHT", -260, 0},				-- "T_DE/BUFF_BAR"		(target_bar 位置坐标 - 主图标注号 9)
+	player_buff_icon = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -10},		-- player's buff
+	player_proc_icon = {"RIGHT", "oUF_FreePlayer", "CENTER", 0, 40},			-- player's proc
+
+	special_proc_icon = {"LEFT", "oUF_FreePlayer", "CENTER", 0, 40},			-- special proc on player
+	cooldown = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, 350},				-- player's cooldown
+
+	target_debuff_icon = {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 20},	-- target's debuff by player
+	target_aura_icon = {"BOTTOMRIGHT", "oUF_FreeTarget", "TOPRIGHT", 0, 20},	-- important aura on target (PVP)
+
+	raid_aura_icon = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, 400},		-- important raid aura
+
+	bar_1 = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -150},								-- bar 1
+	bar_2 = {"TOPRIGHT", UIParent, "RIGHT", -260, 0},							-- bar 2
 }
 
 local Misc = CreateFrame("Frame")
@@ -19,20 +23,20 @@ local Media = "Interface\\AddOns\\FreeUI\\scripts_extra\\Filger\\Media\\"
 
 	-- ShestakUI_Filger.lua
 	-- 可选颜色: "DK", "DLY"-小德, "LR", "FS", "WS"-武僧, "QS", "MS"-牧师(既白色), "DZ", "SM", "SS", "ZS", "Black"-黑色, "Gray"-灰色, "OWN"-自动选择你当前角色的职业颜色.
-	Misc.font = Media.."Pixel.ttf"	-- 所有数字的字体
+	Misc.font = Media.."PFTempestaSeven.ttf"	-- 所有数字的字体
 	Misc.barfg = Media.."barfg"		-- 计时条材质
-	Misc.modefg = "OWN"				-- 计时条颜色
+	Misc.modefg = "DLY"				-- 计时条颜色
 	Misc.modeback = "Black"			-- 图标背景或蒙板颜色（一像素和毛绒绒样式无效）
 	Misc.modeborder = "Black"		-- 边框颜色
-	Misc.numsize = 10				-- 层数, 计时条的计时数字大小
-	Misc.namesize = 10				-- 法术名称字体大小
+	Misc.numsize = 8				-- 层数, 计时条的计时数字大小
+	Misc.namesize = 8				-- 法术名称字体大小
 
 	-- Cooldowns.lua
 	Misc.cdsize = 16				-- 图标中间的 CD 数字大小
 
 	-- Spells.lua
-	Misc.Tbar = "OFF"				-- 开(ON)\关(OFF) target_bar 目标计时条 - (主图标注号 9)
-	Misc.Pbar = "OFF"				-- 开(ON)\关(OFF) pve_cc 计时条 - (主图标注号 7)
+	Misc.bar1 = "OFF"				-- 开(ON)\关(OFF) target_bar 目标计时条 - (主图标注号 9)
+	Misc.bar2 = "OFF"				-- 开(ON)\关(OFF) pve_cc 计时条 - (主图标注号 7)
 	Misc.CD = "ON"					-- 开(ON)\关(OFF) COOLDOWN 冷却图标 - (主图标注号 8)
 	Misc.barw = 160					-- 计时条长度 - (主图标注号 7,9)
 	Misc.CDnum = 6					-- COOLDOWN 冷却图标每行显示几个 - (主图标注号 8)
