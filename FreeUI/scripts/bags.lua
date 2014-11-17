@@ -224,6 +224,7 @@ bankholder:SetPoint("BOTTOMRIGHT", "BagsHolder", "BOTTOMLEFT", -10 , 0)
 bankholder:SetFrameStrata("HIGH")
 bankholder:Hide()
 F.CreateBD(bankholder, .6)
+F.CreateSB(bankholder)
 
 local purchase = F.CreateFS(bankholder)
 purchase:SetPoint("BOTTOMLEFT", bankholder, "BOTTOMLEFT", 3, 22)
