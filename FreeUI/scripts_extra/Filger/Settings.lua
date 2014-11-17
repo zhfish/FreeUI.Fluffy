@@ -3,17 +3,13 @@ Filger_Settings = {
 	config_mode = false,				-- 开\关测试模式
 	max_test_icon = 4,					-- 测试模式下,每组显示最大图标数量
 	player_buff_icon = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -10},		-- player's buff
-	player_proc_icon = {"RIGHT", "oUF_FreePlayer", "CENTER", 0, 40},			-- player's proc
-
-	special_proc_icon = {"LEFT", "oUF_FreePlayer", "CENTER", 0, 40},			-- special proc on player
-	cooldown = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, 350},				-- player's cooldown
-
+	player_proc_icon = {"BOTTOMLEFT", "oUF_FreePlayer", "TOPLEFT", 0, 20},		-- player's proc
+	special_proc_icon = {"BOTTOMRIGHT", "oUF_FreePlayer", "TOPRIGHT", 0, 20},	-- special proc on player
+	cooldown = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -50},				-- player's cooldown
 	target_debuff_icon = {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 20},	-- target's debuff by player
 	target_aura_icon = {"BOTTOMRIGHT", "oUF_FreeTarget", "TOPRIGHT", 0, 20},	-- important aura on target (PVP)
-
-	raid_aura_icon = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, 400},		-- important raid aura
-
-	bar_1 = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -150},								-- bar 1
+	raid_aura_icon = {"BOTTOMLEFT", "oUF_FreePlayer", "TOPLEFT", 0, 70},		-- important raid aura
+	bar_1 = {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -150},				-- bar 1
 	bar_2 = {"TOPRIGHT", UIParent, "RIGHT", -260, 0},							-- bar 2
 }
 
@@ -31,6 +27,9 @@ local Media = "Interface\\AddOns\\FreeUI\\scripts_extra\\Filger\\Media\\"
 	Misc.numsize = 8				-- 层数, 计时条的计时数字大小
 	Misc.namesize = 8				-- 法术名称字体大小
 
+	Misc.Dleft = "LEFT"
+	Misc.Dright = "RIGHT"
+
 	-- Cooldowns.lua
 	Misc.cdsize = 16				-- 图标中间的 CD 数字大小
 
@@ -40,6 +39,7 @@ local Media = "Interface\\AddOns\\FreeUI\\scripts_extra\\Filger\\Media\\"
 	Misc.CD = "ON"					-- 开(ON)\关(OFF) COOLDOWN 冷却图标 - (主图标注号 8)
 	Misc.barw = 160					-- 计时条长度 - (主图标注号 7,9)
 	Misc.CDnum = 6					-- COOLDOWN 冷却图标每行显示几个 - (主图标注号 8)
+	Misc.AURAnum = 2
 	Misc.IconSize = 38				-- 图标大小 - (主图标注号 1,2,3,4,5,6)
 	Misc.IconSizePBuff = 32
 	Misc.IconSizePProc = 28

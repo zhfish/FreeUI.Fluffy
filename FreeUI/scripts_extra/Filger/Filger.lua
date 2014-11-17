@@ -121,7 +121,7 @@ function Filger:DisplayActives()
 			elseif self.NumPerLine and index % self.NumPerLine == 1 then
 				previous = self.bars[index - self.NumPerLine]
 				if self.Direction == "RIGHT" or self.Direction == "LEFT" then
-					bar:SetPoint("TOP", previous, "BOTTOM", 0, -self.Interval)
+					bar:SetPoint("BOTTOM", previous, "TOP", 0, -self.Interval)
 				else
 					bar:SetPoint("LEFT", previous, "RIGHT", self.Interval, 0)
 				end

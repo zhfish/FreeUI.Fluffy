@@ -5,8 +5,8 @@ Filger_Spells = {
 	
 	["WARLOCK"] = {			
 		{
-			Name = "P_BUFF_ICON",
-			Direction = "RIGHT",
+			Name = "player_buff_icon",
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			Interval = 0,
 			Alpha = 1,
@@ -33,8 +33,8 @@ Filger_Spells = {
 			{spellID = 108683, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
-			Name = "P_PROC_ICON",
-			Direction = "LEFT",
+			Name = "player_proc_icon",
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			Interval = 0,
 			Alpha = 1,
@@ -108,8 +108,8 @@ Filger_Spells = {
 			{spellID = 94794, unitID = "player", caster = "player", filter = "DEBUFF"},
 		},
 		{
-			Name = "T_DEBUFF_ICON",
-			Direction = "RIGHT",
+			Name = "target_debuff_icon",
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			Interval = 0,
 			Alpha = 1,
@@ -135,13 +135,13 @@ Filger_Spells = {
 			{spellID = 48181, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
-			Name = "COOLDOWN",
+			Name = "cooldown",
 			enable = Misc.CD,
-			Direction = "RIGHT",
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			NumPerLine = Misc.CDnum,
 			Interval = 0,
-			Alpha = 1,
+			Alpha = .6,
 			IconSize = Misc.CDIconSize,
 			Position = {unpack(Filger_Settings.cooldown)},
 
@@ -193,8 +193,8 @@ Filger_Spells = {
 	},
 	["HUNTER"] = {
 		{
-			Name = "P_BUFF_ICON",
-			Direction = "RIGHT",
+			Name = "player_buff_icon",
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			Interval = 0,
 			Alpha = 1,
@@ -217,8 +217,8 @@ Filger_Spells = {
 			{spellID = 168811, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
-			Name = "P_PROC_ICON",
-			Direction = "LEFT",
+			Name = "player_proc_icon",
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			Interval = 0,
 			Alpha = 1,
@@ -287,8 +287,8 @@ Filger_Spells = {
 			{spellID = 109085, unitID = "player", caster = "player", filter = "BUFF"},
 		},
 		{
-			Name = "T_DEBUFF_ICON",
-			Direction = "RIGHT",
+			Name = "target_debuff_icon",
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			Interval = 0,
 			Alpha = 1,
@@ -305,11 +305,11 @@ Filger_Spells = {
 		{
 			Name = "COOLDOWN",
 			enable = Misc.CD,
-			Direction = "RIGHT",
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			NumPerLine = Misc.CDnum,
 			Interval = 0,
-			Alpha = 1,
+			Alpha = .6,
 			IconSize = Misc.CDIconSize,
 			Position = {unpack(Filger_Settings.cooldown)},
 
@@ -410,10 +410,10 @@ Filger_Spells = {
 		},
 	},
 
-	["ALL"] = {			-- common
+	["ALL"] = {			
 		{
-			Name = "SPECIAL_P_BUFF_ICON",
-			Direction = "RIGHT",
+			Name = "special_proc_icon",
+			Direction = Misc.Dleft,
 			Mode = "ICON",
 			Interval = 0,
 			Alpha = 1,
@@ -525,8 +525,8 @@ Filger_Spells = {
 			{spellID = 6346, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
-			Name = "RAID_AURA_ICON",
-			Direction = "RIGHT",
+			Name = "raid_aura_icon",
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			Interval = 0,
 			Alpha = 1,
@@ -730,9 +730,10 @@ Filger_Spells = {
 			
 		},
 		{
-			Name = "T_BUFF",
-			Direction = "LEFT",
+			Name = "target_aura_icon",
+			Direction = Misc.Dleft,
 			Mode = "ICON",
+			NumPerLine = Misc.AURAnum,
 			Interval = 0,
 			Alpha = 1,
 			IconSize = Misc.IconSizeTBuff,
