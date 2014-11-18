@@ -73,6 +73,7 @@ scripts_extra\Filger\load.xml
 
 scripts_extra\Align.lua
 scripts_extra\AlreadyKnown.lua
+scripts_extra\AuraSource.lua
 scripts_extra\BGSpam.lua
 scripts_extra\BgSpecIcon.lua
 scripts_extra\ColorPicker.lua
