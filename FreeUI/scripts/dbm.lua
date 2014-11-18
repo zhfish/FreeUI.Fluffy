@@ -19,7 +19,8 @@ local function InitStyle()
 				local spark = _G[name.."Spark"]
 				local icon = _G[name.."Icon1"]
 
-				F.CreateBDFrame(tbar, 0)
+				F.CreateBDFrame(tbar, 1)
+				F.CreateSB(tbar)
 
 				texture:SetTexture(C.media.texture)
 				texture.SetTexture = F.dummy
@@ -37,7 +38,7 @@ local function InitStyle()
 				spark:SetTexture("Interface\\AddOns\\FreeUI\\media\\DBMSpark")
 
 				icon:ClearAllPoints()
-				icon:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -3, 0)
+				icon:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -8, 0)
 				icon:SetTexCoord(.08, .92, .08, .92)
 				F.CreateBG(icon)
 
