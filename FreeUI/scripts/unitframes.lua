@@ -350,7 +350,9 @@ local Shared = function(self, unit, isSingle)
 	Health:SetFrameStrata("LOW")
 	Health:SetStatusBarTexture(C.media.texture)
 	Health:SetStatusBarColor(0, 0, 0, 0)
-	F.CreateSB(Health)
+
+	F.frame1px(Health, .2)
+	F.CreateShadow(Health, .9)
 
 	Health.frequentUpdates = true
 	SmoothBar(Health)
@@ -678,7 +680,8 @@ local UnitSpecific = {
 			local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
 			Icon:SetAllPoints(IconFrame)
 			Icon:SetTexCoord(.08, .92, .08, .92)
-			F.CreateSB(IconFrame)
+			F.frame1px(IconFrame)
+			F.CreateShadow(IconFrame)
 
 			Castbar.Icon = Icon
 
@@ -704,7 +707,8 @@ local UnitSpecific = {
 			bg:SetPoint("BOTTOMRIGHT", 1, -1)
 			bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
 			F.CreateBD(bg)
-			F.CreateSB(bg)
+			F.frame1px(bg, .8)
+			F.CreateShadow(bg)
 		end
 
 		-- PVP
@@ -1236,7 +1240,8 @@ local UnitSpecific = {
 			local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
 			Icon:SetAllPoints(IconFrame)
 			Icon:SetTexCoord(.08, .92, .08, .92)
-			F.CreateSB(IconFrame)
+			F.frame1px(IconFrame)
+			F.CreateShadow(IconFrame)
 
 			Castbar.Icon = Icon
 
@@ -1262,7 +1267,8 @@ local UnitSpecific = {
 			bg:SetPoint("BOTTOMRIGHT", 1, -1)
 			bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
 			F.CreateBD(bg)
-			F.CreateSB(bg)
+			F.frame1px(bg, .8)
+			F.CreateShadow(bg)
 		end
 
 		local tt = CreateFrame("Frame", nil, self)
@@ -1396,7 +1402,8 @@ local UnitSpecific = {
 			local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
 			Icon:SetAllPoints(IconFrame)
 			Icon:SetTexCoord(.08, .92, .08, .92)
-			F.CreateSB(IconFrame)
+			F.frame1px(IconFrame)
+			F.CreateShadow(IconFrame)
 
 			Castbar.Icon = Icon
 
@@ -1422,7 +1429,8 @@ local UnitSpecific = {
 			bg:SetPoint("BOTTOMRIGHT", 1, -1)
 			bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
 			F.CreateBD(bg)
-			F.CreateSB(bg)
+			F.frame1px(bg, .8)
+			F.CreateShadow(bg)
 		end
 
 		local tt = CreateFrame("Frame", nil, self)

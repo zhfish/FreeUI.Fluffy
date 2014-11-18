@@ -728,3 +728,74 @@ F.ReskinNavBar = function(f)
 	overflowButton:HookScript("OnEnter", colourArrow)
 	overflowButton:HookScript("OnLeave", clearArrow)
 end
+
+
+
+UIScale = function() 
+   uiscale = min(2, max(0.64, 768 / string.match(GetCVar("gxResolution"), "%d+x(%d+)"))) 
+end 
+UIScale() 
+
+local mult = 768 / string.match(GetCVar("gxResolution"), "%d+x(%d+)") / uiscale
+local Scale = function(x)
+    return mult*math.floor(x/mult+.5)
+end
+F.mult=mult
+F.Scale=Scale
+
+local dummy = function() return end
+F.dummy=dummy
+
+
+local shadows = {
+	edgeFile = "Interface\\AddOns\\FreeUI\\Media\\glowTex", 
+	edgeSize = 4*mult,
+	insets = { left = 3*mult, right = 3*mult, top = 3*mult, bottom = 3*mult }
+}
+
+local function CreateShadow(f, a)
+	if f.shadow then return end
+	local shadow = CreateFrame("Frame", nil, f)
+	shadow:SetFrameLevel(1)
+	shadow:SetFrameStrata(f:GetFrameStrata())
+	shadow:SetPoint("TOPLEFT", -4*mult, 4*mult)
+	shadow:SetPoint("BOTTOMRIGHT", 4*mult, -4*mult)
+	shadow:SetBackdrop(shadows)
+	shadow:SetBackdropColor(0, 0, 0, 0)
+	shadow:SetBackdropBorderColor(0, 0, 0, a or 1)
+	f.shadow = shadow
+	return shadow
+end
+
+local function CreateInnerBorder(f)
+	if f.iborder then return end
+	f.iborder = CreateFrame("Frame", nil, f)
+	f.iborder:SetPoint("TOPLEFT", mult, -mult)
+	f.iborder:SetPoint("BOTTOMRIGHT", -mult, mult)
+	f.iborder:SetFrameLevel(f:GetFrameLevel())
+	f.iborder:SetBackdrop({
+	  edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = mult,
+	  insets = { left = -mult, right = -mult, top = -mult, bottom = -mult}
+	})
+	f.iborder:SetBackdropBorderColor(0, 0, 0)
+	return f.iborder
+end
+
+local function frame1px(f, a)
+	f:SetBackdrop({
+		bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
+		edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = mult, 
+		insets = {left = -mult, right = -mult, top = -mult, bottom = -mult} 
+	})
+
+	--	f:SetBackdropColor(.06,.06,.06,1)
+	--	f:SetBackdropBorderColor(.15,.15,.15,1)
+	--	CreateInnerBorder(f)
+
+		f:SetBackdropColor(0, 0, 0, a or 1)
+		f:SetBackdropBorderColor(0, 0, 0, a or 1)
+
+end
+
+F.frame1px=frame1px
+F.CreateShadow=CreateShadow

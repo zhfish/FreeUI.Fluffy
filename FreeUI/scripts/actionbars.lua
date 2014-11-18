@@ -7,7 +7,7 @@ if not C.actionbars.enable then return end
 --[[ MainMenuBar ]]
 
 local bar1 = CreateFrame("Frame", "FreeUI_MainMenuBar", UIParent, "SecureHandlerStateTemplate")
-bar1:SetWidth(358)
+bar1:SetWidth(380)
 bar1:SetHeight(28)
 
 MainMenuBarArtFrame:SetParent(bar1)
@@ -23,7 +23,7 @@ for i = 1, NUM_ACTIONBAR_BUTTONS do
 		button:SetPoint("BOTTOMLEFT", bar1, "BOTTOMLEFT", 0, 0)
 	else
 		local previous = _G["ActionButton"..i-1]
-		button:SetPoint("LEFT", previous, "RIGHT", 2, 0)
+		button:SetPoint("LEFT", previous, "RIGHT", 4, 0)
 	end
 end
 
@@ -32,7 +32,7 @@ RegisterStateDriver(bar1, "visibility", "[petbattle][overridebar][vehicleui][pos
 --[[ Bottom Left bar ]]
 
 local bar2 = CreateFrame("Frame", "FreeUI_MultiBarBottomLeft", UIParent, "SecureHandlerStateTemplate")
-bar2:SetWidth(358)
+bar2:SetWidth(380)
 bar2:SetHeight(28)
 
 MultiBarBottomLeft:SetParent(bar2)
@@ -46,7 +46,7 @@ for i = 1, NUM_ACTIONBAR_BUTTONS do
 		button:SetPoint("BOTTOMLEFT", bar2, "BOTTOMLEFT", 0, 0)
 	else
 		local previous = _G["MultiBarBottomLeftButton"..i-1]
-		button:SetPoint("LEFT", previous, "RIGHT", 2, 0)
+		button:SetPoint("LEFT", previous, "RIGHT", 4, 0)
 	end
 end
 
@@ -55,7 +55,7 @@ RegisterStateDriver(bar2, "visibility", "[petbattle][vehicleui][overridebar][pos
 --[[ Bottom Right bar ]]
 
 local bar3 = CreateFrame("Frame", "FreeUI_MultiBarBottomRight", UIParent, "SecureHandlerStateTemplate")
-bar3:SetWidth(358)
+bar3:SetWidth(380)
 bar3:SetHeight(28)
 
 MultiBarBottomRight:SetParent(bar3)
@@ -69,7 +69,7 @@ for i = 1, NUM_ACTIONBAR_BUTTONS do
 		button:SetPoint("BOTTOMLEFT", bar3, "BOTTOMLEFT", 0, 0)
 	else
 		local previous = _G["MultiBarBottomRightButton"..i-1]
-		button:SetPoint("LEFT", previous, "RIGHT", 2, 0)
+		button:SetPoint("LEFT", previous, "RIGHT", 4, 0)
 	end
 end
 

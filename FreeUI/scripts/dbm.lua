@@ -20,7 +20,8 @@ local function InitStyle()
 				local icon = _G[name.."Icon1"]
 
 				F.CreateBDFrame(tbar, 1)
-				F.CreateSB(tbar)
+				F.frame1px(tbar)
+				F.CreateShadow(tbar)
 
 				texture:SetTexture(C.media.texture)
 				texture.SetTexture = F.dummy
