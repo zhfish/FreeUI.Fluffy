@@ -27,7 +27,7 @@ local function addAuraSource(self, func, unit, index, filter)
 				src = format("|cff%02x%02x%02x%s|r", color[1] * 255, color[2] * 255, color[3] * 255, src)
 			end
 		end
-		self:AddLine(DONE_BY.." "..src)
+		self:AddLine("|cffff4d60CastBy:".." "..src)
 		self:Show()
 	end
 end
