@@ -2,13 +2,21 @@ local F, C, L = unpack(select(2, ...))
 
 local locale = GetLocale()
 
-if locale == "zhCN" or locale == "zhTW" then return end
-
 local font = 'Fonts\\FRIZQT__.TTF'
 local unitnamefont = 'Fonts\\yahei__.ttf'
-local Diablo = 'Interface\\Addons\\FreeUI\\media\\diablo.ttf'
-local Nordica = 'Interface\\Addons\\FreeUI\\media\\nordica.ttf'
-local damagefont = 'Interface\\Addons\\FreeUI\\media\\supereffective.ttf'
+local Diablo
+local Nordica
+local damagefont
+
+if locale == "zhCN" or locale == "zhTW" then
+	Diablo = 'Fonts\\FRIZQT__.TTF'
+	Nordica = 'Fonts\\FRIZQT__.TTF'
+	damagefont = 'Fonts\\FRIZQT__.TTF'
+else
+	Diablo = 'Interface\\Addons\\FreeUI\\media\\diablo.ttf'
+	Nordica = 'Interface\\Addons\\FreeUI\\media\\nordica.ttf'
+	damagefont = 'Interface\\Addons\\FreeUI\\media\\supereffective.ttf'
+end
 
 
 RaidWarningFrame.slot1:SetFont(font, 20, "OUTLINE")
