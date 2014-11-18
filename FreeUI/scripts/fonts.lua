@@ -50,7 +50,7 @@ GameTooltipHeader:SetFont(font, 13) -- tooltip 头部
 GameTooltipHeader:SetShadowColor(0, 0, 0)
 GameTooltipHeader:SetShadowOffset(1, -1)
 
-Tooltip_Med:SetFont(font, 11)
+Tooltip_Med:SetFont(font, 12)
 Tooltip_Med:SetShadowColor(0, 0, 0)
 Tooltip_Med:SetShadowOffset(1, -1)
 Tooltip_Small:SetFont(font, 10)
@@ -128,15 +128,15 @@ SystemFont_Shadow_Outline_Huge2:SetFont(font, 22, "OUTLINE")
 SystemFont_Shadow_Huge1:SetFont(font, 20)
 SystemFont_Shadow_Huge2:SetFont(font, 24)
 SystemFont_Shadow_Huge3:SetFont(font, 25)
-SystemFont_Shadow_Small:SetFont(font, 10)
+SystemFont_Shadow_Small:SetFont(font, 11) -- 主要小字体
 SystemFont_Shadow_Small2:SetFont(font, 11)
-SystemFont_Small:SetFont(font, 10)
+SystemFont_Small:SetFont(Nordica, 12) -- 成就面板成就描述，技能面板技能需求等级
 SystemFont_Small:SetShadowColor(0, 0, 0)
 SystemFont_Small:SetShadowOffset(1, -1)
-SystemFont_Small2:SetFont(font, 11)
+SystemFont_Small2:SetFont(font, 12)
 SystemFont_Small2:SetShadowColor(0, 0, 0)
 SystemFont_Small2:SetShadowOffset(1, -1)
-SystemFont_Tiny:SetFont(font, 9)
+SystemFont_Tiny:SetFont(font, 12)
 SystemFont_Tiny:SetShadowColor(0, 0, 0)
 SystemFont_Tiny:SetShadowOffset(1, -1)
 

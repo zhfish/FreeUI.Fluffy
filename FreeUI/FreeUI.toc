@@ -106,7 +106,7 @@ theme\AddOns\Blizzard_BindingUI.lua
 theme\AddOns\Blizzard_BlackMarketUI.lua
 theme\AddOns\Blizzard_Calendar.lua
 theme\AddOns\Blizzard_ChallengesUI.lua
-theme\AddOns\Blizzard_DebugTools.lua
+## theme\AddOns\Blizzard_DebugTools.lua
 theme\AddOns\Blizzard_EncounterJournal.lua
 theme\AddOns\Blizzard_GarrisonUI.lua
 theme\AddOns\Blizzard_GlyphUI.lua
