@@ -33,9 +33,9 @@ end)
 local UIFrame = WorldMapFrame.UIElementsFrame
 
 local coords = F.CreateFS(UIFrame, C.FONT_SIZE_NORMAL, "LEFT")
-coords:SetPoint("BOTTOMLEFT", UIFrame, 5, 5)
+coords:SetPoint("TOPLEFT", UIFrame, 5, -5)
 local cursorcoords = F.CreateFS(UIFrame, C.FONT_SIZE_NORMAL, "LEFT")
-cursorcoords:SetPoint("BOTTOMLEFT", coords, "TOPLEFT", 0, 4)
+cursorcoords:SetPoint("BOTTOMLEFT", coords, "TOPLEFT", 0, -4)
 
 local freq = C.performance.mapcoords
 local last = 0
