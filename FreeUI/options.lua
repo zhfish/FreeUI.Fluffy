@@ -6,8 +6,8 @@ local F, C, L = unpack(select(2, ...))
 --[[ Global config ]]
 
 C["general"] = {
-	["buffreminder"] = true, 		-- reminder for selfbuffs
-	["buffTracker"] = true, 		-- track important buffs for some classes (scroll down to buffTracker table to configure)
+	["buffreminder"] = false, 		-- reminder for selfbuffs
+	["buffTracker"] = false, 		-- track important buffs for some classes (scroll down to buffTracker table to configure)
 	["combatText"] = true, 			-- show incoming damage and healing near player frame
 	["helmcloakbuttons"] = true, 		-- show buttons to toggle helm/cloak on character frame
 	["interrupt"] = true,			-- announce your interrupts
