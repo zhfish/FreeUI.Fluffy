@@ -47,6 +47,8 @@ local partyWidth = C.unitframes.party_width
 local partyHeight = C.unitframes.party_height
 local partyWidthHealer = C.unitframes.party_width_healer
 local partyHeightHealer = C.unitframes.party_height_healer
+local raidWidth = C.unitframes.raid_width
+local raidHeight = C.unitframes.raid_height
 
 -- [[ Initialize / load layout option ]]
 
@@ -351,9 +353,6 @@ local Shared = function(self, unit, isSingle)
 	Health:SetStatusBarTexture(C.media.texture)
 	Health:SetStatusBarColor(0, 0, 0, 0)
 
-	F.frame1px(Health, .2)
-	F.CreateShadow(Health, .9)
-
 	Health.frequentUpdates = true
 	SmoothBar(Health)
 
@@ -626,6 +625,8 @@ local UnitSpecific = {
 
 		Health:SetHeight(petHeight - powerHeight - 1)
 
+		F.CreateShadow(Health, .9)
+
 		Castbar:SetAllPoints(Health)
 		Castbar.Width = self:GetWidth()
 
@@ -653,6 +654,8 @@ local UnitSpecific = {
 		-- Health and power
 
 		Health:SetHeight(playerHeight - powerHeight - 1)
+
+		F.CreateShadow(Health, .9)
 
 		local HealthPoints = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "LEFT")
 		HealthPoints:SetPoint("BOTTOMLEFT", Health, "TOPLEFT", 0, 3)
@@ -1218,6 +1221,8 @@ local UnitSpecific = {
 
 		Health:SetHeight(targetHeight - powerHeight - 1)
 
+		F.CreateShadow(Health, .9)
+
 		local HealthPoints = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "LEFT")
 		HealthPoints:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 3)
 		self:Tag(HealthPoints, '[dead][offline][free:health]')
@@ -1251,11 +1256,11 @@ local UnitSpecific = {
 			self.Iconbg:SetTexture(C.media.backdrop)
 
 			Castbar:SetStatusBarTexture(C.media.texture)
-			Castbar:SetStatusBarColor(unpack(C.class))
+			Castbar:SetStatusBarColor(219/255, 0, 11/255)
 			Castbar:SetWidth(229)
 			Castbar:SetHeight(4)
 			Castbar:SetPoint("TOPLEFT", Health, "BOTTOMLEFT", 0, -64)
-			Castbar.Text:SetAllPoints(Castbar)
+			Castbar.Text:SetPoint("TOP", Castbar, "BOTTOM", 0, -4)
 			local sf = Castbar:CreateTexture(nil, "OVERLAY")
 			sf:SetVertexColor(.5, .5, .5, .5)
 			Castbar.SafeZone = sf
@@ -1279,6 +1284,8 @@ local UnitSpecific = {
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
 		ttt:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
+		ttt:SetWidth(80)
+		ttt:SetHeight(12)
 
 		tt:RegisterEvent("UNIT_TARGET")
 		tt:RegisterEvent("PLAYER_TARGET_CHANGED")
@@ -1370,6 +1377,8 @@ local UnitSpecific = {
 
 		Health:SetHeight(targettargetHeight - powerHeight - 1)
 
+		F.CreateShadow(Health, .9)
+
 		Castbar:SetAllPoints(Health)
 		Castbar.Width = self:GetWidth()
 
@@ -1388,6 +1397,8 @@ local UnitSpecific = {
 		local Spark = Castbar.Spark
 
 		Health:SetHeight(focusHeight - powerHeight - 1)
+
+		F.CreateShadow(Health, .9)
 
 		-- Cast bar
 
@@ -1413,11 +1424,11 @@ local UnitSpecific = {
 			self.Iconbg:SetTexture(C.media.backdrop)
 
 			Castbar:SetStatusBarTexture(C.media.texture)
-			Castbar:SetStatusBarColor(unpack(C.class))
+			Castbar:SetStatusBarColor(219/255, 0, 11/255)
 			Castbar:SetWidth(168)
 			Castbar:SetHeight(4)
 			Castbar:SetPoint("TOPLEFT", Health, "BOTTOMLEFT", 0, -40)
-			Castbar.Text:SetAllPoints(Castbar)
+			Castbar.Text:SetPoint("TOP", Castbar, "BOTTOM", 0, -4)
 			local sf = Castbar:CreateTexture(nil, "OVERLAY")
 			sf:SetVertexColor(.5, .5, .5, .5)
 			Castbar.SafeZone = sf
@@ -1441,6 +1452,8 @@ local UnitSpecific = {
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
 		ttt:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
+		ttt:SetWidth(80)
+		ttt:SetHeight(12)
 
 		tt:RegisterEvent("UNIT_TARGET")
 		tt:RegisterEvent("PLAYER_FOCUS_CHANGED")
@@ -1489,6 +1502,8 @@ local UnitSpecific = {
 		local Spark = Castbar.Spark
 
 		Health:SetHeight(focustargetHeight - powerHeight - 1)
+
+		F.CreateShadow(Health, .9)
 
 		Castbar:SetAllPoints(Health)
 		Castbar.Width = self:GetWidth()
@@ -1694,6 +1709,8 @@ do
 
 		local Health, Power = self.Health, self.Power
 
+		F.CreateShadow(Health, .6)
+
 		local Text = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "CENTER")
 		Text:SetPoint("CENTER", 1, 0)
 		self.Text = Text
@@ -1771,7 +1788,7 @@ do
 
 			Debuffs:SetHeight(16)
 			Debuffs:SetWidth(37)
-			Debuffs.num = 2
+			Debuffs.num = 0
 			Debuffs.size = 16
 
 			self.Debuffs = Debuffs
@@ -1960,7 +1977,7 @@ oUF:Factory(function(self)
 		'maxColumns', 5,
 		'unitsperColumn', 1,
 		'columnSpacing', 6,
-		'columnAnchorPoint', "RIGHT",
+		'columnAnchorPoint', "TOP",
 		'oUF-initialConfigFunction', ([[
 			self:SetHeight(%d)
 			self:SetWidth(%d)
@@ -1985,7 +2002,7 @@ oUF:Factory(function(self)
 		'oUF-initialConfigFunction', ([[
 			self:SetHeight(%d)
 			self:SetWidth(%d)
-		]]):format(party_height, party_width)
+		]]):format(raidHeight, raidWidth)
 	)
 
 	raid:SetPoint(unpack(raidPos))
