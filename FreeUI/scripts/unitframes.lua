@@ -1321,7 +1321,7 @@ local UnitSpecific = {
 		Auras.numBuffs = C.unitframes.num_target_buffs
 		Auras:SetHeight(500)
 		Auras:SetWidth(targetWidth)
-		Auras.size = 18
+		Auras.size = 24
 		Auras.gap = true
 
 		self.Auras = Auras

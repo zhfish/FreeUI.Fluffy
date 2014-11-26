@@ -81,6 +81,7 @@ scripts_extra\DragEmAll.lua
 scripts_extra\Doom_CooldownPulse.lua
 scripts_extra\Emergency.lua
 scripts_extra\Focuser.lua
+scripts_extra\GarrisonButton.lua
 scripts_extra\HiddenRaidNames.lua
 scripts_extra\idTip.lua
 scripts_extra\interruptsound.lua
@@ -88,7 +89,6 @@ scripts_extra\Invite.lua
 scripts_extra\ItemLevel.lua
 scripts_extra\ncShadow.lua
 scripts_extra\Screenshots.lua
-scripts_extra\SortedCurrencyTab
 scripts_extra\SpamageMeters.lua
 scripts_extra\TabBinder.lua
 scripts_extra\UnitSounds.lua
