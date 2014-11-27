@@ -83,17 +83,17 @@ local function positionBars()
 	local leftShown, rightShown = MultiBarBottomLeft:IsShown(), MultiBarBottomRight:IsShown()
 
 	if leftShown and rightShown then
-		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 23)
-		bar2:SetPoint("BOTTOM", bar3, "TOP", 0, 3)
-		bar1:SetPoint("BOTTOM", bar2, "TOP", 0, 3)
+		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+		bar2:SetPoint("BOTTOM", bar3, "TOP", 0, 4)
+		bar1:SetPoint("BOTTOM", bar2, "TOP", 0, 4)
 	elseif leftShown then
-		bar2:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 23)
-		bar1:SetPoint("BOTTOM", bar2, "TOP", 0, 3)
+		bar2:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+		bar1:SetPoint("BOTTOM", bar2, "TOP", 0, 4)
 	elseif rightShown then
-		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 23)
-		bar1:SetPoint("BOTTOM", bar3, "TOP", 0, 3)
+		bar3:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+		bar1:SetPoint("BOTTOM", bar3, "TOP", 0, 4)
 	else
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 23)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
 	end
 end
 

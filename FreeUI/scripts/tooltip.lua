@@ -258,7 +258,6 @@ local tex = frame:CreateTexture("ItemRefTooltipIcon", "TOOLTIP")
 tex:SetAllPoints(frame)
 
 F.CreateBG(frame)
-F.CreateSB(frame)
 
 local AddItemIcon = function()
 	local frame = _G["ItemRefTooltipIconFrame"]
