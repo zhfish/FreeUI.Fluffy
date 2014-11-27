@@ -89,6 +89,7 @@ scripts_extra\Invite.lua
 scripts_extra\ItemLevel.lua
 scripts_extra\ncShadow.lua
 scripts_extra\Screenshots.lua
+scripts_extra\SortedCurrencyTab.lua
 scripts_extra\SpamageMeters.lua
 scripts_extra\TabBinder.lua
 scripts_extra\UnitSounds.lua
