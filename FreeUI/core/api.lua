@@ -749,7 +749,7 @@ F.dummy=dummy
 
 local shadows = {
 	edgeFile = "Interface\\AddOns\\FreeUI\\Media\\glowTex", 
-	edgeSize = 4*mult,
+	edgeSize = 5*mult,
 	insets = { left = 3*mult, right = 3*mult, top = 3*mult, bottom = 3*mult }
 }
 

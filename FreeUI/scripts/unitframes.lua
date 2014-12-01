@@ -1325,7 +1325,7 @@ local UnitSpecific = {
 		Auras.numBuffs = C.unitframes.num_target_buffs
 		Auras:SetHeight(500)
 		Auras:SetWidth(targetWidth)
-		Auras.size = 24
+		Auras.size = 18
 		Auras.gap = true
 
 		self.Auras = Auras
@@ -1713,7 +1713,7 @@ do
 
 		local Health, Power = self.Health, self.Power
 
-		F.CreateShadow(Health, .6)
+		--F.CreateShadow(Health, .5)
 
 		local Text = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "CENTER")
 		Text:SetPoint("CENTER", 1, 0)
@@ -1980,8 +1980,8 @@ oUF:Factory(function(self)
 		'yoffset', -8,
 		'maxColumns', 5,
 		'unitsperColumn', 1,
-		'columnSpacing', 6,
-		'columnAnchorPoint', "TOP",
+		'columnSpacing', 4,
+		'columnAnchorPoint', "LEFT",
 		'oUF-initialConfigFunction', ([[
 			self:SetHeight(%d)
 			self:SetWidth(%d)

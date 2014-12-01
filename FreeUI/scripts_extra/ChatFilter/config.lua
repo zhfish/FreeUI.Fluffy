@@ -34,7 +34,7 @@ cf.Config = {
 
 	["FilterRepeat"] = true, --Filter the repeat messages. // 过滤重复聊天信息
 	["RepeatAlike"] = 75, --Set the similarity between the messages. // 设定重复信息相似度
-	["RepeatInterval"] = 60, --Set the interval between the messages. // 设定重复信息间隔时间(秒)
+	["RepeatInterval"] = 120, --Set the interval between the messages. // 设定重复信息间隔时间(秒)
 
 	["FilterByLevel"] = false, --Filter the messages by level. // 屏蔽小号发言
 	["OnlyOnWhisper"] = nil, --Only filter the whisper messages. // 只过滤密语
@@ -138,6 +138,7 @@ cf.Config = {
 		"5173",
 		"支付宝",
 		"支付寶",
+		"小.龙.競.技",
 		"淘宝",
 		"淘寶",
 		"皇冠",
@@ -186,6 +187,7 @@ cf.Config = {
 	["BlackList"] = {
 		"86410866",
 		"24267225",
+		"小.龙.競.技",
 	},
 	["ShieldPlayers"] = {
 	},
