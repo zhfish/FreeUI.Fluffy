@@ -33,8 +33,10 @@ local tooltips = {
 
 local backdrop = {
 	bgFile = C.media.backdrop,
-	edgeFile = C.media.backdrop,
-	edgeSize = 1,
+	edgeFile = C.media.glow,
+	insets = {left = 2, right = 2, top = 2, bottom = 2},
+	tile = false, tileSize = 0, 
+	edgeSize = 3,
 }
 
 -- so other stuff which tries to look like GameTooltip doesn't mess up
@@ -59,7 +61,7 @@ for i = 1, #tooltips do
 	bg:SetFrameLevel(t:GetFrameLevel()-1)
 	bg:SetBackdrop(backdrop)
 	bg:SetBackdropColor(0, 0, 0, .6)
-	bg:SetBackdropBorderColor(0, 0, 0)
+	bg:SetBackdropBorderColor(0, 0, 0, .6)
 
 	t.GetBackdrop = getBackdrop
 	t.GetBackdropColor = getBackdropColor
@@ -75,8 +77,8 @@ end)
 local sb = _G["GameTooltipStatusBar"]
 sb:SetHeight(3)
 sb:ClearAllPoints()
-sb:SetPoint("BOTTOMLEFT", GameTooltip, "BOTTOMLEFT", 2, 2)
-sb:SetPoint("BOTTOMRIGHT", GameTooltip, "BOTTOMRIGHT", -2, 2)
+sb:SetPoint("BOTTOMLEFT", GameTooltip, "BOTTOMLEFT", 4, 2)
+sb:SetPoint("BOTTOMRIGHT", GameTooltip, "BOTTOMRIGHT", -4, 2)
 sb:SetStatusBarTexture(C.media.texture)
 
 local sep = GameTooltipStatusBar:CreateTexture(nil, "ARTWORK")
@@ -251,13 +253,14 @@ end
 
 --[[ Item Icons ]]
 local frame = CreateFrame("Frame", "ItemRefTooltipIconFrame", _G["ItemRefTooltip"])
-frame:SetPoint("TOPRIGHT", _G["ItemRefTooltip"], "TOPLEFT", -1, -2)
+frame:SetPoint("TOPRIGHT", _G["ItemRefTooltip"], "TOPLEFT", -2, -5)
 frame:SetSize(32, 32)
 
 local tex = frame:CreateTexture("ItemRefTooltipIcon", "TOOLTIP")
 tex:SetAllPoints(frame)
 
 F.CreateBG(frame)
+F.CreateSB(frame)
 
 local AddItemIcon = function()
 	local frame = _G["ItemRefTooltipIconFrame"]
