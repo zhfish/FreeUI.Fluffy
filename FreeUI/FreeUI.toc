@@ -70,6 +70,7 @@ scripts\worldstateframe.lua
 
 scripts_extra\ChatFilter\load.xml
 scripts_extra\Filger\load.xml
+scripts_extra\tooltip\load.xml
 
 scripts_extra\Align.lua
 scripts_extra\AlreadyKnown.lua
@@ -85,7 +86,6 @@ scripts_extra\HiddenRaidNames.lua
 scripts_extra\idTip.lua
 scripts_extra\interruptsound.lua
 scripts_extra\Invite.lua
-scripts_extra\ItemLevel.lua
 scripts_extra\ncShadow.lua
 scripts_extra\Screenshots.lua
 scripts_extra\SortedCurrencyTab.lua
