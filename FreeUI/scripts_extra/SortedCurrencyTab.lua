@@ -1,10 +1,15 @@
 --[[
 
-	Sorted Currency Tab - version 1.1 (11/27/14)
+	Sorted Currency Tab - version 1.2a (12/3/14)
 	Kirsia - Dalaran (US)
 
 	Change Log
 	==========
+	1.2a		- Removed an extraneous print() (debug) statement
+
+	1.2		- Added localization support (full support for deDE, esMX, ptBR; possibly also esES, frFR, and itIT)
+			- Defaulted search for WoD currency header to Blizzard-provided constant (theoretically adds partial support for all localizations)
+
 	1.1		- Fixed issue where new currencies would not display on currency tab
 			- Made data variable local (was global for testing and forgot to set it back)
 
@@ -13,8 +18,10 @@
 
 ]]--
 
-local WoD = "Warlords of Draenor" -- needs to localize
-local DaR = "Dungeon and Raid"
+local L = select(2,...)
+
+local WoD = L["WoD"] or EXPANSION_NAME5 or "Warlords of Draenor"
+local DaR = L["DaR"] or "Dungeon and Raid"
 
 local oldGetCurrencyListInfo = GetCurrencyListInfo
 local oldExpandCurrencyList = ExpandCurrencyList
@@ -41,8 +48,6 @@ local InitList = function(self)
 	for i=1,#sct_data do
 		local name, isHeader = GetCurrencyListInfo(i-count)
 
-		--print (i, i-count, name, isHeader)
-
 		if isHeader then -- found a header, stop moving currencies
 			isMovingWoD = name == WoD
 			isMovingDaR = name == DaR
@@ -56,7 +61,6 @@ local InitList = function(self)
 			tinsert(sct_data, sct_data[i-count]) -- insert at end
 			tremove(sct_data,i-count)
 			count = count + 1
-			--print("Count:", count)
 		end
 	end
 end
@@ -77,6 +81,7 @@ ExpandCurrencyList = function(index, value)
 	elseif index > #sct_data then
 		return oldExpandCurrencyList(index, value) -- just pass their index
 	end
+
 	local returnValues = { oldExpandCurrencyList(sct_data[index], value) }
 
 	InitList()
