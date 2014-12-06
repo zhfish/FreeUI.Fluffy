@@ -3,34 +3,6 @@ local F, C = unpack(select(2, ...))
 C.themes["Blizzard_GarrisonUI"] = function()
 	local r, g, b = C.r, C.g, C.b
 
-	-- [[ Shared functions ]]
-
-	local function restyleFollowerPortrait(portrait)
-		local level = portrait.Level
-		local cover = portrait.PortraitRingCover
-
-		portrait.PortraitRing:Hide()
-		portrait.PortraitRingQuality:SetTexture("")
-
-		portrait.LevelBorder:SetTexture(0, 0, 0, .5)
-		portrait.LevelBorder:SetSize(44, 11)
-		portrait.LevelBorder:ClearAllPoints()
-		portrait.LevelBorder:SetPoint("BOTTOM", 0, 12)
-
-		level:ClearAllPoints()
-		level:SetPoint("BOTTOM", portrait, 0, 12)
-
-		local squareBG = CreateFrame("Frame", nil, portrait)
-		squareBG:SetFrameLevel(portrait:GetFrameLevel()-1)
-		squareBG:SetPoint("TOPLEFT", 3, -3)
-		squareBG:SetPoint("BOTTOMRIGHT", -3, 11)
-		F.CreateBD(squareBG, 1)
-		portrait.squareBG = squareBG
-
-		cover:SetTexture(0, 0, 0)
-		cover:SetAllPoints(squareBG)
-	end
-
 	-- [[ Capacitive display frame ]]
 
 	local GarrisonCapacitiveDisplayFrame = GarrisonCapacitiveDisplayFrame
@@ -98,6 +70,7 @@ C.themes["Blizzard_GarrisonUI"] = function()
 
 	local Report = GarrisonLandingPage.Report
 
+	select(2, Report:GetRegions()):Hide()
 	Report.List:GetRegions():Hide()
 
 	local scrollFrame = Report.List.listScroll
@@ -434,7 +407,7 @@ C.themes["Blizzard_GarrisonUI"] = function()
 
 	hooksecurefunc("GarrisonMissionFrame_SetFollowerPortrait", function(portraitFrame, followerInfo)
 		if not portraitFrame.styled then
-			restyleFollowerPortrait(portraitFrame)
+			F.ReskinGarrisonPortrait(portraitFrame)
 			portraitFrame.styled = true
 		end
 
@@ -498,7 +471,7 @@ C.themes["Blizzard_GarrisonUI"] = function()
 	for i = 1, 3 do
 		local recruit = FollowerSelection["Recruit"..i]
 
-		restyleFollowerPortrait(recruit.PortraitFrame)
+		F.ReskinGarrisonPortrait(recruit.PortraitFrame)
 
 		F.Reskin(recruit.HireRecruits)
 	end
@@ -535,6 +508,28 @@ C.themes["Blizzard_GarrisonUI"] = function()
 		end
 	end)
 
+	-- [[ Monuments ]]
+
+	local GarrisonMonumentFrame = GarrisonMonumentFrame
+
+	GarrisonMonumentFrame.Background:Hide()
+	F.SetBD(GarrisonMonumentFrame, 6, -10, -6, 4)
+
+	do
+		local left = GarrisonMonumentFrame.LeftBtn
+		local right = GarrisonMonumentFrame.RightBtn
+
+		left.Texture:Hide()
+		right.Texture:Hide()
+
+		F.ReskinArrow(left, "left")
+		F.ReskinArrow(right, "right")
+		left:SetSize(35, 35)
+		left.tex:SetSize(16, 16)
+		right:SetSize(35, 35)
+		right.tex:SetSize(16, 16)
+	end
+
 	-- [[ Shared templates ]]
 
 	hooksecurefunc("GarrisonFollowerList_Update", function(self)
@@ -561,7 +556,7 @@ C.themes["Blizzard_GarrisonUI"] = function()
 				button.BusyFrame:SetAllPoints()
 
 				if portrait then
-					restyleFollowerPortrait(portrait)
+					F.ReskinGarrisonPortrait(portrait)
 					portrait:ClearAllPoints()
 					portrait:SetPoint("TOPLEFT", 4, -1)
 				end
