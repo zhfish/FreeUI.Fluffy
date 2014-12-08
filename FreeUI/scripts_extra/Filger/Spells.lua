@@ -13,98 +13,54 @@ Filger_Spells = {
 			IconSize = Misc.IconSizeNormal,
 			Position = {unpack(Filger_Settings.P_AURA)},
 
+			-- talent
+			-- Dark Rdgeneration
+			{spellID = 108359, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Sacirifical Pact
+			{spellID = 108416, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Bargain
 			{spellID = 110913, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Unending Resolve
-			{spellID = 104773, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Blood Horror
+			{spellID = 111397, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Burning Rush
+			{spellID = 111400, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Cunning
+			{spellID = 137587, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Fury
+			{spellID = 108508, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Soulburn: Haunt
+			{spellID = 157698, unitID = "player", caster = "player", filter = "BUFF"},
+			-- warlock self
+			-- Soulstone
+			{spellID = 20707, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Soulburn: Demonic Circle
+			{spellID = 79438, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Soul: Knowledge
 			{spellID = 113861, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Soul: Misery
 			{spellID = 113860, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Dark Soul: Instability
 			{spellID = 113858, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Unending Resolve
+			{spellID = 104773, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Soulburn
 			{spellID = 74434, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Soul Swap
 			{spellID = 86211, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Burning Rush
-			{spellID = 111400, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Fire and Brimstone
 			{spellID = 108683, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Buffs
-			-- Molten Core
-			{spellID = 122355, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Backdraft
 			{spellID = 117828, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Demonic Synergy
-			{spellID = 171982, unitID = "player", caster = "player", filter = "BUFF"},
-
-			-- Item sets
-			-- Ember Master (T16)
-			{spellID = 145164, unitID = "player", caster = "player", filter = "BUFF"},
-
-			-- Trinkets
-			-- General
-			-- Darkmoon Cards (Proc)
-			{spellID = 128985, unitID = "player", caster = "player", filter = "BUFF"},
-			-- PvP Trinkets (Health, Use)
-			{spellID = 126697, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Caster General
-			-- Shock-Charger Medallion Figurine (Intellect, Use)
-			{spellID = 136082, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Jade Magistrate Figurine (Crit, Use)
-			{spellID = 126605, unitID = "player", caster = "player", filter = "BUFF"},
-			-- PvP Trinkets (Spell Power, Use)
-			{spellID = 126683, unitID = "player", caster = "player", filter = "BUFF"},
-			-- PvP Trinkets (Spell Power, Proc)
-			{spellID = 126705, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Caster DPS
-			-- Purified Bindings of Immerseus (Intellect, Proc)
-			{spellID = 146046, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Kardris' Toxic Totem (Intellect, Proc)
-			{spellID = 148906, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Frenzied Crystal of Rage (Intellect, Proc)
-			{spellID = 148897, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Black Blood of Y'Shaarj (Intellect, Proc)
-			{spellID = 146184, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Yu'lon's Bite (Crit, Proc)
-			{spellID = 146218, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Unerring Vision of Lei-Shen (Crit, Proc)
-			{spellID = 138963, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Volatile Talisman of the Shado-Pan Assault (Haste, Proc)
-			{spellID = 138703, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Cha-Ye's Essence of Brilliance (Intellect, Proc)
-			{spellID = 139133, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Breath of the Hydra (Intellect, Proc)
-			{spellID = 138898, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Wushoolay's Final Choice (Intellect, Proc)
-			{spellID = 138786, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Essence of Terror (Haste, Proc)
-			{spellID = 126659, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Light of the Cosmos (Intellect, Proc)
-			{spellID = 126577, unitID = "player", caster = "player", filter = "BUFF"},
-
-			-- Enchants
-			-- General
-			-- Caster General
-			-- Jade Spirit (Intellect + Spirit)
-			{spellID = 104993, unitID = "player", caster = "all", filter = "BUFF"},
-
-			-- Legendary Meta Gems
-			-- Sinister Primal Diamond (Caster DPS)
-			{spellID = 137590, unitID = "player", caster = "all", filter = "BUFF"},
 		},
 		{
 			Name = "T_AURA_P",
-			Direction = Misc.Dleft,
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			Interval = 0,
 			Alpha = 1,
 			IconSize = Misc.IconSizeNormal,
 			Position = {unpack(Filger_Settings.T_AURA_P)},
 
-			-- Doom
-			{spellID = 603, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Agony
 			{spellID = 980, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Corruption
@@ -120,7 +76,7 @@ Filger_Spells = {
 		},
 		{
 			Name = "P_CD",
-			Direction = Misc.Dright,
+			Direction = Misc.Dleft,
 			Mode = "ICON",
 			NumPerLine = Misc.CDnum,
 			Interval = 0,
@@ -128,27 +84,48 @@ Filger_Spells = {
 			IconSize = Misc.IconSizeNormal,
 			Position = {unpack(Filger_Settings.P_CD)},
 
-			-- Self
+			-- Pet
 			-- Devour Magic (Felhunter)
 			{spellID = 19505, filter = "CD"},
 			-- Spell Lock (Felhunter)
 			{spellID = 19647, filter = "CD"},
+			-- Optical Blast 
+			{spellID = 115781, filter = "CD"},
+			-- Clone Magic 
+			{spellID = 115284, filter = "CD"},
+			-- Self
+			-- Talent
+			-- Dark Rdgeneration
+			{spellID = 108359, filter = "CD"},
 			-- Shadowfury
 			{spellID = 30283, filter = "CD"},
 			-- Howl of Terror
 			{spellID = 5484, filter = "CD"},
 			-- Mortal Coil
 			{spellID = 6789, filter = "CD"},
-			-- Sacrifice (Voidwalker)
-			{spellID = 7812, filter = "CD"},
-			-- Hand of Gul'dan
-			{spellID = 105174, filter = "CD"},
+			-- Dark Bargain
+			{spellID = 110913, filter = "CD"},
+			-- Sacirifical Pact
+			{spellID = 108416, filter = "CD"},
+			-- unbound Will
+			{spellID = 108482, filter = "CD"},
+			-- Blood Horror
+			{spellID = 111397, filter = "CD"},
+			-- Cunning
+			{spellID = 137587, filter = "CD"},
+			-- Fury
+			{spellID = 108508, filter = "CD"},
+			-- Cataclysm
+			{spellID = 152108, filter = "CD"},
+
+			-- Dark Soul: Knowledge
+			{spellID = 113861, filter = "CD"},
+			-- Dark Soul: Misery
+			{spellID = 113860, filter = "CD"},
+			-- Dark Soul: Instability
+			{spellID = 113858, filter = "CD"},
 			-- Demonic Circle: Teleport
 			{spellID = 48020, filter = "CD"},
-			-- Felstorm
-			{spellID = 89751, filter = "CD"},
-			-- Soulburn
-			{spellID = 74434, filter = "CD"},
 			-- Grimoire of Service
 			{spellID = 108501, filter = "CD"},
 			-- unending resolve
@@ -177,8 +154,6 @@ Filger_Spells = {
 			{spellID = 69070, filter = "CD"},
 
 			-- Items
-			-- Gloves
-			{slotID = 10, filter = "CD"},
 			-- Belt
 			{slotID = 6, filter = "CD"},
 			-- Back
@@ -238,6 +213,8 @@ Filger_Spells = {
 			{spellID = 54861, unitID = "player", caster = "player", filter = "BUFF"},
 			-- Parachute
 			{spellID = 55001, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Goblin Glider
+			{spellID = 126389, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Racial
 			-- Berserking (Troll)
@@ -587,10 +564,6 @@ Filger_Spells = {
 			{spellID = 107079, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Arcane Torrent
 			{spellID = 28730, unitID = "target", caster = "all", filter = "DEBUFF"},
-
-			-- Heart of Fear
-			-- Impaling Spear (Wind Lord Mel'jarak)
-			{spellID = 122224, unitID = "target", caster = "all", filter = "DEBUFF"},
 
 			-- All
 			-- Warsong Flag
