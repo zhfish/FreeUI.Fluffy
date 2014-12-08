@@ -19,9 +19,9 @@ local function InitStyle()
 				local spark = _G[name.."Spark"]
 				local icon = _G[name.."Icon1"]
 
-				F.CreateBDFrame(tbar, 1)
-				F.frame1px(tbar)
-				F.CreateShadow(tbar)
+				F.CreateBDFrame(tbar, .7)
+				--F.frame1px(tbar)
+				F.CreateShadow(tbar, .8)
 
 				texture:SetTexture(C.media.texture)
 				texture.SetTexture = F.dummy
