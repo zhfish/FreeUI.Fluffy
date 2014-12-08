@@ -20,8 +20,8 @@ local FactionInfo = {
 local backdrop = CreateFrame("Frame", nil, Minimap)
 backdrop:SetHeight(6)
 backdrop:SetPoint("TOP", Minimap, "BOTTOM")
-backdrop:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", -1, -1)
-backdrop:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", 1, -1)
+backdrop:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", -1, 47)
+backdrop:SetPoint("TOPRIGHT", Minimap, "BOTTOMRIGHT", 1, 47)
 F.CreateBD(backdrop, .6)
 
 local xpBar = CreateFrame("StatusBar", nil, backdrop)
