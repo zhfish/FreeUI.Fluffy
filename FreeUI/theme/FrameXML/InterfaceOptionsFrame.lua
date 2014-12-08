@@ -21,6 +21,7 @@ tinsert(C.themes["FreeUI"], function()
 		end
 
 		F.CreateBD(InterfaceOptionsFrame)
+		F.CreateSD(InterfaceOptionsFrame)
 		F.Reskin(InterfaceOptionsFrameDefaults)
 		F.Reskin(InterfaceOptionsFrameOkay)
 		F.Reskin(InterfaceOptionsFrameCancel)
