@@ -111,10 +111,9 @@ C["unitframes"] = {
 		["statusIndicatorCombat"] = true,				-- show combat status (else: only resting)
 
 	["player"] = {"CENTER", UIParent, "CENTER", 0, -150},
-	["target"] = {"RIGHT", UIParent, "CENTER", 200, -160},
-	["target_heal"] = {"CENTER", UIParent, "CENTER", 250, -60},
-	["party"] = {"TOPLEFT", 'oUF_FreePlayer', "BOTTOMLEFT", 0, -120}, 	-- only applies with healer layout enabled
-	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -80, 40}, 	-- only applies with healer layout enabled
+	["target"] = {"CENTER", UIParent, "CENTER", 250, -60},
+	["party"] = {"TOPLEFT", 'oUF_FreePlayer', "BOTTOMLEFT", 0, -120},
+	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -80, 40},
 
 	["altpower_height"] = 2,
 	["power_height"] = 2,
@@ -135,10 +134,8 @@ C["unitframes"] = {
 	["boss_height"] = 16,
 	["arena_width"] = 229,
 	["arena_height"] = 12,
-	["party_width"] = 38,
+	["party_width"] = 42,
 	["party_height"] = 20,
-	["party_width_healer"] = 42,
-	["party_height_healer"] = 20,
 	["raid_width"] = 50,
 	["raid_height"] = 22,
 

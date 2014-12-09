@@ -575,15 +575,6 @@ do
 
 	statusIndicator.children = {statusIndicatorCombat}
 
-	local layoutText = unitframes:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
-	layoutText:SetPoint("TOP", 0, -408)
-	layoutText:SetText(ns.localization.layoutText)
-
-	unitframes.Layout = CreateFrame("Button", nil, unitframes, "UIPanelButtonTemplate")
-	unitframes.Layout:SetPoint("TOP", 0, -442)
-	unitframes.Layout:SetSize(128, 25)
-	tinsert(ns.buttons, unitframes.Layout)
-
 	local function toggleUFOptions()
 		local shown = enable:GetChecked()
 
@@ -599,8 +590,6 @@ do
 		statusIndicatorCombat:SetShown(shown)
 		castbar:SetShown(shown)
 		enableArena:SetShown(shown)
-		layoutText:SetShown(shown)
-		unitframes.Layout:SetShown(shown)
 	end
 
 	enable:HookScript("OnClick", toggleUFOptions)

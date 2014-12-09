@@ -58,8 +58,6 @@ local addonLoaded
 addonLoaded = function(_, addon)
 	if addon ~= "FreeUI" then return end
 
-	if FreeUIConfig.layout == nil then FreeUIConfig.layout = 1 end
-
 	F.UnregisterEvent("ADDON_LOADED", addonLoaded)
 	addonLoaded = nil
 end
@@ -242,7 +240,7 @@ local PostUpdateHealth = function(Health, unit, min, max)
 		Health.value:SetTextColor(unpack(reaction))
 	end
 
-	if FreeUIConfig.layout == 2 and not C.unitframes.healerClasscolours then
+	if not C.unitframes.healerClasscolours then
 		if offline or UnitIsDead(unit) or UnitIsGhost(unit) then
 			self.Healthdef:Hide()
 		else
@@ -365,7 +363,7 @@ local Shared = function(self, unit, isSingle)
 
 	--[[ Gradient ]]
 
-	if FreeUIConfig.layout == 2 and not C.unitframes.healerClasscolours then
+	if not C.unitframes.healerClasscolours then
 		local gradient = Health:CreateTexture(nil, "BACKGROUND")
 		gradient:SetPoint("TOPLEFT")
 		gradient:SetPoint("BOTTOMRIGHT")
@@ -381,7 +379,7 @@ local Shared = function(self, unit, isSingle)
 
 	--[[ Health deficit colour ]]
 
-	if FreeUIConfig.layout == 2 and not C.unitframes.healerClasscolours then
+	if not C.unitframes.healerClasscolours then
 		local Healthdef = CreateFrame("StatusBar", nil, self)
 		Healthdef:SetFrameStrata("LOW")
 		Healthdef:SetAllPoints(Health)
@@ -424,8 +422,8 @@ local Shared = function(self, unit, isSingle)
 	Power.bg:SetTexture(C.media.backdrop)
 	Power.bg:SetVertexColor(0, 0, 0, .5)
 
-	-- Colour power by power type for dps/tank layout. Because this is brighter, make the background darker for contrast.
-	if FreeUIConfig.layout == 1 or C.unitframes.healerClasscolours then
+	-- Colour power by power type. Because this is brighter, make the background darker for contrast.
+	if C.unitframes.healerClasscolours then
 		Power.colorPower = true
 		Power.bg:SetVertexColor(0, 0, 0, .25)
 	end
@@ -503,37 +501,35 @@ local Shared = function(self, unit, isSingle)
 
 	-- [[ Heal prediction ]]
 
-	if FreeUIConfig.layout == 2 then
-		local mhpb = self:CreateTexture()
-		mhpb:SetTexture(C.media.texture)
-		mhpb:SetVertexColor(0, .5, 1)
+	local mhpb = self:CreateTexture()
+	mhpb:SetTexture(C.media.texture)
+	mhpb:SetVertexColor(0, .5, 1)
 
-		local ohpb = self:CreateTexture()
-		ohpb:SetTexture(C.media.texture)
-		ohpb:SetVertexColor(.5, 0, 1)
+	local ohpb = self:CreateTexture()
+	ohpb:SetTexture(C.media.texture)
+	ohpb:SetVertexColor(.5, 0, 1)
 
-		self.HealPrediction = {
-			-- status bar to show my incoming heals
-			myBar = mhpb,
-			otherBar = ohpb,
-			maxOverflow = 1,
-			frequentUpdates = true,
-		}
+	self.HealPrediction = {
+		-- status bar to show my incoming heals
+		myBar = mhpb,
+		otherBar = ohpb,
+		maxOverflow = 1,
+		frequentUpdates = true,
+	}
 
-		if C.unitframes.absorb then
-			local absorbBar = self:CreateTexture()
-			absorbBar:SetTexture(C.media.texture)
-			absorbBar:SetVertexColor(.8, .34, .8)
+	if C.unitframes.absorb then
+		local absorbBar = self:CreateTexture()
+		absorbBar:SetTexture(C.media.texture)
+		absorbBar:SetVertexColor(.8, .34, .8)
 
-			local overAbsorbGlow = self:CreateTexture(nil, "OVERLAY")
-			overAbsorbGlow:SetWidth(16)
-			overAbsorbGlow:SetBlendMode("ADD")
-			overAbsorbGlow:SetPoint("TOPLEFT", self.Health, "TOPRIGHT", -7, 0)
-			overAbsorbGlow:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMRIGHT", -7, 0)
+		local overAbsorbGlow = self:CreateTexture(nil, "OVERLAY")
+		overAbsorbGlow:SetWidth(16)
+		overAbsorbGlow:SetBlendMode("ADD")
+		overAbsorbGlow:SetPoint("TOPLEFT", self.Health, "TOPRIGHT", -7, 0)
+		overAbsorbGlow:SetPoint("BOTTOMLEFT", self.Health, "BOTTOMRIGHT", -7, 0)
 
-			self.HealPrediction["absorbBar"] = absorbBar
-			self.HealPrediction["overAbsorbGlow"] = overAbsorbGlow
-		end
+		self.HealPrediction["absorbBar"] = absorbBar
+		self.HealPrediction["overAbsorbGlow"] = overAbsorbGlow
 	end
 
 	-- [[ Raid target icons ]]
@@ -1690,7 +1686,7 @@ local UnitSpecific = {
 		Buffs:SetHeight(22)
 		Buffs:SetWidth(arenaWidth)
 		Buffs.num = C.unitframes.num_arena_buffs
-		Buffs.size = 26
+		Buffs.size = 22
 
 		self.Buffs = Buffs
 
@@ -1783,7 +1779,6 @@ do
 
 		self.LFDRole = lfd
 
-		if FreeUIConfig.layout == 2 then
 			local Debuffs = CreateFrame("Frame", nil, self)
 			Debuffs.initialAnchor = "CENTER"
 			Debuffs:SetPoint("BOTTOM", 0, powerHeight - 1)
@@ -1873,17 +1868,14 @@ do
 					Buffs:SetPoint("TOP", 0, -2)
 				end
 			end
-		end
 
 		local Threat = CreateFrame("Frame", nil, self)
 		self.Threat = Threat
 		Threat.Override = UpdateThreat
 
-		if FreeUIConfig.layout == 2 then
-			local select = CreateFrame("Frame", nil, self)
-			select:RegisterEvent("PLAYER_TARGET_CHANGED")
-			select:SetScript("OnEvent", updateNameColourAlt)
-		end
+		local select = CreateFrame("Frame", nil, self)
+		select:RegisterEvent("PLAYER_TARGET_CHANGED")
+		select:SetScript("OnEvent", updateNameColourAlt)
 
 		self.Range = range
 	end
@@ -1924,26 +1916,9 @@ oUF:Factory(function(self)
 		player = spawnHelper(self, 'player', unpack(C.unitframes.player))
 	end
 
-	if FreeUIConfig.layout == 1 then
-		if C.unitframes.autoPosition then
-			target = spawnHelper(self, 'target', "TOP", UIParent, "CENTER", 0, round(GetScreenHeight()/-5.33))
-		else
-			target = spawnHelper(self, 'target', unpack(C.unitframes.target))
-		end
-
-		partyPos = {"BOTTOM", player, "TOP", 0, 50}
-		raidPos = {"BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -5, 0}
-	else
-		if C.unitframes.autoPosition then
-			target = spawnHelper(self, 'target', "BOTTOM", UIParent, "CENTER", 275, round(GetScreenHeight()/-11.43))
-			partyPos = {"TOP", UIParent, "CENTER", 0, round(GetScreenHeight()/-5.33)}
-			raidPos = {"TOP", UIParent, "CENTER", 0, round(GetScreenHeight()/-6.49)}
-		else
-			target = spawnHelper(self, 'target', unpack(C.unitframes.target_heal))
-			partyPos = C.unitframes.party
-			raidPos = C.unitframes.raid
-		end
-	end
+	target = spawnHelper(self, 'target', unpack(C.unitframes.target))
+	partyPos = C.unitframes.party
+	raidPos = C.unitframes.raid
 
 	spawnHelper(self, 'focus', "LEFT", target, "RIGHT", 8, -100)
 	spawnHelper(self, 'focustarget', "LEFT", target, "RIGHT", 96, -100)
@@ -1965,17 +1940,12 @@ oUF:Factory(function(self)
 	self:SetActiveStyle'Free - Party'
 
 	local party_width, party_height
-	if FreeUIConfig.layout == 2 then
-		party_width = partyWidthHealer
-		party_height = partyHeightHealer
-	else
-		party_width = partyWidth
-		party_height = partyHeight
-	end
+	party_width = partyWidth
+	party_height = partyHeight
 
 	local party = self:SpawnHeader(nil, nil, "party,raid",
 		'showParty', true,
-		'showPlayer', FreeUIConfig.layout == 2,
+		'showPlayer', true,
 		'showSolo', false,
 		'yoffset', -8,
 		'maxColumns', 5,
@@ -2012,12 +1982,12 @@ oUF:Factory(function(self)
 	raid:SetPoint(unpack(raidPos))
 
 	if C.unitframes.limitRaidSize then
-		raid:SetAttribute("groupFilter", "1,2,3,4,5")
+		raid:SetAttribute("groupFilter", "1,2,3,4,5,6")
 	end
 
 	F.AddOptionsCallback("unitframes", "limitRaidSize", function()
 		if C.unitframes.limitRaidSize then
-			raid:SetAttribute("groupFilter", "1,2,3,4,5")
+			raid:SetAttribute("groupFilter", "1,2,3,4,5,6")
 		else
 			raid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
 		end
