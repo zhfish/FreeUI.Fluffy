@@ -273,13 +273,13 @@ C.themes["Blizzard_TalentUI"] = function()
 		bg:SetFrameLevel(tab:GetFrameLevel()-1)
 		F.CreateBD(bg)
 
-		F.CreateSD(tab, 5, 0, 0, 0, 1, 1)
+		F.CreateSD(tab, 5, 0, 0, 0, 1, -2)
 
 		select(2, tab:GetRegions()):SetTexCoord(.08, .92, .08, .92)
 	end
 
 	hooksecurefunc("PlayerTalentFrame_UpdateSpecs", function()
-		PlayerSpecTab1:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPRIGHT", 11, -36)
+		PlayerSpecTab1:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPRIGHT", 5, -36)
 		PlayerSpecTab2:SetPoint("TOP", PlayerSpecTab1, "BOTTOM")
 	end)
 

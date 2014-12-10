@@ -73,8 +73,8 @@ local function applyBackground(bu)
 		edgeSize = 1,
 	})
 	bu:SetBackdropBorderColor(0, 0, 0)
-	F.frame1px(bu)
-	F.CreateShadow(bu)
+
+	F.CreateSD(bu, 4, 0, 0, 0, 1, -1)
 
 	bu.bg = true
 end

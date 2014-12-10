@@ -34,7 +34,7 @@ BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
 BorderFrame:SetBackdropColor(unpack(backdropcolor))
 BorderFrame:SetFrameLevel(6)
 
-F.CreateShadow(BorderFrame)
+F.CreateSD(BorderFrame, 5, 0, 0, 0, 1, -2)
 
 Minimap:EnableMouseWheel(true)
 MinimapCluster:EnableMouse(false)

@@ -93,7 +93,7 @@ local CreateBD = function(f, a)
 		edgeFile = C.media.backdrop,
 		edgeSize = 1,
 	})
-	f:SetBackdropColor(0, 0, 0, a or .8)
+	f:SetBackdropColor(0, 0, 0, a or .7)
 	f:SetBackdropBorderColor(0, 0, 0)
 end
 
@@ -114,8 +114,8 @@ end
 
 F.CreateSD = function(parent, size, r, g, b, alpha, offset)
 	local sd = CreateFrame("Frame", nil, parent)
-	sd.size = size or 5
-	sd.offset = offset or 0
+	sd.size = size or 4
+	sd.offset = offset or -2
 	sd:SetBackdrop({
 		edgeFile = C.media.glow,
 		edgeSize = sd.size,
@@ -123,21 +123,7 @@ F.CreateSD = function(parent, size, r, g, b, alpha, offset)
 	sd:SetPoint("TOPLEFT", parent, -sd.size - 1 - sd.offset, sd.size + 1 + sd.offset)
 	sd:SetPoint("BOTTOMRIGHT", parent, sd.size + 1 + sd.offset, -sd.size - 1 - sd.offset)
 	sd:SetBackdropBorderColor(r or 0, g or 0, b or 0)
-	sd:SetAlpha(alpha or 1)
-end
-
-F.CreateSB = function(parent, size, r, g, b, alpha, offset)
-	local sb = CreateFrame("Frame", nil, parent)
-	sb.size = size or 5
-	sb.offset = offset or 0
-	sb:SetBackdrop({
-		edgeFile = C.media.glow,
-		edgeSize = sb.size,
-	})
-	sb:SetPoint("TOPLEFT", parent, -sb.size - 0 - sb.offset, sb.size + 0 + sb.offset)
-	sb:SetPoint("BOTTOMRIGHT", parent, sb.size + 0 + sb.offset, -sb.size - 0 - sb.offset)
-	sb:SetBackdropBorderColor(r or 0, g or 0, b or 0)
-	sb:SetAlpha(alpha or 1)
+	sd:SetAlpha(alpha or .8)
 end
 
 F.CreateFS = function(parent, fontSize, justify)
@@ -761,74 +747,3 @@ F.ReskinIcon = function(icon)
 	icon:SetTexCoord(.08, .92, .08, .92)
 	return F.CreateBG(icon)
 end
-
-
-
-UIScale = function() 
-   uiscale = min(2, max(0.64, 768 / string.match(GetCVar("gxResolution"), "%d+x(%d+)"))) 
-end 
-UIScale() 
-
-local mult = 768 / string.match(GetCVar("gxResolution"), "%d+x(%d+)") / uiscale
-local Scale = function(x)
-    return mult*math.floor(x/mult+.5)
-end
-F.mult=mult
-F.Scale=Scale
-
-local dummy = function() return end
-F.dummy=dummy
-
-
-local shadows = {
-	edgeFile = "Interface\\AddOns\\FreeUI\\Media\\glowTex", 
-	edgeSize = 5*mult,
-	insets = { left = 3*mult, right = 3*mult, top = 3*mult, bottom = 3*mult }
-}
-
-local function CreateShadow(f, a)
-	if f.shadow then return end
-	local shadow = CreateFrame("Frame", nil, f)
-	shadow:SetFrameLevel(1)
-	shadow:SetFrameStrata(f:GetFrameStrata())
-	shadow:SetPoint("TOPLEFT", -4*mult, 4*mult)
-	shadow:SetPoint("BOTTOMRIGHT", 4*mult, -4*mult)
-	shadow:SetBackdrop(shadows)
-	shadow:SetBackdropColor(0, 0, 0, 0)
-	shadow:SetBackdropBorderColor(0, 0, 0, a or 1)
-	f.shadow = shadow
-	return shadow
-end
-
-local function CreateInnerBorder(f)
-	if f.iborder then return end
-	f.iborder = CreateFrame("Frame", nil, f)
-	f.iborder:SetPoint("TOPLEFT", mult, -mult)
-	f.iborder:SetPoint("BOTTOMRIGHT", -mult, mult)
-	f.iborder:SetFrameLevel(f:GetFrameLevel())
-	f.iborder:SetBackdrop({
-	  edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = mult,
-	  insets = { left = -mult, right = -mult, top = -mult, bottom = -mult}
-	})
-	f.iborder:SetBackdropBorderColor(0, 0, 0)
-	return f.iborder
-end
-
-local function frame1px(f, a)
-	f:SetBackdrop({
-		bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
-		edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = mult, 
-		insets = {left = -mult, right = -mult, top = -mult, bottom = -mult} 
-	})
-
-	--	f:SetBackdropColor(.06,.06,.06,1)
-	--	f:SetBackdropBorderColor(.15,.15,.15,1)
-	--	CreateInnerBorder(f)
-
-		f:SetBackdropColor(0, 0, 0, a or 1)
-		f:SetBackdropBorderColor(0, 0, 0, a or 1)
-
-end
-
-F.frame1px=frame1px
-F.CreateShadow=CreateShadow

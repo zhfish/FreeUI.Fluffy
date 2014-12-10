@@ -625,7 +625,7 @@ local UnitSpecific = {
 
 		Health:SetHeight(petHeight - powerHeight - 1)
 
-		F.CreateShadow(Health, .9)
+		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
 
 		Castbar:SetAllPoints(Health)
 		Castbar.Width = self:GetWidth()
@@ -655,7 +655,7 @@ local UnitSpecific = {
 
 		Health:SetHeight(playerHeight - powerHeight - 1)
 
-		F.CreateShadow(Health, .9)
+		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
 
 		local HealthPoints = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "LEFT")
 		HealthPoints:SetPoint("BOTTOMLEFT", Health, "TOPLEFT", 0, 3)
@@ -683,8 +683,8 @@ local UnitSpecific = {
 			local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
 			Icon:SetAllPoints(IconFrame)
 			Icon:SetTexCoord(.08, .92, .08, .92)
-			F.frame1px(IconFrame)
-			F.CreateShadow(IconFrame)
+
+			F.CreateSD(IconFrame, 5, 0, 0, 0, .8, -1)
 
 			Castbar.Icon = Icon
 
@@ -710,8 +710,7 @@ local UnitSpecific = {
 			bg:SetPoint("BOTTOMRIGHT", 1, -1)
 			bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
 			F.CreateBD(bg)
-			F.frame1px(bg, .8)
-			F.CreateShadow(bg)
+			F.CreateSD(bg, 5, 0, 0, 0, .8, -2)
 		end
 
 		-- PVP
@@ -1221,7 +1220,7 @@ local UnitSpecific = {
 
 		Health:SetHeight(targetHeight - powerHeight - 1)
 
-		F.CreateShadow(Health, .9)
+		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
 
 		local HealthPoints = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "LEFT")
 		HealthPoints:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 3)
@@ -1245,8 +1244,8 @@ local UnitSpecific = {
 			local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
 			Icon:SetAllPoints(IconFrame)
 			Icon:SetTexCoord(.08, .92, .08, .92)
-			F.frame1px(IconFrame)
-			F.CreateShadow(IconFrame)
+
+			F.CreateSD(IconFrame, 5, 0, 0, 0, .8, -1)
 
 			Castbar.Icon = Icon
 
@@ -1272,8 +1271,7 @@ local UnitSpecific = {
 			bg:SetPoint("BOTTOMRIGHT", 1, -1)
 			bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
 			F.CreateBD(bg)
-			F.frame1px(bg, .8)
-			F.CreateShadow(bg)
+			F.CreateSD(bg, 5, 0, 0, 0, .8, -2)
 		end
 
 		local tt = CreateFrame("Frame", nil, self)
@@ -1377,7 +1375,7 @@ local UnitSpecific = {
 
 		Health:SetHeight(targettargetHeight - powerHeight - 1)
 
-		F.CreateShadow(Health, .9)
+		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
 
 		Castbar:SetAllPoints(Health)
 		Castbar.Width = self:GetWidth()
@@ -1398,7 +1396,7 @@ local UnitSpecific = {
 
 		Health:SetHeight(focusHeight - powerHeight - 1)
 
-		F.CreateShadow(Health, .9)
+		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
 
 		-- Cast bar
 
@@ -1413,8 +1411,8 @@ local UnitSpecific = {
 			local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
 			Icon:SetAllPoints(IconFrame)
 			Icon:SetTexCoord(.08, .92, .08, .92)
-			F.frame1px(IconFrame)
-			F.CreateShadow(IconFrame)
+
+			F.CreateSD(IconFrame, 5, 0, 0, 0, .8, -1)
 
 			Castbar.Icon = Icon
 
@@ -1440,8 +1438,7 @@ local UnitSpecific = {
 			bg:SetPoint("BOTTOMRIGHT", 1, -1)
 			bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
 			F.CreateBD(bg)
-			F.frame1px(bg, .8)
-			F.CreateShadow(bg)
+			F.CreateSD(bg, 5, 0, 0, 0, .8, -2)
 		end
 
 		local tt = CreateFrame("Frame", nil, self)
@@ -1503,7 +1500,7 @@ local UnitSpecific = {
 
 		Health:SetHeight(focustargetHeight - powerHeight - 1)
 
-		F.CreateShadow(Health, .9)
+		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
 
 		Castbar:SetAllPoints(Health)
 		Castbar.Width = self:GetWidth()
