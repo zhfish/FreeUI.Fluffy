@@ -239,6 +239,7 @@ F.ReskinTab = function(f)
 	bg:SetPoint("BOTTOMRIGHT", -8, 0)
 	bg:SetFrameLevel(f:GetFrameLevel()-1)
 	F.CreateBD(bg)
+	F.CreateSD(bg, 4, 0, 0, 0, .8, -2)
 
 	f:SetHighlightTexture(C.media.texture)
 	local hl = f:GetHighlightTexture()

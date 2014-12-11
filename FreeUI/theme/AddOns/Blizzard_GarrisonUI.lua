@@ -610,6 +610,7 @@ C.themes["Blizzard_GarrisonUI"] = function()
 	GarrisonRecruitSelectFrame.TitleText:Show()
 
 	F.CreateBD(GarrisonRecruitSelectFrame)
+	F.CreateSD(GarrisonRecruitSelectFrame)
 	F.ReskinClose(GarrisonRecruitSelectFrame.CloseButton)
 
 	-- Follower list

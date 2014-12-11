@@ -10,7 +10,7 @@ tinsert(C.themes["FreeUI"], function()
 	F.ReskinClose(SpellBookFrameCloseButton)
 
 	SpellBookFrameTabButton1:ClearAllPoints()
-	SpellBookFrameTabButton1:SetPoint("TOPLEFT", SpellBookFrame, "BOTTOMLEFT", 0, 2)
+	SpellBookFrameTabButton1:SetPoint("TOPLEFT", SpellBookFrame, "BOTTOMLEFT", 2, 1)
 
 	for i = 1, 5 do
 		F.ReskinTab(_G["SpellBookFrameTabButton"..i])
