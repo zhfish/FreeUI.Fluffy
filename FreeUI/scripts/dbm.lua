@@ -8,7 +8,7 @@ local function InitStyle()
 			local tbar = _G[name]
 			local text = _G[name.."Name"]
 
-			tbar:SetHeight(4)
+			tbar:SetHeight(8)
 
 			text:SetPoint("CENTER", 0, 10)
 			text:SetPoint("LEFT", 2, 10)
@@ -20,8 +20,7 @@ local function InitStyle()
 				local icon = _G[name.."Icon1"]
 
 				F.CreateBDFrame(tbar, .7)
-				--F.frame1px(tbar)
-				F.CreateShadow(tbar, .8)
+				F.CreateSD(tbar, 5, 0, 0, 0, 1, -2)
 
 				texture:SetTexture(C.media.texture)
 				texture.SetTexture = F.dummy
