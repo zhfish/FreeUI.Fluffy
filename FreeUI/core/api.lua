@@ -7,7 +7,7 @@ C.media = {
 	["arrowDown"] = "Interface\\AddOns\\FreeUI\\media\\arrow-down-active",
 	["arrowLeft"] = "Interface\\AddOns\\FreeUI\\media\\arrow-left-active",
 	["arrowRight"] = "Interface\\AddOns\\FreeUI\\media\\arrow-right-active",
-	["backdrop"] = "Interface\\ChatFrame\\ChatFrameBackground", -- default backdrop
+	["backdrop"] = "Interface\\AddOns\\FreeUI\\media\\blank", -- default backdrop
 	["checked"] = "Interface\\AddOns\\FreeUI\\media\\CheckButtonHilight", -- replace default checked texture
 	["font"] = "Interface\\AddOns\\FreeUI\\media\\PFTempestaSeven.ttf", -- default pixel font
 	["font2"] = "Interface\\AddOns\\FreeUI\\media\\font.ttf", -- default font
@@ -93,7 +93,7 @@ local CreateBD = function(f, a)
 		edgeFile = C.media.backdrop,
 		edgeSize = 1,
 	})
-	f:SetBackdropColor(0, 0, 0, a or .7)
+	f:SetBackdropColor(0, 0, 0, a or .6)
 	f:SetBackdropBorderColor(0, 0, 0)
 end
 
@@ -112,10 +112,22 @@ F.CreateBG = function(frame)
 	return bg
 end
 
+-- took from RayUI ;)
+function F:CreateStripesThin(f)
+	if not f then return end
+	f.stripesthin = f:CreateTexture(nil, "BACKGROUND", nil, 1)
+	f.stripesthin:SetAllPoints()
+	f.stripesthin:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true)
+	f.stripesthin:SetHorizTile(true)
+	f.stripesthin:SetVertTile(true)
+	f.stripesthin:SetBlendMode("ADD")
+end
+
 F.CreateSD = function(parent, size, r, g, b, alpha, offset)
+	F:CreateStripesThin(parent)
 	local sd = CreateFrame("Frame", nil, parent)
-	sd.size = size or 4
-	sd.offset = offset or -2
+	sd.size = size or 5
+	sd.offset = offset or 0
 	sd:SetBackdrop({
 		edgeFile = C.media.glow,
 		edgeSize = sd.size,
@@ -123,7 +135,7 @@ F.CreateSD = function(parent, size, r, g, b, alpha, offset)
 	sd:SetPoint("TOPLEFT", parent, -sd.size - 1 - sd.offset, sd.size + 1 + sd.offset)
 	sd:SetPoint("BOTTOMRIGHT", parent, sd.size + 1 + sd.offset, -sd.size - 1 - sd.offset)
 	sd:SetBackdropBorderColor(r or 0, g or 0, b or 0)
-	sd:SetAlpha(alpha or .8)
+	sd:SetAlpha(alpha or 1)
 end
 
 F.CreateFS = function(parent, fontSize, justify)
@@ -183,33 +195,35 @@ F.CreatePulse = function(frame) -- pulse function originally by nightcracker
 end
 
 local r, g, b = unpack(C.class)
-local buttonR, buttonG, buttonB, buttonA = .3, .3, .3, .3
 
 local CreateGradient = function(f)
 	local tex = f:CreateTexture(nil, "BORDER")
 	tex:SetPoint("TOPLEFT", 1, -1)
 	tex:SetPoint("BOTTOMRIGHT", -1, 1)
-	tex:SetTexture(C.media.gradient)
-	tex:SetVertexColor(buttonR, buttonG, buttonB, buttonA)
+	tex:SetTexture(C.media.backdrop)
+	tex:SetGradientAlpha("VERTICAL", 0, 0, 0, .3, .35, .35, .35, .35)
 
 	return tex
 end
 
 F.CreateGradient = CreateGradient
 
-local function colourButton(f)
+local function StartGlow(f)
 	if not f:IsEnabled() then return end
-
-	f:SetBackdropColor(r, g, b, buttonA)
+	f:SetBackdropColor(r, g, b, .1)
 	f:SetBackdropBorderColor(r, g, b)
+	f.glow:SetAlpha(1)
+	F.CreatePulse(f.glow)
 end
 
-local function clearButton(f)
+local function StopGlow(f)
 	f:SetBackdropColor(0, 0, 0, 0)
 	f:SetBackdropBorderColor(0, 0, 0)
+	f.glow:SetScript("OnUpdate", nil)
+	f.glow:SetAlpha(0)
 end
 
-F.Reskin = function(f, noHighlight)
+F.Reskin = function(f, noGlow)
 	f:SetNormalTexture("")
 	f:SetHighlightTexture("")
 	f:SetPushedTexture("")
@@ -223,11 +237,21 @@ F.Reskin = function(f, noHighlight)
 
 	F.CreateBD(f, 0)
 
-	f.tex = CreateGradient(f)
+	CreateGradient(f)
 
-	if not noHighlight then
-		f:HookScript("OnEnter", colourButton)
- 		f:HookScript("OnLeave", clearButton)
+	if not noGlow then
+		f.glow = CreateFrame("Frame", nil, f)
+		f.glow:SetBackdrop({
+			edgeFile = C.media.glow,
+			edgeSize = 5,
+		})
+		f.glow:SetPoint("TOPLEFT", -6, 6)
+		f.glow:SetPoint("BOTTOMRIGHT", 6, -6)
+		f.glow:SetBackdropBorderColor(r, g, b)
+		f.glow:SetAlpha(0)
+
+		f:HookScript("OnEnter", StartGlow)
+ 		f:HookScript("OnLeave", StopGlow)
 	end
 end
 
@@ -239,7 +263,6 @@ F.ReskinTab = function(f)
 	bg:SetPoint("BOTTOMRIGHT", -8, 0)
 	bg:SetFrameLevel(f:GetFrameLevel()-1)
 	F.CreateBD(bg)
-	F.CreateSD(bg, 4, 0, 0, 0, .8, -2)
 
 	f:SetHighlightTexture(C.media.texture)
 	local hl = f:GetHighlightTexture()
@@ -399,7 +422,7 @@ F.ReskinClose = function(f, a1, p, a2, x, y)
 		f:ClearAllPoints()
 		f:SetPoint(a1, p, a2, x, y)
 	else
-		f:SetPoint("TOPRIGHT", -6, -6)
+		f:SetPoint("TOPRIGHT", -4, -4)
 	end
 
 	f:SetNormalTexture("")
