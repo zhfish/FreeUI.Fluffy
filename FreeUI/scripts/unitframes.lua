@@ -540,10 +540,6 @@ local Shared = function(self, unit, isSingle)
 
 	self.RaidIcon = RaidIcon
 
-	self.SpellRange = {
-	    insideAlpha = 1,
-        outsideAlpha = .3}
-
 	-- [[ Counter bar ]]
 
 	if unit == "player" or unit == "pet" then
@@ -575,6 +571,11 @@ local Shared = function(self, unit, isSingle)
 
 		self.CounterBar = CounterBar
 	end
+
+	-------------------------------------
+	-- Range || Plugin: oUF_SpellRange --
+	-------------------------------------
+	self.SpellRange = { insideAlpha = 1, outsideAlpha = 0.4 }	
 
 	--[[ Set up the layout ]]
 
