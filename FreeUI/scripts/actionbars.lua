@@ -320,38 +320,6 @@ hooksecurefunc("StanceBar_Update", function()
 	end
 end)
 
--- [[ Main bar positions ]]
-
-local function positionBars()
-	if InCombatLockdown() then return end
-
-	local leftShown, rightShown = MultiBarBottomLeft:IsShown(), MultiBarBottomRight:IsShown()
-
-	if leftShown and rightShown then
-		petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", 0, 4)
-		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 4, 4)
-		bar3:SetPoint("BOTTOM", bar2, "TOP", 0, 4)
-		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
-	elseif leftShown then
-		petbar:SetPoint("BOTTOMRIGHT", bar2, "TOPRIGHT", 0, 4)
-		stancebar:SetPoint("BOTTOMLEFT", bar2, "TOPLEFT", 4, 4)
-		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
-	elseif rightShown then
-		petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", 0, 4)
-		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 4, 4)
-		bar3:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
-	else
-		petbar:SetPoint("BOTTOMRIGHT", bar1, "TOPRIGHT", 0, 4)
-		stancebar:SetPoint("BOTTOMLEFT", bar1, "TOPLEFT", 4, 4)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
-	end
-end
-
-hooksecurefunc("MultiActionBar_Update", positionBars)
-
 --[[ Right bars on mouseover ]]
 
 if C.actionbars.rightbars_mouseover then
@@ -437,7 +405,6 @@ end
 
 local barextra = CreateFrame("Frame", "FreeUI_ExtraActionBar", UIParent, "SecureHandlerStateTemplate")
 barextra:SetSize(39, 39)
-barextra:SetPoint("BOTTOM", bar1, "TOP", 0, 30)
 
 ExtraActionBarFrame:SetParent(barextra)
 ExtraActionBarFrame:EnableMouse(false)
@@ -448,6 +415,42 @@ ExtraActionBarFrame.ignoreFramePositionManager = true
 ExtraActionButton1:SetSize(39, 39)
 
 RegisterStateDriver(barextra, "visibility", "[extrabar] show; hide")
+
+-- [[ Main bar positions ]]
+
+local function positionBars()
+	if InCombatLockdown() then return end
+
+	local leftShown, rightShown = MultiBarBottomLeft:IsShown(), MultiBarBottomRight:IsShown()
+
+	if leftShown and rightShown then
+		barextra:SetPoint("BOTTOM", bar3, "TOP", 0, 30)
+		petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", 0, 4)
+		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 4, 4)
+		bar3:SetPoint("BOTTOM", bar2, "TOP", 0, 4)
+		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+	elseif leftShown then
+		barextra:SetPoint("BOTTOM", bar2, "TOP", 0, 30)
+		petbar:SetPoint("BOTTOMRIGHT", bar2, "TOPRIGHT", 0, 4)
+		stancebar:SetPoint("BOTTOMLEFT", bar2, "TOPLEFT", 4, 4)
+		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+	elseif rightShown then
+		barextra:SetPoint("BOTTOM", bar3, "TOP", 0, 30)
+		petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", 0, 4)
+		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 4, 4)
+		bar3:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+	else
+		barextra:SetPoint("BOTTOM", bar1, "TOP", 0, 30)
+		petbar:SetPoint("BOTTOMRIGHT", bar1, "TOPRIGHT", 0, 4)
+		stancebar:SetPoint("BOTTOMLEFT", bar1, "TOPLEFT", 4, 4)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+	end
+end
+
+hooksecurefunc("MultiActionBar_Update", positionBars)
 
 -- [[ Leave vehicle ]]
 
