@@ -577,6 +577,107 @@ Filger_Spells = {
 			{spellID = 66271, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Drink
 			{spellID = 80167, unitID = "target", caster = "all", filter = "BUFF"},
+
+			-- 悬锥堡
+			
+			-- 1 卡加斯
+			-- 冲锋
+			{spellID = 	158986, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 迸裂创伤
+			{spellID = 	159178, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 搜寻猎物
+			{spellID = 	162497, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 着火
+			{spellID = 	163130, unitID = "target", caster = "all", filter = "DEBUFF"},
+			
+			-- 2 屠夫
+			-- 捶肉槌
+			{spellID = 156151, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 切肉刀
+			{spellID = 156147, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 龟裂创伤
+			{spellID = 156152, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 白鬼硫酸
+			{spellID = 163046, unitID = "player", caster = "all", filter = "DEBUFF"},
+			
+			-- 3 泰克图斯
+			-- 晶化弹幕
+			{spellID = 162346, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 晶化弹幕
+			{spellID = 	162370, unitID = "player", caster = "all", filter = "DEBUFF"},
+			
+			-- 4  布兰肯斯波
+			-- 感染孢子
+			{spellID = 163242, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 回春孢子
+			{spellID = 159426, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 溃烂
+			{spellID = 163241, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 死疽吐息
+			{spellID = 159220, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 蚀脑真菌
+			{spellID = 160179, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 爆裂灌注
+			{spellID = 165223, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 脉冲高热
+			{spellID = 163666, unitID = "player", caster = "all", filter = "DEBUFF"},
+			
+			-- 5  独眼魔双子
+			-- 受伤
+			{spellID =  155569, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 烈焰
+			{spellID =  158241, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 奥能动荡
+			{spellID =  163372, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 奥术致伤
+			{spellID =  167200, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 扭曲奥能
+			{spellID =  163297, unitID = "target", caster = "all", filter = "BUFF"},
+
+			
+			-- 6 克拉戈
+			-- 魔能散射：冰霜
+			{spellID = 172813, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 魔能散射：火焰
+			{spellID = 162185, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 魔能散射：暗影
+			{spellID = 162184, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 魔能散射：奥术
+			{spellID = 162186, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 压制力场
+			{spellID = 161345, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 废灵标记
+			{spellID = 161242, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 废灵璧垒
+			{spellID = 172886, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 魔能散射：邪能
+			{spellID = 	172895, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 魔能散射：邪能
+			{spellID = 172917, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 统御之力
+			{spellID = 163472, unitID = "player", caster = "all", filter = "DEBUFF"},
+			
+			-- 7 元首
+			-- 锁定
+			{spellID = 157763, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 狂莽突击
+			{spellID = 159515, unitID = "Target", caster = "all", filter = "BUFF"},
+			-- 烙印
+			{spellID = 156225, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 烙印：偏移
+			{spellID = 164004, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 烙印：强固
+			{spellID = 164005, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 烙印：复制
+			{spellID = 164006, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 混沌标记
+			{spellID = 158605, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 混沌标记：偏移
+			{spellID = 164176, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 混沌标记：强固
+			{spellID = 164178, unitID = "player", caster = "all", filter = "DEBUFF"},
+			-- 混沌标记：复制
+			{spellID = 164191, unitID = "player", caster = "all", filter = "DEBUFF"},
 		},
 	},
 }
