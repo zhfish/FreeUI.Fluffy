@@ -174,27 +174,109 @@ Filger_Spells = {
 			IconSize = Misc.IconSizeNormal,
 			Position = {unpack(Filger_Settings.C_AURA)},
 
-			-- Potions
-			-- Draenic Agility Potion
-			{spellID = 156423, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Draenic Intellect Potion
-			{spellID = 156426, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Draenic Strength Potion
+			-- WOD Potions
+			-- 德拉诺力量药水		
 			{spellID = 156428, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Draenic Armor Potion
-			{spellID = 156430, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Virmen's Bite
-			{spellID = 105697, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Potion of Mogu Power
+			-- 德拉诺敏捷药水
+			{spellID = 156423, unitID = "player", caster = "player", filter = "BUFF"},
+			-- 德拉诺智力药水
 			{spellID = 105706, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Potion of the Jade Serpent
-			{spellID = 105702, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Kafa Press
-			{spellID = 125282, unitID = "player", caster = "player", filter = "BUFF"},
-			-- Speed (Potion)
-			{spellID = 2379, unitID = "player", caster = "player", filter = "BUFF", absID = true},
-			-- Speed (BG)
-			{spellID = 23451, unitID = "player", caster = "all", filter = "BUFF", absID = true},
+			-- 德拉诺护甲药水
+			{spellID = 156430, unitID = "player", caster = "player", filter = "BUFF"},
+			
+			-- WOD Enchants
+			-- 雷神之印
+			{spellID = 159234, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 战歌之印
+			{spellID = 159675, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 血环之印
+			{spellID = 173322, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 霜狼之印
+			{spellID = 159676, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 影月之印
+			{spellID = 159678, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 黑石之印
+			{spellID = 159679, unitID = "player", caster = "all", filter = "BUFF"},
+			
+			-- WOD Trinkets
+			-- Tank
+			-- 骑士徽章
+			{spellID = 162917, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 岩心雕像
+			{spellID = 176982, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 起步的愚忠
+			{spellID = 176460, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 普尔的盲目之眼
+			{spellID = 176876, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 石化食肉孢子
+			{spellID = 165824, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 不眠奥术精魂
+			{spellID = 177053, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 不屑合击石板
+			{spellID = 176873, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 爆裂熔炉之门
+			{spellID = 177056, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 重击护符
+			{spellID = 177102, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Melee DPS General
+			-- 战争之颅
+			{spellID = 162915, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Strength Melee DPS
+			-- 活体火山微粒
+			{spellID = 176974, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 齐亚诺斯的剑鞘
+			{spellID = 177189, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 泰克图斯的脉动之心
+			{spellID = 177040, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 抽搐暗影之瓶
+			{spellID = 176874, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 尖啸之魂号角
+			{spellID = 177042, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 熔炉主管的徽记
+			{spellID = 177096, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Agility Melee DPS
+			-- 黑心执行者勋章
+			{spellID = 176984, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 双面幸运金币
+			{spellID = 177597, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 毁灭之鳞
+			{spellID = 177038, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 多肉龙脊奖章
+			{spellID = 177035, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 跃动的山脉之心
+			{spellID = 176878, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 蜂鸣黑铁触发器
+			{spellID = 177067, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Caster DPS
+			-- 睡魔之袋
+			{spellID = 162919, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 狂怒之心护符
+			{spellID = 176980, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 虚无碎片
+			{spellID = 176875, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 科普兰的清醒
+			{spellID = 177594, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 髟鼠蜥人灵魂容器
+			{spellID = 177046, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 达玛克的无常护符
+			{spellID = 177051, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 黑铁微型坩埚
+			{spellID = 177081, unitID = "player", caster = "all", filter = "BUFF"},
+			-- Healer
+			-- 羽翼沙漏
+			{spellID = 162913, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 永燃蜡烛
+			{spellID = 177592, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 完美的活性蘑菇
+			{spellID = 176978, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 腐蚀治疗徽章
+			{spellID = 176879, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 元素师的屏蔽护符
+			{spellID = 177063, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 铁刺狗玩具
+			{spellID = 177060, unitID = "player", caster = "all", filter = "BUFF"},
+			-- 自动修复灭菌器
+			{spellID = 177086, unitID = "player", caster = "all", filter = "BUFF"},
 
 			-- Leeroy Jenkins
 			-- Bloodlust
