@@ -1602,14 +1602,29 @@ local UnitSpecific = {
 		Buffs['spacing-x'] = 3
 		Buffs['spacing-y'] = 3
 
-		Buffs:SetHeight(22)
-		Buffs:SetWidth(bossWidth - 22)
+		Buffs:SetHeight(26)
+		Buffs:SetWidth(bossWidth - 26)
 		Buffs.num = C.unitframes.num_boss_buffs
-		Buffs.size = 22
+		Buffs.size = 26
 
 		self.Buffs = Buffs
-
 		Buffs.PostUpdateIcon = PostUpdateIcon
+
+		local Debuffs = CreateFrame("Frame", nil, self)
+		Debuffs:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 0, -4)
+		Debuffs.initialAnchor = "TOPRIGHT"
+		Debuffs["growth-x"] = "LEFT"
+		Debuffs["growth-y"] = "DOWN"
+		Debuffs["spacing-x"] = 3
+		Debuffs['spacing-y'] = 3
+		Debuffs:SetHeight(26)
+		Debuffs:SetWidth(bossWidth - 26)
+		Debuffs.size = 26
+		Debuffs.num = 8
+		self.Debuffs = Debuffs
+		self.Debuffs.onlyShowPlayer = true
+
+		Debuffs.PostUpdateIcon = PostUpdateIcon
 
 		AltPowerBar:HookScript("OnShow", function()
 			Buffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -(5 + altPowerHeight))
