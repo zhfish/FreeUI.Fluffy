@@ -91,6 +91,7 @@ scripts_extra\Screenshots.lua
 scripts_extra\SortedCurrencyTab.lua
 scripts_extra\SpamageMeters.lua
 scripts_extra\TabBinder.lua
+scripts_extra\TradeTabs.lua
 scripts_extra\UnitSounds.lua
 scripts_extra\WhisperSound.lua
 
