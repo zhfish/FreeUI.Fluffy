@@ -10,7 +10,7 @@ f.tex:SetAllPoints(f)
 function f:SetShadowLevel(n)
 	n = tonumber(n)
 	if not n then error("The level must be a number between 100 and 0.") return end
-	ncShadowLevel = 100
+	ncShadowLevel = 60
 	f:SetAlpha(n/100)
 end
 f:SetScript("OnEvent", function()
