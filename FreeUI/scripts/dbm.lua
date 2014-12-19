@@ -8,7 +8,7 @@ local function InitStyle()
 			local tbar = _G[name]
 			local text = _G[name.."Name"]
 
-			tbar:SetHeight(8)
+			tbar:SetHeight(4)
 
 			text:SetPoint("CENTER", 0, 10)
 			text:SetPoint("LEFT", 2, 10)
@@ -19,8 +19,7 @@ local function InitStyle()
 				local spark = _G[name.."Spark"]
 				local icon = _G[name.."Icon1"]
 
-				F.CreateBDFrame(tbar, .7)
-				F.CreateSD(tbar, 5, 0, 0, 0, 1, -2)
+				F.CreateBDFrame(tbar, 1)
 
 				texture:SetTexture(C.media.texture)
 				texture.SetTexture = F.dummy
@@ -39,8 +38,6 @@ local function InitStyle()
 
 				icon:ClearAllPoints()
 				icon:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -8, 0)
-				icon:SetTexCoord(.08, .92, .08, .92)
-				F.CreateBG(icon)
 
 				bar.styled = true
 			end
