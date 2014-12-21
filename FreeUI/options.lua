@@ -110,10 +110,14 @@ C["unitframes"] = {
 	["statusIndicator"] = false,					-- show combat/resting status on player frame
 		["statusIndicatorCombat"] = true,				-- show combat status (else: only resting)
 
-	["player"] = {"CENTER", UIParent, "CENTER", 0, -150},
-	["target"] = {"CENTER", UIParent, "CENTER", 250, -60},
-	["party"] = {"TOPLEFT", 'oUF_FreePlayer', "BOTTOMLEFT", 0, -120},
-	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -80, 40},
+	["player"] = {"CENTER", UIParent, "CENTER", 0, -200},						-- player unitframe position
+	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, 60},					-- target unitframe position
+	["party"] = {"TOPLEFT", 'oUF_FreePlayer', "BOTTOMLEFT", 0, -120},			-- party unitframe position
+	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -80, 40},				-- raid unitframe position
+
+	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -180},		-- player castbar position
+	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, -60},		-- target castbar position
+	["focus_castbar"] = {"LEFT", 'oUF_FreeFocus', "LEFT", 0, -40},				-- focus castbar position
 
 	["altpower_height"] = 2,
 	["power_height"] = 2,

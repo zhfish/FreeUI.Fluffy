@@ -1,6 +1,6 @@
 local F, C, L = unpack(select(2, ...))
 
-local a1, p, a2, x, y = unpack(C.unitframes.target)
+local a1, p, a2, x, y = unpack(C.unitframes.player)
 
 local combo = CreateFrame("Frame", nil, UIParent)
 combo:SetSize(50, 50)
