@@ -130,6 +130,10 @@ Filger_Spells = {
 			{spellID = 108501, filter = "CD"},
 			-- unending resolve
 			{spellID = 104773, filter = "CD"},
+			-- havoc
+			{spellID = 80240, filter = "CD"},
+			-- conflagrate
+			{spellID = 17962, filter = "CD"},
 
 			-- Racial
 			-- Every Man for Himself (Human)
