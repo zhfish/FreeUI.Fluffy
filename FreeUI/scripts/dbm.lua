@@ -17,9 +17,13 @@ local function InitStyle()
 				local texture = _G[name.."Texture"]
 				local timer = _G[name.."Timer"]
 				local spark = _G[name.."Spark"]
-				local icon = _G[name.."Icon1"]
+			--	local icon = _G[name.."Icon1"]
+				local icon1 = _G[frame:GetName().."BarIcon1"]
+				local icon2 = _G[frame:GetName().."BarIcon2"]
 
-				F.CreateBDFrame(tbar, 1)
+				F.CreateBDFrame(tbar, .6)
+
+				
 
 				texture:SetTexture(C.media.texture)
 				texture.SetTexture = F.dummy
@@ -36,8 +40,10 @@ local function InitStyle()
 				spark.SetSize = F.dummy
 				spark:SetTexture("Interface\\AddOns\\FreeUI\\media\\DBMSpark")
 
-				icon:ClearAllPoints()
-				icon:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -8, 0)
+				icon1:ClearAllPoints()
+				icon1:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -4, -2)
+		
+				icon1.styled = true
 
 				bar.styled = true
 			end
