@@ -213,17 +213,17 @@ do
 	local features = ns.addSubCategory(general, ns.localization.generalFeatures)
 	features:SetPoint("TOPLEFT", general.subText, "BOTTOMLEFT", 0, -8)
 
-	local buffReminder = ns.CreateCheckBox(general, "buffreminder", true, true)
-	buffReminder:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
+	-- local buffReminder = ns.CreateCheckBox(general, "buffreminder", true, true)
+	-- buffReminder:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
 
-	local buffTracker = ns.CreateCheckBox(general, "buffTracker", true, true)
-	buffTracker:SetPoint("TOPLEFT", buffReminder, "BOTTOMLEFT", 0, -8)
+	-- local buffTracker = ns.CreateCheckBox(general, "buffTracker", true, true)
+	-- buffTracker:SetPoint("TOPLEFT", buffReminder, "BOTTOMLEFT", 0, -8)
 
-	local combatText = ns.CreateCheckBox(general, "combatText", true, true)
-	combatText:SetPoint("TOPLEFT", buffTracker, "BOTTOMLEFT", 0, -8)
+	-- local combatText = ns.CreateCheckBox(general, "combatText", true, true)
+	-- combatText:SetPoint("TOPLEFT", buffTracker, "BOTTOMLEFT", 0, -8)
 
 	local interrupt = ns.CreateCheckBox(general, "interrupt", true)
-	interrupt:SetPoint("TOPLEFT", combatText, "BOTTOMLEFT", 0, -8)
+	interrupt:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -8)
 
 	local interruptParty = ns.CreateCheckBox(general, "interrupt_party", true)
 	interruptParty:SetPoint("TOPLEFT", interrupt, "BOTTOMLEFT", 16, -8)
@@ -240,7 +240,7 @@ do
 	interrupt.children = {interruptParty, interruptBGs, interruptLFG, interruptOutdoors}
 
 	local threatMeter = ns.CreateCheckBox(general, "threatMeter", true, true)
-	threatMeter:SetPoint("LEFT", buffReminder, "RIGHT", 240, 0)
+	threatMeter:SetPoint("LEFT", interrupt, "RIGHT", 240, 0)
 
 	local helmCloak = ns.CreateCheckBox(general, "helmcloakbuttons", true, true)
 	helmCloak:SetPoint("TOPLEFT", threatMeter, "BOTTOMLEFT", 0, -8)
@@ -534,11 +534,11 @@ do
 	local enable = ns.CreateCheckBox(unitframes, "enable", true, true)
 	enable:SetPoint("TOPLEFT", unitframes.subText, "BOTTOMLEFT", 0, -8)
 
-	local autoPosition = ns.CreateCheckBox(unitframes, "autoPosition", true, true)
-	autoPosition:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -16)
+--	local autoPosition = ns.CreateCheckBox(unitframes, "autoPosition", true, true)
+--	autoPosition:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -16)
 
 	local enableGroup = ns.CreateCheckBox(unitframes, "enableGroup", true, true)
-	enableGroup:SetPoint("TOPLEFT", autoPosition, "BOTTOMLEFT", 0, -8)
+	enableGroup:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -8)
 
 	local limitRaidSize = ns.CreateCheckBox(unitframes, "limitRaidSize", true)
 	limitRaidSize:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 16, -8)
@@ -555,11 +555,11 @@ do
 	local enableArena = ns.CreateCheckBox(unitframes, "enableArena", true, true)
 	enableArena:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 0, -110)
 
-	local targettarget = ns.CreateCheckBox(unitframes, "targettarget", true, true)
-	targettarget:SetPoint("TOPLEFT", enableArena, "BOTTOMLEFT", 0, -8)
+--	local targettarget = ns.CreateCheckBox(unitframes, "targettarget", true, true)
+--	targettarget:SetPoint("TOPLEFT", enableArena, "BOTTOMLEFT", 0, -8)
 
 	local absorb = ns.CreateCheckBox(unitframes, "absorb", true, true)
-	absorb:SetPoint("LEFT", autoPosition, "RIGHT", 240, 0)
+	absorb:SetPoint("LEFT", enable, "RIGHT", 240, 0)
 
 	local castbar = ns.CreateCheckBox(unitframes, "castbar", true, true)
 	castbar:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -8)
@@ -578,13 +578,13 @@ do
 	local function toggleUFOptions()
 		local shown = enable:GetChecked()
 
-		autoPosition:SetShown(shown)
+--		autoPosition:SetShown(shown)
 		enableGroup:SetShown(shown)
 		limitRaidSize:SetShown(shown)
 		healerClasscolours:SetShown(shown)
 		partyNameAlways:SetShown(shown)
 		absorb:SetShown(shown)
-		targettarget:SetShown(shown)
+--		targettarget:SetShown(shown)
 		pvp:SetShown(shown)
 		statusIndicator:SetShown(shown)
 		statusIndicatorCombat:SetShown(shown)
