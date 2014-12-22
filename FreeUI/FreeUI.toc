@@ -26,14 +26,14 @@ scripts\arena.lua
 scripts\automation.lua
 scripts\bags.lua
 scripts\bubbles.lua
-scripts\buffreminder.lua
+## scripts\buffreminder.lua
 scripts\buffs.lua
-scripts\bufftracker.lua
+## scripts\bufftracker.lua
 scripts\buttons.lua
 scripts\chat.lua
 scripts\chattabs.lua
 scripts\colours.lua
-scripts\combattext.lua
+## scripts\combattext.lua
 scripts\combo.lua
 scripts\dbm.lua
 scripts\disable.lua
@@ -88,6 +88,7 @@ scripts_extra\interruptsound.lua
 scripts_extra\Invite.lua
 scripts_extra\ncShadow.lua
 scripts_extra\Screenshots.lua
+scripts_extra\ShadowBurn.lua
 scripts_extra\SortedCurrencyTab.lua
 scripts_extra\SpamageMeters.lua
 scripts_extra\TabBinder.lua
