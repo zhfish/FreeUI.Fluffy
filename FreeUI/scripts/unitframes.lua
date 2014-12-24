@@ -572,11 +572,6 @@ local Shared = function(self, unit, isSingle)
 		self.CounterBar = CounterBar
 	end
 
-	-------------------------------------
-	-- Range || Plugin: oUF_SpellRange --
-	-------------------------------------
-	self.SpellRange = { insideAlpha = 1, outsideAlpha = 0.4 }	
-
 	--[[ Set up the layout ]]
 
 	self.colors = colors
@@ -1710,6 +1705,10 @@ local UnitSpecific = {
 }
 
 do
+	local range = {
+		insideAlpha = 1,
+		outsideAlpha = .3,
+	}
 
 	UnitSpecific.party = function(self, ...)
 		Shared(self, ...)
@@ -1886,6 +1885,7 @@ do
 		select:RegisterEvent("PLAYER_TARGET_CHANGED")
 		select:SetScript("OnEvent", updateNameColourAlt)
 
+		self.Range = range
 	end
 end
 
