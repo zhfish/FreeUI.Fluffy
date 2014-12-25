@@ -112,7 +112,7 @@ C["unitframes"] = {
 
 	["player"] = {"CENTER", UIParent, "CENTER", 0, -200},						-- player unitframe position
 	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, 60},					-- target unitframe position
-	["party"] = {"TOPLEFT", 'oUF_FreePlayer', "BOTTOMLEFT", 0, -120},			-- party unitframe position
+	["party"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -120},			-- party unitframe position
 	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -80, 40},				-- raid unitframe position
 
 	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -180},		-- player castbar position
