@@ -90,6 +90,7 @@ C["tooltip"] = {
 	["anchorCursor"] = false,
 	["guildrank"] = true,
 	["title"] = false,
+	["pvp"] = false,
 }
 
 C["unitframes"] = {
@@ -138,8 +139,8 @@ C["unitframes"] = {
 	["boss_height"] = 16,
 	["arena_width"] = 229,
 	["arena_height"] = 12,
-	["party_width"] = 42,
-	["party_height"] = 20,
+	["party_width"] = 58,
+	["party_height"] = 26,
 	["raid_width"] = 50,
 	["raid_height"] = 22,
 

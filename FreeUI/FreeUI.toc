@@ -26,14 +26,11 @@ scripts\arena.lua
 scripts\automation.lua
 scripts\bags.lua
 scripts\bubbles.lua
-## scripts\buffreminder.lua
 scripts\buffs.lua
-## scripts\bufftracker.lua
 scripts\buttons.lua
 scripts\chat.lua
 scripts\chattabs.lua
 scripts\colours.lua
-## scripts\combattext.lua
 scripts\combo.lua
 scripts\dbm.lua
 scripts\disable.lua
@@ -72,6 +69,8 @@ scripts\worldstateframe.lua
 scripts_extra\ChatFilter\load.xml
 scripts_extra\Filger\load.xml
 scripts_extra\tooltip\load.xml
+scripts_extra\NephilistGarrison\load.xml
+scripts_extra\ckaosMilitia\load.xml
 
 scripts_extra\Align.lua
 scripts_extra\AlreadyKnown.lua

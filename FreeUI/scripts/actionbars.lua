@@ -7,8 +7,8 @@ if not C.actionbars.enable then return end
 --[[ MainMenuBar ]]
 
 local bar1 = CreateFrame("Frame", "FreeUI_MainMenuBar", UIParent, "SecureHandlerStateTemplate")
-bar1:SetWidth(380)
-bar1:SetHeight(28)
+bar1:SetWidth(404)
+bar1:SetHeight(30)
 
 MainMenuBarArtFrame:SetParent(bar1)
 MainMenuBarArtFrame:EnableMouse(false)
@@ -18,7 +18,7 @@ MainMenuBar.slideOut.IsPlaying = function() return true end
 for i = 1, NUM_ACTIONBAR_BUTTONS do
 	local button = _G["ActionButton"..i]
 	button:ClearAllPoints()
-	button:SetSize(28, 28)
+	button:SetSize(30, 30)
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", bar1, "BOTTOMLEFT", 0, 0)
 	else
@@ -32,8 +32,8 @@ RegisterStateDriver(bar1, "visibility", "[petbattle][overridebar][vehicleui][pos
 --[[ Bottom Left bar ]]
 
 local bar2 = CreateFrame("Frame", "FreeUI_MultiBarBottomLeft", UIParent, "SecureHandlerStateTemplate")
-bar2:SetWidth(380)
-bar2:SetHeight(28)
+bar2:SetWidth(404)
+bar2:SetHeight(30)
 
 MultiBarBottomLeft:SetParent(bar2)
 MultiBarBottomLeft:EnableMouse(false)
@@ -41,7 +41,7 @@ MultiBarBottomLeft:EnableMouse(false)
 for i = 1, NUM_ACTIONBAR_BUTTONS do
 	local button = _G["MultiBarBottomLeftButton"..i]
 	button:ClearAllPoints()
-	button:SetSize(28, 28)
+	button:SetSize(30, 30)
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", bar2, "BOTTOMLEFT", 0, 0)
 	else
@@ -55,8 +55,8 @@ RegisterStateDriver(bar2, "visibility", "[petbattle][vehicleui][overridebar][pos
 --[[ Bottom Right bar ]]
 
 local bar3 = CreateFrame("Frame", "FreeUI_MultiBarBottomRight", UIParent, "SecureHandlerStateTemplate")
-bar3:SetWidth(380)
-bar3:SetHeight(28)
+bar3:SetWidth(404)
+bar3:SetHeight(30)
 
 MultiBarBottomRight:SetParent(bar3)
 MultiBarBottomRight:EnableMouse(false)
@@ -64,7 +64,7 @@ MultiBarBottomRight:EnableMouse(false)
 for i = 1, NUM_ACTIONBAR_BUTTONS do
 	local button = _G["MultiBarBottomRightButton"..i]
 	button:ClearAllPoints()
-	button:SetSize(28, 28)
+	button:SetSize(30, 30)
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", bar3, "BOTTOMLEFT", 0, 0)
 	else
@@ -78,7 +78,7 @@ RegisterStateDriver(bar3, "visibility", "[petbattle][vehicleui][overridebar][pos
 --[[ Right bar 1 ]]
 
 local bar4 = CreateFrame("Frame", "FreeUI_MultiBarRight", UIParent, "SecureHandlerStateTemplate")
-bar4:SetHeight(354)
+bar4:SetHeight(332)
 bar4:SetWidth(24)
 bar4:SetPoint("BOTTOMRIGHT", -3, 40)
 
@@ -93,7 +93,7 @@ for i = 1, NUM_ACTIONBAR_BUTTONS do
 		button:SetPoint("TOPLEFT", bar4, 0,0)
 	else
 		local previous = _G["MultiBarRightButton"..i-1]
-		button:SetPoint("TOP", previous, "BOTTOM", 0, -6)
+		button:SetPoint("TOP", previous, "BOTTOM", 0, -4)
 	end
 end
 
@@ -102,9 +102,9 @@ RegisterStateDriver(bar4, "visibility", "[petbattle][vehicleui][overridebar][pos
 --[[ Right bar 2 ]]
 
 local bar5 = CreateFrame("Frame", "FreeUI_MultiBarLeft", UIParent, "SecureHandlerStateTemplate")
-bar5:SetHeight(354)
+bar5:SetHeight(332)
 bar5:SetWidth(24)
-bar5:SetPoint("BOTTOMRIGHT", -32, 40)
+bar5:SetPoint("BOTTOMRIGHT", -31, 40)
 
 MultiBarLeft:SetParent(bar5)
 MultiBarLeft:EnableMouse(false)
@@ -117,7 +117,7 @@ for i = 1, NUM_ACTIONBAR_BUTTONS do
 		button:SetPoint("TOPLEFT", bar5, 0,0)
 	else
 		local previous = _G["MultiBarLeftButton"..i-1]
-		button:SetPoint("TOP", previous, "BOTTOM", 0, -6)
+		button:SetPoint("TOP", previous, "BOTTOM", 0, -4)
 	end
 end
 
@@ -429,24 +429,24 @@ local function positionBars()
 		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 8, 4)
 		bar3:SetPoint("BOTTOM", bar2, "TOP", 0, 4)
 		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 8)
 	elseif leftShown then
 		barextra:SetPoint("BOTTOM", bar2, "TOP", 0, 36)
 		petbar:SetPoint("BOTTOMRIGHT", bar2, "TOPRIGHT", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar2, "TOPLEFT", 8, 4)
 		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 8)
 	elseif rightShown then
 		barextra:SetPoint("BOTTOM", bar3, "TOP", 0, 36)
 		petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 8, 4)
 		bar3:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 8)
 	else
 		barextra:SetPoint("BOTTOM", bar1, "TOP", 0, 36)
 		petbar:SetPoint("BOTTOMRIGHT", bar1, "TOPRIGHT", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar1, "TOPLEFT", 8, 4)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 8)
 	end
 end
 

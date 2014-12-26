@@ -10,12 +10,12 @@ f.tex:SetAllPoints(f)
 function f:SetShadowLevel(n)
 	n = tonumber(n)
 	if not n then error("The level must be a number between 100 and 0.") return end
-	ncShadowLevel = 60
+	ncShadowLevel = 50
 	f:SetAlpha(n/100)
 end
 f:SetScript("OnEvent", function()
 	--f:SetShadowLevel((ncShadowLevel or 70))
-	f:SetShadowLevel((60))
+	f:SetShadowLevel((50))
 end)
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
 SLASH_SHADOW1 = "/shadow"

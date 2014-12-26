@@ -189,6 +189,7 @@ ns.localization.tooltipenableTooltip = "Disable this option if you want to use a
 ns.localization.tooltipanchorCursor = "Anchor to cursor"
 ns.localization.tooltipguildrank = "Guild rank"
 ns.localization.tooltiptitle = "Player titles"
+ns.localization.tooltippvp = "Player PVP status"
 
 ns.localization.classmod = "Class specific"
 ns.localization.classmodSubText = "These options allow you to toggle the class-specific modules in the UI."

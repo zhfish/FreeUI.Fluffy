@@ -18,8 +18,8 @@ end
 
 local bar = CreateFrame("Frame", "FreeUIMenubar", UIParent)
 bar:SetFrameStrata("BACKGROUND")
-bar:SetPoint("BOTTOMLEFT", -1, -1)
-bar:SetPoint("BOTTOMRIGHT", 1, -1)
+bar:SetPoint("TOPLEFT", -1, 1)
+bar:SetPoint("TOPRIGHT", 1, 1)
 bar:SetHeight(13)
 F.CreateBD(bar, barAlpha)
 

@@ -1516,6 +1516,8 @@ local UnitSpecific = {
 		local Castbar = self.Castbar
 		local Spark = Castbar.Spark
 
+		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
+
 		self:SetAttribute('initial-height', bossHeight)
 		self:SetAttribute('initial-width', bossWidth)
 
@@ -1639,6 +1641,8 @@ local UnitSpecific = {
 		local Castbar = self.Castbar
 		local Spark = Castbar.Spark
 
+		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
+
 		self:SetAttribute('initial-height', arenaHeight)
 		self:SetAttribute('initial-width', arenaWidth)
 
@@ -1717,7 +1721,7 @@ do
 
 		local Health, Power = self.Health, self.Power
 
-		--F.CreateShadow(Health, .5)
+		F.CreateSD(Health, 5, 0, 0, 0, .5, -1)
 
 		local Text = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "CENTER")
 		Text:SetPoint("CENTER", 1, 0)
@@ -1955,10 +1959,11 @@ oUF:Factory(function(self)
 		'showParty', true,
 		'showPlayer', true,
 		'showSolo', false,
+		'xoffset', 5,
 		'yoffset', -8,
 		'maxColumns', 5,
 		'unitsperColumn', 1,
-		'columnSpacing', 4,
+		'columnSpacing', 6,
 		'columnAnchorPoint', "LEFT",
 		'oUF-initialConfigFunction', ([[
 			self:SetHeight(%d)

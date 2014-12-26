@@ -4,7 +4,7 @@ local r, g, b = unpack(C.class)
 
 
 position = "TOPRIGHT"     	
-position_x = -14         		
+position_x = -22       		
 position_y = 0	
 
 local Scale = 1
@@ -20,21 +20,21 @@ local brdcolor = {0/255, 0/255, 0/255}
 
 Minimap:SetSize(256*Scale, 256*Scale)
 Minimap:SetMaskTexture(mediaFolder.."rectangle")
-Minimap:SetHitRectInsets(0, 0, 14*Scale, 48*Scale)
+Minimap:SetHitRectInsets(0, 0, 34*Scale, 34*Scale)
 Minimap:SetFrameLevel(4)
 Minimap:ClearAllPoints()
 Minimap:SetPoint(position, UIParent, position_x, position_y)
 Minimap:SetScale(Scale)
 
 BorderFrame = CreateFrame("Frame", nil, Minimap)
-BorderFrame:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -1, -(14*Scale))
-BorderFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 1, (48*Scale))	
+BorderFrame:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -1, -(32*Scale))
+BorderFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 1, (32*Scale))	
 BorderFrame:SetBackdrop(backdrop)
 BorderFrame:SetBackdropBorderColor(unpack(brdcolor))
 BorderFrame:SetBackdropColor(unpack(backdropcolor))
 BorderFrame:SetFrameLevel(6)
 
-F.CreateSD(BorderFrame, 5, 0, 0, 0, 1, -2)
+F.CreateSD(BorderFrame, 5, 0, 0, 0, .6, -2)
 
 Minimap:EnableMouseWheel(true)
 MinimapCluster:EnableMouse(false)
@@ -72,7 +72,7 @@ end)
 
 local mt = F.CreateFS(mail)
 mt:SetText("|cfff6ff83Mail")
-mt:SetPoint("BOTTOM", Minimap, 0, 54)
+mt:SetPoint("BOTTOM", Minimap, 0, 35)
 
 MiniMapMailFrame:SetAlpha(0)
 MiniMapMailFrame:SetSize(22, 10)
@@ -137,7 +137,7 @@ GuildInstanceDifficulty:SetAlpha(0)
 MiniMapChallengeMode:GetRegions():SetTexture("")
 
 GameTimeFrame:ClearAllPoints()
-GameTimeFrame:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -1, -15)
+GameTimeFrame:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", -1, -33)
 GameTimeFrame:SetSize(16, 16)
 GameTimeFrame:SetHitRectInsets(0, 0, 0, 0)
 GameTimeFrame:SetNormalTexture("")
@@ -152,12 +152,12 @@ dateText:SetPoint("CENTER")
 
 QueueStatusMinimapButtonBorder:SetAlpha(0)
 QueueStatusMinimapButton:ClearAllPoints()
-QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, 0, 48)
+QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, 0, 34)
 QueueStatusMinimapButton:SetHighlightTexture("")
 QueueStatusMinimapButton.Eye.texture:SetTexture("")
 
 QueueStatusFrame:ClearAllPoints()
-QueueStatusFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -4, 47)
+QueueStatusFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -4, 33)
 
 local dots = {}
 for i = 1, 8 do
@@ -226,7 +226,7 @@ TicketStatusFrame:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -49, 0)
 
 local rd = CreateFrame("Frame", nil, Minimap)
 rd:SetSize(24, 8)
-rd:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 5, -19)
+rd:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 5, -37)
 rd:RegisterEvent("PLAYER_ENTERING_WORLD")
 rd:RegisterEvent("PLAYER_DIFFICULTY_CHANGED")
 rd:RegisterEvent("GUILD_PARTY_STATE_UPDATED")

@@ -74,7 +74,7 @@ local function applyBackground(bu)
 	})
 	bu:SetBackdropBorderColor(0, 0, 0)
 
-	F.CreateSD(bu, 4, 0, 0, 0, 1, -1)
+	F.CreateSD(bu, 3, 0, 0, 0, 1, -1)
 
 	bu.bg = true
 end
