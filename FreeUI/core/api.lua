@@ -10,7 +10,7 @@ C.media = {
 	["backdrop"] = "Interface\\AddOns\\FreeUI\\media\\blank", -- default backdrop
 	["checked"] = "Interface\\AddOns\\FreeUI\\media\\CheckButtonHilight", -- replace default checked texture
 	["font"] = "Interface\\AddOns\\FreeUI\\media\\PFTempestaSeven.ttf", -- default pixel font
-	["font2"] = "Interface\\AddOns\\FreeUI\\media\\font.ttf", -- default font
+	["font2"] = "Fonts\\FRIZQT__.ttf", -- default font
 	["glow"] = "Interface\\AddOns\\FreeUI\\media\\glowTex", -- glow/shadow texture
 	["gradient"] = "Interface\\AddOns\\FreeUI\\media\\gradient",
 	["roleIcons"] = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
@@ -21,8 +21,6 @@ local mainFont
 
 if C.appearance.fontUseAlternativeFont then
 	mainFont = C.media.font2
-elseif GetLocale() == "zhCN" then
-	mainFont = "Fonts\\ARIALN.ttf"
 else
 	mainFont = C.media.font
 end
@@ -30,8 +28,6 @@ end
 F.AddOptionsCallback("appearance", "fontUseAlternativeFont", function()
 	if C.appearance.fontUseAlternativeFont then
 		mainFont = C.media.font2
-	elseif GetLocale() == "zhCN" then
-		mainFont = "Fonts\\ARIALN.ttf"
 	else
 		mainFont = C.media.font
 	end

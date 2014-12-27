@@ -5,7 +5,27 @@ if not C.unitframes.enable then return end
 local parent, ns = ...
 local oUF = ns.oUF
 
-local font_CN = 'Fonts\\Zpix.ttf'
+local Font_UF
+local Font_UF_Size
+local Font_UF_Flag
+
+if C.appearance.fontUseAlternativeFont then
+	Font_UF_Flag = "OUTLINE"
+else
+	Font_UF_Flag = 'OUTLINEMONOCHROME'
+end
+
+if C.appearance.fontUseAlternativeFont then
+	Font_UF = C.media.font2
+else
+	Font_UF = 'Fonts\\Zpix.ttf'
+end
+
+if C.appearance.fontUseAlternativeFont then
+	Font_UF_Size = 12
+else
+	Font_UF_Size = 8
+end
 
 local name = UnitName("player")
 local realm = GetRealmName()
@@ -341,6 +361,8 @@ local Shared = function(self, unit, isSingle)
 	bd:SetPoint("BOTTOMRIGHT", 1, -1)
 	bd:SetFrameStrata("BACKGROUND")
 
+	F.CreateSD(bd, 5, 0, 0, 0, .8, -2)
+
 	self.bd = bd
 
 
@@ -540,6 +562,11 @@ local Shared = function(self, unit, isSingle)
 
 	self.RaidIcon = RaidIcon
 
+	-- [[ SpellRange ]]
+	self.SpellRange = {
+	    insideAlpha = 1,
+        outsideAlpha = .4}
+
 	-- [[ Counter bar ]]
 
 	if unit == "player" or unit == "pet" then
@@ -621,8 +648,6 @@ local UnitSpecific = {
 
 		Health:SetHeight(petHeight - powerHeight - 1)
 
-		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
-
 		Castbar:SetAllPoints(Health)
 		Castbar.Width = self:GetWidth()
 
@@ -650,8 +675,6 @@ local UnitSpecific = {
 		-- Health and power
 
 		Health:SetHeight(playerHeight - powerHeight - 1)
-
-		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
 
 		local HealthPoints = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "LEFT")
 		HealthPoints:SetPoint("BOTTOMLEFT", Health, "TOPLEFT", 0, 3)
@@ -1216,8 +1239,6 @@ local UnitSpecific = {
 
 		Health:SetHeight(targetHeight - powerHeight - 1)
 
-		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
-
 		local HealthPoints = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "LEFT")
 		HealthPoints:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 3)
 		self:Tag(HealthPoints, '[dead][offline][free:health]')
@@ -1277,7 +1298,7 @@ local UnitSpecific = {
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
-		ttt:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
+		ttt:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
 		ttt:SetWidth(80)
 		ttt:SetHeight(12)
 
@@ -1298,7 +1319,7 @@ local UnitSpecific = {
 		Name:SetPoint("BOTTOMLEFT", PowerText, "BOTTOMRIGHT")
 		Name:SetPoint("RIGHT", self)
 		Name:SetJustifyH("RIGHT")
-		Name:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
+		Name:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
 		Name:SetTextColor(1, 1, 1)
 
 		self:Tag(Name, '[name]')
@@ -1371,8 +1392,6 @@ local UnitSpecific = {
 
 		Health:SetHeight(targettargetHeight - powerHeight - 1)
 
-		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
-
 		Castbar:SetAllPoints(Health)
 		Castbar.Width = self:GetWidth()
 
@@ -1391,8 +1410,6 @@ local UnitSpecific = {
 		local Spark = Castbar.Spark
 
 		Health:SetHeight(focusHeight - powerHeight - 1)
-
-		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
 
 		-- Cast bar
 
@@ -1444,7 +1461,7 @@ local UnitSpecific = {
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
-		ttt:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
+		ttt:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
 		ttt:SetWidth(80)
 		ttt:SetHeight(12)
 
@@ -1465,7 +1482,7 @@ local UnitSpecific = {
 		Name:SetWidth(80)
 		Name:SetHeight(12)
 		Name:SetJustifyH"LEFT"
-		Name:SetFont(font_CN, 8, "OUTLINEMONOCHROME")
+		Name:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
 		Name:SetTextColor(1, 1, 1)
 
 		self:Tag(Name, '[name]')
@@ -1496,8 +1513,6 @@ local UnitSpecific = {
 
 		Health:SetHeight(focustargetHeight - powerHeight - 1)
 
-		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
-
 		Castbar:SetAllPoints(Health)
 		Castbar.Width = self:GetWidth()
 
@@ -1515,8 +1530,6 @@ local UnitSpecific = {
 		local Health = self.Health
 		local Castbar = self.Castbar
 		local Spark = Castbar.Spark
-
-		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
 
 		self:SetAttribute('initial-height', bossHeight)
 		self:SetAttribute('initial-width', bossWidth)
@@ -1641,8 +1654,6 @@ local UnitSpecific = {
 		local Castbar = self.Castbar
 		local Spark = Castbar.Spark
 
-		F.CreateSD(Health, 5, 0, 0, 0, .8, -1)
-
 		self:SetAttribute('initial-height', arenaHeight)
 		self:SetAttribute('initial-width', arenaWidth)
 
@@ -1709,19 +1720,12 @@ local UnitSpecific = {
 }
 
 do
-	local range = {
-		insideAlpha = 1,
-		outsideAlpha = .3,
-	}
-
 	UnitSpecific.party = function(self, ...)
 		Shared(self, ...)
 
 		self.disallowVehicleSwap = false
 
 		local Health, Power = self.Health, self.Power
-
-		F.CreateSD(Health, 5, 0, 0, 0, .5, -1)
 
 		local Text = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "CENTER")
 		Text:SetPoint("CENTER", 1, 0)
@@ -1958,7 +1962,7 @@ oUF:Factory(function(self)
 	local party = self:SpawnHeader(nil, nil, "party,raid",
 		'showParty', true,
 		'showPlayer', true,
-		'showSolo', false,
+		'showSolo', true,
 		'xoffset', 5,
 		'yoffset', -8,
 		'maxColumns', 5,
@@ -1977,14 +1981,14 @@ oUF:Factory(function(self)
 		'showParty', false,
 		'showRaid', true,
 		'xoffset', 5,
-		'yOffset', -4,
+		'yOffset', -8,
 		'point', "TOP",
 		'groupFilter', '1,2,3,4,5,6,7,8',
 		'groupingOrder', '1,2,3,4,5,6,7,8',
 		'groupBy', 'GROUP',
 		'maxColumns', 8,
 		'unitsPerColumn', 5,
-		'columnSpacing', 5,
+		'columnSpacing', 8,
 		'columnAnchorPoint', "RIGHT",
 		'oUF-initialConfigFunction', ([[
 			self:SetHeight(%d)
