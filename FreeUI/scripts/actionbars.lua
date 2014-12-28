@@ -80,7 +80,7 @@ RegisterStateDriver(bar3, "visibility", "[petbattle][vehicleui][overridebar][pos
 local bar4 = CreateFrame("Frame", "FreeUI_MultiBarRight", UIParent, "SecureHandlerStateTemplate")
 bar4:SetHeight(332)
 bar4:SetWidth(24)
-bar4:SetPoint("BOTTOMRIGHT", -3, 40)
+bar4:SetPoint("BOTTOMRIGHT", -3, 200)
 
 MultiBarRight:SetParent(bar4)
 MultiBarRight:EnableMouse(false)
@@ -104,7 +104,7 @@ RegisterStateDriver(bar4, "visibility", "[petbattle][vehicleui][overridebar][pos
 local bar5 = CreateFrame("Frame", "FreeUI_MultiBarLeft", UIParent, "SecureHandlerStateTemplate")
 bar5:SetHeight(332)
 bar5:SetWidth(24)
-bar5:SetPoint("BOTTOMRIGHT", -31, 40)
+bar5:SetPoint("BOTTOMRIGHT", -31, 200)
 
 MultiBarLeft:SetParent(bar5)
 MultiBarLeft:EnableMouse(false)
