@@ -1,5 +1,7 @@
 local F, C, L = unpack(select(2, ...))
 
+if not C.general.objectivetracker then return end
+
 local ot = ObjectiveTrackerFrame
 local BlocksFrame = ot.BlocksFrame
 

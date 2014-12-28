@@ -16,12 +16,13 @@ C["general"] = {
 		["interrupt_lfg"] = true, 		-- enable in dungeon/raid finder/scenario groups
 		["interrupt_outdoors"] = true,	-- enable when not in an instance
 	["mailButton"] = true, 			-- adds a button to the mail frame to collect all attachments
-	["nameplates"] = true, 			-- enable nameplates
+	["nameplates"] = false, 			-- enable nameplates
 	["rareAlert"] = true, 			-- raid warning when a rare mob is spotted (5.4)
 		["rareAlert_playSound"] = true, 			-- play sound
 	["threatMeter"] = true,			-- threat bar above the target frame in dps/healer layout
 	["uiScaleAuto"] = true,			-- force the correct UI scale
 	["undressButton"] = true, 		-- undress button on dressup frame
+	["objectivetracker"] = false,
 }
 
 C["appearance"] = {
@@ -114,7 +115,7 @@ C["unitframes"] = {
 	["player"] = {"CENTER", UIParent, "CENTER", 0, -200},						-- player unitframe position
 	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, 60},					-- target unitframe position
 	["party"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -120},			-- party unitframe position
-	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -80, 40},				-- raid unitframe position
+	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -20, 20},				-- raid unitframe position
 
 	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -180},		-- player castbar position
 	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, -60},		-- target castbar position

@@ -222,8 +222,17 @@ do
 	-- local combatText = ns.CreateCheckBox(general, "combatText", true, true)
 	-- combatText:SetPoint("TOPLEFT", buffTracker, "BOTTOMLEFT", 0, -8)
 
+	local nameplates = ns.CreateCheckBox(general, "nameplates", true, true)
+	nameplates:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -42)
+
+	local objectivetracker = ns.CreateCheckBox(general, "objectivetracker", true, true)
+	objectivetracker:SetPoint("TOPLEFT", nameplates, "BOTTOMLEFT", 0, -8)
+
+	local undressButton = ns.CreateCheckBox(general, "undressButton", true, true)
+	undressButton:SetPoint("TOPLEFT", objectivetracker, "BOTTOMLEFT", 0, -8)
+
 	local interrupt = ns.CreateCheckBox(general, "interrupt", true)
-	interrupt:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -8)
+	interrupt:SetPoint("TOPLEFT", undressButton, "BOTTOMLEFT", 0, -8)
 
 	local interruptParty = ns.CreateCheckBox(general, "interrupt_party", true)
 	interruptParty:SetPoint("TOPLEFT", interrupt, "BOTTOMLEFT", 16, -8)
@@ -240,7 +249,7 @@ do
 	interrupt.children = {interruptParty, interruptBGs, interruptLFG, interruptOutdoors}
 
 	local threatMeter = ns.CreateCheckBox(general, "threatMeter", true, true)
-	threatMeter:SetPoint("LEFT", interrupt, "RIGHT", 240, 0)
+	threatMeter:SetPoint("LEFT", nameplates, "RIGHT", 240, 0)
 
 	local helmCloak = ns.CreateCheckBox(general, "helmcloakbuttons", true, true)
 	helmCloak:SetPoint("TOPLEFT", threatMeter, "BOTTOMLEFT", 0, -8)
@@ -256,14 +265,8 @@ do
 
 	rareAlert.children = {rareAlertPlaySound}
 
-	local nameplates = ns.CreateCheckBox(general, "nameplates", true, true)
-	nameplates:SetPoint("TOPLEFT", rareAlert, "BOTTOMLEFT", 0, -42)
-
-	local undressButton = ns.CreateCheckBox(general, "undressButton", true, true)
-	undressButton:SetPoint("TOPLEFT", nameplates, "BOTTOMLEFT", 0, -8)
-
 	local misc = ns.addSubCategory(general, ns.localization.generalMisc)
-	misc:SetPoint("TOPLEFT", interruptOutdoors, "BOTTOMLEFT", -16, -30)
+	misc:SetPoint("TOPLEFT", interruptOutdoors, "BOTTOMLEFT", -16, -20)
 
 	local uiScaleAuto = ns.CreateCheckBox(general, "uiScaleAuto", true)
 	uiScaleAuto:SetPoint("TOPLEFT", misc, "BOTTOMLEFT", 0, -20)
