@@ -1,5 +1,30 @@
 local F, C, L = unpack(FreeUI)
 
+local function CreateShadow(self)
+	self.shadow = CreateFrame("Frame", nil, self)
+	self.shadow:SetFrameLevel(1)
+	self.shadow:SetFrameStrata(self:GetFrameStrata())
+	self.shadow:SetPoint("TOPLEFT", -2, 2)
+	self.shadow:SetPoint("BOTTOMRIGHT", 2, -2)
+	self.shadow:SetBackdrop({
+		edgeFile = "Interface\\addons\\FreeUI\\media\\glowTex", 
+		edgeSize = 4,
+		insets = { left = 3, right = 3, top = 3, bottom = 3 }
+		})
+	self.shadow:SetBackdropBorderColor(0,0,0)
+end
+
+local function CreateBorder(self)
+	self.Border = CreateFrame("Frame", nil, self)
+	self.Border:SetPoint("TOPLEFT", 1, -1)
+	self.Border:SetPoint("BOTTOMRIGHT", -1, 1)
+	self.Border:SetBackdrop({ 
+		edgeFile = "Interface\\Buttons\\WHITE8x8" , edgeSize = 2,
+	})
+	self.Border:SetBackdropBorderColor(255/255, 0/255, 13/255,1)  --BELIZEHOLE
+	self.Border:SetFrameLevel(0)
+end
+
 local function InitStyle()
 	hooksecurefunc(DBT, "CreateBar", function(self)
 		for bar in self:GetBarIterator() do
@@ -8,7 +33,7 @@ local function InitStyle()
 			local tbar = _G[name]
 			local text = _G[name.."Name"]
 
-			tbar:SetHeight(4)
+			tbar:SetHeight(8)
 
 			text:SetPoint("CENTER", 0, 10)
 			text:SetPoint("LEFT", 2, 10)
@@ -17,13 +42,10 @@ local function InitStyle()
 				local texture = _G[name.."Texture"]
 				local timer = _G[name.."Timer"]
 				local spark = _G[name.."Spark"]
-			--	local icon = _G[name.."Icon1"]
 				local icon1 = _G[frame:GetName().."BarIcon1"]
 				local icon2 = _G[frame:GetName().."BarIcon2"]
 
-				F.CreateBDFrame(tbar, .6)
-
-				
+				F.CreateBDFrame(tbar, .5)
 
 				texture:SetTexture(C.media.texture)
 				texture.SetTexture = F.dummy
@@ -41,9 +63,19 @@ local function InitStyle()
 				spark:SetTexture("Interface\\AddOns\\FreeUI\\media\\DBMSpark")
 
 				icon1:ClearAllPoints()
-				icon1:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -4, -2)
+				icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
+				icon1.overlay:SetFrameLevel(1)
+				icon1.overlay:SetSize(28, 28)
+				icon1.overlay:SetFrameStrata("BACKGROUND")
+				icon1.overlay:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -4, -3)
 		
-				icon1.styled = true
+				local backdroptex = icon1.overlay:CreateTexture(nil, "BORDER")
+				backdroptex:SetTexture([=[Interface\Icons\Spell_Nature_WispSplode]=])
+				backdroptex:SetPoint("TOPLEFT", icon1.overlay, "TOPLEFT", 3, -3)
+				backdroptex:SetPoint("BOTTOMRIGHT", icon1.overlay, "BOTTOMRIGHT", -3, 3)
+				backdroptex:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+				CreateBorder(icon1.overlay)
+				CreateShadow(icon1.overlay)
 
 				bar.styled = true
 			end
