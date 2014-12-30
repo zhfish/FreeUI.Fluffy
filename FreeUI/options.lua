@@ -124,7 +124,7 @@ C["unitframes"] = {
 	["altpower_height"] = 2,
 	["power_height"] = 2,
 
-	["player_width"] = 229,
+	["player_width"] = 259,
 	["player_height"] = 12,
 	["target_width"] = 229,
 	["target_height"] = 12,

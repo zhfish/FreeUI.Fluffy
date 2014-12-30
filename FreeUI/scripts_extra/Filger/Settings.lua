@@ -2,11 +2,11 @@
 Filger_Settings = {
 	config_mode = false,				-- 开\关测试模式
 	max_test_icon = 6,					-- 测试模式下,每组显示最大图标数量
-	C_AURA		= {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -20},		-- comm aura
+	C_AURA		= {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, 100},		-- comm aura
 	P_AURA		= {"BOTTOMLEFT", "oUF_FreePlayer", "TOPLEFT", 0, 20},		-- player's buff/debuff/proc
-	P_CD		= {"TOPRIGHT", "oUF_FreePlayer", "BOTTOMRIGHT", 0, -70},		-- player's cooldown
+	P_CD		= {"TOPLEFT", "oUF_FreePlayer", "BOTTOMLEFT", 0, -20},		-- player's cooldown
 	T_AURA_P 	= {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 20},		-- target's debuff by player
-	R_T_AURA 	= {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 120},		-- important aura alert (dungeon/PVP)
+	R_T_AURA 	= {"BOTTOMLEFT", "oUF_FreeTarget", "TOPLEFT", 0, 80},		-- important aura alert (dungeon/PVP)
 }
 
 local Misc = CreateFrame("Frame")

@@ -76,7 +76,7 @@ Filger_Spells = {
 		},
 		{
 			Name = "P_CD",
-			Direction = Misc.Dleft,
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			NumPerLine = Misc.CDnum,
 			Interval = 0,
@@ -200,6 +200,8 @@ Filger_Spells = {
 
 			-- Dark Succor
 			{spellID = 101568, unitID = "player", caster = "player", filter = "BUFF"},
+			-- Soul Reaper
+			{spellID = 114868, unitID = "player", caster = "player", filter = "BUFF"},
 
 			-- Scent of Blood
 			{spellID = 50421, unitID = "player", caster = "player", filter = "BUFF"},
@@ -233,10 +235,12 @@ Filger_Spells = {
 			{spellID = 55078, unitID = "target", caster = "player", filter = "DEBUFF"},
 			-- Frost Fever
 			{spellID = 55095, unitID = "target", caster = "player", filter = "DEBUFF"},
+			-- Soul Reaper
+			{spellID = 130735, unitID = "target", caster = "player", filter = "DEBUFF"},
 		},
 		{
 			Name = "P_CD",
-			Direction = Misc.Dleft,
+			Direction = Misc.Dright,
 			Mode = "ICON",
 			NumPerLine = Misc.CDnum,
 			Interval = 0,

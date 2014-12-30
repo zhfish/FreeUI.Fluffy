@@ -1803,7 +1803,7 @@ do
 
 			Debuffs:SetHeight(16)
 			Debuffs:SetWidth(37)
-			Debuffs.num = 0
+			Debuffs.num = 2
 			Debuffs.size = 16
 
 			self.Debuffs = Debuffs
@@ -1962,7 +1962,7 @@ oUF:Factory(function(self)
 	local party = self:SpawnHeader(nil, nil, "party,raid",
 		'showParty', true,
 		'showPlayer', true,
-		'showSolo', true,
+		'showSolo', false,
 		'xoffset', 5,
 		'yoffset', -8,
 		'maxColumns', 5,

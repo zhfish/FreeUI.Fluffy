@@ -71,6 +71,7 @@ scripts_extra\Filger\load.xml
 scripts_extra\tooltip\load.xml
 scripts_extra\NephilistGarrison\load.xml
 scripts_extra\ckaosMilitia\load.xml
+scripts_extra\Foglight\load.xml
 
 scripts_extra\Align.lua
 scripts_extra\AlreadyKnown.lua

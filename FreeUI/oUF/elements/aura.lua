@@ -168,7 +168,7 @@ local updateIcon = function(unit, icons, index, offset, filter, isDebuff, visibl
 			icon.count:SetText((count > 1 and count))
 
 			local size = icons.size or 16
-			icon:SetSize(size, size*0.6)
+			icon:SetSize(size, size*0.8)
 
 			icon:EnableMouse(true)
 			icon:SetID(index)
