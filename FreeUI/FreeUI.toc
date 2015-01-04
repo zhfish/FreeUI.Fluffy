@@ -67,7 +67,6 @@ scripts\worldmarker.lua
 scripts\worldstateframe.lua
 
 scripts_extra\ChatFilter\load.xml
-scripts_extra\Filger\load.xml
 scripts_extra\tooltip\load.xml
 
 scripts_extra\Align.lua
