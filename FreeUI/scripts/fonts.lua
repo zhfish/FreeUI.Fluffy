@@ -3,7 +3,7 @@ local F, C, L = unpack(select(2, ...))
 local locale = GetLocale()
 
 local font = 'Fonts\\FRIZQT__.TTF'
-local unitnamefont = 'Fonts\\yahei__.ttf'
+local unitnamefont = 'Fonts\\UNIT_NAME.ttf'
 local Diablo
 local Nordica
 local damagefont

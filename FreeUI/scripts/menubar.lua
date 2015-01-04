@@ -200,7 +200,7 @@ end)
 
 addButton("Chat menu", POSITION_LEFT, function()
 	ChatMenu:ClearAllPoints()
-	ChatMenu:SetPoint("BOTTOMLEFT", UIParent, 30, 30)
+	ChatMenu:SetPoint("TOPLEFT", UIParent, 8, -20)
 	ToggleFrame(ChatMenu)
 end)
 

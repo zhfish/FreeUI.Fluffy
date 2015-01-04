@@ -152,6 +152,8 @@ function TradeTabs:CreateTab(i, parent, spellID)
 	F.CreateBG(button)
 	F.CreateSD(button, 5, 0, 0, 0, 1, 0)
 	F.ReskinTab(button)
+	button:SetPushedTexture(nil)
+	select(4, button:GetRegions()):SetTexCoord(.08, .92, .08, .92)
 	
 	button:SetScript("OnEvent",updateSelection)
 	button:RegisterEvent("TRADE_SKILL_SHOW")

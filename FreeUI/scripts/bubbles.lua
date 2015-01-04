@@ -17,8 +17,10 @@ local function styleBubble(frame)
 
 	frame:SetBackdrop({
 		bgFile = C.media.backdrop,
-		edgeFile = C.media.backdrop,
-		edgeSize = scale,
+	edgeFile = C.media.glow,
+	insets = {left = 2, right = 2, top = 2, bottom = 2},
+	tile = false, tileSize = 0, 
+	edgeSize = 3,
 	})
 	frame:SetBackdropColor(0, 0, 0, .5)
 	frame:SetBackdropBorderColor(0, 0, 0)

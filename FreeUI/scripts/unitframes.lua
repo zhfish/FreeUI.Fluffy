@@ -1988,7 +1988,7 @@ oUF:Factory(function(self)
 		'groupBy', 'GROUP',
 		'maxColumns', 8,
 		'unitsPerColumn', 5,
-		'columnSpacing', 8,
+		'columnSpacing', 6,  -- 团队框架横向间隔
 		'columnAnchorPoint', "RIGHT",
 		'oUF-initialConfigFunction', ([[
 			self:SetHeight(%d)
