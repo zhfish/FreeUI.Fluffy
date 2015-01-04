@@ -1,0 +1,3 @@
+[submodule "ShestakUI_Filger"]
+	path = ShestakUI_Filger
+	url = git@github.com:solor/ShestakUI_Filger.git
