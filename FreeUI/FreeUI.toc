@@ -77,15 +77,12 @@ scripts_extra\BgSpecIcon.lua
 scripts_extra\ColorPicker.lua
 scripts_extra\DragEmAll.lua
 scripts_extra\Doom_CooldownPulse.lua
-scripts_extra\Emergency.lua
 scripts_extra\Focuser.lua
 scripts_extra\HiddenRaidNames.lua
 scripts_extra\idTip.lua
 scripts_extra\interruptsound.lua
-scripts_extra\Invite.lua
 scripts_extra\ncShadow.lua
 scripts_extra\Screenshots.lua
-scripts_extra\ShadowBurn.lua
 scripts_extra\skada.lua
 scripts_extra\SortedCurrencyTab.lua
 scripts_extra\SpamageMeters.lua
@@ -107,7 +104,7 @@ theme\AddOns\Blizzard_BindingUI.lua
 theme\AddOns\Blizzard_BlackMarketUI.lua
 theme\AddOns\Blizzard_Calendar.lua
 theme\AddOns\Blizzard_ChallengesUI.lua
-## theme\AddOns\Blizzard_DebugTools.lua
+theme\AddOns\Blizzard_DebugTools.lua
 theme\AddOns\Blizzard_EncounterJournal.lua
 theme\AddOns\Blizzard_GarrisonUI.lua
 theme\AddOns\Blizzard_GlyphUI.lua
