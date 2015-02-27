@@ -17,7 +17,7 @@ local microMenu = {
 	end},
 	{text = ACHIEVEMENT_BUTTON, notCheckable = true, func = ToggleAchievementFrame},
 	{text = WORLD_MAP.." / "..QUESTLOG_BUTTON, notCheckable = true, func = function() ShowUIPanel(WorldMapFrame) end},
-	{text = MOUNTS_AND_PETS, notCheckable = true, func = function() TogglePetJournal(1) end},
+	{text = COLLECTIONS, notCheckable = true, func = function() ToggleCollectionsJournal() end},
 	{text = SOCIAL_BUTTON, notCheckable = true, func = function() ToggleFriendsFrame(1) end},
 	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE, notCheckable = true, func = function() PVEFrame_ToggleFrame() end},
 	{text = COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP, notCheckable = true, func = TogglePVPUI},
@@ -51,5 +51,7 @@ end
 F.RegisterEvent("ADDON_LOADED", taint)
 
 F.MicroMenu = function()
-	EasyMenu(microMenu, menuFrame, "UIParent", 30, 220, "MENU")
+--	EasyMenu(microMenu, menuFrame, "UIParent", 30, 220, "MENU")
+	menuFrame:SetPoint("TOPLEFT", UIParent)
+	EasyMenu(microMenu, menuFrame, menuFrame, 10, 10, "MENU")
 end

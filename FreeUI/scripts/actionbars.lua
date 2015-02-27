@@ -7,8 +7,8 @@ if not C.actionbars.enable then return end
 --[[ MainMenuBar ]]
 
 local bar1 = CreateFrame("Frame", "FreeUI_MainMenuBar", UIParent, "SecureHandlerStateTemplate")
-bar1:SetWidth(404)
-bar1:SetHeight(30)
+bar1:SetWidth(369)
+bar1:SetHeight(28)
 
 MainMenuBarArtFrame:SetParent(bar1)
 MainMenuBarArtFrame:EnableMouse(false)
@@ -18,12 +18,12 @@ MainMenuBar.slideOut.IsPlaying = function() return true end
 for i = 1, NUM_ACTIONBAR_BUTTONS do
 	local button = _G["ActionButton"..i]
 	button:ClearAllPoints()
-	button:SetSize(30, 30)
+	button:SetSize(28, 28)
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", bar1, "BOTTOMLEFT", 0, 0)
 	else
 		local previous = _G["ActionButton"..i-1]
-		button:SetPoint("LEFT", previous, "RIGHT", 4, 0)
+		button:SetPoint("LEFT", previous, "RIGHT", 3, 0)
 	end
 end
 
@@ -32,8 +32,8 @@ RegisterStateDriver(bar1, "visibility", "[petbattle][overridebar][vehicleui][pos
 --[[ Bottom Left bar ]]
 
 local bar2 = CreateFrame("Frame", "FreeUI_MultiBarBottomLeft", UIParent, "SecureHandlerStateTemplate")
-bar2:SetWidth(404)
-bar2:SetHeight(30)
+bar2:SetWidth(369)
+bar2:SetHeight(28)
 
 MultiBarBottomLeft:SetParent(bar2)
 MultiBarBottomLeft:EnableMouse(false)
@@ -41,12 +41,12 @@ MultiBarBottomLeft:EnableMouse(false)
 for i = 1, NUM_ACTIONBAR_BUTTONS do
 	local button = _G["MultiBarBottomLeftButton"..i]
 	button:ClearAllPoints()
-	button:SetSize(30, 30)
+	button:SetSize(28, 28)
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", bar2, "BOTTOMLEFT", 0, 0)
 	else
 		local previous = _G["MultiBarBottomLeftButton"..i-1]
-		button:SetPoint("LEFT", previous, "RIGHT", 4, 0)
+		button:SetPoint("LEFT", previous, "RIGHT", 3, 0)
 	end
 end
 
@@ -55,8 +55,8 @@ RegisterStateDriver(bar2, "visibility", "[petbattle][vehicleui][overridebar][pos
 --[[ Bottom Right bar ]]
 
 local bar3 = CreateFrame("Frame", "FreeUI_MultiBarBottomRight", UIParent, "SecureHandlerStateTemplate")
-bar3:SetWidth(404)
-bar3:SetHeight(30)
+bar3:SetWidth(369)
+bar3:SetHeight(28)
 
 MultiBarBottomRight:SetParent(bar3)
 MultiBarBottomRight:EnableMouse(false)
@@ -64,12 +64,12 @@ MultiBarBottomRight:EnableMouse(false)
 for i = 1, NUM_ACTIONBAR_BUTTONS do
 	local button = _G["MultiBarBottomRightButton"..i]
 	button:ClearAllPoints()
-	button:SetSize(30, 30)
+	button:SetSize(28, 28)
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", bar3, "BOTTOMLEFT", 0, 0)
 	else
 		local previous = _G["MultiBarBottomRightButton"..i-1]
-		button:SetPoint("LEFT", previous, "RIGHT", 4, 0)
+		button:SetPoint("LEFT", previous, "RIGHT", 3, 0)
 	end
 end
 
@@ -165,7 +165,7 @@ RegisterStateDriver(OverrideActionBar, "visibility", "[overridebar][vehicleui][p
 local hider = CreateFrame("Frame")
 hider:Hide()
 
-local hideFrames = {MainMenuBar, MainMenuBarPageNumber, ActionBarDownButton, ActionBarUpButton, OverrideActionBarExpBar, OverrideActionBarHealthBar, OverrideActionBarPowerBar, OverrideActionBarPitchFrame, CharacterMicroButton, SpellbookMicroButton, TalentMicroButton, AchievementMicroButton, QuestLogMicroButton, GuildMicroButton, PVPMicroButton, LFDMicroButton, CompanionsMicroButton, EJMicroButton, MainMenuMicroButton, HelpMicroButton, StoreMicroButton, MainMenuBarBackpackButton}
+local hideFrames = {MainMenuBar, MainMenuBarPageNumber, ActionBarDownButton, ActionBarUpButton, OverrideActionBarExpBar, OverrideActionBarHealthBar, OverrideActionBarPowerBar, OverrideActionBarPitchFrame, CharacterMicroButton, SpellbookMicroButton, TalentMicroButton, AchievementMicroButton, QuestLogMicroButton, GuildMicroButton, PVPMicroButton, LFDMicroButton, CompanionsMicroButton, EJMicroButton, MainMenuMicroButton, HelpMicroButton, StoreMicroButton, CollectionsMicroButton, MainMenuBarBackpackButton}
 for _, frame in pairs(hideFrames) do
 	frame:SetParent(hider)
 end
@@ -260,14 +260,14 @@ RegisterStateDriver(petbar, "visibility", "[petbattle][overridebar][vehicleui][p
 --[[ Stance/possess bar]]
 
 local stancebar = CreateFrame("Frame", "FreeUI_StanceBar", UIParent, "SecureHandlerStateTemplate")
-stancebar:SetHeight(26)
+stancebar:SetHeight(24)
 
 StanceBarFrame:SetParent(stancebar)
 StanceBarFrame:EnableMouse(false)
 
 for i = 1, NUM_STANCE_SLOTS do
 	local button = _G["StanceButton"..i]
-	button:SetSize(26, 26)
+	button:SetSize(24, 24)
 	button:ClearAllPoints()
 	if i == 1 then
 		button:SetPoint("BOTTOMLEFT", stancebar, 0, 0)
@@ -427,20 +427,20 @@ local function positionBars()
 		barextra:SetPoint("BOTTOM", bar3, "TOP", 0, 36)
 		petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 14, 4)
-		bar3:SetPoint("BOTTOM", bar2, "TOP", 0, 4)
-		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
+		bar3:SetPoint("BOTTOM", bar2, "TOP", 0, 3)
+		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 3)
 		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 8)
 	elseif leftShown then
 		barextra:SetPoint("BOTTOM", bar2, "TOP", 0, 36)
 		petbar:SetPoint("BOTTOMRIGHT", bar2, "TOPRIGHT", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar2, "TOPLEFT", 14, 4)
-		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
+		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 3)
 		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 8)
 	elseif rightShown then
 		barextra:SetPoint("BOTTOM", bar3, "TOP", 0, 36)
 		petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 14, 4)
-		bar3:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
+		bar3:SetPoint("BOTTOM", bar1, "TOP", 0, 3)
 		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 8)
 	else
 		barextra:SetPoint("BOTTOM", bar1, "TOP", 0, 36)

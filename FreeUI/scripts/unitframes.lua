@@ -788,14 +788,15 @@ local UnitSpecific = {
 			runes:SetHeight(2)
 			runes:SetPoint("BOTTOMRIGHT", Debuffs, "TOPRIGHT", 0, 3)
 
-			local rbd = CreateFrame("Frame", nil, runes)
-			rbd:SetBackdrop({
-				edgeFile = C.media.backdrop,
-				edgeSize = 1,
-			})
-			rbd:SetBackdropBorderColor(0, 0, 0)
-			rbd:SetPoint("TOPLEFT", -1, 1)
-			rbd:SetPoint("BOTTOMRIGHT", 1, -1)
+			-- local rbd = CreateFrame("Frame", nil, runes)
+			-- rbd:SetBackdrop({
+			-- 	edgeFile = C.media.backdrop,
+			-- 	edgeSize = 1,
+			-- })
+			-- rbd:SetBackdropBorderColor(0, 0, 0)
+			-- rbd:SetPoint("TOPLEFT", -1, 1)
+			-- rbd:SetPoint("BOTTOMRIGHT", 1, -1)
+			F.CreateBDFrame(runes)
 
 			for i = 1, 6 do
 				runes[i] = CreateFrame("StatusBar", nil, self)
@@ -2011,14 +2012,13 @@ oUF:Factory(function(self)
 	end)
 
 	local raidToParty = CreateFrame("Frame")
-	raidToParty:RegisterEvent("PLAYER_ENTERING_WORLD")
-	raidToParty:RegisterEvent("GROUP_ROSTER_UPDATE")
-	raidToParty:SetScript("OnEvent", function(self, event)
+
+	local function togglePartyAndRaid(event)
 		if InCombatLockdown() then
-			self:RegisterEvent("PLAYER_REGEN_ENABLED")
+			raidToParty:RegisterEvent("PLAYER_REGEN_ENABLED")
 			return
-		elseif event == "PLAYER_REGEN_ENABLED" then
-			self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+		elseif (event and event == "PLAYER_REGEN_ENABLED") then
+			raidToParty:UnregisterEvent("PLAYER_REGEN_ENABLED")
 		end
 
 		local numGroup = GetNumGroupMembers()
@@ -2039,8 +2039,28 @@ oUF:Factory(function(self)
 				party:SetAttribute("showRaid", false)
 			end
 		end
-	end)
-end)
+	end
 
+	raidToParty:SetScript("OnEvent", togglePartyAndRaid)
+
+	local function checkShowRaidFrames()
+		if C.unitframes.showRaidFrames then
+			raidToParty:RegisterEvent("PLAYER_ENTERING_WORLD")
+			raidToParty:RegisterEvent("GROUP_ROSTER_UPDATE")
+
+			togglePartyAndRaid()
+		else
+			raidToParty:UnregisterEvent("PLAYER_ENTERING_WORLD")
+			raidToParty:UnregisterEvent("GROUP_ROSTER_UPDATE")
+
+			party:SetAttribute("showParty", true)
+			party:SetAttribute("showRaid", true)
+			raid:SetAttribute("showRaid", false)
+		end
+	end
+
+	checkShowRaidFrames()
+	F.AddOptionsCallback("unitframes", "showRaidFrames", checkShowRaidFrames)
+end)
 	
 

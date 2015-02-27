@@ -89,6 +89,7 @@ C["notifications"] = {
 C["tooltip"] = {
 	["enable"] = true,
 	["anchorCursor"] = false,
+	["class"] = false,
 	["guildrank"] = true,
 	["title"] = false,
 	["pvp"] = false,
@@ -97,14 +98,12 @@ C["tooltip"] = {
 C["unitframes"] = {
 	["enable"] = true, 						-- enable the unit frames and their included modules
 
---	["autoPosition"] = false,				-- automatically postion unit frames based on resolution
-
 	["enableGroup"] = true,					-- enable party/raid frames
 		["healerClasscolours"] = false,				-- colour unitframes by class in healer layout
 		["limitRaidSize"] = false, 					-- show a maximum of 25 players in a raid
+		["showRaidFrames"] = true, 					-- show the raid frames
 		["partyNameAlways"] = false,				-- show name on party/raid frames in dps/tank layout
 	["enableArena"] = false,					-- enable arena/flag carrier frames
---	["targettarget"] = true, 					-- show target of target frame
 
 	["absorb"] = true, 							-- absorb bar/over absorb glow
 	["castbar"] = true,
@@ -170,178 +169,6 @@ C["performance"] = {
 	["mapcoords"] = .1, 	-- update interval for map coords in seconds (only with map open)
 	["nameplates"] = .1, 	-- update interval for nameplates in seconds (always)
 	["nameplatesHealth"] = .2, 	-- update interval for nameplate health bar colour (only with name plates shown)
-}
-
--- Selfbuff reminder
--- put all possible buffs with the same effect in the same list, even when you can't cast them yourself
--- outer tables are for buffs that you want together (e.g. an outer table with inner fire and an outer table with PW:F)
--- tables within those tables are for buffs that are exclusive to each other (e.g. blessing of might and blessing of kings)
-C["selfbuffs"] = {
-	DEATHKNIGHT = {
-		{
-			{
-				6673, -- Battle Shout
-				57330, -- Horn of Winter
-				19506, -- Trueshot Aura
-			},
-		},
-	},
-	DRUID = {
-		{
-			{
-				20217, -- Blessing of Kings
-				115921, -- Legacy of the Emperor
-				116781, -- Legacy of the White Tiger
-				1126, -- Mark of the Wild
-			},
-		},
-	},
-	MAGE = {
-		{
-			{
-				1459, -- Arcane Brilliance
-				61316, -- Dalaran Brilliance
-				109773, -- Dark Intent
-			},
-			{
-				1459, -- Arcane Brilliance
-				61316, -- Dalaran Brilliance
-				17007, -- Leader of the Pack
-				116781, -- Legacy of the White Tiger
-			},
-		},
-	},
-	MONK = {
-		{
-			{
-				20217, -- Blessing of Kings
-				115921, -- Legacy of the Emperor
-				116781, -- Legacy of the White Tiger
-				1126, -- Mark of the Wild
-			},
-			{
-				1459, -- Arcane Brilliance
-				61316, -- Dalaran Brilliance
-				17007, -- Leader of the Pack
-				116781, -- Legacy of the White Tiger
-			},
-		},
-	},
-	PALADIN = {
-		{
-			{
-				20217, -- Blessing of Kings
-				115921, -- Legacy of the Emperor
-				116781, -- Legacy of the White Tiger
-				1126, -- Mark of the Wild
-			},
-			{
-				19740, -- Blessing of Might
-				116956, -- Grace of Air
-				24907, -- Moonkin Aura
-				155522, -- Power of the Grave
-			},
-		},
-	},
-	PRIEST = {
-		{
-			{
-				166928, -- Blood Pact
-				469, -- Commanding Shout
-				21562, -- Power Word: Fortitude
-			},
-		},
-	},
-	ROGUE = {
-		{
-			{
-				2823, -- Deadly Poison
-				8679, -- Wound Poison
-			},
-		},
-	},
-	SHAMAN = {
-		{
-			{
-				974, -- Earth shield
-				324, -- Lightning shield
-				52127, -- Water shield
-			},
-		},
-	},
-	WARLOCK = {
-		{
-			{
-				1459, -- Arcane Brilliance
-				61316, -- Dalaran Brilliance
-				109773, -- Dark Intent
-			},
-			{
-				109773, -- Dark Intent
-				49868, -- Mind Quickening
-				113742, -- Swiftblade's Cunning
-				166916, -- Windflurry
-			},
-		},
-	},
-	WARRIOR = {
-		{
-			{
-				166928, -- Blood Pact
-				469, -- Commanding Shout
-				21562, -- Power Word: Fortitude
-			},
-			{
-				6673, -- Battle Shout
-				57330, -- Horn of Winter
-				19506, -- Trueshot Aura
-			},
-		},
-	},
-}
-
--- buff tracker: slot 1 is left, slot 2 is middle, slot 3 is right
--- spellIDs, size, unitId, isMine, filter, slot (1-3: left, middle, right), customPoint (table, overrides slot), spec (1-3)
--- if you use multiple spellIDs, first available gets displayed
-C["buffTracker"] = {
-	["MAGE"] = {
-		-- Alter Time
-		{spellIds = {[110909]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 3},
-		-- Arcane Power
-		{spellIds = {[12042]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 2},
-	},
-	["MONK"] = {
-		-- Tiger Power
-		{spellIds = {[125359]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 1},
-		-- Tigereye Brew
-		{spellIds = {[125195]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 3, minStack = 10},
-	},
-	["PALADIN"] = {
-		-- Sacred Shield
-		{spellIds = {[20925]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 3},
-		-- Selfless Healer
-		{spellIds = {[114250]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 3, minStack = 3},
-		-- Divine Shield, Hand of Protection, Avenging Wrath, Holy Avenger
-		{spellIds = {[642]=true, [1022]=true, [31884]=true, [105809]=true}, unitId = "player", isMine = "all", filter = "HELPFUL", slot = 2},
-		-- Bastion of Glory
-		{spellIds = {[114637]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 1},
-	},
-	["ROGUE"] = {
-		-- Bandit's Guile
-		{spellIds = {[84745]=true, [84746]=true, [84747]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 3},
-		-- Adrenaline Rush
-		{spellIds = {[13750]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 2},
-		-- Slice and dice
-		{spellIds = {[5171]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 1},
-	},
-	["WARRIOR"] = {
-		-- Last Stand, Shield Wall, Recklessness
-		{spellIds = {[12975]=true, [871]=true, [1719]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 2},
-		-- Shield Block
-		{spellIds = {[2565]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 3},
-		-- Enrage
-		{spellIds = {[12880]=true}, unitId = "player", isMine = 1, filter = "HELPFUL", slot = 3, spec = 1},
-	}
 }
 
 -- [[ Filters ]]
@@ -472,6 +299,13 @@ C["hideDebuffs"] = {
 	[71041] = true, -- Dungeon Deserter
 	[26218] = true, -- Mistletoe
 	[117870] = true, -- Touch of the Titans
+	[173658] = true, -- Delvar Ironfist defeated
+	[173659] = true, -- Talonpriest Ishaal defeated
+	[173661] = true, -- Vivianne defeated
+	[173679] = true, -- Leorajh defeated
+	[173649] = true, -- Tormmok defeated
+	[173660] = true, -- Aeda Brightdawn defeated
+ 	[173657] = true, -- Defender Illona defeated
 }
 
 if select(2, UnitClass("player")) == "PRIEST" then C.hideDebuffs[6788] = false end

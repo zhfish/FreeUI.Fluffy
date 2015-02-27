@@ -1,6 +1,6 @@
 -- aTooltip by Alza, modified.
 
-local F, C, L = unpack(select(2, ...))
+local F, C = unpack(select(2, ...))
 
 if not C.tooltip.enable then return end
 
@@ -35,7 +35,7 @@ local backdrop = {
 	bgFile = C.media.backdrop,
 	edgeFile = C.media.glow,
 	insets = {left = 2, right = 2, top = 2, bottom = 2},
-	tile = false, tileSize = 0, 
+	tile = false, tileSize = 0,
 	edgeSize = 3,
 }
 
@@ -159,9 +159,14 @@ local function OnTooltipSetUnit(self)
 		end
 
 		local n = guildName and 3 or 2
-		_G["GameTooltipTextLeft"..n]:SetFormattedText("%s %s", level, race)
+		if C.tooltip.class then
+			local class = UnitClass(unit)
+			_G["GameTooltipTextLeft"..n]:SetFormattedText("%s %s "..color.."%s", level, race, class)
+		else
+			_G["GameTooltipTextLeft"..n]:SetFormattedText("%s %s", level, race)
+		end
 
-		if UnitIsPVP(unit) and C.tooltip.pvp then
+		if C.tooltip.pvp and UnitIsPVP(unit) then
 			_G["GameTooltipTextLeft"..n + 1]:SetFormattedText("%s (%s)", UnitFactionGroup(unit), PVP)
 		end
 	elseif UnitIsBattlePet(unit) then
