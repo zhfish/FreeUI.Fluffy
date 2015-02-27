@@ -2,13 +2,14 @@ local hooksecurefunc, select, UnitBuff, UnitDebuff, UnitAura, UnitGUID, GetGlyph
       hooksecurefunc, select, UnitBuff, UnitDebuff, UnitAura, UnitGUID, GetGlyphSocketInfo, tonumber, strfind
 
 local types = {
-    spell       = "|cffff4d60SpellID:",
-    item        = "|cffff4d60ItemID:",
-    glyph       = "|cffff4d60GlyphID:",
-    unit        = "|cffff4d60NPC ID:",
-    quest       = "|cffff4d60QuestID:",
-    talent      = "|cffff4d60TalentID:",
-    achievement = "|cffff4d60AchievementID:"
+    spell       = "SpellID:",
+    item        = "ItemID:",
+    glyph       = "GlyphID:",
+    unit        = "NPC ID:",
+    quest       = "QuestID:",
+    talent      = "TalentID:",
+    achievement = "AchievementID:",
+    ability     = "AbilityID:"
 }
 
 local function addLine(tooltip, id, type)
@@ -23,7 +24,7 @@ local function addLine(tooltip, id, type)
     end
 
     if not found then
-        tooltip:AddDoubleLine(type, "|cffc1f0ec" .. id)
+        tooltip:AddDoubleLine(type, "|cffffffff" .. id)
         tooltip:Show()
     end
 end
@@ -129,5 +130,27 @@ f:SetScript("OnEvent", function(_, _, what)
                 GameTooltip:Hide()
             end)
         end
+    end
+end)
+
+-- Pet battle buttons
+hooksecurefunc("PetBattleAbilityButton_OnEnter", function(self)
+    local petIndex = C_PetBattles.GetActivePet(LE_BATTLE_PET_ALLY);
+    if ( self:GetEffectiveAlpha() > 0 ) then
+        local id = select(1, C_PetBattles.GetAbilityInfo(LE_BATTLE_PET_ALLY, petIndex, self:GetID()));
+        if id then
+            local oldText = PetBattlePrimaryAbilityTooltip.Description:GetText(id);
+            PetBattlePrimaryAbilityTooltip.Description:SetText(oldText .. "\r\r" .. types.ability .. "|cffffffff " .. id .. "|r")
+        end
+    end
+end)
+
+-- Pet battle auras
+hooksecurefunc("PetBattleAura_OnEnter", function(self)
+    local parent = self:GetParent();
+    local id = select(1, C_PetBattles.GetAuraInfo(parent.petOwner, parent.petIndex, self.auraIndex))
+    if id then
+        local oldText = PetBattlePrimaryAbilityTooltip.Description:GetText(id);
+        PetBattlePrimaryAbilityTooltip.Description:SetText(oldText .. "\r\r" .. types.ability .. "|cffffffff " .. id .. "|r")
     end
 end)
