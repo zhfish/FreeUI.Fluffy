@@ -224,37 +224,37 @@ RegisterStateDriver(petbar, "visibility", "[petbattle][overridebar][vehicleui][p
 --[[ Petbar on mouseover ]]
 
 
-	-- petbar:EnableMouse(true)
+	petbar:EnableMouse(true)
 
-	-- local function setButtonAlpha(alpha)
-	-- 	petbar:SetAlpha(alpha)
+	local function setButtonAlpha(alpha)
+		petbar:SetAlpha(alpha)
 
-	-- 	for i = 1, numpet do
-	-- 		local ab1 = _G["PetActionButton"..i]
+		for i = 1, numpet do
+			local ab1 = _G["PetActionButton"..i]
 
-	-- 		ab1.cooldown:SetSwipeColor(0, 0, 0, 0.8 * alpha)
-	-- 		ab1.cooldown:SetDrawBling(alpha == 1)
-	-- 	end
-	-- end
+			ab1.cooldown:SetSwipeColor(0, 0, 0, 0.8 * alpha)
+			ab1.cooldown:SetDrawBling(alpha == 1)
+		end
+	end
 
-	-- local function showButtons()
-	-- 	setButtonAlpha(1)
-	-- end
+	local function showButtons()
+		setButtonAlpha(1)
+	end
 
-	-- local function hideButtons()
-	-- 	setButtonAlpha(0)
-	-- end
+	local function hideButtons()
+		setButtonAlpha(0)
+	end
 
-	-- for i = 1, numpet do
-	-- 	local ab1 = _G["PetActionButton"..i]
+	for i = 1, numpet do
+		local ab1 = _G["PetActionButton"..i]
 
-	-- 	ab1:HookScript("OnEnter", showButtons)
-	-- 	ab1:HookScript("OnLeave", hideButtons)
-	-- end
+		ab1:HookScript("OnEnter", showButtons)
+		ab1:HookScript("OnLeave", hideButtons)
+	end
 
-	-- petbar:HookScript("OnEnter", showButtons)
-	-- petbar:HookScript("OnLeave", hideButtons)
-	-- hideButtons()
+	petbar:HookScript("OnEnter", showButtons)
+	petbar:HookScript("OnLeave", hideButtons)
+	hideButtons()
 
 
 --[[ Stance/possess bar]]
