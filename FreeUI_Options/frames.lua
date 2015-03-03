@@ -560,7 +560,7 @@ do
 	enableGroup.children = {showRaidFrames, healerClasscolours, partyNameAlways}
 
 	local enableArena = ns.CreateCheckBox(unitframes, "enableArena", true, true)
-	enableArena:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 0, -110)
+	enableArena:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 0, -140)
 
 --	local targettarget = ns.CreateCheckBox(unitframes, "targettarget", true, true)
 --	targettarget:SetPoint("TOPLEFT", enableArena, "BOTTOMLEFT", 0, -8)
