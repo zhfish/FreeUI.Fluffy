@@ -5,6 +5,7 @@ if not C.unitframes.enable then return end
 local parent, ns = ...
 local oUF = ns.oUF
 
+local locale = GetLocale()
 local Font_UF
 local Font_UF_Size
 local Font_UF_Flag
@@ -695,6 +696,9 @@ local UnitSpecific = {
 			Castbar.Width = self:GetWidth()
 			Spark:SetHeight(self.Health:GetHeight())
 			Castbar.Text = F.CreateFS(Castbar)
+			if locale == "zhCN" then
+				Castbar.Text:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
+			end
 			Castbar.Text:SetDrawLayer("ARTWORK")
 
 			local IconFrame = CreateFrame("Frame", nil, Castbar)
@@ -1255,6 +1259,9 @@ local UnitSpecific = {
 			Castbar.Width = self:GetWidth()
 			Spark:SetHeight(self.Health:GetHeight())
 			Castbar.Text = F.CreateFS(Castbar)
+			if locale == "zhCN" then
+				Castbar.Text:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
+			end
 			Castbar.Text:SetDrawLayer("ARTWORK")
 
 			local IconFrame = CreateFrame("Frame", nil, Castbar)
@@ -1418,6 +1425,9 @@ local UnitSpecific = {
 			Castbar.Width = self:GetWidth()
 			Spark:SetHeight(self.Health:GetHeight())
 			Castbar.Text = F.CreateFS(Castbar)
+			if locale == "zhCN" then
+				Castbar.Text:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
+			end
 			Castbar.Text:SetDrawLayer("ARTWORK")
 
 			local IconFrame = CreateFrame("Frame", nil, Castbar)
