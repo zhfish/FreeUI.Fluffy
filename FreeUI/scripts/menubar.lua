@@ -18,9 +18,9 @@ end
 
 local bar = CreateFrame("Frame", "FreeUIMenubar", UIParent)
 bar:SetFrameStrata("BACKGROUND")
-bar:SetPoint("TOPLEFT", -1, 1)
-bar:SetPoint("TOPRIGHT", 1, 1)
-bar:SetHeight(15)
+bar:SetPoint("BOTTOMLEFT", -1, -1)
+bar:SetPoint("BOTTOMRIGHT", 1, -1)
+bar:SetHeight(13)
 F.CreateBD(bar, barAlpha)
 
 bar.buttons = {}
@@ -200,7 +200,7 @@ end)
 
 addButton("Chat menu", POSITION_LEFT, function()
 	ChatMenu:ClearAllPoints()
-	ChatMenu:SetPoint("TOPLEFT", UIParent, 140, -20)
+	ChatMenu:SetPoint("BOTTOMLEFT", UIParent, 30, 30)
 	ToggleFrame(ChatMenu)
 end)
 

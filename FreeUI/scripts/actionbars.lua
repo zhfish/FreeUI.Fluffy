@@ -429,24 +429,24 @@ local function positionBars()
 		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 14, 4)
 		bar3:SetPoint("BOTTOM", bar2, "TOP", 0, 3)
 		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 3)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 8)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 20)
 	elseif leftShown then
 		barextra:SetPoint("BOTTOM", bar2, "TOP", 0, 36)
 		petbar:SetPoint("BOTTOMRIGHT", bar2, "TOPRIGHT", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar2, "TOPLEFT", 14, 4)
 		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 3)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 8)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 20)
 	elseif rightShown then
 		barextra:SetPoint("BOTTOM", bar3, "TOP", 0, 36)
 		petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 14, 4)
 		bar3:SetPoint("BOTTOM", bar1, "TOP", 0, 3)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 8)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 20)
 	else
 		barextra:SetPoint("BOTTOM", bar1, "TOP", 0, 36)
 		petbar:SetPoint("BOTTOMRIGHT", bar1, "TOPRIGHT", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar1, "TOPLEFT", 14, 4)
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 8)
+		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 20)
 	end
 end
 

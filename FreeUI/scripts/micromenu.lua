@@ -51,7 +51,5 @@ end
 F.RegisterEvent("ADDON_LOADED", taint)
 
 F.MicroMenu = function()
---	EasyMenu(microMenu, menuFrame, "UIParent", 30, 220, "MENU")
-	menuFrame:SetPoint("TOPLEFT", UIParent)
-	EasyMenu(microMenu, menuFrame, menuFrame, 10, 10, "MENU")
+	EasyMenu(microMenu, menuFrame, "UIParent", 30, 220, "MENU")
 end

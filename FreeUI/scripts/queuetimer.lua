@@ -6,9 +6,9 @@ local LFD_QUEUE_TIMEOUT = 40
 local count = 0
 
 local timer = CreateFrame("StatusBar", "FreeUI_QueueTimer", FreeUIMenubar)
-timer:SetPoint("BOTTOMLEFT")
-timer:SetPoint("BOTTOMRIGHT")
-timer:SetHeight(2)
+timer:SetPoint("TOPLEFT")
+timer:SetPoint("TOPRIGHT")
+timer:SetHeight(1)
 timer:SetStatusBarTexture(C.media.backdrop)
 timer:SetStatusBarColor(r, g, b)
 timer:SetMinMaxValues(0, LFD_QUEUE_TIMEOUT)
