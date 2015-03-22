@@ -1,6 +1,3 @@
-[submodule "ShestakUI_Filger"]
-	path = ShestakUI_Filger
-	url = git@github.com:solor/ShestakUI_Filger.git
 [submodule "Fonts"]
 	path = Fonts
 	url = git@github.com:solor/Font-Package-for-FreeUI.Fluffy.git
