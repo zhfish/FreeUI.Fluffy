@@ -1500,7 +1500,7 @@ local UnitSpecific = {
 		self.Name = Name
 
 		local Debuffs = CreateFrame("Frame", nil, self)
-		Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, 4)
+		Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, 0)
 		Debuffs.initialAnchor = "BOTTOMLEFT"
 		Debuffs["growth-x"] = "RIGHT"
 		Debuffs["growth-y"] = "UP"
