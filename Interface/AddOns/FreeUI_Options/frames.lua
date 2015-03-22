@@ -222,11 +222,11 @@ do
 	-- local combatText = ns.CreateCheckBox(general, "combatText", true, true)
 	-- combatText:SetPoint("TOPLEFT", buffTracker, "BOTTOMLEFT", 0, -8)
 
-	local nameplates = ns.CreateCheckBox(general, "nameplates", true, true)
-	nameplates:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -42)
+	--local nameplates = ns.CreateCheckBox(general, "nameplates", true, true)
+	--nameplates:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -42)
 
 	local objectivetracker = ns.CreateCheckBox(general, "objectivetracker", true, true)
-	objectivetracker:SetPoint("TOPLEFT", nameplates, "BOTTOMLEFT", 0, -8)
+	objectivetracker:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -42)
 
 	local undressButton = ns.CreateCheckBox(general, "undressButton", true, true)
 	undressButton:SetPoint("TOPLEFT", objectivetracker, "BOTTOMLEFT", 0, -8)
@@ -249,7 +249,7 @@ do
 	interrupt.children = {interruptParty, interruptBGs, interruptLFG, interruptOutdoors}
 
 	local threatMeter = ns.CreateCheckBox(general, "threatMeter", true, true)
-	threatMeter:SetPoint("LEFT", nameplates, "RIGHT", 240, 0)
+	threatMeter:SetPoint("LEFT", objectivetracker, "RIGHT", 240, 0)
 
 	local helmCloak = ns.CreateCheckBox(general, "helmcloakbuttons", true, true)
 	helmCloak:SetPoint("TOPLEFT", threatMeter, "BOTTOMLEFT", 0, -8)
@@ -380,7 +380,7 @@ do
 			tex:SetPoint("BOTTOMRIGHT", actionbars.tab.Icon, "BOTTOMRIGHT")
 		end
 	end
-
+--[[
 	local enable = ns.CreateCheckBox(actionbars, "enable", true, true)
 	enable:SetPoint("TOPLEFT", actionbars.subText, "BOTTOMLEFT", 0, -8)
 
@@ -406,6 +406,7 @@ do
 
 	enable:HookScript("OnClick", toggleActionBarsOptions)
 	actionbars:HookScript("OnShow", toggleActionBarsOptions)
+]]
 end
 
 -- [[ Bags ]]
@@ -531,7 +532,6 @@ end
 do
 	local unitframes = FreeUIOptionsPanel.unitframes
 	unitframes.tab.Icon:SetTexture("Interface\\Icons\\Spell_Holy_PrayerofSpirit")
-	tinsert(ns.newCategories, unitframes)
 
 	local enable = ns.CreateCheckBox(unitframes, "enable", true, true)
 	enable:SetPoint("TOPLEFT", unitframes.subText, "BOTTOMLEFT", 0, -8)
@@ -549,7 +549,6 @@ do
 	local showRaidFrames = ns.CreateCheckBox(unitframes, "showRaidFrames", true)
 	showRaidFrames:SetPoint("TOPLEFT", limitRaidSize, "BOTTOMLEFT", 16, -8)
 	tinsert(ns.protectOptions, showRaidFrames)
-	tinsert(ns.newOptions,showRaidFrames)
 
 	local healerClasscolours = ns.CreateCheckBox(unitframes, "healerClasscolours", true, true)
 	healerClasscolours:SetPoint("TOPLEFT", showRaidFrames, "BOTTOMLEFT", 0, -8)
@@ -609,8 +608,7 @@ end
 do
 	local tooltip = FreeUIOptionsPanel.tooltip
 	tooltip.tab.Icon:SetTexture("Interface\\Icons\\INV_Enchant_FormulaEpic_01")
-	tinsert(ns.newCategories, tooltip)
-
+--[[
 	local enable = ns.CreateCheckBox(tooltip, "enable", true, true)
 	enable:SetPoint("TOPLEFT", tooltip.subText, "BOTTOMLEFT", 0, -8)
 	tinsert(ns.newOptions, enable)
@@ -643,6 +641,7 @@ do
 
 	enable:HookScript("OnClick", toggleTooltipOptions)
 	tooltip:HookScript("OnShow", toggleTooltipOptions)
+]]
 end
 
 -- [[ Class specific ]]
