@@ -20,19 +20,19 @@ core\notifications.lua
 
 oUF\oUF.xml
 
-scripts\actionbars.lua
+## scripts\actionbars.lua
 scripts\archaeologybar.lua
 scripts\arena.lua
 scripts\automation.lua
 scripts\bags.lua
 scripts\bubbles.lua
-scripts\buffs.lua
-scripts\buttons.lua
+## scripts\buffs.lua
+## scripts\buttons.lua
 scripts\chat.lua
 scripts\chattabs.lua
 scripts\colours.lua
 scripts\combo.lua
-scripts\dbm.lua
+## scripts\dbm.lua
 scripts\disable.lua
 scripts\durability.lua
 scripts\errors.lua
@@ -61,17 +61,21 @@ scripts\role.lua
 scripts\stats.lua
 scripts\tekkrush.lua
 scripts\threatmeter.lua
-scripts\tooltip.lua
+## scripts\tooltip.lua
 scripts\unitframes.lua
 scripts\worldmarker.lua
 scripts\worldstateframe.lua
 
 scripts_extra\ChatFilter\load.xml
-scripts_extra\tooltip\load.xml
+scripts_extra\FreebTip\load.xml
+scripts_extra\ActionBars\load.xml
+scripts_extra\rBuffFrameStyler\load.xml
 
 scripts_extra\Align.lua
+scripts_extra\AchievementCheer.lua
 scripts_extra\AlreadyKnown.lua
-scripts_extra\AuraSource.lua
+## scripts_extra\AuraSource.lua
+scripts_extra\BiggerTradeSkillUI.lua
 scripts_extra\BGSpam.lua
 scripts_extra\BgSpecIcon.lua
 scripts_extra\ColorPicker.lua
@@ -79,8 +83,9 @@ scripts_extra\DragEmAll.lua
 scripts_extra\Doom_CooldownPulse.lua
 scripts_extra\emergency.lua
 scripts_extra\Focuser.lua
+scripts_extra\Foglight.lua
 scripts_extra\HiddenRaidNames.lua
-scripts_extra\idTip.lua
+## scripts_extra\idTip.lua
 scripts_extra\ncShadow.lua
 scripts_extra\QuestLevel.lua
 scripts_extra\Screenshots.lua
