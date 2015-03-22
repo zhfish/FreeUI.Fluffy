@@ -492,7 +492,7 @@ GameTooltip:HookScript("OnUpdate", GT_OnUpdate)
 local function addAuraInfo(self, caster, spellID)
 	if(cfg.auraID and spellID) then
 		--print(spellID)
-		GameTooltip:AddLine("ID: "..spellID)
+		GameTooltip:AddLine("SpellID: "..spellID)
 		GameTooltip:Show()
 	end
 

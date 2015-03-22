@@ -5,7 +5,7 @@ local Launch = CreateFrame("Frame")
 Launch:RegisterEvent("ADDON_LOADED")
 Launch:SetScript("OnEvent", function(self, event, addon)
 	if addon == "Blizzard_TradeSkillUI" then
-		TRADE_SKILLS_DISPLAYED = 25
+		TRADE_SKILLS_DISPLAYED = 32
 
 		-- Add skill buttons if needed
 		for i=1, TRADE_SKILLS_DISPLAYED do
@@ -18,8 +18,8 @@ Launch:SetScript("OnEvent", function(self, event, addon)
 
 
 		-- Resize the main window
-		TradeSkillFrame:SetWidth(550)
-		TradeSkillFrame:SetHeight(525)
+		TradeSkillFrame:SetWidth(570)
+		TradeSkillFrame:SetHeight(640)
 
 		-- Hide Horizontal bar in the default UI
 		TradeSkillHorizontalBarLeft:Hide()
