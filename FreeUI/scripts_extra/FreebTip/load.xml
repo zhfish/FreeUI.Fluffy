@@ -1,0 +1,16 @@
+﻿<!-- FreebTip by freebaser -->
+
+
+
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+
+	<Script file="tip.lua"/>
+	<Script file="anchor.lua"/>
+	<Script file="LibStub.lua"/>
+	<Script file="LibInspect.lua"/>
+	<Script file="ItemUpgradeInfo.lua"/>
+	<Script file="spec.lua"/>
+	<Script file="ilvl.lua"/>
+
+</Ui>
