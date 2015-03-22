@@ -62,10 +62,10 @@ hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self,...)
     if id then addLine(self, id, types.spell) end
 end)
 
-hooksecurefunc(GameTooltip, "SetUnitAura", function(self,...)
-    local id = select(11, UnitAura(...))
-    if id then addLine(self, id, types.spell) end
-end)
+-- hooksecurefunc(GameTooltip, "SetUnitAura", function(self,...)
+--     local id = select(11, UnitAura(...))
+--     if id then addLine(self, id, types.spell) end
+-- end)
 
 hooksecurefunc("SetItemRef", function(link, ...)
     local id = tonumber(link:match("spell:(%d+)"))
@@ -78,15 +78,15 @@ GameTooltip:HookScript("OnTooltipSetSpell", function(self)
 end)
 
 -- NPCs
-GameTooltip:HookScript("OnTooltipSetUnit", function(self)
-    if C_PetBattles.IsInBattle() then return end
-    local unit = select(2, self:GetUnit())
-    if unit then
-        local guid = UnitGUID(unit) or ""
-        local id   = tonumber(guid:match("-(%d+)-%x+$"), 10)
-        if id and guid:match("%a+") ~= "Player" then addLine(GameTooltip, id, types.unit) end
-    end
-end)
+-- GameTooltip:HookScript("OnTooltipSetUnit", function(self)
+--     if C_PetBattles.IsInBattle() then return end
+--     local unit = select(2, self:GetUnit())
+--     if unit then
+--         local guid = UnitGUID(unit) or ""
+--         local id   = tonumber(guid:match("-(%d+)-%x+$"), 10)
+--         if id and guid:match("%a+") ~= "Player" then addLine(GameTooltip, id, types.unit) end
+--     end
+-- end)
 
 -- Items
 local function attachItemTooltip(self)
