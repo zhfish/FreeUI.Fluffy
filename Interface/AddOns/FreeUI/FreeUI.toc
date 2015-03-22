@@ -51,7 +51,6 @@ scripts\moneytext.lua
 scripts\objectivetracker.lua
 scripts\petbattles.lua
 scripts\queuetimer.lua
-scripts\rangecolor.lua
 scripts\rarealert.lua
 scripts\role.lua
 scripts\stats.lua
