@@ -29,7 +29,7 @@ scripts\chat.lua
 scripts\chattabs.lua
 scripts\colours.lua
 scripts\combo.lua
-## scripts\dbm.lua
+scripts\dbm.lua
 scripts\disable.lua
 scripts\durability.lua
 scripts\errors.lua

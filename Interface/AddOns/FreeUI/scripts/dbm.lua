@@ -8,7 +8,7 @@ local function InitStyle()
 			local tbar = _G[name]
 			local text = _G[name.."Name"]
 
-			tbar:SetHeight(4)
+			tbar:SetHeight(6)
 
 			text:SetPoint("CENTER", 0, 10)
 			text:SetPoint("LEFT", 2, 10)
