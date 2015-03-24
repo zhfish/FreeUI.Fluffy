@@ -32,19 +32,31 @@ local name = UnitName("player")
 local realm = GetRealmName()
 local class = select(2, UnitClass("player"))
 
-local colors = setmetatable({
-	power = setmetatable({
-		["MANA"] = {.9, .9, .9},
-		["RAGE"] = {.9, .1, .1},
-		["FUEL"] = {0, 0.55, 0.5},
-		["FOCUS"] = {.9, .5, .1},
-		["ENERGY"] = {.9, .9, .1},
-		["AMMOSLOT"] = {0.8, 0.6, 0},
-		["RUNIC_POWER"] = {.1, .9, .9},
-		["POWER_TYPE_STEAM"] = {0.55, 0.57, 0.61},
-		["POWER_TYPE_PYRITE"] = {0.60, 0.09, 0.17},
-	}, {__index = oUF.colors.power}),
-}, {__index = oUF.colors})
+-- local colors = setmetatable({
+-- 	power = setmetatable({
+-- 		["MANA"] = {.9, .9, .9},
+-- 		["RAGE"] = {.9, .1, .1},
+-- 		["FUEL"] = {0, 0.55, 0.5},
+-- 		["FOCUS"] = {.9, .5, .1},
+-- 		["ENERGY"] = {.9, .9, .1},
+-- 		["AMMOSLOT"] = {0.8, 0.6, 0},
+-- 		["RUNIC_POWER"] = {.1, .9, .9},
+-- 		["POWER_TYPE_STEAM"] = {0.55, 0.57, 0.61},
+-- 		["POWER_TYPE_PYRITE"] = {0.60, 0.09, 0.17},
+-- 	}, {__index = oUF.colors.power}),
+-- }, {__index = oUF.colors})
+
+oUF.colors.power['MANA'] = {0.37, 0.6, 1}
+oUF.colors.power['RAGE']  = {0.9,  0.3,  0.23}
+oUF.colors.power['FOCUS']  = {1, 0.81,  0.27}
+oUF.colors.power['RUNIC_POWER']  = {0, 0.81, 1}
+oUF.colors.power['AMMOSLOT'] = {0.78,1, 0.78}
+oUF.colors.power['FUEL'] = {0.9,  0.3,  0.23}
+oUF.colors.power['POWER_TYPE_STEAM'] = {0.55, 0.57, 0.61}
+oUF.colors.power['POWER_TYPE_PYRITE'] = {0.60, 0.09, 0.17}
+oUF.colors.power['POWER_TYPE_HEAT'] = {0.55,0.57,0.61}
+oUF.colors.power['POWER_TYPE_OOZE'] = {0.76,1,0}
+oUF.colors.power['POWER_TYPE_BLOOD_POWER'] = {0.7,0,1}
 
 local powerHeight = C.unitframes.power_height
 local altPowerHeight = C.unitframes.altpower_height
@@ -95,6 +107,14 @@ local siValue = function(val)
 	else
 		return val
 	end
+end
+
+local function hex(r, g, b)
+    if not r then return '|cffFFFFFF' end
+    if(type(r) == 'table') then
+        if(r.r) then r, g, b = r.r, r.g, r.b else r, g, b = unpack(r) end
+    end
+    return ('|cff%02x%02x%02x'):format(r * 255, g * 255, b * 255)
 end
 
 -- [[ Smooth ]]
@@ -224,6 +244,19 @@ oUF.Tags.Methods['free:missinghealth'] = function(unit)
 	end
 end
 oUF.Tags.Events['free:missinghealth'] = oUF.Tags.Events.missinghp
+
+-- show demonic fury value for demolock
+oUF.Tags.Methods['free:demofury'] = function(unit)
+	local spec = GetSpecialization()
+	local fury = UnitPower('player', SPELL_POWER_DEMONIC_FURY)
+	if class == 'WARLOCK' and spec == SPEC_WARLOCK_DEMONOLOGY then
+		local r, g, b = 0.9, 0.37, 0.37
+		return hex(r, g, b)..siValue(fury)
+	else
+		return nil
+	end
+end
+oUF.Tags.Events['free:demofury'] = 'UNIT_POWER PLAYER_SPECIALIZATION_CHANGED PLAYER_TALENT_UPDATE UNIT_HEALTH UNIT_CONNECTION'
 
 oUF.Tags.Methods['free:power'] = function(unit)
 	local min, max = UnitPower(unit), UnitPowerMax(unit)
@@ -684,7 +717,14 @@ local UnitSpecific = {
 
 		local PowerText = F.CreateFS(Power, C.FONT_SIZE_NORMAL, "RIGHT")
 		PowerText:SetPoint("BOTTOMRIGHT", Health, "TOPRIGHT", 0, 3)
-		self:Tag(PowerText, '[free:power]')
+		if powerType ~= 0 then PowerText.frequentUpdates = .1 end
+		local spec = GetSpecialization()
+		local fury = UnitPower('player', SPELL_POWER_DEMONIC_FURY)
+		if class == 'WARLOCK' and spec == SPEC_WARLOCK_DEMONOLOGY then
+			self:Tag(PowerText, '[free:demofury]')
+		else
+			self:Tag(PowerText, '[free:power]')
+		end
 		Power.Text = PowerText
 
 		self.RaidIcon:ClearAllPoints()
@@ -1251,6 +1291,7 @@ local UnitSpecific = {
 
 		local PowerText = F.CreateFS(Power)
 		PowerText:SetPoint("BOTTOMLEFT", HealthPoints, "BOTTOMRIGHT", 3, 0)
+		if powerType ~= 0 then PowerText.frequentUpdates = .1 end
 		self:Tag(PowerText, '[free:power]')
 
 		-- Cast bar
@@ -2072,5 +2113,3 @@ oUF:Factory(function(self)
 	checkShowRaidFrames()
 	F.AddOptionsCallback("unitframes", "showRaidFrames", checkShowRaidFrames)
 end)
-	
-
