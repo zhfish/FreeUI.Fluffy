@@ -15,7 +15,7 @@ if locale == "zhCN" or locale == "zhTW" then
 else
 	Diablo = 'Interface\\Addons\\FreeUI\\media\\diablo.ttf'
 	Nordica = 'Interface\\Addons\\FreeUI\\media\\nordica.ttf'
-	damagefont = 'Interface\\Addons\\FreeUI\\media\\supereffective.ttf'
+	damagefont = 'Interface\\Addons\\FreeUI\\media\\damage.ttf'
 end
 
 
@@ -160,7 +160,7 @@ PVPInfoTextFont:SetFont(Diablo, 48)
 PVPInfoTextFont:SetShadowColor(0, 0, 0)
 PVPInfoTextFont:SetShadowOffset(1, -1)
 
-WorldMapTextFont:SetFont(Diablo, 100) 
+WorldMapTextFont:SetFont(Diablo, 100)
 WorldMapTextFont:SetShadowColor(0, 0, 0)
 WorldMapTextFont:SetShadowOffset(1, -1)
 
