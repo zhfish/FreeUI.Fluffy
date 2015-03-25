@@ -36,10 +36,10 @@
     button:SetSize(cfg.buttons.size, cfg.buttons.size)
     button:ClearAllPoints()
     if i == 1 then
-      button:SetPoint("TOPRIGHT", frame, -cfg.padding, -cfg.padding)
+      button:SetPoint("BOTTOMLEFT", frame, cfg.padding, cfg.padding)
     else
       local previous = _G["MultiBarBottomRightButton"..i-1]
-       button:SetPoint("LEFT", previous, "RIGHT", 0, -cfg.buttons.margin)
+       button:SetPoint("LEFT", previous, "RIGHT", cfg.buttons.margin, 0)
     end
   end
 

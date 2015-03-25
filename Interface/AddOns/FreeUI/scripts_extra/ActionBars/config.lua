@@ -25,7 +25,6 @@
     --BAR 1
     bar1 = {
       enable          = true, --enable module
-      uselayout2x6    = false,
       scale           = 1,
       padding         = 1, --frame padding
       buttons         = {
@@ -56,7 +55,7 @@
         size            = 38,
         margin          = 1,
       },
-      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -1, y = 22 },
+      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 22 },
       userplaced      = {
         enable          = false,
       },
@@ -74,7 +73,6 @@
     --BAR 2
     bar2 = {
       enable          = true, --enable module
-      uselayout2x6    = false,
       scale           = 1,
       padding         = 1, --frame padding
       buttons         = {
@@ -102,10 +100,10 @@
       scale           = 1,
       padding         = 1, --frame padding
       buttons         = {
-        size            = 28,
+        size            = 32,
         margin          = 0,
       },
-      pos             = { a1 = "LEFT", a2 = "LEFT", af = "UIParent", x = 50, y = -100  },
+      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 78  },
       userplaced      = {
         enable          = false,
       },
@@ -129,7 +127,7 @@
         size            = 24,
         margin          = 0,
       },
-      pos             = { a1 = "TOPRIGHT", a2 = "RIGHT", af = "UIParent", x = -6, y = -100 },
+      pos             = { a1 = "TOPRIGHT", a2 = "RIGHT", af = "UIParent", x = -6, y = -180 },
       userplaced      = {
         enable          = false,
       },
@@ -153,12 +151,12 @@
         size            = 28,
         margin          = 0,
       },
-      pos             = { a1 = "LEFT", a2 = "LEFT", af = "UIParent", x = 2, y = 0 },
+      pos             = { a1 = "LEFT", a2 = "LEFT", af = "UIParent", x = 2, y = -80 },
       userplaced      = {
         enable          = false,
       },
       mouseover       = {
-        enable          = true,
+        enable          = false,
         fadeIn          = {time = 0.4, alpha = 1},
         fadeOut         = {time = 0.3, alpha = 0},
       },
@@ -175,15 +173,15 @@
       scale           = 1,
       padding         = 2, --frame padding
       buttons         = {
-        size            = 28,
-        margin          = 3,
+        size            = 32,
+        margin          = 1,
       },
-      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 85 },
+      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 114 },
       userplaced      = {
         enable          = false,
       },
       mouseover       = {
-        enable          = true,
+        enable          = false,
         fadeIn          = {time = 0.4, alpha = 1},
         fadeOut         = {time = 0.3, alpha = 0},
       },
@@ -200,10 +198,10 @@
       scale           = 1,
       padding         = 2, --frame padding
       buttons         = {
-        size            = 28,
+        size            = 30,
         margin          = 0,
       },
-      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -44, y = 78 },
+      pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -30, y = 114 },
       userplaced      = {
         enable          = true,
       },
@@ -290,15 +288,16 @@
     },
   }
 
-    -----------------------------
+  -----------------------------
   -- CHARSPECIFIC REWRITES
   -----------------------------
 
   local playername, _ = UnitName('player')
 
-if playername == 'Волараукар' then
-	--cfg.bars.bar1.mouseover.enable = false
-	cfg.bars.bar1.combat.enable = true
-	--cfg.bars.bar1.pos = { a1 = "BOTTOMRIGHT", a2 = "BOTTOM", af = "UIParent", x = -50, y = 200 }
-	--cfg.bars.bar1.pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 10}
-end
+  if playername == 'Dostoyevsky' then
+      cfg.bars.bar5.mouseover.enable = true
+      cfg.bars.petbar.buttons.size = 28
+      cfg.bars.petbar.pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 82 }
+      cfg.bars.petbar.mouseover.enable = true
+      cfg.bars.stancebar.show = false
+  end

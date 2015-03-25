@@ -117,10 +117,10 @@
 			text = text:gsub("(a%-)", "A")
 			text = text:gsub("(c%-)", "C")
 			if locale == "zhCN" then
-        text = text:gsub("鼠标按键", "M")
-        text = text:gsub("鼠标中键", "M3")
-        text = text:gsub("鼠标滚轮向上滚动", "MU")
-        text = text:gsub("鼠标滚轮向下滚动", "MD")
+                text = text:gsub("鼠标按键", "M")
+                text = text:gsub("鼠标中键", "M3")
+                text = text:gsub("鼠标滚轮向上滚动", "MU")
+                text = text:gsub("鼠标滚轮向下滚动", "MD")
 			end
 			text = text:gsub("Mouse Button", "M")
 			text = text:gsub("Middle Mouse", "M3")
@@ -188,11 +188,11 @@
 	local cd  = _G[name.."Cooldown"]
     local nt  = _G[name.."NormalTexture2"]
     --setting the textures
-    fl:SetTexture(nil)
-    bu:SetPushedTexture(nil)
-    SetNormalTexture(bu:GetNormalTexture())
-	SetHighlightTexture(bu:GetHighlightTexture())
-    SetCheckedTexture(bu:GetCheckedTexture())
+    fl:SetTexture("")
+    bu:SetPushedTexture("")
+    bu:SetNormalTexture("")
+    bu:SetHighlightTexture("")
+    bu:SetCheckedTexture("Interface\\Addons\\FreeUI\\Media\\CheckButtonHilight")
 	hooksecurefunc(bu, "SetNormalTexture", function(self, texture)
       if texture then
         self:SetNormalTexture(nil)
