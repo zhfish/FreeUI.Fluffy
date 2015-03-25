@@ -9,10 +9,10 @@
   SetCVar("consolidateBuffs", 0)
 
   --rewrite the oneletter shortcuts
-  HOUR_ONELETTER_ABBR = "%dh";
-  DAY_ONELETTER_ABBR = "%dd";
-  MINUTE_ONELETTER_ABBR = "%dm";
-  SECOND_ONELETTER_ABBR = "%d";
+  HOUR_ONELETTER_ABBR = "|cff51afed%dh";
+  DAY_ONELETTER_ABBR = "|cffffffff%dd";
+  MINUTE_ONELETTER_ABBR = "|cfff1c31a%dm";
+  SECOND_ONELETTER_ABBR = "|cffff000c%d";
 
   ---------------------------------------
   -- FUNCTIONS

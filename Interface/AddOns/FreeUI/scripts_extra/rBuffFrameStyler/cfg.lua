@@ -22,7 +22,7 @@ cfg.buffframe = {
     pos             = { a1 = "TOPRIGHT", af = "Minimap", a2 = "TOPLEFT", x = -10, y = -34 },
     rowSpacing      = 1,
     colSpacing      = 1,
-    buffsPerRow     = 12,
+    buffsPerRow     = 10,
     gap             = 10, --gap in pixel between buff and debuff
 }
 
