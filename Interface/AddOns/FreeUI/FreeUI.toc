@@ -2,7 +2,7 @@
 ## Title: FreeUI
 ## Notes: Minimalistic user interface.
 ## Author: Haleth/Lightsword
-## Version: 8.2.1
+## Version: 8.2.3
 ## RequiredDeps: Blizzard_CombatText
 ## OptionalDeps: Clique, FreeUI_Options, MyRolePlay, oUF
 ## SavedVariables: FreeUIGlobalConfig
@@ -23,7 +23,7 @@ oUF\oUF.xml
 scripts\archaeologybar.lua
 scripts\arena.lua
 scripts\automation.lua
-scripts\bags.lua
+## scripts\bags.lua
 scripts\bubbles.lua
 scripts\chat.lua
 scripts\chattabs.lua
@@ -104,6 +104,7 @@ theme\AddOns\Blizzard_BlackMarketUI.lua
 theme\AddOns\Blizzard_Calendar.lua
 theme\AddOns\Blizzard_ChallengesUI.lua
 theme\AddOns\Blizzard_Collections.lua
+theme\AddOns\Blizzard_DeathRecap.lua
 theme\AddOns\Blizzard_DebugTools.lua
 theme\AddOns\Blizzard_EncounterJournal.lua
 theme\AddOns\Blizzard_GarrisonUI.lua
