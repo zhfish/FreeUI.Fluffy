@@ -294,10 +294,19 @@
 
   local playername, _ = UnitName('player')
 
-  if playername == 'Dostoyevsky' then
+  if playername == 'Dostoyevsky' or playername == 'Turgenev' then
       cfg.bars.bar5.mouseover.enable = true
       cfg.bars.petbar.buttons.size = 28
       cfg.bars.petbar.pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 82 }
       cfg.bars.petbar.mouseover.enable = true
       cfg.bars.stancebar.show = false
+  end
+
+  if playername == '繾綣之絆' then
+      cfg.bars.bar5.mouseover.enable = true
+      cfg.bars.petbar.buttons.size = 28
+      cfg.bars.petbar.pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 82 }
+      cfg.bars.petbar.mouseover.enable = true
+      cfg.bars.stancebar.pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -20, y = 80 }
+      cfg.bars.stancebar.buttons.margin = 2
   end
