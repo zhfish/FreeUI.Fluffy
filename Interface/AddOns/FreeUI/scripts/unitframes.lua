@@ -208,9 +208,32 @@ oUF.Tags.Methods['free:bosshealth'] = function(unit)
 end
 oUF.Tags.Events['free:bosshealth'] = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_TARGETABLE_CHANGED"
 
+--------------------------- utf8 short string ---------------------------------
+local function usub(str, len)
+    local i = 1
+    local n = 0
+    while true do
+        local b,e = string.find(str, "([%z\1-\127\194-\244][\128-\191]*)", i)
+        if(b == nil) then
+            return str
+        end
+        i = e + 1
+        n = n + 1
+        if(n > len) then
+            local r = string.sub(str, 1, b-1)
+            return r
+        end
+    end
+end
+
+local function getSummary(str)
+    local t = string.gsub(str, "<.->", "")
+    return usub(t, 100, "...")
+end
+
 local function shortName(unit)
 	local name = UnitName(unit)
-	if name and name:len() > 4 then name = name:sub(1, 4) end
+	if name and name:len() > 4 then name = usub(name, 4) end
 
 	return name
 end
