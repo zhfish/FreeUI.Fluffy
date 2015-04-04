@@ -1804,6 +1804,7 @@ do
 
 		local Text = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "CENTER")
 		Text:SetPoint("CENTER", 1, 0)
+		Text:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
 		self.Text = Text
 
 		self:Tag(Text, '[dead][offline]')
@@ -1813,12 +1814,12 @@ do
 		-- 	self:Tag(Text, '[free:missinghealth]')
 
 		-- else
-		-- 	Health:SetHeight(partyHeight - powerHeight - 1)
-		-- 	if C.unitframes.partyNameAlways then
-		-- 		self:Tag(Text, '[free:name]')
-		-- 	else
-		-- 		self:Tag(Text, '[dead][offline]')
-		-- 	end
+			Health:SetHeight(partyHeight - powerHeight - 1)
+			if C.unitframes.partyNameAlways then
+				self:Tag(Text, '[free:name]')
+			else
+				self:Tag(Text, '[dead][offline]')
+			end
 		-- end
 
 		self.ResurrectIcon = self:CreateTexture(nil, "OVERLAY")
