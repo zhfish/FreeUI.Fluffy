@@ -82,7 +82,7 @@ do
 		if _DB.point then
 			_anchor:SetPoint(_DB.point, UIParent, _DB.point, _DB.x, _DB.y)
 		else
-			_anchor:SetPoint("BOTTOMRIGHT", UIParent, "RIGHT", -10,-80)
+			_anchor:SetPoint("BOTTOMRIGHT", UIParent, "RIGHT", -10,-160)
 			--_anchor:SetPoint("TOPRIGHT", Minimap, "BOTTOMLEFT", 0, 1)
 		end
 
