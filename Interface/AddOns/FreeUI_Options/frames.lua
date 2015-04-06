@@ -213,20 +213,11 @@ do
 	local features = ns.addSubCategory(general, ns.localization.generalFeatures)
 	features:SetPoint("TOPLEFT", general.subText, "BOTTOMLEFT", 0, -8)
 
-	-- local buffReminder = ns.CreateCheckBox(general, "buffreminder", true, true)
-	-- buffReminder:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
-
-	-- local buffTracker = ns.CreateCheckBox(general, "buffTracker", true, true)
-	-- buffTracker:SetPoint("TOPLEFT", buffReminder, "BOTTOMLEFT", 0, -8)
-
-	-- local combatText = ns.CreateCheckBox(general, "combatText", true, true)
-	-- combatText:SetPoint("TOPLEFT", buffTracker, "BOTTOMLEFT", 0, -8)
-
-	--local nameplates = ns.CreateCheckBox(general, "nameplates", true, true)
-	--nameplates:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -42)
+	local AuraTracker = ns.CreateCheckBox(general, "AuraTracker", true, true)
+	AuraTracker:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
 
 	local objectivetracker = ns.CreateCheckBox(general, "objectivetracker", true, true)
-	objectivetracker:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -42)
+	objectivetracker:SetPoint("TOPLEFT", AuraTracker, "BOTTOMLEFT", 0, -8)
 
 	local undressButton = ns.CreateCheckBox(general, "undressButton", true, true)
 	undressButton:SetPoint("TOPLEFT", objectivetracker, "BOTTOMLEFT", 0, -8)
@@ -249,7 +240,7 @@ do
 	interrupt.children = {interruptParty, interruptBGs, interruptLFG, interruptOutdoors}
 
 	local threatMeter = ns.CreateCheckBox(general, "threatMeter", true, true)
-	threatMeter:SetPoint("LEFT", objectivetracker, "RIGHT", 240, 0)
+	threatMeter:SetPoint("LEFT", AuraTracker, "RIGHT", 240, 0)
 
 	local helmCloak = ns.CreateCheckBox(general, "helmcloakbuttons", true, true)
 	helmCloak:SetPoint("TOPLEFT", threatMeter, "BOTTOMLEFT", 0, -8)
@@ -415,37 +406,37 @@ do
 	local bags = FreeUIOptionsPanel.bags
 	bags.tab.Icon:SetTexture("Interface\\Icons\\inv_misc_bag_08")
 
-	local general = ns.addSubCategory(bags, ns.localization.bagsGeneral)
-	general:SetPoint("TOPLEFT", bags.subText, "BOTTOMLEFT", 0, -8)
-
-	local style = ns.CreateRadioButtonGroup(bags, "style", 3, false, true)
-	style.buttons[1]:SetPoint("TOPLEFT", general, "BOTTOMLEFT", 0, -41)
-
-	local styleSpecific, styleSpecificLine = ns.addSubCategory(bags, ns.localization.bagsStyleSpecific)
-	styleSpecific:SetPoint("TOPLEFT", style.buttons[3], "BOTTOMLEFT", 0, -30)
-
-	local slotsShowAlways = ns.CreateCheckBox(bags, "slotsShowAlways", true)
-	slotsShowAlways:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
-
-	local size = ns.CreateNumberSlider(bags, "size", SMALL, LARGE, 8, 100, 1)
-	size:SetPoint("TOPLEFT", slotsShowAlways, "BOTTOMLEFT", 8, -42)
-
-	local hideSlots = ns.CreateCheckBox(bags, "hideSlots", true)
-	hideSlots:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
-
-	local function toggleBagsOptions()
-		local isAllInOne = style.buttons[1]:GetChecked()
-
-		slotsShowAlways:SetShown(isAllInOne)
-		size:SetShown(isAllInOne)
-		hideSlots:SetShown(not isAllInOne)
-	end
-
-	for _, button in pairs(style.buttons) do
-		button:HookScript("OnClick", toggleBagsOptions)
-	end
-
-	bags:HookScript("OnShow", toggleBagsOptions)
+	-- local general = ns.addSubCategory(bags, ns.localization.bagsGeneral)
+	-- general:SetPoint("TOPLEFT", bags.subText, "BOTTOMLEFT", 0, -8)
+	--
+	-- local style = ns.CreateRadioButtonGroup(bags, "style", 3, false, true)
+	-- style.buttons[1]:SetPoint("TOPLEFT", general, "BOTTOMLEFT", 0, -41)
+	--
+	-- local styleSpecific, styleSpecificLine = ns.addSubCategory(bags, ns.localization.bagsStyleSpecific)
+	-- styleSpecific:SetPoint("TOPLEFT", style.buttons[3], "BOTTOMLEFT", 0, -30)
+	--
+	-- local slotsShowAlways = ns.CreateCheckBox(bags, "slotsShowAlways", true)
+	-- slotsShowAlways:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
+	--
+	-- local size = ns.CreateNumberSlider(bags, "size", SMALL, LARGE, 8, 100, 1)
+	-- size:SetPoint("TOPLEFT", slotsShowAlways, "BOTTOMLEFT", 8, -42)
+	--
+	-- local hideSlots = ns.CreateCheckBox(bags, "hideSlots", true)
+	-- hideSlots:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
+	--
+	-- local function toggleBagsOptions()
+	-- 	local isAllInOne = style.buttons[1]:GetChecked()
+	--
+	-- 	slotsShowAlways:SetShown(isAllInOne)
+	-- 	size:SetShown(isAllInOne)
+	-- 	hideSlots:SetShown(not isAllInOne)
+	-- end
+	--
+	-- for _, button in pairs(style.buttons) do
+	-- 	button:HookScript("OnClick", toggleBagsOptions)
+	-- end
+	--
+	-- bags:HookScript("OnShow", toggleBagsOptions)
 end
 
 -- [[ Menu bar ]]
@@ -561,9 +552,6 @@ do
 	local enableArena = ns.CreateCheckBox(unitframes, "enableArena", true, true)
 	enableArena:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 0, -140)
 
---	local targettarget = ns.CreateCheckBox(unitframes, "targettarget", true, true)
---	targettarget:SetPoint("TOPLEFT", enableArena, "BOTTOMLEFT", 0, -8)
-
 	local absorb = ns.CreateCheckBox(unitframes, "absorb", true, true)
 	absorb:SetPoint("LEFT", enable, "RIGHT", 240, 0)
 
@@ -571,7 +559,7 @@ do
 	castbar:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -8)
 
 	local pvp = ns.CreateCheckBox(unitframes, "pvp", true, true)
-	pvp:SetPoint("TOPLEFT", castbar, "BOTTOMLEFT", 0, -42)
+	pvp:SetPoint("TOPLEFT", castbar, "BOTTOMLEFT", 0, -8)
 
 	local statusIndicator = ns.CreateCheckBox(unitframes, "statusIndicator", true)
 	statusIndicator:SetPoint("TOPLEFT", pvp, "BOTTOMLEFT", 0, -8)
@@ -584,14 +572,12 @@ do
 	local function toggleUFOptions()
 		local shown = enable:GetChecked()
 
---		autoPosition:SetShown(shown)
 		enableGroup:SetShown(shown)
 		limitRaidSize:SetShown(shown)
 		showRaidFrames:SetShown(shown)
 		healerClasscolours:SetShown(shown)
 		partyNameAlways:SetShown(shown)
 		absorb:SetShown(shown)
---		targettarget:SetShown(shown)
 		pvp:SetShown(shown)
 		statusIndicator:SetShown(shown)
 		statusIndicatorCombat:SetShown(shown)
