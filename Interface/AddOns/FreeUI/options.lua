@@ -6,21 +6,21 @@ local F, C, L = unpack(select(2, ...))
 --[[ Global config ]]
 
 C["general"] = {
-	["AuraTracker"] = true, 		-- Track some important auras, based on classic Filger
-	["helmcloakbuttons"] = true, 		-- show buttons to toggle helm/cloak on character frame
+	["AuraTracker"] = false, 		-- Track some important auras, based on classic Filger
+		["AuraTracker_testmod"] = false,	-- test mod to adjust position
+	["helmcloakbuttons"] = true, 	-- show buttons to toggle helm/cloak on character frame
 	["interrupt"] = true,			-- announce your interrupts
 		["interrupt_party"] = true,		-- enable in 5 mans / scenarios
 		["interrupt_bgs"] = false,		-- enable in battlegrounds
 		["interrupt_lfg"] = true, 		-- enable in dungeon/raid finder/scenario groups
 		["interrupt_outdoors"] = true,	-- enable when not in an instance
 	["mailButton"] = true, 			-- adds a button to the mail frame to collect all attachments
-	["nameplates"] = false, 			-- enable nameplates
 	["rareAlert"] = true, 			-- raid warning when a rare mob is spotted (5.4)
-		["rareAlert_playSound"] = true, 			-- play sound
-	["threatMeter"] = true,			-- threat bar above the target frame in dps/healer layout
+		["rareAlert_playSound"] = true, -- play sound
+	["threatMeter"] = false,		-- threat bar above the target frame in dps/healer layout
 	["uiScaleAuto"] = true,			-- force the correct UI scale
 	["undressButton"] = true, 		-- undress button on dressup frame
-	["objectivetracker"] = false,
+	["objectivetracker"] = false,	-- restyle objectivetracker
 }
 
 C["appearance"] = {

@@ -3,7 +3,7 @@ local F, C = unpack(select(2, ...))
 if not C.general.AuraTracker then return end
 
 Filger_Settings = {
-	config_mode = true,
+--	config_mode = false,
 	max_test_icon = 4,
 
 	Self_Buff	= {"BOTTOMLEFT", "oUF_FreePlayer", "TOPLEFT", 0, 20},		-- player's buff/proc
@@ -28,21 +28,6 @@ local Media = "Interface\\AddOns\\FreeUI\\scripts_extra\\Filger\\Media\\"
 
 	Misc.IconSizeNormal = 32
 	Misc.IconSizeBig = 44
-
-getscreenheight = tonumber(string.match(({GetScreenResolutions()})[GetCurrentResolution()], "%d+x(%d+)"))
-getscreenwidth = tonumber(string.match(({GetScreenResolutions()})[GetCurrentResolution()], "(%d+)x+%d"))
-
---   Pixel perfect script of custom ui Scale
-UIScale = function()
-   uiscale = min(2, max(0.64, 768 / string.match(GetCVar("gxResolution"), "%d+x(%d+)")))
-end
-UIScale()
-
-local mult = 768 / string.match(GetCVar("gxResolution"), "%d+x(%d+)") / uiscale
-local Scale = function(x)
-   return mult * math.floor(x / mult + 0.5)
-end
-Misc.mult = mult
 
 local _, filger = ...
 filger.FilgerSettings = Misc

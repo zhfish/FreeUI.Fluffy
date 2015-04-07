@@ -213,11 +213,8 @@ do
 	local features = ns.addSubCategory(general, ns.localization.generalFeatures)
 	features:SetPoint("TOPLEFT", general.subText, "BOTTOMLEFT", 0, -8)
 
-	local AuraTracker = ns.CreateCheckBox(general, "AuraTracker", true, true)
-	AuraTracker:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
-
 	local objectivetracker = ns.CreateCheckBox(general, "objectivetracker", true, true)
-	objectivetracker:SetPoint("TOPLEFT", AuraTracker, "BOTTOMLEFT", 0, -8)
+	objectivetracker:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
 
 	local undressButton = ns.CreateCheckBox(general, "undressButton", true, true)
 	undressButton:SetPoint("TOPLEFT", objectivetracker, "BOTTOMLEFT", 0, -8)
@@ -240,7 +237,7 @@ do
 	interrupt.children = {interruptParty, interruptBGs, interruptLFG, interruptOutdoors}
 
 	local threatMeter = ns.CreateCheckBox(general, "threatMeter", true, true)
-	threatMeter:SetPoint("LEFT", AuraTracker, "RIGHT", 240, 0)
+	threatMeter:SetPoint("LEFT", objectivetracker, "RIGHT", 240, 0)
 
 	local helmCloak = ns.CreateCheckBox(general, "helmcloakbuttons", true, true)
 	helmCloak:SetPoint("TOPLEFT", threatMeter, "BOTTOMLEFT", 0, -8)
@@ -256,12 +253,30 @@ do
 
 	rareAlert.children = {rareAlertPlaySound}
 
+	local AuraTracker = ns.CreateCheckBox(general, "AuraTracker", true, true)
+	AuraTracker:SetPoint("TOPLEFT", rareAlertPlaySound, "BOTTOMLEFT", -16, -8)
+
+	local AuraTrackertestmod = ns.CreateCheckBox(general, "AuraTracker_testmod", true, true)
+	AuraTrackertestmod:SetPoint("TOPLEFT", AuraTracker, "BOTTOMLEFT", 16, -8)
+
+	AuraTracker.children = {AuraTrackertestmod}
+
 	local misc = ns.addSubCategory(general, ns.localization.generalMisc)
 	misc:SetPoint("TOPLEFT", interruptOutdoors, "BOTTOMLEFT", -16, -20)
 
 	local uiScaleAuto = ns.CreateCheckBox(general, "uiScaleAuto", true)
 	uiScaleAuto:SetPoint("TOPLEFT", misc, "BOTTOMLEFT", 0, -20)
 	tinsert(ns.protectOptions, uiScaleAuto)
+
+	local function toggleGeneralOptions()
+		local shown = AuraTracker:GetChecked()
+
+		AuraTrackertestmod:SetShown(shown)
+
+	end
+
+	AuraTracker:HookScript("OnClick", toggleGeneralOptions)
+	general:HookScript("OnShow", toggleGeneralOptions)
 end
 
 -- [[ Appearance ]]
@@ -594,10 +609,9 @@ end
 do
 	local tooltip = FreeUIOptionsPanel.tooltip
 	tooltip.tab.Icon:SetTexture("Interface\\Icons\\INV_Enchant_FormulaEpic_01")
---[[
+
 	local enable = ns.CreateCheckBox(tooltip, "enable", true, true)
 	enable:SetPoint("TOPLEFT", tooltip.subText, "BOTTOMLEFT", 0, -8)
-	tinsert(ns.newOptions, enable)
 
 	local anchorCursor = ns.CreateCheckBox(tooltip, "anchorCursor")
 	anchorCursor:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -16)
@@ -627,7 +641,7 @@ do
 
 	enable:HookScript("OnClick", toggleTooltipOptions)
 	tooltip:HookScript("OnShow", toggleTooltipOptions)
-]]
+
 end
 
 -- [[ Class specific ]]

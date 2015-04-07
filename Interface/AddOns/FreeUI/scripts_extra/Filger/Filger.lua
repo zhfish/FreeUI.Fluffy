@@ -2,6 +2,8 @@ local F, C = unpack(select(2, ...))
 
 if not C.general.AuraTracker then return end
 
+local testmod = C.general.AuraTracker_testmod
+
 local _, filger = ...
 local Misc = filger.FilgerSettings
 
@@ -497,7 +499,8 @@ FreeAnchor:SetScript("OnEvent", function(self, event)
 			frame.Position = data.Position or "CENTER"
 			frame:SetPoint(unpack(data.Position))
 
-			if Filger_Settings.config_mode then
+--			if Filger_Settings.config_mode then
+			if testmod then
 				frame.actives = {}
 				for j = 1, math.min(Filger_Settings.max_test_icon, #Filger_Spells[class][i]), 1 do
 					local data = Filger_Spells[class][i][j]
