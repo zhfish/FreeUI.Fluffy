@@ -170,9 +170,6 @@ Filger_Spells = {
 			{slotID = 14, filter = "CD"},
 		},
 	},
-
-
-
 	["ALL"] = {
 		{
 			Name = "Buff_Comm",
@@ -380,273 +377,6 @@ Filger_Spells = {
 			IconSize = Misc.IconSizeBig,
 			Position = {unpack(Filger_Settings.Tar_Aura)},
 
-			-- Death knight
-			-- Anti-Magic Shell
-			{spellID = 48707, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Desecrated Ground
-			{spellID = 115018, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Lichborne
-			{spellID = 49039, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Icebound Fortitude
-			{spellID = 48792, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Pillar of Frost
-			{spellID = 51271, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Death's Advance
-			{spellID = 96268, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Debuffs
-			-- Remorseless Winter
-			{spellID = 115001, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
-			-- Asphyxiate
-			{spellID = 108194, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Gnaw (Ghoul)
-			{spellID = 91800, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Monstrous Blow (Mutated Ghoul)
-			{spellID = 91797, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Strangulate
-			{spellID = 47476, unitID = "target", caster = "all", filter = "DEBUFF"},
-
-			-- Druid
-			-- Survival Instincts
-			{spellID = 61336, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Barkskin
-			{spellID = 22812, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Ironbark
-			{spellID = 102342, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Nature's Grasp
-			{spellID = 170856, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Stampeding Roar
-			{spellID = 77764, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Incarnation: Tree of Life
-			{spellID = 117679, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Berserk
-			{spellID = 50334, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Debuffs
-			-- Cyclone
-			{spellID = 33786, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Mighty Bash
-			{spellID = 5211, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Maim
-			{spellID = 22570, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Rake
-			{spellID = 163505, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
-			-- Incapacitating Roar
-			{spellID = 99, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Solar Beam
-			{spellID = 78675, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Fae Silence
-			{spellID = 114238, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Entangling Roots
-			{spellID = 339, unitID = "target", caster = "all", filter = "DEBUFF"},
-
-			-- Hunter
-			-- Aspect of the Pack
-			{spellID = 13159, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Aspect of the Cheetah
-			{spellID = 5118, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Deterrence
-			{spellID = 19263, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Posthaste
-			{spellID = 118922, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Debuffs
-			-- Freezing Trap
-			{spellID = 3355, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Wyvern Sting
-			{spellID = 19386, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Binding Shot
-			{spellID = 117526, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
-			-- Intimidation
-			{spellID = 24394, unitID = "target", caster = "all", filter = "DEBUFF"},
-
-			-- Mage
-			-- Ice Block
-			{spellID = 45438, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Invisibility
-			{spellID = 66, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Evocation
-			{spellID = 12051, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Temporal Shield
-			{spellID = 115610, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Alter Time
-			{spellID = 110909, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Debuffs
-			-- Cauterize
-			{spellID = 87023, unitID = "target", caster = "target", filter = "DEBUFF"},
-			-- Polymorph
-			{spellID = 118, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Deep Freeze
-			{spellID = 44572, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Ring of Frost
-			{spellID = 82691, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Dragon's Breath
-			{spellID = 31661, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Frostjaw
-			{spellID = 102051, unitID = "target", caster = "all", filter = "DEBUFF"},
-
-			-- Monk
-			-- Touch of Karma
-			{spellID = 125174, unitID = "target", caster = "target", filter = "BUFF"},
-			-- Ring of Peace
-			{spellID = 116844, unitID = "target", caster = "target", filter = "BUFF"},
-			-- Diffuse Magic
-			{spellID = 122783, unitID = "target", caster = "target", filter = "BUFF"},
-			-- Debuffs
-			-- Paralysis
-			{spellID = 115078, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Leg Sweep
-			{spellID = 119381, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Fists of Fury
-			{spellID = 120086, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Charging Ox Wave
-			{spellID = 119392, unitID = "target", caster = "all", filter = "DEBUFF"},
-
-			-- Paladin
-			-- Divine Shield
-			{spellID = 642, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Hand of Protection
-			{spellID = 1022, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Hand of Sacrifice
-			{spellID = 6940, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Hand of Freedom
-			{spellID = 1044, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Hand of Purity
-			{spellID = 114039, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Devotion Aura
-			{spellID = 31821, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Ardent Defender
-			{spellID = 31850, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Divine Protection
-			{spellID = 498, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Guardian of Ancient Kings
-			{spellID = 86659, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Debuffs
-			-- Hammer of Justice
-			{spellID = 853, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Fist of Justice
-			{spellID = 105593, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Repentance
-			{spellID = 20066, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Turn Evil
-			{spellID = 10326, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Blinding Light
-			{spellID = 105421, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Avenger's Shield
-			{spellID = 31935, unitID = "target", caster = "all", filter = "DEBUFF"},
-
-			-- Priest
-			-- Dispersion
-			{spellID = 47585, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Pain Suppression
-			{spellID = 33206, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Guardian Spirit
-			{spellID = 47788, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Phantasm
-			{spellID = 114239, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Fear Ward
-			{spellID = 6346, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Debuffs
-			-- Dominate Mind
-			{spellID = 605, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Psychic Scream
-			{spellID = 8122, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Psychic Horror
-			{spellID = 64044, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Silence
-			{spellID = 15487, unitID = "target", caster = "all", filter = "DEBUFF"},
-
-			-- Rogue
-			-- Cloak of Shadows
-			{spellID = 31224, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Evasion
-			{spellID = 5277, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Cheating Death
-			{spellID = 45182, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Combat Insight
-			{spellID = 74002, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Shadow Dance
-			{spellID = 51713, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Debuffs
-			-- Kidney Shot
-			{spellID = 408, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Cheap Shot
-			{spellID = 1833, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Sap
-			{spellID = 6770, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Blind
-			{spellID = 2094, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Garrote - Silence
-			{spellID = 1330, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Smoke Bomb
-			{spellID = 76577, unitID = "target", caster = "all", filter = "DEBUFF"},
-
-			-- Shaman
-			-- Grounding Totem Effect
-			{spellID = 8178, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Shamanistic Rage
-			{spellID = 30823, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Spiritwalker's Grace
-			{spellID = 79206, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Debuffs
-			-- Hex
-			{spellID = 51514, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Static Charge
-			{spellID = 118905, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Pulverize (Earth Elemental)
-			{spellID = 118345, unitID = "target", caster = "all", filter = "DEBUFF"},
-
-			-- Warlock
-			-- Dark Bargain
-			{spellID = 110913, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Unending Resolve
-			{spellID = 104773, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Soulstone
-			{spellID = 20707, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Debuffs
-			-- Banish
-			{spellID = 710, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Shadowfury
-			{spellID = 30283, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Axe Toss (Felguard)
-			{spellID = 89766, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Fear
-			{spellID = 118699, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Howl of Terror
-			{spellID = 5484, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Blood Horror
-			{spellID = 137143, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Mortal Coil
-			{spellID = 6789, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Seduction (Succubus)
-			{spellID = 6358, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Mesmerize (Shivarra)
-			{spellID = 115268, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Unstable Affliction
-			{spellID = 31117, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
-
-			-- Warrior
-			-- Spell Reflection
-			{spellID = 23920, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Mass Spell Reflection
-			{spellID = 114028, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Die by the Sword
-			{spellID = 118038, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Shield Wall
-			{spellID = 871, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Berserker Rage
-			{spellID = 18499, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Last Stand
-			{spellID = 12975, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Bladestorm
-			{spellID = 46924, unitID = "target", caster = "all", filter = "BUFF"},
-			-- Debuffs
-			-- Storm Bolt
-			{spellID = 132169, unitID = "target", caster = "all", filter = "DEBUFF", absID = true},
-			-- Shockwave
-			{spellID = 132168, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Intimidating Shout
-			{spellID = 5246, unitID = "target", caster = "all", filter = "DEBUFF"},
-			-- Silenced (Gag Order)
-			{spellID = 18498, unitID = "target", caster = "all", filter = "DEBUFF"},
-
 			-- Racial
 			-- War Stomp
 			{spellID = 20549, unitID = "target", caster = "all", filter = "DEBUFF"},
@@ -655,7 +385,7 @@ Filger_Spells = {
 			-- Arcane Torrent
 			{spellID = 28730, unitID = "target", caster = "all", filter = "DEBUFF"},
 
-			-- All
+			-- BG
 			-- Warsong Flag
 			{spellID = 23333, unitID = "target", caster = "all", filter = "BUFF"},
 			{spellID = 23335, unitID = "target", caster = "all", filter = "BUFF"},
@@ -667,6 +397,165 @@ Filger_Spells = {
 			{spellID = 66271, unitID = "target", caster = "all", filter = "DEBUFF"},
 			-- Drink
 			{spellID = 80167, unitID = "target", caster = "all", filter = "BUFF"},
+
+			-- Defensive
+			-- WARRIOR
+			-- Shield Wall -40% damage taken 8s
+			{spellID = 871, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Rallying Cry +15% maximum health 10s
+			{spellID = 97463, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Last Stand +30% maximum health 15s
+			{spellID = 12975, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Berserker Rage
+			{spellID = 18499, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Safeguard
+			{spellID = 114029, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Vigilance -30% damage taken 12s
+			{spellID = 114030, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Bladestorm
+			{spellID = 46924, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Die by the Sword +100% parry -20% damage taken 8s
+			{spellID = 118038, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Spell Reflection
+			{spellID = 23920, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Mass Spell Reflection
+			{spellID = 114028, unitID = "target", caster = "all", filter = "BUFF"},
+			-- DEATH KNIGHT
+			-- Icebound Fortitude -20% damage taken 8s immune stun
+			{spellID = 48792, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Pillar of Frost +15% strength 20s immune slow
+			{spellID = 51271, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Lichborne +10% leech 10s immune charm fear sleep
+			{spellID = 49039, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Vampiric Blood +15% maximum health +15% healing recieved 10s
+			{spellID = 55233, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Death Pact
+			{spellID = 48743, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Desecrated Ground
+			{spellID = 115018, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Anti-Magic Shell
+			{spellID = 48707, unitID = "target", caster = "all", filter = "BUFF"},
+			-- PALADIN
+			-- Guardian of Ancient Kings -50% damage taken 8s
+			{spellID = 86659, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Ardent Defender -20% damage taken 10s
+			{spellID = 31850, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Divine Protection -40% magic damage taken 8s
+			{spellID = 498, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Hand of Protection
+			{spellID = 1022, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Hand of Sacrifice -30% damage taken 12s
+			{spellID = 6940, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Hand of Freedom
+			{spellID = 1044, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Hand of Purity -80% dot damage taken -15% damage taken 6s
+			{spellID = 114039, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Divine Shield
+			{spellID = 642, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Devotion Aura -20% magic damage taken
+			{spellID = 31821, unitID = "target", caster = "all", filter = "BUFF"},
+			-- HUNTER
+			-- Roar of Sacrifice
+			{spellID = 53480, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Master's Call
+			{spellID = 54216, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Feign Death
+			{spellID = 5384, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Deterrence
+			{spellID = 19263, unitID = "target", caster = "all", filter = "BUFF"},
+			-- SHAMAN
+			-- Astral Shift -40% damage taken 6s
+			{spellID = 108271, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Shamanistic Rage -30% damage taken 15s
+			{spellID = 30823, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Ancestral Guidance
+			{spellID = 108281, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Nature's Guardian
+			{spellID = 30884, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Reinforce -20% damage taken +10% healing done 10s
+			{spellID = 118347, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Spiritwalker's Grace
+			{spellID = 79206, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Shadow Magic
+			{spellID = 159630, unitID = "target", caster = "all", filter = "BUFF"},
+			-- ROGUE
+			-- Combat Readiness
+			{spellID = 74001, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Feint -50% aoe damage taken 5s
+			{spellID = 1966, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Smoke Bomb
+			{spellID = 76577, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Cloak of Shadows
+			{spellID = 31224, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Evasion
+			{spellID = 5277, unitID = "target", caster = "all", filter = "BUFF"},
+			-- DRUID
+			-- Survival Instincts -50% damage taken 6s
+			{spellID = 61336, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Bristling Fur -40% damage taken 3s
+			{spellID = 155835, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Barkskin -20% damage taken 12s
+			{spellID = 22812, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Ironbark -20% damage taken 12s
+			{spellID = 102342, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Savage Defense
+			{spellID = 62606, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Cyclone
+			{spellID = 33786, unitID = "target", caster = "all", filter = "DEBUFF"},
+			-- MONK
+			-- Life Cocoon
+			{spellID = 116849, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Touch of Karma
+			{spellID = 122470, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Nimble Brew
+			{spellID = 137562, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Fortifying Brew
+			{spellID = 115203, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Dampen Harm
+			{spellID = 122278, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Zen Meditation
+			{spellID = 115176, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Zen Focus
+			{spellID = 124488, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Diffuse Magic
+			{spellID = 122783, unitID = "target", caster = "all", filter = "BUFF"},
+			-- MAGE
+			-- Alter Time
+			{spellID = 108978, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Evanesce
+			{spellID = 157913, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Ice Block
+			{spellID = 45438, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Glyph of Ice Block
+			{spellID = 115760, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Greater Invisibility
+			{spellID = 110959, unitID = "target", caster = "all", filter = "BUFF"},
+			-- WARLOCK
+			-- Dark Bargain
+			{spellID = 110913, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Sacrificial Pact
+			{spellID = 108416, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Dark Regeneration
+			{spellID = 108359, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Unending Resolve
+			{spellID = 104773, unitID = "target", caster = "all", filter = "BUFF"},
+			-- PRIEST
+			-- Guardian Spirit +60% healing done
+			{spellID = 47788, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Pain Suppression -40% damage taken 8s
+			{spellID = 33206, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Power Word: Barrier -20% damage taken immune interrupt 10s
+			{spellID = 62618, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Fear Ward
+			{spellID = 6346, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Vampiric Embrace
+			{spellID = 15286, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Phantasm
+			{spellID = 114239, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Spectral Guise
+			{spellID = 119032, unitID = "target", caster = "all", filter = "BUFF"},
+			-- Dispersion -90% damage taken immune snare slow
+			{spellID = 47585, unitID = "target", caster = "all", filter = "BUFF"},
 		},
 		{
 			Name = "RaidAlert",
