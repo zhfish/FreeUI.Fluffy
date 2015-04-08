@@ -10,10 +10,11 @@ C["general"] = {
 		["AuraTracker_testmod"] = false,	-- test mod to adjust position
 	["helmcloakbuttons"] = true, 	-- show buttons to toggle helm/cloak on character frame
 	["interrupt"] = true,			-- announce your interrupts
-		["interrupt_party"] = true,		-- enable in 5 mans / scenarios
+		["interrupt_sound"] = true,		-- play sound
+		["interrupt_party"] = false,	-- enable in 5 mans / scenarios
 		["interrupt_bgs"] = false,		-- enable in battlegrounds
-		["interrupt_lfg"] = true, 		-- enable in dungeon/raid finder/scenario groups
-		["interrupt_outdoors"] = true,	-- enable when not in an instance
+		["interrupt_lfg"] = false, 		-- enable in dungeon/raid finder/scenario groups
+		["interrupt_outdoors"] = false,	-- enable when not in an instance
 	["mailButton"] = true, 			-- adds a button to the mail frame to collect all attachments
 	["rareAlert"] = true, 			-- raid warning when a rare mob is spotted (5.4)
 		["rareAlert_playSound"] = true, -- play sound
@@ -21,6 +22,9 @@ C["general"] = {
 	["uiScaleAuto"] = true,			-- force the correct UI scale
 	["undressButton"] = true, 		-- undress button on dressup frame
 	["objectivetracker"] = false,	-- restyle objectivetracker
+	["biggertradeskillui"] = true,
+	["cooldownpulse"] = true,
+	["screenshot"] = true,
 }
 
 C["appearance"] = {

@@ -1,5 +1,7 @@
 local F, C, L = unpack(select(2, ...))
 
+if not C.general.biggertradeskillui then return end
+
 local addonName, BTSUi = ...
 local Launch = CreateFrame("Frame")
 Launch:RegisterEvent("ADDON_LOADED")

@@ -1,6 +1,7 @@
 local F, C = unpack(select(2, ...))
 
 -- always enabled in raid and arena
+local playsound = C.general.interrupt_sound
 local enableInParty = C.general.interrupt_party
 local enableInBGs = C.general.interrupt_bgs
 local enableInLFG = C.general.interrupt_lfg
@@ -11,7 +12,11 @@ local LE_PARTY_CATEGORY_INSTANCE, LE_PARTY_CATEGORY_HOME = LE_PARTY_CATEGORY_INS
 
 local function OnEvent(_, _, subEvent, _, sourceGUID, sourceName, _, _, _, destName, _, _, _, _, _, spellID)
 	if subEvent == "SPELL_INTERRUPT" and (sourceName == playerName or sourceGUID == UnitGUID("pet")) then
-		PlaySoundFile("Interface\\AddOns\\FreeUI\\media\\Shutupfool.ogg", "Master") -- 打断成功语音提示
+
+		if playsound then
+			PlaySoundFile("Interface\\AddOns\\FreeUI\\media\\Shutupfool.ogg", "Master")
+		end
+
 		local channel
 
 		if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then

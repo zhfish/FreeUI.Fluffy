@@ -213,17 +213,29 @@ do
 	local features = ns.addSubCategory(general, ns.localization.generalFeatures)
 	features:SetPoint("TOPLEFT", general.subText, "BOTTOMLEFT", 0, -8)
 
+	local biggertradeskillui = ns.CreateCheckBox(general, "biggertradeskillui", true, true)
+	biggertradeskillui:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
+
 	local objectivetracker = ns.CreateCheckBox(general, "objectivetracker", true, true)
-	objectivetracker:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
+	objectivetracker:SetPoint("TOPLEFT", biggertradeskillui, "BOTTOMLEFT", 0, -8)
+
+	local cooldownpulse = ns.CreateCheckBox(general, "cooldownpulse", true, true)
+	cooldownpulse:SetPoint("TOPLEFT", objectivetracker, "BOTTOMLEFT", 0, -8)
+
+	local screenshot = ns.CreateCheckBox(general, "screenshot", true, true)
+	screenshot:SetPoint("TOPLEFT", cooldownpulse, "BOTTOMLEFT", 0, -8)
 
 	local undressButton = ns.CreateCheckBox(general, "undressButton", true, true)
-	undressButton:SetPoint("TOPLEFT", objectivetracker, "BOTTOMLEFT", 0, -8)
+	undressButton:SetPoint("TOPLEFT", screenshot, "BOTTOMLEFT", 0, -8)
 
 	local interrupt = ns.CreateCheckBox(general, "interrupt", true)
 	interrupt:SetPoint("TOPLEFT", undressButton, "BOTTOMLEFT", 0, -8)
 
+	local interruptsound = ns.CreateCheckBox(general, "interrupt_sound", true, true)
+	interruptsound:SetPoint("TOPLEFT", interrupt, "BOTTOMLEFT", 16, -8)
+
 	local interruptParty = ns.CreateCheckBox(general, "interrupt_party", true)
-	interruptParty:SetPoint("TOPLEFT", interrupt, "BOTTOMLEFT", 16, -8)
+	interruptParty:SetPoint("TOPLEFT", interruptsound, "BOTTOMLEFT", 0, -8)
 
 	local interruptBGs = ns.CreateCheckBox(general, "interrupt_bgs", true)
 	interruptBGs:SetPoint("TOPLEFT", interruptParty, "BOTTOMLEFT", 0, -8)
@@ -234,10 +246,10 @@ do
 	local interruptOutdoors = ns.CreateCheckBox(general, "interrupt_outdoors", true)
 	interruptOutdoors:SetPoint("TOPLEFT", interruptLFG, "BOTTOMLEFT", 0, -8)
 
-	interrupt.children = {interruptParty, interruptBGs, interruptLFG, interruptOutdoors}
+	interrupt.children = {interruptsound, interruptParty, interruptBGs, interruptLFG, interruptOutdoors}
 
 	local threatMeter = ns.CreateCheckBox(general, "threatMeter", true, true)
-	threatMeter:SetPoint("LEFT", objectivetracker, "RIGHT", 240, 0)
+	threatMeter:SetPoint("LEFT", biggertradeskillui, "RIGHT", 240, 0)
 
 	local helmCloak = ns.CreateCheckBox(general, "helmcloakbuttons", true, true)
 	helmCloak:SetPoint("TOPLEFT", threatMeter, "BOTTOMLEFT", 0, -8)

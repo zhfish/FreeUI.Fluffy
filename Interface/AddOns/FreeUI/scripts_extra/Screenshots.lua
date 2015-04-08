@@ -1,3 +1,7 @@
+local F, C, L = unpack(select(2, ...))
+
+if not C.general.screenshot then return end
+
 ----------------------------------------------------------------------------------------
 --	Take screenshots of Achievements(Based on Achievement Screenshotter by Blamdarot)
 ----------------------------------------------------------------------------------------
