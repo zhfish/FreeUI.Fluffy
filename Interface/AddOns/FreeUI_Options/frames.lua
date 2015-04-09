@@ -552,13 +552,13 @@ do
 	unitframes.tab.Icon:SetTexture("Interface\\Icons\\Spell_Holy_PrayerofSpirit")
 
 	local enable = ns.CreateCheckBox(unitframes, "enable", true, true)
-	enable:SetPoint("TOPLEFT", unitframes.subText, "BOTTOMLEFT", 0, -8)
+	enable:SetPoint("TOPLEFT", unitframes.subText, "BOTTOMLEFT", 0, -16)
 
---	local autoPosition = ns.CreateCheckBox(unitframes, "autoPosition", true, true)
---	autoPosition:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -16)
+	local shadow = ns.CreateCheckBox(unitframes, "shadow", true, true)
+	shadow:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -8)
 
 	local enableGroup = ns.CreateCheckBox(unitframes, "enableGroup", true, true)
-	enableGroup:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -8)
+	enableGroup:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
 
 	local limitRaidSize = ns.CreateCheckBox(unitframes, "limitRaidSize", true)
 	limitRaidSize:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 16, -8)

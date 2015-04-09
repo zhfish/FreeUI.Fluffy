@@ -5,6 +5,7 @@ if not C.unitframes.enable then return end
 local parent, ns = ...
 local oUF = ns.oUF
 
+local shadow = C.unitframes.shadow
 local locale = GetLocale()
 local Font_UF
 local Font_UF_Size
@@ -208,7 +209,7 @@ oUF.Tags.Methods['free:bosshealth'] = function(unit)
 end
 oUF.Tags.Events['free:bosshealth'] = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_TARGETABLE_CHANGED"
 
---------------------------- utf8 short string ---------------------------------
+-- utf8 short string
 local function usub(str, len)
     local i = 1
     local n = 0
@@ -418,7 +419,9 @@ local Shared = function(self, unit, isSingle)
 	bd:SetPoint("BOTTOMRIGHT", 1, -1)
 	bd:SetFrameStrata("BACKGROUND")
 
-	F.CreateSD(bd, 5, 0, 0, 0, .8, -2)
+	if shadow then
+		F.CreateSD(bd, 5, 0, 0, 0, .8, -2)
+	end
 
 	self.bd = bd
 
