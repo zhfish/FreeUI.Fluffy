@@ -18,10 +18,10 @@ C["general"] = {
 	["mailButton"] = true, 			-- adds a button to the mail frame to collect all attachments
 	["rareAlert"] = true, 			-- raid warning when a rare mob is spotted (5.4)
 		["rareAlert_playSound"] = true, -- play sound
-	["threatMeter"] = false,		-- threat bar above the target frame in dps/healer layout
+	["threatMeter"] = true,		-- threat bar above the target frame in dps/healer layout
 	["uiScaleAuto"] = true,			-- force the correct UI scale
 	["undressButton"] = true, 		-- undress button on dressup frame
-	["objectivetracker"] = false,	-- restyle objectivetracker
+	["objectivetracker"] = true,	-- restyle objectivetracker
 	["biggertradeskillui"] = true,
 	["cooldownpulse"] = true,
 	["screenshot"] = true,
@@ -90,11 +90,21 @@ C["notifications"] = {
 
 C["tooltip"] = {
 	["enable"] = true,
-	["anchorCursor"] = false,
-	["class"] = false,
-	["guildrank"] = true,
-	["title"] = false,
-	["pvp"] = false,
+	["cursor"] = false,
+	["title"] = true,
+	["realm"] = true,
+	["rank"] = true,
+	["pvp"] = true,
+	["faction"] = true,
+
+	["hide"] = false,
+	["hideall"] = false,
+
+	["id"] = true,
+	["caster"] = true,
+
+	["ilvl"] = true,
+	["spec"] = true,
 }
 
 C["unitframes"] = {

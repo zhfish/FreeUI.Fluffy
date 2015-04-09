@@ -1,5 +1,22 @@
+local F, C, L = unpack(select(2, ...))
+
+if not C.tooltip.enable then return end
+
 local _, ns = ...
 local mediapath = "Interface\\AddOns\\FreeUI\\Media\\"
+
+local cursor = C.tooltip.cursor
+local hideTitle = C.tooltip.title
+local hideRealm = C.tooltip.realm
+local hideRank = C.tooltip.rank
+local hidePvP = C.tooltip.pvp
+local hideFaction = C.tooltip.faction
+
+local combathide = C.tooltip.hide
+local combathideALL = C.tooltip.hideall
+local auraID = C.tooltip.id
+local auraCaster = C.tooltip.caster
+
 
 
 local cfg = {
@@ -9,11 +26,6 @@ local cfg = {
 	outline = "",
 	tex = mediapath.."bar1",
 	scale = 1,
-	cursor = false,
-	hideTitles = true,
-	hideRealm = true,
-	hideFaction = true,
-	hidePvP = true,
 	backdrop = {
 		bgFile = "Interface\\Buttons\\WHITE8x8",
 		edgeFile = mediapath.."glowTex",
@@ -22,18 +34,21 @@ local cfg = {
 		edgeSize = 3,
 		insets = { left = 3, right = 3, top = 3, bottom = 3 },
 		},
-
 	bgcolor = { r=0.05, g=0.05, b=0.05, t=.7 }, -- background
 	bdrcolor = { r=0, g=0, b=0 }, -- border
 	gcolor = { r=1, g=0.1, b=0.8 }, -- guild
 	you = "<You>",
 	boss = "??",
-	combathide = false,     -- world objects
-	combathideALL = false,  -- everything
-	multiTip = true, -- show more than one linked item tooltip
-	showRank = false, -- show guild rank
-	auraID = true, -- show aura id
-	auraCaster = true, -- show (if possible) who applied the aura
+
+--	hideTitles = true,
+--	hideRealm = true,
+--	hideFaction = true,
+--	hidePvP = true,
+--	combathide = false,     -- world objects
+--	combathideALL = false,  -- everything
+--	showRank = false, -- show guild rank
+--	auraID = true, -- show aura id
+--	auraCaster = true, -- show (if possible) who applied the aura
 }
 ns.cfg = cfg
 
@@ -150,7 +165,7 @@ local function hideLines(self)
 		local linetext = tiptext:GetText()
 
 		if(linetext) then
-			if(cfg.hidePvP and linetext:find(PVP)) then
+			if(hidePvP and linetext:find(PVP)) then
 				tiptext:SetText(nil)
 				tiptext:Hide()
 			elseif(linetext:find(COALESCED_REALM_TOOLTIP1) or linetext:find(INTERACTIVE_REALM_TOOLTIP1)) then
@@ -163,14 +178,14 @@ local function hideLines(self)
 
 				self:Show()
 			elseif(linetext:find(FACTION_ALLIANCE)) then
-				if(cfg.hideFaction) then
+				if(hideFaction) then
 					tiptext:SetText(nil)
 					tiptext:Hide()
 				else
 					tiptext:SetText("|cff7788FF"..linetext.."|r")
 				end
 			elseif(linetext:find(FACTION_HORDE)) then
-				if(cfg.hideFaction) then
+				if(hideFaction) then
 					tiptext:SetText(nil)
 					tiptext:Hide()
 				else
@@ -183,11 +198,11 @@ end
 
 local function PlayerTitle(self, unit)
 	local unitName
-	if(cfg.hideTitles and cfg.hideRealm) then
+	if(hideTitle and hideRealm) then
 		unitName = UnitName(unit)
-	elseif(cfg.hideTitles) then
+	elseif(hideTitle) then
 		unitName = GetUnitName(unit, true)
-	elseif(cfg.hideRealm) then
+	elseif(hideRealm) then
 		unitName = UnitPVPName(unit) or UnitName(unit)
 	end
 
@@ -210,9 +225,12 @@ local function PlayerGuild(self, unit, unitGuild, unitRank)
 	if(unitGuild) then
 		local text2 = GameTooltipTextLeft2
 		local str = hex(cfg.gcolor).."<%s> |cff00E6A8%s|r"
-		local unitRank = cfg.showRank and unitRank or ""
-
-		text2:SetFormattedText(str, unitGuild, unitRank)
+--		local unitRank = hideRank and unitRank or ""
+		if hideRank then
+			text2:SetFormattedText(str, unitGuild, "")
+		else
+			text2:SetFormattedText(str, unitGuild, unitRank)
+		end
 	end
 end
 
@@ -250,7 +268,7 @@ local function ShowTarget(self, unit)
 end
 
 local function OnSetUnit(self)
-	if(cfg.combathide and InCombatLockdown()) then
+	if(combathide and InCombatLockdown()) then
 		return self:Hide()
 	end
 
@@ -429,7 +447,7 @@ for i = 1, #tooltips do
 	local t = _G[tooltips[i]]
 	if t then
 		t:HookScript("OnShow", function(self)
-			if(cfg.combathideALL and InCombatLockdown()) then
+			if(combathideALL and InCombatLockdown()) then
 				return self:Hide()
 			end
 			style(self)
@@ -490,13 +508,13 @@ GameTooltip:HookScript("OnUpdate", GT_OnUpdate)
 --GameTooltipTextSmall:SetFont(cfg.font, cfg.fontsize-2, cfg.outline)
 
 local function addAuraInfo(self, caster, spellID)
-	if(cfg.auraID and spellID) then
+	if(auraID and spellID) then
 		--print(spellID)
 		GameTooltip:AddLine("SpellID: "..spellID)
 		GameTooltip:Show()
 	end
 
-	if(cfg.auraCaster and caster) then
+	if(auraCaster and caster) then
 		--print(caster)
 		local color = unitColor(caster)
 		if(color) then
@@ -524,4 +542,13 @@ hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self,...)
 	local _,_,_,_,_,_,_, caster,_,_, spellID = UnitDebuff(...)
 
 	addAuraInfo(self, caster, spellID)
+end)
+
+hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)
+	if cursor then
+		self:SetOwner(parent, "ANCHOR_CURSOR")
+	else
+		self:SetOwner(parent, "ANCHOR_NONE")
+		self:SetPoint("BOTTOMRIGHT", UIParent, "RIGHT", -10,-160)
+	end
 end)
