@@ -544,6 +544,32 @@ hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self,...)
 	addAuraInfo(self, caster, spellID)
 end)
 
+--[[ item icon ]]
+local frame = CreateFrame("Frame", "ItemRefTooltipIconFrame", _G["ItemRefTooltip"])
+frame:SetPoint("TOPRIGHT", _G["ItemRefTooltip"], "TOPLEFT", -1, -2)
+frame:SetSize(32, 32)
+
+local tex = frame:CreateTexture("ItemRefTooltipIcon", "TOOLTIP")
+tex:SetAllPoints(frame)
+
+F.CreateBG(frame)
+
+local AddItemIcon = function()
+	local frame = _G["ItemRefTooltipIconFrame"]
+	frame:Hide()
+
+	local _, link = _G["ItemRefTooltip"]:GetItem()
+	local icon = link and GetItemIcon(link)
+	if(not icon) then return end
+
+	_G["ItemRefTooltipIcon"]:SetTexture(icon)
+	_G["ItemRefTooltipIcon"]:SetTexCoord(.08, .92, .08, .92)
+	frame:Show()
+end
+
+hooksecurefunc("SetItemRef", AddItemIcon)
+
+--[[ position ]]
 hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)
 	if cursor then
 		self:SetOwner(parent, "ANCHOR_CURSOR")
