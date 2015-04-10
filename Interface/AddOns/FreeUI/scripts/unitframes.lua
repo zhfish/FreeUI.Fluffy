@@ -33,19 +33,6 @@ local name = UnitName("player")
 local realm = GetRealmName()
 local class = select(2, UnitClass("player"))
 
--- local colors = setmetatable({
--- 	power = setmetatable({
--- 		["MANA"] = {.9, .9, .9},
--- 		["RAGE"] = {.9, .1, .1},
--- 		["FUEL"] = {0, 0.55, 0.5},
--- 		["FOCUS"] = {.9, .5, .1},
--- 		["ENERGY"] = {.9, .9, .1},
--- 		["AMMOSLOT"] = {0.8, 0.6, 0},
--- 		["RUNIC_POWER"] = {.1, .9, .9},
--- 		["POWER_TYPE_STEAM"] = {0.55, 0.57, 0.61},
--- 		["POWER_TYPE_PYRITE"] = {0.60, 0.09, 0.17},
--- 	}, {__index = oUF.colors.power}),
--- }, {__index = oUF.colors})
 
 oUF.colors.power['MANA'] = {0.37, 0.6, 1}
 oUF.colors.power['RAGE']  = {0.9,  0.3,  0.23}
