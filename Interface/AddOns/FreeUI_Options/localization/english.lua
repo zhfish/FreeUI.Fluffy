@@ -162,7 +162,7 @@ ns.localization.unitframesSubText = "These options control most of the options f
 ns.localization.unitframesenable = "Enable"
 ns.localization.unitframesenableTooltip = "Disable this option if you want to use another unit frames addon."
 ns.localization.unitframesshadow = "Shadow border"
-ns.localization.unitframesshadowTooltip = "Add shadow border around unit frames."
+ns.localization.unitframesshadowTooltip = "Add shadow border around unit frames, disable it if you like clean style."
 ns.localization.unitframesenableGroup = "Party/Raid frames"
 ns.localization.unitframesenableGroupTooltip = "Uncheck if you want to use another addon for party and raid frames."
 ns.localization.unitframeslimitRaidSize = "Limit raid size"
@@ -177,10 +177,8 @@ ns.localization.unitframescastbarTooltip = "Disable this option if you want to u
 
 ns.localization.unitframesabsorb = "Absorb amount"
 ns.localization.unitframesabsorbTooltip = "Shows absorb amounts as well as an over-absorb glow on unit frames."
-ns.localization.unitframestargettarget = "Target of Target"
-ns.localization.unitframestargettargetTooltip = "Add a Target of Target frame above the target frame."
 ns.localization.unitframeshealerClasscolours = "Always use class colours"
-ns.localization.unitframeshealerClasscoloursTooltip = "Enable to use class colours rather than gradient in the healer layout."
+ns.localization.unitframeshealerClasscoloursTooltip = "Enable to use class colours rather than gradient."
 ns.localization.unitframespvp = "PVP icon"
 ns.localization.unitframespvpTooltip = "Show a small red PVP icon above the player unit frame."
 

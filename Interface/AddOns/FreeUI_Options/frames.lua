@@ -557,8 +557,11 @@ do
 	local shadow = ns.CreateCheckBox(unitframes, "shadow", true, true)
 	shadow:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -8)
 
+	local healerClasscolours = ns.CreateCheckBox(unitframes, "healerClasscolours", true, true)
+	healerClasscolours:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
+
 	local enableGroup = ns.CreateCheckBox(unitframes, "enableGroup", true, true)
-	enableGroup:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
+	enableGroup:SetPoint("TOPLEFT", healerClasscolours, "BOTTOMLEFT", 0, -8)
 
 	local limitRaidSize = ns.CreateCheckBox(unitframes, "limitRaidSize", true)
 	limitRaidSize:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 16, -8)
@@ -568,11 +571,8 @@ do
 	showRaidFrames:SetPoint("TOPLEFT", limitRaidSize, "BOTTOMLEFT", 16, -8)
 	tinsert(ns.protectOptions, showRaidFrames)
 
-	local healerClasscolours = ns.CreateCheckBox(unitframes, "healerClasscolours", true, true)
-	healerClasscolours:SetPoint("TOPLEFT", showRaidFrames, "BOTTOMLEFT", 0, -8)
-
 	local partyNameAlways = ns.CreateCheckBox(unitframes, "partyNameAlways", true, true)
-	partyNameAlways:SetPoint("TOPLEFT", healerClasscolours, "BOTTOMLEFT", 0, -8)
+	partyNameAlways:SetPoint("TOPLEFT", showRaidFrames, "BOTTOMLEFT", 0, -8)
 
 	enableGroup.children = {showRaidFrames, healerClasscolours, partyNameAlways}
 
