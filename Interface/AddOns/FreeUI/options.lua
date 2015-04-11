@@ -127,15 +127,16 @@ C["unitframes"] = {
 
 	["player"] = {"CENTER", UIParent, "CENTER", 0, -200},						-- player unitframe position
 	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, 60},					-- target unitframe position
-	["party"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -120},			-- party unitframe position
+	["focus"] = {"LEFT", 'oUF_FreeTarget', "RIGHT", 8, -100},					-- focus unitframe position
+	["party"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -120},				-- party unitframe position
 	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -20, 20},				-- raid unitframe position
 
 	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -180},		-- player castbar position
 	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, -60},		-- target castbar position
 	["focus_castbar"] = {"LEFT", 'oUF_FreeFocus', "LEFT", 0, -40},				-- focus castbar position
 
-	["altpower_height"] = 2,
 	["power_height"] = 2,
+	["altpower_height"] = 2,
 
 	["player_width"] = 259,
 	["player_height"] = 12,

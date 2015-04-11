@@ -1990,22 +1990,17 @@ end
 
 oUF:Factory(function(self)
 	local partyPos, raidPos
-	local player, target
+	local player, target, focus
 
-	if C.unitframes.autoPosition then
-		player = spawnHelper(self, 'player', "BOTTOM", UIParent, "CENTER", -275, round(GetScreenHeight()/-11.43))
-	else
-		player = spawnHelper(self, 'player', unpack(C.unitframes.player))
-	end
-
+	player = spawnHelper(self, 'player', unpack(C.unitframes.player))
 	target = spawnHelper(self, 'target', unpack(C.unitframes.target))
+	focus = spawnHelper(self, 'focus', unpack(C.unitframes.focus))
 	partyPos = C.unitframes.party
 	raidPos = C.unitframes.raid
 
-	spawnHelper(self, 'focus', "LEFT", target, "RIGHT", 8, -100)
-	spawnHelper(self, 'focustarget', "LEFT", target, "RIGHT", 96, -100)
 	spawnHelper(self, 'pet', "RIGHT", player, "LEFT", -8, 0)
 	spawnHelper(self, 'targettarget', "LEFT", target, "RIGHT", 8, 0)
+	spawnHelper(self, 'focustarget', "LEFT", focus, "RIGHT", 8, 0)
 
 	for n = 1, MAX_BOSS_FRAMES do
 		spawnHelper(self, 'boss' .. n, 'RIGHT', -30, 220 - (60 * n))
