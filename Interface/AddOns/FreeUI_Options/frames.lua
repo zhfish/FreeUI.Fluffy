@@ -265,8 +265,11 @@ do
 	local showtreasures = ns.CreateCheckBox(general, "showtreasures", true, true)
 	showtreasures:SetPoint("TOPLEFT", mailButton, "BOTTOMLEFT", 0, -8)
 
+	local ncshadow = ns.CreateCheckBox(general, "ncshadow", true, true)
+	ncshadow:SetPoint("TOPLEFT", showtreasures, "BOTTOMLEFT", 0, -8)
+
 	local rareAlert = ns.CreateCheckBox(general, "rareAlert", true)
-	rareAlert:SetPoint("TOPLEFT", showtreasures, "BOTTOMLEFT", 0, -8)
+	rareAlert:SetPoint("TOPLEFT", ncshadow, "BOTTOMLEFT", 0, -8)
 
 	local rareAlertPlaySound = ns.CreateCheckBox(general, "rareAlert_playSound")
 	rareAlertPlaySound:SetPoint("TOPLEFT", rareAlert, "BOTTOMLEFT", 16, -8)

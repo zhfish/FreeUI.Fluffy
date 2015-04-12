@@ -1,4 +1,7 @@
-local _G = _G
+local F, C, L = unpack(select(2, ...))
+
+if not C.general.ncshadow then return end
+
 local f = CreateFrame("Frame", "ShadowBackground")
 f:SetPoint("TOPLEFT")
 f:SetPoint("BOTTOMRIGHT")
@@ -18,5 +21,3 @@ f:SetScript("OnEvent", function()
 	f:SetShadowLevel((50))
 end)
 f:RegisterEvent("PLAYER_ENTERING_WORLD")
-SLASH_SHADOW1 = "/shadow"
-SlashCmdList["SHADOW"] = function(n) f:SetShadowLevel(n) end
