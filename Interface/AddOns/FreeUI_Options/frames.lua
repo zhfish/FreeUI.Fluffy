@@ -262,8 +262,11 @@ do
 	local mailButton = ns.CreateCheckBox(general, "mailButton", true, true)
 	mailButton:SetPoint("TOPLEFT", helmCloak, "BOTTOMLEFT", 0, -8)
 
+	local showtreasures = ns.CreateCheckBox(general, "showtreasures", true, true)
+	showtreasures:SetPoint("TOPLEFT", mailButton, "BOTTOMLEFT", 0, -8)
+
 	local rareAlert = ns.CreateCheckBox(general, "rareAlert", true)
-	rareAlert:SetPoint("TOPLEFT", mailButton, "BOTTOMLEFT", 0, -8)
+	rareAlert:SetPoint("TOPLEFT", showtreasures, "BOTTOMLEFT", 0, -8)
 
 	local rareAlertPlaySound = ns.CreateCheckBox(general, "rareAlert_playSound")
 	rareAlertPlaySound:SetPoint("TOPLEFT", rareAlert, "BOTTOMLEFT", 16, -8)

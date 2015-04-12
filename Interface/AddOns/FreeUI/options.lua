@@ -26,6 +26,7 @@ C["general"] = {
 		["tradetab"] = true,
 	["cooldownpulse"] = true,
 	["screenshot"] = true,
+	["showtreasures"] = true,		-- toggle the treasures marked from the various treasure maps sold in Ashran
 }
 
 C["appearance"] = {
