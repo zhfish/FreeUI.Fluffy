@@ -28,6 +28,7 @@ C["general"] = {
 	["screenshot"] = true,
 	["showtreasures"] = true,		-- toggle the treasures marked from the various treasure maps sold in Ashran
 	["ncshadow"] = true,
+	["emergency"] = true,
 }
 
 C["appearance"] = {

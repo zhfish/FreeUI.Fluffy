@@ -1,4 +1,8 @@
-local _, class = UnitClass("player")
+local F, C, L = unpack(select(2, ...))
+
+if not C.general.emergency then return end
+
+local class = select(2, UnitClass("player"))
 
 local lowHealth = .2
 local lowMana 	= .3

@@ -269,8 +269,11 @@ do
 	local ncshadow = ns.CreateCheckBox(general, "ncshadow", true, true)
 	ncshadow:SetPoint("TOPLEFT", showtreasures, "BOTTOMLEFT", 0, -8)
 
+	local emergency = ns.CreateCheckBox(general, "emergency", true, true)
+	emergency:SetPoint("TOPLEFT", ncshadow, "BOTTOMLEFT", 0, -8)
+
 	local rareAlert = ns.CreateCheckBox(general, "rareAlert", true)
-	rareAlert:SetPoint("TOPLEFT", ncshadow, "BOTTOMLEFT", 0, -8)
+	rareAlert:SetPoint("TOPLEFT", emergency, "BOTTOMLEFT", 0, -8)
 
 	local rareAlertPlaySound = ns.CreateCheckBox(general, "rareAlert_playSound")
 	rareAlertPlaySound:SetPoint("TOPLEFT", rareAlert, "BOTTOMLEFT", 16, -8)
