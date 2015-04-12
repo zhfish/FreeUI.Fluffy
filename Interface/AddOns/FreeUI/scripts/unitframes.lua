@@ -545,13 +545,18 @@ local Shared = function(self, unit, isSingle)
 	Castbar.Spark = Spark
 
 	self.Castbar = Castbar
-
+	-- 目标/焦点施法条，可打断为黄色，不可打断为红色，玩家施法条永远职业染色
 	local PostCastStart = function(Castbar, unit, spell, spellrank)
 		if self.Iconbg then
-			if Castbar.interrupt and (unit=="target" or unit:find("boss%d")) then
+			if Castbar.interrupt and (unit=="target" or unit=="focus" or unit:find("boss%d")) then
 				self.Iconbg:SetVertexColor(1, 0, 0)
+				Castbar:SetStatusBarColor(219/255, 0, 11/255)
+			elseif unit=="player" then
+				self.Iconbg:SetVertexColor(0, 0, 0)
+				Castbar:SetStatusBarColor(unpack(C.class))
 			else
 				self.Iconbg:SetVertexColor(0, 0, 0)
+				Castbar:SetStatusBarColor(241/255, 195/255, 26/255)
 			end
 		end
 	end
@@ -770,7 +775,7 @@ local UnitSpecific = {
 			self.Iconbg:SetTexture(C.media.backdrop)
 
 			Castbar:SetStatusBarTexture(C.media.texture)
-			Castbar:SetStatusBarColor(unpack(C.class))
+--			Castbar:SetStatusBarColor(unpack(C.class))
 			Castbar:SetWidth(self:GetWidth())
 			Castbar:SetHeight(self:GetHeight())
 			Castbar:SetPoint(unpack(C.unitframes.player_castbar))
@@ -1334,7 +1339,7 @@ local UnitSpecific = {
 			self.Iconbg:SetTexture(C.media.backdrop)
 
 			Castbar:SetStatusBarTexture(C.media.texture)
-			Castbar:SetStatusBarColor(219/255, 0, 11/255)
+--			Castbar:SetStatusBarColor(219/255, 0, 11/255)
 			Castbar:SetWidth(229)
 			Castbar:SetHeight(4)
 			Castbar:SetPoint(unpack(C.unitframes.target_castbar))
@@ -1500,7 +1505,7 @@ local UnitSpecific = {
 			self.Iconbg:SetTexture(C.media.backdrop)
 
 			Castbar:SetStatusBarTexture(C.media.texture)
-			Castbar:SetStatusBarColor(219/255, 0, 11/255)
+--			Castbar:SetStatusBarColor(219/255, 0, 11/255)
 			Castbar:SetWidth(168)
 			Castbar:SetHeight(4)
 			Castbar:SetPoint(unpack(C.unitframes.focus_castbar))
