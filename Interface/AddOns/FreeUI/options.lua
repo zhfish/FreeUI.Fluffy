@@ -23,6 +23,7 @@ C["general"] = {
 	["undressButton"] = true, 		-- undress button on dressup frame
 	["objectivetracker"] = true,	-- restyle objectivetracker
 	["biggertradeskillui"] = true,
+		["tradetab"] = true,
 	["cooldownpulse"] = true,
 	["screenshot"] = true,
 }

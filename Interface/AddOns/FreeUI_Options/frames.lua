@@ -216,8 +216,13 @@ do
 	local biggertradeskillui = ns.CreateCheckBox(general, "biggertradeskillui", true, true)
 	biggertradeskillui:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
 
+	local tradetab = ns.CreateCheckBox(general, "tradetab", true, true)
+	tradetab:SetPoint("TOPLEFT", biggertradeskillui, "BOTTOMLEFT", 16, -8)
+
+	biggertradeskillui.children = {tradetab}
+
 	local objectivetracker = ns.CreateCheckBox(general, "objectivetracker", true, true)
-	objectivetracker:SetPoint("TOPLEFT", biggertradeskillui, "BOTTOMLEFT", 0, -8)
+	objectivetracker:SetPoint("TOPLEFT", tradetab, "BOTTOMLEFT", -16, -8)
 
 	local cooldownpulse = ns.CreateCheckBox(general, "cooldownpulse", true, true)
 	cooldownpulse:SetPoint("TOPLEFT", objectivetracker, "BOTTOMLEFT", 0, -8)
@@ -398,33 +403,33 @@ do
 			tex:SetPoint("BOTTOMRIGHT", actionbars.tab.Icon, "BOTTOMRIGHT")
 		end
 	end
---[[
-	local enable = ns.CreateCheckBox(actionbars, "enable", true, true)
-	enable:SetPoint("TOPLEFT", actionbars.subText, "BOTTOMLEFT", 0, -8)
 
-	local enableStyle = ns.CreateCheckBox(actionbars, "enableStyle", true, true)
-	enableStyle:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -16)
+	-- local enable = ns.CreateCheckBox(actionbars, "enable", true, true)
+	-- enable:SetPoint("TOPLEFT", actionbars.subText, "BOTTOMLEFT", 0, -8)
 
-	local rightBarsMouseover = ns.CreateCheckBox(actionbars, "rightbars_mouseover", false, true)
-	rightBarsMouseover:SetPoint("TOPLEFT", enableStyle, "BOTTOMLEFT", 0, -8)
+	-- local enableStyle = ns.CreateCheckBox(actionbars, "enableStyle", true, true)
+	-- enableStyle:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -16)
+	--
+	-- local macroname = ns.CreateCheckBox(actionbars, "macroname", false, true)
+	-- macroname:SetPoint("TOPLEFT", enableStyle, "BOTTOMLEFT", 0, -8)
+	--
+	-- enable.children = {macroname}
 
-	enable.children = {rightBarsMouseover}
+	-- local hotKey = ns.CreateCheckBox(actionbars, "hotkey", true, true)
+	-- hotKey:SetPoint("TOPLEFT", actionbars.subText, "BOTTOMLEFT", 0, -8)
 
-	local hotKey = ns.CreateCheckBox(actionbars, "hotkey")
-	hotKey:SetPoint("TOPLEFT", rightBarsMouseover, "BOTTOMLEFT", 0, -8)
+	-- enableStyle.children = {hotKey}
+	--
+	-- local function toggleActionBarsOptions()
+	-- 	local shown = enable:GetChecked()
+	-- 	enableStyle:SetShown(shown)
+	-- 	macroname:SetShown(shown)
+	-- 	hotKey:SetShown(shown)
+	-- end
+	--
+	-- enable:HookScript("OnClick", toggleActionBarsOptions)
+	-- actionbars:HookScript("OnShow", toggleActionBarsOptions)
 
-	enableStyle.children = {hotKey}
-
-	local function toggleActionBarsOptions()
-		local shown = enable:GetChecked()
-		enableStyle:SetShown(shown)
-		rightBarsMouseover:SetShown(shown)
-		hotKey:SetShown(shown)
-	end
-
-	enable:HookScript("OnClick", toggleActionBarsOptions)
-	actionbars:HookScript("OnShow", toggleActionBarsOptions)
-]]
 end
 
 -- [[ Bags ]]

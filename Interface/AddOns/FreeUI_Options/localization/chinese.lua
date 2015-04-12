@@ -1,6 +1,6 @@
 local _, ns = ...
 
--- if ns.locale ~= "zhCN" and ns.locale ~= "zhTW" then return end
+if ns.locale ~= "zhCN" and ns.locale ~= "zhTW" then return end
 
 ns.localization.profile = "角色单独配置"
 ns.localization.profileTooltip = "在角色单独配置和公共配置之间切换。"
@@ -34,6 +34,8 @@ ns.localization.generalAuraTracker_testmod = "测试模式"
 ns.localization.generalAuraTracker_testmodTooltip = "进入测试模式方便调整图标位置。"
 ns.localization.generalbiggertradeskillui = "商业技能面板增强"
 ns.localization.generalbiggertradeskilluiTooltip = "商业技能面板调整，更大更容易使用。"
+ns.localization.generaltradetab = "Trade Tab"
+ns.localization.generaltradetabTooltip = "Add spellbook-like tabs to the TradeSkillFrame, it will add one for each of your professions and one for each of the profession 'suppliment' abilities (cookfire, disenchant, milling, etc)."
 ns.localization.generalcooldownpulse = "冷却提示"
 ns.localization.generalcooldownpulseTooltip = "当技能冷却完毕时在屏幕中央闪动图标。"
 ns.localization.generalscreenshot = "成就截图"

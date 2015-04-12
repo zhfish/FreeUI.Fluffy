@@ -1,5 +1,7 @@
 local F, C, L = unpack(select(2, ...))
 
+if not C.general.tradetab then return end
+
 local TradeTabs = CreateFrame("Frame","TradeTabs")
 
 local whitelist = {
@@ -18,7 +20,7 @@ local whitelist = {
 
 
 local onlyPrimary = {
-	[171] = true, -- Alchemy	
+	[171] = true, -- Alchemy
 	[202] = true, -- Engineering
 }
 
@@ -44,9 +46,9 @@ local function buildSpellList()
 	local extras = 0
 
 	for _,prof in pairs(profs) do
-		local name, icon, _, _, abilities, offset, skillLine = GetProfessionInfo(prof)  
+		local name, icon, _, _, abilities, offset, skillLine = GetProfessionInfo(prof)
 		if whitelist[skillLine] then
-			
+
 			if onlyPrimary[skillLine] then
 				abilities = 1
 			end
@@ -73,13 +75,13 @@ end
 
 function TradeTabs:Initialize()
 	if self.initialized or not IsAddOnLoaded("Blizzard_TradeSkillUI") then return end -- Shouldn't need this, but I'm paranoid
-	
+
 	local parent = TradeSkillFrame
-	
+
 	local tradeSpells = buildSpellList()
 	local i = 1
 	local prev
-	
+
 	-- if player is a DK, insert runeforging at the top
 	if select(2, UnitClass("player")) == "DEATHKNIGHT" then
 		prev = self:CreateTab(i, parent, RUNEFORGING)
@@ -91,28 +93,28 @@ function TradeTabs:Initialize()
 		local _, spellID = GetSpellBookItemInfo(slot, BOOKTYPE_PROFESSION)
 		local tab = self:CreateTab(i, parent, spellID)
 		i = i + 1
-		
+
 		local point,relPoint,x,y = "TOPLEFT", "BOTTOMLEFT", 0, -17
 		if not prev then
 			prev, relPoint, x, y = parent, "TOPRIGHT", 11, -44
 		end
 		tab:SetPoint(point, prev, relPoint, x, y)
-		
+
 		prev = tab
 	end
 
 	self.initialized = true
 end
 
-local function onEnter(self) 
-	GameTooltip:SetOwner(self,"ANCHOR_RIGHT") GameTooltip:SetText(self.tooltip) 
+local function onEnter(self)
+	GameTooltip:SetOwner(self,"ANCHOR_RIGHT") GameTooltip:SetText(self.tooltip)
 	self:GetParent():LockHighlight()
 end
 
-local function onLeave(self) 
+local function onLeave(self)
 	GameTooltip:Hide()
 	self:GetParent():UnlockHighlight()
-end   
+end
 
 local function updateSelection(self)
 	if IsCurrentSpell(self.spell) then
@@ -146,7 +148,7 @@ function TradeTabs:CreateTab(i, parent, spellID)
 	button:Show()
 	button:SetAttribute("type","spell")
 	button:SetAttribute("spell",spell)
-	
+
 	button:SetNormalTexture(texture)
 	button:SetCheckedTexture(C.media.checked)
 	F.CreateBG(button)
@@ -154,7 +156,7 @@ function TradeTabs:CreateTab(i, parent, spellID)
 	F.ReskinTab(button)
 	button:SetPushedTexture(nil)
 	select(4, button:GetRegions()):SetTexCoord(.08, .92, .08, .92)
-	
+
 	button:SetScript("OnEvent",updateSelection)
 	button:RegisterEvent("TRADE_SKILL_SHOW")
 	button:RegisterEvent("TRADE_SKILL_CLOSE")
@@ -165,7 +167,7 @@ function TradeTabs:CreateTab(i, parent, spellID)
 	return button
 end
 
-TradeTabs:RegisterEvent("TRADE_SKILL_SHOW")	
+TradeTabs:RegisterEvent("TRADE_SKILL_SHOW")
 TradeTabs:SetScript("OnEvent",TradeTabs.OnEvent)
 
 TradeTabs:Initialize()
