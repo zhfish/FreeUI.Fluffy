@@ -1,8 +1,8 @@
 local F, C = unpack(select(2, ...))
 
-if not C.general.AuraTracker then return end
+if not C.general.auratracker then return end
 
-local testmod = C.general.AuraTracker_testmod
+local testmod = C.general.auratracker_test
 
 local _, filger = ...
 local Misc = filger.FilgerSettings

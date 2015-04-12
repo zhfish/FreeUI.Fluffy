@@ -221,11 +221,9 @@ do
 
 	biggertradeskillui.children = {tradetab}
 
-	local objectivetracker = ns.CreateCheckBox(general, "objectivetracker", true, true)
-	objectivetracker:SetPoint("TOPLEFT", tradetab, "BOTTOMLEFT", -16, -8)
 
 	local cooldownpulse = ns.CreateCheckBox(general, "cooldownpulse", true, true)
-	cooldownpulse:SetPoint("TOPLEFT", objectivetracker, "BOTTOMLEFT", 0, -8)
+	cooldownpulse:SetPoint("TOPLEFT", tradetab, "BOTTOMLEFT", -16, -8)
 
 	local screenshot = ns.CreateCheckBox(general, "screenshot", true, true)
 	screenshot:SetPoint("TOPLEFT", cooldownpulse, "BOTTOMLEFT", 0, -8)
@@ -256,8 +254,11 @@ do
 	local threatMeter = ns.CreateCheckBox(general, "threatMeter", true, true)
 	threatMeter:SetPoint("LEFT", biggertradeskillui, "RIGHT", 240, 0)
 
+	local objectivetracker = ns.CreateCheckBox(general, "objectivetracker", true, true)
+	objectivetracker:SetPoint("TOPLEFT", threatMeter, "BOTTOMLEFT", 0, -8)
+
 	local helmCloak = ns.CreateCheckBox(general, "helmcloakbuttons", true, true)
-	helmCloak:SetPoint("TOPLEFT", threatMeter, "BOTTOMLEFT", 0, -8)
+	helmCloak:SetPoint("TOPLEFT", objectivetracker, "BOTTOMLEFT", 0, -8)
 
 	local mailButton = ns.CreateCheckBox(general, "mailButton", true, true)
 	mailButton:SetPoint("TOPLEFT", helmCloak, "BOTTOMLEFT", 0, -8)
@@ -276,13 +277,13 @@ do
 
 	rareAlert.children = {rareAlertPlaySound}
 
-	local AuraTracker = ns.CreateCheckBox(general, "AuraTracker", true, true)
-	AuraTracker:SetPoint("TOPLEFT", rareAlertPlaySound, "BOTTOMLEFT", -16, -8)
+	local auratracker = ns.CreateCheckBox(general, "auratracker", true, true)
+	auratracker:SetPoint("TOPLEFT", rareAlertPlaySound, "BOTTOMLEFT", -16, -8)
 
-	local AuraTrackertestmod = ns.CreateCheckBox(general, "AuraTracker_testmod", true, true)
-	AuraTrackertestmod:SetPoint("TOPLEFT", AuraTracker, "BOTTOMLEFT", 16, -8)
+	local auratracker_test = ns.CreateCheckBox(general, "auratracker_test", true, true)
+	auratracker_test:SetPoint("TOPLEFT", auratracker, "BOTTOMLEFT", 16, -8)
 
-	AuraTracker.children = {AuraTrackertestmod}
+	auratracker.children = {auratracker_test}
 
 	local misc = ns.addSubCategory(general, ns.localization.generalMisc)
 	misc:SetPoint("TOPLEFT", interruptOutdoors, "BOTTOMLEFT", -16, -20)
@@ -292,13 +293,13 @@ do
 	tinsert(ns.protectOptions, uiScaleAuto)
 
 	local function toggleGeneralOptions()
-		local shown = AuraTracker:GetChecked()
+		local shown = auratracker:GetChecked()
 
-		AuraTrackertestmod:SetShown(shown)
+		auratracker_test:SetShown(shown)
 
 	end
 
-	AuraTracker:HookScript("OnClick", toggleGeneralOptions)
+	auratracker:HookScript("OnClick", toggleGeneralOptions)
 	general:HookScript("OnShow", toggleGeneralOptions)
 end
 
@@ -610,6 +611,7 @@ do
 	local function toggleUFOptions()
 		local shown = enable:GetChecked()
 
+		shadow:SetShown(shown)
 		enableGroup:SetShown(shown)
 		limitRaidSize:SetShown(shown)
 		showRaidFrames:SetShown(shown)

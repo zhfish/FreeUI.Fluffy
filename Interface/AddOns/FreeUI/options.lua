@@ -6,8 +6,8 @@ local F, C, L = unpack(select(2, ...))
 --[[ Global config ]]
 
 C["general"] = {
-	["AuraTracker"] = false, 		-- Track some important auras, based on classic Filger
-		["AuraTracker_testmod"] = false,	-- test mod to adjust position
+	["auratracker"] = false, 		-- Track some important auras, based on classic Filger
+		["auratracker_test"] = false,	-- test mod to adjust position
 	["helmcloakbuttons"] = true, 	-- show buttons to toggle helm/cloak on character frame
 	["interrupt"] = true,			-- announce your interrupts
 		["interrupt_sound"] = true,		-- play sound
@@ -18,7 +18,7 @@ C["general"] = {
 	["mailButton"] = true, 			-- adds a button to the mail frame to collect all attachments
 	["rareAlert"] = true, 			-- raid warning when a rare mob is spotted (5.4)
 		["rareAlert_playSound"] = true, -- play sound
-	["threatMeter"] = true,		-- threat bar above the target frame in dps/healer layout
+	["threatMeter"] = true,			-- threat bar above the target frame in dps/healer layout
 	["uiScaleAuto"] = true,			-- force the correct UI scale
 	["undressButton"] = true, 		-- undress button on dressup frame
 	["objectivetracker"] = true,	-- restyle objectivetracker
@@ -55,20 +55,11 @@ C["automation"] = {
 }
 
 C["actionbars"] = {
-	["enable"] = true,					-- enable the action bars
-	["enableStyle"] = true,				-- style the action bars (might have to be turned off for other addons)
 
-	["hotkey"] = false, 				-- show hot keys on buttons
-	["rightbars_mouseover"] = false,	-- show right bars on mouseover (show/hide: use blizz option)
 }
 
 C["bags"] = {
-	["style"] = 1,						-- 1 = all-in-one, 2 = restyle default bags, 3 = do nothing
 
-	["size"] = 37,						-- change the size of the bags/bank, default = 37
-	["slotsShowAlways"] = false, 		-- always show the bag item slots
-
-	["hideSlots"] = true,				-- hide bag slots if style is 2 or 3
 }
 
 C["menubar"] = {
@@ -93,19 +84,17 @@ C["notifications"] = {
 
 C["tooltip"] = {
 	["enable"] = true,
+
 	["cursor"] = false,
 	["title"] = true,
 	["realm"] = true,
 	["rank"] = true,
 	["pvp"] = true,
 	["faction"] = true,
-
 	["hide"] = false,
 	["hideall"] = false,
-
 	["id"] = true,
 	["caster"] = true,
-
 	["ilvl"] = true,
 	["spec"] = true,
 }
