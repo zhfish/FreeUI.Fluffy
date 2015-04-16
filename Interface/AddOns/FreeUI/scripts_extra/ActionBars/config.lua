@@ -294,7 +294,7 @@ bags = {
 
 local playername, _ = UnitName('player')
 
-if playername == 'Dostoyevsky' or playername == 'Turgenev' then
+if playername == 'Dostoyevsky' or playername == 'Turgenev' or playername == 'Solor' then
     cfg.bars.bar5.mouseover.enable = true
     cfg.bars.petbar.buttons.size = 28
     cfg.bars.petbar.pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 82 }
