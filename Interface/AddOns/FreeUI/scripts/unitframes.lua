@@ -550,13 +550,17 @@ local Shared = function(self, unit, isSingle)
 		if self.Iconbg then
 			if Castbar.interrupt and (unit=="target" or unit=="focus" or unit:find("boss%d")) then
 				self.Iconbg:SetVertexColor(1, 0, 0)
-				Castbar:SetStatusBarColor(219/255, 0, 11/255)
+				if unit=="target" or unit=="focus" then
+					Castbar:SetStatusBarColor(219/255, 0, 11/255)
+				end
 			elseif unit=="player" then
 				self.Iconbg:SetVertexColor(0, 0, 0)
 				Castbar:SetStatusBarColor(unpack(C.class))
 			else
 				self.Iconbg:SetVertexColor(0, 0, 0)
-				Castbar:SetStatusBarColor(241/255, 195/255, 26/255)
+				if unit=="target" or unit=="focus" then
+					Castbar:SetStatusBarColor(241/255, 195/255, 26/255)
+				end
 			end
 		end
 	end
