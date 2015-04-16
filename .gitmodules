@@ -1,6 +1,3 @@
-[submodule "Fonts"]
-	path = Fonts
-	url = git@github.com:solor/Font-Package-for-FreeUI.Fluffy.git
 [submodule "Interface/AddOns/cargBags_Nivaya"]
 	path = Interface/AddOns/cargBags_Nivaya
 	url = git@github.com:solor/cargBags_Nivaya.git
