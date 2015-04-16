@@ -5,37 +5,13 @@ if not C.unitframes.enable then return end
 local parent, ns = ...
 local oUF = ns.oUF
 
-local shadow = C.unitframes.shadow
-local locale = GetLocale()
-local Font_UF
-local Font_UF_Size
-local Font_UF_Flag
-
-if C.appearance.fontUseAlternativeFont then
-	Font_UF_Flag = "OUTLINE"
-else
-	Font_UF_Flag = 'OUTLINEMONOCHROME'
-end
-
-if C.appearance.fontUseAlternativeFont then
-	Font_UF = C.media.font2
-else
-	Font_UF = 'Fonts\\Zpix.ttf'
-end
-
-if C.appearance.fontUseAlternativeFont then
-	Font_UF_Size = 12
-else
-	Font_UF_Size = 8
-end
-
 local name = UnitName("player")
 local realm = GetRealmName()
 local class = select(2, UnitClass("player"))
 
+local shadow = C.unitframes.shadow
 local CBinterrupt = C.unitframes.castbarColorInterrupt
 local CBnormal = C.unitframes.castbarColorNormal
-
 
 oUF.colors.power['MANA'] = {0.37, 0.6, 1}
 oUF.colors.power['RAGE']  = {0.9,  0.3,  0.23}
@@ -761,9 +737,6 @@ local UnitSpecific = {
 			Castbar.Width = self:GetWidth()
 			Spark:SetHeight(self.Health:GetHeight())
 			Castbar.Text = F.CreateFS(Castbar)
-			if locale == "zhCN" then
-				Castbar.Text:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
-			end
 			Castbar.Text:SetDrawLayer("ARTWORK")
 
 			local IconFrame = CreateFrame("Frame", nil, Castbar)
@@ -1325,9 +1298,6 @@ local UnitSpecific = {
 			Castbar.Width = self:GetWidth()
 			Spark:SetHeight(self.Health:GetHeight())
 			Castbar.Text = F.CreateFS(Castbar)
-			if locale == "zhCN" then
-				Castbar.Text:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
-			end
 			Castbar.Text:SetDrawLayer("ARTWORK")
 
 			local IconFrame = CreateFrame("Frame", nil, Castbar)
@@ -1372,7 +1342,6 @@ local UnitSpecific = {
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
-		ttt:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
 		ttt:SetWidth(80)
 		ttt:SetHeight(12)
 
@@ -1393,7 +1362,6 @@ local UnitSpecific = {
 		Name:SetPoint("BOTTOMLEFT", PowerText, "BOTTOMRIGHT")
 		Name:SetPoint("RIGHT", self)
 		Name:SetJustifyH("RIGHT")
-		Name:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
 		Name:SetTextColor(1, 1, 1)
 
 		self:Tag(Name, '[name]')
@@ -1491,9 +1459,6 @@ local UnitSpecific = {
 			Castbar.Width = self:GetWidth()
 			Spark:SetHeight(self.Health:GetHeight())
 			Castbar.Text = F.CreateFS(Castbar)
-			if locale == "zhCN" then
-				Castbar.Text:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
-			end
 			Castbar.Text:SetDrawLayer("ARTWORK")
 
 			local IconFrame = CreateFrame("Frame", nil, Castbar)
@@ -1538,7 +1503,6 @@ local UnitSpecific = {
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
-		ttt:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
 		ttt:SetWidth(80)
 		ttt:SetHeight(12)
 
@@ -1554,12 +1518,11 @@ local UnitSpecific = {
 			end
 		end)
 
-		local Name = F.CreateFS(self, 8)
-		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
+		local Name = F.CreateFS(self)
+		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 3)
 		Name:SetWidth(80)
 		Name:SetHeight(12)
 		Name:SetJustifyH"LEFT"
-		Name:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
 		Name:SetTextColor(1, 1, 1)
 
 		self:Tag(Name, '[name]')
