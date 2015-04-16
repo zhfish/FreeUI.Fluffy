@@ -33,6 +33,9 @@ local name = UnitName("player")
 local realm = GetRealmName()
 local class = select(2, UnitClass("player"))
 
+local CBinterrupt = C.unitframes.castbarColorInterrupt
+local CBnormal = C.unitframes.castbarColorNormal
+
 
 oUF.colors.power['MANA'] = {0.37, 0.6, 1}
 oUF.colors.power['RAGE']  = {0.9,  0.3,  0.23}
@@ -551,7 +554,7 @@ local Shared = function(self, unit, isSingle)
 			if Castbar.interrupt and (unit=="target" or unit=="focus" or unit:find("boss%d")) then
 				self.Iconbg:SetVertexColor(1, 0, 0)
 				if unit=="target" or unit=="focus" then
-					Castbar:SetStatusBarColor(219/255, 0, 11/255)
+					Castbar:SetStatusBarColor(unpack(CBinterrupt))
 				end
 			elseif unit=="player" then
 				self.Iconbg:SetVertexColor(0, 0, 0)
@@ -559,7 +562,7 @@ local Shared = function(self, unit, isSingle)
 			else
 				self.Iconbg:SetVertexColor(0, 0, 0)
 				if unit=="target" or unit=="focus" then
-					Castbar:SetStatusBarColor(241/255, 195/255, 26/255)
+					Castbar:SetStatusBarColor(unpack(CBnormal))
 				end
 			end
 		end

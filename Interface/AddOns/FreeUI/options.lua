@@ -128,6 +128,9 @@ C["unitframes"] = {
 	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, -60},		-- target castbar position
 	["focus_castbar"] = {"LEFT", 'oUF_FreeFocus', "LEFT", 0, -40},				-- focus castbar position
 
+	["castbarColorInterrupt"] = {219/255, 0, 11/255},
+	["castbarColorNormal"] = {241/255, 195/255, 26/255},
+
 	["power_height"] = 2,
 	["altpower_height"] = 2,
 
