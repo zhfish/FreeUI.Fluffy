@@ -1769,7 +1769,6 @@ do
 
 		local Text = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "CENTER")
 		Text:SetPoint("CENTER", 1, 0)
-		Text:SetFont(Font_UF, Font_UF_Size, Font_UF_Flag)
 		self.Text = Text
 
 		self:Tag(Text, '[dead][offline]')
