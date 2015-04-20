@@ -1,6 +1,6 @@
 
 local sounds = {
-	["CHAT_MSG_WHISPER"] = "Interface\\AddOns\\FreeUI\\media\\whisper.ogg", MASTER,
+--	["CHAT_MSG_WHISPER"] = "Interface\\AddOns\\FreeUI\\media\\whisper.ogg", MASTER,
 	["CHAT_MSG_BN_WHISPER"] = "Interface\\AddOns\\FreeUI\\media\\whisper2.ogg", MASTER,
 	["CHAT_MSG_BN_CONVERSATION"] = "Interface\\AddOns\\FreeUI\\media\\whisper2.ogg", MASTER,
 --	["CHAT_MSG_PARTY"] = "Interface\\AddOns\\FreeUI\\media\\party.ogg", MASTER,
@@ -15,7 +15,7 @@ local sounds = {
 }
 
 local f = CreateFrame("Frame")
-f:RegisterEvent("CHAT_MSG_WHISPER")
+--f:RegisterEvent("CHAT_MSG_WHISPER")
 f:RegisterEvent("CHAT_MSG_BN_WHISPER")
 f:RegisterEvent("CHAT_MSG_BN_CONVERSATION")
 -- f:RegisterEvent("CHAT_MSG_RAID_LEADER")

@@ -90,7 +90,7 @@ scripts_extra\TabBinder.lua
 scripts_extra\TradeTabs.lua
 scripts_extra\ToggleTreasures.lua
 scripts_extra\UnitSounds.lua
-## scripts_extra\WhisperSound.lua
+scripts_extra\WhisperSound.lua
 
 class\paladin.lua
 
