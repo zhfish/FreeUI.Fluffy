@@ -598,9 +598,15 @@ local Shared = function(self, unit, isSingle)
 	self.RaidIcon = RaidIcon
 
 	-- [[ SpellRange ]]
-	self.SpellRange = {
-	    insideAlpha = 1,
-        outsideAlpha = .4}
+	if C.unitframes.spellRange then
+		self.SpellRange = {
+	    	insideAlpha = 1,
+        	outsideAlpha = .4}
+	else
+		local range = {
+			insideAlpha = 1,
+			outsideAlpha = .4,}
+	end
 
 	-- [[ Counter bar ]]
 
@@ -1933,7 +1939,9 @@ do
 		select:RegisterEvent("PLAYER_TARGET_CHANGED")
 		select:SetScript("OnEvent", updateNameColourAlt)
 
-		self.Range = range
+		if not C.unitframes.spellRange then
+			self.Range = range
+		end
 	end
 end
 

@@ -569,8 +569,11 @@ do
 	local enable = ns.CreateCheckBox(unitframes, "enable", true, true)
 	enable:SetPoint("TOPLEFT", unitframes.subText, "BOTTOMLEFT", 0, -16)
 
+	local spellRange = ns.CreateCheckBox(unitframes, "spellRange", true, true)
+	spellRange:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -8)
+
 	local shadow = ns.CreateCheckBox(unitframes, "shadow", true, true)
-	shadow:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -8)
+	shadow:SetPoint("TOPLEFT", spellRange, "BOTTOMLEFT", 0, -8)
 
 	local healerClasscolours = ns.CreateCheckBox(unitframes, "healerClasscolours", true, true)
 	healerClasscolours:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
@@ -615,6 +618,7 @@ do
 		local shown = enable:GetChecked()
 
 		shadow:SetShown(shown)
+		spellRange:SetShown(shown)
 		enableGroup:SetShown(shown)
 		limitRaidSize:SetShown(shown)
 		showRaidFrames:SetShown(shown)

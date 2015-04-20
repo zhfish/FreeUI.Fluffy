@@ -103,6 +103,7 @@ C["tooltip"] = {
 C["unitframes"] = {
 	["enable"] = true, 						-- enable the unit frames and their included modules
 
+	["spellRange"] = true,					
 	["shadow"] = true,						-- add shadow border around unit frames
 
 	["enableGroup"] = true,					-- enable party/raid frames

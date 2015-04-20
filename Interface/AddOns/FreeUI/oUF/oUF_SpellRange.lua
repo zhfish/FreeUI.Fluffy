@@ -1,3 +1,7 @@
+local F, C, L = unpack(select(2, ...))
+
+if not C.unitframes.spellRange then return end
+
 --[[****************************************************************************
   * oUF_SpellRange by Saiket                                                   *
   * oUF_SpellRange.lua - Improved range element for oUF.                       *
