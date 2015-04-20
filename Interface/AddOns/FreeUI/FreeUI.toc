@@ -83,7 +83,6 @@ scripts_extra\idTip.lua
 scripts_extra\ncShadow.lua
 scripts_extra\QuestLevel.lua
 scripts_extra\Screenshots.lua
-scripts_extra\skada.lua
 scripts_extra\SortedCurrencyTab.lua
 scripts_extra\SpamageMeters.lua
 scripts_extra\TabBinder.lua
