@@ -10,7 +10,7 @@ C.media = {
 	["backdrop"] = "Interface\\AddOns\\FreeUI\\media\\blank", 					-- default backdrop
 	["checked"] = "Interface\\AddOns\\FreeUI\\media\\CheckButtonHilight", 		-- replace default checked texture
 	["font"] = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 					-- default pixel font
-	["font2"] = "Fonts\\FRIZQT__.ttf", 											-- default font
+	["font2"] = "Interface\\AddOns\\FreeUI\\media\\font.ttf", 					-- default font
 	["glow"] = "Interface\\AddOns\\FreeUI\\media\\glowTex", 					-- glow/shadow texture
 	["gradient"] = "Interface\\AddOns\\FreeUI\\media\\gradient",
 	["roleIcons"] = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
@@ -21,6 +21,10 @@ local mainFont
 
 if C.appearance.fontUseAlternativeFont then
 	mainFont = C.media.font2
+elseif GetLocale() == "zhCN" then
+	mainFont = "Fonts\\ARKai_T.TTF"
+elseif GetLocale() == "zhTW" then
+	mainFont = "Fonts\\bHEI00M.TTF"
 else
 	mainFont = C.media.font
 end
@@ -28,6 +32,10 @@ end
 F.AddOptionsCallback("appearance", "fontUseAlternativeFont", function()
 	if C.appearance.fontUseAlternativeFont then
 		mainFont = C.media.font2
+	elseif GetLocale() == "zhCN" then
+		mainFont = "Fonts\\ARKai_T.TTF"
+	elseif GetLocale() == "zhTW" then
+		mainFont = "Fonts\\bHEI00M.TTF"
 	else
 		mainFont = C.media.font
 	end
@@ -147,7 +155,11 @@ F.SetFS = function(fontObject, fontSize)
 	local size
 
 	if(not fontSize or fontSize == C.FONT_SIZE_NORMAL) then
-		size = C.appearance.fontSizeNormal
+		if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+			size = 12
+		else
+			size = C.appearance.fontSizeNormal
+		end
 	elseif fontSize == C.FONT_SIZE_LARGE then
 		size = C.appearance.fontSizeLarge
 	elseif fontSize > 4 then -- actual size
@@ -156,7 +168,11 @@ F.SetFS = function(fontObject, fontSize)
 
 	local outline = nil
 	if C.appearance.fontOutline then
-		outline = C.appearance.fontOutlineStyle == 2 and "OUTLINEMONOCHROME" or "OUTLINE"
+		if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+			outline = "OUTLINE"
+		else
+			outline = C.appearance.fontOutlineStyle == 2 and "OUTLINEMONOCHROME" or "OUTLINE"
+		end
 	end
 
 	fontObject:SetFont(mainFont, size, outline)

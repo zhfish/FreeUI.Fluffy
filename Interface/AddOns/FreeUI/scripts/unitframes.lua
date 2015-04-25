@@ -1369,6 +1369,7 @@ local UnitSpecific = {
 		Name:SetPoint("RIGHT", self)
 		Name:SetJustifyH("RIGHT")
 		Name:SetTextColor(1, 1, 1)
+		Name:SetWordWrap(false)
 
 		self:Tag(Name, '[name]')
 		self.Name = Name
