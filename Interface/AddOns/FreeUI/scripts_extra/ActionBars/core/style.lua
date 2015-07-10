@@ -165,7 +165,9 @@ local function styleActionButton(bu)
         ho:Hide()
     end
 	--macroname
-	na:SetFont("Interface\\Addons\\FreeUI\\Media\\pixel.ttf", 8, "Outlinemonochrome")
+	if GetLocale() == "enUS" then
+		na:SetFont("Interface\\Addons\\FreeUI\\Media\\pixel.ttf", 8, "Outlinemonochrome")
+	end
 	na:ClearAllPoints()
 	na:SetPoint("BOTTOMLEFT",bu)
     na:SetPoint("BOTTOMRIGHT",bu)
