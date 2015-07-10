@@ -642,61 +642,61 @@ do
 	local tooltip = FreeUIOptionsPanel.tooltip
 	tooltip.tab.Icon:SetTexture("Interface\\Icons\\INV_Enchant_FormulaEpic_01")
 
-	local enable = ns.CreateCheckBox(tooltip, "enable", true, true)
-	enable:SetPoint("TOPLEFT", tooltip.subText, "BOTTOMLEFT", 0, -8)
+	-- local enable = ns.CreateCheckBox(tooltip, "enable", true, true)
+	-- enable:SetPoint("TOPLEFT", tooltip.subText, "BOTTOMLEFT", 0, -8)
 
-	local cursor = ns.CreateCheckBox(tooltip, "cursor", true, true)
-	cursor:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 16, -16)
+	-- local cursor = ns.CreateCheckBox(tooltip, "cursor", true, true)
+	-- cursor:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 16, -16)
 
-	local title = ns.CreateCheckBox(tooltip, "title", true, true)
-	title:SetPoint("TOPLEFT", cursor, "BOTTOMLEFT", 0, -8)
+	-- local title = ns.CreateCheckBox(tooltip, "title", true, true)
+	-- title:SetPoint("TOPLEFT", cursor, "BOTTOMLEFT", 0, -8)
 
-	local realm = ns.CreateCheckBox(tooltip, "realm", true, true)
-	realm:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
+	-- local realm = ns.CreateCheckBox(tooltip, "realm", true, true)
+	-- realm:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
 
-	local rank = ns.CreateCheckBox(tooltip, "rank", true, true)
-	rank:SetPoint("TOPLEFT", realm, "BOTTOMLEFT", 0, -8)
+	-- local rank = ns.CreateCheckBox(tooltip, "rank", true, true)
+	-- rank:SetPoint("TOPLEFT", realm, "BOTTOMLEFT", 0, -8)
 
-	local pvp = ns.CreateCheckBox(tooltip, "pvp", true, true)
-	pvp:SetPoint("TOPLEFT", rank, "BOTTOMLEFT", 0, -8)
+	-- local pvp = ns.CreateCheckBox(tooltip, "pvp", true, true)
+	-- pvp:SetPoint("TOPLEFT", rank, "BOTTOMLEFT", 0, -8)
 
-	local faction = ns.CreateCheckBox(tooltip, "faction", true, true)
-	faction:SetPoint("TOPLEFT", pvp, "BOTTOMLEFT", 0, -8)
+	-- local faction = ns.CreateCheckBox(tooltip, "faction", true, true)
+	-- faction:SetPoint("TOPLEFT", pvp, "BOTTOMLEFT", 0, -8)
 
-	local hide = ns.CreateCheckBox(tooltip, "hide", true, true)
-	hide:SetPoint("TOPLEFT", faction, "BOTTOMLEFT", 0, -8)
+	-- local hide = ns.CreateCheckBox(tooltip, "hide", true, true)
+	-- hide:SetPoint("TOPLEFT", faction, "BOTTOMLEFT", 0, -8)
 
-	local hideall = ns.CreateCheckBox(tooltip, "hideall", true, true)
-	hideall:SetPoint("TOPLEFT", hide, "BOTTOMLEFT", 0, -8)
+	-- local hideall = ns.CreateCheckBox(tooltip, "hideall", true, true)
+	-- hideall:SetPoint("TOPLEFT", hide, "BOTTOMLEFT", 0, -8)
 
-	local id = ns.CreateCheckBox(tooltip, "id", true, true)
-	id:SetPoint("TOPLEFT", hideall, "BOTTOMLEFT", 0, -8)
+	-- local id = ns.CreateCheckBox(tooltip, "id", true, true)
+	-- id:SetPoint("TOPLEFT", hideall, "BOTTOMLEFT", 0, -8)
 
-	local caster = ns.CreateCheckBox(tooltip, "caster", true, true)
-	caster:SetPoint("TOPLEFT", id, "BOTTOMLEFT", 0, -8)
+	-- local caster = ns.CreateCheckBox(tooltip, "caster", true, true)
+	-- caster:SetPoint("TOPLEFT", id, "BOTTOMLEFT", 0, -8)
 
-	local ilvl = ns.CreateCheckBox(tooltip, "ilvl", true, true)
-	ilvl:SetPoint("LEFT", cursor, "RIGHT", 240, 0)
+	-- local ilvl = ns.CreateCheckBox(tooltip, "ilvl", true, true)
+	-- ilvl:SetPoint("LEFT", cursor, "RIGHT", 240, 0)
 
-	local spec = ns.CreateCheckBox(tooltip, "spec", true, true)
-	spec:SetPoint("TOPLEFT", ilvl, "BOTTOMLEFT", 0, -8)
+	-- local spec = ns.CreateCheckBox(tooltip, "spec", true, true)
+	-- spec:SetPoint("TOPLEFT", ilvl, "BOTTOMLEFT", 0, -8)
 
-	local function toggleTooltipOptions()
-		local shown = enable:GetChecked()
-		cursor:SetShown(shown)
-		title:SetShown(shown)
-		realm:SetShown(shown)
-		rank:SetShown(shown)
-		pvp:SetShown(shown)
-		faction:SetShown(shown)
-		hide:SetShown(shown)
-		hideall:SetShown(shown)
-		id:SetShown(shown)
-		caster:SetShown(shown)
-	end
+	-- local function toggleTooltipOptions()
+	-- 	local shown = enable:GetChecked()
+	-- 	cursor:SetShown(shown)
+	-- 	title:SetShown(shown)
+	-- 	realm:SetShown(shown)
+	-- 	rank:SetShown(shown)
+	-- 	pvp:SetShown(shown)
+	-- 	faction:SetShown(shown)
+	-- 	hide:SetShown(shown)
+	-- 	hideall:SetShown(shown)
+	-- 	id:SetShown(shown)
+	-- 	caster:SetShown(shown)
+	-- end
 
-	enable:HookScript("OnClick", toggleTooltipOptions)
-	tooltip:HookScript("OnShow", toggleTooltipOptions)
+	-- enable:HookScript("OnClick", toggleTooltipOptions)
+	-- tooltip:HookScript("OnShow", toggleTooltipOptions)
 
 end
 
