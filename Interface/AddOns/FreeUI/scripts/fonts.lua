@@ -9,12 +9,12 @@ local fontDiablo
 local fontNordica
 local fontDamage
 
-if playername == 'Dostoyevsky' or playername == 'Turgenev' or playername == 'Solor' or playername == '繾綣之絆' then
+if playername == 'Dostoyevsky' or playername == 'Turgenev' or playername == 'Solor' or playername == 'Cyrtia' then
 	fontStandard = 'Fonts\\FRIZQT__.TTF'
 	fontUnitName = "Fonts\\UNIT_NAME.ttf"
 	fontDiablo = 'Interface\\Addons\\FreeUI\\media\\diablo.ttf'
 	fontNordica = 'Interface\\Addons\\FreeUI\\media\\nordica.ttf'
-	fontDamage = 'Interface\\Addons\\FreeUI\\media\\damage.ttf'
+	fontDamage = 'Interface\\Addons\\FreeUI\\media\\supereffective.ttf'
 elseif locale == "zhCN" then
 	fontStandard = "Fonts\\ARKai_T.TTF"
 	fontUnitName = "Fonts\\ARKai_T.TTF"
@@ -70,7 +70,7 @@ FriendsFont_Large:SetFont(fontStandard, 14)
 FriendsFont_UserText:SetFont(fontStandard, 11) -- 好友战网更新
 
 GameFont_Gigantic:SetFont(fontStandard, 32)
-GameTooltipHeader:SetFont(fontStandard, 13) -- tooltip 头部
+GameTooltipHeader:SetFont(fontStandard, 14) -- tooltip 头部
 GameTooltipHeader:SetShadowColor(0, 0, 0)
 GameTooltipHeader:SetShadowOffset(1, -1)
 

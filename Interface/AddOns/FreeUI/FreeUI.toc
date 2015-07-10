@@ -29,7 +29,6 @@ scripts\chat.lua
 scripts\chattabs.lua
 scripts\colours.lua
 scripts\combo.lua
-scripts\dbm.lua
 scripts\disable.lua
 scripts\durability.lua
 scripts\errors.lua
@@ -62,9 +61,17 @@ scripts\worldstateframe.lua
 
 scripts_extra\ChatFilter\load.xml
 scripts_extra\Filger\load.xml
-scripts_extra\FreebTip\load.xml
 scripts_extra\ActionBars\load.xml
 scripts_extra\rBuffFrameStyler\load.xml
+scripts_extra\FreebTip\libs\LibItemUpgradeInfo-1.0\LibItemUpgradeInfo-1.0.xml
+scripts_extra\FreebTip\libs\LibInspect\LibStub\LibStub.lua
+scripts_extra\FreebTip\libs\LibInspect\LibInspect.lua
+scripts_extra\FreebTip\ilvl.lua
+scripts_extra\FreebTip\spec.lua
+scripts_extra\FreebTip\tip.lua
+scripts_extra\FreebTip\FreebTip_Multi.xml
+scripts_extra\Skins\DBM.lua
+scripts_extra\Skins\Skada.lua
 
 scripts_extra\Align.lua
 scripts_extra\AchievementCheer.lua
