@@ -8,6 +8,7 @@ local addon, ns = ...
 local gcfg = ns.cfg
 --get some values from the namespace
 local cfg = gcfg.bars.bar1
+local cfg3 = gcfg.bars.bar3
 local dragFrameList = ns.dragFrameList
 
 -----------------------------
@@ -21,15 +22,12 @@ local buttonList = {}
 
 --create the frame to hold the buttons
 local frame = CreateFrame("Frame", "rABS_MainMenuBar", UIParent, "SecureHandlerStateTemplate")
-if cfg.uselayout2x6 then
-    frame:SetWidth(cfg.buttons.size*num/2 + (num/2-1)*cfg.buttons.margin + 2*cfg.padding)
-    frame:SetHeight(cfg.buttons.size*num/6 + (num/6-1)*cfg.buttons.margin + 2*cfg.padding)
-else
-    frame:SetWidth(num*cfg.buttons.size + (num-1)*cfg.buttons.margin + 2*cfg.padding)
-    frame:SetHeight(cfg.buttons.size + 2*cfg.padding)
-end
-if cfg.uselayout2x6 then
-    frame:SetPoint(cfg.pos.a1,cfg.pos.af,cfg.pos.a2,cfg.pos.x-((cfg.buttons.size*num/2+cfg.buttons.margin*num/2)/2),cfg.pos.y)
+
+frame:SetWidth(num*cfg.buttons.size + (num-1)*cfg.buttons.margin + 2*cfg.padding)
+frame:SetHeight(cfg.buttons.size + 2*cfg.padding)
+
+if cfg3.layout2 then
+    frame:SetPoint(cfg.pos.a1,cfg.pos.af,cfg.pos.a2,cfg.pos.x-((cfg.buttons.size*num/2+cfg.buttons.margin*num/2)/3/2),cfg.pos.y)
 else
     frame:SetPoint(cfg.pos.a1,cfg.pos.af,cfg.pos.a2,cfg.pos.x,cfg.pos.y)
 end
@@ -48,12 +46,7 @@ for i=1, num do
         button:SetPoint("BOTTOMLEFT", frame, cfg.padding, cfg.padding)
     else
         local previous = _G["ActionButton"..i-1]
-        if cfg.uselayout2x6 and i == (num/2+1) then
-            previous = _G["ActionButton1"]
-            button:SetPoint("BOTTOM", previous, "TOP", 0, cfg.buttons.margin)
-        else
-            button:SetPoint("LEFT", previous, "RIGHT", cfg.buttons.margin, 0)
-        end
+        button:SetPoint("LEFT", previous, "RIGHT", cfg.buttons.margin, 0)
     end
 end
 

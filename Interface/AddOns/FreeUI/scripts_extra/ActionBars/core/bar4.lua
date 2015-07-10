@@ -21,8 +21,8 @@ local buttonList = {}
 
 --create the frame to hold the buttons
 local frame = CreateFrame("Frame", "rABS_MultiBarRight", UIParent, "SecureHandlerStateTemplate")
-frame:SetWidth((num/6)*cfg.buttons.size + cfg.buttons.margin + 2*cfg.padding)
-frame:SetHeight((num/2)*cfg.buttons.size + (num/2-1)*cfg.buttons.margin + 2*cfg.padding)
+frame:SetWidth(cfg.buttons.size + 2*cfg.padding)
+frame:SetHeight(num*cfg.buttons.size + (num-1)*cfg.buttons.margin + 2*cfg.padding)
 frame:SetPoint(cfg.pos.a1,cfg.pos.af,cfg.pos.a2,cfg.pos.x,cfg.pos.y)
 frame:SetScale(cfg.scale)
 
@@ -43,12 +43,7 @@ for i=1, num do
         button:SetPoint("TOPRIGHT", frame, cfg.padding, cfg.padding)
     else
         local previous = _G["MultiBarRightButton"..i-1]
-        if i == (num/2+1) then
-            previous = _G["MultiBarRightButton1"]
-            button:SetPoint("RIGHT", previous, "LEFT", 0, cfg.buttons.margin)
-        else
-            button:SetPoint("TOP", previous, "BOTTOM", cfg.buttons.margin, 0)
-        end
+        button:SetPoint("TOP", previous, "BOTTOM", 0, -cfg.buttons.margin)
     end
 end
 

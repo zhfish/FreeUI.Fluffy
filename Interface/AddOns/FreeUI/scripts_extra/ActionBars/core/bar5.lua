@@ -40,7 +40,7 @@ for i=1, num do
         button:SetPoint("TOPLEFT", frame, cfg.padding, cfg.padding)
     else
         local previous = _G["MultiBarLeftButton"..i-1]
-        button:SetPoint("TOP", previous, "BOTTOM", cfg.buttons.margin, 0)
+        button:SetPoint("TOP", previous, "BOTTOM", 0, -cfg.buttons.margin)
     end
 end
 

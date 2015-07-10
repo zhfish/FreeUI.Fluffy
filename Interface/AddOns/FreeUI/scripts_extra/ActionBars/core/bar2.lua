@@ -8,6 +8,7 @@ local addon, ns = ...
 local gcfg = ns.cfg
 --get some values from the namespace
 local cfg = gcfg.bars.bar2
+local cfg3 = gcfg.bars.bar3
 local dragFrameList = ns.dragFrameList
 
 -----------------------------
@@ -23,7 +24,13 @@ local buttonList = {}
 local frame = CreateFrame("Frame", "rABS_MultiBarBottomLeft", UIParent, "SecureHandlerStateTemplate")
 frame:SetWidth(num*cfg.buttons.size + (num-1)*cfg.buttons.margin + 2*cfg.padding)
 frame:SetHeight(cfg.buttons.size + 2*cfg.padding)
-frame:SetPoint(cfg.pos.a1,cfg.pos.af,cfg.pos.a2,cfg.pos.x,cfg.pos.y)
+
+if cfg3.layout2 then
+    frame:SetPoint(cfg.pos.a1,cfg.pos.af,cfg.pos.a2,cfg.pos.x-((cfg.buttons.size*num/2+cfg.buttons.margin*num/2)/3/2),cfg.pos.y)
+else
+    frame:SetPoint(cfg.pos.a1,cfg.pos.af,cfg.pos.a2,cfg.pos.x,cfg.pos.y)
+end
+
 frame:SetScale(cfg.scale)
 
 --move the buttons into position and reparent them

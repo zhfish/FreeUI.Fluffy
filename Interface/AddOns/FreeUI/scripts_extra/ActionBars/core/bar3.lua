@@ -8,6 +8,7 @@ local addon, ns = ...
 local gcfg = ns.cfg
 --get some values from the namespace
 local cfg = gcfg.bars.bar3
+local cfg1 = gcfg.bars.bar1
 local dragFrameList = ns.dragFrameList
 
 -----------------------------
@@ -21,9 +22,24 @@ local buttonList = {}
 
 --create the frame to hold the buttons
 local frame = CreateFrame("Frame", "rABS_MultiBarBottomRight", UIParent, "SecureHandlerStateTemplate")
-frame:SetWidth(num*cfg.buttons.size + (num-1)*cfg.buttons.margin + 2*cfg.padding)
-frame:SetHeight(cfg.buttons.size + 2*cfg.padding)
-frame:SetPoint(cfg.pos.a1,cfg.pos.af,cfg.pos.a2,cfg.pos.x,cfg.pos.y)
+
+if cfg.layout2 then
+    frame:SetWidth(cfg.buttons.size*num/2 + (num/2-1)*cfg.buttons.margin + 2*cfg.padding)
+    frame:SetHeight(cfg.buttons.size*num/6 + (num/6-1)*cfg.buttons.margin + 2*cfg.padding)
+else
+    frame:SetWidth(num*cfg.buttons.size + (num-1)*cfg.buttons.margin + 2*cfg.padding)
+    frame:SetHeight(cfg.buttons.size + 2*cfg.padding)
+end
+if cfg.layout2 then
+    frame:SetPoint(cfg.pos_layout2.a1,cfg.pos_layout2.af,cfg.pos_layout2.a2,cfg.pos_layout2.x+cfg.buttons.margin-2*cfg.padding,cfg.pos_layout2.y)
+else
+    frame:SetPoint(cfg.pos.a1,cfg.pos.af,cfg.pos.a2,cfg.pos.x,cfg.pos.y)
+end
+
+--frame:SetWidth(num*cfg.buttons.size + (num-1)*cfg.buttons.margin + 2*cfg.padding)
+--frame:SetHeight(cfg.buttons.size + 2*cfg.padding)
+--frame:SetPoint(cfg.pos.a1,cfg.pos.af,cfg.pos.a2,cfg.pos.x,cfg.pos.y)
+
 frame:SetScale(cfg.scale)
 
 --move the buttons into position and reparent them
@@ -39,7 +55,12 @@ for i=1, num do
         button:SetPoint("BOTTOMLEFT", frame, cfg.padding, cfg.padding)
     else
         local previous = _G["MultiBarBottomRightButton"..i-1]
-        button:SetPoint("LEFT", previous, "RIGHT", cfg.buttons.margin, 0)
+        if cfg.layout2 and i == (num/2+1) then
+            previous = _G["MultiBarBottomRightButton1"]
+            button:SetPoint("BOTTOM", previous, "TOP", 0, cfg.buttons.margin)
+        else
+            button:SetPoint("LEFT", previous, "RIGHT", cfg.buttons.margin, 0)
+        end
     end
 end
 

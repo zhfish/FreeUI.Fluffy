@@ -19,7 +19,7 @@ ns.cfg = cfg
 
 cfg.font = "Interface\\Addons\\FreeUI\\Media\\pixel.ttf"
 cfg.hotkeys = true
-cfg.macroname = false
+cfg.macroname = true
 
 cfg.bars = {
     --BAR 1
@@ -28,8 +28,8 @@ cfg.bars = {
         scale           = 1,
         padding         = 1, --frame padding
         buttons         = {
-            size            = 32,
-            margin          = 0,
+            size            = 28,
+            margin          = 4,
         },
         pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 14 },
         userplaced      = {
@@ -52,8 +52,8 @@ enable          = true, --enable module
 scale           = 1,
 padding         = 2, --frame padding
 buttons         = {
-    size            = 38,
-    margin          = 1,
+    size            = 34,
+    margin          = 4,
 },
 pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 22 },
 userplaced      = {
@@ -76,8 +76,8 @@ bar2 = {
     scale           = 1,
     padding         = 1, --frame padding
     buttons         = {
-        size            = 32,
-        margin          = 0,
+        size            = 28,
+        margin          = 4,
     },
     pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 46 },
     userplaced      = {
@@ -97,15 +97,17 @@ bar2 = {
 --BAR 3
 bar3 = {
     enable          = true, --enable module
+    layout2         = false,
     scale           = 1,
     padding         = 1, --frame padding
     buttons         = {
-        size            = 32,
-        margin          = 0,
+        size            = 28,
+        margin          = 4,
     },
     pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 78  },
+    pos_layout2     = { a1 = "BOTTOMLEFT", a2 = "BOTTOMRIGHT", af = "rABS_MainMenuBar", x = 0, y = 0  },
     userplaced      = {
-        enable          = false,
+        enable          = true,
     },
     mouseover       = {
         enable          = false,
@@ -125,9 +127,9 @@ bar4 = {
     padding         = 1, --frame padding
     buttons         = {
         size            = 24,
-        margin          = 0,
+        margin          = 4,
     },
-    pos             = { a1 = "TOPRIGHT", a2 = "RIGHT", af = "UIParent", x = -6, y = -180 },
+    pos             = { a1 = "RIGHT", a2 = "RIGHT", af = "UIParent", x = -6, y = 0 },
     userplaced      = {
         enable          = false,
     },
@@ -148,8 +150,8 @@ bar5 = {
     scale           = 1,
     padding         = 1, --frame padding
     buttons         = {
-        size            = 28,
-        margin          = 0,
+        size            = 24,
+        margin          = 4,
     },
     pos             = { a1 = "LEFT", a2 = "LEFT", af = "UIParent", x = 2, y = 20 },
     userplaced      = {
@@ -294,19 +296,14 @@ bags = {
 
 local playername, _ = UnitName('player')
 
-if playername == 'Dostoyevsky' or playername == 'Turgenev' or playername == 'Solor' then
-    cfg.bars.bar5.mouseover.enable = true
+if playername == 'Dostoyevsky' or playername == 'Turgenev' or playername == 'Solor' or playername == 'Cyrtia' then
+    cfg.bars.bar3.layout2 = true
+    cfg.bars.bar4.pos = { a1 = "RIGHT", a2 = "RIGHT", af = "UIParent", x = -4, y = -140 }
+    cfg.bars.bar5.pos = { a1 = "RIGHT", a2 = "RIGHT", af = "UIParent", x = -30, y = -140 }
     cfg.bars.petbar.buttons.size = 28
     cfg.bars.petbar.pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 82 }
     cfg.bars.petbar.mouseover.enable = true
     cfg.bars.stancebar.show = false
 end
 
-if playername == '繾綣之絆' then
-    cfg.bars.bar5.mouseover.enable = true
-    cfg.bars.petbar.buttons.size = 28
-    cfg.bars.petbar.pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 82 }
-    cfg.bars.petbar.mouseover.enable = true
-    cfg.bars.stancebar.pos = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -20, y = 80 }
-    cfg.bars.stancebar.buttons.margin = 2
-end
+
