@@ -1,11 +1,7 @@
-local F, C, L = unpack(select(2, ...))
-
-if not C.tooltip.ilvl then return end
-
 local ADDON_NAME, ns = ...
 
 local NORMAL_FONT_COLOR = NORMAL_FONT_COLOR
-local ITEM_LEVEL_ABBR = ITEM_LEVEL_ABBR
+local ITEM_LEVEL_ABBR = "iLvl"
 local GetMouseFocus = GetMouseFocus
 local GameTooltip = GameTooltip
 local GetTime = GetTime
@@ -18,7 +14,7 @@ local maxage = 1800 --number of secs to cache each player
 LibInspect:SetMaxAge(maxage)
 
 local cache = {}
-local ilvlText = "|cffFFFFFF%d|r"
+local ilvlText = "|cffFFFFFF%0.2f|r"
 
 local function getUnit()
 	local mFocus = GetMouseFocus()
@@ -102,3 +98,83 @@ local function OnSetUnit(self)
 	iLvlUpdate:Show()
 end
 GameTooltip:HookScript("OnTooltipSetUnit", OnSetUnit)
+
+-- Inspect iLevels
+local F = CreateFrame('Frame')
+local slot = {'Head','Neck','Shoulder','Shirt','Chest','Waist','Legs','Feet','Wrist','Hands','Finger0','Finger1','Trinket0','Trinket1','Back','MainHand','SecondaryHand','Tabard'}
+local levelAdjust={
+   ["000"]=00,["001"]=08,["373"]=04,["374"]=08,["375"]=04,["376"]=04,["377"]=04,["378"]=07,
+   ["379"]=04,["380"]=04,["445"]=00,["446"]=04,["447"]=08,["451"]=00,["452"]=08,["453"]=00,
+   ["454"]=04,["455"]=08,["456"]=00,["457"]=08,["458"]=00,["459"]=04,["460"]=08,["461"]=12,
+   ["462"]=16,["465"]=00,["466"]=04,["467"]=08,["468"]=00,["469"]=04,["470"]=08,["471"]=12,
+   ["472"]=16,["491"]=00,["492"]=04,["493"]=08,["494"]=00,["495"]=04,["496"]=08,["497"]=12,
+   ["498"]=16,["503"]=01,["504"]=12,["505"]=16,["506"]=20,["507"]=24,
+}
+
+local function CreateIlvText(slotName)
+   local f = _G[slotName]
+   f.ilv = f:CreateFontString(nil, "OVERLAY")
+   f.ilv:SetFont("Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 8, "OUTLINEMONOCHROME")
+   f.ilv:SetPoint("CENTER", f, "TOP", 1, -6)
+   f.ilv:SetTextColor(GameFontNormal:GetTextColor())
+end
+
+local function GetActualItemLevel(itemLink, baseLevel)
+   local upgrade = itemLink:match("item:%d+:%d+:%d+:%d+:%d+:%d+:%-?%d+:%-?%d+:%d+:(%d+)")
+   if not upgrade then return baseLevel end
+   return baseLevel + (levelAdjust[upgrade] or 0)
+end
+
+local function CheckItem(unit, frame)
+   if unit then
+      for k, v in pairs(slot) do
+         local f = _G[frame..v..'Slot']
+         local itemLink = GetInventoryItemLink(unit, k)
+         if not itemLink then
+            f.ilv:SetText()
+         else
+            local _, _, itemQuality, baseLevel = GetItemInfo(itemLink)
+            f.ilv:SetText(GetActualItemLevel(itemLink, baseLevel))
+         end
+      end
+   end
+end
+
+for _, v in pairs(slot) do CreateIlvText('Character'..v..'Slot') end
+
+CharacterFrame:HookScript('OnShow', function(self)
+CheckItem('player', 'Character')
+self:RegisterEvent('PLAYER_EQUIPMENT_CHANGED')
+end)
+
+CharacterFrame:HookScript('OnHide', function(self)
+self:UnregisterEvent('PLAYER_EQUIPMENT_CHANGED')
+end)
+
+CharacterFrame:HookScript('OnEvent', function(self, event)
+if event ~= 'PLAYER_EQUIPMENT_CHANGED' then return end
+CheckItem('player', 'Character')
+end)
+
+F:RegisterEvent('ADDON_LOADED')
+F:SetScript('OnEvent', function(self, event, addon)
+   if addon == 'Blizzard_InspectUI' then
+      for k, v in pairs(slot) do CreateIlvText('Inspect'..v..'Slot') end
+      CheckItem(_G['InspectFrame'].unit, 'Inspect')
+      _G['InspectFrame']:HookScript('OnShow', function()
+         CheckItem(_G['InspectFrame'].unit, 'Inspect')
+         self:RegisterEvent('INSPECT_READY')
+         self:RegisterEvent('UNIT_MODEL_CHANGED')
+         self:RegisterEvent('PLAYER_TARGET_CHANGED')
+         self:SetScript('OnEvent', function() CheckItem(_G['InspectFrame'].unit, 'Inspect') end)
+      end)
+      _G['InspectFrame']:HookScript('OnHide', function()
+         self:UnregisterEvent('PLAYER_TARGET_CHANGED')
+         self:UnregisterEvent('UNIT_MODEL_CHANGED')
+         self:UnregisterEvent('INSPECT_READY')
+         self:SetScript('OnEvent', nil)
+      end)
+      self:UnregisterEvent('ADDON_LOADED')
+      self:SetScript('OnEvent', nil)
+   end
+end)
