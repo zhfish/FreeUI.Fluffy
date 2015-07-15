@@ -529,7 +529,7 @@ local function gtSBValChange(self, value)
 	if(not self.text) then
 		self.text = self:CreateFontString(nil, "OVERLAY")
 		self.text:SetPoint("CENTER", GameTooltipStatusBar)
-		self.text:SetFont("Interface\\AddOns\\FreeUI\\media\\nordica.ttf", 14, "OUTLINE")		-- 血条字体大小
+		self.text:SetFont("Fonts\\FRIZQT__.TTF", 14, "OUTLINE")		-- 血条字体大小
 	end
 	self.text:Show()
 	local hp = numberize(self:GetValue()).." / "..numberize(max)
@@ -741,9 +741,9 @@ hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self,...)
 	addAuraInfo(self, caster, spellID)
 end)
 
-GameTooltipHeaderText:SetFont(STANDARD_TEXT_FONT, 14, "THINOUTLINE")
-GameTooltipText:SetFont(STANDARD_TEXT_FONT, 12, "THINOUTLINE")
-Tooltip_Small:SetFont(STANDARD_TEXT_FONT, 11, "THINOUTLINE")
+GameTooltipHeaderText:SetFont(STANDARD_TEXT_FONT, 14, "OUTLINE")
+GameTooltipText:SetFont(STANDARD_TEXT_FONT, 12, "OUTLINE")
+Tooltip_Small:SetFont(STANDARD_TEXT_FONT, 11, "OUTLINE")
 
 --[[ position ]]
 hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)

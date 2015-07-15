@@ -107,7 +107,6 @@ C["unitframes"] = {
 	["shadow"] = true,						-- add shadow border around unit frames
 
 	["enableGroup"] = true,					-- enable party/raid frames
-		["healerClasscolours"] = false,				-- colour unitframes by class in healer layout
 		["limitRaidSize"] = false, 					-- show a maximum of 25 players in a raid
 		["showRaidFrames"] = true, 					-- show the raid frames
 		["partyNameAlways"] = false,				-- show name on party/raid frames in dps/tank layout
@@ -115,17 +114,18 @@ C["unitframes"] = {
 
 	["absorb"] = true, 							-- absorb bar/over absorb glow
 	["castbar"] = true,
+	["castbarSeparate"] = false,
 	["pvp"] = true, 							-- show pvp icon on player frame
 	["statusIndicator"] = false,					-- show combat/resting status on player frame
 		["statusIndicatorCombat"] = true,				-- show combat status (else: only resting)
 
-	["player"] = {"CENTER", UIParent, "CENTER", 0, -200},						-- player unitframe position
+	["player"] = {"BOTTOM", UIParent, "BOTTOM", 0, 200},						-- player unitframe position
 	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, 60},					-- target unitframe position
 	["focus"] = {"LEFT", 'oUF_FreeTarget', "RIGHT", 8, -100},					-- focus unitframe position
-	["party"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -120},				-- party unitframe position
+	["party"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -60},				-- party unitframe position
 	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -20, 20},				-- raid unitframe position
 
-	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -180},		-- player castbar position
+	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -60},		-- player castbar position
 	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, -60},		-- target castbar position
 	["focus_castbar"] = {"LEFT", 'oUF_FreeFocus', "LEFT", 0, -40},				-- focus castbar position
 

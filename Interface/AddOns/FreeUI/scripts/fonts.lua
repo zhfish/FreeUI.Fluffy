@@ -6,32 +6,17 @@ local locale = GetLocale()
 local fontStandard
 local fontUnitName
 local fontDiablo
-local fontNordica
 local fontDamage
 
-if playername == 'Dostoyevsky' or playername == 'Turgenev' or playername == 'Solor' or playername == 'Cyrtia' then
-	fontStandard = 'Fonts\\FRIZQT__.TTF'
-	fontUnitName = "Fonts\\UNIT_NAME.ttf"
-	fontDiablo = 'Interface\\Addons\\FreeUI\\media\\diablo.ttf'
-	fontNordica = 'Interface\\Addons\\FreeUI\\media\\nordica.ttf'
-	fontDamage = 'Interface\\Addons\\FreeUI\\media\\supereffective.ttf'
-elseif locale == "zhCN" then
-	fontStandard = "Fonts\\ARKai_T.TTF"
-	fontUnitName = "Fonts\\ARKai_T.TTF"
+if locale == "zhCN" then
+	fontStandard = "Fonts\\ARKai_T.TTF"		-- 简体中文客户端主字体
+	fontUnitName = "Fonts\\ARKai_T.TTF"		-- 玩家 / NPC 头上的名字
 	fontDiablo = 'Fonts\\ARKai_T.TTF'
-	fontNordica = 'Fonts\\ARKai_T.TTF'
-	fontDamage = 'Fonts\\ARKai_T.TTF'
-elseif locale == "zhTW" then
-	fontStandard = "Fonts\\bHEI00M.TTF"
-	fontUnitName = "Fonts\\bHEI00M.TTF"
-	fontDiablo = 'Fonts\\bHEI00M.TTF'
-	fontNordica = 'Fonts\\bHEI00M.TTF'
-	fontDamage = 'Fonts\\bHEI00M.TTF'
+	fontDamage = 'Fonts\\ARKai_T.TTF'		-- 伤害字体
 else
 	fontStandard = C.media.font2
 	fontUnitName = C.media.font2
 	fontDiablo = 'Interface\\Addons\\FreeUI\\media\\diablo.ttf'
-	fontNordica = 'Interface\\Addons\\FreeUI\\media\\nordica.ttf'
 	fontDamage = 'Interface\\Addons\\FreeUI\\media\\damage.ttf'
 end
 
@@ -49,11 +34,11 @@ DAMAGE_TEXT_FONT   = fontDamage
 UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
 CHAT_FONT_HEIGHTS = {11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
 
-AchievementFont_Small:SetFont(fontNordica, 12) -- 成就日期
+AchievementFont_Small:SetFont(fontStandard, 12) -- 成就日期
 AchievementFont_Small:SetShadowColor(0, 0, 0)
 AchievementFont_Small:SetShadowOffset(1, -1)
 
-CoreAbilityFont:SetFont(fontNordica, 32) -- 核心技能面板大字体
+CoreAbilityFont:SetFont(fontStandard, 32) -- 核心技能面板大字体
 CoreAbilityFont:SetShadowColor(0, 0, 0)
 CoreAbilityFont:SetShadowOffset(1, -1)
 
@@ -102,8 +87,8 @@ QuestFont_Shadow_Small:SetFont(fontStandard, 15)
 QuestFont_Large:SetFont(fontStandard, 17)
 QuestFont_Large:SetShadowColor(0, 0, 0)
 QuestFont_Large:SetShadowOffset(1, -1)
-QuestFont_Shadow_Huge:SetFont(fontNordica, 24) -- 任务标题/地下城任务标题
-QuestFont_Huge:SetFont(fontNordica, 18) -- rewards
+QuestFont_Shadow_Huge:SetFont(fontStandard, 24) -- 任务标题/地下城任务标题
+QuestFont_Huge:SetFont(fontStandard, 18) -- rewards
 QuestFont_Super_Huge:SetFont(fontStandard, 24)
 QuestFont_Super_Huge:SetShadowColor(0, 0, 0)
 QuestFont_Super_Huge:SetShadowOffset(1, -1)
@@ -115,7 +100,7 @@ end
 
 ReputationDetailFont:SetFont(fontStandard, 12) -- 声望面板描述
 
-SpellFont_Small:SetFont(fontNordica, 12) -- 技能面板小字体
+SpellFont_Small:SetFont(fontStandard, 12) -- 技能面板小字体
 SpellFont_Small:SetShadowColor(0, 0, 0)
 SpellFont_Small:SetShadowOffset(1, -1)
 
@@ -154,7 +139,7 @@ SystemFont_Shadow_Huge2:SetFont(fontStandard, 24)
 SystemFont_Shadow_Huge3:SetFont(fontStandard, 25)
 SystemFont_Shadow_Small:SetFont(fontStandard, 11) -- 主要小字体
 SystemFont_Shadow_Small2:SetFont(fontStandard, 11)
-SystemFont_Small:SetFont(fontNordica, 12) -- 成就面板成就描述，技能面板技能需求等级
+SystemFont_Small:SetFont(fontStandard, 11) -- 成就面板成就描述，技能面板技能需求等级
 SystemFont_Small:SetShadowColor(0, 0, 0)
 SystemFont_Small:SetShadowOffset(1, -1)
 SystemFont_Small2:SetFont(fontStandard, 12)

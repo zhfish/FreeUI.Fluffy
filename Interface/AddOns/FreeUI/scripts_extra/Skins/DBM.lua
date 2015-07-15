@@ -1,7 +1,5 @@
 local F, C, L = unpack(FreeUI)
 
-if not IsAddOnLoaded("DBM-Core") then return end
-
 local function InitStyle()
 	hooksecurefunc(DBT, "CreateBar", function(self)
 		for bar in self:GetBarIterator() do

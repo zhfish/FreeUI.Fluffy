@@ -31,7 +31,7 @@ cfg.bars = {
             size            = 28,
             margin          = 4,
         },
-        pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 14 },
+        pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 28 },
         userplaced      = {
             enable          = false,
         },
@@ -55,7 +55,7 @@ buttons         = {
     size            = 34,
     margin          = 4,
 },
-pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 22 },
+pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 28 },
 userplaced      = {
     enable          = false,
 },
@@ -79,7 +79,7 @@ bar2 = {
         size            = 28,
         margin          = 4,
     },
-    pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 46 },
+    pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 60 },
     userplaced      = {
         enable          = false,
     },
@@ -104,7 +104,7 @@ bar3 = {
         size            = 28,
         margin          = 4,
     },
-    pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 78  },
+    pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 92  },
     pos_layout2     = { a1 = "BOTTOMLEFT", a2 = "BOTTOMRIGHT", af = "rABS_MainMenuBar", x = 0, y = 0  },
     userplaced      = {
         enable          = true,
@@ -176,7 +176,7 @@ petbar = {
     padding         = 2, --frame padding
     buttons         = {
         size            = 32,
-        margin          = 1,
+        margin          = 4,
     },
     pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 114 },
     userplaced      = {
@@ -201,7 +201,7 @@ stancebar = {
     padding         = 2, --frame padding
     buttons         = {
         size            = 30,
-        margin          = 0,
+        margin          = 4,
     },
     pos             = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = -30, y = 114 },
     userplaced      = {
@@ -296,7 +296,7 @@ bags = {
 
 local playername, _ = UnitName('player')
 
-if playername == 'Dostoyevsky' or playername == 'Turgenev' or playername == 'Solor' or playername == 'Cyrtia' then
+if playername == 'Dostoyevsky' or playername == 'Turgenev' or playername == 'Solor' or playername == '夢醒已千年' then
     cfg.bars.bar3.layout2 = true
     cfg.bars.bar4.pos = { a1 = "RIGHT", a2 = "RIGHT", af = "UIParent", x = -4, y = -140 }
     cfg.bars.bar5.pos = { a1 = "RIGHT", a2 = "RIGHT", af = "UIParent", x = -30, y = -140 }

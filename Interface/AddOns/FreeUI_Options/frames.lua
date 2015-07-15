@@ -575,11 +575,8 @@ do
 	local shadow = ns.CreateCheckBox(unitframes, "shadow", true, true)
 	shadow:SetPoint("TOPLEFT", spellRange, "BOTTOMLEFT", 0, -8)
 
-	local healerClasscolours = ns.CreateCheckBox(unitframes, "healerClasscolours", true, true)
-	healerClasscolours:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
-
 	local enableGroup = ns.CreateCheckBox(unitframes, "enableGroup", true, true)
-	enableGroup:SetPoint("TOPLEFT", healerClasscolours, "BOTTOMLEFT", 0, -8)
+	enableGroup:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
 
 	local limitRaidSize = ns.CreateCheckBox(unitframes, "limitRaidSize", true)
 	limitRaidSize:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 16, -8)
@@ -592,7 +589,7 @@ do
 	local partyNameAlways = ns.CreateCheckBox(unitframes, "partyNameAlways", true, true)
 	partyNameAlways:SetPoint("TOPLEFT", showRaidFrames, "BOTTOMLEFT", 0, -8)
 
-	enableGroup.children = {showRaidFrames, healerClasscolours, partyNameAlways}
+	enableGroup.children = {showRaidFrames, partyNameAlways}
 
 	local enableArena = ns.CreateCheckBox(unitframes, "enableArena", true, true)
 	enableArena:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 0, -140)
@@ -622,7 +619,6 @@ do
 		enableGroup:SetShown(shown)
 		limitRaidSize:SetShown(shown)
 		showRaidFrames:SetShown(shown)
-		healerClasscolours:SetShown(shown)
 		partyNameAlways:SetShown(shown)
 		absorb:SetShown(shown)
 		pvp:SetShown(shown)

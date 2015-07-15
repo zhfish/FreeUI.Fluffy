@@ -9,12 +9,13 @@ local name = UnitName("player")
 local realm = GetRealmName()
 local class = select(2, UnitClass("player"))
 
+local nameFont = "Fonts\\FRIZQT__.TTF"
 local shadow = C.unitframes.shadow
 local CBinterrupt = C.unitframes.castbarColorInterrupt
 local CBnormal = C.unitframes.castbarColorNormal
 
 oUF.colors.power['MANA'] = {0.37, 0.6, 1}
-oUF.colors.power['RAGE']  = {0.9,  0.3,  0.23}
+oUF.colors.power['RAGE']  = {0.86, 0, 0.04}
 oUF.colors.power['FOCUS']  = {1, 0.81,  0.27}
 oUF.colors.power['RUNIC_POWER']  = {0, 0.81, 1}
 oUF.colors.power['AMMOSLOT'] = {0.78,1, 0.78}
@@ -283,35 +284,32 @@ local PostUpdateHealth = function(Health, unit, min, max)
 	if unit == "target" or unit:find("arena") then
 		Health.value:SetTextColor(unpack(reaction))
 	end
+	if offline or UnitIsDead(unit) or UnitIsGhost(unit) then
+		self.Healthdef:Hide()
+	else
+		self.Healthdef:SetMinMaxValues(0, max)
+		self.Healthdef:SetValue(max-min)
+		--self.Healthdef:GetStatusBarTexture():SetVertexColor(self.ColorGradient(min, max, unpack(self.colors.smooth)))
+		self.Healthdef:GetStatusBarTexture():SetVertexColor(r, g, b)	-- 掉血用职业染色！
+		self.Healthdef:Show()
+	end
 
-	if not C.unitframes.healerClasscolours then
-		if offline or UnitIsDead(unit) or UnitIsGhost(unit) then
-			self.Healthdef:Hide()
-		else
-			self.Healthdef:SetMinMaxValues(0, max)
-			self.Healthdef:SetValue(max-min)
-	--		self.Healthdef:GetStatusBarTexture():SetVertexColor(self.ColorGradient(min, max, unpack(self.colors.smooth)))
-			self.Healthdef:GetStatusBarTexture():SetVertexColor(r, g, b)	-- 掉血用职业染色！
-			self.Healthdef:Show()
-		end
-
+	if unit == "player" then
+		self.Power.colorPower = true
+		self.Power.bg:SetVertexColor(0, 0, 0, .1)
+	else
 		self.Power:SetStatusBarColor(r, g, b)
 		self.Power.bg:SetVertexColor(r/2, g/2, b/2)
+	end
 
-		if tapped or offline then
-			self.gradient:SetGradientAlpha("VERTICAL", .6, .6, .6, .6, .4, .4, .4, .6)
-		else
-			self.gradient:SetGradientAlpha("VERTICAL", .3, .3, .3, .6, .1, .1, .1, .6)
-		end
-
-		if self.Text then
-			updateNameColour(self, unit)
-		end
+	if tapped or offline then
+		self.gradient:SetGradientAlpha("VERTICAL", .6, .6, .6, .6, .4, .4, .4, .6)
 	else
-		if UnitIsDead(unit) or UnitIsGhost(unit) then
-			Health:SetValue(0)
-		end
-		Health:GetStatusBarTexture():SetGradient("VERTICAL", r, g, b, r/2, g/2, b/2)
+		self.gradient:SetGradientAlpha("VERTICAL", .3, .3, .3, .6, .1, .1, .1, .6)
+	end
+
+	if self.Text then
+		updateNameColour(self, unit)
 	end
 end
 
@@ -411,34 +409,29 @@ local Shared = function(self, unit, isSingle)
 
 	--[[ Gradient ]]
 
-	if not C.unitframes.healerClasscolours then
-		local gradient = Health:CreateTexture(nil, "BACKGROUND")
-		gradient:SetPoint("TOPLEFT")
-		gradient:SetPoint("BOTTOMRIGHT")
-		gradient:SetTexture(C.media.backdrop)
-		gradient:SetGradientAlpha("VERTICAL", .3, .3, .3, .6, .1, .1, .1, .6)
+	local gradient = Health:CreateTexture(nil, "BACKGROUND")
+	gradient:SetPoint("TOPLEFT")
+	gradient:SetPoint("BOTTOMRIGHT")
+	gradient:SetTexture(C.media.backdrop)
+	gradient:SetGradientAlpha("VERTICAL", .3, .3, .3, .6, .1, .1, .1, .6)
 
-		self.gradient = gradient
+	self.gradient = gradient
 
-		F.CreateBD(bd, 0)
-	else
-		F.CreateBD(bd)
-	end
+	F.CreateBD(bd, 0)
 
 	--[[ Health deficit colour ]]
 
-	if not C.unitframes.healerClasscolours then
-		local Healthdef = CreateFrame("StatusBar", nil, self)
-		Healthdef:SetFrameStrata("LOW")
-		Healthdef:SetAllPoints(Health)
-		Healthdef:SetStatusBarTexture(C.media.texture)
-		Healthdef:SetStatusBarColor(1, 1, 1)
+	local Healthdef = CreateFrame("StatusBar", nil, self)
+	Healthdef:SetFrameStrata("LOW")
+	Healthdef:SetAllPoints(Health)
+	Healthdef:SetStatusBarTexture(C.media.texture)
+	Healthdef:SetStatusBarColor(1, 1, 1)
 
-		Healthdef:SetReverseFill(true)
-		SmoothBar(Healthdef)
+	Healthdef:SetReverseFill(true)
+	SmoothBar(Healthdef)
 
-		self.Healthdef = Healthdef
-	end
+	self.Healthdef = Healthdef
+
 
 	--[[ Power ]]
 
@@ -469,12 +462,6 @@ local Shared = function(self, unit, isSingle)
 	Power.bg:SetPoint("RIGHT")
 	Power.bg:SetTexture(C.media.backdrop)
 	Power.bg:SetVertexColor(0, 0, 0, .5)
-
-	-- Colour power by power type. Because this is brighter, make the background darker for contrast.
-	if C.unitframes.healerClasscolours then
-		Power.colorPower = true
-		Power.bg:SetVertexColor(0, 0, 0, .25)
-	end
 
 	--[[ Alt Power ]]
 
@@ -534,7 +521,7 @@ local Shared = function(self, unit, isSingle)
 				end
 			elseif unit=="player" then
 				self.Iconbg:SetVertexColor(0, 0, 0)
-				Castbar:SetStatusBarColor(unpack(C.class))
+				Castbar:SetStatusBarColor(0, 0, 0, .3)
 			else
 				self.Iconbg:SetVertexColor(0, 0, 0)
 				if unit=="target" or unit=="focus" then
@@ -760,24 +747,31 @@ local UnitSpecific = {
 			self.Iconbg:SetPoint("BOTTOMRIGHT", 1, -1)
 			self.Iconbg:SetTexture(C.media.backdrop)
 
-			Castbar:SetStatusBarTexture(C.media.texture)
---			Castbar:SetStatusBarColor(unpack(C.class))
-			Castbar:SetWidth(self:GetWidth())
-			Castbar:SetHeight(self:GetHeight())
-			Castbar:SetPoint(unpack(C.unitframes.player_castbar))
-			Castbar.Text:SetAllPoints(Castbar)
-			local sf = Castbar:CreateTexture(nil, "OVERLAY")
-			sf:SetVertexColor(.5, .5, .5, .5)
-			Castbar.SafeZone = sf
-			IconFrame:SetPoint("RIGHT", Castbar, "LEFT", -10, 0)
-			IconFrame:SetSize(22, 22)
+			if C.unitframes.castbarSeparate then
+				Castbar:SetStatusBarTexture(C.media.texture)
+	--			Castbar:SetStatusBarColor(unpack(C.class))
+				Castbar:SetWidth(self:GetWidth())
+				Castbar:SetHeight(self:GetHeight())
+				Castbar:SetPoint(unpack(C.unitframes.player_castbar))
+				Castbar.Text:SetAllPoints(Castbar)
+				local sf = Castbar:CreateTexture(nil, "OVERLAY")
+				sf:SetVertexColor(.5, .5, .5, .5)
+				Castbar.SafeZone = sf
+				IconFrame:SetPoint("RIGHT", Castbar, "LEFT", -10, 0)
+				IconFrame:SetSize(22, 22)
 
-			local bg = CreateFrame("Frame", nil, Castbar)
-			bg:SetPoint("TOPLEFT", -1, 1)
-			bg:SetPoint("BOTTOMRIGHT", 1, -1)
-			bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
-			F.CreateBD(bg)
-			F.CreateSD(bg, 5, 0, 0, 0, .8, -2)
+				local bg = CreateFrame("Frame", nil, Castbar)
+				bg:SetPoint("TOPLEFT", -1, 1)
+				bg:SetPoint("BOTTOMRIGHT", 1, -1)
+				bg:SetFrameLevel(Castbar:GetFrameLevel()-1)
+				F.CreateBD(bg)
+				F.CreateSD(bg, 5, 0, 0, 0, .8, -2)
+			else
+				Castbar:SetAllPoints(Health)
+				Castbar.Text:Hide()
+				IconFrame:SetPoint("RIGHT", self, "LEFT", -10, 0)
+				IconFrame:SetSize(22, 22)
+			end
 		end
 
 		-- PVP
@@ -1348,6 +1342,7 @@ local UnitSpecific = {
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
+		ttt:SetFont(nameFont, 11, "OUTLINE")
 		ttt:SetWidth(80)
 		ttt:SetHeight(12)
 
@@ -1367,6 +1362,7 @@ local UnitSpecific = {
 		local Name = F.CreateFS(self)
 		Name:SetPoint("BOTTOMLEFT", PowerText, "BOTTOMRIGHT")
 		Name:SetPoint("RIGHT", self)
+		Name:SetFont(nameFont, 11, "OUTLINE")
 		Name:SetJustifyH("RIGHT")
 		Name:SetTextColor(1, 1, 1)
 		Name:SetWordWrap(false)
@@ -1510,6 +1506,7 @@ local UnitSpecific = {
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
+		ttt:SetFont(nameFont, 11, "OUTLINE")
 		ttt:SetWidth(80)
 		ttt:SetHeight(12)
 
@@ -1527,6 +1524,7 @@ local UnitSpecific = {
 
 		local Name = F.CreateFS(self)
 		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 3)
+		Name:SetFont(nameFont, 11, "OUTLINE")
 		Name:SetWidth(80)
 		Name:SetHeight(12)
 		Name:SetJustifyH"LEFT"
