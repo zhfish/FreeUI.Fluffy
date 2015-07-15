@@ -9,7 +9,13 @@ local name = UnitName("player")
 local realm = GetRealmName()
 local class = select(2, UnitClass("player"))
 
-local nameFont = "Fonts\\FRIZQT__.TTF"
+local locale = GetLocale()
+if locale == "zhCN" then
+	nameFont = "Fonts\\ARKai_T.TTF"		
+else
+	nameFont = "Fonts\\FRIZQT__.TTF"
+end
+
 local shadow = C.unitframes.shadow
 local CBinterrupt = C.unitframes.castbarColorInterrupt
 local CBnormal = C.unitframes.castbarColorNormal
