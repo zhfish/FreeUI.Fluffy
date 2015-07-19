@@ -113,8 +113,9 @@ C["unitframes"] = {
 	["enableArena"] = false,					-- enable arena/flag carrier frames
 
 	["absorb"] = true, 							-- absorb bar/over absorb glow
-	["castbar"] = true,
-	["castbarSeparate"] = false,
+	["powerTypeColor"] = false,					-- 玩家框体的能量条染色按照能量类型
+	["castbar"] = true,							-- 启用内置施法条
+	["castbarSeparate"] = false,				-- 施法条分离
 	["pvp"] = true, 							-- show pvp icon on player frame
 	["statusIndicator"] = false,					-- show combat/resting status on player frame
 		["statusIndicatorCombat"] = true,				-- show combat status (else: only resting)
@@ -125,7 +126,7 @@ C["unitframes"] = {
 	["party"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -60},				-- party unitframe position
 	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -20, 20},				-- raid unitframe position
 
-	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -60},		-- player castbar position
+	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -90},		-- player castbar position
 	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, -60},		-- target castbar position
 	["focus_castbar"] = {"LEFT", 'oUF_FreeFocus', "LEFT", 0, -40},				-- focus castbar position
 

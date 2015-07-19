@@ -597,11 +597,19 @@ do
 	local absorb = ns.CreateCheckBox(unitframes, "absorb", true, true)
 	absorb:SetPoint("LEFT", enable, "RIGHT", 240, 0)
 
+	local powerTypeColor = ns.CreateCheckBox(unitframes, "powerTypeColor", true, true)
+	powerTypeColor:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -8)
+
 	local castbar = ns.CreateCheckBox(unitframes, "castbar", true, true)
-	castbar:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -8)
+	castbar:SetPoint("TOPLEFT", powerTypeColor, "BOTTOMLEFT", 0, -8)
+
+	local castbarSeparate = ns.CreateCheckBox(unitframes, "castbarSeparate", true, true)
+	castbarSeparate:SetPoint("TOPLEFT", castbar, "BOTTOMLEFT", 16, -8)
+
+	enableGroup.children = {castbar, castbarSeparate}
 
 	local pvp = ns.CreateCheckBox(unitframes, "pvp", true, true)
-	pvp:SetPoint("TOPLEFT", castbar, "BOTTOMLEFT", 0, -8)
+	pvp:SetPoint("TOPLEFT", castbarSeparate, "BOTTOMLEFT", -16, -8)
 
 	local statusIndicator = ns.CreateCheckBox(unitframes, "statusIndicator", true)
 	statusIndicator:SetPoint("TOPLEFT", pvp, "BOTTOMLEFT", 0, -8)
@@ -620,8 +628,10 @@ do
 		limitRaidSize:SetShown(shown)
 		showRaidFrames:SetShown(shown)
 		partyNameAlways:SetShown(shown)
+		castbarSeparate:SetShown(shown)
 		absorb:SetShown(shown)
 		pvp:SetShown(shown)
+		powerTypeColor:SetShown(shown)
 		statusIndicator:SetShown(shown)
 		statusIndicatorCombat:SetShown(shown)
 		castbar:SetShown(shown)

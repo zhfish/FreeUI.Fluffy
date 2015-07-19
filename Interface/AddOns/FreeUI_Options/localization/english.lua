@@ -179,6 +179,11 @@ ns.localization.unitframesshowRaidFrames = "Show raid frames"
 ns.localization.unitframesshowRaidFramesTooltip = "When disabled, show only the party frames, even in a raid group."
 ns.localization.unitframespartyNameAlways = "Always show group member names"
 ns.localization.unitframespartyNameAlwaysTooltip = "Check to show group member names in the dps/tank layout."
+ns.localization.unitframespowerTypeColor = "Power type color"
+ns.localization.unitframespowerTypeColorTooltip = "Power bar colored by power type"
+ns.localization.unitframescastbarSeparate = "Player castbar as separate bar"
+ns.localization.unitframescastbarSeparateTooltip = "When this option is disabled, the player cast bar is embedded in the player frame."
+
 
 ns.localization.unitframescastbar = "Castbar"
 ns.localization.unitframescastbarTooltip = "Disable this option if you want to use another castbar addon."

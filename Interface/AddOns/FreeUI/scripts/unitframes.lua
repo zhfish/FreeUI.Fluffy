@@ -300,7 +300,7 @@ local PostUpdateHealth = function(Health, unit, min, max)
 		self.Healthdef:Show()
 	end
 
-	if unit == "player" then
+	if C.unitframes.powerTypeColor and unit == "player" then
 		self.Power.colorPower = true
 		self.Power.bg:SetVertexColor(0, 0, 0, .1)
 	else
@@ -527,7 +527,11 @@ local Shared = function(self, unit, isSingle)
 				end
 			elseif unit=="player" then
 				self.Iconbg:SetVertexColor(0, 0, 0)
-				Castbar:SetStatusBarColor(0, 0, 0, .3)
+				if C.unitframes.castbarSeparate then
+					Castbar:SetStatusBarColor(unpack(C.class))
+				else
+					Castbar:SetStatusBarColor(0, 0, 0, .3)
+				end
 			else
 				self.Iconbg:SetVertexColor(0, 0, 0)
 				if unit=="target" or unit=="focus" then
@@ -692,6 +696,7 @@ local UnitSpecific = {
 		Name:SetWidth(80)
 		Name:SetHeight(12)
 		Name:SetJustifyH"LEFT"
+		Name:SetFont(nameFont, 11, "OUTLINE")
 		Name:SetTextColor(1, 1, 1)
 
 		self:Tag(Name, '[name]')
