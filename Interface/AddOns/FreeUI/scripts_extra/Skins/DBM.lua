@@ -1,60 +1,67 @@
 local F, C, L = unpack(FreeUI)
+if not IsAddOnLoaded("DBM-Core") then return end
 
-local function InitStyle()
-	hooksecurefunc(DBT, "CreateBar", function(self)
-		for bar in self:GetBarIterator() do
-			local frame = bar.frame
-			local name = frame:GetName().."Bar"
-			local tbar = _G[name]
-			local text = _G[name.."Name"]
+--	DBM skin(by Affli)
+local croprwicons = true					-- Crops blizz shitty borders from icons in RaidWarning messages
+local rwiconsize = 12						-- RaidWarning icon size. Works only if croprwicons = true
 
-			if not bar.styled then
-				local texture = _G[name.."Texture"]
-				local timer = _G[name.."Timer"]
-				local spark = _G[name.."Spark"]
-				local icon1 = _G[frame:GetName().."BarIcon1"]
-				local icon2 = _G[frame:GetName().."BarIcon2"]
+local glow = C.media.glow
+local blank = C.media.texture
+local backdrop = {
+	bgFile = blank,
+	insets = {left = 0, right = 0, top = 0, bottom = 0},
+}
 
-				if (icon1.overlay) then
-					icon1.overlay = _G[icon1.overlay:GetName()]
-				else
-					icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
-					icon1.overlay:SetWidth(24)
-					icon1.overlay:SetHeight(24)
-					icon1.overlay:SetFrameStrata("BACKGROUND")
-					icon1.overlay:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -2, -2)
-					F.CreateSD(icon1.overlay, 3, 0, 0, 0, 1, -3)
-				end
+local DBMSkin = CreateFrame("Frame")
+DBMSkin:RegisterEvent("PLAYER_LOGIN")
+DBMSkin:SetScript("OnEvent", function(self, event, addon)
+		local function SkinBars(self)
+			for bar in self:GetBarIterator() do
+				if not bar.injected then
+					bar.ApplyStyle = function()
+						local frame = bar.frame
+						local tbar = _G[frame:GetName().."Bar"]
+						local texture = _G[frame:GetName().."BarTexture"]
+						local icon1 = _G[frame:GetName().."BarIcon1"]
+						local icon2 = _G[frame:GetName().."BarIcon2"]
+						local name = _G[frame:GetName().."BarName"]
+						local timer = _G[frame:GetName().."BarTimer"]
+						local spark = _G[frame:GetName().."BarSpark"]
 
-				if (icon2.overlay) then
-					icon2.overlay = _G[icon2.overlay:GetName()]
-				else
-					icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
-					icon2.overlay:SetWidth(24)
-					icon2.overlay:SetHeight(24)
-					icon2.overlay:SetFrameStrata("BACKGROUND")
-					icon2.overlay:SetPoint("BOTTOMLEFT", tbar, "BOTTOMRIGHT", 5, -2)
-					F.CreateSD(icon2.overlay, 3, 0, 0, 0, 1, -3)
-				end
+						if (icon1.overlay) then
+							icon1.overlay = _G[icon1.overlay:GetName()]
+						else
+							icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
+							icon1.overlay:SetWidth(24)
+							icon1.overlay:SetHeight(24)
+							icon1.overlay:SetFrameStrata("BACKGROUND")
+							icon1.overlay:SetPoint("BOTTOMRIGHT", tbar, "BOTTOMLEFT", -2, -2)
+							F.CreateSD(icon1.overlay, 3, 0, 0, 0, 1, -3)
+						end
 
-				F.CreateBDFrame(tbar, .6)
+						if (icon2.overlay) then
+							icon2.overlay = _G[icon2.overlay:GetName()]
+						else
+							icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
+							icon2.overlay:SetWidth(24)
+							icon2.overlay:SetHeight(24)
+							icon2.overlay:SetFrameStrata("BACKGROUND")
+							icon2.overlay:SetPoint("BOTTOMLEFT", tbar, "BOTTOMRIGHT", 5, -2)
+							F.CreateSD(icon2.overlay, 3, 0, 0, 0, 1, -3)
+						end
+						
+						if bar.enlarged then frame:SetWidth(bar.owner.options.HugeWidth) else frame:SetWidth(bar.owner.options.Width) end
+						if bar.enlarged then tbar:SetWidth(bar.owner.options.HugeWidth) else tbar:SetWidth(bar.owner.options.Width) end
 
-				texture:SetTexture(C.media.texture)
-				texture.SetTexture = F.dummy
-
-				F.SetFS(text)
-				text.SetFont = F.dummy
-
-				timer:SetPoint("CENTER", 0, 10)
-				timer:SetPoint("RIGHT", -2, 10)
-				F.SetFS(timer)
-				timer.SetFont = F.dummy
-
-				spark:SetSize(8, 16)
-				spark.SetSize = F.dummy
-				spark:SetTexture("Interface\\AddOns\\FreeUI\\media\\DBMSpark")
-				
-				if not icon1.styled then
+						frame:SetScale(1)
+						if not frame.styled then
+							frame:SetHeight(10)
+							
+							F.CreateBDFrame(tbar, .6)
+							frame.styled = true
+						end
+			
+						if not icon1.styled then
 							icon1:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 							icon1:ClearAllPoints()
 							icon1:SetPoint("TOPLEFT", icon1.overlay, 2, -2)
@@ -69,140 +76,119 @@ local function InitStyle()
 							icon2:SetPoint("BOTTOMRIGHT", icon2.overlay, -2, 2)
 							icon2.styled = true
 						end
+						
+						if not texture.styled then
+							texture:SetTexture(blank)
+							texture.styled = true
+						end
+						
+						if not tbar.styled then
+							tbar:SetPoint("TOPLEFT", frame, "TOPLEFT", 2, -2)
+							tbar:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
+							tbar.styled = true
+						end
 
-				bar.styled = true
+						F.SetFS(name)
+						name.SetFont = F.dummy
 
-				if bar.owner.options.IconLeft then icon1:Show() icon1.overlay:Show() else icon1:Hide() icon1.overlay:Hide() end
-				if bar.owner.options.IconRight then icon2:Show() icon2.overlay:Show() else icon2:Hide() icon2.overlay:Hide() end
+						timer:SetPoint("CENTER", 0, 10)
+						timer:SetPoint("RIGHT", -2, 10)
+						F.SetFS(timer)
+						timer.SetFont = F.dummy
 
-				tbar:SetHeight(6)
+						name:SetPoint("CENTER", 0, 10)
+						name:SetPoint("LEFT", 2, 10)
 
-				text:SetPoint("CENTER", 0, 10)
-				text:SetPoint("LEFT", 2, 10)
+						spark:SetSize(8, 16)
+						spark.SetSize = F.dummy
+						spark:SetTexture("Interface\\AddOns\\FreeUI\\media\\DBMSpark")
 
-				tbar:SetAlpha(1)
-				frame:SetAlpha(1)
-				texture:SetAlpha(1)
-				frame:Show()
-				bar:Update(0)
-				bar.injected = true
+
+						
+						if bar.owner.options.IconLeft then icon1:Show() icon1.overlay:Show() else icon1:Hide() icon1.overlay:Hide() end
+						if bar.owner.options.IconRight then icon2:Show() icon2.overlay:Show() else icon2:Hide() icon2.overlay:Hide() end
+						tbar:SetAlpha(1)
+						frame:SetAlpha(1)
+						texture:SetAlpha(1)
+						frame:Show()
+						bar:Update(0)
+						bar.injected = true
+					end
+					bar:ApplyStyle()
+				end
 			end
 		end
-	end)
+		
+		local SkinBoss = function()
+			local count = 1
+			while (_G[format("DBM_BossHealth_Bar_%d", count)]) do
+				local bar = _G[format("DBM_BossHealth_Bar_%d", count)]
+				local background = _G[bar:GetName().."BarBorder"]
+				local progress = _G[bar:GetName().."Bar"]
+				local name = _G[bar:GetName().."BarName"]
+				local timer = _G[bar:GetName().."BarTimer"]
+				local prev = _G[format("DBM_BossHealth_Bar_%d", count-1)]
 
-	local firstInfo = true
-	hooksecurefunc(DBM.InfoFrame, "Show", function()
-		if firstInfo then
-			DBMInfoFrame:SetBackdrop(nil)
-			local bd = CreateFrame("Frame", nil, DBMInfoFrame)
-			bd:SetPoint("TOPLEFT")
-			bd:SetPoint("BOTTOMRIGHT")
-			bd:SetFrameLevel(DBMInfoFrame:GetFrameLevel()-1)
-			F.CreateBD(bd)
+				if (count == 1) then
+					local _, anch, _ , _, _ = bar:GetPoint()
+					bar:ClearAllPoints()
+					if DBM_AllSavedOptions["Default"]["HealthFrameGrowUp"] then
+						bar:SetPoint("BOTTOM", anch, "TOP", 0, 3)
+					else
+						bar:SetPoint("TOP", anch, "BOTTOM", 0, -3)
+					end
+				else
+					bar:ClearAllPoints()
+					if DBM_AllSavedOptions["Default"]["HealthFrameGrowUp"] then
+						bar:SetPoint("BOTTOMLEFT", prev, "TOPLEFT", 0, 3)
+					else
+						bar:SetPoint("TOPLEFT", prev, "BOTTOMLEFT", 0, -3)
+					end
+				end
 
-			firstInfo = false
-		end
-	end)
+				if not bar.styled then
+					bar:SetScale(1)
+					bar:SetHeight(19)
+					F.CreateSD(bar, 4, 0, 0, 0, 1, -3)
+					F.CreateBD(bar, 0.7)
+					background:SetNormalTexture(nil)
+					bar.styled = true
+				end	
+				
+				if not progress.styled then
+					progress:SetStatusBarTexture(blank)
+				end
+				progress:ClearAllPoints()
+				progress:SetPoint("TOPLEFT", bar, "TOPLEFT", 2, -2)
+				progress:SetPoint("BOTTOMRIGHT", bar, "BOTTOMRIGHT", -2, 2)
 
-	local firstRange = true
-	hooksecurefunc(DBM.RangeCheck, "Show", function()
-		if firstRange then
-			DBMRangeCheck:SetBackdrop(nil)
-			F.CreateBDFrame(DBMRangeCheck)
-
-			DBMRangeCheckRadar.background:SetTexture("")
-			F.CreateBDFrame(DBMRangeCheckRadar)
-
-			F.SetFS(DBMRangeCheckRadar.text)
-			DBMRangeCheckRadar.text:SetTextColor(1, 1, 1)
-			F.SetFS(DBMRangeCheckRadar.inRangeText)
-			DBMRangeCheckRadar.inRangeText:SetTextColor(1, 1, 1)
-
-			firstRange = false
-		end
-	end)
-
-	hooksecurefunc(DBM.BossHealth, "Show", function()
-		local anchor = DBMBossHealthDropdown:GetParent()
-		if not anchor.styled then
-			local header = anchor:GetRegions()
-			F.SetFS(header)
-			header:SetTextColor(1, 1, 1)
-
-			anchor.styled = true
-		end
-	end)
-
-	local count = 1
-
-	local styleBar = function()
-		local bar = _G["DBM_BossHealth_Bar_"..count]
-
-		while bar do
-			if not bar.styled then
-				local name = bar:GetName()
-				local sb = _G[name.."Bar"]
-				local text = _G[name.."BarName"]
-				local timer = _G[name.."BarTimer"]
-
-				_G[name.."BarBackground"]:Hide()
-				_G[name.."BarBorder"]:SetNormalTexture("")
-
-				sb:SetStatusBarTexture(C.media.texture)
-
-				F.SetFS(text)
-				F.SetFS(timer)
-
-				F.CreateBDFrame(sb)
-
-				bar.styled = true
-			end
-
-			count = count + 1
-			bar = _G["DBM_BossHealth_Bar_"..count]
-		end
-	end
-
-	hooksecurefunc(DBM.BossHealth, "AddBoss", styleBar)
-	hooksecurefunc(DBM.BossHealth, "UpdateSettings", styleBar)
-
-	hooksecurefunc(DBM, "ShowUpdateReminder", function()
-		-- no name or anything
-		-- reverse loop because it's most likely to be somewhere at the end
-		for i = UIParent:GetNumChildren(), 1, -1 do
-			local frame = select(i, UIParent:GetChildren())
-
-			local editBox = frame:GetChildren()
-			if editBox and editBox:GetObjectType() == "EditBox" and editBox:GetText() == "http://www.deadlybossmods.com" and not frame.styled then
-				F.CreateBD(frame)
-
-				select(6, editBox:GetRegions()):Hide()
-				select(7, editBox:GetRegions()):Hide()
-				select(8, editBox:GetRegions()):Hide()
-
-				local bg = F.CreateBDFrame(editBox, .25)
-				bg:SetPoint("TOPLEFT", -2, -6)
-				bg:SetPoint("BOTTOMRIGHT", 2, 8)
-
-				F.Reskin(select(2, frame:GetChildren()))
-
-				frame.styled = true
+				count = count + 1
 			end
 		end
-	end)
-end
-
-if IsAddOnLoaded("DBM-Core") then
-	InitStyle()
-else
-	local load = CreateFrame("Frame")
-	load:RegisterEvent("ADDON_LOADED")
-	load:SetScript("OnEvent", function(self, _, addon)
-		if addon ~= "DBM-Core" then return end
-		self:UnregisterEvent("ADDON_LOADED")
-
-		InitStyle()
-
-		load = nil
-	end)
-end
+		
+		local SkinInfo = function()
+			local infoframe = _G["DBMInfoFrame"]
+			F.SetBD(infoframe)
+			F.CreateBD(infoframe, 0)
+		end
+		
+		hooksecurefunc(DBT, "CreateBar", SkinBars)
+		hooksecurefunc(DBM.BossHealth, "AddBoss", SkinBoss)
+		hooksecurefunc(DBM.BossHealth,"UpdateSettings",SkinBoss)
+		DBM.RangeCheck:Show()
+		DBM.RangeCheck:Hide()
+		
+		--F.SetBD(_G["DBMRangeCheckRadar"])
+		--F.SetBD(_G["DBMRangeCheck"])
+		
+		if croprwicons then
+			local replace = string.gsub
+			local old = RaidNotice_AddMessage
+			RaidNotice_AddMessage = function(noticeFrame, textString, colorInfo)
+				if textString:find(" |T") then
+					textString=replace(textString,"(:12:12)",":"..rwiconsize..":"..rwiconsize..":0:0:64:64:5:59:5:59")
+				end
+				return old(noticeFrame, textString, colorInfo)
+			end
+		end
+end)
