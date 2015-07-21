@@ -23,7 +23,7 @@ oUF\oUF.xml
 scripts\archaeologybar.lua
 scripts\arena.lua
 scripts\automation.lua
-## scripts\bags.lua
+scripts\bags.lua
 scripts\bubbles.lua
 scripts\chat.lua
 scripts\chattabs.lua
