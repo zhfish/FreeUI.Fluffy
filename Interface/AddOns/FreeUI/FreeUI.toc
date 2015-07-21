@@ -86,6 +86,7 @@ scripts_extra\emergency.lua
 scripts_extra\Focuser.lua
 scripts_extra\Foglight.lua
 scripts_extra\HiddenRaidNames.lua
+scripts_extra\ncHoverBind.lua
 scripts_extra\idTip.lua
 scripts_extra\ncShadow.lua
 scripts_extra\QuestLevel.lua
