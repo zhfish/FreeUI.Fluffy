@@ -448,37 +448,37 @@ do
 	local bags = FreeUIOptionsPanel.bags
 	bags.tab.Icon:SetTexture("Interface\\Icons\\inv_misc_bag_08")
 
-	local general = ns.addSubCategory(bags, ns.localization.bagsGeneral)
-	general:SetPoint("TOPLEFT", bags.subText, "BOTTOMLEFT", 0, -8)
-	
-	local style = ns.CreateRadioButtonGroup(bags, "style", 3, false, true)
-	style.buttons[1]:SetPoint("TOPLEFT", general, "BOTTOMLEFT", 0, -41)
-	
-	local styleSpecific, styleSpecificLine = ns.addSubCategory(bags, ns.localization.bagsStyleSpecific)
-	styleSpecific:SetPoint("TOPLEFT", style.buttons[3], "BOTTOMLEFT", 0, -30)
-	
-	local slotsShowAlways = ns.CreateCheckBox(bags, "slotsShowAlways", true)
-	slotsShowAlways:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
-	
-	local size = ns.CreateNumberSlider(bags, "size", SMALL, LARGE, 8, 100, 1)
-	size:SetPoint("TOPLEFT", slotsShowAlways, "BOTTOMLEFT", 8, -42)
-	
-	local hideSlots = ns.CreateCheckBox(bags, "hideSlots", true)
-	hideSlots:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
-	
-	local function toggleBagsOptions()
-		local isAllInOne = style.buttons[1]:GetChecked()
-	
-		slotsShowAlways:SetShown(isAllInOne)
-		size:SetShown(isAllInOne)
-		hideSlots:SetShown(not isAllInOne)
-	end
-	
-	for _, button in pairs(style.buttons) do
-		button:HookScript("OnClick", toggleBagsOptions)
-	end
-	
-	bags:HookScript("OnShow", toggleBagsOptions)
+	-- local general = ns.addSubCategory(bags, ns.localization.bagsGeneral)
+	-- general:SetPoint("TOPLEFT", bags.subText, "BOTTOMLEFT", 0, -8)
+	--
+	-- local style = ns.CreateRadioButtonGroup(bags, "style", 3, false, true)
+	-- style.buttons[1]:SetPoint("TOPLEFT", general, "BOTTOMLEFT", 0, -41)
+	--
+	-- local styleSpecific, styleSpecificLine = ns.addSubCategory(bags, ns.localization.bagsStyleSpecific)
+	-- styleSpecific:SetPoint("TOPLEFT", style.buttons[3], "BOTTOMLEFT", 0, -30)
+	--
+	-- local slotsShowAlways = ns.CreateCheckBox(bags, "slotsShowAlways", true)
+	-- slotsShowAlways:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
+	--
+	-- local size = ns.CreateNumberSlider(bags, "size", SMALL, LARGE, 8, 100, 1)
+	-- size:SetPoint("TOPLEFT", slotsShowAlways, "BOTTOMLEFT", 8, -42)
+	--
+	-- local hideSlots = ns.CreateCheckBox(bags, "hideSlots", true)
+	-- hideSlots:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
+	--
+	-- local function toggleBagsOptions()
+	-- 	local isAllInOne = style.buttons[1]:GetChecked()
+	--
+	-- 	slotsShowAlways:SetShown(isAllInOne)
+	-- 	size:SetShown(isAllInOne)
+	-- 	hideSlots:SetShown(not isAllInOne)
+	-- end
+	--
+	-- for _, button in pairs(style.buttons) do
+	-- 	button:HookScript("OnClick", toggleBagsOptions)
+	-- end
+	--
+	-- bags:HookScript("OnShow", toggleBagsOptions)
 end
 
 -- [[ Menu bar ]]

@@ -20,7 +20,6 @@ if C.bags.style ~= 1 then
 	return
 end
 
-
 local r, g, b = unpack(C.class)
 
 local bankbagholder, colourSelectedTab
@@ -187,11 +186,10 @@ end
 --[[ Bags ]]
 
 local holder = CreateFrame("Button", "BagsHolder", UIParent)
-holder:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -80, 30)
+holder:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -30, 30)
 holder:SetFrameStrata("HIGH")
 holder:Hide()
-F.CreateBD(holder, .7)
-F.CreateSD(holder, 5, 0, 0, 0, 1, -2)
+F.CreateBD(holder, .6)
 
 local ReanchorButtons = function()
 	table.wipe(buttons)
@@ -223,9 +221,7 @@ local bankholder = CreateFrame("Button", "BagsBankHolder", UIParent)
 bankholder:SetPoint("BOTTOMRIGHT", "BagsHolder", "BOTTOMLEFT", -10 , 0)
 bankholder:SetFrameStrata("HIGH")
 bankholder:Hide()
-F.CreateBD(bankholder, .7)
-F.CreateSD(bankholder, 5, 0, 0, 0, 1, -2)
-
+F.CreateBD(bankholder, .6)
 
 local purchase = F.CreateFS(bankholder)
 purchase:SetPoint("BOTTOMLEFT", bankholder, "BOTTOMLEFT", 3, 22)
