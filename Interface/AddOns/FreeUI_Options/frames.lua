@@ -414,31 +414,25 @@ do
 		end
 	end
 
-	-- local enable = ns.CreateCheckBox(actionbars, "enable", true, true)
-	-- enable:SetPoint("TOPLEFT", actionbars.subText, "BOTTOMLEFT", 0, -8)
+	local enable = ns.CreateCheckBox(actionbars, "enable", true, true)
+	enable:SetPoint("TOPLEFT", actionbars.subText, "BOTTOMLEFT", 0, -8)
 
-	-- local enableStyle = ns.CreateCheckBox(actionbars, "enableStyle", true, true)
-	-- enableStyle:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -16)
-	--
-	-- local macroname = ns.CreateCheckBox(actionbars, "macroname", false, true)
-	-- macroname:SetPoint("TOPLEFT", enableStyle, "BOTTOMLEFT", 0, -8)
-	--
-	-- enable.children = {macroname}
-
-	-- local hotKey = ns.CreateCheckBox(actionbars, "hotkey", true, true)
-	-- hotKey:SetPoint("TOPLEFT", actionbars.subText, "BOTTOMLEFT", 0, -8)
-
-	-- enableStyle.children = {hotKey}
-	--
-	-- local function toggleActionBarsOptions()
-	-- 	local shown = enable:GetChecked()
-	-- 	enableStyle:SetShown(shown)
-	-- 	macroname:SetShown(shown)
-	-- 	hotKey:SetShown(shown)
-	-- end
-	--
-	-- enable:HookScript("OnClick", toggleActionBarsOptions)
-	-- actionbars:HookScript("OnShow", toggleActionBarsOptions)
+	local hotKey = ns.CreateCheckBox(actionbars, "hotkey", true, true)
+	hotKey:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 16, -8)
+	
+	local macroname = ns.CreateCheckBox(actionbars, "macroname", false, true)
+	macroname:SetPoint("TOPLEFT", hotKey, "BOTTOMLEFT", 0, -8)
+	
+	enable.children = {macroname, hotKey}
+	
+	local function toggleActionBarsOptions()
+		local shown = enable:GetChecked()
+		macroname:SetShown(shown)
+		hotKey:SetShown(shown)
+	end
+	
+	enable:HookScript("OnClick", toggleActionBarsOptions)
+	actionbars:HookScript("OnShow", toggleActionBarsOptions)
 
 end
 
@@ -448,37 +442,37 @@ do
 	local bags = FreeUIOptionsPanel.bags
 	bags.tab.Icon:SetTexture("Interface\\Icons\\inv_misc_bag_08")
 
-	-- local general = ns.addSubCategory(bags, ns.localization.bagsGeneral)
-	-- general:SetPoint("TOPLEFT", bags.subText, "BOTTOMLEFT", 0, -8)
-	--
-	-- local style = ns.CreateRadioButtonGroup(bags, "style", 3, false, true)
-	-- style.buttons[1]:SetPoint("TOPLEFT", general, "BOTTOMLEFT", 0, -41)
-	--
-	-- local styleSpecific, styleSpecificLine = ns.addSubCategory(bags, ns.localization.bagsStyleSpecific)
-	-- styleSpecific:SetPoint("TOPLEFT", style.buttons[3], "BOTTOMLEFT", 0, -30)
-	--
-	-- local slotsShowAlways = ns.CreateCheckBox(bags, "slotsShowAlways", true)
-	-- slotsShowAlways:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
-	--
-	-- local size = ns.CreateNumberSlider(bags, "size", SMALL, LARGE, 8, 100, 1)
-	-- size:SetPoint("TOPLEFT", slotsShowAlways, "BOTTOMLEFT", 8, -42)
-	--
-	-- local hideSlots = ns.CreateCheckBox(bags, "hideSlots", true)
-	-- hideSlots:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
-	--
-	-- local function toggleBagsOptions()
-	-- 	local isAllInOne = style.buttons[1]:GetChecked()
-	--
-	-- 	slotsShowAlways:SetShown(isAllInOne)
-	-- 	size:SetShown(isAllInOne)
-	-- 	hideSlots:SetShown(not isAllInOne)
-	-- end
-	--
-	-- for _, button in pairs(style.buttons) do
-	-- 	button:HookScript("OnClick", toggleBagsOptions)
-	-- end
-	--
-	-- bags:HookScript("OnShow", toggleBagsOptions)
+	local general = ns.addSubCategory(bags, ns.localization.bagsGeneral)
+	general:SetPoint("TOPLEFT", bags.subText, "BOTTOMLEFT", 0, -8)
+	
+	local style = ns.CreateRadioButtonGroup(bags, "style", 3, false, true)
+	style.buttons[1]:SetPoint("TOPLEFT", general, "BOTTOMLEFT", 0, -41)
+	
+	local styleSpecific, styleSpecificLine = ns.addSubCategory(bags, ns.localization.bagsStyleSpecific)
+	styleSpecific:SetPoint("TOPLEFT", style.buttons[3], "BOTTOMLEFT", 0, -30)
+	
+	local slotsShowAlways = ns.CreateCheckBox(bags, "slotsShowAlways", true)
+	slotsShowAlways:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
+	
+	local size = ns.CreateNumberSlider(bags, "size", SMALL, LARGE, 8, 100, 1)
+	size:SetPoint("TOPLEFT", slotsShowAlways, "BOTTOMLEFT", 8, -42)
+	
+	local hideSlots = ns.CreateCheckBox(bags, "hideSlots", true)
+	hideSlots:SetPoint("TOPLEFT", styleSpecific, "BOTTOMLEFT", 0, -20)
+	
+	local function toggleBagsOptions()
+		local isAllInOne = style.buttons[1]:GetChecked()
+	
+		slotsShowAlways:SetShown(isAllInOne)
+		size:SetShown(isAllInOne)
+		hideSlots:SetShown(not isAllInOne)
+	end
+	
+	for _, button in pairs(style.buttons) do
+		button:HookScript("OnClick", toggleBagsOptions)
+	end
+	
+	bags:HookScript("OnShow", toggleBagsOptions)
 end
 
 -- [[ Menu bar ]]

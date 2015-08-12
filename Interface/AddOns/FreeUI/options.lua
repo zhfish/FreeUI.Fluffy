@@ -56,11 +56,19 @@ C["automation"] = {
 }
 
 C["actionbars"] = {
+	["enable"] = true,					-- enable the action bars
 
+	["hotkey"] = true, 				-- show hot keys on buttons
+	["macroname"] = true,					-- show macro name on buttons
 }
 
 C["bags"] = {
+	["style"] = 1,						-- 1 = all-in-one, 2 = restyle default bags, 3 = do nothing
 
+	["size"] = 37,						-- change the size of the bags/bank, default = 37
+	["slotsShowAlways"] = false, 		-- always show the bag item slots
+
+	["hideSlots"] = true,				-- hide bag slots if style is 2 or 3
 }
 
 C["menubar"] = {
@@ -121,13 +129,13 @@ C["unitframes"] = {
 		["statusIndicatorCombat"] = true,				-- show combat status (else: only resting)
 
 	["player"] = {"BOTTOM", UIParent, "BOTTOM", 0, 200},						-- player unitframe position
-	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, 60},					-- target unitframe position
-	["focus"] = {"LEFT", 'oUF_FreeTarget', "RIGHT", 8, -100},					-- focus unitframe position
+	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, 100},					-- target unitframe position
+	["focus"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, -40},					-- focus unitframe position
 	["party"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -60},				-- party unitframe position
 	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -20, 20},				-- raid unitframe position
 
 	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -90},		-- player castbar position
-	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, -60},		-- target castbar position
+	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, -90},		-- target castbar position
 	["focus_castbar"] = {"LEFT", 'oUF_FreeFocus', "LEFT", 0, -40},				-- focus castbar position
 
 	["castbarColorInterrupt"] = {219/255, 0, 11/255},
@@ -138,17 +146,17 @@ C["unitframes"] = {
 
 	["player_width"] = 259,
 	["player_height"] = 12,
-	["target_width"] = 229,
+	["target_width"] = 205,
 	["target_height"] = 12,
 	["targettarget_width"] = 80,
 	["targettarget_height"] = 12,
-	["focus_width"] = 80,
+	["focus_width"] = 99,
 	["focus_height"] = 12,
-	["focustarget_width"] = 80,
+	["focustarget_width"] = 99,
 	["focustarget_height"] = 12,
 	["pet_width"] = 80,
 	["pet_height"] = 12,
-	["boss_width"] = 200,
+	["boss_width"] = 160,
 	["boss_height"] = 16,
 	["arena_width"] = 229,
 	["arena_height"] = 12,
