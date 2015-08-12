@@ -590,7 +590,7 @@ local Shared = function(self, unit, isSingle)
 
 	local RaidIcon = self:CreateTexture()
 	RaidIcon:SetSize(16, 16)
-	RaidIcon:SetPoint("RIGHT", self, "LEFT", -3, 0)
+	RaidIcon:SetPoint("CENTER", self, "CENTER", 0, 20)
 
 	self.RaidIcon = RaidIcon
 
@@ -828,7 +828,7 @@ local UnitSpecific = {
 		Debuffs:SetHeight(60)
 		Debuffs:SetWidth(playerWidth)
 		Debuffs.num = C.unitframes.num_player_debuffs
-		Debuffs.size = 18
+		Debuffs.size = 22
 
 		self.Debuffs = Debuffs
 		Debuffs.PostUpdateIcon = PostUpdateIcon
@@ -1328,7 +1328,7 @@ local UnitSpecific = {
 
 			Castbar:SetStatusBarTexture(C.media.texture)
 --			Castbar:SetStatusBarColor(219/255, 0, 11/255)
-			Castbar:SetWidth(229)
+			Castbar:SetWidth(C.unitframes.target_width)
 			Castbar:SetHeight(4)
 			Castbar:SetPoint(unpack(C.unitframes.target_castbar))
 			Castbar.Text:SetPoint("TOP", Castbar, "BOTTOM", 0, -4)
@@ -1392,7 +1392,7 @@ local UnitSpecific = {
 		Auras.numBuffs = C.unitframes.num_target_buffs
 		Auras:SetHeight(500)
 		Auras:SetWidth(targetWidth)
-		Auras.size = 18
+		Auras.size = 20
 		Auras.gap = true
 
 		self.Auras = Auras
@@ -1492,7 +1492,7 @@ local UnitSpecific = {
 
 			Castbar:SetStatusBarTexture(C.media.texture)
 --			Castbar:SetStatusBarColor(219/255, 0, 11/255)
-			Castbar:SetWidth(168)
+			Castbar:SetWidth(C.unitframes.target_width)
 			Castbar:SetHeight(4)
 			Castbar:SetPoint(unpack(C.unitframes.focus_castbar))
 			Castbar.Text:SetPoint("TOP", Castbar, "BOTTOM", 0, -4)
@@ -1668,10 +1668,10 @@ local UnitSpecific = {
 		Buffs['spacing-x'] = 3
 		Buffs['spacing-y'] = 3
 
-		Buffs:SetHeight(26)
-		Buffs:SetWidth(bossWidth - 26)
+		Buffs:SetHeight(20)
+		Buffs:SetWidth(bossWidth - 20)
 		Buffs.num = C.unitframes.num_boss_buffs
-		Buffs.size = 26
+		Buffs.size = 20
 
 		self.Buffs = Buffs
 		Buffs.PostUpdateIcon = PostUpdateIcon
@@ -1683,9 +1683,9 @@ local UnitSpecific = {
 		Debuffs["growth-y"] = "DOWN"
 		Debuffs["spacing-x"] = 3
 		Debuffs['spacing-y'] = 3
-		Debuffs:SetHeight(26)
-		Debuffs:SetWidth(bossWidth - 26)
-		Debuffs.size = 26
+		Debuffs:SetHeight(20)
+		Debuffs:SetWidth(bossWidth - 20)
+		Debuffs.size = 20
 		Debuffs.num = 8
 		self.Debuffs = Debuffs
 		self.Debuffs.onlyShowPlayer = true
@@ -1990,12 +1990,12 @@ oUF:Factory(function(self)
 	partyPos = C.unitframes.party
 	raidPos = C.unitframes.raid
 
-	spawnHelper(self, 'pet', "RIGHT", player, "LEFT", -8, 0)
-	spawnHelper(self, 'targettarget', "LEFT", target, "RIGHT", 8, 0)
-	spawnHelper(self, 'focustarget', "LEFT", focus, "RIGHT", 8, 0)
+	spawnHelper(self, 'pet', "RIGHT", player, "LEFT", -7, 0)
+	spawnHelper(self, 'targettarget', "LEFT", target, "RIGHT", 7, 0)
+	spawnHelper(self, 'focustarget', "LEFT", focus, "RIGHT", 7, 0)
 
 	for n = 1, MAX_BOSS_FRAMES do
-		spawnHelper(self, 'boss' .. n, 'RIGHT', -30, 220 - (60 * n))
+		spawnHelper(self, 'boss' .. n, 'LEFT', target, "RIGHT", 10, 80 + (60 * n))
 	end
 
 	if C.unitframes.enableArena then
