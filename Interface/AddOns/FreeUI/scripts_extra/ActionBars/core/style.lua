@@ -1,5 +1,9 @@
-local addon, ns = ...
-local cfg = ns.cfg
+local F, C = unpack(select(2, ...))
+
+local r, g, b = unpack(C.class)
+local locale = GetLocale()
+local _G = _G
+local gsub = gsub
 
 local textures = {
 	blank = "Interface\\Buttons\\WHITE8x8",
@@ -33,6 +37,69 @@ local backdrop2 = {
 	edgeSize = 1,
 	insets = {top = 1, left = 1, bottom = 1, right = 1},
 }
+
+local showHotKey = C.actionbars.hotkey
+local showMacroName = C.actionbars.macroname
+
+F.AddOptionsCallback("actionbars", "hotkey", function()
+	showHotKey = C.actionbars.hotkey
+
+	for k, frame in pairs(ActionBarButtonEventsFrame.frames) do
+		ActionButton_UpdateHotkeys(frame, frame.buttonType)
+	end
+
+	for i = 1, NUM_PET_ACTION_SLOTS do
+		PetActionButton_SetHotkeys(_G["PetActionButton"..i])
+	end
+end)
+
+local function updateHotkey(self)
+	local ho = _G[self:GetName().."HotKey"]
+
+	if showHotKey then
+		if not self.styledHotkey then
+			ho:ClearAllPoints()
+			ho:SetWidth(0)
+			ho:SetPoint("TOPRIGHT", 1, 0)
+			F.SetFS(ho)
+			ho:SetJustifyH("RIGHT")
+			ho:SetDrawLayer("OVERLAY", 1)
+			self.styledHotkey = true
+		end
+
+		local text = ho:GetText()
+
+		if text then
+			text = text:gsub("(s%-)", "S-")
+			text = text:gsub("(a%-)", "A-")
+			text = text:gsub("(c%-)", "C-")
+			if locale == "zhCN" then
+            	text = text:gsub("鼠标按键", "M")
+            	text = text:gsub("鼠标中键", "M3")
+            	text = text:gsub("鼠标滚轮向上滚动", "MU")
+            	text = text:gsub("鼠标滚轮向下滚动", "MD")
+        	end
+			text = text:gsub("Mouse Button", "M")
+			text = text:gsub("Middle Mouse", "M3")
+			text = text:gsub("Mouse Wheel Up", "MU")
+			text = text:gsub("Mouse Wheel Down", "MD")
+			text = text:gsub("Delete", "Del")
+			text = text:gsub("Num Pad", "N")
+			text = text:gsub("Page Up", "PU")
+			text = text:gsub("Page Down", "PD")
+			text = text:gsub("Spacebar", "SpB")
+			text = text:gsub("Insert", "Ins")
+			text = text:gsub("Num Lock", "NL")
+			text = text:gsub("Home", "Hm")
+
+			ho:SetText("|cffffffff"..text)
+		end
+
+		ho:Show()
+	else
+		ho:Hide()
+	end
+end
 
 local function applyBackground(bu)
 if bu:GetFrameLevel() < 2 then bu:SetFrameLevel(2) end
@@ -108,13 +175,12 @@ end--floating
 
 --initial style func
 local function styleActionButton(bu)
-	if not bu or (bu and bu.rabs_styled) then return end
+	if not bu or (bu and bu.styled) then return end
 	local action = bu.action
 	local name = bu:GetName()
 	local ic= _G[name.."Icon"]
 	local co= _G[name.."Count"]
 	local bo= _G[name.."Border"]
-	local ho= _G[name.."HotKey"]
 	local cd= _G[name.."Cooldown"]
 	local na= _G[name.."Name"]
 	local fl= _G[name.."Flash"]
@@ -127,51 +193,13 @@ local function styleActionButton(bu)
 	if fob then fob:SetTexture(nil) end
 	if fobs then fobs:SetTexture(nil) end
 	bo:SetTexture(nil) --hide the border (plain ugly, sry blizz)
-	--hotkey
-	ho:SetFont("Interface\\Addons\\FreeUI\\Media\\pixel.ttf", 8, "Outlinemonochrome")
-	ho:ClearAllPoints()
-	ho:SetPoint("TOPRIGHT",bu)
-    ho:SetPoint("TOPLEFT",bu)
 
-	local text = ho:GetText()
-
-    if text then
-        text = text:gsub("(s%-)", "S")
-        text = text:gsub("(a%-)", "A")
-        text = text:gsub("(c%-)", "C")
-        if locale == "zhCN" then
-            text = text:gsub("鼠标按键", "M")
-            text = text:gsub("鼠标中键", "M3")
-            text = text:gsub("鼠标滚轮向上滚动", "MU")
-            text = text:gsub("鼠标滚轮向下滚动", "MD")
-        end
-        text = text:gsub("Mouse Button", "M")
-        text = text:gsub("Middle Mouse", "M3")
-        text = text:gsub("Mouse Wheel Up", "MU")
-        text = text:gsub("Mouse Wheel Down", "MD")
-        text = text:gsub("Delete", "Del")
-        text = text:gsub("Num Pad", "N")
-        text = text:gsub("Page Up", "PU")
-        text = text:gsub("Page Down", "PD")
-        text = text:gsub("Spacebar", "SpB")
-        text = text:gsub("Insert", "Ins")
-        text = text:gsub("Num Lock", "NL")
-        text = text:gsub("Home", "Hm")
-
-        ho:SetText("|cffffffff"..text)
-    end
-
-    if not cfg.hotkeys then
-        ho:Hide()
-    end
 	--macroname
-	if GetLocale() == "enUS" then
-		na:SetFont("Interface\\Addons\\FreeUI\\Media\\pixel.ttf", 8, "Outlinemonochrome")
-	end
-	na:ClearAllPoints()
+	F.SetFS(na)
+    na:ClearAllPoints()
 	na:SetPoint("BOTTOMLEFT",bu)
     na:SetPoint("BOTTOMRIGHT",bu)
-	if not cfg.macroname then na:Hide() end
+	if not showMacroName then na:Hide() end
 	--count
 	co:SetFont("Interface\\Addons\\FreeUI\\Media\\pixel.ttf", 8, "Outlinemonochrome")
 	co:ClearAllPoints()
@@ -217,9 +245,10 @@ local function styleActionButton(bu)
 			nt:SetVertexColor(color.normal.r,color.normal.g,color.normal.b,1)
 		end
 	end)
+	updateHotkey(bu)
 	--apply background
 	if not bu.bg then applyBackground(bu) end
-	bu.rabs_styled = true
+	bu.styled = true
 end
 
 local function styleLeaveButton(bu)
@@ -235,10 +264,20 @@ local function stylePetButton(bu)
 	local name = bu:GetName()
 	local ic= _G[name.."Icon"]
 	local fl= _G[name.."Flash"]
+	local ho= _G[name.."HotKey"]
 	local nt= _G[name.."NormalTexture2"]
 	nt:SetAllPoints(bu)
 	--applying color
 	nt:SetVertexColor(color.normal.r,color.normal.g,color.normal.b,1)
+
+	ho:ClearAllPoints()
+	ho:SetWidth(0)
+	ho:SetPoint("TOPRIGHT", 1, 0)
+	F.SetFS(ho)
+	ho:SetJustifyH("RIGHT")
+	ho:SetDrawLayer("OVERLAY", 1)
+	local text = ho:GetText()
+	ho:SetText("|cffffffff"..text)
 	--setting the textures
 	fl:SetTexture(textures.flash)
 	bu:SetHighlightTexture(textures.hover)
@@ -280,6 +319,7 @@ local function styleStanceButton(bu)
 	ic:SetTexCoord(0.1,0.9,0.1,0.9)
 	ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 0, 0)
 	ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", 0, 0)
+	updateHotkey(bu)
 	--apply background
 	if not bu.bg then applyBackground(bu) end
 	bu.rabs_styled = true
@@ -310,14 +350,12 @@ local function stylePossessButton(bu)
 	bu.rabs_styled = true
 end
 
----------------------------------------
--- INIT
----------------------------------------
-
 local function init()
 	--style the actionbar buttons
 	for i = 1, NUM_ACTIONBAR_BUTTONS do
 		styleActionButton(_G["ActionButton"..i])
+		styleActionButton(_G["VehicleMenuBarActionButton"..i])
+		styleActionButton(_G["BonusActionButton"..i])
 		styleActionButton(_G["MultiBarBottomLeftButton"..i])
 		styleActionButton(_G["MultiBarBottomRightButton"..i])
 		styleActionButton(_G["MultiBarRightButton"..i])
@@ -343,7 +381,7 @@ local function init()
 	--extraactionbutton1
 	styleExtraActionButton(ExtraActionButton1)
 	styleExtraActionButton2(DraenorZoneAbilityFrame.SpellButton)
-	--spell flyout
+
 	SpellFlyoutBackgroundEnd:SetTexture(nil)
 	SpellFlyoutHorizontalBackground:SetTexture(nil)
 	SpellFlyoutVerticalBackground:SetTexture(nil)
@@ -354,6 +392,9 @@ local function init()
 		end
 	end
 	SpellFlyout:HookScript("OnShow",checkForFlyoutButtons)
+
+	hooksecurefunc("ActionButton_UpdateHotkeys", updateHotkey)
+	hooksecurefunc("PetActionButton_SetHotkeys", updateHotkey)
 end
 
 -- CALL
