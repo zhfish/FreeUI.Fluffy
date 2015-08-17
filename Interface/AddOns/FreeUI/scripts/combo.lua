@@ -4,10 +4,10 @@ local a1, p, a2, x, y = unpack(C.unitframes.player)
 
 local combo = CreateFrame("Frame", nil, UIParent)
 combo:SetSize(50, 50)
-combo:SetPoint(a1, p, a2, x, y+180)
+combo:SetPoint(a1, p, a2, x, y+200)
 combo:SetFrameLevel(3)
 
-local count = F.CreateFS(combo, 32, "CENTER")
+local count = F.CreateFS(combo, 24, "CENTER")
 count:SetAllPoints(combo)
 
 local function UpdatePoints()
