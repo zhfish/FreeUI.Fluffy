@@ -599,10 +599,6 @@ local Shared = function(self, unit, isSingle)
 		self.SpellRange = {
 	    	insideAlpha = 1,
         	outsideAlpha = .4}
-	else
-		local range = {
-			insideAlpha = 1,
-			outsideAlpha = .4,}
 	end
 
 	-- [[ Counter bar ]]
@@ -768,7 +764,7 @@ local UnitSpecific = {
 				local sf = Castbar:CreateTexture(nil, "OVERLAY")
 				sf:SetVertexColor(.5, .5, .5, .5)
 				Castbar.SafeZone = sf
-				IconFrame:SetPoint("RIGHT", Castbar, "LEFT", -10, 0)
+				IconFrame:SetPoint("RIGHT", Castbar, "LEFT", -6, 0)
 				IconFrame:SetSize(22, 22)
 
 				local bg = CreateFrame("Frame", nil, Castbar)
@@ -780,7 +776,7 @@ local UnitSpecific = {
 			else
 				Castbar:SetAllPoints(Health)
 				Castbar.Text:Hide()
-				IconFrame:SetPoint("RIGHT", self, "LEFT", -10, 0)
+				IconFrame:SetPoint("RIGHT", self, "LEFT", -6, 0)
 				IconFrame:SetSize(22, 22)
 			end
 		end
@@ -1724,7 +1720,8 @@ local UnitSpecific = {
 		local Name = F.CreateFS(self, C.FONT_SIZE_NORMAL, "LEFT")
 		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 2)
 		Name:SetWidth(110)
-		Name:SetHeight(8)
+		Name:SetHeight(12)
+		Name:SetFont(nameFont, 11, "OUTLINE")
 
 		self:Tag(Name, '[name]')
 		self.Name = Name
@@ -1776,6 +1773,13 @@ local UnitSpecific = {
 }
 
 do
+	if not C.unitframes.spellRange then
+		local range = {
+			insideAlpha = 1,
+			outsideAlpha = .3,
+		}
+	end
+
 	UnitSpecific.party = function(self, ...)
 		Shared(self, ...)
 
