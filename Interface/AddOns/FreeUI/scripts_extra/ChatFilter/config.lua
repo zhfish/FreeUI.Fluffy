@@ -34,7 +34,7 @@ cf.Config = {
 
 	["FilterRepeat"] = true, --Filter the repeat messages. // 过滤重复聊天信息
 	["RepeatAlike"] = 75, --Set the similarity between the messages. // 设定重复信息相似度
-	["RepeatInterval"] = 120, --Set the interval between the messages. // 设定重复信息间隔时间(秒)
+	["RepeatInterval"] = 300, --Set the interval between the messages. // 设定重复信息间隔时间(秒)
 
 	["FilterByLevel"] = false, --Filter the messages by level. // 屏蔽小号发言
 	["OnlyOnWhisper"] = nil, --Only filter the whisper messages. // 只过滤密语
@@ -203,6 +203,10 @@ cf.Config = {
 		"80级",
 		"90级",
 		"100级",
+		"包团",
+		"老板",
+		"招收",
+		"地狱火",
 	},
 	["WhiteList"] = {
 	},
@@ -255,6 +259,10 @@ cf.Config = {
 		"97681421",
 		"56189",
 		"红人速刷",
+		"静兰小舍",
+		"支持邮寄",
+		"打脸娱乐",
+		"大脚任务",
 	},
 	["ShieldPlayers"] = {
 	},
