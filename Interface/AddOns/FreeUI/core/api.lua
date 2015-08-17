@@ -14,7 +14,7 @@ C.media = {
 	["glow"] = "Interface\\AddOns\\FreeUI\\media\\glowTex", 					-- glow/shadow texture
 	["gradient"] = "Interface\\AddOns\\FreeUI\\media\\gradient",
 	["roleIcons"] = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
-	["texture"] = "Interface\\AddOns\\FreeUI\\media\\statusbar", 				-- statusbar texture
+	["texture"] = "Interface\\AddOns\\FreeUI\\media\\Texture1", 				-- statusbar texture
 }
 
 local mainFont
@@ -43,11 +43,11 @@ C.classcolours = {
 	["HUNTER"] = {r = 0.6, g = 0.8, b = 0.21},
 	["MAGE"] = {r = 0.35, g = 0.76, b = 0.93},
 	["MONK"] = {r = 0.04, g = 0.85 , b = 0.53},
-	["PALADIN"] = {r = 0.87, g = 0.14, b = 0.51},
+	["PALADIN"] = {r = 241/255, g = 0, b = 168/255},
 	["PRIEST"] = {r = 1, g = 1, b = 1},
-	["ROGUE"] = {r = 0.95, g = 0.76, b = 0.1},
+	["ROGUE"] = {r = 1, g = 238/255, b = 0},
 	["SHAMAN"] = {r = 0.07, g = 0.42, b = 0.96},
-	["WARLOCK"] = {r = 0.75, g = 0.34, b = 0.93},
+	["WARLOCK"] = {r = 136/255, g = 73/255, b = 223/255},
 	["WARRIOR"] = {r = 0.79, g = 0.61, b = 0.5},
 }
 
