@@ -57,9 +57,12 @@ C["automation"] = {
 
 C["actionbars"] = {
 	["enable"] = true,					-- enable the action bars
-
-	["hotkey"] = true, 				-- show hot keys on buttons
-	["macroname"] = true,					-- show macro name on buttons
+	["enableStyle"] = true,
+	["bar3Fold"] = true,
+	["hotKey"] = true, 				-- show hot keys on buttons
+	["macroName"] = true,					-- show macro name on buttons
+	["rightbars_mouseover"] = false, -- show right bars on mouseover (show/hide: use blizz option)
+	
 }
 
 C["bags"] = {
@@ -132,27 +135,28 @@ C["unitframes"] = {
 	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, 100},					-- target unitframe position
 	["focus"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, -40},					-- focus unitframe position
 	["party"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -60},				-- party unitframe position
-	["raid"] = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -20, 20},				-- raid unitframe position
+	["raid"] = {"BOTTOMRIGHT", 'oUF_FreePlayer', "TOPLEFT", -120, 80},				-- raid unitframe position
 
 	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -90},		-- player castbar position
-	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, -90},		-- target castbar position
+	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, 40},		-- target castbar position
 	["focus_castbar"] = {"LEFT", 'oUF_FreeFocus', "LEFT", 0, -40},				-- focus castbar position
 
-	["castbarColorInterrupt"] = {219/255, 0, 11/255},
-	["castbarColorNormal"] = {241/255, 195/255, 26/255},
+	["castbarColorInterrupt"] = {241/255, 80/255, 241/255},
+	["castbarColorNormal"] = {89/255, 216/255, 237/255},
+	["castbarHeight"] = 6,
 
 	["power_height"] = 2,
 	["altpower_height"] = 2,
 
-	["player_width"] = 259,
+	["player_width"] = 241,
 	["player_height"] = 12,
-	["target_width"] = 205,
+	["target_width"] = 201,
 	["target_height"] = 12,
 	["targettarget_width"] = 80,
 	["targettarget_height"] = 12,
-	["focus_width"] = 99,
+	["focus_width"] = 97,
 	["focus_height"] = 12,
-	["focustarget_width"] = 99,
+	["focustarget_width"] = 97,
 	["focustarget_height"] = 12,
 	["pet_width"] = 80,
 	["pet_height"] = 12,
@@ -162,8 +166,8 @@ C["unitframes"] = {
 	["arena_height"] = 12,
 	["party_width"] = 58,
 	["party_height"] = 26,
-	["raid_width"] = 50,
-	["raid_height"] = 22,
+	["raid_width"] = 66,
+	["raid_height"] = 26,
 
 	["num_player_debuffs"] = 8,
 	["num_target_debuffs"] = 16,

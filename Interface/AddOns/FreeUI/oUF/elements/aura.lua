@@ -37,6 +37,7 @@ local createAuraIcon = function(icons, index)
 	local icon = button:CreateTexture(nil, "BORDER")
 	icon:SetAllPoints(button)
 	icon:SetTexCoord(.08, .92, .08, .92)
+	F.CreateSD(button, 5, 0, 0, 0, .6, -2)
 
 	local count = F.CreateFS(button, 8, "CENTER")
 	count:SetPoint("TOP", button, "TOP", 2, -2)
@@ -168,7 +169,8 @@ local updateIcon = function(unit, icons, index, offset, filter, isDebuff, visibl
 			icon.count:SetText((count > 1 and count))
 
 			local size = icons.size or 16
-			icon:SetSize(size, size*0.8)
+	--		icon:SetSize(size, size*0.8)
+			icon:SetSize(size, size)
 
 			icon:EnableMouse(true)
 			icon:SetID(index)

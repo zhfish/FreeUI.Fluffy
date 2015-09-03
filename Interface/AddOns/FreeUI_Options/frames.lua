@@ -417,17 +417,33 @@ do
 	local enable = ns.CreateCheckBox(actionbars, "enable", true, true)
 	enable:SetPoint("TOPLEFT", actionbars.subText, "BOTTOMLEFT", 0, -8)
 
-	local hotKey = ns.CreateCheckBox(actionbars, "hotkey", true, true)
-	hotKey:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 16, -8)
+	local enableStyle = ns.CreateCheckBox(actionbars, "enableStyle", true, true)
+	enableStyle:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 16, -8)
+
+	local rightBarsMouseover = ns.CreateCheckBox(actionbars, "rightbars_mouseover", false, true)
+	rightBarsMouseover:SetPoint("TOPLEFT", enableStyle, "BOTTOMLEFT", 0, -8)
+
+	enable.children = {rightBarsMouseover}
+
+	local bar3Fold = ns.CreateCheckBox(actionbars, "bar3Fold", true, true)
+	bar3Fold:SetPoint("TOPLEFT", rightBarsMouseover, "BOTTOMLEFT", 0, -8)
+
+	local hotKey = ns.CreateCheckBox(actionbars, "hotkey")
+	hotKey:SetPoint("TOPLEFT", bar3Fold, "BOTTOMLEFT", 0, -8)
+
+	enableStyle.children = {hotKey}
 	
-	local macroname = ns.CreateCheckBox(actionbars, "macroname", false, true)
-	macroname:SetPoint("TOPLEFT", hotKey, "BOTTOMLEFT", 0, -8)
+	-- local macroName = ns.CreateCheckBox(actionbars, "macroname")
+	-- macroName:SetPoint("TOPLEFT", hotKey, "BOTTOMLEFT", 0, -8)
 	
-	enable.children = {macroname, hotKey}
+	-- enable.children = {macroName}
 	
 	local function toggleActionBarsOptions()
 		local shown = enable:GetChecked()
-		macroname:SetShown(shown)
+		enableStyle:SetShown(shown)
+		bar3Fold:SetShown(shown)
+		rightBarsMouseover:SetShown(shown)
+--		macroName:SetShown(shown)
 		hotKey:SetShown(shown)
 	end
 	
@@ -572,12 +588,16 @@ do
 	local enableGroup = ns.CreateCheckBox(unitframes, "enableGroup", true, true)
 	enableGroup:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
 
-	local limitRaidSize = ns.CreateCheckBox(unitframes, "limitRaidSize", true)
-	limitRaidSize:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 16, -8)
-	tinsert(ns.protectOptions, limitRaidSize)
+	local limitRaidSizePVE = ns.CreateCheckBox(unitframes, "limitRaidSizePVE", true)
+	limitRaidSizePVE:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 16, -8)
+	tinsert(ns.protectOptions, limitRaidSizePVE)
+
+	local limitRaidSizePVP = ns.CreateCheckBox(unitframes, "limitRaidSizePVP", true)
+	limitRaidSizePVP:SetPoint("TOPLEFT", limitRaidSizePVE, "BOTTOMLEFT", 0, -8)
+	tinsert(ns.protectOptions, limitRaidSizePVP)
 
 	local showRaidFrames = ns.CreateCheckBox(unitframes, "showRaidFrames", true)
-	showRaidFrames:SetPoint("TOPLEFT", limitRaidSize, "BOTTOMLEFT", 16, -8)
+	showRaidFrames:SetPoint("TOPLEFT", limitRaidSizePVP, "BOTTOMLEFT", 16, -8)
 	tinsert(ns.protectOptions, showRaidFrames)
 
 	local partyNameAlways = ns.CreateCheckBox(unitframes, "partyNameAlways", true, true)
@@ -619,7 +639,8 @@ do
 		shadow:SetShown(shown)
 		spellRange:SetShown(shown)
 		enableGroup:SetShown(shown)
-		limitRaidSize:SetShown(shown)
+		limitRaidSizePVE:SetShown(shown)
+		limitRaidSizePVP:SetShown(shown)
 		showRaidFrames:SetShown(shown)
 		partyNameAlways:SetShown(shown)
 		castbarSeparate:SetShown(shown)

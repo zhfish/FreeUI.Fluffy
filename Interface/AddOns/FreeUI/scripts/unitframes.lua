@@ -334,14 +334,19 @@ for i = 1, MAX_PARTY_MEMBERS do
 end
 
 --[[ Debuff highlight ]]
-
 local PostUpdateIcon = function(_, unit, icon, index, _, filter)
 	local _, _, _, _, dtype = UnitAura(unit, index, icon.filter)
+	local texture = icon.icon
 	if icon.isDebuff and dtype and UnitIsFriend("player", unit) then
 		local color = DebuffTypeColor[dtype]
 		icon.bg:SetVertexColor(color.r, color.g, color.b)
 	else
 		icon.bg:SetVertexColor(0, 0, 0)
+	end
+	if icon.isDebuff and not icon.isPlayer and unit ~= "player" then
+		texture:SetDesaturated(true)
+	else
+		texture:SetDesaturated(false)
 	end
 end
 
@@ -390,7 +395,7 @@ local Shared = function(self, unit, isSingle)
 	bd:SetFrameStrata("BACKGROUND")
 
 	if shadow then
-		F.CreateSD(bd, 5, 0, 0, 0, .8, -2)
+		F.CreateSD(bd, 3, 0, 0, 0, .6, -1)
 	end
 
 	self.bd = bd
@@ -1325,13 +1330,13 @@ local UnitSpecific = {
 			Castbar:SetStatusBarTexture(C.media.texture)
 --			Castbar:SetStatusBarColor(219/255, 0, 11/255)
 			Castbar:SetWidth(C.unitframes.target_width)
-			Castbar:SetHeight(4)
+			Castbar:SetHeight(C.unitframes.castbarHeight)
 			Castbar:SetPoint(unpack(C.unitframes.target_castbar))
-			Castbar.Text:SetPoint("TOP", Castbar, "BOTTOM", 0, -4)
+			Castbar.Text:SetPoint("BOTTOM", Castbar, "TOP", 0, 4)
 			local sf = Castbar:CreateTexture(nil, "OVERLAY")
 			sf:SetVertexColor(.5, .5, .5, .5)
 			Castbar.SafeZone = sf
-			IconFrame:SetPoint("LEFT", Castbar, "RIGHT", 10, 0)
+			IconFrame:SetPoint("RIGHT", Castbar, "LEFT", -4, 0)
 			IconFrame:SetSize(14, 14)
 
 			local bg = CreateFrame("Frame", nil, Castbar)
@@ -1388,8 +1393,10 @@ local UnitSpecific = {
 		Auras.numBuffs = C.unitframes.num_target_buffs
 		Auras:SetHeight(500)
 		Auras:SetWidth(targetWidth)
-		Auras.size = 20
+		Auras.size = 26
 		Auras.gap = true
+
+
 
 		self.Auras = Auras
 
@@ -1407,13 +1414,13 @@ local UnitSpecific = {
 			vehicle = true,
 		}
 
-		Auras.CustomFilter = function(_, unit, icon, _, _, _, _, _, _, _, caster, _, _, spellID)
-			if(icon.isDebuff and not UnitIsFriend("player", unit) and not playerUnits[icon.owner] and icon.owner ~= self.unit and not C.debuffFilter[spellID])
-			or(not icon.isDebuff and UnitIsPlayer(unit) and not UnitIsFriend("player", unit) and not C.dangerousBuffs[spellID]) then
-				return false
-			end
-			return true
-		end
+		-- Auras.CustomFilter = function(_, unit, icon, _, _, _, _, _, _, _, caster, _, _, spellID)
+		-- 	if(icon.isDebuff and not UnitIsFriend("player", unit) and not playerUnits[icon.owner] and icon.owner ~= self.unit and not C.debuffFilter[spellID])
+		-- 	or(not icon.isDebuff and UnitIsPlayer(unit) and not UnitIsFriend("player", unit) and not C.dangerousBuffs[spellID]) then
+		-- 		return false
+		-- 	end
+		-- 	return true
+		-- end
 
 		local QuestIcon = F.CreateFS(self)
 		QuestIcon:SetText("!")
@@ -1489,7 +1496,7 @@ local UnitSpecific = {
 			Castbar:SetStatusBarTexture(C.media.texture)
 --			Castbar:SetStatusBarColor(219/255, 0, 11/255)
 			Castbar:SetWidth(C.unitframes.target_width)
-			Castbar:SetHeight(4)
+			Castbar:SetHeight(C.unitframes.castbarHeight)
 			Castbar:SetPoint(unpack(C.unitframes.focus_castbar))
 			Castbar.Text:SetPoint("TOP", Castbar, "BOTTOM", 0, -4)
 			local sf = Castbar:CreateTexture(nil, "OVERLAY")
@@ -1861,10 +1868,10 @@ do
 			Debuffs["growth-x"] = "RIGHT"
 			Debuffs["spacing-x"] = 3
 
-			Debuffs:SetHeight(16)
-			Debuffs:SetWidth(37)
-			Debuffs.num = 2
-			Debuffs.size = 16
+			Debuffs:SetHeight(18)
+			Debuffs:SetWidth(40)
+			Debuffs.num = 2		-- grid debuff number
+			Debuffs.size = 18
 
 			self.Debuffs = Debuffs
 
@@ -1994,9 +2001,9 @@ oUF:Factory(function(self)
 	partyPos = C.unitframes.party
 	raidPos = C.unitframes.raid
 
-	spawnHelper(self, 'pet', "RIGHT", player, "LEFT", -7, 0)
-	spawnHelper(self, 'targettarget', "LEFT", target, "RIGHT", 7, 0)
-	spawnHelper(self, 'focustarget', "LEFT", focus, "RIGHT", 7, 0)
+	spawnHelper(self, 'pet', "RIGHT", player, "LEFT", -5, 0)
+	spawnHelper(self, 'targettarget', "LEFT", target, "RIGHT", 5, 0)
+	spawnHelper(self, 'focustarget', "LEFT", focus, "RIGHT", 5, 0)
 
 	for n = 1, MAX_BOSS_FRAMES do
 		spawnHelper(self, 'boss' .. n, 'LEFT', target, "RIGHT", 10, 80 + (60 * n))
@@ -2038,8 +2045,8 @@ oUF:Factory(function(self)
 		'showParty', false,
 		'showRaid', true,
 		'xoffset', 5,
-		'yOffset', -8,
-		'point', "TOP",
+		'yOffset', 6, -- 团队框架纵向间隔
+		'point', "BOTTOM",
 		'groupFilter', '1,2,3,4,5,6,7,8',
 		'groupingOrder', '1,2,3,4,5,6,7,8',
 		'groupBy', 'GROUP',
@@ -2055,13 +2062,25 @@ oUF:Factory(function(self)
 
 	raid:SetPoint(unpack(raidPos))
 
-	if C.unitframes.limitRaidSize then
+	if C.unitframes.limitRaidSizePVE then
 		raid:SetAttribute("groupFilter", "1,2,3,4,5,6")
 	end
 
-	F.AddOptionsCallback("unitframes", "limitRaidSize", function()
-		if C.unitframes.limitRaidSize then
+	if C.unitframes.limitRaidSizePVP then
+		raid:SetAttribute("groupFilter", "1,2,3")
+	end
+
+	F.AddOptionsCallback("unitframes", "limitRaidSizePVE", function()
+		if C.unitframes.limitRaidSizePVE then
 			raid:SetAttribute("groupFilter", "1,2,3,4,5,6")
+		else
+			raid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
+		end
+	end)
+
+	F.AddOptionsCallback("unitframes", "limitRaidSizePVP", function()
+		if C.unitframes.limitRaidSizePVP then
+			raid:SetAttribute("groupFilter", "1,2,3")
 		else
 			raid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
 		end
