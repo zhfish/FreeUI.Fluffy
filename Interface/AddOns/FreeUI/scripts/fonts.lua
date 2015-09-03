@@ -11,7 +11,7 @@ local fontDamage
 if locale == "zhCN" then
 	fontStandard = "Fonts\\ARKai_T.TTF"		-- 简体中文客户端主字体
 	fontUnitName = "Fonts\\ARKai_T.TTF"		-- 玩家 / NPC 头上的名字
-	fontDiablo = 'Fonts\\ARKai_T.TTF'
+	fontDiablo = 'Fonts\\ARKai_T.TTF'		-- 地图上的地名字体
 	fontDamage = 'Fonts\\ARKai_T.TTF'		-- 伤害字体
 else
 	fontStandard = C.media.font2
