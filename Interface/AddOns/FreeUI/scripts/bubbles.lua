@@ -1,5 +1,7 @@
 local F, C = unpack(select(2, ...))
 
+local bubbleFont = C.media.font2
+
 local bubbleHook = CreateFrame("Frame")
 
 local function styleBubble(frame)
@@ -10,7 +12,7 @@ local function styleBubble(frame)
 		if region:GetObjectType() == "Texture" then
 			region:SetTexture(nil)
 		elseif region:GetObjectType() == "FontString" then
-			region:SetFont("Fonts\\FRIZQT__.TTF", 14)
+			region:SetFont(bubbleFont, 14)
 			region:SetShadowOffset(scale, -scale)
 		end
 	end

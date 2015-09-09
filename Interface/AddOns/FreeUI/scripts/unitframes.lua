@@ -1548,7 +1548,7 @@ local UnitSpecific = {
 		self.Name = Name
 
 		local Debuffs = CreateFrame("Frame", nil, self)
-		Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, 0)
+		Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -4)
 		Debuffs.initialAnchor = "BOTTOMLEFT"
 		Debuffs["growth-x"] = "RIGHT"
 		Debuffs["growth-y"] = "UP"
@@ -1671,10 +1671,10 @@ local UnitSpecific = {
 		Buffs['spacing-x'] = 3
 		Buffs['spacing-y'] = 3
 
-		Buffs:SetHeight(20)
-		Buffs:SetWidth(bossWidth - 20)
+		Buffs:SetHeight(22)
+		Buffs:SetWidth(bossWidth - 22)
 		Buffs.num = C.unitframes.num_boss_buffs
-		Buffs.size = 20
+		Buffs.size = 22
 
 		self.Buffs = Buffs
 		Buffs.PostUpdateIcon = PostUpdateIcon
@@ -1686,9 +1686,9 @@ local UnitSpecific = {
 		Debuffs["growth-y"] = "DOWN"
 		Debuffs["spacing-x"] = 3
 		Debuffs['spacing-y'] = 3
-		Debuffs:SetHeight(20)
-		Debuffs:SetWidth(bossWidth - 20)
-		Debuffs.size = 20
+		Debuffs:SetHeight(22)
+		Debuffs:SetWidth(bossWidth - 22)
+		Debuffs.size = 22
 		Debuffs.num = 8
 		self.Debuffs = Debuffs
 		self.Debuffs.onlyShowPlayer = true
@@ -1866,7 +1866,7 @@ do
 			Debuffs.initialAnchor = "CENTER"
 			Debuffs:SetPoint("BOTTOM", 0, powerHeight - 1)
 			Debuffs["growth-x"] = "RIGHT"
-			Debuffs["spacing-x"] = 3
+			Debuffs["spacing-x"] = 4
 
 			Debuffs:SetHeight(18)
 			Debuffs:SetWidth(40)

@@ -186,10 +186,11 @@ end
 --[[ Bags ]]
 
 local holder = CreateFrame("Button", "BagsHolder", UIParent)
-holder:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -60, 20)
+holder:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -70, 20)
 holder:SetFrameStrata("HIGH")
 holder:Hide()
 F.CreateBD(holder, .6)
+F.CreateSD(holder, 5, 0, 0, 0, .75, -1)
 
 local ReanchorButtons = function()
 	table.wipe(buttons)
@@ -222,6 +223,7 @@ bankholder:SetPoint("BOTTOMRIGHT", "BagsHolder", "BOTTOMLEFT", -10 , 0)
 bankholder:SetFrameStrata("HIGH")
 bankholder:Hide()
 F.CreateBD(bankholder, .6)
+F.CreateSD(bankholder, 5, 0, 0, 0, .75, -1)
 
 local purchase = F.CreateFS(bankholder)
 purchase:SetPoint("BOTTOMLEFT", bankholder, "BOTTOMLEFT", 3, 22)

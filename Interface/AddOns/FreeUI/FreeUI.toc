@@ -20,15 +20,19 @@ core\notifications.lua
 
 oUF\oUF.xml
 
+scripts\actionbars.lua
 scripts\archaeologybar.lua
 scripts\arena.lua
 scripts\automation.lua
 scripts\bags.lua
 scripts\bubbles.lua
+scripts\buffs.lua
+scripts\buttons.lua
 scripts\chat.lua
 scripts\chattabs.lua
 scripts\colours.lua
 scripts\combo.lua
+scripts\dbm.lua
 scripts\disable.lua
 scripts\durability.lua
 scripts\errors.lua
@@ -50,6 +54,7 @@ scripts\moneytext.lua
 scripts\objectivetracker.lua
 scripts\petbattles.lua
 scripts\queuetimer.lua
+scripts\rangecolor.lua
 scripts\rarealert.lua
 scripts\role.lua
 scripts\stats.lua
@@ -59,53 +64,38 @@ scripts\unitframes.lua
 scripts\worldmarker.lua
 scripts\worldstateframe.lua
 
-media\libs\LibStub\LibStub.lua
-media\libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
-media\libs\LibSharedMedia-3.0\lib.xml
-media\myMedia.lua
+scripts\extra\libs\load_libs.xml
+scripts\extra\chatfilter\load_chatfilter.xml
+scripts\extra\freebtip\load_freebtip.xml
+scripts\extra\filger\load_filger.xml
 
-scripts_extra\ChatFilter\load.xml
-scripts_extra\Filger\load.xml
-scripts_extra\ActionBars\load.xml
-## scripts_extra\ActionBars\actionbars.lua
-## scripts_extra\ActionBars\buttons.lua
-## scripts_extra\Auras\test.lua
-scripts_extra\Auras\load.xml
-scripts_extra\Tooltips\libs\LibItemUpgradeInfo-1.0\LibItemUpgradeInfo-1.0.xml
-scripts_extra\Tooltips\libs\LibInspect\LibStub\LibStub.lua
-scripts_extra\Tooltips\libs\LibInspect\LibInspect.lua
-scripts_extra\Tooltips\ilvl.lua
-scripts_extra\Tooltips\spec.lua
-scripts_extra\Tooltips\tip.lua
-scripts_extra\Tooltips\FreebTip_Multi.xml
-scripts_extra\Skins\DBM.lua
-scripts_extra\Skins\Skada.lua
-
-scripts_extra\Align.lua
-scripts_extra\AchievementCheer.lua
-scripts_extra\AlreadyKnown.lua
-scripts_extra\BiggerTradeSkillUI.lua
-scripts_extra\BGSpam.lua
-scripts_extra\BgSpecIcon.lua
-scripts_extra\ColorPicker.lua
-scripts_extra\DragEmAll.lua
-scripts_extra\Doom_CooldownPulse.lua
-scripts_extra\emergency.lua
-scripts_extra\Focuser.lua
-scripts_extra\Foglight.lua
-scripts_extra\HiddenRaidNames.lua
-scripts_extra\ncHoverBind.lua
-scripts_extra\idTip.lua
-scripts_extra\ncShadow.lua
-scripts_extra\QuestLevel.lua
-scripts_extra\Screenshots.lua
-scripts_extra\SortedCurrencyTab.lua
-scripts_extra\SpamageMeters.lua
-scripts_extra\TabBinder.lua
-scripts_extra\TradeTabs.lua
-scripts_extra\ToggleTreasures.lua
-scripts_extra\UnitSounds.lua
-scripts_extra\WhisperSound.lua
+scripts\extra\Align.lua
+scripts\extra\AchievementCheer.lua
+scripts\extra\AlreadyKnown.lua
+scripts\extra\BiggerTradeSkillUI.lua
+scripts\extra\BGSpamFix.lua
+scripts\extra\BgSpecIcon.lua
+scripts\extra\ColorPicker.lua
+scripts\extra\DragEmAll.lua
+scripts\extra\Doom_CooldownPulse.lua
+scripts\extra\emergency.lua
+scripts\extra\FasterCamera.lua
+scripts\extra\Focuser.lua
+scripts\extra\Foglight.lua
+scripts\extra\HiddenRaidNames.lua
+scripts\extra\ncHoverBind.lua
+scripts\extra\idTip.lua
+scripts\extra\myMedia.lua
+scripts\extra\ncShadow.lua
+scripts\extra\QuestLevel.lua
+scripts\extra\SafeQueue.lua
+scripts\extra\Screenshots.lua
+scripts\extra\SpamageMeters.lua
+scripts\extra\TabBinder.lua
+scripts\extra\TradeTabs.lua
+scripts\extra\ToggleTreasures.lua
+scripts\extra\UnitSounds.lua
+scripts\extra\WhisperSound.lua
 
 class\paladin.lua
 
