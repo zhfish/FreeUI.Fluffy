@@ -152,10 +152,10 @@ tinsert(C.themes["FreeUI"], function()
 
 	F.CreateBD(LFGDungeonReadyDialog)
 	LFGDungeonReadyDialog.SetBackdrop = F.dummy
-	F.CreateSD(LFGDungeonReadyDialog)
 	F.CreateBD(LFGInvitePopup)
-	F.CreateSD(LFGInvitePopup)
 	F.CreateBD(LFGDungeonReadyStatus)
+	F.CreateSD(LFGDungeonReadyDialog)
+	F.CreateSD(LFGInvitePopup)
 	F.CreateSD(LFGDungeonReadyStatus)
 
 	F.Reskin(LFGDungeonReadyDialogEnterDungeonButton)
@@ -240,6 +240,7 @@ tinsert(C.themes["FreeUI"], function()
 
 	for _, roleButton in pairs({LFDRoleCheckPopupRoleButtonTank, LFDRoleCheckPopupRoleButtonHealer, LFDRoleCheckPopupRoleButtonDPS, LFGInvitePopupRoleButtonTank, LFGInvitePopupRoleButtonHealer, LFGInvitePopupRoleButtonDPS, LFGListApplicationDialog.DamagerButton, LFGListApplicationDialog.TankButton, LFGListApplicationDialog.HealerButton}) do
 		local checkButton = roleButton.checkButton or roleButton.CheckButton
+
 		roleButton.cover:SetTexture(C.media.roleIcons)
 		roleButton:SetNormalTexture(C.media.roleIcons)
 

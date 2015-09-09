@@ -33,7 +33,7 @@ tinsert(C.themes["FreeUI"], function()
 		_G[frame:GetName().."MaterialTopRight"]:Hide()
 		_G[frame:GetName().."MaterialBotLeft"]:Hide()
 		_G[frame:GetName().."MaterialBotRight"]:Hide()
- 	end)
+	end)
 
 	local line = QuestFrameGreetingPanel:CreateTexture()
 	line:SetTexture(1, 1, 1, .2)

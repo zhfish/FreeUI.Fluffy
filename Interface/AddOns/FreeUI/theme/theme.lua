@@ -782,7 +782,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		local function styleTab(bu)
 			bu.selected:SetTexture(r, g, b, .2)
 			bu.selected:SetDrawLayer("BACKGROUND")
-	--		bu.text:SetFont(C.media.font2, 14)
+			bu.text:SetFont(C.media.font2, 14)
 			F.Reskin(bu, true)
 			bu:SetScript("OnEnter", colourTab)
 			bu:SetScript("OnLeave", clearTab)
@@ -793,8 +793,8 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		end
 		styleTab(HelpFrameButton16)
 
-	--	HelpFrameAccountSecurityOpenTicket.text:SetFont(C.media.font2, 14)
-	--	HelpFrameOpenTicketHelpOpenTicket.text:SetFont(C.media.font2, 14)
+		HelpFrameAccountSecurityOpenTicket.text:SetFont(C.media.font2, 14)
+		HelpFrameOpenTicketHelpOpenTicket.text:SetFont(C.media.font2, 14)
 
 		HelpFrameCharacterStuckHearthstone:SetSize(56, 56)
 		F.CreateBG(HelpFrameCharacterStuckHearthstone)
@@ -1365,8 +1365,8 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		end
 
 		F.CreateBD(PVPReadyDialog)
-		PVPReadyDialog.SetBackdrop = F.dummy
 		F.CreateSD(PVPReadyDialog)
+		PVPReadyDialog.SetBackdrop = F.dummy
 
 		F.Reskin(PVPReadyDialog.enterButton)
 		F.Reskin(PVPReadyDialog.leaveButton)
@@ -1563,28 +1563,9 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		TabardCharacterModelRotateRightButton:SetPoint("TOPLEFT", TabardCharacterModelRotateLeftButton, "TOPRIGHT", 1, 0)
 		LFDQueueFrameSpecificListScrollFrameScrollBarScrollDownButton:SetPoint("TOP", LFDQueueFrameSpecificListScrollFrameScrollBar, "BOTTOM", 0, 2)
 		LFDQueueFrameRandomScrollFrameScrollBarScrollDownButton:SetPoint("TOP", LFDQueueFrameRandomScrollFrameScrollBar, "BOTTOM", 0, 2)
-
 		WhoFrameWhoButton:SetPoint("RIGHT", WhoFrameAddFriendButton, "LEFT", -1, 0)
 		WhoFrameAddFriendButton:SetPoint("RIGHT", WhoFrameGroupInviteButton, "LEFT", -1, 0)
 		FriendsFrameTitleText:SetPoint("TOP", FriendsFrame, "TOP", 0, -8)
-
-		-- [[ Tabs ]]
-
-		-- for i = 1, 5 do
-		-- 	F.ReskinTab(_G["SpellBookFrameTabButton"..i])
-		-- end
-
-		-- for i = 1, 4 do
-		-- 	F.ReskinTab(_G["FriendsFrameTab"..i])
-		-- 	if _G["CharacterFrameTab"..i] then
-		-- 		F.ReskinTab(_G["CharacterFrameTab"..i])
-		-- 	end
-		-- end
-
-		-- for i = 1, 2 do
-		-- 	F.ReskinTab(_G["MerchantFrameTab"..i])
-		-- 	F.ReskinTab(_G["MailFrameTab"..i])
-		-- end
 
 		-- [[ Buttons ]]
 
