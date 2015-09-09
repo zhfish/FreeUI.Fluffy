@@ -93,8 +93,19 @@ local CreateBD = function(f, a)
 		edgeFile = C.media.backdrop,
 		edgeSize = 1,
 	})
-	f:SetBackdropColor(0, 0, 0, a or .6)
+	f:SetBackdropColor(.03, .03, .03, a or .75)
 	f:SetBackdropBorderColor(0, 0, 0)
+
+	if not a then
+        f.tex = f.tex or f:CreateTexture(nil, "BACKGROUND", nil, 1)
+        f.tex:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true)
+        f.tex:SetAllPoints()
+        f.tex:SetHorizTile(true)
+        f.tex:SetVertTile(true)
+        f.tex:SetBlendMode("ADD")
+    else
+        f:SetBackdropColor(0, 0, 0, a)
+    end
 end
 
 F.CreateBD = CreateBD
@@ -112,19 +123,8 @@ F.CreateBG = function(frame)
 	return bg
 end
 
--- took from RayUI ;)
-function F:CreateStripesThin(f)
-	if not f then return end
-	f.stripesthin = f:CreateTexture(nil, "BACKGROUND", nil, 1)
-	f.stripesthin:SetAllPoints()
-	f.stripesthin:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true)
-	f.stripesthin:SetHorizTile(true)
-	f.stripesthin:SetVertTile(true)
-	f.stripesthin:SetBlendMode("ADD")
-end
-
 F.CreateSD = function(parent, size, r, g, b, alpha, offset)
-	F:CreateStripesThin(parent)
+--	F:CreateStripesThin(parent)
 	local sd = CreateFrame("Frame", nil, parent)
 	sd.size = size or 5
 	sd.offset = offset or 0
@@ -203,13 +203,15 @@ F.CreatePulse = function(frame) -- pulse function originally by nightcracker
 end
 
 local r, g, b = unpack(C.class)
+local buttonR, buttonG, buttonB, buttonA = .2, .2, .2, .2
 
 local CreateGradient = function(f)
 	local tex = f:CreateTexture(nil, "BORDER")
 	tex:SetPoint("TOPLEFT", 1, -1)
 	tex:SetPoint("BOTTOMRIGHT", -1, 1)
 	tex:SetTexture(C.media.backdrop)
-	tex:SetGradientAlpha("VERTICAL", 0, 0, 0, .3, .35, .35, .35, .35)
+--	tex:SetGradientAlpha("VERTICAL", 0, 0, 0, .3, .35, .35, .35, .35)
+	tex:SetVertexColor(buttonR, buttonG, buttonB, buttonA)
 
 	return tex
 end
