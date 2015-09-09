@@ -124,7 +124,6 @@ F.CreateBG = function(frame)
 end
 
 F.CreateSD = function(parent, size, r, g, b, alpha, offset)
---	F:CreateStripesThin(parent)
 	local sd = CreateFrame("Frame", nil, parent)
 	sd.size = size or 5
 	sd.offset = offset or 0
@@ -203,7 +202,7 @@ F.CreatePulse = function(frame) -- pulse function originally by nightcracker
 end
 
 local r, g, b = unpack(C.class)
-local buttonR, buttonG, buttonB, buttonA = .2, .2, .2, .2
+local buttonR, buttonG, buttonB, buttonA = .5, .5, .5, .2
 
 local CreateGradient = function(f)
 	local tex = f:CreateTexture(nil, "BORDER")

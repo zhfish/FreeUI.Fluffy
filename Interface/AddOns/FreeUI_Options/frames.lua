@@ -280,13 +280,13 @@ do
 
 	rareAlert.children = {rareAlertPlaySound}
 
-	local auratracker = ns.CreateCheckBox(general, "auratracker", true, true)
-	auratracker:SetPoint("TOPLEFT", rareAlertPlaySound, "BOTTOMLEFT", -16, -8)
+	local auraTracker = ns.CreateCheckBox(general, "auraTracker", true, true)
+	auraTracker:SetPoint("TOPLEFT", rareAlertPlaySound, "BOTTOMLEFT", -16, -8)
 
-	local auratracker_test = ns.CreateCheckBox(general, "auratracker_test", true, true)
-	auratracker_test:SetPoint("TOPLEFT", auratracker, "BOTTOMLEFT", 16, -8)
+	local auraTracker_test = ns.CreateCheckBox(general, "auraTracker_test", true, true)
+	auraTracker_test:SetPoint("TOPLEFT", auraTracker, "BOTTOMLEFT", 16, -8)
 
-	auratracker.children = {auratracker_test}
+	auraTracker.children = {auraTracker_test}
 
 	local misc = ns.addSubCategory(general, ns.localization.generalMisc)
 	misc:SetPoint("TOPLEFT", interruptOutdoors, "BOTTOMLEFT", -16, -20)
@@ -296,13 +296,13 @@ do
 	tinsert(ns.protectOptions, uiScaleAuto)
 
 	local function toggleGeneralOptions()
-		local shown = auratracker:GetChecked()
+		local shown = auraTracker:GetChecked()
 
-		auratracker_test:SetShown(shown)
+		auraTracker_test:SetShown(shown)
 
 	end
 
-	auratracker:HookScript("OnClick", toggleGeneralOptions)
+	auraTracker:HookScript("OnClick", toggleGeneralOptions)
 	general:HookScript("OnShow", toggleGeneralOptions)
 end
 
@@ -663,38 +663,35 @@ do
 	local tooltip = FreeUIOptionsPanel.tooltip
 	tooltip.tab.Icon:SetTexture("Interface\\Icons\\INV_Enchant_FormulaEpic_01")
 
-	-- local enable = ns.CreateCheckBox(tooltip, "enable", true, true)
-	-- enable:SetPoint("TOPLEFT", tooltip.subText, "BOTTOMLEFT", 0, -8)
+	local cursor = ns.CreateCheckBox(tooltip, "cursor", true, true)
+	cursor:SetPoint("TOPLEFT", tooltip.subText, "BOTTOMLEFT", 0, -8)
 
-	-- local cursor = ns.CreateCheckBox(tooltip, "cursor", true, true)
-	-- cursor:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 16, -16)
+	local hideTitles = ns.CreateCheckBox(tooltip, "hideTitles", true, true)
+	hideTitles:SetPoint("TOPLEFT", cursor, "BOTTOMLEFT", 0, -8)
 
-	-- local title = ns.CreateCheckBox(tooltip, "title", true, true)
-	-- title:SetPoint("TOPLEFT", cursor, "BOTTOMLEFT", 0, -8)
+	local hideRealm = ns.CreateCheckBox(tooltip, "hideRealm", true, true)
+	hideRealm:SetPoint("TOPLEFT", hideTitles, "BOTTOMLEFT", 0, -8)
 
-	-- local realm = ns.CreateCheckBox(tooltip, "realm", true, true)
-	-- realm:SetPoint("TOPLEFT", title, "BOTTOMLEFT", 0, -8)
+	local showRank = ns.CreateCheckBox(tooltip, "showRank", true, true)
+	showRank:SetPoint("TOPLEFT", hideRealm, "BOTTOMLEFT", 0, -8)
 
-	-- local rank = ns.CreateCheckBox(tooltip, "rank", true, true)
-	-- rank:SetPoint("TOPLEFT", realm, "BOTTOMLEFT", 0, -8)
+	local hidePvP = ns.CreateCheckBox(tooltip, "hidePvP", true, true)
+	hidePvP:SetPoint("TOPLEFT", showRank, "BOTTOMLEFT", 0, -8)
 
-	-- local pvp = ns.CreateCheckBox(tooltip, "pvp", true, true)
-	-- pvp:SetPoint("TOPLEFT", rank, "BOTTOMLEFT", 0, -8)
+	local hideFaction = ns.CreateCheckBox(tooltip, "hideFaction", true, true)
+	hideFaction:SetPoint("TOPLEFT", hidePvP, "BOTTOMLEFT", 0, -8)
 
-	-- local faction = ns.CreateCheckBox(tooltip, "faction", true, true)
-	-- faction:SetPoint("TOPLEFT", pvp, "BOTTOMLEFT", 0, -8)
+	local colorborderClass = ns.CreateCheckBox(tooltip, "colorborderClass", true, true)
+	colorborderClass:SetPoint("TOPLEFT", hideFaction, "BOTTOMLEFT", 0, -8)
 
-	-- local hide = ns.CreateCheckBox(tooltip, "hide", true, true)
-	-- hide:SetPoint("TOPLEFT", faction, "BOTTOMLEFT", 0, -8)
+	local combathideALL = ns.CreateCheckBox(tooltip, "combathideALL", true, true)
+	combathideALL:SetPoint("TOPLEFT", colorborderClass, "BOTTOMLEFT", 0, -8)
 
-	-- local hideall = ns.CreateCheckBox(tooltip, "hideall", true, true)
-	-- hideall:SetPoint("TOPLEFT", hide, "BOTTOMLEFT", 0, -8)
+	local hideHealthbar = ns.CreateCheckBox(tooltip, "hideHealthbar", true, true)
+	hideHealthbar:SetPoint("TOPLEFT", combathideALL, "BOTTOMLEFT", 0, -8)
 
-	-- local id = ns.CreateCheckBox(tooltip, "id", true, true)
-	-- id:SetPoint("TOPLEFT", hideall, "BOTTOMLEFT", 0, -8)
-
-	-- local caster = ns.CreateCheckBox(tooltip, "caster", true, true)
-	-- caster:SetPoint("TOPLEFT", id, "BOTTOMLEFT", 0, -8)
+	local powerbar = ns.CreateCheckBox(tooltip, "powerbar", true, true)
+	powerbar:SetPoint("TOPLEFT", hideHealthbar, "BOTTOMLEFT", 0, -8)
 
 	-- local ilvl = ns.CreateCheckBox(tooltip, "ilvl", true, true)
 	-- ilvl:SetPoint("LEFT", cursor, "RIGHT", 240, 0)
@@ -716,8 +713,8 @@ do
 	-- 	caster:SetShown(shown)
 	-- end
 
-	-- enable:HookScript("OnClick", toggleTooltipOptions)
-	-- tooltip:HookScript("OnShow", toggleTooltipOptions)
+--	enable:HookScript("OnClick", toggleTooltipOptions)
+--	tooltip:HookScript("OnShow", toggleTooltipOptions)
 
 end
 

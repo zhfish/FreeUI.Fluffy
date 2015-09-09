@@ -96,20 +96,17 @@ C["notifications"] = {
 }
 
 C["tooltip"] = {
-	["enable"] = true,
-
-	["cursor"] = false,
-	["title"] = true,
-	["realm"] = true,
-	["rank"] = true,
-	["pvp"] = true,
-	["faction"] = true,
-	["hide"] = false,
-	["hideall"] = false,
-	["id"] = true,
-	["caster"] = true,
-	["ilvl"] = true,
-	["spec"] = true,
+	["cursor"] = false,		-- tooltip at mouse
+	["position"] = {"BOTTOMRIGHT", -25, 30},	-- tooltip position
+	["hideTitles"] = true,	-- hide player title
+	["hideRealm"] = false,	-- hide realm
+	["showRank"] = false,	-- show guild rank
+	["hideFaction"] = true,	-- hide faction
+	["hidePvP"] = true,		-- hide PVP status
+	["colorborderClass"] = false,	-- color border by class
+	["combathideALL"] = false,  -- hide tooltip while in combat
+	["hideHealthbar"] = false,	-- hide healthbar
+	["powerbar"] = false,		-- show mana / power bar
 }
 
 C["unitframes"] = {
