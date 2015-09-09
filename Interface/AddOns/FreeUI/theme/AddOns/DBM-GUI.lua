@@ -18,30 +18,37 @@ C.themes["DBM-GUI"] = function()
 	local count = 1
 
 	local function styleDBM()
-		local option = _G["DBM_GUI_Option_"..count]
-		while option do
-			local objType = option:GetObjectType()
-			if objType == "CheckButton" then
-				F.ReskinCheck(option)
-			elseif objType == "Slider" then
-				F.ReskinSlider(option)
-			elseif objType == "EditBox" then
-				F.ReskinInput(option)
-			elseif option:GetName():find("DropDown") then
-				F.ReskinDropDown(option)
-			elseif objType == "Button" then
-				F.Reskin(option)
-			elseif objType == "Frame" then
-				option:SetBackdrop(nil)
-			end
+        local option = _G["DBM_GUI_Option_"..count]
+        while option do
+            local objType = option:GetObjectType()
+            if objType == "CheckButton" then
+                F.ReskinCheck(option)
+            elseif objType == "Slider" then
+                F.ReskinSlider(option)
+            elseif objType == "EditBox" then
+                F.ReskinInput(option)
+            elseif option:GetName():find("DropDown") then
+                F.ReskinDropDown(option)
+                local name = option:GetName()
+                local button, bg = option:GetChildren()
+                bg:SetPoint("TOPLEFT", _G[name.."Left"], 18, -20)
+                bg:SetPoint("BOTTOMRIGHT", _G[name.."Right"], -16, 24)
 
-			count = count + 1
-			option = _G["DBM_GUI_Option_"..count]
-			if not option then
-				option = _G["DBM_GUI_DropDown"..count]
-			end
-		end
-	end
+                button:ClearAllPoints()
+                button:SetPoint("RIGHT", bg, 0, 0)
+            elseif objType == "Button" then
+                F.Reskin(option)
+            elseif objType == "Frame" then
+                option:SetBackdrop(nil)
+            end
+
+            count = count + 1
+            option = _G["DBM_GUI_Option_"..count]
+            if not option then
+                option = _G["DBM_GUI_DropDown"..count]
+            end
+        end
+    end
 
 	DBM:RegisterOnGuiLoadCallback(function()
 		styleDBM()
@@ -63,9 +70,38 @@ C.themes["DBM-GUI"] = function()
 		element.toggle.plus:SetShown(pushed and pushed:find("Plus"))
 	end)
 
-	F.CreateBD(DBM_GUI_OptionsFrame)
-	F.CreateSD(DBM_GUI_OptionsFrame)
-	F.Reskin(DBM_GUI_OptionsFrameOkay)
-	F.Reskin(DBM_GUI_OptionsFrameWebsiteButton)
-	F.ReskinScroll(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
+	local MAX_BUTTONS = 10
+    hooksecurefunc(DBM_GUI_DropDown, "ShowMenu", function(self, values)
+        --print("DBMSkin: ShowMenu", self, values)
+        local button = self.buttons[1]
+        local _, _, _, x = button:GetPoint()
+        for i = 1, MAX_BUTTONS do
+            if i + self.offset <= #values then
+                if values[i+self.offset].value == self.dropdown.value then
+                    local text = self.buttons[i]:GetText()
+                    local t, j = text:find("Check:0")
+                    text = text:sub(j+3)
+                    --print("Button "..i.."text:", text)
+                end
+                --button = self.buttons[i]
+
+                local highlight = _G[self.buttons[i]:GetName().."Highlight"]
+                highlight:SetTexture(C.r, C.g, C.b, .2)
+                highlight:SetPoint("TOPLEFT", -x, 0)
+                highlight:SetPoint("BOTTOMRIGHT", self:GetWidth() - button:GetWidth() - x - 1, 0)
+            end
+        end
+
+        if self.text:IsShown() then
+            self:SetHeight(self:GetHeight() + 5)
+            self.text:SetPoint("BOTTOM", self, "BOTTOM", 0, 3)
+        end
+    end)
+
+	F.CreateBD(DBM_GUI_DropDown)
+    F.CreateBD(DBM_GUI_OptionsFrame)
+    F.CreateSD(DBM_GUI_OptionsFrame)
+    F.Reskin(DBM_GUI_OptionsFrameWebsiteButton)
+    F.Reskin(DBM_GUI_OptionsFrameOkay)
+    F.ReskinScroll(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
 end
