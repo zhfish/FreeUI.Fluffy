@@ -6,8 +6,8 @@ local F, C, L = unpack(select(2, ...))
 --[[ Global config ]]
 
 C["general"] = {
-	["auratracker"] = false, 		-- Track some important auras, based on classic Filger
-		["auratracker_test"] = false,	-- test mod to adjust position
+	["auraTracker"] = false, 		-- Track some important auras, based on classic Filger
+		["auraTracker_test"] = false,	-- test mod to adjust position
 	["helmcloakbuttons"] = true, 	-- show buttons to toggle helm/cloak on character frame
 	["interrupt"] = true,			-- announce your interrupts
 		["interrupt_sound"] = true,		-- play sound
@@ -29,6 +29,7 @@ C["general"] = {
 	["showtreasures"] = true,		-- toggle the treasures marked from the various treasure maps sold in Ashran
 	["ncshadow"] = true,
 	["emergency"] = true,
+	["hideraidnames"] = true,
 }
 
 C["appearance"] = {
@@ -59,7 +60,7 @@ C["actionbars"] = {
 	["enable"] = true,					-- enable the action bars
 	["enableStyle"] = true,
 	["bar3Fold"] = true,
-	["hotKey"] = true, 				-- show hot keys on buttons
+	["hotKey"] = false, 				-- show hot keys on buttons
 	["macroName"] = true,					-- show macro name on buttons
 	["rightbars_mouseover"] = false, -- show right bars on mouseover (show/hide: use blizz option)
 	
@@ -68,8 +69,8 @@ C["actionbars"] = {
 C["bags"] = {
 	["style"] = 1,						-- 1 = all-in-one, 2 = restyle default bags, 3 = do nothing
 
-	["size"] = 37,						-- change the size of the bags/bank, default = 37
-	["slotsShowAlways"] = false, 		-- always show the bag item slots
+	["size"] = 34,						-- change the size of the bags/bank, default = 37
+	["slotsShowAlways"] = true, 		-- always show the bag item slots
 
 	["hideSlots"] = true,				-- hide bag slots if style is 2 or 3
 }
@@ -132,10 +133,10 @@ C["unitframes"] = {
 		["statusIndicatorCombat"] = true,				-- show combat status (else: only resting)
 
 	["player"] = {"BOTTOM", UIParent, "BOTTOM", 0, 200},						-- player unitframe position
-	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, 100},					-- target unitframe position
-	["focus"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 10, -40},					-- focus unitframe position
+	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 26, 120},					-- target unitframe position
+	["focus"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 26, -40},					-- focus unitframe position
 	["party"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -60},				-- party unitframe position
-	["raid"] = {"BOTTOMRIGHT", 'oUF_FreePlayer', "TOPLEFT", -120, 80},				-- raid unitframe position
+	["raid"] = {"BOTTOMRIGHT", 'oUF_FreePlayer', "TOPLEFT", -110, 80},				-- raid unitframe position
 
 	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -90},		-- player castbar position
 	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, 40},		-- target castbar position
@@ -148,7 +149,7 @@ C["unitframes"] = {
 	["power_height"] = 2,
 	["altpower_height"] = 2,
 
-	["player_width"] = 241,
+	["player_width"] = 260,
 	["player_height"] = 12,
 	["target_width"] = 201,
 	["target_height"] = 12,
