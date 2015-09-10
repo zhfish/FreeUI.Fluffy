@@ -623,20 +623,10 @@ do
 	showRaidFrames:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 16, -8)
 	tinsert(ns.protectOptions, showRaidFrames)
 
-	local limitRaidSize30 = ns.CreateCheckBox(unitframes, "limitRaidSize30", true)
-	limitRaidSize30:SetPoint("TOPLEFT", showRaidFrames, "BOTTOMLEFT", 16, -8)
-	tinsert(ns.protectOptions, limitRaidSize30)
-
-	local limitRaidSize15 = ns.CreateCheckBox(unitframes, "limitRaidSize15", true)
-	limitRaidSize15:SetPoint("TOPLEFT", limitRaidSize30, "BOTTOMLEFT", 0, -8)
-	tinsert(ns.protectOptions, limitRaidSize15)
-
 	local partyNameAlways = ns.CreateCheckBox(unitframes, "partyNameAlways", true, true)
-	partyNameAlways:SetPoint("TOPLEFT", limitRaidSize15, "BOTTOMLEFT", -16, -8)
+	partyNameAlways:SetPoint("TOPLEFT", showRaidFrames, "BOTTOMLEFT", 0, -8)
 
-	enableGroup.children = {limitRaidSize15, limitRaidSize30, showRaidFrames, partyNameAlways}
-
-	showRaidFrames.children = {limitRaidSize15, limitRaidSize30}
+	enableGroup.children = {showRaidFrames, partyNameAlways}
 
 	local function toggleUFOptions()
 		local shown = enable:GetChecked()
@@ -645,8 +635,6 @@ do
 		gradient:SetShown(shown)
 		spellRange:SetShown(shown)
 		enableGroup:SetShown(shown)
-		limitRaidSize15:SetShown(shown)
-		limitRaidSize30:SetShown(shown)
 		showRaidFrames:SetShown(shown)
 		partyNameAlways:SetShown(shown)
 		castbarSeparate:SetShown(shown)

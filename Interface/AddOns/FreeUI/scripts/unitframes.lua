@@ -2075,30 +2075,6 @@ oUF:Factory(function(self)
 
 	raid:SetPoint(unpack(raidPos))
 
-	if C.unitframes.limitRaidSizePVE then
-		raid:SetAttribute("groupFilter", "1,2,3,4,5,6")
-	end
-
-	if C.unitframes.limitRaidSizePVP then
-		raid:SetAttribute("groupFilter", "1,2,3")
-	end
-
-	F.AddOptionsCallback("unitframes", "limitRaidSize30", function()
-		if C.unitframes.limitRaidSizePVE then
-			raid:SetAttribute("groupFilter", "1,2,3,4,5,6")
-		else
-			raid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
-		end
-	end)
-
-	F.AddOptionsCallback("unitframes", "limitRaidSize15", function()
-		if C.unitframes.limitRaidSizePVP then
-			raid:SetAttribute("groupFilter", "1,2,3")
-		else
-			raid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
-		end
-	end)
-
 	local raidToParty = CreateFrame("Frame")
 
 	local function togglePartyAndRaid(event)
