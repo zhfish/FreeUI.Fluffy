@@ -115,6 +115,7 @@ C["unitframes"] = {
 
 	["spellRange"] = true,					
 	["shadow"] = true,						-- add shadow border around unit frames
+	["gradient"] = false,					-- gradient mode
 
 	["enableGroup"] = true,					-- enable party/raid frames
 		["limitRaidSize"] = false, 					-- show a maximum of 25 players in a raid

@@ -582,8 +582,11 @@ do
 	local spellRange = ns.CreateCheckBox(unitframes, "spellRange", true, true)
 	spellRange:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -8)
 
+	local gradient = ns.CreateCheckBox(unitframes, "gradient", true, true)
+	gradient:SetPoint("TOPLEFT", spellRange, "BOTTOMLEFT", 0, -8)
+
 	local shadow = ns.CreateCheckBox(unitframes, "shadow", true, true)
-	shadow:SetPoint("TOPLEFT", spellRange, "BOTTOMLEFT", 0, -8)
+	shadow:SetPoint("TOPLEFT", gradient, "BOTTOMLEFT", 0, -8)
 
 	local enableGroup = ns.CreateCheckBox(unitframes, "enableGroup", true, true)
 	enableGroup:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
@@ -637,6 +640,7 @@ do
 		local shown = enable:GetChecked()
 
 		shadow:SetShown(shown)
+		gradient:SetShown(shown)
 		spellRange:SetShown(shown)
 		enableGroup:SetShown(shown)
 		limitRaidSizePVE:SetShown(shown)
