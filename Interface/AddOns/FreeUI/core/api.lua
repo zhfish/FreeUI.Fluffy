@@ -93,7 +93,7 @@ local CreateBD = function(f, a)
 		edgeFile = C.media.backdrop,
 		edgeSize = 1,
 	})
-	f:SetBackdropColor(.03, .03, .03, a or .75)
+	f:SetBackdropColor(.06, .06, .06, a or .9)
 	f:SetBackdropBorderColor(0, 0, 0)
 
 	if not a then
@@ -125,16 +125,16 @@ end
 
 F.CreateSD = function(parent, size, r, g, b, alpha, offset)
 	local sd = CreateFrame("Frame", nil, parent)
-	sd.size = size or 5
-	sd.offset = offset or 0
+	sd.size = size or 4
+	sd.offset = offset or -1
 	sd:SetBackdrop({
 		edgeFile = C.media.glow,
 		edgeSize = sd.size,
 	})
-	sd:SetPoint("TOPLEFT", parent, -sd.size - 1 - sd.offset, sd.size + 1 + sd.offset)
-	sd:SetPoint("BOTTOMRIGHT", parent, sd.size + 1 + sd.offset, -sd.size - 1 - sd.offset)
-	sd:SetBackdropBorderColor(r or 0, g or 0, b or 0)
-	sd:SetAlpha(alpha or 1)
+	sd:SetPoint("TOPLEFT", parent, -sd.size - 0 - sd.offset, sd.size + 0 + sd.offset)
+	sd:SetPoint("BOTTOMRIGHT", parent, sd.size + 0 + sd.offset, -sd.size - 0 - sd.offset)
+	sd:SetBackdropBorderColor(r or .03, g or .03, b or .03)
+	sd:SetAlpha(alpha or .6)
 end
 
 F.CreateFS = function(parent, fontSize, justify)
@@ -202,7 +202,7 @@ F.CreatePulse = function(frame) -- pulse function originally by nightcracker
 end
 
 local r, g, b = unpack(C.class)
-local buttonR, buttonG, buttonB, buttonA = .5, .5, .5, .2
+local buttonR, buttonG, buttonB, buttonA = .06, .06, .06, .8
 
 local CreateGradient = function(f)
 	local tex = f:CreateTexture(nil, "BORDER")
