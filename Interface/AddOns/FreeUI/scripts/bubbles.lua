@@ -1,8 +1,11 @@
 local F, C = unpack(select(2, ...))
 
-local bubbleFont = C.media.font2
-
 local bubbleHook = CreateFrame("Frame")
+local last = 0
+local numKids = 0
+local noscalemult = 1
+local tslu = 0
+local bubbles = {}
 
 local function styleBubble(frame)
 	local scale = UIParent:GetScale()
@@ -12,20 +15,24 @@ local function styleBubble(frame)
 		if region:GetObjectType() == "Texture" then
 			region:SetTexture(nil)
 		elseif region:GetObjectType() == "FontString" then
-			region:SetFont(bubbleFont, 14)
+			frame.text = region
 			region:SetShadowOffset(scale, -scale)
 		end
 	end
 
 	frame:SetBackdrop({
 		bgFile = C.media.backdrop,
-	edgeFile = C.media.glow,
-	insets = {left = 2, right = 2, top = 2, bottom = 2},
-	tile = false, tileSize = 0, 
-	edgeSize = 3,
+		edgeFile = C.media.glow,
+		insets = {left = 2, right = 2, top = 2, bottom = 2},
+		tile = false, tileSize = 0, 
+		edgeSize = 3,
 	})
+
+	frame:SetClampedToScreen(false)
 	frame:SetBackdropColor(0, 0, 0, .5)
 	frame:SetBackdropBorderColor(0, 0, 0)
+
+	tinsert(bubbles, frame)
 end
 
 local function isChatBubble(frame)
@@ -34,13 +41,12 @@ local function isChatBubble(frame)
 	return frame:GetRegions():GetTexture() == [[Interface\Tooltips\ChatBubble-Background]]
 end
 
-local last = 0
-local numKids = 0
-
 bubbleHook:SetScript("OnUpdate", function(self, elapsed)
-	last = last + elapsed
-	if last > .1 then
-		last = 0
+	tslu = tslu + elapsed
+
+	if tslu > .1 then
+		tslu = 0
+		
 		local newNumKids = WorldFrame:GetNumChildren()
 		if newNumKids ~= numKids then
 			for i = numKids + 1, newNumKids do
@@ -51,6 +57,11 @@ bubbleHook:SetScript("OnUpdate", function(self, elapsed)
 				end
 			end
 			numKids = newNumKids
+		end
+
+		for i, frame in next, bubbles do
+			local r, g, b = frame.text:GetTextColor()
+			frame:SetBackdropBorderColor(r, g, b, .8)
 		end
 	end
 end)
