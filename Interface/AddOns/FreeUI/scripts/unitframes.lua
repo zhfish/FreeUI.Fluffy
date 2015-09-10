@@ -555,7 +555,7 @@ local Shared = function(self, unit, isSingle)
 	Castbar.Spark = Spark
 
 	self.Castbar = Castbar
-	-- 目标/焦点施法条，可打断为黄色，不可打断为红色，玩家施法条永远职业染色
+
 	local PostCastStart = function(Castbar, unit, spell, spellrank)
 		if self.Iconbg then
 			if Castbar.interrupt and (unit=="target" or unit=="focus" or unit:find("boss%d")) then
