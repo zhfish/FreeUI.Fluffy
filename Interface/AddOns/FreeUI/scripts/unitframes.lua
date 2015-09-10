@@ -2083,7 +2083,7 @@ oUF:Factory(function(self)
 		raid:SetAttribute("groupFilter", "1,2,3")
 	end
 
-	F.AddOptionsCallback("unitframes", "limitRaidSizePVE", function()
+	F.AddOptionsCallback("unitframes", "limitRaidSize30", function()
 		if C.unitframes.limitRaidSizePVE then
 			raid:SetAttribute("groupFilter", "1,2,3,4,5,6")
 		else
@@ -2091,7 +2091,7 @@ oUF:Factory(function(self)
 		end
 	end)
 
-	F.AddOptionsCallback("unitframes", "limitRaidSizePVP", function()
+	F.AddOptionsCallback("unitframes", "limitRaidSize15", function()
 		if C.unitframes.limitRaidSizePVP then
 			raid:SetAttribute("groupFilter", "1,2,3")
 		else

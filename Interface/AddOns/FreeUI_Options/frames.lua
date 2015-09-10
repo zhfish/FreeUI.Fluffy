@@ -579,43 +579,17 @@ do
 	local enable = ns.CreateCheckBox(unitframes, "enable", true, true)
 	enable:SetPoint("TOPLEFT", unitframes.subText, "BOTTOMLEFT", 0, -16)
 
-	local spellRange = ns.CreateCheckBox(unitframes, "spellRange", true, true)
-	spellRange:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 0, -8)
+	local shadow = ns.CreateCheckBox(unitframes, "shadow", true, true)
+	shadow:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 16, -8)
 
 	local gradient = ns.CreateCheckBox(unitframes, "gradient", true, true)
-	gradient:SetPoint("TOPLEFT", spellRange, "BOTTOMLEFT", 0, -8)
+	gradient:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
 
-	local shadow = ns.CreateCheckBox(unitframes, "shadow", true, true)
-	shadow:SetPoint("TOPLEFT", gradient, "BOTTOMLEFT", 0, -8)
-
-	local enableGroup = ns.CreateCheckBox(unitframes, "enableGroup", true, true)
-	enableGroup:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
-
-	local limitRaidSizePVE = ns.CreateCheckBox(unitframes, "limitRaidSizePVE", true)
-	limitRaidSizePVE:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 16, -8)
-	tinsert(ns.protectOptions, limitRaidSizePVE)
-
-	local limitRaidSizePVP = ns.CreateCheckBox(unitframes, "limitRaidSizePVP", true)
-	limitRaidSizePVP:SetPoint("TOPLEFT", limitRaidSizePVE, "BOTTOMLEFT", 0, -8)
-	tinsert(ns.protectOptions, limitRaidSizePVP)
-
-	local showRaidFrames = ns.CreateCheckBox(unitframes, "showRaidFrames", true)
-	showRaidFrames:SetPoint("TOPLEFT", limitRaidSizePVP, "BOTTOMLEFT", 16, -8)
-	tinsert(ns.protectOptions, showRaidFrames)
-
-	local partyNameAlways = ns.CreateCheckBox(unitframes, "partyNameAlways", true, true)
-	partyNameAlways:SetPoint("TOPLEFT", showRaidFrames, "BOTTOMLEFT", 0, -8)
-
-	enableGroup.children = {showRaidFrames, partyNameAlways}
-
-	local enableArena = ns.CreateCheckBox(unitframes, "enableArena", true, true)
-	enableArena:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 0, -140)
-
-	local absorb = ns.CreateCheckBox(unitframes, "absorb", true, true)
-	absorb:SetPoint("LEFT", enable, "RIGHT", 240, 0)
+	local spellRange = ns.CreateCheckBox(unitframes, "spellRange", true, true)
+	spellRange:SetPoint("TOPLEFT", gradient, "BOTTOMLEFT", 0, -8)
 
 	local powerTypeColor = ns.CreateCheckBox(unitframes, "powerTypeColor", true, true)
-	powerTypeColor:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -8)
+	powerTypeColor:SetPoint("TOPLEFT", spellRange, "BOTTOMLEFT", 0, -8)
 
 	local castbar = ns.CreateCheckBox(unitframes, "castbar", true, true)
 	castbar:SetPoint("TOPLEFT", powerTypeColor, "BOTTOMLEFT", 0, -8)
@@ -623,10 +597,13 @@ do
 	local castbarSeparate = ns.CreateCheckBox(unitframes, "castbarSeparate", true, true)
 	castbarSeparate:SetPoint("TOPLEFT", castbar, "BOTTOMLEFT", 16, -8)
 
-	enableGroup.children = {castbar, castbarSeparate}
+	castbar.children = {castbarSeparate}
 
+	local absorb = ns.CreateCheckBox(unitframes, "absorb", true, true)
+	absorb:SetPoint("TOPLEFT", castbarSeparate, "BOTTOMLEFT", -16, -8)
+	
 	local pvp = ns.CreateCheckBox(unitframes, "pvp", true, true)
-	pvp:SetPoint("TOPLEFT", castbarSeparate, "BOTTOMLEFT", -16, -8)
+	pvp:SetPoint("TOPLEFT", absorb, "BOTTOMLEFT", 0, -8)
 
 	local statusIndicator = ns.CreateCheckBox(unitframes, "statusIndicator", true)
 	statusIndicator:SetPoint("TOPLEFT", pvp, "BOTTOMLEFT", 0, -8)
@@ -636,6 +613,31 @@ do
 
 	statusIndicator.children = {statusIndicatorCombat}
 
+	local enableArena = ns.CreateCheckBox(unitframes, "enableArena", true, true)
+	enableArena:SetPoint("TOPLEFT", statusIndicatorCombat, "BOTTOMLEFT", -16, -8)
+
+	local enableGroup = ns.CreateCheckBox(unitframes, "enableGroup", true, true)
+	enableGroup:SetPoint("LEFT", enable, "RIGHT", 240, 0)
+
+	local showRaidFrames = ns.CreateCheckBox(unitframes, "showRaidFrames", true)
+	showRaidFrames:SetPoint("TOPLEFT", enableGroup, "BOTTOMLEFT", 16, -8)
+	tinsert(ns.protectOptions, showRaidFrames)
+
+	local limitRaidSize30 = ns.CreateCheckBox(unitframes, "limitRaidSize30", true)
+	limitRaidSize30:SetPoint("TOPLEFT", showRaidFrames, "BOTTOMLEFT", 16, -8)
+	tinsert(ns.protectOptions, limitRaidSize30)
+
+	local limitRaidSize15 = ns.CreateCheckBox(unitframes, "limitRaidSize15", true)
+	limitRaidSize15:SetPoint("TOPLEFT", limitRaidSize30, "BOTTOMLEFT", 0, -8)
+	tinsert(ns.protectOptions, limitRaidSize15)
+
+	local partyNameAlways = ns.CreateCheckBox(unitframes, "partyNameAlways", true, true)
+	partyNameAlways:SetPoint("TOPLEFT", limitRaidSize15, "BOTTOMLEFT", -16, -8)
+
+	enableGroup.children = {limitRaidSize15, limitRaidSize30, showRaidFrames, partyNameAlways}
+
+	showRaidFrames.children = {limitRaidSize15, limitRaidSize30}
+
 	local function toggleUFOptions()
 		local shown = enable:GetChecked()
 
@@ -643,8 +645,8 @@ do
 		gradient:SetShown(shown)
 		spellRange:SetShown(shown)
 		enableGroup:SetShown(shown)
-		limitRaidSizePVE:SetShown(shown)
-		limitRaidSizePVP:SetShown(shown)
+		limitRaidSize15:SetShown(shown)
+		limitRaidSize30:SetShown(shown)
 		showRaidFrames:SetShown(shown)
 		partyNameAlways:SetShown(shown)
 		castbarSeparate:SetShown(shown)
