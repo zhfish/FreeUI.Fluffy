@@ -579,8 +579,11 @@ do
 	local enable = ns.CreateCheckBox(unitframes, "enable", true, true)
 	enable:SetPoint("TOPLEFT", unitframes.subText, "BOTTOMLEFT", 0, -16)
 
+	local healerClasscolours = ns.CreateCheckBox(unitframes, "healerClasscolours", true, true)
+	healerClasscolours:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 16, -8)
+
 	local shadow = ns.CreateCheckBox(unitframes, "shadow", true, true)
-	shadow:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 16, -8)
+	shadow:SetPoint("TOPLEFT", healerClasscolours, "BOTTOMLEFT", 0, -8)
 
 	local gradient = ns.CreateCheckBox(unitframes, "gradient", true, true)
 	gradient:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
@@ -631,6 +634,7 @@ do
 	local function toggleUFOptions()
 		local shown = enable:GetChecked()
 
+		healerClasscolours:SetShown(shown)
 		shadow:SetShown(shown)
 		gradient:SetShown(shown)
 		spellRange:SetShown(shown)

@@ -113,6 +113,7 @@ C["tooltip"] = {
 C["unitframes"] = {
 	["enable"] = true, 						-- enable the unit frames and their included modules
 
+	["healerClasscolours"] = false,
 	["spellRange"] = true,					
 	["shadow"] = true,						-- add shadow border around unit frames
 	["gradient"] = false,					-- gradient mode

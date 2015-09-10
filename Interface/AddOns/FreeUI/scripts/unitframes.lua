@@ -290,40 +290,48 @@ local PostUpdateHealth = function(Health, unit, min, max)
 	if unit == "target" or unit:find("arena") then
 		Health.value:SetTextColor(unpack(reaction))
 	end
-	if offline or UnitIsDead(unit) or UnitIsGhost(unit) then
-		self.Healthdef:Hide()
-	else
-		self.Healthdef:SetMinMaxValues(0, max)
-		self.Healthdef:SetValue(max-min)
-		--self.Healthdef:GetStatusBarTexture():SetVertexColor(self.ColorGradient(min, max, unpack(self.colors.smooth)))
-		self.Healthdef:GetStatusBarTexture():SetVertexColor(r, g, b)	-- 掉血用职业染色！
-		self.Healthdef:Show()
-	end
 
-	if C.unitframes.powerTypeColor and unit == "player" then
-		self.Power.colorPower = true
-		self.Power.bg:SetVertexColor(0, 0, 0, .1)
-	else
-		self.Power:SetStatusBarColor(r, g, b)
-		self.Power.bg:SetVertexColor(r/2, g/2, b/2)
-	end
-
-	if tapped or offline then
-		if C.unitframes.gradient then
-			self.gradient:SetGradientAlpha("VERTICAL", .6, .6, .6, .6, .4, .4, .4, .6)
+	if not C.unitframes.healerClasscolours then
+		if offline or UnitIsDead(unit) or UnitIsGhost(unit) then
+			self.Healthdef:Hide()
 		else
-			self.gradient:SetGradientAlpha("VERTICAL", .6, .6, .6, .6, .6, .6, .6, .6)
+			self.Healthdef:SetMinMaxValues(0, max)
+			self.Healthdef:SetValue(max-min)
+			--self.Healthdef:GetStatusBarTexture():SetVertexColor(self.ColorGradient(min, max, unpack(self.colors.smooth)))
+			self.Healthdef:GetStatusBarTexture():SetVertexColor(r, g, b)	-- 掉血用职业染色！
+			self.Healthdef:Show()
+		end
+
+		if C.unitframes.powerTypeColor and unit == "player" then
+			self.Power.colorPower = true
+			self.Power.bg:SetVertexColor(0, 0, 0, .1)
+		else
+			self.Power:SetStatusBarColor(r, g, b)
+			self.Power.bg:SetVertexColor(r/2, g/2, b/2)
+		end
+
+		if tapped or offline then
+			if C.unitframes.gradient then
+				self.gradient:SetGradientAlpha("VERTICAL", .6, .6, .6, .6, .4, .4, .4, .6)
+			else
+				self.gradient:SetGradientAlpha("VERTICAL", .6, .6, .6, .6, .6, .6, .6, .6)
+			end
+		else
+			if C.unitframes.gradient then
+				self.gradient:SetGradientAlpha("VERTICAL", .3, .3, .3, .6, .1, .1, .1, .6)
+			else
+				self.gradient:SetGradientAlpha("VERTICAL", .1, .1, .1, .6, .1, .1, .1, .6)
+			end
+		end
+
+		if self.Text then
+			updateNameColour(self, unit)
 		end
 	else
-		if C.unitframes.gradient then
-			self.gradient:SetGradientAlpha("VERTICAL", .3, .3, .3, .6, .1, .1, .1, .6)
-		else
-			self.gradient:SetGradientAlpha("VERTICAL", .1, .1, .1, .6, .1, .1, .1, .6)
+		if UnitIsDead(unit) or UnitIsGhost(unit) then
+			Health:SetValue(0)
 		end
-	end
-
-	if self.Text then
-		updateNameColour(self, unit)
+		Health:GetStatusBarTexture():SetGradient("VERTICAL", r, g, b, r, g, b)
 	end
 end
 
@@ -428,33 +436,39 @@ local Shared = function(self, unit, isSingle)
 
 	--[[ Gradient ]]
 
-	local gradient = Health:CreateTexture(nil, "BACKGROUND")
-	gradient:SetPoint("TOPLEFT")
-	gradient:SetPoint("BOTTOMRIGHT")
-	gradient:SetTexture(C.media.backdrop)
+	if not C.unitframes.healerClasscolours then
+		local gradient = Health:CreateTexture(nil, "BACKGROUND")
+		gradient:SetPoint("TOPLEFT")
+		gradient:SetPoint("BOTTOMRIGHT")
+		gradient:SetTexture(C.media.backdrop)
 
-	if C.unitframes.gradient then
-		gradient:SetGradientAlpha("VERTICAL", .3, .3, .3, .6, .1, .1, .1, .6)
+		if C.unitframes.gradient then
+			gradient:SetGradientAlpha("VERTICAL", .3, .3, .3, .6, .1, .1, .1, .6)
+		else
+			gradient:SetGradientAlpha("VERTICAL", .3, .3, .3, .6, .3, .3, .3, .6)
+		end
+
+		self.gradient = gradient
+
+		F.CreateBD(bd, 0)
 	else
-		gradient:SetGradientAlpha("VERTICAL", .3, .3, .3, .6, .3, .3, .3, .6)
+		F.CreateBD(bd)
 	end
-
-	self.gradient = gradient
-
-	F.CreateBD(bd, 0)
 
 	--[[ Health deficit colour ]]
 
-	local Healthdef = CreateFrame("StatusBar", nil, self)
-	Healthdef:SetFrameStrata("LOW")
-	Healthdef:SetAllPoints(Health)
-	Healthdef:SetStatusBarTexture(C.media.texture)
-	Healthdef:SetStatusBarColor(1, 1, 1)
+	if not C.unitframes.healerClasscolours then
+		local Healthdef = CreateFrame("StatusBar", nil, self)
+		Healthdef:SetFrameStrata("LOW")
+		Healthdef:SetAllPoints(Health)
+		Healthdef:SetStatusBarTexture(C.media.texture)
+		Healthdef:SetStatusBarColor(1, 1, 1)
 
-	Healthdef:SetReverseFill(true)
-	SmoothBar(Healthdef)
+		Healthdef:SetReverseFill(true)
+		SmoothBar(Healthdef)
 
-	self.Healthdef = Healthdef
+		self.Healthdef = Healthdef
+	end
 
 
 	--[[ Power ]]
@@ -486,6 +500,12 @@ local Shared = function(self, unit, isSingle)
 	Power.bg:SetPoint("RIGHT")
 	Power.bg:SetTexture(C.media.backdrop)
 	Power.bg:SetVertexColor(0, 0, 0, .5)
+
+	-- Colour power by power type for dps/tank layout. Because this is brighter, make the background darker for contrast.
+	if C.unitframes.healerClasscolours then
+		Power.colorPower = true
+		Power.bg:SetVertexColor(0, 0, 0, .25)
+	end
 
 	--[[ Alt Power ]]
 

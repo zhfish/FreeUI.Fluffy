@@ -191,8 +191,8 @@ ns.localization.unitframesshowRaidFramesTooltip = "禁用此项则只显示小�
 ns.localization.unitframespartyNameAlways = "显示团员名字"
 ns.localization.unitframespartyNameAlwaysTooltip = "在团队框架上显示团员名字"
 
-ns.localization.unitframeshealerClasscolours = "总是使用职业染色"
-ns.localization.unitframeshealerClasscoloursTooltip = "启用职业染色来代替透明渐变"
+ns.localization.unitframeshealerClasscolours = "禁用头像框体透明模式"
+ns.localization.unitframeshealerClasscoloursTooltip = "启用职业染色来代替透明风格。"
 ns.localization.unitframespvp = "PVP 图标"
 ns.localization.unitframespvpTooltip = "在玩家框体显示一个红色的PVP图标"
 
