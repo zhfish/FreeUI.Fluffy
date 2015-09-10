@@ -96,6 +96,7 @@ C["notifications"] = {
 }
 
 C["tooltip"] = {
+	["enable"] = true,			-- enable tooltip and modules
 	["cursor"] = false,		-- tooltip at mouse
 	["position"] = {"BOTTOMRIGHT", -25, 30},	-- tooltip position
 	["hideTitles"] = true,	-- hide player title

@@ -1,3 +1,7 @@
+local F, C, L = unpack(select(2, ...))
+
+if C.tooltip.enable == false then return end
+
 --[[
 	Until Blizzard adds an easier solution, this function can be used to get the true upgraded itemLevel.
 	The Lua file is easily portable between addons. The function is placed in the global namespace.

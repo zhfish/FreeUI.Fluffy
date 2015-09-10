@@ -1,4 +1,8 @@
+local F, C, L = unpack(select(2, ...))
+
 local _, ns = ...
+
+if C.tooltip.enable == false then return end
 
 if ns.cfg.multiTip == false then return end
 

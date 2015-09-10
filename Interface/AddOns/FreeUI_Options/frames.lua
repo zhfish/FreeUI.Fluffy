@@ -663,8 +663,11 @@ do
 	local tooltip = FreeUIOptionsPanel.tooltip
 	tooltip.tab.Icon:SetTexture("Interface\\Icons\\INV_Enchant_FormulaEpic_01")
 
+	local enable = ns.CreateCheckBox(tooltip, "enable", true, true)
+	enable:SetPoint("TOPLEFT", tooltip.subText, "BOTTOMLEFT", 0, -16)
+
 	local cursor = ns.CreateCheckBox(tooltip, "cursor", true, true)
-	cursor:SetPoint("TOPLEFT", tooltip.subText, "BOTTOMLEFT", 0, -8)
+	cursor:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 16, -8)
 
 	local hideTitles = ns.CreateCheckBox(tooltip, "hideTitles", true, true)
 	hideTitles:SetPoint("TOPLEFT", cursor, "BOTTOMLEFT", 0, -8)
@@ -699,22 +702,22 @@ do
 	-- local spec = ns.CreateCheckBox(tooltip, "spec", true, true)
 	-- spec:SetPoint("TOPLEFT", ilvl, "BOTTOMLEFT", 0, -8)
 
-	-- local function toggleTooltipOptions()
-	-- 	local shown = enable:GetChecked()
-	-- 	cursor:SetShown(shown)
-	-- 	title:SetShown(shown)
-	-- 	realm:SetShown(shown)
-	-- 	rank:SetShown(shown)
-	-- 	pvp:SetShown(shown)
-	-- 	faction:SetShown(shown)
-	-- 	hide:SetShown(shown)
-	-- 	hideall:SetShown(shown)
-	-- 	id:SetShown(shown)
-	-- 	caster:SetShown(shown)
-	-- end
+	local function toggleTooltipOptions()
+		local shown = enable:GetChecked()
+		cursor:SetShown(shown)
+		hideTitles:SetShown(shown)
+		hideRealm:SetShown(shown)
+		showRank:SetShown(shown)
+		hidePvP:SetShown(shown)
+		hideFaction:SetShown(shown)
+		combathideALL:SetShown(shown)
+		colorborderClass:SetShown(shown)
+		hideHealthbar:SetShown(shown)
+		powerbar:SetShown(shown)
+	end
 
---	enable:HookScript("OnClick", toggleTooltipOptions)
---	tooltip:HookScript("OnShow", toggleTooltipOptions)
+	enable:HookScript("OnClick", toggleTooltipOptions)
+	tooltip:HookScript("OnShow", toggleTooltipOptions)
 
 end
 

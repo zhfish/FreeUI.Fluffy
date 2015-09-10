@@ -2,6 +2,8 @@ local F, C, L = unpack(select(2, ...))
 
 local ADDON_NAME, ns = ...
 
+if C.tooltip.enable == false then return end
+
 local ttFont = C.media.font2
 
 local mediapath = "Interface\\AddOns\\FreeUI\\media\\"
