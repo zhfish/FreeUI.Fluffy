@@ -395,7 +395,7 @@ local Shared = function(self, unit, isSingle)
 	bd:SetFrameStrata("BACKGROUND")
 
 	if shadow then
-		F.CreateSD(bd, 3, 0, 0, 0, .6, -1)
+		F.CreateSD(bd)
 	end
 
 	self.bd = bd
