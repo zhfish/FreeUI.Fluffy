@@ -86,6 +86,7 @@ scripts\extra\HiddenRaidNames.lua
 scripts\extra\ncHoverBind.lua
 scripts\extra\idTip.lua
 scripts\extra\myMedia.lua
+scripts\extra\NoAsianFonts.lua
 scripts\extra\ncShadow.lua
 scripts\extra\QuestLevel.lua
 scripts\extra\SafeQueue.lua
