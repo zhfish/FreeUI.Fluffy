@@ -2039,12 +2039,12 @@ oUF:Factory(function(self)
 	spawnHelper(self, 'focustarget', "LEFT", focus, "RIGHT", 5, 0)
 
 	for n = 1, MAX_BOSS_FRAMES do
-		spawnHelper(self, 'boss' .. n, 'LEFT', target, "RIGHT", 10, 80 + (60 * n))
+		spawnHelper(self, 'boss' .. n, C.unitframes.boss.a, C.unitframes.boss.b, C.unitframes.boss.c, C.unitframes.boss.x, C.unitframes.boss.y + (66 * n))
 	end
 
 	if C.unitframes.enableArena then
 		for n = 1, 5 do
-			spawnHelper(self, 'arena' .. n, 'LEFT', UIParent, 20, 100 - (56 * n))
+			spawnHelper(self, 'arena' .. n, C.unitframes.arena.a, C.unitframes.arena.b, C.unitframes.arena.c, C.unitframes.arena.x, C.unitframes.arena.y - (66 * n))
 		end
 	end
 
