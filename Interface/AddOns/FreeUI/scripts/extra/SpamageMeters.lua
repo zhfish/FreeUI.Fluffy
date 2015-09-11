@@ -4,6 +4,7 @@
 local firstLines = {
 	"^Recount - (.*)$", --Recount
 	"^Skada: (.*) for (.*):$", -- Skada enUS 
+	"^Skada：([^:]*)：([^:]*)：$",
 	"^Skada: (.*) por (.*):$", -- Skada esES/ptBR 
 	"^Skada: (.*) für (.*):$", -- Skada deDE 
 	"^Skada: (.*) pour (.*):$", -- Skada frFR 
