@@ -67,7 +67,6 @@ scripts\worldstateframe.lua
 scripts\extra\libs\load_libs.xml
 scripts\extra\chatfilter\load_chatfilter.xml
 scripts\extra\freebtip\load_freebtip.xml
-scripts\extra\filger\load_filger.xml
 
 scripts\extra\_dev\test.lua
 

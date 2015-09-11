@@ -221,7 +221,6 @@ do
 
 	biggertradeskillui.children = {tradetab}
 
-
 	local cooldownpulse = ns.CreateCheckBox(general, "cooldownpulse", true, true)
 	cooldownpulse:SetPoint("TOPLEFT", tradetab, "BOTTOMLEFT", -16, -8)
 
@@ -280,14 +279,6 @@ do
 
 	rareAlert.children = {rareAlertPlaySound}
 
-	local auraTracker = ns.CreateCheckBox(general, "auraTracker", true, true)
-	auraTracker:SetPoint("TOPLEFT", rareAlertPlaySound, "BOTTOMLEFT", -16, -8)
-
-	local auraTracker_test = ns.CreateCheckBox(general, "auraTracker_test", true, true)
-	auraTracker_test:SetPoint("TOPLEFT", auraTracker, "BOTTOMLEFT", 16, -8)
-
-	auraTracker.children = {auraTracker_test}
-
 	local misc = ns.addSubCategory(general, ns.localization.generalMisc)
 	misc:SetPoint("TOPLEFT", interruptOutdoors, "BOTTOMLEFT", -16, -20)
 
@@ -295,15 +286,6 @@ do
 	uiScaleAuto:SetPoint("TOPLEFT", misc, "BOTTOMLEFT", 0, -20)
 	tinsert(ns.protectOptions, uiScaleAuto)
 
-	local function toggleGeneralOptions()
-		local shown = auraTracker:GetChecked()
-
-		auraTracker_test:SetShown(shown)
-
-	end
-
-	auraTracker:HookScript("OnClick", toggleGeneralOptions)
-	general:HookScript("OnShow", toggleGeneralOptions)
 end
 
 -- [[ Appearance ]]
