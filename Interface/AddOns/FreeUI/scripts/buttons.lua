@@ -60,6 +60,13 @@ end)
 
 local function updateHotkey(self)
 	local ho = _G[self:GetName().."HotKey"]
+	local text = ho:GetText()
+
+	if ho:GetText() == _G["RANGE_INDICATOR"] then
+		hotkey:SetText("")
+	else
+		ho:SetText(text)
+	end
 
 	if showHotKey then
 		if not self.styledHotkey then
@@ -72,7 +79,7 @@ local function updateHotkey(self)
 			self.styledHotkey = true
 		end
 
-		local text = ho:GetText()
+		
 
 		if text then
 			text = text:gsub("(s%-)", "S")
