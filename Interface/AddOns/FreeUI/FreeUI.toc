@@ -81,7 +81,6 @@ scripts\extra\DragEmAll.lua
 scripts\extra\Doom_CooldownPulse.lua
 scripts\extra\emergency.lua
 scripts\extra\FasterCamera.lua
-scripts\extra\Focuser.lua
 scripts\extra\Foglight.lua
 scripts\extra\HiddenRaidNames.lua
 scripts\extra\ncHoverBind.lua

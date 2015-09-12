@@ -351,6 +351,21 @@ for i = 1, MAX_PARTY_MEMBERS do
 end
 
 
+
+--[[ set/clear focus with shift + left click ]]
+local focMod = 'shift-'
+local focBut = '1'
+hooksecurefunc("CompactUnitFrame_SetUpFrame", function(frame, ...)
+	if frame then
+		frame:SetAttribute(focMod.."type"..focBut, "focus")
+	end
+end)
+local foc = CreateFrame("CheckButton", "Focuser", UIParent, "SecureActionButtonTemplate")
+foc:SetAttribute("type1", "macro")
+foc:SetAttribute("macrotext", "/focus mouseover")
+SetOverrideBindingClick(Focuser, true, focMod.."BUTTON"..focBut, "Focuser")
+
+
 --[[ Debuff highlight ]]
 local PostUpdateIcon = function(_, unit, icon, index, _, filter)
 	local _, _, _, _, dtype = UnitAura(unit, index, icon.filter)
