@@ -102,12 +102,6 @@ local function updateHotkey(self)
 			ho:SetText("|cffffffff"..text)
 		end
 
-		if ho:GetText() == _G["RANGE_INDICATOR"] then
-			hotkey:SetText("")
-		else
-			hotkey:SetText(text)
-		end
-
 		ho:Show()
 	else
 		ho:Hide()
