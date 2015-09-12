@@ -115,7 +115,7 @@ ns.localization.actionbarsenable = "启用"
 ns.localization.actionbarsenableTooltip = "禁用这个选项如果你想使用默认动作条"
 ns.localization.actionbarsenableStyle = "启用动作条样式"
 ns.localization.actionbarsenableStyleTooltip = "使用其他动作条插件时禁用此项以保证兼容"
-ns.localization.actionbarshotkey = "显示快捷键绑定"
+ns.localization.actionbarshotKey = "显示快捷键绑定"
 ns.localization.actionbarsrightbars_mouseover = "鼠标滑过显示右侧动作条"
 
 ns.localization.bags = "背包"

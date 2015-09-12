@@ -115,7 +115,7 @@ ns.localization.actionbarsenableStyle = "Enable button style"
 ns.localization.actionbarsenableStyleTooltip = "You may need to disable this option to ensure compatibility with other action bars addons."
 ns.localization.actionbarsrightbars_mouseover = "Show right action bars on mouseover"
 ns.localization.actionbarsbar3Fold = "Bar 3 fold"
-ns.localization.actionbarshotkey = "Show key bindings on buttons"
+ns.localization.actionbarshotKey = "Show key bindings on buttons"
 ns.localization.actionbarsmacroname = "Show macro name on buttons"
 
 ns.localization.bags = "Bags"

@@ -410,7 +410,7 @@ do
 	local bar3Fold = ns.CreateCheckBox(actionbars, "bar3Fold", true, true)
 	bar3Fold:SetPoint("TOPLEFT", rightBarsMouseover, "BOTTOMLEFT", 0, -8)
 
-	local hotKey = ns.CreateCheckBox(actionbars, "hotkey")
+	local hotKey = ns.CreateCheckBox(actionbars, "hotKey")
 	hotKey:SetPoint("TOPLEFT", bar3Fold, "BOTTOMLEFT", 0, -8)
 
 	enableStyle.children = {hotKey}

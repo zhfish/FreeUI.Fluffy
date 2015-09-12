@@ -46,8 +46,8 @@ local backdrop2 = {
 local showHotKey = C.actionbars.hotKey
 local showMacroName = C.actionbars.macroName
 
-F.AddOptionsCallback("actionbars", "hotkey", function()
-	showHotKey = C.actionbars.hotkey
+F.AddOptionsCallback("actionbars", "hotKey", function()
+	showHotKey = C.actionbars.hotKey
 
 	for k, frame in pairs(ActionBarButtonEventsFrame.frames) do
 		ActionButton_UpdateHotkeys(frame, frame.buttonType)
@@ -61,54 +61,51 @@ end)
 local function updateHotkey(self)
 	local ho = _G[self:GetName().."HotKey"]
 	local text = ho:GetText()
+	
+	if not self.styledHotkey then
+		ho:ClearAllPoints()
+		ho:SetWidth(0)
+		ho:SetPoint("TOPLEFT", 1, 0)
+		F.SetFS(ho)
+		ho:SetJustifyH("RIGHT")
+		ho:SetDrawLayer("OVERLAY", 1)
+		self.styledHotkey = true
+	end
+
+	if text then
+		text = text:gsub("(s%-)", "S")
+		text = text:gsub("(a%-)", "A")
+		text = text:gsub("(c%-)", "C")
+
+		if locale == "zhCN" then
+        	text = text:gsub("鼠标按键", "M")
+        	text = text:gsub("鼠标中键", "M3")
+        	text = text:gsub("鼠标滚轮向上滚动", "MU")
+        	text = text:gsub("鼠标滚轮向下滚动", "MD")
+    	end
+
+		text = text:gsub("Mouse Button", "M")
+		text = text:gsub("Middle Mouse", "M3")
+		text = text:gsub("Mouse Wheel Up", "MU")
+		text = text:gsub("Mouse Wheel Down", "MD")
+		text = text:gsub("Delete", "Del")
+		text = text:gsub("Num Pad", "N")
+		text = text:gsub("Page Up", "PU")
+		text = text:gsub("Page Down", "PD")
+		text = text:gsub("Spacebar", "SpB")
+		text = text:gsub("Insert", "Ins")
+		text = text:gsub("Num Lock", "NL")
+		text = text:gsub("Home", "Hm")
+	end
 
 	if ho:GetText() == _G["RANGE_INDICATOR"] then
-		hotkey:SetText("")
+		ho:SetText("")
 	else
 		ho:SetText(text)
+		ho:SetText("|cffffffff"..text)
 	end
 
 	if showHotKey then
-		if not self.styledHotkey then
-			ho:ClearAllPoints()
-			ho:SetWidth(0)
-			ho:SetPoint("TOPLEFT", 1, 0)
-			F.SetFS(ho)
-			ho:SetJustifyH("RIGHT")
-			ho:SetDrawLayer("OVERLAY", 1)
-			self.styledHotkey = true
-		end
-
-		
-
-		if text then
-			text = text:gsub("(s%-)", "S")
-			text = text:gsub("(a%-)", "A")
-			text = text:gsub("(c%-)", "C")
-
-			if locale == "zhCN" then
-            	text = text:gsub("鼠标按键", "M")
-            	text = text:gsub("鼠标中键", "M3")
-            	text = text:gsub("鼠标滚轮向上滚动", "MU")
-            	text = text:gsub("鼠标滚轮向下滚动", "MD")
-        	end
-
-			text = text:gsub("Mouse Button", "M")
-			text = text:gsub("Middle Mouse", "M3")
-			text = text:gsub("Mouse Wheel Up", "MU")
-			text = text:gsub("Mouse Wheel Down", "MD")
-			text = text:gsub("Delete", "Del")
-			text = text:gsub("Num Pad", "N")
-			text = text:gsub("Page Up", "PU")
-			text = text:gsub("Page Down", "PD")
-			text = text:gsub("Spacebar", "SpB")
-			text = text:gsub("Insert", "Ins")
-			text = text:gsub("Num Lock", "NL")
-			text = text:gsub("Home", "Hm")
-
-			ho:SetText("|cffffffff"..text)
-		end
-
 		ho:Show()
 	else
 		ho:Hide()
@@ -431,6 +428,7 @@ local function init()
 
 	styleExtraActionButton(ExtraActionButton1)
 
+	hooksecurefunc("ActionButton_OnEvent", function(self, event, ...) if event == "PLAYER_ENTERING_WORLD" then ActionButton_UpdateHotkeys(self, self.buttonType) end end)
 	hooksecurefunc("ActionButton_UpdateHotkeys", updateHotkey)
 	hooksecurefunc("PetActionButton_SetHotkeys", updateHotkey)
 	hooksecurefunc("ActionButton_UpdateFlyout", styleflyout)
