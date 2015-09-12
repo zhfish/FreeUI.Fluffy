@@ -117,6 +117,7 @@ C["unitframes"] = {
 	["spellRange"] = true,					
 	["shadow"] = true,						-- add shadow border around unit frames
 	["gradient"] = false,					-- gradient mode
+	["rectangleAura"] = false,
 
 	["enableGroup"] = true,					-- enable party/raid frames
 		["limitRaidSize"] = false, 					-- show a maximum of 25 players in a raid
@@ -151,15 +152,15 @@ C["unitframes"] = {
 	["power_height"] = 2,
 	["altpower_height"] = 2,
 
-	["player_width"] = 260,
+	["player_width"] = 229,
 	["player_height"] = 12,
-	["target_width"] = 201,
+	["target_width"] = 229,
 	["target_height"] = 12,
 	["targettarget_width"] = 80,
 	["targettarget_height"] = 12,
-	["focus_width"] = 97,
+	["focus_width"] = 112,
 	["focus_height"] = 12,
-	["focustarget_width"] = 97,
+	["focustarget_width"] = 112,
 	["focustarget_height"] = 12,
 	["pet_width"] = 80,
 	["pet_height"] = 12,

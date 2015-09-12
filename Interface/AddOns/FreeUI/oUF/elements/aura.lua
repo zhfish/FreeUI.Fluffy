@@ -40,7 +40,7 @@ local createAuraIcon = function(icons, index)
 	F.CreateSD(button)
 
 	local count = F.CreateFS(button, 8, "CENTER")
-	count:SetPoint("TOP", button, "TOP", 2, -2)
+	count:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
 
 	local overlay = button:CreateTexture(nil, "OVERLAY")
 	overlay:SetTexture"Interface\\Buttons\\UI-Debuff-Overlays"
@@ -169,8 +169,12 @@ local updateIcon = function(unit, icons, index, offset, filter, isDebuff, visibl
 			icon.count:SetText((count > 1 and count))
 
 			local size = icons.size or 16
-	--		icon:SetSize(size, size*0.8)
-			icon:SetSize(size, size)
+			
+			if C.unitframes.rectangleAura then
+				icon:SetSize(size, size*0.8)
+			else
+				icon:SetSize(size, size)
+			end
 
 			icon:EnableMouse(true)
 			icon:SetID(index)

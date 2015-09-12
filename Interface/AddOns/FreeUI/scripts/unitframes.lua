@@ -263,6 +263,7 @@ oUF.Tags.Methods['free:power'] = function(unit)
 end
 oUF.Tags.Events['free:power'] = oUF.Tags.Events.missingpp
 
+
 --[[ Update health ]]
 
 local PostUpdateHealth = function(Health, unit, min, max)
@@ -349,6 +350,7 @@ for i = 1, MAX_PARTY_MEMBERS do
 	_G[pet.."HealthBar"]:UnregisterAllEvents()
 end
 
+
 --[[ Debuff highlight ]]
 local PostUpdateIcon = function(_, unit, icon, index, _, filter)
 	local _, _, _, _, dtype = UnitAura(unit, index, icon.filter)
@@ -365,6 +367,7 @@ local PostUpdateIcon = function(_, unit, icon, index, _, filter)
 		texture:SetDesaturated(false)
 	end
 end
+
 
 --[[ Update power value ]]
 
@@ -794,7 +797,7 @@ local UnitSpecific = {
 
 			if C.unitframes.castbarSeparate then
 				Castbar:SetStatusBarTexture(C.media.texture)
-	--			Castbar:SetStatusBarColor(unpack(C.class))
+				--Castbar:SetStatusBarColor(unpack(C.class))
 				Castbar:SetWidth(self:GetWidth())
 				Castbar:SetHeight(self:GetHeight())
 				Castbar:SetPoint(unpack(C.unitframes.player_castbar))
@@ -1421,7 +1424,13 @@ local UnitSpecific = {
 		Auras["growth-x"] = "RIGHT"
 		Auras["growth-y"] = "DOWN"
 		Auras['spacing-x'] = 3
-		Auras['spacing-y'] = 3
+
+		if C.unitframes.rectangleAura then
+			Auras['spacing-y'] = -2
+		else
+			Auras['spacing-y'] = 3
+		end
+		
 		Auras.numDebuffs = C.unitframes.num_target_debuffs
 		Auras.numBuffs = C.unitframes.num_target_buffs
 		Auras:SetHeight(500)
@@ -1434,6 +1443,7 @@ local UnitSpecific = {
 		self.Auras = Auras
 
 		Auras.showStealableBuffs = true
+		Auras.PostCreateIcon = PostCreateIcon
 		Auras.PostUpdateIcon = PostUpdateIcon
 
 		-- complicated filter is complicated
@@ -1447,13 +1457,15 @@ local UnitSpecific = {
 			vehicle = true,
 		}
 
-		-- Auras.CustomFilter = function(_, unit, icon, _, _, _, _, _, _, _, caster, _, _, spellID)
-		-- 	if(icon.isDebuff and not UnitIsFriend("player", unit) and not playerUnits[icon.owner] and icon.owner ~= self.unit and not C.debuffFilter[spellID])
-		-- 	or(not icon.isDebuff and UnitIsPlayer(unit) and not UnitIsFriend("player", unit) and not C.dangerousBuffs[spellID]) then
-		-- 		return false
-		-- 	end
-		-- 	return true
-		-- end
+		Auras.CustomFilter = function(_, unit, icon, _, _, _, _, _, _, _, caster, _, _, spellID)
+			if(icon.isDebuff and not UnitIsFriend("player", unit) and not playerUnits[icon.owner] and icon.owner ~= self.unit and not C.debuffFilter[spellID])
+			or(not icon.isDebuff and UnitIsPlayer(unit) and not UnitIsFriend("player", unit) and not C.dangerousBuffs[spellID]) then
+				return false
+			end
+			return true
+		end
+
+
 
 		local QuestIcon = F.CreateFS(self)
 		QuestIcon:SetText("!")
