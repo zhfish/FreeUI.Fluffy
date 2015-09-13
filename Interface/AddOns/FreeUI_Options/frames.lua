@@ -627,6 +627,7 @@ do
 		shadow:SetShown(shown)
 		gradient:SetShown(shown)
 		spellRange:SetShown(shown)
+		rectangleAura:SetShown(shown)
 		enableGroup:SetShown(shown)
 		showRaidFrames:SetShown(shown)
 		partyNameAlways:SetShown(shown)
