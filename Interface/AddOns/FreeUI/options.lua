@@ -55,6 +55,7 @@ C["automation"] = {
 	["questRewardHighlight"] = true, -- highlights the quest reward with highest vendor price
 	["hideRaidNames"] = true,
 	["autoScreenShot"] = true,
+	["saySapped"] = true,
 }
 
 C["actionbars"] = {
