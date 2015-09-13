@@ -102,7 +102,7 @@ local function updateHotkey(self)
 		ho:SetText("")
 	else
 		ho:SetText(text)
-		ho:SetText("|cffffffff"..text)
+	--	ho:SetText("|cffffffff"..text)
 	end
 
 	if showHotKey then
