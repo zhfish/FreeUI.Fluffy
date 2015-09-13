@@ -9,7 +9,7 @@ local ttFont = C.media.font2
 local mediapath = "Interface\\AddOns\\FreeUI\\media\\"
 local cfg = {
 --	font = mediapath.."expressway.ttf",
-	fontsize = 13, -- I'd suggest adjusting the scale instead of the fontsize
+	fontsize = 12, -- I'd suggest adjusting the scale instead of the fontsize
 	outline = "OUTLINE",
 	tex = mediapath.."bar",
 
@@ -54,7 +54,7 @@ local cfg = {
 
 	hideHealthbar = C.tooltip.hideHealthbar,
 
-	powerbar = C.tooltip.powerbar, -- enable power bars
+	powerbar = false, -- enable power bars
 	powerManaOnly = true, -- only show mana users
 
 	showRank = C.tooltip.showRank, -- show guild rank
@@ -368,13 +368,24 @@ local function SetStatusBar(self, unit)
 		gtSB:ClearAllPoints()
 
 		local gtsbHeight = gtSB:GetHeight()
-		if(GameTooltipFreebTipPowerBar and GameTooltipFreebTipPowerBar:IsShown()) then
-			GameTooltipStatusBar:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 10, ((gtsbHeight)*2)+7)
-			GameTooltipStatusBar:SetPoint("BOTTOMRIGHT", self, -10, 0)
-		else
-			GameTooltipStatusBar:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 10, gtsbHeight+3)
-			GameTooltipStatusBar:SetPoint("BOTTOMRIGHT", self, -10, 0)
-		end
+		-- if(GameTooltipFreebTipPowerBar and GameTooltipFreebTipPowerBar:IsShown()) then
+		-- 	GameTooltipStatusBar:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 10, ((gtsbHeight)*2)+7)
+		-- 	GameTooltipStatusBar:SetPoint("BOTTOMRIGHT", self, -10, 0)
+		-- else
+		-- 	GameTooltipStatusBar:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 10, gtsbHeight+3)
+		-- 	GameTooltipStatusBar:SetPoint("BOTTOMRIGHT", self, -10, 0)
+		-- end
+
+		GameTooltipStatusBar:ClearAllPoints()
+		GameTooltipStatusBar:SetHeight(6)
+		GameTooltipStatusBar:SetPoint("BOTTOMLEFT", GameTooltipStatusBar:GetParent(), "TOPLEFT", 3, 1)
+		GameTooltipStatusBar:SetPoint("BOTTOMRIGHT", GameTooltipStatusBar:GetParent(), "TOPRIGHT", -3, 1)
+	
+		GameTooltipStatusBar.bg = GameTooltipStatusBar:CreateTexture(nil,"BACKGROUND",nil,-8)
+		GameTooltipStatusBar.bg:SetPoint("TOPLEFT",-1,1)
+		GameTooltipStatusBar.bg:SetPoint("BOTTOMRIGHT",1,-1)
+		GameTooltipStatusBar.bg:SetTexture(1,1,1)
+		GameTooltipStatusBar.bg:SetVertexColor(0,0,0,0.7)
 	end
 
 	if(unit) then

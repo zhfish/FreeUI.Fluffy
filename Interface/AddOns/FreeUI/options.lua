@@ -109,7 +109,7 @@ C["tooltip"] = {
 	["colorborderClass"] = false,	-- color border by class
 	["combathideALL"] = false,  -- hide tooltip while in combat
 	["hideHealthbar"] = false,	-- hide healthbar
-	["powerbar"] = false,		-- show mana / power bar
+--	["powerbar"] = false,		-- show mana / power bar
 }
 
 C["unitframes"] = {
