@@ -1,5 +1,8 @@
 local F, C, L = unpack(select(2, ...))
 
+local class = select(2, UnitClass("player"))
+r, g, b = C.classcolours[class].r, C.classcolours[class].g, C.classcolours[class].b
+
 if not C.general.objectivetracker then return end
 
 local ot = ObjectiveTrackerFrame
@@ -20,8 +23,8 @@ local otMover_Frame = CreateFrame("Frame", "otMoverFrame", UIParent)
 
 	local otMover_Tex = otMover_Frame:CreateTexture()
 	otMover_Tex:SetAllPoints()
-	otMover_Tex:SetTexture(0,0,0,.8)
-	otMover_Tex:SetGradientAlpha("HORIZONTAL",0,0,0,0,1,1,1,.8)
+	otMover_Tex:SetTexture(0,0,0,.3)
+--	otMover_Tex:SetGradientAlpha("HORIZONTAL",0,0,0,0,1,1,1,.8)
 
 	otMover_Frame:RegisterEvent("ADDON_LOADED")
 	otMover_Frame:RegisterEvent("PLAYER_LOGIN")
@@ -117,6 +120,7 @@ for _, headerName in pairs({"QuestHeader", "AchievementHeader", "ScenarioHeader"
 
 	header.Background:Hide()
 	F.SetFS(header.Text)
+	header.Text:SetTextColor(.4,.6,.9)	-- header
 end
 
 do
@@ -124,11 +128,13 @@ do
 
 	header.Background:Hide()
 	F.SetFS(header.Text)
+	header.Text:SetTextColor(1,0,0)	-- bonus objectives header
 end
 
 hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "SetBlockHeader", function(_, block)
 	if not block.headerStyled then
 		F.SetFS(block.HeaderText)
+		block.HeaderText:SetTextColor(r,g,b)	-- achievement header
 		block.headerStyled = true
 	end
 end)
@@ -136,6 +142,7 @@ end)
 hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", function(_, block)
 	if not block.headerStyled then
 		F.SetFS(block.HeaderText)
+		block.HeaderText:SetTextColor(r,g,b)	-- quest lines header
 		block.headerStyled = true
 	end
 
