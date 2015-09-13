@@ -59,11 +59,12 @@ C["automation"] = {
 C["actionbars"] = {
 	["enable"] = true,					-- enable the action bars
 	["enableStyle"] = true,
-	["bar3Fold"] = true,
-	["hotKey"] = false, 				-- show hot keys on buttons
+	["bar3Fold"] = false,
+	["hotKey"] = true, 				-- show hot keys on buttons
 	["macroName"] = true,					-- show macro name on buttons
 	["rightbars_mouseover"] = false, -- show right bars on mouseover (show/hide: use blizz option)
-	
+	["stancebar_mouseover"] = false,
+	["petbar_mouseover"] = false,
 }
 
 C["bags"] = {

@@ -405,27 +405,31 @@ do
 	local rightBarsMouseover = ns.CreateCheckBox(actionbars, "rightbars_mouseover", false, true)
 	rightBarsMouseover:SetPoint("TOPLEFT", enableStyle, "BOTTOMLEFT", 0, -8)
 
-	enable.children = {rightBarsMouseover}
+	local stancebar_mouseover = ns.CreateCheckBox(actionbars, "stancebar_mouseover", false, true)
+	stancebar_mouseover:SetPoint("TOPLEFT", rightBarsMouseover, "BOTTOMLEFT", 0, -8)
+
+	local petbar_mouseover = ns.CreateCheckBox(actionbars, "petbar_mouseover", false, true)
+	petbar_mouseover:SetPoint("TOPLEFT", stancebar_mouseover, "BOTTOMLEFT", 0, -8)
+
+	enable.children = {rightBarsMouseover, stancebar_mouseover, petbar_mouseover}
 
 	local bar3Fold = ns.CreateCheckBox(actionbars, "bar3Fold", true, true)
-	bar3Fold:SetPoint("TOPLEFT", rightBarsMouseover, "BOTTOMLEFT", 0, -8)
+	bar3Fold:SetPoint("TOPLEFT", petbar_mouseover, "BOTTOMLEFT", 0, -8)
 
 	local hotKey = ns.CreateCheckBox(actionbars, "hotKey")
 	hotKey:SetPoint("TOPLEFT", bar3Fold, "BOTTOMLEFT", 0, -8)
-
-	enableStyle.children = {hotKey}
 	
-	-- local macroName = ns.CreateCheckBox(actionbars, "macroname")
-	-- macroName:SetPoint("TOPLEFT", hotKey, "BOTTOMLEFT", 0, -8)
-	
-	-- enable.children = {macroName}
+	local macroName = ns.CreateCheckBox(actionbars, "macroName", true, true)
+	macroName:SetPoint("TOPLEFT", hotKey, "BOTTOMLEFT", 0, -8)
 	
 	local function toggleActionBarsOptions()
 		local shown = enable:GetChecked()
 		enableStyle:SetShown(shown)
 		bar3Fold:SetShown(shown)
 		rightBarsMouseover:SetShown(shown)
---		macroName:SetShown(shown)
+		petbar_mouseover:SetShown(shown)
+		stancebar_mouseover:SetShown(shown)
+		macroName:SetShown(shown)
 		hotKey:SetShown(shown)
 	end
 	

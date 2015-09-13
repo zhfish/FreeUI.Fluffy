@@ -348,6 +348,87 @@ end
 
 hooksecurefunc("MultiActionBar_Update", positionBars)
 
+--[[ stancebar on mouseover ]]
+
+if C.actionbars.stancebar_mouseover then
+	stancebar:EnableMouse(true)
+
+	local function setButtonAlpha(alpha)
+		stancebar:SetAlpha(alpha)
+
+		for i = 1, NUM_STANCE_SLOTS do
+			local sb1 = _G["StanceButton"..i]
+
+			sb1.cooldown:SetSwipeColor(0, 0, 0, 0.8 * alpha)
+			sb1.cooldown:SetDrawBling(alpha == 1)
+		end
+	end
+
+	local function showButtons()
+		setButtonAlpha(1)
+	end
+
+	local function hideButtons()
+		setButtonAlpha(0)
+	end
+
+	for i = 1, NUM_STANCE_SLOTS do
+		local sb1 = _G["StanceButton"..i]
+
+		sb1:HookScript("OnEnter", showButtons)
+		sb1:HookScript("OnLeave", hideButtons)
+	end
+
+	stancebar:HookScript("OnEnter", showButtons)
+	stancebar:HookScript("OnLeave", hideButtons)
+	hideButtons()
+
+	-- dumb fix for cooldown spirals not playing nice with alpha settingss
+	F.RegisterEvent("PLAYER_LOGIN", hideButtons)
+	F.RegisterEvent("PLAYER_ENTERING_WORLD", hideButtons)
+end
+
+--[[ petbar on mouseover ]]
+
+if C.actionbars.petbar_mouseover then
+	petbar:EnableMouse(true)
+
+	local function setButtonAlpha(alpha)
+		petbar:SetAlpha(alpha)
+
+		for i = 1, NUM_PET_ACTION_SLOTS do
+			local pb1 = _G["PetActionButton"..i]
+
+			pb1.cooldown:SetSwipeColor(0, 0, 0, 0.8 * alpha)
+			pb1.cooldown:SetDrawBling(alpha == 1)
+		end
+	end
+
+	local function showButtons()
+		setButtonAlpha(1)
+	end
+
+	local function hideButtons()
+		setButtonAlpha(0)
+	end
+
+	for i = 1, NUM_PET_ACTION_SLOTS do
+		local pb1 = _G["StanceButton"..i]
+
+		pb1:HookScript("OnEnter", showButtons)
+		pb1:HookScript("OnLeave", hideButtons)
+	end
+
+	petbar:HookScript("OnEnter", showButtons)
+	petbar:HookScript("OnLeave", hideButtons)
+	hideButtons()
+
+	-- dumb fix for cooldown spirals not playing nice with alpha settingss
+	F.RegisterEvent("PLAYER_LOGIN", hideButtons)
+	F.RegisterEvent("PLAYER_ENTERING_WORLD", hideButtons)
+end
+
+
 --[[ Right bars on mouseover ]]
 
 if C.actionbars.rightbars_mouseover then

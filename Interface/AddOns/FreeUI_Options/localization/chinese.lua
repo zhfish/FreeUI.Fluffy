@@ -111,12 +111,15 @@ ns.localization.automationautoSetRole_verboseTooltip = "当跳过职责确认时
 
 ns.localization.actionbars = "动作条"
 ns.localization.actionbarsSubText = "动作条以及按钮设置"
-ns.localization.actionbarsenable = "启用"
+ns.localization.actionbarsenable = "启用动作条布局"
 ns.localization.actionbarsenableTooltip = "禁用这个选项如果你想使用默认动作条"
 ns.localization.actionbarsenableStyle = "启用动作条样式"
 ns.localization.actionbarsenableStyleTooltip = "使用其他动作条插件时禁用此项以保证兼容"
 ns.localization.actionbarshotKey = "显示快捷键绑定"
-ns.localization.actionbarsrightbars_mouseover = "鼠标滑过显示右侧动作条"
+ns.localization.actionbarsmacroName = "显示宏名称"
+ns.localization.actionbarsrightbars_mouseover = "鼠标悬停显示右侧动作条"
+ns.localization.actionbarsstancebar_mouseover = "鼠标悬停显示姿态条"
+ns.localization.actionbarspetbar_mouseover = "鼠标悬停显示宠物动作条"
 
 ns.localization.bags = "背包"
 ns.localization.bagsSubText = "选择设置你喜欢的样式"
