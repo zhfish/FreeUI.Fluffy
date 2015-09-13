@@ -574,8 +574,11 @@ do
 	local gradient = ns.CreateCheckBox(unitframes, "gradient", true, true)
 	gradient:SetPoint("TOPLEFT", shadow, "BOTTOMLEFT", 0, -8)
 
+	local rectangleAura = ns.CreateCheckBox(unitframes, "rectangleAura", true, true)
+	rectangleAura:SetPoint("TOPLEFT", gradient, "BOTTOMLEFT", 0, -8)
+
 	local spellRange = ns.CreateCheckBox(unitframes, "spellRange", true, true)
-	spellRange:SetPoint("TOPLEFT", gradient, "BOTTOMLEFT", 0, -8)
+	spellRange:SetPoint("TOPLEFT", rectangleAura, "BOTTOMLEFT", 0, -8)
 
 	local powerTypeColor = ns.CreateCheckBox(unitframes, "powerTypeColor", true, true)
 	powerTypeColor:SetPoint("TOPLEFT", spellRange, "BOTTOMLEFT", 0, -8)
@@ -602,9 +605,6 @@ do
 
 	statusIndicator.children = {statusIndicatorCombat}
 
-	local enableArena = ns.CreateCheckBox(unitframes, "enableArena", true, true)
-	enableArena:SetPoint("TOPLEFT", statusIndicatorCombat, "BOTTOMLEFT", -16, -8)
-
 	local enableGroup = ns.CreateCheckBox(unitframes, "enableGroup", true, true)
 	enableGroup:SetPoint("LEFT", enable, "RIGHT", 240, 0)
 
@@ -616,6 +616,9 @@ do
 	partyNameAlways:SetPoint("TOPLEFT", showRaidFrames, "BOTTOMLEFT", 0, -8)
 
 	enableGroup.children = {showRaidFrames, partyNameAlways}
+
+	local enableArena = ns.CreateCheckBox(unitframes, "enableArena", true, true)
+	enableArena:SetPoint("TOPLEFT", partyNameAlways, "BOTTOMLEFT", -16, -8)
 
 	local function toggleUFOptions()
 		local shown = enable:GetChecked()
