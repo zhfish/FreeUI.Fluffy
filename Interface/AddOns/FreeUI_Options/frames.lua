@@ -371,6 +371,9 @@ do
 	autoSetRoleVerbose:SetPoint("TOPLEFT", autoSetRoleUseSpec, "BOTTOMLEFT", 0, -8)
 
 	autoSetRole.children = {autoSetRoleUseSpec, autoSetRoleVerbose}
+
+	local hideRaidNames = ns.CreateCheckBox(automation, "hideRaidNames", true, true)
+	hideRaidNames:SetPoint("TOPLEFT", autoSetRoleVerbose, "BOTTOMLEFT", -16, -8)
 end
 
 -- [[ Action bars ]]

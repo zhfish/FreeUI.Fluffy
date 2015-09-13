@@ -1,6 +1,6 @@
 ﻿local F, C = unpack(select(2, ...))
 
-if not C.general.hideraidnames then return end
+if not C.automation.hideRaidNames then return end
 
 local HRN = CreateFrame("Frame")
 

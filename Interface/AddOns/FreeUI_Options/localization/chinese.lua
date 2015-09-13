@@ -108,6 +108,7 @@ ns.localization.automationautoSetRole_useSpec = "依据当前天赋确定职责"
 ns.localization.automationautoSetRole_useSpecTooltip = "总是依据你的当前天赋确定职责，不再提示职责确认窗口"
 ns.localization.automationautoSetRole_verbose = "通告模式"
 ns.localization.automationautoSetRole_verboseTooltip = "当跳过职责确认时发出通告"
+ns.localization.automationhideRaidNames = "在团队副本中自动隐藏队友头上的名字"
 
 ns.localization.actionbars = "动作条"
 ns.localization.actionbarsSubText = "动作条以及按钮设置"

@@ -54,6 +54,7 @@ C["automation"] = {
 		["autoSetRole_useSpec"] = true,		-- attempt to set role based on your current spec
 		["autoSetRole_verbose"] = false,	-- tells you what happens when setting role
 	["questRewardHighlight"] = true, -- highlights the quest reward with highest vendor price
+	["hideRaidNames"] = true,
 }
 
 C["actionbars"] = {

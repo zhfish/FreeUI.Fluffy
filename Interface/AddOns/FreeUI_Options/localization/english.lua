@@ -106,6 +106,7 @@ ns.localization.automationautoSetRole_useSpec = "Set role based on current speci
 ns.localization.automationautoSetRole_useSpecTooltip = "Always attempt to set your role automatically based on your spec, never showing the popup."
 ns.localization.automationautoSetRole_verbose = "Verbose mode"
 ns.localization.automationautoSetRole_verboseTooltip = "Enable to be informed of what happens when the popup is skipped."
+ns.localization.automationhideRaidNames = "hide raid names"
 
 ns.localization.actionbars = "Action bars"
 ns.localization.actionbarsSubText = "These options are specific to the action bars and their buttons."
