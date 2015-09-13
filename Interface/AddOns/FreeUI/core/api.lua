@@ -780,3 +780,9 @@ F.ReskinIcon = function(icon)
 	icon:SetTexCoord(.08, .92, .08, .92)
 	return F.CreateBG(icon)
 end
+
+
+
+DEFAULT_CHAT_FRAME:AddMessage("FreeUI.Fluffy |cffffffff"..GetAddOnMetadata("FreeUI", "Version"), unpack(C.class))
+DEFAULT_CHAT_FRAME:AddMessage("|cfffffffftype|r /freeui |cffffffffto open options GUI|r", unpack(C.class))
+DEFAULT_CHAT_FRAME:AddMessage("|cffffffffFor more info visit|r https://github.com/solor/FreeUI.Fluffy|r", unpack(C.class))
