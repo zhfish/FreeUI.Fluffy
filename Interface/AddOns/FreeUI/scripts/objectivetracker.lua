@@ -1,7 +1,7 @@
 local F, C, L = unpack(select(2, ...))
 
 local class = select(2, UnitClass("player"))
-r, g, b = C.classcolours[class].r, C.classcolours[class].g, C.classcolours[class].b
+local r, g, b = C.classcolours[class].r, C.classcolours[class].g, C.classcolours[class].b
 
 if not C.general.objectivetracker then return end
 
@@ -362,3 +362,52 @@ function QuestInfo_hook(template, parentFrame, acceptButton, material, mapView)
 	end
 end
 hooksecurefunc("QuestInfo_Display", QuestInfo_hook)
+
+
+
+
+-- more color
+
+
+hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", function(_, block)
+	block.HeaderText:SetTextColor(r, g, b)
+end)
+
+local function hoverquest(_, block)
+	block.HeaderText:SetTextColor(r, g, b)
+end
+
+hooksecurefunc(QUEST_TRACKER_MODULE, "OnBlockHeaderEnter", hoverquest)  
+hooksecurefunc(QUEST_TRACKER_MODULE, "OnBlockHeaderLeave", hoverquest)
+
+
+hooksecurefunc(ACHIEVEMENT_TRACKER_MODULE, "SetBlockHeader", function(_, block)
+	local trackedAchievements = {GetTrackedAchievements()}
+    
+    for i = 1, #trackedAchievements do
+	    local achieveID = trackedAchievements[i]
+	    local _, achievementName, _, completed, _, _, _, description, _, icon, _, _, wasEarnedByMe = GetAchievementInfo(achieveID)
+        local showAchievement = true
+        
+	    if wasEarnedByMe then
+		    showAchievement = false
+	    elseif displayOnlyArena then
+		    if GetAchievementCategory(achieveID)~=ARENA_CATEGORY then
+			    showAchievement = false
+		    end
+	    end
+	    
+        if showAchievement then
+
+            block.HeaderText:SetTextColor(r, g, b)
+
+        end
+    end
+end)
+  
+local function hoverachieve(_, block)
+	block.HeaderText:SetTextColor(r, g, b)
+end
+  
+hooksecurefunc(ACHIEVEMENT_TRACKER_MODULE, "OnBlockHeaderEnter", hoverachieve)
+hooksecurefunc(ACHIEVEMENT_TRACKER_MODULE, "OnBlockHeaderLeave", hoverachieve)
