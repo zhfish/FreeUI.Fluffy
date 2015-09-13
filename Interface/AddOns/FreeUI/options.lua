@@ -25,7 +25,6 @@ C["general"] = {
 	["biggertradeskillui"] = true,
 		["tradetab"] = true,
 	["cooldownpulse"] = true,
-	["screenshot"] = true,
 	["showtreasures"] = true,		-- toggle the treasures marked from the various treasure maps sold in Ashran
 	["ncshadow"] = true,
 	["emergency"] = true,
@@ -55,6 +54,7 @@ C["automation"] = {
 		["autoSetRole_verbose"] = false,	-- tells you what happens when setting role
 	["questRewardHighlight"] = true, -- highlights the quest reward with highest vendor price
 	["hideRaidNames"] = true,
+	["autoScreenShot"] = true,
 }
 
 C["actionbars"] = {

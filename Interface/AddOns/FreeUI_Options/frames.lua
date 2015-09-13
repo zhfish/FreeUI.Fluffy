@@ -224,11 +224,8 @@ do
 	local cooldownpulse = ns.CreateCheckBox(general, "cooldownpulse", true, true)
 	cooldownpulse:SetPoint("TOPLEFT", tradetab, "BOTTOMLEFT", -16, -8)
 
-	local screenshot = ns.CreateCheckBox(general, "screenshot", true, true)
-	screenshot:SetPoint("TOPLEFT", cooldownpulse, "BOTTOMLEFT", 0, -8)
-
 	local undressButton = ns.CreateCheckBox(general, "undressButton", true, true)
-	undressButton:SetPoint("TOPLEFT", screenshot, "BOTTOMLEFT", 0, -8)
+	undressButton:SetPoint("TOPLEFT", cooldownpulse, "BOTTOMLEFT", 0, -8)
 
 	local interrupt = ns.CreateCheckBox(general, "interrupt", true)
 	interrupt:SetPoint("TOPLEFT", undressButton, "BOTTOMLEFT", 0, -8)
@@ -374,6 +371,9 @@ do
 
 	local hideRaidNames = ns.CreateCheckBox(automation, "hideRaidNames", true, true)
 	hideRaidNames:SetPoint("TOPLEFT", autoSetRoleVerbose, "BOTTOMLEFT", -16, -8)
+
+	local autoScreenShot = ns.CreateCheckBox(automation, "autoScreenShot", true, true)
+	autoScreenShot:SetPoint("TOPLEFT", hideRaidNames, "BOTTOMLEFT", 0, -8)
 end
 
 -- [[ Action bars ]]

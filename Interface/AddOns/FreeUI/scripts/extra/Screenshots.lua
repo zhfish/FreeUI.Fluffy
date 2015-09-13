@@ -1,6 +1,6 @@
 local F, C, L = unpack(select(2, ...))
 
-if not C.general.screenshot then return end
+if not C.automation.autoScreenShot then return end
 
 ----------------------------------------------------------------------------------------
 --  Take screenshots of defined events (Sinaris)
