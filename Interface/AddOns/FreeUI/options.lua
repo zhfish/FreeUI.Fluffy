@@ -139,7 +139,7 @@ C["unitframes"] = {
 	["player"] = {"BOTTOM", UIParent, "BOTTOM", 0, 200},						-- player unitframe position
 	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 26, 120},					-- target unitframe position
 	["focus"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 26, -40},					-- focus unitframe position
-	["party"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -60},					-- party unitframe position
+	["party"] = {"BOTTOMRIGHT", 'oUF_FreePlayer', "TOPLEFT", -110, 50},					-- party unitframe position
 	["raid"] = {"BOTTOMRIGHT", 'oUF_FreePlayer', "TOPLEFT", -110, 80},			-- raid unitframe position		
 	["boss"] = {a='LEFT', b='oUF_FreeTarget', c="RIGHT", x=10, y=80},			-- boss unitframe position
 	["arena"] = {a='LEFT', b='UIParent', c="LEFT", x=20, y=100},				-- arena unitframe position		
@@ -171,8 +171,8 @@ C["unitframes"] = {
 	["boss_height"] = 16,
 	["arena_width"] = 229,
 	["arena_height"] = 12,
-	["party_width"] = 58,
-	["party_height"] = 26,
+	["party_width"] = 86,
+	["party_height"] = 32,
 	["raid_width"] = 66,
 	["raid_height"] = 26,
 

@@ -2107,11 +2107,12 @@ oUF:Factory(function(self)
 		'showParty', true,
 		'showPlayer', true,
 		'showSolo', false,
-		'xoffset', 5,
-		'yoffset', -8,
-		'maxColumns', 5,
-		'unitsperColumn', 1,
+	--	'xoffset', 5,
+		'yoffset', 6,
+		'maxColumns', 1,
+		'unitsperColumn', 5,
 		'columnSpacing', 6,
+		'point', "BOTTOM",
 		'columnAnchorPoint', "LEFT",
 		'oUF-initialConfigFunction', ([[
 			self:SetHeight(%d)
