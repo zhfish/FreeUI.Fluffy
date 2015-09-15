@@ -96,7 +96,7 @@ function TradeTabs:Initialize()
 
 		local point,relPoint,x,y = "TOPLEFT", "BOTTOMLEFT", 0, -17
 		if not prev then
-			prev, relPoint, x, y = parent, "TOPRIGHT", 11, -44
+			prev, relPoint, x, y = parent, "TOPRIGHT", 4, -44
 		end
 		tab:SetPoint(point, prev, relPoint, x, y)
 
@@ -152,7 +152,7 @@ function TradeTabs:CreateTab(i, parent, spellID)
 	button:SetNormalTexture(texture)
 	button:SetCheckedTexture(C.media.checked)
 	F.CreateBG(button)
-	F.CreateSD(button, 5, 0, 0, 0, 1, 0)
+	F.CreateSD(button)
 	F.ReskinTab(button)
 	button:SetPushedTexture(nil)
 	select(4, button:GetRegions()):SetTexCoord(.08, .92, .08, .92)
