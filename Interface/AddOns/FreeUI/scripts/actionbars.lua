@@ -65,7 +65,7 @@ RegisterStateDriver(bar2, "visibility", "[petbattle][vehicleui][overridebar][pos
 local bar3 = CreateFrame("Frame", "FreeUI_MultiBarBottomRight", UIParent, "SecureHandlerStateTemplate")
 
 if bar3fold then
-	bar3:SetWidth(abbs*nab/2 + (nab/2-1)*margin)
+	bar3:SetWidth(abbs*nab/4 + (nab/4-1)*margin)
 	bar3:SetHeight(abbs*2 + margin)
 else
 	bar3:SetWidth(nab*abbs + (nab-1)*margin)
