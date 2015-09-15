@@ -2185,8 +2185,8 @@ oUF:Factory(function(self)
 			raidToParty:UnregisterEvent("PLAYER_ENTERING_WORLD")
 			raidToParty:UnregisterEvent("GROUP_ROSTER_UPDATE")
 
-			party:SetAttribute("showParty", true)
-			party:SetAttribute("showRaid", true)
+			party:SetAttribute("showParty", false)
+			party:SetAttribute("showRaid", false)
 			raid:SetAttribute("showRaid", false)
 		end
 	end

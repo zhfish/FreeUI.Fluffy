@@ -186,8 +186,8 @@ ns.localization.unitframesabsorbTooltip = "在头像框体上发亮提示吸收�
 
 ns.localization.unitframesenableGroup = "启用小队/团队框体"
 ns.localization.unitframesenableGroupTooltip = "如果你想使用其他团队框架类插件则禁用这个选项。"
-ns.localization.unitframesshowRaidFrames = "显示团队框架"
-ns.localization.unitframesshowRaidFramesTooltip = "禁用此项则只显示小队框架，即使你在一个团队当中。"
+ns.localization.unitframesshowRaidFrames = "显示小队/团队框架"
+ns.localization.unitframesshowRaidFramesTooltip = "禁用此项则隐藏小队/团队框架，即使你在一个队伍/团队当中。"
 ns.localization.unitframespartyNameAlways = "显示团员名字"
 ns.localization.unitframespartyNameAlwaysTooltip = "在团队框架上显示团员名字"
 
