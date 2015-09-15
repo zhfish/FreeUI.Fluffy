@@ -88,6 +88,7 @@ scripts\extra\idTip.lua
 scripts\extra\myMedia.lua
 scripts\extra\NoAsianFonts.lua
 scripts\extra\ncShadow.lua
+scripts\extra\saySapped.lua
 scripts\extra\SafeQueue.lua
 scripts\extra\Screenshots.lua
 scripts\extra\SpamageMeters.lua
