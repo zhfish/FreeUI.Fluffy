@@ -15,6 +15,7 @@ for i = 1, 3 do
 	bg:SetPoint("BOTTOMRIGHT", 1, -1)
 	bg:SetFrameLevel(bar:GetFrameLevel()-1)
 	F.CreateBD(bg)
+	F.CreateSD(bg)
 
 	bar:GetRegions():Hide()
 
