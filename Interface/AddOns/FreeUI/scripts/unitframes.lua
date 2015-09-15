@@ -821,7 +821,7 @@ local UnitSpecific = {
 			Icon:SetAllPoints(IconFrame)
 			Icon:SetTexCoord(.08, .92, .08, .92)
 
-			F.CreateSD(IconFrame, 5, 0, 0, 0, .8, -1)
+			F.CreateSD(IconFrame)
 
 			Castbar.Icon = Icon
 
@@ -1389,7 +1389,7 @@ local UnitSpecific = {
 			Icon:SetAllPoints(IconFrame)
 			Icon:SetTexCoord(.08, .92, .08, .92)
 
-			F.CreateSD(IconFrame, 5, 0, 0, 0, .8, -1)
+			F.CreateSD(IconFrame)
 
 			Castbar.Icon = Icon
 
@@ -1564,7 +1564,7 @@ local UnitSpecific = {
 			Icon:SetAllPoints(IconFrame)
 			Icon:SetTexCoord(.08, .92, .08, .92)
 
-			F.CreateSD(IconFrame, 5, 0, 0, 0, .8, -1)
+			F.CreateSD(IconFrame)
 
 			Castbar.Icon = Icon
 
@@ -1732,6 +1732,8 @@ local UnitSpecific = {
 		IconFrame:SetHeight(22)
 		IconFrame:SetWidth(22)
 
+		F.CreateSD(IconFrame)
+
 		local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
 		Icon:SetAllPoints(IconFrame)
 		Icon:SetTexCoord(.08, .92, .08, .92)
@@ -1826,6 +1828,8 @@ local UnitSpecific = {
 		IconFrame:SetPoint("LEFT", self, "RIGHT", 3, 0)
 		IconFrame:SetHeight(22)
 		IconFrame:SetWidth(22)
+
+		F.CreateSD(IconFrame)
 
 		local Icon = IconFrame:CreateTexture(nil, "OVERLAY")
 		Icon:SetAllPoints(IconFrame)
