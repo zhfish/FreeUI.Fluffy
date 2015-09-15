@@ -84,15 +84,17 @@ for i= 1, NUM_ACTIONBAR_BUTTONS do
 	else
 		local previous = _G["MultiBarBottomRightButton"..i-1]
 		if bar3fold then
-			if i == (nab/2+1) then
+			if i == (nab/4+1) then
 				previous = _G["MultiBarBottomRightButton1"]
-	        	button:SetPoint("BOTTOM", previous, "TOP", 0, margin)
-	    	else
-	    		button:SetPoint("LEFT", previous, "RIGHT", margin, 0)
-	    	end
-	    else
-	    	button:SetPoint("LEFT", previous, "RIGHT", margin, 0)
-	    end
+				button:SetPoint("BOTTOM", previous, "TOP", 0, margin)
+			elseif i > (nab/2) then	-- hide button 7-12
+				button:Hide()
+			else
+				button:SetPoint("LEFT", previous, "RIGHT", margin, 0)
+			end
+		else
+			button:SetPoint("LEFT", previous, "RIGHT", margin, 0)
+		end
 	end
 end
 
