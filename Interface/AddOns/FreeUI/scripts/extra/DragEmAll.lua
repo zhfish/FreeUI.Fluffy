@@ -117,73 +117,73 @@ local function MouseUpHandler(frame, button)
 end
 
 function addon:HookFrames(list)
-  for name, child in pairs(list) do
-    self:HookFrame(name, child)
-  end
+	for name, child in pairs(list) do
+		self:HookFrame(name, child)
+	end
 end
 
 function addon:HookFrame(name, moveParent)
-  local frame = _G
-  local s
-  for s in string.gmatch(name, "%w+") do
-    if frame then
-      frame = frame[s]
-    end
-  end
-  -- check if frame was found
-  if frame == _G then
-    frame = nil
-  end
+	local frame = _G
+		local s
+		for s in string.gmatch(name, "%w+") do
+		if frame then
+			frame = frame[s]
+		end
+	end
+	-- check if frame was found
+	if frame == _G then
+		frame = nil
+	end
 
-  local parent
-  if frame and not hooked[name] then
-    if moveParent then
-      if type(moveParent) == "string" then
-        parent = _G[moveParent]
-      else
-        parent = frame:GetParent()
-      end
-      if not parent then
-        print("Parent frame not found: " .. name)
-        return
-      end
-      parentFrame[frame] = parent
-    end
-    if parent then
-      parent:SetMovable(true)
-      parent:SetClampedToScreen(false)
-    end
-    frame:EnableMouse(true)
-    frame:SetMovable(true)
-    frame:SetClampedToScreen(false)
-    self:HookScript(frame, "OnMouseDown", MouseDownHandler)
-    self:HookScript(frame, "OnMouseUp", MouseUpHandler)
-    hooked[name] = true
-  end
+	local parent
+	if frame and not hooked[name] then
+		if moveParent then
+			if type(moveParent) == "string" then
+				parent = _G[moveParent]
+			else
+				parent = frame:GetParent()
+			end
+			if not parent then
+				print("Parent frame not found: " .. name)
+				return
+			end
+			parentFrame[frame] = parent
+		end
+		if parent then
+			parent:SetMovable(true)
+			parent:SetClampedToScreen(false)
+		end
+		frame:EnableMouse(true)
+		frame:SetMovable(true)
+		frame:SetClampedToScreen(false)
+		self:HookScript(frame, "OnMouseDown", MouseDownHandler)
+		self:HookScript(frame, "OnMouseUp", MouseUpHandler)
+		hooked[name] = true
+	end
 end
 
 function addon:PLAYER_LOGIN()
-  self:HookFrames(frames)
+	self:HookFrames(frames)
 end
 
 function addon:ADDON_LOADED(name)
-  local frameList = lodFrames[name]
-  if frameList then
-    self:HookFrames(frameList)
-  end
+local frameList = lodFrames[name]
+	if frameList then
+		self:HookFrames(frameList)
+	end
 end
 
 function addon:HookScript(frame, script, handler)
-  if not frame.GetScript then return end
-  local oldHandler = frame:GetScript(script)
-  if oldHandler then
-    frame:SetScript(script, function(...)
-      handler(...)
-      oldHandler(...)
-    end)
-  else
-    frame:SetScript(script, handler)
-  end
+	if not frame.GetScript then return end
+	local oldHandler = frame:GetScript(script)
+		if oldHandler then
+			frame:SetScript(script, function(...)
+			handler(...)
+			oldHandler(...)
+		end)
+	else
+		frame:SetScript(script, handler)
+	end
 end
 
 addon:SetScript("OnEvent", function(f, e, ...) f[e](f, ...) end)
