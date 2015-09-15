@@ -17,59 +17,40 @@ end
 
 -- Following borrowed from LibBabble-TalentTree
 if gameLocale == "zhCN" then
-	L["Affliction"] = "痛苦"
-	L["Arcane"] = "奥术"
-	L["Arms"] = "武器"
-	L["Assassination"] = "刺杀"
-	L["Balance"] = "平衡"
-	L["Beast Mastery"] = "野兽控制"
-	L["Blood"] = "鲜血"
-	L["Combat"] = "战斗"
-	L["Demonology"] = "恶魔学识"
-	L["Destruction"] = "毁灭"
-	L["Discipline"] = "戒律"
-	L["Elemental"] = "元素战斗"
-	L["Enhancement"] = "增强"
-	L["Feral Combat"] = "野性战斗"
-	L["Fire"] = "火焰"
-	L["Frost"] = "冰霜"
-	L["Fury"] = "狂怒"
-	L["Holy"] = "神圣"
-	L["Marksmanship"] = "射击"
-	L["Protection"] = "防护"
-	L["Restoration"] = "恢复"
-	L["Retribution"] = "惩戒"
-	L["Shadow"] = "暗影魔法"
-	L["Subtlety"] = "敏锐"
-	L["Survival"] = "生存技能"
-	L["Unholy"] = "邪恶"
-elseif gameLocale == "zhTW" then
-	L["Affliction"] = "痛苦"
-	L["Arcane"] = "秘法"
-	L["Arms"] = "武器"
-	L["Assassination"] = "刺殺"
-	L["Balance"] = "平衡"
-	L["Beast Mastery"] = "野獸控制"
-	L["Blood"] = "血魄"
-	L["Combat"] = "戰鬥"
-	L["Demonology"] = "惡魔學識"
-	L["Destruction"] = "毀滅"
-	L["Discipline"] = "戒律"
-	L["Elemental"] = "元素"
-	L["Enhancement"] = "增強"
-	L["Feral Combat"] = "野性戰鬥"
-	L["Fire"] = "火焰"
-	L["Frost"] = "冰霜"
-	L["Fury"] = "狂怒"
-	L["Holy"] = "神聖"
-	L["Marksmanship"] = "射擊"
-	L["Protection"] = "防護"
-	L["Restoration"] = "恢復"
-	L["Retribution"] = "懲戒"
-	L["Shadow"] = "暗影"
-	L["Subtlety"] = "敏銳"
-	L["Survival"] = "生存"
-	L["Unholy"] = "穢邪"
+
+	L["Affliction"] = "痛苦",
+	L["Arcane"] = "奥术",
+	L["Arms"] = "武器",
+	L["Assassination"] = "刺杀",
+	L["Balance"] = "平衡",
+	L["Beast Mastery"] = "野兽控制",
+	L["Blood"] = "鲜血",
+	L["Brewmaster"] = "酒仙",
+	L["Combat"] = "战斗",
+	L["Demonology"] = "恶魔学识",
+	L["Destruction"] = "毁灭",
+	L["Discipline"] = "戒律",
+	L["Elemental"] = "元素战斗",
+	L["Enhancement"] = "增强",
+	L["Feral"] = "野性",
+	L["Feral Combat"] = "野性战斗",
+	L["Fire"] = "火焰",
+	L["Frost"] = "冰霜",
+	L["Fury"] = "狂怒",
+	L["Guardian"] = "守护",
+	L["Holy"] = "神圣",
+	L["Hybrid"] = "混合",
+	L["Marksmanship"] = "射击",
+	L["Mistweaver"] = "织雾",
+	L["Protection"] = "防护",
+	L["Restoration"] = "恢复",
+	L["Retribution"] = "惩戒",
+	L["Shadow"] = "暗影魔法",
+	L["Subtlety"] = "敏锐",
+	L["Survival"] = "生存技能",
+	L["Unholy"] = "邪恶",
+	L["Windwalker"] = "踏风",
+
 end
 
 local SpecIcons = {
