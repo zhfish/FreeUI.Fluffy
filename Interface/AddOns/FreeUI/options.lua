@@ -67,6 +67,15 @@ C["actionbars"] = {
 	["rightbars_mouseover"] = false, -- show right bars on mouseover (show/hide: use blizz option)
 	["stancebar_mouseover"] = false,
 	["petbar_mouseover"] = false,
+
+	["margin"] = 4,		-- button margin
+	["abbs"] = 30,		-- main bar button size
+	["abbs_r"] = 24,	-- right bar button size
+	["pbbs"] = 24,		-- pet bar button size
+	["sbbs"] = 24,		-- stance bar button size
+
+	["mainbar_pos"] = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 24 },		-- mainbar(bar1) position
+	["rightbar_pos"] = { a1 = "RIGHT", a2 = "RIGHT", af = "UIParent", x = -6, y = -200 },	-- rightbar(bar4) position
 }
 
 C["bags"] = {

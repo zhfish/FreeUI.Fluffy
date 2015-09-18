@@ -6,11 +6,13 @@ if not C.actionbars.enable then return end
 
 local bar3fold = C.actionbars.bar3Fold
 local nab = NUM_ACTIONBAR_BUTTONS
-local margin = 4
-local abbs = 30
-local abbs_r = 24
-local pbbs = 22
-local sbbs = 26
+local margin = C.actionbars.margin
+local abbs = C.actionbars.abbs
+local abbs_r = C.actionbars.abbs_r
+local pbbs = C.actionbars.pbbs
+local sbbs = C.actionbars.sbbs
+
+
 
 --[[ MainMenuBar ]]
 
@@ -316,13 +318,13 @@ local function positionBars()
 
 	if leftShown and rightShown then
 		if bar3fold then
-			bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", -(abbs*nab/2 + (nab/2-1)*margin)/2/2, 24)
+			bar1:SetPoint(C.actionbars.mainbar_pos.a1,C.actionbars.mainbar_pos.af,C.actionbars.mainbar_pos.a2,C.actionbars.mainbar_pos.x-(abbs*nab/2 + (nab/2-1)*margin)/2/2,C.actionbars.mainbar_pos.y)
 			bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
 			bar3:SetPoint("BOTTOMLEFT", bar1, "BOTTOMRIGHT", 4, 0)
 			stancebar:SetPoint("BOTTOMLEFT", bar2, "TOPLEFT", 10, 6)
 			petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", -10, 6)
 		else
-			bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+			bar1:SetPoint(C.actionbars.mainbar_pos.a1,C.actionbars.mainbar_pos.af,C.actionbars.mainbar_pos.a2,C.actionbars.mainbar_pos.x,C.actionbars.mainbar_pos.y)
 			bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
 			bar3:SetPoint("BOTTOM", bar2, "TOP", 0, 4)
 			stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 10, 6)
@@ -330,22 +332,23 @@ local function positionBars()
 		end
 
 	elseif leftShown then
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+		bar1:SetPoint(C.actionbars.mainbar_pos.a1,C.actionbars.mainbar_pos.af,C.actionbars.mainbar_pos.a2,C.actionbars.mainbar_pos.x,C.actionbars.mainbar_pos.y)
 		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar2, "TOPLEFT", 10, 6)
 		petbar:SetPoint("BOTTOMRIGHT", bar2, "TOPRIGHT", 0, 6)
 	elseif rightShown then
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+		bar1:SetPoint(C.actionbars.mainbar_pos.a1,C.actionbars.mainbar_pos.af,C.actionbars.mainbar_pos.a2,C.actionbars.mainbar_pos.x,C.actionbars.mainbar_pos.y)
 		bar3:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 10, 6)
 		petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", 0, 6)
 	else
-		bar1:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 24)
+		bar1:SetPoint(C.actionbars.mainbar_pos.a1,C.actionbars.mainbar_pos.af,C.actionbars.mainbar_pos.a2,C.actionbars.mainbar_pos.x,C.actionbars.mainbar_pos.y)
 		stancebar:SetPoint("BOTTOMLEFT", bar1, "TOPLEFT", 10, 6)
 		petbar:SetPoint("BOTTOMRIGHT", bar1, "TOPRIGHT", 0, 6)
-		bar4:SetPoint("BOTTOMRIGHT", -6, 200)
-		bar5:SetPoint("BOTTOMRIGHT", -34, 200)
 	end
+
+	bar4:SetPoint(C.actionbars.rightbar_pos.a1,C.actionbars.rightbar_pos.af,C.actionbars.rightbar_pos.a2,C.actionbars.rightbar_pos.x,C.actionbars.rightbar_pos.y)
+	bar5:SetPoint(C.actionbars.rightbar_pos.a1,C.actionbars.rightbar_pos.af,C.actionbars.rightbar_pos.a2,C.actionbars.rightbar_pos.x-C.actionbars.abbs_r-C.actionbars.margin,C.actionbars.rightbar_pos.y)
 end
 
 hooksecurefunc("MultiActionBar_Update", positionBars)
@@ -415,7 +418,7 @@ if C.actionbars.petbar_mouseover then
 	end
 
 	for i = 1, NUM_PET_ACTION_SLOTS do
-		local pb1 = _G["StanceButton"..i]
+		local pb1 = _G["PetActionButton"..i]
 
 		pb1:HookScript("OnEnter", showButtons)
 		pb1:HookScript("OnLeave", hideButtons)
@@ -584,8 +587,8 @@ RegisterStateDriver(leave, "visibility", "[petbattle][vehicleui][overridebar][po
 
 -- [[ Bags ]]
 
-for i = 0, 3 do
-	_G["CharacterBag"..i.."Slot"]:Hide()
-end
+-- for i = 0, 3 do
+-- 	_G["CharacterBag"..i.."Slot"]:Hide()
+-- end
 
 
