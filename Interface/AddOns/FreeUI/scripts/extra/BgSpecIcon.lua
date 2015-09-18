@@ -18,38 +18,38 @@ end
 -- Following borrowed from LibBabble-TalentTree
 if gameLocale == "zhCN" then
 
-	L["Affliction"] = "痛苦",
-	L["Arcane"] = "奥术",
-	L["Arms"] = "武器",
-	L["Assassination"] = "刺杀",
-	L["Balance"] = "平衡",
-	L["Beast Mastery"] = "野兽控制",
-	L["Blood"] = "鲜血",
-	L["Brewmaster"] = "酒仙",
-	L["Combat"] = "战斗",
-	L["Demonology"] = "恶魔学识",
-	L["Destruction"] = "毁灭",
-	L["Discipline"] = "戒律",
-	L["Elemental"] = "元素战斗",
-	L["Enhancement"] = "增强",
-	L["Feral"] = "野性",
-	L["Feral Combat"] = "野性战斗",
-	L["Fire"] = "火焰",
-	L["Frost"] = "冰霜",
-	L["Fury"] = "狂怒",
-	L["Guardian"] = "守护",
-	L["Holy"] = "神圣",
-	L["Hybrid"] = "混合",
-	L["Marksmanship"] = "射击",
-	L["Mistweaver"] = "织雾",
-	L["Protection"] = "防护",
-	L["Restoration"] = "恢复",
-	L["Retribution"] = "惩戒",
-	L["Shadow"] = "暗影魔法",
-	L["Subtlety"] = "敏锐",
-	L["Survival"] = "生存技能",
-	L["Unholy"] = "邪恶",
-	L["Windwalker"] = "踏风",
+	L["Affliction"] = "痛苦"
+	L["Arcane"] = "奥术"
+	L["Arms"] = "武器"
+	L["Assassination"] = "刺杀"
+	L["Balance"] = "平衡"
+	L["Beast Mastery"] = "野兽控制"
+	L["Blood"] = "鲜血"
+	L["Brewmaster"] = "酒仙"
+	L["Combat"] = "战斗"
+	L["Demonology"] = "恶魔学识"
+	L["Destruction"] = "毁灭"
+	L["Discipline"] = "戒律"
+	L["Elemental"] = "元素战斗"
+	L["Enhancement"] = "增强"
+	L["Feral"] = "野性"
+	L["Feral Combat"] = "野性战斗"
+	L["Fire"] = "火焰"
+	L["Frost"] = "冰霜"
+	L["Fury"] = "狂怒"
+	L["Guardian"] = "守护"
+	L["Holy"] = "神圣"
+	L["Hybrid"] = "混合"
+	L["Marksmanship"] = "射击"
+	L["Mistweaver"] = "织雾"
+	L["Protection"] = "防护"
+	L["Restoration"] = "恢复"
+	L["Retribution"] = "惩戒"
+	L["Shadow"] = "暗影魔法"
+	L["Subtlety"] = "敏锐"
+	L["Survival"] = "生存技能"
+	L["Unholy"] = "邪恶"
+	L["Windwalker"] = "踏风"
 
 end
 
