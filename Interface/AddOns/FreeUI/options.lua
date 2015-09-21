@@ -120,6 +120,8 @@ C["tooltip"] = {
 	["combathideALL"] = false,  -- hide tooltip while in combat
 	["hideHealthbar"] = false,	-- hide healthbar
 --	["powerbar"] = false,		-- show mana / power bar
+	["spec"] = false,
+	["ilvl"] = false,
 }
 
 C["unitframes"] = {

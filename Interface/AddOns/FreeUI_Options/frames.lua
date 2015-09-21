@@ -687,11 +687,11 @@ do
 	-- local powerbar = ns.CreateCheckBox(tooltip, "powerbar", true, true)
 	-- powerbar:SetPoint("TOPLEFT", hideHealthbar, "BOTTOMLEFT", 0, -8)
 
-	-- local ilvl = ns.CreateCheckBox(tooltip, "ilvl", true, true)
-	-- ilvl:SetPoint("LEFT", cursor, "RIGHT", 240, 0)
+	local ilvl = ns.CreateCheckBox(tooltip, "ilvl", true, true)
+	ilvl:SetPoint("TOPLEFT", hideHealthbar, "BOTTOMLEFT", 0, -8)
 
-	-- local spec = ns.CreateCheckBox(tooltip, "spec", true, true)
-	-- spec:SetPoint("TOPLEFT", ilvl, "BOTTOMLEFT", 0, -8)
+	local spec = ns.CreateCheckBox(tooltip, "spec", true, true)
+	spec:SetPoint("TOPLEFT", ilvl, "BOTTOMLEFT", 0, -8)
 
 	local function toggleTooltipOptions()
 		local shown = enable:GetChecked()
@@ -704,6 +704,8 @@ do
 		combathideALL:SetShown(shown)
 		colorborderClass:SetShown(shown)
 		hideHealthbar:SetShown(shown)
+		spec:SetShown(shown)
+		ilvl:SetShown(shown)
 	end
 
 	enable:HookScript("OnClick", toggleTooltipOptions)
