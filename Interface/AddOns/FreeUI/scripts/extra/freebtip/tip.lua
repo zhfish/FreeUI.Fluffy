@@ -378,8 +378,8 @@ local function SetStatusBar(self, unit)
 
 		GameTooltipStatusBar:ClearAllPoints()
 		GameTooltipStatusBar:SetHeight(6)
-		GameTooltipStatusBar:SetPoint("BOTTOMLEFT", GameTooltipStatusBar:GetParent(), "TOPLEFT", 3, 1)
-		GameTooltipStatusBar:SetPoint("BOTTOMRIGHT", GameTooltipStatusBar:GetParent(), "TOPRIGHT", -3, 1)
+		GameTooltipStatusBar:SetPoint("BOTTOMLEFT", GameTooltipStatusBar:GetParent(), "TOPLEFT", 3, -1)
+		GameTooltipStatusBar:SetPoint("BOTTOMRIGHT", GameTooltipStatusBar:GetParent(), "TOPRIGHT", -3, -1)
 	
 		GameTooltipStatusBar.bg = GameTooltipStatusBar:CreateTexture(nil,"BACKGROUND",nil,-8)
 		GameTooltipStatusBar.bg:SetPoint("TOPLEFT",-1,1)
@@ -542,7 +542,8 @@ local function gtSBValChange(self, value)
 	if(not self.text) then
 		self.text = self:CreateFontString(nil, "OVERLAY")
 		self.text:SetPoint("CENTER", GameTooltipStatusBar)
-		self.text:SetFont(ttFont, 12, "OUTLINE")
+	--	self.text:SetFont(ttFont, 18, "OUTLINE")
+		F.SetFS(self.text)
 	end
 	self.text:Show()
 	local hp = numberize(self:GetValue()).." / "..numberize(max)
