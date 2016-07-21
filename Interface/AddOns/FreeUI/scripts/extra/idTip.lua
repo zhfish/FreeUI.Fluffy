@@ -105,14 +105,14 @@ ShoppingTooltip1:HookScript("OnTooltipSetItem", attachItemTooltip)
 ShoppingTooltip2:HookScript("OnTooltipSetItem", attachItemTooltip)
 
 -- Glyphs
-hooksecurefunc(GameTooltip, "SetGlyph", function(self, ...)
-	local id = select(4, GetGlyphSocketInfo(...))
-	if id then addLine(self, id, types.glyph) end
-end)
+-- hooksecurefunc(GameTooltip, "SetGlyph", function(self, ...)
+-- 	local id = select(4, GetGlyphSocketInfo(...))
+-- 	if id then addLine(self, id, types.glyph) end
+-- end)
 
-hooksecurefunc(GameTooltip, "SetGlyphByID", function(self, id)
-	if id then addLine(self, id, types.glyph) end
-end)
+-- hooksecurefunc(GameTooltip, "SetGlyphByID", function(self, id)
+-- 	if id then addLine(self, id, types.glyph) end
+-- end)
 
 -- Achievement Frame Tooltips
 local f = CreateFrame("frame")

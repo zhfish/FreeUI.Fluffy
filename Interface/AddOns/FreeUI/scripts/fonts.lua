@@ -9,7 +9,7 @@ local fontDiablo
 local fontDamage
 
 if locale == "zhCN" then
-	fontStandard = "Fonts\\ARKai_T.TTF"		-- 简体中文客户端主字体
+	fontStandard = "Fonts\\ARKai_T.ttf"		-- 简体中文客户端主字体
 	fontUnitName = "Fonts\\ARKai_T.TTF"		-- 玩家 / NPC 头上的名字
 	fontDiablo = 'Fonts\\ARKai_T.TTF'		-- 地图上的地名字体
 	fontDamage = 'Fonts\\ARKai_T.TTF'		-- 伤害字体
@@ -121,7 +121,6 @@ SystemFont_Med3:SetFont(fontStandard, 14)
 SystemFont_Med3:SetShadowColor(0, 0, 0)
 SystemFont_Med3:SetShadowOffset(1, -1)
 SystemFont_OutlineThick_WTF:SetFont(fontStandard, 32, "THICKOUTLINE")
-SystemFont_OutlineThick_WTF2:SetFont(fontStandard, 36)
 SystemFont_OutlineThick_Huge2:SetFont(fontStandard, 22, "THICKOUTLINE")
 SystemFont_OutlineThick_Huge4:SetFont(fontStandard, 26, "THICKOUTLINE")
 SystemFont_Outline_Small:SetFont(fontStandard, 10, "OUTLINE")

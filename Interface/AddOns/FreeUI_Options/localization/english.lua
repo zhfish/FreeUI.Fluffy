@@ -96,8 +96,6 @@ ns.localization.automationautoRoll = "Roll disenchant or greed on BoE uncommon i
 ns.localization.automationautoRoll_maxLevel = "Only at max level"
 ns.localization.automationautoSell = "Sell junk"
 ns.localization.automationautoSellTooltip = "Automatically sell grey quality items to vendors, unless they are used in an equipment set."
-ns.localization.automationquestRewardHighlight = "Quest reward highlighting"
-ns.localization.automationquestRewardHighlightTooltip = "When turning in a quest, highlight the quest reward with the highest vendor sell price."
 ns.localization.automationautoSetRole = "Skip unnecessary role poll popups"
 ns.localization.automationautoSetRoleTooltip = "Skip the role poll popup if your role is already set or you are playing a pure dps class."
 ns.localization.automationautoSetRole_useSpec = "Set role based on current specialization"
@@ -199,8 +197,13 @@ ns.localization.unitframesshowRaidFramesTooltip = "When disabled, hide the party
 ns.localization.unitframespartyNameAlways = "Show group member names"
 ns.localization.unitframespartyNameAlwaysTooltip = "Check to show group member names."
 
-
-
+ns.localization.quests = "Quests"
+ns.localization.questsSubText = "All options related to quests and the objective tracker."
+ns.localization.questsquestRewardHighlight = "Quest reward highlighting"
+ns.localization.questsquestRewardHighlightTooltip = "When turning in a quest, highlight the quest reward with the highest vendor sell price."
+ns.localization.questsrememberObjectiveTrackerState = "Save objective tracker expanded/collapsed state"
+ns.localization.questsrememberObjectiveTrackerStateTooltip = "Collapses the objective tracker when you log in if it was collapsed when you logged out. Works on a per-character basis."
+ns.localization.questsalwaysCollapseObjectiveTracker = "Always collapse objective tracker on login"
 
 ns.localization.tooltip = "Tooltip"
 ns.localization.tooltipSubText = "Adjust the appearance and functionality of the game tooltip below."
@@ -230,12 +233,10 @@ end
 
 ns.localization.classmoddeathknight = ns.localization.classmoddeathknight..":|cffffffff Rune bars"
 ns.localization.classmoddruidMana = ns.localization.classmoddruid..":|cffffffff Shapeshift mana bar"
-ns.localization.classmoddruidEclipse = ns.localization.classmoddruid..":|cffffffff Eclipse bar"
 ns.localization.classmodmage = ns.localization.classmodmage..":|cffffffff Rune of Power tracker"
 ns.localization.classmodmonk = ns.localization.classmodmonk..":|cffffffff Chi and Stagger tracker"
 ns.localization.classmodpaladinHP = ns.localization.classmodpaladin..":|cffffffff Holy Power tracker"
 ns.localization.classmodpaladinRF = ns.localization.classmodpaladin..":|cffffffff Righteous Fury reminder"
-ns.localization.classmodpriest = ns.localization.classmodpriest..":|cffffffff Shadow orb tracker"
 ns.localization.classmodwarlock = ns.localization.classmodwarlock..":|cffffffff Specialization bars"
 
 ns.localization.credits = "Credits"

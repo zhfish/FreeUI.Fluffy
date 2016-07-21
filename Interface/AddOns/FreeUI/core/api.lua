@@ -10,7 +10,7 @@ C.media = {
 	["backdrop"] = "Interface\\AddOns\\FreeUI\\media\\blank", 					-- default backdrop
 	["checked"] = "Interface\\AddOns\\FreeUI\\media\\CheckButtonHilight", 		-- replace default checked texture
 	["font"] = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 					-- default pixel font
-	["font2"] = "Fonts\\FRIZQT__.TTF", 					-- default font
+	["font2"] = "Fonts\\FRIZQT__.ttf", 					-- default font
 	["glow"] = "Interface\\AddOns\\FreeUI\\media\\glowTex", 					-- glow/shadow texture
 	["gradient"] = "Interface\\AddOns\\FreeUI\\media\\gradient",
 	["roleIcons"] = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
@@ -38,9 +38,10 @@ F.AddOptionsCallback("appearance", "fontUseAlternativeFont", function()
 end)
 
 C.classcolours = {
-	["DEATHKNIGHT"] = {r = 0.86, g = 0, b = 0.04},
+	["DEATHKNIGHT"] = {r = 187/255, g = 0, b = 42/255},
+	["DEMONHUNTER"] = {r = 0.64, g = 0.19, b = 0.79},
 	["DRUID"] = {r = 0.94, g = 0.39, b = 0.1},
-	["HUNTER"] = {r = 0.6, g = 0.8, b = 0.21},
+	["HUNTER"] = {r = 126/255, g = 185/255, b = 18/255},
 	["MAGE"] = {r = 0.35, g = 0.76, b = 0.93},
 	["MONK"] = {r = 0.04, g = 0.85 , b = 0.53},
 	["PALADIN"] = {r = 241/255, g = 0, b = 168/255},
@@ -108,12 +109,12 @@ local CreateBD = function(f, a)
 	f:SetBackdropBorderColor(0, 0, 0)
 
 	if not a then
-        f.tex = f.tex or f:CreateTexture(nil, "BACKGROUND", nil, 1)
-        f.tex:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true)
-        f.tex:SetAllPoints()
-        f.tex:SetHorizTile(true)
-        f.tex:SetVertTile(true)
-        f.tex:SetBlendMode("ADD")
+        -- f.tex = f.tex or f:CreateTexture(nil, "BACKGROUND", nil, 1)
+        -- f.tex:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true)
+        -- f.tex:SetAllPoints()
+        -- f.tex:SetHorizTile(true)
+        -- f.tex:SetVertTile(true)
+        -- f.tex:SetBlendMode("ADD")
     else
         f:SetBackdropColor(0, 0, 0, a)
     end
@@ -464,7 +465,7 @@ F.ReskinClose = function(f, a1, p, a2, x, y)
 
 	for i = 1, 9 do
 		local tex = f:CreateTexture()
-		tex:SetTexture(1, 1, 1)
+		tex:SetColorTexture(1, 1, 1)
 		tex:SetSize(1, 1)
 		tex:SetPoint("BOTTOMLEFT", 3+i, 3+i)
 		tinsert(f.pixels, tex)
@@ -472,7 +473,7 @@ F.ReskinClose = function(f, a1, p, a2, x, y)
 
 	for i = 1, 9 do
 		local tex = f:CreateTexture()
-		tex:SetTexture(1, 1, 1)
+		tex:SetColorTexture(1, 1, 1)
 		tex:SetSize(1, 1)
 		tex:SetPoint("TOPLEFT", 3+i, -3-i)
 		tinsert(f.pixels, tex)
@@ -714,7 +715,7 @@ F.ReskinColourSwatch = function(f)
 	nt:SetPoint("TOPLEFT", 3, -3)
 	nt:SetPoint("BOTTOMRIGHT", -3, 3)
 
-	bg:SetTexture(0, 0, 0)
+	bg:SetColorTexture(0, 0, 0)
 	bg:SetPoint("TOPLEFT", 2, -2)
 	bg:SetPoint("BOTTOMRIGHT", -2, 2)
 end
@@ -766,7 +767,7 @@ F.ReskinGarrisonPortrait = function(portrait)
 	portrait.PortraitRing:Hide()
 	portrait.PortraitRingQuality:SetTexture("")
 
-	portrait.LevelBorder:SetTexture(0, 0, 0, .5)
+	portrait.LevelBorder:SetColorTexture(0, 0, 0, .5)
 	portrait.LevelBorder:SetSize(44, 11)
 	portrait.LevelBorder:ClearAllPoints()
 	portrait.LevelBorder:SetPoint("BOTTOM", 0, 12)
@@ -782,7 +783,7 @@ F.ReskinGarrisonPortrait = function(portrait)
 	portrait.squareBG = squareBG
 
 	if cover then
-		cover:SetTexture(0, 0, 0)
+		cover:SetColorTexture(0, 0, 0)
 		cover:SetAllPoints(squareBG)
 	end
 end

@@ -34,7 +34,7 @@ FreeUIStatsButton:SetScript("OnUpdate", function(self, elapsed)
 	end
 
 	if last >= 1 then
-		text:SetText("|cffffffff"..floor(GetFramerate() + .5).."|r fps   |cffffffff"..(home).."|r/|cffffffff"..(world).."|r ms   |cffffffff"..GameTime_GetTime(false))
+		text:SetText("|cffffffff"..floor(GetFramerate() + .5).."|r fps   |cffffffff"..(home+0).."|r/|cffffffff"..(world+0).."|r ms   |cffffffff"..GameTime_GetTime(false))
 		last = 0
 	end
 end)

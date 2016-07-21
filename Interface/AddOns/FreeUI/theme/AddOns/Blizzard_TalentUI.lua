@@ -21,10 +21,7 @@ C.themes["Blizzard_TalentUI"] = function()
 		select(i, PlayerTalentFrameSpecializationSpellScrollFrameScrollChild:GetRegions()):Hide()
 	end
 
-	F.CreateBG(PlayerTalentFrameTalentsClearInfoFrame)
-	PlayerTalentFrameTalentsClearInfoFrameIcon:SetTexCoord(.08, .92, .08, .92)
-
-	PlayerTalentFrameSpecializationSpellScrollFrameScrollChild.Seperator:SetTexture(1, 1, 1)
+	PlayerTalentFrameSpecializationSpellScrollFrameScrollChild.Seperator:SetColorTexture(1, 1, 1)
 	PlayerTalentFrameSpecializationSpellScrollFrameScrollChild.Seperator:SetAlpha(.2)
 
 	if class == "HUNTER" then
@@ -36,7 +33,7 @@ C.themes["Blizzard_TalentUI"] = function()
 			select(i, PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild:GetRegions()):Hide()
 		end
 
-		PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild.Seperator:SetTexture(1, 1, 1)
+		PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild.Seperator:SetColorTexture(1, 1, 1)
 		PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild.Seperator:SetAlpha(.2)
 
 		for i = 1, GetNumSpecializations(false, true) do
@@ -151,7 +148,6 @@ C.themes["Blizzard_TalentUI"] = function()
 	end
 
 	PlayerTalentFrameSpecializationLearnButton.Flash:SetTexture("")
-	PlayerTalentFrameTalentsLearnButton.Flash:SetTexture("")
 
 	local buttons = {"PlayerTalentFrameSpecializationSpecButton", "PlayerTalentFramePetSpecializationSpecButton"}
 
@@ -229,7 +225,6 @@ C.themes["Blizzard_TalentUI"] = function()
 			bu:SetHighlightTexture("")
 			bu.Slot:SetAlpha(0)
 			bu.knownSelection:SetAlpha(0)
-			bu.learnSelection:SetAlpha(0)
 
 			ic:SetDrawLayer("ARTWORK")
 			ic:SetTexCoord(.08, .92, .08, .92)
@@ -252,11 +247,6 @@ C.themes["Blizzard_TalentUI"] = function()
 				else
 					bu.bg:SetBackdropColor(0, 0, 0, .25)
 				end
-				if bu.learnSelection:IsShown() then
-					bu.bg:SetBackdropBorderColor(r, g, b)
-				else
-					bu.bg:SetBackdropBorderColor(0, 0, 0)
-				end
 			end
 		end
 	end)
@@ -272,13 +262,12 @@ C.themes["Blizzard_TalentUI"] = function()
 		bg:SetPoint("BOTTOMRIGHT", 1, -1)
 		bg:SetFrameLevel(tab:GetFrameLevel()-1)
 		F.CreateBD(bg)
-		F.CreateSD(tab, 5, 0, 0, 0, 1, 1)
 
 		select(2, tab:GetRegions()):SetTexCoord(.08, .92, .08, .92)
 	end
 
 	hooksecurefunc("PlayerTalentFrame_UpdateSpecs", function()
-		PlayerSpecTab1:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPRIGHT", 11, -36)
+		PlayerSpecTab1:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPRIGHT", 2, -36)
 		PlayerSpecTab2:SetPoint("TOP", PlayerSpecTab1, "BOTTOM")
 	end)
 
@@ -289,7 +278,6 @@ C.themes["Blizzard_TalentUI"] = function()
 
 	F.ReskinPortraitFrame(PlayerTalentFrame, true)
 	F.Reskin(PlayerTalentFrameSpecializationLearnButton)
-	F.Reskin(PlayerTalentFrameTalentsLearnButton)
 	F.Reskin(PlayerTalentFrameActivateButton)
 	F.Reskin(PlayerTalentFramePetSpecializationLearnButton)
 end

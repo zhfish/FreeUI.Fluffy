@@ -26,12 +26,10 @@
 	<Script file='elements\holypower.lua' />
 	<Script file='elements\readycheck.lua' />
 	<Script file='elements\qicon.lua' />
-	<Script file='elements\eclipsebar.lua' />
 	<Script file='elements\altpowerbar.lua' />
 	<Script file='elements\resurrect.lua' />
 	<Script file='elements\druidmana.lua' />
 	<Script file='elements\harmonyorbs.lua' />
-	<Script file='elements\shadoworbs.lua' />
 	<Script file='elements\stagger.lua' />
 
 	<Script file='oUF_SpellRange.lua' />

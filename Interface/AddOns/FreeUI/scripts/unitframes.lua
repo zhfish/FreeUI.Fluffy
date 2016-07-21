@@ -20,17 +20,17 @@ local shadow = C.unitframes.shadow
 local CBinterrupt = C.unitframes.castbarColorInterrupt
 local CBnormal = C.unitframes.castbarColorNormal
 
-oUF.colors.power['MANA'] = {0.37, 0.6, 1}
-oUF.colors.power['RAGE']  = {0.86, 0, 0.04}
-oUF.colors.power['FOCUS']  = {1, 0.81,  0.27}
-oUF.colors.power['RUNIC_POWER']  = {0, 0.81, 1}
-oUF.colors.power['AMMOSLOT'] = {0.78,1, 0.78}
-oUF.colors.power['FUEL'] = {0.9,  0.3,  0.23}
-oUF.colors.power['POWER_TYPE_STEAM'] = {0.55, 0.57, 0.61}
-oUF.colors.power['POWER_TYPE_PYRITE'] = {0.60, 0.09, 0.17}
-oUF.colors.power['POWER_TYPE_HEAT'] = {0.55,0.57,0.61}
-oUF.colors.power['POWER_TYPE_OOZE'] = {0.76,1,0}
-oUF.colors.power['POWER_TYPE_BLOOD_POWER'] = {0.7,0,1}
+local colors = setmetatable({
+	power = setmetatable({
+		["MANA"] = {0.37, 0.6, 1},
+		["RAGE"] = {0.86, 0, 0.04},
+		["FUEL"] = {0, 0.55, 0.5},
+		["FOCUS"] = {1, 0.81,  0.27},
+		["ENERGY"] = {.9, .9, .1},
+		["RUNIC_POWER"] = {0, 0.81, 1},
+		["LUNAR_POWER"] = {.5, .52, .9},
+	}, {__index = oUF.colors.power}),
+}, {__index = oUF.colors})
 
 local powerHeight = C.unitframes.power_height
 local altPowerHeight = C.unitframes.altpower_height
@@ -272,7 +272,7 @@ local PostUpdateHealth = function(Health, unit, min, max)
 	local reaction = C.reactioncolours[UnitReaction(unit, "player") or 5]
 
 	local offline = not UnitIsConnected(unit)
-	local tapped = not UnitPlayerControlled(unit) and UnitIsTapped(unit) and not UnitIsTappedByPlayer(unit) and not UnitIsTappedByAllThreatList(unit)
+	local tapped = not UnitPlayerControlled(unit) and UnitIsTapDenied(unit)
 
 	if tapped or offline then
 		r, g, b = .6, .6, .6
@@ -949,11 +949,11 @@ local UnitSpecific = {
 
 			self.Runes = runes
 			self.SpecialPowerBar = runes
-		elseif class == "DRUID" and (C.classmod.druidEclipse or C.classmod.druidMana) then
-			local druidMana, eclipseBar
+		elseif class == "DRUID" and C.classmod.druidMana then
+ 			local druidMana
 
 			local function moveDebuffAnchors()
-				if (druidMana and druidMana:IsShown()) or (eclipseBar and eclipseBar:IsShown()) then
+				if druidMana and druidMana:IsShown() then
 					local offset
 					if (druidMana and druidMana:IsShown()) then
 						offset = 1
@@ -972,102 +972,6 @@ local UnitSpecific = {
 						self.Debuffs:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 0, -3)
 					end
 				end
-			end
-			if C.classmod.druidMana then
-				druidMana = CreateFrame("StatusBar", nil, self)
-				druidMana:SetStatusBarTexture(C.media.backdrop)
-				druidMana:SetStatusBarColor(0, 0.76, 1)
-				druidMana:SetSize(playerWidth, 1)
-				druidMana:SetPoint("BOTTOMRIGHT", Debuffs, "TOPRIGHT", 0, 3)
-
-				F.CreateBDFrame(druidMana, .25)
-
-				self.DruidMana = druidMana
-
-				druidMana.PostUpdate = moveDebuffAnchors
-			end
-
-			if C.classmod.druidEclipse then
-				eclipseBar = CreateFrame("Frame", nil, self)
-				eclipseBar:SetWidth(playerWidth)
-				eclipseBar:SetHeight(2)
-				eclipseBar:SetPoint("BOTTOMRIGHT", Debuffs, "TOPRIGHT", 0, 3)
-
-				F.CreateBDFrame(eclipseBar, .25)
-
-				local glow = CreateFrame("Frame", nil, eclipseBar)
-				glow:SetBackdrop({
-					edgeFile = C.media.glow,
-					edgeSize = 5,
-				})
-				glow:SetPoint("TOPLEFT", -6, 6)
-				glow:SetPoint("BOTTOMRIGHT", 6, -6)
-
-				local LunarBar = CreateFrame("StatusBar", nil, eclipseBar)
-				LunarBar:SetPoint("LEFT", eclipseBar, "LEFT")
-				LunarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
-				LunarBar:SetStatusBarTexture(C.media.texture)
-				LunarBar:SetStatusBarColor(.80, .82, .60)
-				eclipseBar.LunarBar = LunarBar
-
-				SmoothBar(LunarBar)
-
-				local SolarBar = CreateFrame("StatusBar", nil, eclipseBar)
-				SolarBar:SetPoint("LEFT", LunarBar:GetStatusBarTexture(), "RIGHT")
-				SolarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
-				SolarBar:SetStatusBarTexture(C.media.texture)
-				SolarBar:SetStatusBarColor(.30, .52, .90)
-				eclipseBar.SolarBar = SolarBar
-
-				SmoothBar(SolarBar)
-
-				local spark = SolarBar:CreateTexture(nil, "OVERLAY")
-				spark:SetTexture("Interface\\CastingBar\\UI-CastingBar-Spark")
-				spark:SetBlendMode("ADD")
-				spark:SetHeight(4)
-				spark:SetPoint("CENTER", SolarBar:GetStatusBarTexture(), "LEFT")
-
-				local eclipseBarText = F.CreateFS(eclipseBar, 24)
-				eclipseBarText:SetPoint("LEFT", self, "RIGHT", 10, 0)
-				eclipseBarText:Hide()
-
-				self.EclipseBar = eclipseBar
-
-				eclipseBar:RegisterEvent("PLAYER_REGEN_ENABLED")
-				eclipseBar:RegisterEvent("PLAYER_REGEN_DISABLED")
-				eclipseBar:HookScript("OnEvent", function(self, event)
-					if event == "PLAYER_REGEN_DISABLED" then
-						eclipseBarText:Show()
-					elseif event == "PLAYER_REGEN_ENABLED" then
-						eclipseBarText:Hide()
-					end
-				end)
-
-				eclipseBar.PostUnitAura = function(self, unit)
-					if self.hasSolarEclipse then
-						glow:SetBackdropBorderColor(.80, .82, .60, 1)
-					elseif self.hasLunarEclipse then
-						glow:SetBackdropBorderColor(.30, .52, .90, 1)
-					else
-						glow:SetBackdropBorderColor(0, 0, 0, 0)
-					end
-				end
-
-				eclipseBar.PostUpdatePower = function(self, unit, power)
-					if power == 0 then
-						eclipseBarText:SetText("")
-					else
-						eclipseBarText:SetText(math.abs(power))
-
-						if power < 0 then
-							eclipseBarText:SetTextColor(.30, .52, .90)
-						else
-							eclipseBarText:SetTextColor(.80, .82, .60)
-						end
-					end
-				end
-
-				eclipseBar.PostUpdateVisibility = moveDebuffAnchors
 			end
 
 			self.AltPowerBar:HookScript("OnShow", moveDebuffAnchors)
@@ -1206,56 +1110,14 @@ local UnitSpecific = {
 
 			self.HolyPower = glow
 			glow.Override = UpdateHoly
-		elseif class == "PRIEST" and C.classmod.priest then
-			local UpdateOrbs = function(self, event, unit, powerType)
-				if(self.unit ~= unit or (powerType and powerType ~= 'SHADOW_ORBS')) then return end
 
-				local numOrbs = UnitPower("player", SPELL_POWER_SHADOW_ORBS)
-
-				if(numOrbs == PRIEST_BAR_NUM_ORBS) then
-					self.glow:SetAlpha(1)
-					F.CreatePulse(self.glow)
-					self.count:SetText(numOrbs)
-					self.count:SetTextColor(.6, 0, 1)
-					F.SetFS(self.count, 40)
-				elseif numOrbs == 0 then
-					self.glow:SetScript("OnUpdate", nil)
-					self.glow:SetAlpha(0)
-					self.count:SetText("")
-				else
-					self.glow:SetScript("OnUpdate", nil)
-					self.glow:SetAlpha(0)
-					self.count:SetText(numOrbs)
-					self.count:SetTextColor(1, 1, 1)
-					F.SetFS(self.count, 24)
-				end
-			end
-
-			local glow = CreateFrame("Frame", nil, self)
-			glow:SetBackdrop({
-				edgeFile = C.media.glow,
-				edgeSize = 5,
-			})
-			glow:SetPoint("TOPLEFT", self, -6, 6)
-			glow:SetPoint("BOTTOMRIGHT", self, 6, -6)
-			glow:SetBackdropBorderColor(.6, 0, 1)
-
-			self.glow = glow
-
-			local count = F.CreateFS(self, 24)
-			count:SetPoint("LEFT", self, "RIGHT", 10, 0)
-
-			self.count = count
-
-			self.ShadowOrbs = glow
-			glow.Override = UpdateOrbs
 		elseif class == "WARLOCK" and C.classmod.warlock then
 			local bars = CreateFrame("Frame", nil, self)
 			bars:SetWidth(playerWidth)
 			bars:SetHeight(2)
 			bars:SetPoint("BOTTOMRIGHT", Debuffs, "TOPRIGHT", 0, 3)
 
-			for i = 1, 4 do
+			for i = 1, UnitPowerMax("player", SPELL_POWER_SOUL_SHARDS) do
 				bars[i] = CreateFrame("StatusBar", nil, bars)
 				bars[i]:SetHeight(2)
 				bars[i]:SetStatusBarTexture(C.media.texture)

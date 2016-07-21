@@ -69,15 +69,17 @@ local RestyleButton = function(bu)
 	local newItemTexture = bu.NewItemTexture
 
 	bu:SetSize(C.bags.size, C.bags.size)
+	border:SetTexture(C.media.backdrop)
 
 	if bu.restyled then return end
 
 	local co = _G[buName.."Count"]
 
+	bu:SetFrameStrata("HIGH")
+	bu:SetToplevel(false)
 	bu:SetNormalTexture("")
 	bu:SetPushedTexture("")
 	bu:SetHighlightTexture("")
-	bu:SetFrameStrata("HIGH")
 
 	F.SetFS(co)
 	co:ClearAllPoints()
@@ -85,7 +87,6 @@ local RestyleButton = function(bu)
 
 	bu.icon:SetTexCoord(.08, .92, .08, .92)
 
-	border:SetTexture(C.media.backdrop)
 	border:SetPoint("TOPLEFT", -1, 1)
 	border:SetPoint("BOTTOMRIGHT", 1, -1)
 	border:SetDrawLayer("BACKGROUND")
@@ -122,6 +123,7 @@ local HideBag = function(bagName)
 
 	if bag.restyled then return end
 
+	bag:SetToplevel(false)
 	bag:EnableMouse(false)
 	bag.ClickableTitleFrame:EnableMouse(false)
 	_G[bagName.."CloseButton"]:Hide()
@@ -161,7 +163,7 @@ local buttons, bankbuttons = {}, {}
 
 --[[ Function to move buttons ]]
 
-local MoveButtons = function(table, frame)
+local MoveButtons = function(table, frame, extraHeight)
 	local columns = ceil(sqrt(#table))
 	local iconSize = C.bags.size
 
@@ -178,7 +180,7 @@ local MoveButtons = function(table, frame)
 		end
 	end
 
-	frame:SetHeight((row + (col==0 and 0 or 1)) * (iconSize + Spacing) + 19)
+	frame:SetHeight((row + (col==0 and 0 or 1)) * (iconSize + Spacing) + 19 + (extraHeight or 0))
 	frame:SetWidth(columns * iconSize + Spacing * (columns - 1) + 6)
 	col, row = 0, 0
 end
@@ -212,7 +214,6 @@ end
 
 local money = _G["ContainerFrame1MoneyFrame"]
 money:SetParent(holder)
-money:SetFrameStrata("HIGH")
 money:ClearAllPoints()
 money:SetPoint("BOTTOMRIGHT", holder, "BOTTOMRIGHT", 12, 2)
 
@@ -232,9 +233,17 @@ purchase:SetText("Buy new slots: Click here.")
 local purchaseButton = CreateFrame("Button", nil, bankholder)
 purchaseButton:SetSize(purchase:GetStringWidth(), 8)
 purchaseButton:SetPoint("BOTTOMLEFT", bankholder, "BOTTOMLEFT", 3, 22)
+purchaseButton:SetScript("OnEnter", function(self)
+	purchase:SetTextColor(r, g, b)
+end)
+purchaseButton:SetScript("OnLeave", function(self)
+	purchase:SetTextColor(1, 1, 1)
+end)
 purchaseButton:SetScript("OnClick", function()
 	StaticPopup_Show("CONFIRM_BUY_BANK_SLOT")
 end)
+
+bankholder.purchaseButton = purchaseButton
 
 local cachedBankWidth, cachedBankHeight -- restored when switching from reagent to normal bank
 
@@ -279,7 +288,7 @@ local ReanchorBankButtons = function(noMoving)
 	end
 
 	if not noMoving then
-		MoveButtons(bankbuttons, bankholder)
+		MoveButtons(bankbuttons, bankholder, bankholder.purchaseButton:IsShown() and 19 or 0)
 		cachedBankWidth = bankholder:GetWidth()
 		cachedBankHeight = bankholder:GetHeight()
 	else
@@ -494,6 +503,7 @@ end)
 BankFramePurchaseInfo:Hide()
 BankFramePurchaseInfo.Show = F.dummy
 BankFrame:EnableMouse(false)
+BankFrame:SetToplevel(false)
 BankFrameCloseButton:Hide()
 BankFrame:DisableDrawLayer("BACKGROUND")
 BankFrame:DisableDrawLayer("BORDER")

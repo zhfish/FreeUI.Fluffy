@@ -1,8 +1,8 @@
-## Interface: 60200
+## Interface: 70000
 ## Title: FreeUI
 ## Notes: Minimalistic user interface.
 ## Author: Haleth/Lightsword
-## Version: 6.2.r1
+## Version: 7.0
 ## RequiredDeps: Blizzard_CombatText
 ## OptionalDeps: Clique, FreeUI_Options, MyRolePlay, oUF
 ## SavedVariables: FreeUIGlobalConfig
@@ -65,27 +65,28 @@ scripts\worldmarker.lua
 scripts\worldstateframe.lua
 
 scripts\extra\libs\load_libs.xml
-scripts\extra\chatfilter\load_chatfilter.xml
-scripts\extra\freebtip\load_freebtip.xml
+#scripts\extra\chatfilter\load_chatfilter.xml
+scripts\extra\tooltip\load_tooltip.xml
 
 scripts\extra\_dev\test.lua
 
 scripts\extra\Align.lua
-scripts\extra\AchievementCheer.lua
-scripts\extra\AlreadyKnown.lua
-scripts\extra\BiggerTradeSkillUI.lua
+
+#scripts\extra\AlreadyKnown.lua
+
 scripts\extra\BGSpamFix.lua
 scripts\extra\BgSpecIcon.lua
 scripts\extra\ColorPicker.lua
 scripts\extra\DragEmAll.lua
 scripts\extra\Doom_CooldownPulse.lua
-scripts\extra\emergency.lua
-scripts\extra\FasterCamera.lua
+
+#scripts\extra\FasterCamera.lua
 scripts\extra\Foglight.lua
 scripts\extra\HiddenRaidNames.lua
 scripts\extra\ncHoverBind.lua
 scripts\extra\idTip.lua
 scripts\extra\myMedia.lua
+scripts\extra\MerchantItemlevel.lua
 scripts\extra\NoAsianFonts.lua
 scripts\extra\ncShadow.lua
 scripts\extra\saySapped.lua
@@ -94,7 +95,7 @@ scripts\extra\Screenshots.lua
 scripts\extra\SpamageMeters.lua
 scripts\extra\TabBinder.lua
 scripts\extra\TradeTabs.lua
-scripts\extra\ToggleTreasures.lua
+#scripts\extra\ToggleTreasures.lua
 scripts\extra\UnitSounds.lua
 scripts\extra\WhisperSound.lua
 
@@ -141,6 +142,7 @@ theme\FrameXML\AlertFrames.lua
 theme\FrameXML\BankFrame.lua
 theme\FrameXML\CharacterFrame.lua
 theme\FrameXML\ContainerFrame.lua
+theme\FrameXML\DressUpFrames.lua
 theme\FrameXML\EquipmentFlyout.lua
 theme\FrameXML\GarrisonFollowerTooltip.lua
 theme\FrameXML\InterfaceOptionsFrame.lua

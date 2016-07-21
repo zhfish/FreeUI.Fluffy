@@ -150,7 +150,6 @@ tinsert(ns.buttons, CreditsButton)
 
 local InstallButton = CreateFrame("Button", nil, options, "UIPanelButtonTemplate")
 InstallButton:SetSize(128, 25)
-InstallButton:SetPoint("TOP", CreditsButton, "BOTTOM", 0, -4)
 InstallButton:SetText(ns.localization.install)
 InstallButton:SetScript("OnClick", function()
 	if IsAddOnLoaded("FreeUI_Install") then
@@ -165,7 +164,6 @@ tinsert(ns.buttons, InstallButton)
 
 local ResetButton = CreateFrame("Button", nil, options, "UIPanelButtonTemplate")
 ResetButton:SetSize(128, 25)
-ResetButton:SetPoint("TOP", InstallButton, "BOTTOM", 0, -4)
 ResetButton:SetText(RESET)
 ResetButton:SetScript("OnClick", function()
 	resetFrame:Show()
@@ -175,7 +173,7 @@ tinsert(ns.buttons, ResetButton)
 local line = options:CreateTexture()
 line:SetSize(1, 568)
 line:SetPoint("TOPLEFT", 190, -58)
-line:SetTexture(1, 1, 1, .2)
+line:SetColorTexture(1, 1, 1, .2)
 
 local menuButton = CreateFrame("Button", "GameMenuButtonFreeUI", GameMenuFrame, "GameMenuButtonTemplate")
 menuButton:SetSize(144, 21)
@@ -198,11 +196,14 @@ ns.addCategory("ActionBars")
 ns.addCategory("Bags")
 ns.addCategory("MenuBar")
 ns.addCategory("Notifications")
+ns.addCategory("Quests")
 ns.addCategory("Tooltip")
 ns.addCategory("UnitFrames")
 ns.addCategory("ClassMod")
 
-CreditsButton:SetPoint("TOP", options.lastCategoryTab, "BOTTOM", 0, -136)
+CreditsButton:SetPoint("BOTTOM", InstallButton, "TOP", 0, 4)
+InstallButton:SetPoint("BOTTOM", ResetButton, "TOP", 0, 4)
+ResetButton:SetPoint("TOP", FreeUIOptionsPanel.general.tab, "BOTTOM", 0, -509)
 
 -- [[ General ]]
 
@@ -355,11 +356,8 @@ do
 	local autoSell = ns.CreateCheckBox(automation, "autoSell", true)
 	autoSell:SetPoint("TOPLEFT", autoRoll, "BOTTOMLEFT", 0, -42)
 
-	local questRewardHighlight = ns.CreateCheckBox(automation, "questRewardHighlight", true)
-	questRewardHighlight:SetPoint("TOPLEFT", autoSell, "BOTTOMLEFT", 0, -8)
-
 	local autoSetRole = ns.CreateCheckBox(automation, "autoSetRole", true)
-	autoSetRole:SetPoint("TOPLEFT", questRewardHighlight, "BOTTOMLEFT", 0, -8)
+	autoSetRole:SetPoint("TOPLEFT", autoSell, "BOTTOMLEFT", 0, -8)
 
 	local autoSetRoleUseSpec = ns.CreateCheckBox(automation, "autoSetRole_useSpec", true)
 	autoSetRoleUseSpec:SetPoint("TOPLEFT", autoSetRole, "BOTTOMLEFT", 16, -8)
@@ -648,6 +646,27 @@ do
 	unitframes:HookScript("OnShow", toggleUFOptions)
 end
 
+-- [[Quests]]
+
+do
+	local quests = FreeUIOptionsPanel.quests
+	quests.tab.Icon:SetTexture("Interface\\Icons\\achievement_quests_completed_06")
+	tinsert(ns.newCategories, quests)
+
+	local questRewardHighlight = ns.CreateCheckBox(quests, "questRewardHighlight", true)
+ 	questRewardHighlight:SetPoint("TOPLEFT", quests.subText, "BOTTOMLEFT", 0, -8)
+
+ 	local rememberObjectiveTrackerState = ns.CreateCheckBox(quests, "rememberObjectiveTrackerState", true)
+ 	rememberObjectiveTrackerState:SetPoint("TOPLEFT", questRewardHighlight, "BOTTOMLEFT", 0, -8)
+ 	tinsert(ns.newOptions, rememberObjectiveTrackerState)
+ 
+ 	local alwaysCollapseObjectiveTracker = ns.CreateCheckBox(quests, "alwaysCollapseObjectiveTracker")
+ 	alwaysCollapseObjectiveTracker:SetPoint("TOPLEFT", rememberObjectiveTrackerState, "BOTTOMLEFT", 16, -8)
+ 	tinsert(ns.newOptions, alwaysCollapseObjectiveTracker)
+ 
+ 	rememberObjectiveTrackerState.children = {alwaysCollapseObjectiveTracker}
+end
+
 -- [[ Tooltip ]]
 
 do
@@ -728,18 +747,13 @@ do
 	deathknight.className = "DEATHKNIGHT"
 	tinsert(ns.classOptions, deathknight)
 
-	local druidMana = ns.CreateCheckBox(classmod, "druidMana", false, true)
-	druidMana:SetPoint("TOPLEFT", deathknight, "BOTTOMLEFT", 0, -8)
-	druidMana.className = "DRUID"
-	tinsert(ns.classOptions, druidMana)
-
 	local druidEclipse = ns.CreateCheckBox(classmod, "druidEclipse", false, true)
 	druidEclipse:SetPoint("TOPLEFT", druidMana, "BOTTOMLEFT", 0, -8)
 	druidEclipse.className = "DRUID"
 	tinsert(ns.classOptions, druidEclipse)
 
 	local mage = ns.CreateCheckBox(classmod, "mage", false, true)
-	mage:SetPoint("TOPLEFT", druidEclipse, "BOTTOMLEFT", 0, -8)
+	mage:SetPoint("TOPLEFT", druidMana, "BOTTOMLEFT", 0, -8)
 	mage.className = "MAGE"
 	tinsert(ns.classOptions, mage)
 
@@ -758,13 +772,8 @@ do
 	paladinRF.className = "PALADIN"
 	tinsert(ns.classOptions, paladinRF)
 
-	local priest = ns.CreateCheckBox(classmod, "priest", false, true)
-	priest:SetPoint("TOPLEFT", paladinRF, "BOTTOMLEFT", 0, -8)
-	priest.className = "PRIEST"
-	tinsert(ns.classOptions, priest)
-
 	local warlock = ns.CreateCheckBox(classmod, "warlock", false, true)
-	warlock:SetPoint("TOPLEFT", priest, "BOTTOMLEFT", 0, -8)
+	warlock:SetPoint("TOPLEFT", paladinRF, "BOTTOMLEFT", 0, -8)
 	warlock.className = "WARLOCK"
 	tinsert(ns.classOptions, warlock)
 end
