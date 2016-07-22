@@ -72,7 +72,6 @@ scripts\extra\_dev\test.lua
 scripts\extra\Align.lua
 
 scripts\extra\AlreadyKnown.lua
-
 scripts\extra\BGSpamFix.lua
 scripts\extra\BgSpecIcon.lua
 scripts\extra\ColorPicker.lua
@@ -93,7 +92,7 @@ scripts\extra\SafeQueue.lua
 scripts\extra\Screenshots.lua
 scripts\extra\SpamageMeters.lua
 scripts\extra\TabBinder.lua
-scripts\extra\TradeTabs.lua
+
 #scripts\extra\ToggleTreasures.lua
 scripts\extra\UnitSounds.lua
 scripts\extra\WhisperSound.lua

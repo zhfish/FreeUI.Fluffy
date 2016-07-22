@@ -214,16 +214,8 @@ do
 	local features = ns.addSubCategory(general, ns.localization.generalFeatures)
 	features:SetPoint("TOPLEFT", general.subText, "BOTTOMLEFT", 0, -8)
 
-	local biggertradeskillui = ns.CreateCheckBox(general, "biggertradeskillui", true, true)
-	biggertradeskillui:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
-
-	local tradetab = ns.CreateCheckBox(general, "tradetab", true, true)
-	tradetab:SetPoint("TOPLEFT", biggertradeskillui, "BOTTOMLEFT", 16, -8)
-
-	biggertradeskillui.children = {tradetab}
-
 	local cooldownpulse = ns.CreateCheckBox(general, "cooldownpulse", true, true)
-	cooldownpulse:SetPoint("TOPLEFT", tradetab, "BOTTOMLEFT", -16, -8)
+	cooldownpulse:SetPoint("TOPLEFT", features, "BOTTOMLEFT", 0, -20)
 
 	local undressButton = ns.CreateCheckBox(general, "undressButton", true, true)
 	undressButton:SetPoint("TOPLEFT", cooldownpulse, "BOTTOMLEFT", 0, -8)
@@ -249,7 +241,7 @@ do
 	interrupt.children = {interruptsound, interruptParty, interruptBGs, interruptLFG, interruptOutdoors}
 
 	local threatMeter = ns.CreateCheckBox(general, "threatMeter", true, true)
-	threatMeter:SetPoint("LEFT", biggertradeskillui, "RIGHT", 240, 0)
+	threatMeter:SetPoint("LEFT", cooldownpulse, "RIGHT", 240, 0)
 
 	local objectivetracker = ns.CreateCheckBox(general, "objectivetracker", true, true)
 	objectivetracker:SetPoint("TOPLEFT", threatMeter, "BOTTOMLEFT", 0, -8)
@@ -260,17 +252,11 @@ do
 	local mailButton = ns.CreateCheckBox(general, "mailButton", true, true)
 	mailButton:SetPoint("TOPLEFT", helmCloak, "BOTTOMLEFT", 0, -8)
 
-	local showtreasures = ns.CreateCheckBox(general, "showtreasures", true, true)
-	showtreasures:SetPoint("TOPLEFT", mailButton, "BOTTOMLEFT", 0, -8)
-
 	local ncshadow = ns.CreateCheckBox(general, "ncshadow", true, true)
-	ncshadow:SetPoint("TOPLEFT", showtreasures, "BOTTOMLEFT", 0, -8)
-
-	local emergency = ns.CreateCheckBox(general, "emergency", true, true)
-	emergency:SetPoint("TOPLEFT", ncshadow, "BOTTOMLEFT", 0, -8)
+	ncshadow:SetPoint("TOPLEFT", mailButton, "BOTTOMLEFT", 0, -8)
 
 	local rareAlert = ns.CreateCheckBox(general, "rareAlert", true)
-	rareAlert:SetPoint("TOPLEFT", emergency, "BOTTOMLEFT", 0, -8)
+	rareAlert:SetPoint("TOPLEFT", ncshadow, "BOTTOMLEFT", 0, -8)
 
 	local rareAlertPlaySound = ns.CreateCheckBox(general, "rareAlert_playSound")
 	rareAlertPlaySound:SetPoint("TOPLEFT", rareAlert, "BOTTOMLEFT", 16, -8)
