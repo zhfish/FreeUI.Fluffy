@@ -65,14 +65,13 @@ scripts\worldmarker.lua
 scripts\worldstateframe.lua
 
 scripts\extra\libs\load_libs.xml
-#scripts\extra\chatfilter\load_chatfilter.xml
 scripts\extra\tooltip\load_tooltip.xml
 
 scripts\extra\_dev\test.lua
 
 scripts\extra\Align.lua
 
-#scripts\extra\AlreadyKnown.lua
+scripts\extra\AlreadyKnown.lua
 
 scripts\extra\BGSpamFix.lua
 scripts\extra\BgSpecIcon.lua
@@ -80,7 +79,7 @@ scripts\extra\ColorPicker.lua
 scripts\extra\DragEmAll.lua
 scripts\extra\Doom_CooldownPulse.lua
 
-#scripts\extra\FasterCamera.lua
+
 scripts\extra\Foglight.lua
 scripts\extra\HiddenRaidNames.lua
 scripts\extra\ncHoverBind.lua
