@@ -17,6 +17,7 @@ local function MerchantItemlevel()
 				button.text = button:CreateFontString(nil, "OVERLAY", "SystemFont_Outline_Small")
 				button.text:SetPoint("TOPLEFT", 1, -1)
 				button.text:SetTextColor(1, 1, 0)
+				F.SetFS(button.text)
 			else
 				button.text:SetText("")
 			end
