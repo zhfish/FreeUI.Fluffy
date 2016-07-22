@@ -3,10 +3,10 @@ local F, C, L = unpack(select(2, ...))
 local _, nBuff = ...
 
 nBuff.Config = {
-	buffSize = 30,
+	buffSize = 34,
 	buffScale = 1,
 
-	debuffSize = 44,
+	debuffSize = 46,
 	debuffScale = 1,
 
 	paddingX = 4,
