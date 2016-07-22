@@ -93,7 +93,7 @@ scripts\extra\Screenshots.lua
 scripts\extra\SpamageMeters.lua
 scripts\extra\TabBinder.lua
 
-#scripts\extra\ToggleTreasures.lua
+
 scripts\extra\UnitSounds.lua
 scripts\extra\WhisperSound.lua
 

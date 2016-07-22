@@ -6,8 +6,6 @@ local F, C, L = unpack(select(2, ...))
 --[[ Global config ]]
 
 C["general"] = {
-	["auraTracker"] = false, 		-- Track some important auras, based on classic Filger
-		["auraTracker_test"] = false,	-- test mod to adjust position
 	["helmcloakbuttons"] = true, 	-- show buttons to toggle helm/cloak on character frame
 	["interrupt"] = true,			-- announce your interrupts
 		["interrupt_sound"] = true,		-- play sound
@@ -22,13 +20,8 @@ C["general"] = {
 	["uiScaleAuto"] = true,			-- force the correct UI scale
 	["undressButton"] = true, 		-- undress button on dressup frame
 	["objectivetracker"] = true,	-- restyle objectivetracker
-	["biggertradeskillui"] = true,
-		["tradetab"] = true,
 	["cooldownpulse"] = true,
-	["showtreasures"] = true,		-- toggle the treasures marked from the various treasure maps sold in Ashran
 	["ncshadow"] = true,
-	["emergency"] = true,
-	["hideraidnames"] = true,
 }
 
 C["appearance"] = {
