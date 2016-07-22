@@ -1,7 +1,7 @@
 ## Interface: 70000
-## Title: FreeUI
+## Title: |cffF5FFFAFreeUI|r.|cffFF34B3Fluffy|r
 ## Notes: Minimalistic user interface.
-## Author: Haleth/Lightsword
+## Author: Haleth/Lightsword (Modified by Dostoyevsky@烈焰峰)
 ## Version: 7.0
 ## RequiredDeps: Blizzard_CombatText
 ## OptionalDeps: Clique, FreeUI_Options, MyRolePlay, oUF
@@ -65,6 +65,8 @@ scripts\worldmarker.lua
 scripts\worldstateframe.lua
 
 scripts\extra\libs\load_libs.xml
+scripts\extra\myMedia.lua
+
 scripts\extra\tooltip\load_tooltip.xml
 
 scripts\extra\_dev\test.lua
@@ -83,7 +85,7 @@ scripts\extra\Foglight.lua
 scripts\extra\HiddenRaidNames.lua
 scripts\extra\ncHoverBind.lua
 scripts\extra\idTip.lua
-scripts\extra\myMedia.lua
+
 scripts\extra\MerchantItemlevel.lua
 scripts\extra\NoAsianFonts.lua
 scripts\extra\ncShadow.lua

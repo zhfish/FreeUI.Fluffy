@@ -1,7 +1,7 @@
 ## Interface: 70000
-## Title: FreeUI Options
+## Title: |cffF5FFFAFreeUI|r.|cffFF34B3Fluffy|r |cffFFFACDOptions|r
 ## Notes: Options GUI for FreeUI.
-## Author: Haleth/Lightsword
+## Author: Haleth/Lightsword (Modified by Dostoyevsky@烈焰峰)
 ## Version: 7.0
 ## SavedVariables: FreeUIOptionsGlobal, FreeUIOptions
 ## SavedVariablesPerCharacter: FreeUIOptionsPerChar
