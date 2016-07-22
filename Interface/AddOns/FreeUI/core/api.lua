@@ -109,12 +109,13 @@ local CreateBD = function(f, a)
 	f:SetBackdropBorderColor(0, 0, 0)
 
 	if not a then
-        -- f.tex = f.tex or f:CreateTexture(nil, "BACKGROUND", nil, 1)
-        -- f.tex:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true)
-        -- f.tex:SetAllPoints()
-        -- f.tex:SetHorizTile(true)
-        -- f.tex:SetVertTile(true)
-        -- f.tex:SetBlendMode("ADD")
+        f.tex = f.tex or f:CreateTexture(nil, "BACKGROUND", nil, 1)
+        f.tex:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true, true)
+        f.tex:SetAlpha(.5)
+        f.tex:SetAllPoints()
+        f.tex:SetHorizTile(true)
+        f.tex:SetVertTile(true)
+        f.tex:SetBlendMode("ADD")
     else
         f:SetBackdropColor(0, 0, 0, a)
     end
@@ -302,16 +303,27 @@ local function clearScroll(f)
 	f.tex:SetVertexColor(1, 1, 1)
 end
 
-F.ReskinScroll = function(f)
+F.ReskinScroll = function(f, parent)
 	local frame = f:GetName()
 
-	if _G[frame.."Track"] then _G[frame.."Track"]:Hide() end
-	if _G[frame.."BG"] then _G[frame.."BG"]:Hide() end
-	if _G[frame.."Top"] then _G[frame.."Top"]:Hide() end
-	if _G[frame.."Middle"] then _G[frame.."Middle"]:Hide() end
-	if _G[frame.."Bottom"] then _G[frame.."Bottom"]:Hide() end
+	if frame then
+		if _G[frame.."Track"] then _G[frame.."Track"]:Hide() end
+		if _G[frame.."BG"] then _G[frame.."BG"]:Hide() end
+		if _G[frame.."Top"] then _G[frame.."Top"]:Hide() end
+		if _G[frame.."Middle"] then _G[frame.."Middle"]:Hide() end
+		if _G[frame.."Bottom"] then _G[frame.."Bottom"]:Hide() end
+	else
+		if f.trackBG then f.trackBG:Hide() end
+		if f.Background then f.Background:Hide() end
+		if f.Top then f.Top:Hide() end
+		if f.Middle then f.Middle:Hide() end
+		if f.Bottom then f.Bottom:Hide() end
+		if f.ScrollBarTop then f.ScrollBarTop:Hide() end
+		if f.ScrollBarMiddle then f.ScrollBarMiddle:Hide() end
+		if f.ScrollBarBottom then f.ScrollBarBottom:Hide() end
+	end
 
-	local bu = _G[frame.."ThumbTexture"]
+	local bu = f.ThumbTexture or f.thumbTexture or _G[frame.."ThumbTexture"]
 	bu:SetAlpha(0)
 	bu:SetWidth(17)
 
@@ -324,8 +336,8 @@ F.ReskinScroll = function(f)
 	tex:SetPoint("TOPLEFT", bu.bg, 1, -1)
 	tex:SetPoint("BOTTOMRIGHT", bu.bg, -1, 1)
 
-	local up = _G[frame.."ScrollUpButton"]
-	local down = _G[frame.."ScrollDownButton"]
+	local up = f.ScrollUpButton or f.UpButton or _G[(frame or parent).."ScrollUpButton"]
+ 	local down = f.ScrollDownButton or f.DownButton or _G[(frame or parent).."ScrollDownButton"]
 
 	up:SetWidth(17)
 	down:SetWidth(17)
@@ -656,19 +668,22 @@ end
 F.ReskinPortraitFrame = function(f, isButtonFrame)
 	local name = f:GetName()
 
-	_G[name.."Bg"]:Hide()
+	f.Bg:Hide()
 	_G[name.."TitleBg"]:Hide()
-	_G[name.."Portrait"]:Hide()
-	_G[name.."PortraitFrame"]:Hide()
+	f.portrait:Hide()
+	f.portraitFrame:Hide()
 	_G[name.."TopRightCorner"]:Hide()
-	_G[name.."TopLeftCorner"]:Hide()
-	_G[name.."TopBorder"]:Hide()
-	_G[name.."TopTileStreaks"]:SetTexture("")
+	f.topLeftCorner:Hide()
+	f.topBorderBar:Hide()
+	f.TopTileStreaks:SetTexture("")
 	_G[name.."BotLeftCorner"]:Hide()
 	_G[name.."BotRightCorner"]:Hide()
 	_G[name.."BottomBorder"]:Hide()
-	_G[name.."LeftBorder"]:Hide()
+	f.leftBorderBar:Hide()
 	_G[name.."RightBorder"]:Hide()
+
+	F.ReskinClose(f.CloseButton)
+	f.portrait.Show = F.dummy
 
 	if isButtonFrame then
 		_G[name.."BtnCornerLeft"]:SetTexture("")
@@ -681,7 +696,6 @@ F.ReskinPortraitFrame = function(f, isButtonFrame)
 
 	F.CreateBD(f)
 	F.CreateSD(f)
-	F.ReskinClose(_G[name.."CloseButton"])
 end
 
 F.CreateBDFrame = function(f, a)
