@@ -4,12 +4,12 @@ local hooksecurefunc, select, UnitBuff, UnitDebuff, UnitAura, UnitGUID, GetGlyph
 local types = {
 	spell       = "SpellID:",
 	item        = "ItemID:",
-	glyph       = "GlyphID:",
 	unit        = "NPC ID:",
 	quest       = "QuestID:",
 	talent      = "TalentID:",
 	achievement = "AchievementID:",
-	ability     = "AbilityID:"
+	ability     = "AbilityID:",
+	currency    = "CurrencyID:"
 }
 
 local function addLine(tooltip, id, type)
@@ -29,14 +29,12 @@ local function addLine(tooltip, id, type)
 	end
 end
 
--- All types, primarily for linked tooltips
+-- All types, primarily for detached tooltips
 local function onSetHyperlink(self, link)
 	local type, id = string.match(link,"^(%a+):(%d+)")
 	if not type or not id then return end
 	if type == "spell" or type == "enchant" or type == "trade" then
 		addLine(self, id, types.spell)
-	elseif type == "glyph" then
-		addLine(self, id, types.glyph)
 	elseif type == "talent" then
 		addLine(self, id, types.talent)
 	elseif type == "quest" then
@@ -45,6 +43,8 @@ local function onSetHyperlink(self, link)
 		addLine(self, id, types.achievement)
 	elseif type == "item" then
 		addLine(self, id, types.item)
+	elseif type == "currency" then
+		addLine(self, id, types.currency)
 	end
 end
 
@@ -62,10 +62,10 @@ hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self,...)
 	if id then addLine(self, id, types.spell) end
 end)
 
--- hooksecurefunc(GameTooltip, "SetUnitAura", function(self,...)
---     local id = select(11, UnitAura(...))
---     if id then addLine(self, id, types.spell) end
--- end)
+hooksecurefunc(GameTooltip, "SetUnitAura", function(self,...)
+	local id = select(11, UnitAura(...))
+	if id then addLine(self, id, types.spell) end
+end)
 
 hooksecurefunc("SetItemRef", function(link, ...)
 	local id = tonumber(link:match("spell:(%d+)"))
@@ -78,23 +78,34 @@ GameTooltip:HookScript("OnTooltipSetSpell", function(self)
 end)
 
 -- NPCs
--- GameTooltip:HookScript("OnTooltipSetUnit", function(self)
---     if C_PetBattles.IsInBattle() then return end
---     local unit = select(2, self:GetUnit())
---     if unit then
---         local guid = UnitGUID(unit) or ""
---         local id   = tonumber(guid:match("-(%d+)-%x+$"), 10)
---         if id and guid:match("%a+") ~= "Player" then addLine(GameTooltip, id, types.unit) end
---     end
--- end)
+GameTooltip:HookScript("OnTooltipSetUnit", function(self)
+	if C_PetBattles.IsInBattle() then return end
+	local unit = select(2, self:GetUnit())
+	if unit then
+		local guid = UnitGUID(unit) or ""
+		local id = tonumber(guid:match("-(%d+)-%x+$"), 10)
+		if id and guid:match("%a+") ~= "Player" then addLine(GameTooltip, id, types.unit) end
+	end
+end)
 
 -- Items
 local function attachItemTooltip(self)
-	local link = select(2, self:GetItem())
-	if link then
-		local id = select(3, strfind(link, "^|%x+|Hitem:(%-?%d+):(%d+):(%d+).*"))
-		if id then addLine(self, id, types.item) end
+  local link = select(2, self:GetItem())
+  if link then
+	local id = string.match(link, "item:(%d*)")
+	if id == "" or id == "0" and TradeSkillFrame ~= nil and TradeSkillFrame:IsVisible() and GetMouseFocus().reagentIndex then
+	  local selectedRecipe = TradeSkillFrame.RecipeList:GetSelectedRecipeID()
+	  for i = 1, 8 do
+		if GetMouseFocus().reagentIndex == i then
+		  id = C_TradeSkillUI.GetRecipeReagentItemLink(selectedRecipe, i):match("item:(%d+):") or nil
+		  break
+		end
+	  end
 	end
+	if id then
+	  addLine(self, id, types.item)
+	end
+  end
 end
 
 GameTooltip:HookScript("OnTooltipSetItem", attachItemTooltip)
@@ -103,16 +114,6 @@ ItemRefShoppingTooltip1:HookScript("OnTooltipSetItem", attachItemTooltip)
 ItemRefShoppingTooltip2:HookScript("OnTooltipSetItem", attachItemTooltip)
 ShoppingTooltip1:HookScript("OnTooltipSetItem", attachItemTooltip)
 ShoppingTooltip2:HookScript("OnTooltipSetItem", attachItemTooltip)
-
--- Glyphs
--- hooksecurefunc(GameTooltip, "SetGlyph", function(self, ...)
--- 	local id = select(4, GetGlyphSocketInfo(...))
--- 	if id then addLine(self, id, types.glyph) end
--- end)
-
--- hooksecurefunc(GameTooltip, "SetGlyphByID", function(self, id)
--- 	if id then addLine(self, id, types.glyph) end
--- end)
 
 -- Achievement Frame Tooltips
 local f = CreateFrame("frame")
@@ -135,11 +136,11 @@ end)
 
 -- Pet battle buttons
 hooksecurefunc("PetBattleAbilityButton_OnEnter", function(self)
-	local petIndex = C_PetBattles.GetActivePet(LE_BATTLE_PET_ALLY);
+	local petIndex = C_PetBattles.GetActivePet(LE_BATTLE_PET_ALLY)
 	if ( self:GetEffectiveAlpha() > 0 ) then
-		local id = select(1, C_PetBattles.GetAbilityInfo(LE_BATTLE_PET_ALLY, petIndex, self:GetID()));
+		local id = select(1, C_PetBattles.GetAbilityInfo(LE_BATTLE_PET_ALLY, petIndex, self:GetID()))
 		if id then
-			local oldText = PetBattlePrimaryAbilityTooltip.Description:GetText(id);
+			local oldText = PetBattlePrimaryAbilityTooltip.Description:GetText(id)
 			PetBattlePrimaryAbilityTooltip.Description:SetText(oldText .. "\r\r" .. types.ability .. "|cffffffff " .. id .. "|r")
 		end
 	end
@@ -147,10 +148,24 @@ end)
 
 -- Pet battle auras
 hooksecurefunc("PetBattleAura_OnEnter", function(self)
-	local parent = self:GetParent();
+	local parent = self:GetParent()
 	local id = select(1, C_PetBattles.GetAuraInfo(parent.petOwner, parent.petIndex, self.auraIndex))
 	if id then
-		local oldText = PetBattlePrimaryAbilityTooltip.Description:GetText(id);
+		local oldText = PetBattlePrimaryAbilityTooltip.Description:GetText(id)
 		PetBattlePrimaryAbilityTooltip.Description:SetText(oldText .. "\r\r" .. types.ability .. "|cffffffff " .. id .. "|r")
 	end
+end)
+
+-- Currencies
+hooksecurefunc(GameTooltip, "SetCurrencyToken", function(self, index)
+	local id = tonumber(string.match(GetCurrencyListLink(index),"currency:(%d+)"))
+	if id then addLine(self, id, types.currency) end
+end)
+
+hooksecurefunc(GameTooltip, "SetCurrencyByID", function(self, id)
+   if id then addLine(self, id, types.currency) end
+end)
+
+hooksecurefunc(GameTooltip, "SetCurrencyTokenByID", function(self, id)
+   if id then addLine(self, id, types.currency) end
 end)
