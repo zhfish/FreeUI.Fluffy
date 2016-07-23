@@ -77,7 +77,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 			elseif spellmacro=="MACRO" then
 				self.button.id = self.button:GetID()
 				
-				if localmacros==1 then self.button.id = self.button.id + 36 end
+				if localmacros==1 then self.button.id = self.button.id + 120 end
 				
 				self.button.name = GetMacroInfo(self.button.id)
 				
@@ -273,7 +273,7 @@ SlashCmdList.MOUSEOVERBIND = function()
 		end
 		
 		local function registermacro()
-			for i=1,36 do
+			for i=1,120 do
 				local mb = _G["MacroButton"..i]
 				mb:HookScript("OnEnter", function(self) bind:Update(self, "MACRO") end)
 			end
