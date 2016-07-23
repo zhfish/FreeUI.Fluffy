@@ -6,7 +6,7 @@ nBuff.Config = {
 	buffSize = 34,
 	buffScale = 1,
 
-	debuffSize = 46,
+	debuffSize = 40,
 	debuffScale = 1,
 
 	paddingX = 4,
