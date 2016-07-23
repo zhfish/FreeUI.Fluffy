@@ -209,7 +209,7 @@ HarmIDs = ( {
 	PRIEST = { 589 }; -- Shadow Word: Pain (40yd) - Lvl 3
 	-- ROGUE = {};
 	SHAMAN = { 403 }; -- Lightning Bolt (30yd) - Starter
-	WARLOCK = { 686 }; -- Shadow Bolt (40yd) - Starter
+	WARLOCK = { 689 }; -- Drain Life (40yd) - Starter
 	WARRIOR = { 355 }; -- Taunt (30yd) - Lvl 12
 } )[ Class ];
 
