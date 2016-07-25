@@ -87,6 +87,7 @@ scripts\extra\ncHoverBind.lua
 scripts\extra\idTip.lua
 
 scripts\extra\MerchantItemlevel.lua
+scripts\extra\NameplateRange.lua
 scripts\extra\NoAsianFonts.lua
 scripts\extra\ncShadow.lua
 scripts\extra\saySapped.lua
