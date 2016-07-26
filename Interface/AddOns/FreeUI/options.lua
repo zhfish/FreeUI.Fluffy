@@ -71,7 +71,7 @@ C["actionbars"] = {
 }
 
 C["bags"] = {
-	["style"] = 1,						-- 1 = all-in-one, 2 = restyle default bags, 3 = do nothing
+	["style"] = 3,						-- 1 = all-in-one, 2 = restyle default bags, 3 = do nothing
 
 	["size"] = 34,						-- change the size of the bags/bank, default = 37
 	["slotsShowAlways"] = true, 		-- always show the bag item slots
