@@ -3,7 +3,7 @@
 	<Script file="anchor.lua"/>
 	<Include file="FreebTip_Multi.xml"/>
 	<!-- <Script file="GetUpgradedItemLevel.lua"/> -->
-	<Script file="ItemRef.lua"/>
+	<!-- <Script file="ItemRef.lua"/> -->
 	<!-- <Script file="LibInspect.lua"/>
 	<Script file="LibItemUpgradeInfo-1.0.lua"/>
 	<Script file="spec.lua"/> -->
