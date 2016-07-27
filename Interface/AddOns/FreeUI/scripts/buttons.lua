@@ -101,7 +101,8 @@ local function updateHotkey(self)
 	if ho:GetText() == _G["RANGE_INDICATOR"] then
 		ho:SetText("")
 	else
-		ho:SetText(text)
+--		ho:SetText(text)
+		ho:SetText(""..text)
 	--	ho:SetText("|cffffffff"..text)
 	end
 
