@@ -1,12 +1,12 @@
 local addon, ns = ...
 ns.options = {
 
-itemSlotSize = 35,	-- Size of item slots
+itemSlotSize = 34,	-- Size of item slots
 
 sizes = {
 	bags = {
-		columnsSmall = 9,
-		columnsLarge = 9,
+		columnsSmall = 8,
+		columnsLarge = 8,
 		largeItemCount = 114,	-- Switch to columnsLarge when >= this number of items in your bags
 	},
 	bank = {
