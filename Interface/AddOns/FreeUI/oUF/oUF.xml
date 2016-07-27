@@ -32,7 +32,7 @@
 	<Script file='elements\harmonyorbs.lua' />
 	<Script file='elements\stagger.lua' />
 
-	<Script file='oUF_SpellRange.lua' />
+	<!-- <Script file='oUF_SpellRange.lua' /> -->
 
 	<Script file='oUF_CounterBar\oUF_CounterBar.lua' />
 	<Script file='oUF_WarlockSpecBars\oUF_WarlockSpecBars.lua' />
