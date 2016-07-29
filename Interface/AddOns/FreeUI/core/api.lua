@@ -111,7 +111,7 @@ local CreateBD = function(f, a)
 	if not a then
         f.tex = f.tex or f:CreateTexture(nil, "BACKGROUND", nil, 1)
         f.tex:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true, true)
-        f.tex:SetAlpha(.5)
+        f.tex:SetAlpha(.45)
         f.tex:SetAllPoints()
         f.tex:SetHorizTile(true)
         f.tex:SetVertTile(true)
