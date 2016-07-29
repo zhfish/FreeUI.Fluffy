@@ -1,30 +1,36 @@
 local F, C = unpack(select(2, ...))
 
 -- [[ Constants ]]
-
 C.media = {
-	["arrowUp"] = "Interface\\AddOns\\FreeUI\\media\\arrow-up-active",
-	["arrowDown"] = "Interface\\AddOns\\FreeUI\\media\\arrow-down-active",
-	["arrowLeft"] = "Interface\\AddOns\\FreeUI\\media\\arrow-left-active",
+	["arrowUp"]    = "Interface\\AddOns\\FreeUI\\media\\arrow-up-active",
+	["arrowDown"]  = "Interface\\AddOns\\FreeUI\\media\\arrow-down-active",
+	["arrowLeft"]  = "Interface\\AddOns\\FreeUI\\media\\arrow-left-active",
 	["arrowRight"] = "Interface\\AddOns\\FreeUI\\media\\arrow-right-active",
-	["backdrop"] = "Interface\\AddOns\\FreeUI\\media\\blank", 					-- default backdrop
-	["checked"] = "Interface\\AddOns\\FreeUI\\media\\CheckButtonHilight", 		-- replace default checked texture
-	["font"] = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 					-- default pixel font
-	["font2"] = "Fonts\\FRIZQT__.ttf", 					-- default font
-	["glow"] = "Interface\\AddOns\\FreeUI\\media\\glowTex", 					-- glow/shadow texture
-	["gradient"] = "Interface\\AddOns\\FreeUI\\media\\gradient",
-	["roleIcons"] = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
-	["texture"] = "Interface\\AddOns\\FreeUI\\media\\Texture1", 				-- statusbar texture
+	["backdrop"]   = "Interface\\AddOns\\FreeUI\\media\\blank", 					-- default backdrop
+	["checked"]    = "Interface\\AddOns\\FreeUI\\media\\CheckButtonHilight", 		-- replace default checked texture
+	["font"]       = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 				-- default pixel font
+--	["font2"]      = "Fonts\\FRIZQT__.ttf", 										-- default font
+	["glow"]       = "Interface\\AddOns\\FreeUI\\media\\glowTex", 					-- glow/shadow texture
+	["gradient"]   = "Interface\\AddOns\\FreeUI\\media\\gradient",
+	["roleIcons"]  = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
+	["texture"]    = "Interface\\AddOns\\FreeUI\\media\\Texture1", 					-- statusbar texture
 }
+--C.media.font2 = GameFontHighlight:GetFont()
+
+local locale = GetLocale()
+
+if locale == "zhCN" then
+	C.media.font2 = "Fonts\\ARKai_T.ttf"		-- 简体中文客户端主字体
+elseif locale == "zhTW" then
+	C.media.font2 = "Fonts\\blei00d.ttf"		-- 繁体中文客户端主字体
+else
+	C.media.font2 = "Fonts\\FRIZQT__.ttf"		-- 英语客户端主字体
+end
 
 local mainFont
 
 if C.appearance.fontUseAlternativeFont then
 	mainFont = C.media.font2
-elseif GetLocale() == "zhCN" then
-	mainFont = "Fonts\\ARKai_T.TTF"
-elseif GetLocale() == "zhTW" then
-	mainFont = "Fonts\\blei00d.TTF"
 else
 	mainFont = C.media.font
 end
@@ -32,10 +38,6 @@ end
 F.AddOptionsCallback("appearance", "fontUseAlternativeFont", function()
 	if C.appearance.fontUseAlternativeFont then
 		mainFont = C.media.font2
-	elseif GetLocale() == "zhCN" then
-		mainFont = "Fonts\\ARKai_T.TTF"
-	elseif GetLocale() == "zhTW" then
-		mainFont = "Fonts\\blei00d.TTF"
 	else
 		mainFont = C.media.font
 	end
@@ -44,16 +46,16 @@ end)
 C.classcolours = {
 	["DEATHKNIGHT"] = {r = 187/255, g = 0, b = 42/255},
 	["DEMONHUNTER"] = {r = 0.64, g = 0.19, b = 0.79},
-	["DRUID"] = {r = 0.94, g = 0.39, b = 0.1},
-	["HUNTER"] = {r = 126/255, g = 185/255, b = 18/255},
-	["MAGE"] = {r = 0.35, g = 0.76, b = 0.93},
-	["MONK"] = {r = 0.04, g = 0.85 , b = 0.53},
-	["PALADIN"] = {r = 241/255, g = 0, b = 168/255},
-	["PRIEST"] = {r = 219/255, g = 243/255, b = 1},
-	["ROGUE"] = {r = 1, g = 238/255, b = 0},
-	["SHAMAN"] = {r = 0.07, g = 0.42, b = 0.96},
-	["WARLOCK"] = {r = 136/255, g = 73/255, b = 223/255},
-	["WARRIOR"] = {r = 0.79, g = 0.61, b = 0.5},
+	["DRUID"]       = {r = 0.94, g = 0.39, b = 0.1},
+	["HUNTER"]      = {r = 126/255, g = 185/255, b = 18/255},
+	["MAGE"]        = {r = 0.35, g = 0.76, b = 0.93},
+	["MONK"]        = {r = 0.04, g = 0.85 , b = 0.53},
+	["PALADIN"]     = {r = 241/255, g = 0, b = 168/255},
+	["PRIEST"]      = {r = 219/255, g = 243/255, b = 1},
+	["ROGUE"]       = {r = 1, g = 238/255, b = 0},
+	["SHAMAN"]      = {r = 0.07, g = 0.42, b = 0.96},
+	["WARLOCK"]     = {r = 136/255, g = 73/255, b = 223/255},
+	["WARRIOR"]     = {r = 0.79, g = 0.61, b = 0.5},
 }
 
 FACTION_BAR_COLORS = {
@@ -167,11 +169,7 @@ F.SetFS = function(fontObject, fontSize)
 	local size
 
 	if(not fontSize or fontSize == C.FONT_SIZE_NORMAL) then
-		if GetLocale() == "zhCN" then
-			size = 12
-		else
-			size = C.appearance.fontSizeNormal
-		end
+		size = C.appearance.fontSizeNormal
 	elseif fontSize == C.FONT_SIZE_LARGE then
 		size = C.appearance.fontSizeLarge
 	elseif fontSize > 4 then -- actual size
@@ -180,10 +178,10 @@ F.SetFS = function(fontObject, fontSize)
 
 	local outline = nil
 	if C.appearance.fontOutline then
-		if GetLocale() == "zhCN" then
+		if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
 			outline = "OUTLINE"
 		else
-			outline = C.appearance.fontOutlineStyle == 2 and "OUTLINEMONOCHROME" or "OUTLINE"
+		 	outline = C.appearance.fontOutlineStyle == 2 and "OUTLINEMONOCHROME" or "OUTLINE"
 		end
 	end
 

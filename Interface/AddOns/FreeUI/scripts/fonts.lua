@@ -8,21 +8,16 @@ local fontUnitName
 local fontDiablo
 local fontDamage
 
-if locale == "zhCN" then
-	fontStandard = "Fonts\\ARKai_T.ttf"		-- 简体中文客户端主字体
-	fontUnitName = "Fonts\\ARKai_T.TTF"		-- 玩家 / NPC 头上的名字
-	fontDiablo = 'Fonts\\ARKai_T.TTF'		-- 地图上的地名字体
-	fontDamage = 'Fonts\\ARKai_T.TTF'		-- 伤害字体
-elseif locale == "zhTW" then
-	fontStandard = "Fonts\\blei00d.ttf"		-- 繁体中文客户端主字体
-	fontUnitName = "Fonts\\blei00d.TTF"
-	fontDiablo = 'Fonts\\blei00d.TTF'
-	fontDamage = 'Fonts\\blei00d.TTF'
+if locale == "zhCN" or locale == "zhTW" then
+	fontStandard = C.media.font2
+	fontUnitName = C.media.font2
+	fontDiablo   = C.media.font2
+	fontDamage   = C.media.font2
 else
 	fontStandard = C.media.font2
 	fontUnitName = C.media.font2
-	fontDiablo = 'Interface\\Addons\\FreeUI\\media\\ExocetBlizzardMedium.ttf'
-	fontDamage = 'Interface\\Addons\\FreeUI\\media\\PEPSI_pl.ttf'
+	fontDiablo   = 'Interface\\Addons\\FreeUI\\media\\ExocetBlizzardMedium.ttf'
+	fontDamage   = 'Interface\\Addons\\FreeUI\\media\\PEPSI_pl.ttf'
 end
 
 RaidWarningFrame.slot1:SetFont(fontStandard, 20, "OUTLINE")
