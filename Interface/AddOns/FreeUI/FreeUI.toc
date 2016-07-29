@@ -2,7 +2,7 @@
 ## Title: |cffF5FFFAFreeUI|r.|cffFF34B3Fluffy|r
 ## Notes: Minimalistic user interface.
 ## Author: Haleth/Lightsword (Modified by Dostoyevsky@烈焰峰)
-## Version: 70000.02
+## Version: 70000.03
 ## RequiredDeps: Blizzard_CombatText
 ## OptionalDeps: Clique, FreeUI_Options, MyRolePlay, oUF
 ## SavedVariables: FreeUIGlobalConfig
@@ -35,7 +35,7 @@ scripts\combo.lua
 scripts\dbm.lua
 scripts\disable.lua
 scripts\durability.lua
-scripts\errors.lua
+#scripts\errors.lua
 scripts\events.lua
 scripts\expbar.lua
 scripts\fonts.lua

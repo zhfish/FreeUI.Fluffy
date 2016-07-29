@@ -2,7 +2,7 @@
 ## Title: |cffF5FFFAFreeUI|r.|cffFF34B3Fluffy|r |cffFFFACDInstall|r
 ## Notes: FreeUI setup addon.
 ## Author: Haleth/Lightsword (Modified by Dostoyevsky@烈焰峰)
-## Version: 70000.02
+## Version: 70000.03
 ## RequiredDeps: FreeUI
 
 install.lua

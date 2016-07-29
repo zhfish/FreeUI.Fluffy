@@ -18,14 +18,14 @@ else
 	fontUnitName = C.media.font2
 	fontDiablo   = 'Interface\\Addons\\FreeUI\\media\\ExocetBlizzardMedium.ttf'
 	fontDamage   = 'Interface\\Addons\\FreeUI\\media\\PEPSI_pl.ttf'
+
+	F.SetFS(UIErrorsFrame)
 end
 
 RaidWarningFrame.slot1:SetFont(fontStandard, 20, "OUTLINE")
 RaidWarningFrame.slot2:SetFont(fontStandard, 20, "OUTLINE")
 RaidBossEmoteFrame.slot1:SetFont(fontStandard, 20, "OUTLINE")
 RaidBossEmoteFrame.slot2:SetFont(fontStandard, 20, "OUTLINE")
-
-F.SetFS(UIErrorsFrame)
 
 STANDARD_TEXT_FONT = fontStandard
 UNIT_NAME_FONT     = fontUnitName
