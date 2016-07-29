@@ -1,10 +1,13 @@
 local F, C, L = unpack(select(2, ...))
 
-local a1, p, a2, x, y = unpack(C.unitframes.player)
+if not C.general.combo then return end
+
+--local a1, p, a2, x, y = unpack(C.unitframes.player)
 
 local combo = CreateFrame("Frame", nil, UIParent)
 combo:SetSize(50, 50)
-combo:SetPoint(a1, p, a2, x, y+200)
+--combo:SetPoint(a1, p, a2, x, y+200)
+combo:SetPoint("CENTER", UIParent, "CENTER", 0, -200)
 combo:SetFrameLevel(3)
 
 local count = F.CreateFS(combo, 24, "CENTER")

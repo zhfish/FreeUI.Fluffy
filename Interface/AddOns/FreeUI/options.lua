@@ -22,6 +22,7 @@ C["general"] = {
 	["objectivetracker"] = true,	-- restyle objectivetracker
 	["cooldownpulse"] = true,
 	["ncshadow"] = true,
+	["combo"] = false,
 }
 
 C["appearance"] = {

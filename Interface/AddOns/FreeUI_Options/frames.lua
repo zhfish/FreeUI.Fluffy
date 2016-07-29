@@ -243,8 +243,11 @@ do
 	local threatMeter = ns.CreateCheckBox(general, "threatMeter", true, true)
 	threatMeter:SetPoint("LEFT", cooldownpulse, "RIGHT", 240, 0)
 
+	local combo = ns.CreateCheckBox(general, "combo", true, true)
+	combo:SetPoint("TOPLEFT", threatMeter, "BOTTOMLEFT", 0, -8)
+
 	local objectivetracker = ns.CreateCheckBox(general, "objectivetracker", true, true)
-	objectivetracker:SetPoint("TOPLEFT", threatMeter, "BOTTOMLEFT", 0, -8)
+	objectivetracker:SetPoint("TOPLEFT", combo, "BOTTOMLEFT", 0, -8)
 
 	local helmCloak = ns.CreateCheckBox(general, "helmcloakbuttons", true, true)
 	helmCloak:SetPoint("TOPLEFT", objectivetracker, "BOTTOMLEFT", 0, -8)
