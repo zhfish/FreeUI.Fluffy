@@ -23,6 +23,8 @@ if C.appearance.fontUseAlternativeFont then
 	mainFont = C.media.font2
 elseif GetLocale() == "zhCN" then
 	mainFont = "Fonts\\ARKai_T.TTF"
+elseif GetLocale() == "zhTW" then
+	mainFont = "Fonts\\blei00d.TTF"
 else
 	mainFont = C.media.font
 end
@@ -32,6 +34,8 @@ F.AddOptionsCallback("appearance", "fontUseAlternativeFont", function()
 		mainFont = C.media.font2
 	elseif GetLocale() == "zhCN" then
 		mainFont = "Fonts\\ARKai_T.TTF"
+	elseif GetLocale() == "zhTW" then
+		mainFont = "Fonts\\blei00d.TTF"
 	else
 		mainFont = C.media.font
 	end

@@ -13,6 +13,11 @@ if locale == "zhCN" then
 	fontUnitName = "Fonts\\ARKai_T.TTF"		-- 玩家 / NPC 头上的名字
 	fontDiablo = 'Fonts\\ARKai_T.TTF'		-- 地图上的地名字体
 	fontDamage = 'Fonts\\ARKai_T.TTF'		-- 伤害字体
+elseif locale == "zhTW" then
+	fontStandard = "Fonts\\blei00d.ttf"		-- 繁体中文客户端主字体
+	fontUnitName = "Fonts\\blei00d.TTF"
+	fontDiablo = 'Fonts\\blei00d.TTF'
+	fontDamage = 'Fonts\\blei00d.TTF'
 else
 	fontStandard = C.media.font2
 	fontUnitName = C.media.font2
