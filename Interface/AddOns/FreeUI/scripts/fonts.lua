@@ -158,7 +158,7 @@ PVPInfoTextFont:SetFont(fontDiablo, 48)
 PVPInfoTextFont:SetShadowColor(0, 0, 0)
 PVPInfoTextFont:SetShadowOffset(1, -1)
 
-WorldMapTextFont:SetFont(fontDiablo, 100)
+WorldMapTextFont:SetFont(fontDiablo, 80)
 WorldMapTextFont:SetShadowColor(0, 0, 0)
 WorldMapTextFont:SetShadowOffset(1, -1)
 
