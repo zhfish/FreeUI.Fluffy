@@ -16,8 +16,8 @@ if locale == "zhCN" then
 else
 	fontStandard = C.media.font2
 	fontUnitName = C.media.font2
-	fontDiablo = 'Interface\\Addons\\FreeUI\\media\\diablo.ttf'
-	fontDamage = 'Interface\\Addons\\FreeUI\\media\\damage.ttf'
+	fontDiablo = 'Interface\\Addons\\FreeUI\\media\\ExocetBlizzardMedium.ttf'
+	fontDamage = 'Interface\\Addons\\FreeUI\\media\\PEPSI_pl.ttf'
 end
 
 RaidWarningFrame.slot1:SetFont(fontStandard, 20, "OUTLINE")
@@ -87,7 +87,7 @@ QuestFont_Shadow_Small:SetFont(fontStandard, 15)
 QuestFont_Large:SetFont(fontStandard, 17)
 QuestFont_Large:SetShadowColor(0, 0, 0)
 QuestFont_Large:SetShadowOffset(1, -1)
-QuestFont_Shadow_Huge:SetFont(fontStandard, 24) -- 任务标题/地下城任务标题
+QuestFont_Shadow_Huge:SetFont(fontDiablo, 24) -- 任务标题/地下城任务标题
 QuestFont_Huge:SetFont(fontStandard, 18) -- rewards
 QuestFont_Super_Huge:SetFont(fontStandard, 24)
 QuestFont_Super_Huge:SetShadowColor(0, 0, 0)
