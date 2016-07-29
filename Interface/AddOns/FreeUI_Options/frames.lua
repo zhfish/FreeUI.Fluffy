@@ -736,10 +736,10 @@ do
 	deathknight.className = "DEATHKNIGHT"
 	tinsert(ns.classOptions, deathknight)
 
-	local druidEclipse = ns.CreateCheckBox(classmod, "druidEclipse", false, true)
-	druidEclipse:SetPoint("TOPLEFT", druidMana, "BOTTOMLEFT", 0, -8)
-	druidEclipse.className = "DRUID"
-	tinsert(ns.classOptions, druidEclipse)
+	local druidMana = ns.CreateCheckBox(classmod, "druidMana", false, true)
+	druidMana:SetPoint("TOPLEFT", deathknight, "BOTTOMLEFT", 0, -8)
+	druidMana.className = "DRUID"
+	tinsert(ns.classOptions, druidMana)
 
 	local mage = ns.CreateCheckBox(classmod, "mage", false, true)
 	mage:SetPoint("TOPLEFT", druidMana, "BOTTOMLEFT", 0, -8)
