@@ -255,18 +255,18 @@ local function styleActionButton(bu)
 	--make the normaltexture match the buttonsize
 	nt:SetAllPoints(bu)
 	--hook to prevent Blizzard from reseting our colors
-	hooksecurefunc(nt, "SetVertexColor", function(nt, r, g, b, a)
-		local bu = nt:GetParent()
-		local action = bu.action
-		--print("bu"..bu:GetName().."R"..r.."G"..g.."B"..b)
-		if r==1 and g==1 and b==1 and action and (IsEquippedAction(action)) then
-			nt:SetVertexColor(color.equipped.r,color.equipped.g,color.equipped.b, 1)
-		elseif r==0.5 and g==0.5 and b==1 then
-			nt:SetVertexColor(color.normal.r,color.normal.g,color.normal.b,1)
-		elseif r==1 and g==1 and b==1 then
-			nt:SetVertexColor(color.normal.r,color.normal.g,color.normal.b,1)
-		end
-	end)
+	-- hooksecurefunc(nt, "SetVertexColor", function(nt, r, g, b, a)
+	-- 	local bu = nt:GetParent()
+	-- 	local action = bu.action
+	-- 	--print("bu"..bu:GetName().."R"..r.."G"..g.."B"..b)
+	-- 	if r==1 and g==1 and b==1 and action and (IsEquippedAction(action)) then
+	-- 		nt:SetVertexColor(color.equipped.r,color.equipped.g,color.equipped.b, 1)
+	-- 	elseif r==0.5 and g==0.5 and b==1 then
+	-- 		nt:SetVertexColor(color.normal.r,color.normal.g,color.normal.b,1)
+	-- 	elseif r==1 and g==1 and b==1 then
+	-- 		nt:SetVertexColor(color.normal.r,color.normal.g,color.normal.b,1)
+	-- 	end
+	-- end)
 
 	if fbg then
 		fbg:Hide()
