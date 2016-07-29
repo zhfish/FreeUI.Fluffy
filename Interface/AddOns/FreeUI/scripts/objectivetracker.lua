@@ -8,95 +8,91 @@ if not C.general.objectivetracker then return end
 local ot = ObjectiveTrackerFrame
 local BlocksFrame = ot.BlocksFrame
 
+-- [[ Positioning ]]
 
-local otMover_Frame = CreateFrame("Frame", "otMoverFrame", UIParent)
-	--otMover_Frame:SetBackdrop(GameTooltip:GetBackdrop())
-	--otMover_Frame:SetBackdropColor(GameTooltip:GetBackdropColor())
-	otMover_Frame:SetWidth(262)
-	otMover_Frame:SetHeight(26)
-	otMover_Frame:SetScale(1)
-	otMover_Frame:SetPoint("CENTER",0,0)
-	otMover_Frame:SetClampedToScreen(true)
-	otMover_Frame:EnableMouse(true)
-	otMover_Frame:SetMovable(true)
-	otMover_Frame:SetUserPlaced(true)
+-- local function moveTracker()
+-- 	ot:ClearAllPoints()
+-- 	ot:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -30, -160)
+-- 	ot:SetPoint("TOP", Minimap, "BOTTOM", 100, 0) -- bogus positioning because we can't touch ObjectiveTracker_CanFitBlock
+-- end
 
-	local otMover_Tex = otMover_Frame:CreateTexture()
-	otMover_Tex:SetAllPoints()
-	otMover_Tex:SetTexture(0,0,0,.3)
---	otMover_Tex:SetGradientAlpha("HORIZONTAL",0,0,0,0,1,1,1,.8)
+-- hooksecurefunc(ot, "SetPoint", function(_, _, _, point)
+-- 	if point == "BOTTOMRIGHT" then
+-- 		moveTracker()
+-- 	end
+-- end)
 
-	otMover_Frame:RegisterEvent("ADDON_LOADED")
-	otMover_Frame:RegisterEvent("PLAYER_LOGIN")
-	otMover_Frame:RegisterEvent("PLAYER_REGEN_DISABLED")
-	otMover_Frame:RegisterEvent("PLAYER_REGEN_ENABLED")
-	otMover_Frame:RegisterEvent("QUEST_WATCH_LIST_CHANGED")
-	otMover_Frame:RegisterEvent("TRACKED_ACHIEVEMENT_LIST_CHANGED")
+-- hooksecurefunc(VehicleSeatIndicator, "SetPoint", function(_, _, anchor)
+-- 	if anchor ~= Minimap then
+-- 		VehicleSeatIndicator:ClearAllPoints()
+-- 		VehicleSeatIndicator:SetPoint("BOTTOM", Minimap, "TOP", 0, 20)
+-- 	end
+-- end)
 
-	otMover_Frame:SetScript("OnMouseDown",
-		function(self, button)
-			self:StartMoving()
-		end
-	)
+local frame = CreateFrame("Frame", "ObjectiveTrackerAnchor", UIParent)
+frame:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", -10, 0)
+frame:SetHeight(150)
+frame:SetWidth(224)
 
-	otMover_Frame:SetScript("OnMouseUp",
-		function(self, button)
-			self:StopMovingOrSizing()
-		end
-	)
+ObjectiveTrackerFrame:ClearAllPoints()
+ObjectiveTrackerFrame:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, 0)
+ObjectiveTrackerFrame:SetHeight(600)
 
-	otMover_Frame:SetScript("OnUpdate", 
-		function(self, t)
-			if(ObjectiveTrackerFrame.collapsed) then
-				otMover_Frame:SetWidth(92)
-			else otMover_Frame:SetWidth(262) end
-		end
-	)
-
-	local function otMover_SetPoint(self,...)
-		ObjectiveTrackerFrame:SetParent(otMover_Frame)
-		ObjectiveTrackerFrame:SetPoint("TOPLEFT", 30,-1)
-		ObjectiveTrackerFrame.HeaderMenu.MinimizeButton:SetPoint("TOPRIGHT", otMover_Frame, "TOPRIGHT", -2 ,-5)
+hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(_, _, parent)
+	if parent ~= frame then
+		ObjectiveTrackerFrame:ClearAllPoints()
+		ObjectiveTrackerFrame:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, 0)
 	end
+end)
 
-	local function GetChildNames(ui_obj, ...)
-		for x=1, ui_obj:GetNumChildren() do
-			local child = select(x, ...)
-			print(child:GetName())
+for _, headerName in pairs({"QuestHeader", "AchievementHeader", "ScenarioHeader"}) do
+	ObjectiveTrackerFrame.BlocksFrame[headerName].Background:Hide()
+end
+BONUS_OBJECTIVE_TRACKER_MODULE.Header.Background:Hide()
+
+ObjectiveTrackerFrame.HeaderMenu.Title:SetAlpha(0)
+OBJECTIVE_TRACKER_DOUBLE_LINE_HEIGHT = 30
+
+----------------------------------------------------------------------------------------
+--	Difficulty color for ObjectiveTrackerFrame lines
+----------------------------------------------------------------------------------------
+hooksecurefunc(QUEST_TRACKER_MODULE, "Update", function()
+	for i = 1, GetNumQuestWatches() do
+		local questID, _, questIndex = GetQuestWatchInfo(i)
+		if not questID then
+			break
+		end
+		local _, level = GetQuestLogTitle(questIndex)
+		local col = GetQuestDifficultyColor(level)
+		local block = QUEST_TRACKER_MODULE:GetExistingBlock(questID)
+		if block then
+			block.HeaderText:SetTextColor(col.r, col.g, col.b)
+			block.HeaderText.col = col
 		end
 	end
+end)
 
-	local function otMover_OnEvent(self, event, ...)
-			
-		if(event == "PLAYER_LOGIN") then
-			hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", otMover_SetPoint) 
-			--GetChildNames(Minimap, Minimap:GetChildren())
-		end
-		
-		if(event == "PLAYER_REGEN_DISABLED") then
-			otMover_Frame:Hide()
-		end	
-
-		if(event == "PLAYER_REGEN_ENABLED") then
-			otMover_Frame:Show()
-		end	
-
-		if(event == "QUEST_WATCH_LIST_CHANGED" or event == "TRACKED_ACHIEVEMENT_LIST_CHANGED") then
-			if(GetNumQuestWatches() > 0 or GetNumTrackedAchievements() > 0 or GetNumAutoQuestPopUps() > 0) then 
-				otMover_Frame:Show()
-			else otMover_Frame:Hide() end
-		end
-		--TRACKED_ACHIEVEMENT_LIST_CHANGED
+hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "AddObjective", function(self, block)
+	if block.module == ACHIEVEMENT_TRACKER_MODULE then
+		block.HeaderText:SetTextColor(0.75, 0.61, 0)
+		block.HeaderText.col = nil
 	end
+end)
 
-	otMover_Frame:SetScript("OnEvent", otMover_OnEvent)
+hooksecurefunc("ObjectiveTrackerBlockHeader_OnLeave", function(self)
+	local block = self:GetParent()
+	if block.HeaderText.col then
+		block.HeaderText:SetTextColor(block.HeaderText.col.r, block.HeaderText.col.g, block.HeaderText.col.b)
+	end
+end)
 
 
 -- [[ Header ]]
 
 -- Header
 
-F.SetFS(ot.HeaderMenu.Title)
+--F.SetFS(ot.HeaderMenu.Title)
+ot.HeaderMenu.Title:SetFont(C.media.font2, 14, "OUTLINE")
 
 -- Minimize button
 
@@ -108,9 +104,12 @@ minimizeButton.plus:Hide()
 
 hooksecurefunc("ObjectiveTracker_Collapse", function()
 	minimizeButton.plus:Show()
+	FreeUIConfig.objectiveTracker.collapsed = true
 end)
+
 hooksecurefunc("ObjectiveTracker_Expand", function()
 	minimizeButton.plus:Hide()
+	FreeUIConfig.objectiveTracker.collapsed = false
 end)
 
 -- [[ Blocks and lines ]]
@@ -119,30 +118,33 @@ for _, headerName in pairs({"QuestHeader", "AchievementHeader", "ScenarioHeader"
 	local header = BlocksFrame[headerName]
 
 	header.Background:Hide()
-	F.SetFS(header.Text)
-	header.Text:SetTextColor(.4,.6,.9)	-- header
+--	F.SetFS(header.Text)
+	header.Text:SetFont(C.media.font2, 14, "OUTLINE")
+	header.Text:SetTextColor(r, g, b)
 end
 
 do
 	local header = BONUS_OBJECTIVE_TRACKER_MODULE.Header
 
 	header.Background:Hide()
-	F.SetFS(header.Text)
-	header.Text:SetTextColor(1,0,0)	-- bonus objectives header
+--	F.SetFS(header.Text)
+	header.Text:SetFont(C.media.font2, 14, "OUTLINE")
+	header.Text:SetTextColor(r, g, b)
 end
 
 hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "SetBlockHeader", function(_, block)
 	if not block.headerStyled then
-		F.SetFS(block.HeaderText)
-		block.HeaderText:SetTextColor(r,g,b)	-- achievement header
+--		F.SetFS(block.HeaderText)
+		block.HeaderText:SetFont(C.media.font2, 14, "OUTLINE")
+		block.HeaderText:SetTextColor(r, g, b)
 		block.headerStyled = true
 	end
 end)
 
 hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", function(_, block)
 	if not block.headerStyled then
-		F.SetFS(block.HeaderText)
-		block.HeaderText:SetTextColor(r,g,b)	-- quest lines header
+--		F.SetFS(block.HeaderText)
+		block.HeaderText:SetFont(C.media.font2, 14, "OUTLINE")
 		block.headerStyled = true
 	end
 
@@ -153,9 +155,14 @@ hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", function(_, block)
 		itemButton:SetPushedTexture("")
 
 		itemButton.HotKey:ClearAllPoints()
-		itemButton.HotKey:SetPoint("TOP", itemButton, -1, 0)
+		itemButton.HotKey:SetPoint("CENTER", itemButton, 1, 0)
 		itemButton.HotKey:SetJustifyH("CENTER")
 		F.SetFS(itemButton.HotKey)
+
+		itemButton.Count:ClearAllPoints()
+		itemButton.Count:SetPoint("TOP", itemButton, 2, -1)
+		itemButton.Count:SetJustifyH("CENTER")
+		F.SetFS(itemButton.Count)
 
 		itemButton.icon:SetTexCoord(.08, .92, .08, .92)
 		F.CreateBG(itemButton)
@@ -195,7 +202,8 @@ hooksecurefunc("ObjectiveTracker_AddBlock", function(block)
 	if block.lines then
 		for _, line in pairs(block.lines) do
 			if not line.styled then
-				F.SetFS(line.Text)
+--				F.SetFS(line.Text)
+				line.Text:SetFont(C.media.font2, 12, "OUTLINE")
 				line.Text:SetSpacing(2)
 
 				if line.Dash then
@@ -220,46 +228,39 @@ end)
 
 hooksecurefunc(BONUS_OBJECTIVE_TRACKER_MODULE, "AddProgressBar", function(self, block, line)
 	local progressBar = line.ProgressBar
+	local bar = progressBar.Bar
+	local icon = bar.Icon
 
 	if not progressBar.styled then
-		local bar = progressBar.Bar
 		local label = bar.Label
-		local icon = bar.Icon
+
+		bar.BarBG:Hide()
+
+		icon:SetMask(nil)
+		icon:SetDrawLayer("BACKGROUND", 1)
+		icon:ClearAllPoints()
+		icon:SetPoint("RIGHT", 35, 2)
+		bar.newIconBg = F.ReskinIcon(icon)
 
 		bar.BarFrame:Hide()
-		bar.BarBG:Hide()
-		bar.IconBG:Hide()
 
-		if icon:IsShown() then
-			icon:SetMask(nil)
-			icon:SetDrawLayer("BACKGROUND", 1)
-			icon:ClearAllPoints()
-			icon:SetPoint("RIGHT", 35, 2)
-			S:ReskinIcon(icon)
-		end
-		
-		bar:SetStatusBarTexture(R["media"].gloss)
+		bar:SetStatusBarTexture(C.media.backdrop)
 
 		label:ClearAllPoints()
-		label:SetPoint("CENTER", 0, -1)
-		label:FontTemplate(nil, nil, "OUTLINE")
+		label:SetPoint("CENTER")
+--		F.SetFS(label)
+		label:SetFont(C.media.font2, 12, "OUTLINE")
 
-		local bg = S:CreateBDFrame(bar)
-		bg:Point("TOPLEFT", -1, 1)
-		bg:Point("BOTTOMRIGHT", 0, -2)
+		local bg = F.CreateBDFrame(bar)
+		bg:SetPoint("TOPLEFT", -1, 1)
+		bg:SetPoint("BOTTOMRIGHT", 0, -2)
 
 		progressBar.styled = true
 	end
 
-	progressBar.Bar:SetValue(50)
+	bar.IconBG:Hide()
+	bar.newIconBg:SetShown(icon:IsShown())
 end)
-
-
-
---------------------------------------------------------------------------------------------------------
---                                    QuestLevel variables                                       --
---------------------------------------------------------------------------------------------------------
-local QuestLevelPatch = {}
 
 --------------------------------------------------------------------------------------------------------
 --                                QuestLevel hooked funcitons                                    --
@@ -328,24 +329,24 @@ end
 hooksecurefunc(QUEST_TRACKER_MODULE, "Update", SetBlockHeader_hook)
 
 -- Hook quest log on map
-function QuestLogQuests_hook(self, poiTable)
-	local numEntries, numQuests = GetNumQuestLogEntries()
-	local headerIndex = 0
-	for questLogIndex = 1, numEntries do
-		local title, level, suggestedGroup, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isStory = GetQuestLogTitle(questLogIndex)
-		if isOnMap and not isTask and not isHeader then
-			headerIndex = headerIndex + 1
-			local button = QuestLogQuests_GetTitleButton(headerIndex)
-			local oldBlockHeight = button:GetHeight()
-			local oldHeight = button.Text:GetStringHeight()
-			local newTitle = ""..level..". "..button.Text:GetText()
-			button.Text:SetText(newTitle)
-			local newHeight = button.Text:GetStringHeight()
-			button:SetHeight(oldBlockHeight + newHeight - oldHeight)
-		end
-	end
-end
-hooksecurefunc("QuestLogQuests_Update", QuestLogQuests_hook)
+-- function QuestLogQuests_hook(self, poiTable)
+-- 	local numEntries, numQuests = GetNumQuestLogEntries()
+-- 	local headerIndex = 0
+-- 	for questLogIndex = 1, numEntries do
+-- 		local title, level, suggestedGroup, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isStory = GetQuestLogTitle(questLogIndex)
+-- 		if isOnMap and not isTask and not isHeader then
+-- 			headerIndex = headerIndex + 1
+-- 			local button = QuestLogQuests_GetTitleButton(headerIndex)
+-- 			local oldBlockHeight = button:GetHeight()
+-- 			local oldHeight = button.Text:GetStringHeight()
+-- 			local newTitle = ""..level..". "..button.Text:GetText()
+-- 			button.Text:SetText(newTitle)
+-- 			local newHeight = button.Text:GetStringHeight()
+-- 			button:SetHeight(oldBlockHeight + newHeight - oldHeight)
+-- 		end
+-- 	end
+-- end
+-- hooksecurefunc("QuestLogQuests_Update", QuestLogQuests_hook)
 
 -- Hook quest info
 function QuestInfo_hook(template, parentFrame, acceptButton, material, mapView)
@@ -363,51 +364,12 @@ function QuestInfo_hook(template, parentFrame, acceptButton, material, mapView)
 end
 hooksecurefunc("QuestInfo_Display", QuestInfo_hook)
 
+-- [[ Init ]]
 
+F.RegisterEvent("VARIABLES_LOADED", function()
+	if not FreeUIConfig.objectiveTracker then FreeUIConfig.objectiveTracker = {} end
 
-
--- more color
-
-
-hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", function(_, block)
-	block.HeaderText:SetTextColor(r, g, b)
+	if C.quests.rememberObjectiveTrackerState and (FreeUIConfig.objectiveTracker.collapsed or C.quests.alwaysCollapseObjectiveTracker) then
+		ObjectiveTracker_Collapse()
+	end
 end)
-
-local function hoverquest(_, block)
-	block.HeaderText:SetTextColor(r, g, b)
-end
-
-hooksecurefunc(QUEST_TRACKER_MODULE, "OnBlockHeaderEnter", hoverquest)  
-hooksecurefunc(QUEST_TRACKER_MODULE, "OnBlockHeaderLeave", hoverquest)
-
-
-hooksecurefunc(ACHIEVEMENT_TRACKER_MODULE, "SetBlockHeader", function(_, block)
-	local trackedAchievements = {GetTrackedAchievements()}
-    
-    for i = 1, #trackedAchievements do
-	    local achieveID = trackedAchievements[i]
-	    local _, achievementName, _, completed, _, _, _, description, _, icon, _, _, wasEarnedByMe = GetAchievementInfo(achieveID)
-        local showAchievement = true
-        
-	    if wasEarnedByMe then
-		    showAchievement = false
-	    elseif displayOnlyArena then
-		    if GetAchievementCategory(achieveID)~=ARENA_CATEGORY then
-			    showAchievement = false
-		    end
-	    end
-	    
-        if showAchievement then
-
-            block.HeaderText:SetTextColor(r, g, b)
-
-        end
-    end
-end)
-  
-local function hoverachieve(_, block)
-	block.HeaderText:SetTextColor(r, g, b)
-end
-  
-hooksecurefunc(ACHIEVEMENT_TRACKER_MODULE, "OnBlockHeaderEnter", hoverachieve)
-hooksecurefunc(ACHIEVEMENT_TRACKER_MODULE, "OnBlockHeaderLeave", hoverachieve)
