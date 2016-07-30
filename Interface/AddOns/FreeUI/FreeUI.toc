@@ -90,14 +90,14 @@ scripts\extra\MerchantItemlevel.lua
 scripts\extra\NameplateRange.lua
 scripts\extra\NoAsianFonts.lua
 scripts\extra\ncShadow.lua
+scripts\extra\QuestLevel.lua
 scripts\extra\saySapped.lua
 scripts\extra\SafeQueue.lua
 scripts\extra\Screenshots.lua
 scripts\extra\SpamageMeters.lua
 scripts\extra\TabBinder.lua
-
-
 scripts\extra\UnitSounds.lua
+scripts\extra\VehicleMove.lua
 scripts\extra\WhisperSound.lua
 
 class\paladin.lua
