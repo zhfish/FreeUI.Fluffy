@@ -2,6 +2,8 @@
 
 local F, C, L = unpack(select(2, ...))
 
+local locale = GetLocale()
+
 CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = 0
 CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = 0
 CHAT_FRAME_TAB_ALERTING_NOMOUSE_ALPHA = 1
@@ -17,6 +19,10 @@ local updateFS = function(self, _, _, ...)
 
 	if((...)) then
 		fstring:SetTextColor(...)
+
+		if locale == "zhCN" or locale == "zhTW" then
+			fstring:SetFont(C.media.font3, 10, "OUTLINEMONOCHROME")
+		end
 	end
 
 	fstring:SetShadowColor(0, 0, 0, 0)
