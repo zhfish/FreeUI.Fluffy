@@ -37,7 +37,7 @@ local createAuraIcon = function(icons, index)
 	local icon = button:CreateTexture(nil, "BORDER")
 	icon:SetAllPoints(button)
 	icon:SetTexCoord(.08, .92, .08, .92)
-	F.CreateSD(button)
+--	F.CreateSD(button)
 
 	local count = F.CreateFS(button, 8, "CENTER")
 	count:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
