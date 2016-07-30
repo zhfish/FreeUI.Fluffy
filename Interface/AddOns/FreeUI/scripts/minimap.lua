@@ -2,6 +2,8 @@ local F, C, L = unpack(select(2, ...))
 
 local r, g, b = unpack(C.class)
 
+local locale = GetLocale()
+local font = C.media.font2
 
 position = "TOPRIGHT"     	
 position_x = -22       		
@@ -102,6 +104,14 @@ MinimapZoneText:SetPoint("CENTER", MinimapZoneTextButton)
 F.SetFS(MinimapZoneText)
 MinimapZoneText:SetShadowColor(0, 0, 0, 0)
 MinimapZoneText:SetJustifyH("CENTER")
+
+if locale == "zhCN" or locale == "zhTW" then
+	ZoneTextString:SetFont(font, 14, "OUTLINE")
+	SubZoneTextString:SetFont(font, 14, "OUTLINE")
+	PVPInfoTextString:SetFont(font, 14, "OUTLINE")
+	PVPArenaTextString:SetFont(font, 14, "OUTLINE")
+	MinimapZoneText:SetFont(font, 14, "OUTLINE")
+end
 
 Minimap:HookScript("OnEnter", function()
 	MinimapZoneTextButton:SetAlpha(1)
