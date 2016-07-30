@@ -106,6 +106,7 @@ theme\theme.lua
 
 theme\AddOns\Blizzard_AchievementUI.lua
 theme\AddOns\Blizzard_ArchaeologyUI.lua
+theme\AddOns\Blizzard_ArtifactUI.lua
 theme\AddOns\Blizzard_AuctionUI.lua
 theme\AddOns\Blizzard_BarbershopUI.lua
 theme\AddOns\Blizzard_BattlefieldMinimap.lua
