@@ -10,11 +10,7 @@ local realm = GetRealmName()
 local class = select(2, UnitClass("player"))
 
 local locale = GetLocale()
-if locale == "zhCN" then
-	nameFont = "Fonts\\ARKai_T.TTF"		
-else
-	nameFont = "Fonts\\FRIZQT__.TTF"
-end
+local nameFont = C.media.font2
 
 local shadow = C.unitframes.shadow
 local CBinterrupt = C.unitframes.castbarColorInterrupt
@@ -1279,7 +1275,7 @@ local UnitSpecific = {
 		tt:SetHeight(12)
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
-		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
+		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 86, 2)
 		ttt:SetFont(nameFont, 11, "OUTLINE")
 		ttt:SetWidth(80)
 		ttt:SetHeight(12)
@@ -1454,9 +1450,9 @@ local UnitSpecific = {
 		tt:SetHeight(12)
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
-		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 88, 2)
+		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 118, 2)
 		ttt:SetFont(nameFont, 11, "OUTLINE")
-		ttt:SetWidth(80)
+		ttt:SetWidth(112)
 		ttt:SetHeight(12)
 
 		tt:RegisterEvent("UNIT_TARGET")
@@ -1474,7 +1470,7 @@ local UnitSpecific = {
 		local Name = F.CreateFS(self)
 		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 3)
 		Name:SetFont(nameFont, 11, "OUTLINE")
-		Name:SetWidth(80)
+		Name:SetWidth(112)
 		Name:SetHeight(12)
 		Name:SetJustifyH"LEFT"
 		Name:SetTextColor(1, 1, 1)
@@ -1539,7 +1535,11 @@ local UnitSpecific = {
 		local Name = F.CreateFS(self, C.FONT_SIZE_NORMAL, "LEFT")
 		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
 		Name:SetWidth((bossWidth / 2) + 10)
-		Name:SetHeight(8)
+		Name:SetHeight(12)
+
+		if locale == "zhCN" or locale == "zhTW" then
+			Name:SetFont(nameFont, 11, "OUTLINE")
+		end
 
 		self:Tag(Name, '[name]')
 		self.Name = Name
@@ -1733,6 +1733,8 @@ do
 
 		local Text = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "CENTER")
 		Text:SetPoint("CENTER", 1, 0)
+		Text:SetFont(C.media.font3, 10, "OUTLINEMONOCHROME")
+
 		self.Text = Text
 
 		self:Tag(Text, '[dead][offline]')
