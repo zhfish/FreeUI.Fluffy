@@ -15,7 +15,6 @@ C.media = {
 	["roleIcons"]  = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
 	["texture"]    = "Interface\\AddOns\\FreeUI\\media\\Texture1", 					-- statusbar texture
 }
---C.media.font2 = GameFontHighlight:GetFont()
 
 local locale = GetLocale()
 

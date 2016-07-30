@@ -1733,7 +1733,7 @@ do
 
 		local Text = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "CENTER")
 		Text:SetPoint("CENTER", 1, 0)
-		Text:SetFont(C.media.font3, 10, "OUTLINEMONOCHROME")
+		Text:SetFont(C.media.font2, 10, "OUTLINE")
 
 		self.Text = Text
 
