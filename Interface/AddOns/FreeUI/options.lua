@@ -101,7 +101,7 @@ C["notifications"] = {
 }
 
 C["tooltip"] = {
-	["enable"] = true,			-- enable tooltip and modules
+	["enable"] = true,		-- enable tooltip and modules
 	["cursor"] = false,		-- tooltip at mouse
 	["position"] = {"BOTTOMRIGHT", -25, 30},	-- tooltip position
 	["hideTitles"] = true,	-- hide player title
@@ -113,8 +113,7 @@ C["tooltip"] = {
 	["combathideALL"] = false,  -- hide tooltip while in combat
 	["hideHealthbar"] = false,	-- hide healthbar
 --	["powerbar"] = false,		-- show mana / power bar
-	["spec"] = false,
-	["ilvl"] = false,
+	["ilvlspec"] = true,		-- show gear info and specialization on tooltip
 }
 
 C["quests"] = {
