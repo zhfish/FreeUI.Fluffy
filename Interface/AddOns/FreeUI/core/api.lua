@@ -10,12 +10,12 @@ C.media = {
 	["checked"]    = "Interface\\AddOns\\FreeUI\\media\\CheckButtonHilight", 		-- replace default checked texture
 	["font"]       = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 				-- default pixel font
 --	["font2"]      = "Fonts\\FRIZQT__.ttf", 										-- default font
+	["font3"]      = "Fonts\\pixfontCN.ttf",
 	["glow"]       = "Interface\\AddOns\\FreeUI\\media\\glowTex", 					-- glow/shadow texture
 	["gradient"]   = "Interface\\AddOns\\FreeUI\\media\\gradient",
 	["roleIcons"]  = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
 	["texture"]    = "Interface\\AddOns\\FreeUI\\media\\Texture1", 					-- statusbar texture
 }
---C.media.font2 = GameFontHighlight:GetFont()
 
 local locale = GetLocale()
 
