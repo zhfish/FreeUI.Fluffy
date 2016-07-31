@@ -118,6 +118,8 @@ local function Setup()
 	SetCVar("nameplateShowEnemies", 1)
 	SetCVar("ShowClassColorInNameplate", 1)
 	SetCVar("miniWorldMap", 1)
+	SetCVar("TargetPriorityAllowAnyOnScreen", 0)
+	SetCVar("Targetnearestuseold", 1)
 end
 
 local function SetupChat()
