@@ -10,7 +10,7 @@ local function restyleStateFrames()
 			F.SetFS(g)
 
 			if locale == "zhCN" or locale == "zhTW" then
-				g:SetFont(C.media.font3, 10, "OUTLINEMONOCHROME")
+				g:SetFont(C.media.font2, 10, "OUTLINE")
 			end
 
 			g:SetShadowOffset(0, 0)
