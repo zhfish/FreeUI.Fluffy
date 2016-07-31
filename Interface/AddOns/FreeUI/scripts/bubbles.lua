@@ -29,7 +29,7 @@ local function styleBubble(frame)
 	})
 
 	frame:SetClampedToScreen(false)
-	frame:SetBackdropColor(0, 0, 0, .5)
+	frame:SetBackdropColor(0, 0, 0, .75)
 	frame:SetBackdropBorderColor(0, 0, 0)
 
 	tinsert(bubbles, frame)
