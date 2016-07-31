@@ -32,7 +32,7 @@ scripts\chat.lua
 scripts\chattabs.lua
 scripts\colours.lua
 scripts\combo.lua
-scripts\dbm.lua
+#scripts\dbm.lua
 scripts\disable.lua
 scripts\durability.lua
 #scripts\errors.lua
@@ -69,25 +69,19 @@ scripts\extra\myMedia.lua
 
 scripts\extra\tooltip\load_tooltip.xml
 
-scripts\extra\_dev\test.lua
-
 scripts\extra\Align.lua
-
 scripts\extra\AlreadyKnown.lua
 scripts\extra\BGSpamFix.lua
 scripts\extra\BgSpecIcon.lua
 scripts\extra\ColorPicker.lua
+scripts\extra\CVarfix.lua
 scripts\extra\DragEmAll.lua
 scripts\extra\Doom_CooldownPulse.lua
-
-
 scripts\extra\Foglight.lua
 scripts\extra\HiddenRaidNames.lua
-scripts\extra\ncHoverBind.lua
 scripts\extra\idTip.lua
-
 scripts\extra\MerchantItemlevel.lua
-scripts\extra\NameplateRange.lua
+scripts\extra\ncHoverBind.lua
 scripts\extra\NoAsianFonts.lua
 scripts\extra\ncShadow.lua
 scripts\extra\QuestLevel.lua
@@ -99,6 +93,10 @@ scripts\extra\TabBinder.lua
 scripts\extra\UnitSounds.lua
 scripts\extra\VehicleMove.lua
 scripts\extra\WhisperSound.lua
+
+scripts\extra\skin\Bugger.lua
+
+scripts\extra\_dev\test.lua
 
 class\paladin.lua
 
@@ -137,8 +135,8 @@ theme\AddOns\Blizzard_TimeManager.lua
 theme\AddOns\Blizzard_TradeSkillUI.lua
 theme\AddOns\Blizzard_TrainerUI.lua
 theme\AddOns\Blizzard_VoidStorageUI.lua
-theme\AddOns\DBM-GUI.lua
-theme\AddOns\KayrChat.lua
+#theme\AddOns\DBM-GUI.lua
+#theme\AddOns\KayrChat.lua
 
 theme\FrameXML\AlertFrames.lua
 theme\FrameXML\BankFrame.lua
