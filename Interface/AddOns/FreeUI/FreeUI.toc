@@ -32,7 +32,7 @@ scripts\chat.lua
 scripts\chattabs.lua
 scripts\colours.lua
 scripts\combo.lua
-#scripts\dbm.lua
+scripts\dbm.lua
 scripts\disable.lua
 scripts\durability.lua
 #scripts\errors.lua
@@ -135,7 +135,7 @@ theme\AddOns\Blizzard_TimeManager.lua
 theme\AddOns\Blizzard_TradeSkillUI.lua
 theme\AddOns\Blizzard_TrainerUI.lua
 theme\AddOns\Blizzard_VoidStorageUI.lua
-#theme\AddOns\DBM-GUI.lua
+theme\AddOns\DBM-GUI.lua
 #theme\AddOns\KayrChat.lua
 
 theme\FrameXML\AlertFrames.lua
