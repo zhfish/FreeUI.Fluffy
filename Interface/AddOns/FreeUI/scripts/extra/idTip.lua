@@ -78,15 +78,15 @@ GameTooltip:HookScript("OnTooltipSetSpell", function(self)
 end)
 
 -- NPCs
-GameTooltip:HookScript("OnTooltipSetUnit", function(self)
-	if C_PetBattles.IsInBattle() then return end
-	local unit = select(2, self:GetUnit())
-	if unit then
-		local guid = UnitGUID(unit) or ""
-		local id = tonumber(guid:match("-(%d+)-%x+$"), 10)
-		if id and guid:match("%a+") ~= "Player" then addLine(GameTooltip, id, types.unit) end
-	end
-end)
+-- GameTooltip:HookScript("OnTooltipSetUnit", function(self)
+-- 	if C_PetBattles.IsInBattle() then return end
+-- 	local unit = select(2, self:GetUnit())
+-- 	if unit then
+-- 		local guid = UnitGUID(unit) or ""
+-- 		local id = tonumber(guid:match("-(%d+)-%x+$"), 10)
+-- 		if id and guid:match("%a+") ~= "Player" then addLine(GameTooltip, id, types.unit) end
+-- 	end
+-- end)
 
 -- Items
 local function attachItemTooltip(self)
