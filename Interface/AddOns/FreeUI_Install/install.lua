@@ -120,6 +120,10 @@ local function Setup()
 	SetCVar("miniWorldMap", 1)
 	SetCVar("TargetPriorityAllowAnyOnScreen", 0)
 	SetCVar("Targetnearestuseold", 1)
+	SetCVar("floatingCombatTextCombatDamageDirectionalScale", 1)
+	SetCVar("nameplateMaxDistance", 40)
+	SetCVar("nameplateOtherTopInset", -1)
+	SetCVar("nameplateOtherBottomInset", -1)
 end
 
 local function SetupChat()
