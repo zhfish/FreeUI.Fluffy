@@ -625,6 +625,9 @@ local tooltips = {
 	"DropDownList1MenuBackdrop",
 	"DropDownList2MenuBackdrop",
 	"DropDownList3MenuBackdrop",
+	"AtlasLootTooltip",
+	"QuestHelperTooltip",
+	"QuestGuru_QuestWatchTooltip",
 }
 
 local frameload = CreateFrame"Frame"
