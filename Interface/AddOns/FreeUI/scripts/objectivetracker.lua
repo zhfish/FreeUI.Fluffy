@@ -242,6 +242,20 @@ hooksecurefunc(BONUS_OBJECTIVE_TRACKER_MODULE, "AddProgressBar", function(self, 
 	bar.newIconBg:SetShown(icon:IsShown())
 end)
 
+-- Objective Tracker
+F.ReskinExpandOrCollapse(_G.ObjectiveTrackerFrame.HeaderMenu.MinimizeButton)
+for _, headerName in next, {"QuestHeader", "AchievementHeader", "ScenarioHeader"} do
+	local header = _G.ObjectiveTrackerFrame.BlocksFrame[headerName]
+	header.Background:Hide()
+
+	local bg = header:CreateTexture(nil, "ARTWORK")
+	bg:SetTexture([[Interface\LFGFrame\UI-LFG-SEPARATOR]])
+	bg:SetTexCoord(0, 0.6640625, 0, 0.3125)
+	bg:SetVertexColor(r * 0.7, g * 0.7, b * 0.7)
+	bg:SetPoint("BOTTOMLEFT", -30, -4)
+	bg:SetSize(210, 30)
+end
+
 
 -- [[ Init ]]
 
