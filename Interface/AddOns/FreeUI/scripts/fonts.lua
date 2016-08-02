@@ -17,7 +17,7 @@ else
 	fontStandard = C.media.font2
 	fontUnitName = C.media.font2
 	fontDiablo   = 'Interface\\Addons\\FreeUI\\media\\ExocetBlizzardLight.ttf'
-	fontDamage   = 'Interface\\Addons\\FreeUI\\media\\ExocetBlizzardMedium.ttf'
+	fontDamage   = 'Interface\\Addons\\FreeUI\\media\\InfinityGears.ttf'
 
 	F.SetFS(UIErrorsFrame)
 end
