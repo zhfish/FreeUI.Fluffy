@@ -11,25 +11,24 @@ local function SummonPet(fav)
 	end)
 end
 
-if autopet then
-	eventframe:RegisterEvent("PLAYER_ENTERING_WORLD")
-	eventframe:RegisterEvent("PLAYER_CONTROL_GAINED")
-	eventframe:RegisterEvent("UNIT_EXITED_VEHICLE")
-	eventframe:RegisterEvent("PLAYER_ALIVE")
 
-	function eventframe:PLAYER_ENTERING_WORLD()
-		SummonPet()
-	end
+eventframe:RegisterEvent("PLAYER_ENTERING_WORLD")
+eventframe:RegisterEvent("PLAYER_CONTROL_GAINED")
+eventframe:RegisterEvent("UNIT_EXITED_VEHICLE")
+eventframe:RegisterEvent("PLAYER_ALIVE")
 
-	function eventframe:PLAYER_CONTROL_GAINED()
-		SummonPet()
-	end
+function eventframe:PLAYER_ENTERING_WORLD()
+	SummonPet()
+end
 
-	function eventframe:UNIT_EXITED_VEHICLE()
-		SummonPet()
-	end
+function eventframe:PLAYER_CONTROL_GAINED()
+	SummonPet()
+end
 
-	function eventframe:PLAYER_ALIVE()
-		SummonPet()
-	end
+function eventframe:UNIT_EXITED_VEHICLE()
+	SummonPet()
+end
+
+function eventframe:PLAYER_ALIVE()
+	SummonPet()
 end
