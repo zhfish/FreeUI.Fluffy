@@ -8,6 +8,6 @@ C_Timer.After(.1, function() -- need to wait a bit
 		-- tab的行为改回7.0以前，优先tab最近的单位
 		SetCVar("TargetPriorityAllowAnyOnScreen", 0)
 		SetCVar("Targetnearestuseold", 1)
-		SetCVar("floatingCombatTextCombatDamageDirectionalScale", 1)
+		SetCVar("floatingCombatTextCombatDamageDirectionalScale", 0)
 	end
 end)
