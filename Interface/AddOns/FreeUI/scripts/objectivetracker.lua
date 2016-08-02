@@ -16,7 +16,7 @@ frame:SetWidth(224)
 
 ObjectiveTrackerFrame:ClearAllPoints()
 ObjectiveTrackerFrame:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, 0)
-ObjectiveTrackerFrame:SetHeight(600)
+ObjectiveTrackerFrame:SetHeight(GetScreenHeight() / 2)
 
 hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(_, _, parent)
 	if parent ~= frame then
