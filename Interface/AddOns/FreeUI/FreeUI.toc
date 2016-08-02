@@ -71,6 +71,7 @@ scripts\extra\tooltip\load_tooltip.xml
 
 scripts\extra\Align.lua
 scripts\extra\AlreadyKnown.lua
+scripts\extra\AutoPet.lua
 scripts\extra\BGSpamFix.lua
 scripts\extra\BgSpecIcon.lua
 scripts\extra\ColorPicker.lua
