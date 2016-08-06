@@ -74,6 +74,7 @@ scripts\extra\rMinimap\core.lua
 scripts\extra\Align.lua
 scripts\extra\AlreadyKnown.lua
 scripts\extra\AlertMover.lua
+scripts\extra\AutoPet.lua
 scripts\extra\BGSpamFix.lua
 scripts\extra\BgSpecIcon.lua
 scripts\extra\ColorPicker.lua
