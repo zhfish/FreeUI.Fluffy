@@ -2,6 +2,6 @@
 	<Script file="tip.lua"/>
 	<Script file="anchor.lua"/>
 	<Include file="FreebTip_Multi.xml"/>
-	<Script file="ItemRef.lua"/>
+	<!-- <Script file="ItemRef.lua"/> -->
 	<Script file="ilvlspec.lua"/>
 </Ui>

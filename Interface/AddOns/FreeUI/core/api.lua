@@ -577,10 +577,17 @@ F.ReskinRadio = function(f)
 	f:SetHighlightTexture("")
 	f:SetCheckedTexture(C.media.texture)
 
+	f:SetDisabledCheckedTexture(C.media.backdrop)
+
 	local ch = f:GetCheckedTexture()
 	ch:SetPoint("TOPLEFT", 4, -4)
 	ch:SetPoint("BOTTOMRIGHT", -4, 4)
 	ch:SetVertexColor(r, g, b, .6)
+
+	local dch = f:GetDisabledCheckedTexture()
+	dch:SetPoint("TOPLEFT", 4, -4)
+	dch:SetPoint("BOTTOMRIGHT", -4, 4)
+	dch:SetVertexColor(.7, .7, .7, .6)
 
 	local bd = CreateFrame("Frame", nil, f)
 	bd:SetPoint("TOPLEFT", 3, -3)

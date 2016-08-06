@@ -256,6 +256,26 @@ for _, headerName in next, {"QuestHeader", "AchievementHeader", "ScenarioHeader"
 	bg:SetSize(210, 30)
 end
 
+--
+ScenarioStageBlock:HookScript("OnShow", function()
+	if not ScenarioStageBlock.skinned then
+		ScenarioStageBlock.NormalBG:SetAlpha(0)
+		ScenarioStageBlock.FinalBG:SetAlpha(0)
+		ScenarioStageBlock.GlowTexture:SetTexture(nil)
+		ScenarioStageBlock.Stage:SetFont(C.media.font2, 18, "OUTLINE")
+		ScenarioStageBlock.Stage:SetTextColor(1, 1, 1)
+		ScenarioStageBlock.Name:SetFont(C.media.font2, 12, "OUTLINE")
+		ScenarioStageBlock.CompleteLabel:SetFont(C.media.font2, 18, "OUTLINE")
+		ScenarioStageBlock.CompleteLabel:SetTextColor(1, 1, 1)
+		ScenarioStageBlock.skinned = true
+	end
+end)
+
+
+
+--ScenarioChallengeModeBlock
+--ScenarioProvingGroundsBlock
+
 
 -- [[ Init ]]
 

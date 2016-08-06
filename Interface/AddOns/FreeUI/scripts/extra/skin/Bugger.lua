@@ -1,8 +1,9 @@
+if not IsAddOnLoaded("Bugger") then return end
+
 local F, C, L = unpack(select(2, ...))
 
 -- Lua Globals --
 local _G = _G
-
 
 _G.hooksecurefunc(_G.Bugger, "SetupFrame", function()
 	local BuggerFrame = _G.BuggerFrame
@@ -38,3 +39,4 @@ _G.hooksecurefunc(_G.Bugger, "SetupFrame", function()
 		F.ReskinTab(tab)
 	end
 end)
+

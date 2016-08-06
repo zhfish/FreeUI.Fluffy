@@ -380,6 +380,8 @@ C.themes["Blizzard_GarrisonUI"] = function()
 		select(i, GarrisonMissionFrame:GetRegions()):Hide()
 	end
 
+	GarrisonMissionFrame.GarrCorners:Hide()
+
 	GarrisonMissionFrame.TitleText:Show()
 
 	F.CreateBD(GarrisonMissionFrame)
