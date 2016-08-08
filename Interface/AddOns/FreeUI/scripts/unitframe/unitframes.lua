@@ -24,7 +24,13 @@ fonts = {
 	},
 }
 
-local nameFont = fonts.pixel
+local nameFont
+
+if name == "Nekretaal" or name == "Dostoyevsky" then
+	nameFont = fonts.pixel
+else
+	nameFont = fonts.standard
+end
 
 local shadow = C.unitframes.shadow
 local CBinterrupt = C.unitframes.castbarColorInterrupt
