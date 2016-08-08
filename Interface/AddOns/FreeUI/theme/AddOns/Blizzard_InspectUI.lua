@@ -9,6 +9,7 @@ C.themes["Blizzard_InspectUI"] = function()
 	for i = 1, 5 do
 		select(i, InspectModelFrame:GetRegions()):Hide()
 	end
+	F.Reskin(InspectPaperDollFrame.ViewButton)
 
 	-- Character
 
@@ -29,7 +30,6 @@ C.themes["Blizzard_InspectUI"] = function()
 		slot:SetNormalTexture("")
 		slot:SetPushedTexture("")
 
-		border:SetTexture(C.media.backdrop)
 		border:SetPoint("TOPLEFT", -1, 1)
 		border:SetPoint("BOTTOMRIGHT", 1, -1)
 		border:SetDrawLayer("BACKGROUND")
@@ -38,6 +38,7 @@ C.themes["Blizzard_InspectUI"] = function()
 	end
 
 	hooksecurefunc("InspectPaperDollItemSlotButton_Update", function(button)
+		button.IconBorder:SetTexture(C.media.backdrop)
 		button.icon:SetShown(button.hasItem)
 	end)
 

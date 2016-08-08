@@ -1001,7 +1001,8 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		-- Item text
 
-		InboxFrameBg:Hide()
+		select(18, ItemTextFrame:GetRegions()):Hide()
+		ItemTextFramePageBg:SetAlpha(0)
 		ItemTextPrevPageButton:GetRegions():Hide()
 		ItemTextNextPageButton:GetRegions():Hide()
 		ItemTextMaterialTopLeft:SetAlpha(0)

@@ -15,17 +15,16 @@ C.themes["Blizzard_EncounterJournal"] = function()
 	EncounterJournalInsetBg:Hide()
 	EncounterJournalEncounterFrameInfoModelFrameShadow:Hide()
 	EncounterJournalEncounterFrameInfoModelFrame.dungeonBG:Hide()
-	
-	EncounterJournalEncounterFrameInfoInstanceButton:Hide()
-	EncounterJournalEncounterFrameInfoInstanceButton.Show = function() end
-	
+	EncounterJournal.encounter.info.difficulty.UpLeft:SetAlpha(0)
+	EncounterJournal.encounter.info.difficulty.UpRight:SetAlpha(0)
+	EncounterJournal.encounter.info.difficulty.DownLeft:SetAlpha(0)
+	EncounterJournal.encounter.info.difficulty.DownRight:SetAlpha(0)
 	select(5, EncounterJournalEncounterFrameInfoDifficulty:GetRegions()):Hide()
 	select(6, EncounterJournalEncounterFrameInfoDifficulty:GetRegions()):Hide()
-	EncounterJournalEncounterFrameInfoDifficulty.UpLeft:SetAlpha(0)
-	EncounterJournalEncounterFrameInfoDifficulty.UpRight:SetAlpha(0)
-	EncounterJournalEncounterFrameInfoDifficulty.DownLeft:SetAlpha(0)
-	EncounterJournalEncounterFrameInfoDifficulty.DownRight:SetAlpha(0)
-	
+	EncounterJournal.encounter.info.lootScroll.filter.UpLeft:SetAlpha(0)
+	EncounterJournal.encounter.info.lootScroll.filter.UpRight:SetAlpha(0)
+	EncounterJournal.encounter.info.lootScroll.filter.DownLeft:SetAlpha(0)
+	EncounterJournal.encounter.info.lootScroll.filter.DownRight:SetAlpha(0)
 	select(5, EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:GetRegions()):Hide()
 	select(6, EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:GetRegions()):Hide()
 	EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle.UpLeft:SetAlpha(0)
@@ -73,29 +72,10 @@ C.themes["Blizzard_EncounterJournal"] = function()
 		tab:HookScript("OnEnable", onEnable)
 		tab:HookScript("OnDisable", onDisable)
 		tab:HookScript("OnClick", onClick)
-		
+
 		F.Reskin(tab)
 	end
-	
-	for _, EJ_Button in pairs({EncounterJournal.LootJournal.LegendariesFrame.ClassButton, EncounterJournal.LootJournal.LegendariesFrame.SlotButton, EncounterJournal.LootJournal.ItemSetsFrame.ClassButton}) do
-		EJ_Button.UpLeft:Hide()
-		EJ_Button.UpLeft.Show = function() end
-		EJ_Button.UpRight:Hide()
-		EJ_Button.UpRight.Show = function() end
-		EJ_Button.DownLeft:Hide()
-		EJ_Button.DownLeft.Show = function() end
-		EJ_Button.DownRight:Hide()
-		EJ_Button.DownRight.Show = function() end
-		EJ_Button.HighLeft:Hide()
-		EJ_Button.HighRight:Hide()
-		
-		local text = EJ_Button:GetFontString()
-		text:SetPoint("CENTER")
-		text:SetTextColor(1, 1, 1)
-		
-		F.Reskin(EJ_Button)
-	end
-	
+
 	EncounterJournalInstanceSelectSuggestTab:SetBackdropColor(r, g, b, .2)
 
 	-- [[ Side tabs ]]
@@ -218,7 +198,8 @@ C.themes["Blizzard_EncounterJournal"] = function()
 				header.button.expandedIcon:SetTextColor(1, 1, 1)
 				header.button.expandedIcon.SetTextColor = F.dummy
 
-				F.Reskin(header.button)
+				-- Blizzard already uses .tex for this frame, so we can't do highlights
+				F.Reskin(header.button, true)
 
 				header.button.abilityIcon:SetTexCoord(.08, .92, .08, .92)
 				header.button.bg = F.CreateBG(header.button.abilityIcon)
@@ -253,7 +234,8 @@ C.themes["Blizzard_EncounterJournal"] = function()
 			header.button.expandedIcon:SetTextColor(1, 1, 1)
 			header.button.expandedIcon.SetTextColor = F.dummy
 
-			F.Reskin(header.button)
+			-- Blizzard already uses .tex for this frame, so we can't do highlights
+			F.Reskin(header.button, true)
 
 			header.styled = true
 		end
@@ -450,7 +432,7 @@ C.themes["Blizzard_EncounterJournal"] = function()
 		end
 	end
 
-	-- Suggestion 1
+	--[[ Suggestion 1 ]]
 
 	local suggestion = suggestFrame.Suggestion1
 
@@ -508,6 +490,99 @@ C.themes["Blizzard_EncounterJournal"] = function()
 		F.CreateBG(reward.icon)
 	end
 
+	-- [[ Loot tab ]]
+
+	F.Reskin(EncounterJournal.LootJournal.LegendariesFrame.ClassButton)
+	EncounterJournal.LootJournal.LegendariesFrame.ClassButton:GetFontString():SetTextColor(1, 1, 1)
+	select(5, EncounterJournal.LootJournal.LegendariesFrame.ClassButton:GetRegions()):Hide()
+	select(6, EncounterJournal.LootJournal.LegendariesFrame.ClassButton:GetRegions()):Hide()
+	EncounterJournal.LootJournal.LegendariesFrame.ClassButton.UpLeft:SetAlpha(0)
+	EncounterJournal.LootJournal.LegendariesFrame.ClassButton.UpRight:SetAlpha(0)
+	EncounterJournal.LootJournal.LegendariesFrame.ClassButton.HighLeft:SetAlpha(0)
+	EncounterJournal.LootJournal.LegendariesFrame.ClassButton.HighRight:SetAlpha(0)
+	EncounterJournal.LootJournal.LegendariesFrame.ClassButton.DownLeft:SetAlpha(0)
+	EncounterJournal.LootJournal.LegendariesFrame.ClassButton.DownRight:SetAlpha(0)
+
+	F.Reskin(EncounterJournal.LootJournal.LegendariesFrame.SlotButton)
+	EncounterJournal.LootJournal.LegendariesFrame.SlotButton:GetFontString():SetTextColor(1, 1, 1)
+	select(5, EncounterJournal.LootJournal.LegendariesFrame.SlotButton:GetRegions()):Hide()
+	select(6, EncounterJournal.LootJournal.LegendariesFrame.SlotButton:GetRegions()):Hide()
+	EncounterJournal.LootJournal.LegendariesFrame.SlotButton.UpLeft:SetAlpha(0)
+	EncounterJournal.LootJournal.LegendariesFrame.SlotButton.UpRight:SetAlpha(0)
+	EncounterJournal.LootJournal.LegendariesFrame.SlotButton.HighLeft:SetAlpha(0)
+	EncounterJournal.LootJournal.LegendariesFrame.SlotButton.HighRight:SetAlpha(0)
+	EncounterJournal.LootJournal.LegendariesFrame.SlotButton.DownLeft:SetAlpha(0)
+	EncounterJournal.LootJournal.LegendariesFrame.SlotButton.DownRight:SetAlpha(0)
+
+	EncounterJournal.LootJournal:DisableDrawLayer("BACKGROUND")
+	F.ReskinScroll(EncounterJournalScrollBar)
+	F.ReskinDropDown(LootJournalViewDropDown)
+
+	local itemsLeftSide = EncounterJournal.LootJournal.LegendariesFrame.buttons
+	local itemsRightSide = EncounterJournal.LootJournal.LegendariesFrame.rightSideButtons
+	for _, items in ipairs({itemsLeftSide, itemsRightSide}) do
+		for i = 1, #items do
+			local item = items[i]
+
+			item.ItemType:SetTextColor(1, 1, 1)
+			item.Background:Hide()
+
+			item.Icon:SetPoint("TOPLEFT", 1, -1)
+
+			item.Icon:SetTexCoord(.08, .92, .08, .92)
+			item.Icon:SetDrawLayer("OVERLAY")
+			F.CreateBG(item.Icon)
+
+			local bg = CreateFrame("Frame", nil, item)
+			bg:SetPoint("TOPLEFT")
+			bg:SetPoint("BOTTOMRIGHT", 0, 1)
+			bg:SetFrameLevel(item:GetFrameLevel() - 1)
+			F.CreateBD(bg, .25)
+		end
+	end
+
+	F.Reskin(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton)
+	EncounterJournal.LootJournal.ItemSetsFrame.ClassButton:GetFontString():SetTextColor(1, 1, 1)
+	select(5, EncounterJournal.LootJournal.ItemSetsFrame.ClassButton:GetRegions()):Hide()
+	select(6, EncounterJournal.LootJournal.ItemSetsFrame.ClassButton:GetRegions()):Hide()
+	EncounterJournal.LootJournal.ItemSetsFrame.ClassButton.UpLeft:SetAlpha(0)
+	EncounterJournal.LootJournal.ItemSetsFrame.ClassButton.UpRight:SetAlpha(0)
+	EncounterJournal.LootJournal.ItemSetsFrame.ClassButton.HighLeft:SetAlpha(0)
+	EncounterJournal.LootJournal.ItemSetsFrame.ClassButton.HighRight:SetAlpha(0)
+	EncounterJournal.LootJournal.ItemSetsFrame.ClassButton.DownLeft:SetAlpha(0)
+	EncounterJournal.LootJournal.ItemSetsFrame.ClassButton.DownRight:SetAlpha(0)
+
+	hooksecurefunc(EncounterJournal.LootJournal.ItemSetsFrame, "UpdateList", function()
+		local itemSets = EncounterJournal.LootJournal.ItemSetsFrame.buttons
+		for i = 1, #itemSets do
+			local itemSet = itemSets[i]
+
+			itemSet.ItemLevel:SetTextColor(1, 1, 1)
+			itemSet.Background:Hide()
+
+			if not itemSet.bg then
+				local bg = CreateFrame("Frame", nil, itemSet)
+				bg:SetPoint("TOPLEFT")
+				bg:SetPoint("BOTTOMRIGHT", 0, 1)
+				bg:SetFrameLevel(itemSet:GetFrameLevel() - 1)
+				F.CreateBD(bg, .25)
+				itemSet.bg = bg
+			end
+
+			local items = itemSet.ItemButtons
+			for j = 1, #items do
+				local item = items[j]
+
+				item.Border:Hide()
+				item.Icon:SetPoint("TOPLEFT", 1, -1)
+
+				item.Icon:SetTexCoord(.08, .92, .08, .92)
+				item.Icon:SetDrawLayer("OVERLAY")
+				F.CreateBG(item.Icon)
+			end
+		end
+	end)
+
 	-- Hook functions
 
 	hooksecurefunc("EJSuggestFrame_RefreshDisplay", function()
@@ -520,7 +595,7 @@ C.themes["Blizzard_EncounterJournal"] = function()
 			suggestion.iconRing:Hide()
 
 			if data.iconPath then
-				suggestion.icon:SetMask(nil)
+				suggestion.icon:SetMask("")
 				suggestion.icon:SetTexture(data.iconPath)
 				suggestion.icon:SetTexCoord(.08, .92, .08, .92)
 			end
@@ -536,7 +611,7 @@ C.themes["Blizzard_EncounterJournal"] = function()
 				suggestion.iconRing:Hide()
 
 				if data.iconPath then
-					suggestion.icon:SetMask(nil)
+					suggestion.icon:SetMask("")
 					suggestion.icon:SetTexture(data.iconPath)
 					suggestion.icon:SetTexCoord(.08, .92, .08, .92)
 				end
@@ -549,24 +624,8 @@ C.themes["Blizzard_EncounterJournal"] = function()
 		if rewardData then
 			local texture = rewardData.itemIcon or rewardData.currencyIcon or [[Interface\Icons\achievement_guildperk_mobilebanking]]
 			suggestion.reward.icon:SetMask("")
- 			suggestion.reward.icon:SetTexture(texture)
+			suggestion.reward.icon:SetTexture(texture)
 			suggestion.reward.icon:SetTexCoord(.08, .92, .08, .92)
 		end
 	end)
-	
-	local bg = EncounterJournal.LootJournal:GetRegions()
-	bg:Hide()
-	
-	for k, bu in pairs(EncounterJournal.LootJournal.LegendariesFrame.buttons) do
-		bu.Background:Hide()
-		F.Reskin(bu)
-		F.CreateBG(bu.Icon)
-		bu.Icon:SetDrawLayer("ARTWORK")
-	end
-	for k, bu in pairs(EncounterJournal.LootJournal.LegendariesFrame.rightSideButtons) do
-		bu.Background:Hide()
-		F.Reskin(bu)
-		F.CreateBG(bu.Icon)
-		bu.Icon:SetDrawLayer("ARTWORK")
-	end
 end
