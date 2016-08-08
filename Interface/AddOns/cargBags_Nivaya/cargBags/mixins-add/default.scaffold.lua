@@ -26,7 +26,6 @@ DEPENDENCIES
 ]]
 local addon, ns = ...
 local cargBags = ns.cargBags
-local L = cargBags:GetLocalizedTypes()
 
 local function noop() end
 
@@ -93,7 +92,6 @@ end
 	@param item <table> The itemTable holding information, see Implementation:GetItemInfo()
 	@callback OnUpdate(item)
 ]]
-local ilvlTypes = {[L["Armor"]] = true, [L["Weapon"]] = true}
 local function ItemButton_Update(self, item)
 	if item.texture then
 		self.Icon:SetTexture(item.texture)
@@ -126,16 +124,14 @@ local function ItemButton_Update(self, item)
 	end
 
 	-- Item Level
-	local _,_,_,_,_,_,itemLink = GetContainerItemInfo(item.bagID, item.slotID)
-	if itemLink then
-		local _,_,itemRarity,itemLevel,_,_,_,_,itemEquipLoc = GetItemInfo(itemLink)
+	if item.link then
 		if LIU then
-			itemLevel = LIU:GetUpgradedItemLevel(itemLink)
+			item.level = LIU:GetUpgradedItemLevel(item.link)
 		end
 
-		if (itemEquipLoc ~= "") and (itemLevel and itemLevel > 0) then
-			self.BottomString:SetText(itemLevel)
-			self.BottomString:SetTextColor(GetItemQualityColor(itemRarity))
+		if (item.equipLoc ~= "") and (item.level and item.level > 0) then
+ 			self.BottomString:SetText(item.level)
+ 			self.BottomString:SetTextColor(GetItemQualityColor(item.rarity))
 		else
 			self.BottomString:SetText("")
 		end
