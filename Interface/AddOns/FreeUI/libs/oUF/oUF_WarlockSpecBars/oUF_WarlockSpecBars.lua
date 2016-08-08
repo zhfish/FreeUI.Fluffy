@@ -13,7 +13,7 @@ local SPELL_POWER_SOUL_SHARDS = SPELL_POWER_SOUL_SHARDS
 local Colors = {
 	[1] = {148/255, 130/255, 201/255, 1},
 	[2] = {95/255, 222/255,  95/255, 1},
-	[3] = {233/255, 42/255,  0/255, 1},
+	[3] = {222/255, 95/255,  95/255, 1},
 }
 
 local Update = function(self, event, unit, powerType)

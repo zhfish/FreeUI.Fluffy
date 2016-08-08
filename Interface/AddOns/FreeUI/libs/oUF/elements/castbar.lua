@@ -383,7 +383,7 @@ local Enable = function(object, unit)
 			CastingBarFrame:UnregisterAllEvents()
 			CastingBarFrame.Show = CastingBarFrame.Hide
 			CastingBarFrame:Hide()
-		
+
 			PetCastingBarFrame:UnregisterAllEvents()
 			PetCastingBarFrame.Show = PetCastingBarFrame.Hide
 			PetCastingBarFrame:Hide()

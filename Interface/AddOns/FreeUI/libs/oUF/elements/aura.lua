@@ -26,10 +26,10 @@ local OnLeave = function()
 end
 
 local createAuraIcon = function(icons, index)
-	local button = CreateFrame("Button", "$parentButton"..index, icons)
+	local button = CreateFrame("Button", nil, icons)
 	button:RegisterForClicks'RightButtonUp'
 
-	local cd = CreateFrame("Cooldown", "$parentCooldown", button, "CooldownFrameTemplate")
+	local cd = CreateFrame("Cooldown", nil, button, "CooldownFrameTemplate")
 	cd:SetAllPoints(button)
 	cd:SetDrawEdge(false)
 	cd:SetReverse(true)
@@ -37,7 +37,6 @@ local createAuraIcon = function(icons, index)
 	local icon = button:CreateTexture(nil, "BORDER")
 	icon:SetAllPoints(button)
 	icon:SetTexCoord(.08, .92, .08, .92)
---	F.CreateSD(button)
 
 	local count = F.CreateFS(button, 8, "CENTER")
 	count:SetPoint("TOPLEFT", button, "TOPLEFT", 2, -2)
@@ -169,10 +168,12 @@ local updateIcon = function(unit, icons, index, offset, filter, isDebuff, visibl
 			icon.count:SetText((count > 1 and count))
 
 			local size = icons.size or 16
-			
+--			icon:SetSize(size, size)
+
 			if C.unitframes.rectangleAura then
-				icon:SetSize(size, size*0.8)
+				icon:SetSize(size, size*0.7)
 			else
+
 				icon:SetSize(size, size)
 			end
 

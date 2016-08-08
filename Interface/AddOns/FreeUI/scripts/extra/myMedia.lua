@@ -1,4 +1,5 @@
 local LSM = _G.LibStub("LibSharedMedia-3.0")
+local koKR, ruRU, zhCN, zhTW, western = LSM.LOCALE_BIT_koKR, LSM.LOCALE_BIT_ruRU, LSM.LOCALE_BIT_zhCN, LSM.LOCALE_BIT_zhTW, LSM.LOCALE_BIT_western
 -- -----
 -- BACKGROUND
 -- -----
@@ -7,19 +8,23 @@ LSM:Register("background", "myMedia_BG_A", 			[[Interface\Addons\FreeUI\media\Ha
 -- -----
 --  BORDER
 -- ----
-LSM:Register("border", "myMedia_border_roth", 					[[Interface\Addons\FreeUI\media\border_roth.tga]])
+LSM:Register("border", "myMedia_border_roth", 		[[Interface\Addons\FreeUI\media\border_roth.tga]])
 -- -----
 --   FONT
 -- -----
 LSM:Register("font", "FruityMicrofont", 				[[Interface\Addons\FreeUI\media\FruityMicrofont.ttf]])
 LSM:Register("font", "Hooge0655", 						[[Interface\Addons\FreeUI\media\Hooge0655.ttf]])
-LSM:Register("font", "bm", 								[[Interface\Addons\FreeUI\media\bm.ttf]])
-LSM:Register("font", "diablo", 							[[Interface\Addons\FreeUI\media\diablo.ttf]])
+LSM:Register("font", "ExocetBlizzardLight", 			[[Interface\Addons\FreeUI\media\ExocetBlizzardLight.ttf]])
+LSM:Register("font", "ExocetBlizzardMedium", 			[[Interface\Addons\FreeUI\media\ExocetBlizzardMedium.ttf]])
 LSM:Register("font", "supereffective", 					[[Interface\Addons\FreeUI\media\supereffective.ttf]])
 LSM:Register("font", "swfit", 							[[Interface\Addons\FreeUI\media\swfit.ttf]])
 LSM:Register("font", "PFTempestaSeven", 				[[Interface\Addons\FreeUI\media\pixel.ttf]])
-LSM:Register("font", "myriad semibold", 				[[Interface\Addons\FreeUI\media\font.ttf]])
-LSM:Register("font", "wendy_10", 						[[Interface\Addons\FreeUI\media\wendy_10.ttf]])
+
+LSM:Register("font", "pixfontCN", 						[[Fonts\pixfontCN.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "zhscnm", 							[[Fonts\zhscnm.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "yahei_expressway", 				[[Fonts\yahei_expressway.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "yuehei", 							[[Fonts\yuehei.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "cy_emblem", 						[[Fonts\cy_emblem.ttf]], zhCN + zhTW + western)
 -- -----
 --   SOUND
 -- -----

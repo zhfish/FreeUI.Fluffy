@@ -1,6 +1,5 @@
--- BgSpecIcon v1.02b by d07.RiV (Iroared)
--- "hotfix" by RandomHero13
--- All rights reserved
+local F, C = unpack(select(2, ...))
+
 local _G = _G
 
 BgSpecIcon = CreateFrame ("Frame", nil, UIParent)
@@ -17,7 +16,6 @@ end
 
 -- Following borrowed from LibBabble-TalentTree
 if gameLocale == "zhCN" then
-
 	L["Affliction"] = "痛苦"
 	L["Arcane"] = "奥术"
 	L["Arms"] = "武器"
@@ -26,7 +24,7 @@ if gameLocale == "zhCN" then
 	L["Beast Mastery"] = "野兽控制"
 	L["Blood"] = "鲜血"
 	L["Brewmaster"] = "酒仙"
-	L["Combat"] = "战斗"
+	L["Outlaw"] = "狂徒"
 	L["Demonology"] = "恶魔学识"
 	L["Destruction"] = "毁灭"
 	L["Discipline"] = "戒律"
@@ -38,6 +36,7 @@ if gameLocale == "zhCN" then
 	L["Frost"] = "冰霜"
 	L["Fury"] = "狂怒"
 	L["Guardian"] = "守护"
+	L["Havoc"] = "浩劫"
 	L["Holy"] = "神圣"
 	L["Hybrid"] = "混合"
 	L["Marksmanship"] = "射击"
@@ -47,10 +46,45 @@ if gameLocale == "zhCN" then
 	L["Retribution"] = "惩戒"
 	L["Shadow"] = "暗影魔法"
 	L["Subtlety"] = "敏锐"
-	L["Survival"] = "生存技能"
+	L["Survival"] = "生存"
 	L["Unholy"] = "邪恶"
+	L["Vengeance"] = "复仇"
 	L["Windwalker"] = "踏风"
-
+elseif gameLocale == "zhTW" then
+	L["Affliction"] = "痛苦"
+	L["Arcane"] = "秘法"
+	L["Arms"] = "武器"
+	L["Assassination"] = "刺殺"
+	L["Balance"] = "平衡"
+	L["Beast Mastery"] = "野獸控制"
+	L["Blood"] = "血魄"
+	L["Brewmaster"] = "釀酒"
+	L["Outlaw"] = "暴徒"
+	L["Demonology"] = "惡魔學識"
+	L["Destruction"] = "毀滅"
+	L["Discipline"] = "戒律"
+	L["Elemental"] = "元素"
+	L["Enhancement"] = "增強"
+	L["Feral"] = "野性戰鬥"
+	L["Feral Combat"] = "野性戰鬥"
+	L["Fire"] = "火焰"
+	L["Frost"] = "冰霜"
+	L["Fury"] = "狂怒"
+	L["Guardian"] = "守護者"
+	L["Havoc"] = "災虐"
+	L["Holy"] = "神聖"
+	L["Hybrid"] = "混合"
+	L["Marksmanship"] = "射擊"
+	L["Mistweaver"] = "織霧"
+	L["Protection"] = "防護"
+	L["Restoration"] = "恢復"
+	L["Retribution"] = "懲戒"
+	L["Shadow"] = "暗影"
+	L["Subtlety"] = "敏銳"
+	L["Survival"] = "生存"
+	L["Unholy"] = "穢邪"
+	L["Vengeance"] = "復仇"
+	L["Windwalker"] = "御風"
 end
 
 local SpecIcons = {
@@ -70,8 +104,8 @@ local SpecIcons = {
 		["Destruction"] = "Interface\\Icons\\Spell_Shadow_RainOfFire",
 	},
 	["ROGUE"] = {
-		["Assassination"] = "Interface\\Icons\\Ability_Rogue_Eviscerate",
-		["Combat"] = "Interface\\Icons\\Ability_BackStab",
+		["Assassination"] = "Interface\\Icons\\Ability_Rogue_Deadlybrew",
+		["Outlaw"] = "Interface\\Icons\\inv_sword_30",
 		["Subtlety"] = "Interface\\Icons\\Ability_Stealth",
 	},
 	["DRUID"] = {
@@ -81,9 +115,9 @@ local SpecIcons = {
 		["Guardian"] = "Interface\\Icons\\Ability_Racial_BearForm",
 	},
 	["HUNTER"] = {
-		["Beast Mastery"] = "Interface\\Icons\\Ability_Druid_FerociousBite",
+		["Beast Mastery"] = "Interface\\Icons\\ability_hunter_bestialdiscipline",
 		["Marksmanship"] = "Interface\\Icons\\Ability_Marksmanship",
-		["Survival"] = "Interface\\Icons\\INV_Misc_Net_01",
+		["Survival"] = "Interface\\Icons\\ability_hunter_camouflage",
 	},
 	["SHAMAN"] = {
 		["Elemental"] = "Interface\\Icons\\Spell_Nature_Lightning",
@@ -106,9 +140,13 @@ local SpecIcons = {
 		["Unholy"] = "Interface\\Icons\\Spell_Deathknight_UnholyPresence",
 	},
 	["MONK"] = {
-		["Brewmaster"] = "Interface\\Icons\\inv_drink_05",
-		["Mistweaver"] = "Interface\\Icons\\Ability_Monk_Summonserpentstatue",
-		["Windwalker"] = "Interface\\Icons\\pandarenracial_bouncy",
+		["Brewmaster"] = "Interface\\Icons\\spell_monk_brewmaster_spec",
+		["Mistweaver"] = "Interface\\Icons\\spell_monk_mistweaver_spec",
+		["Windwalker"] = "Interface\\Icons\\spell_monk_windwalker_spec",
+	},
+	["DEMONHUNTER"] = {
+		["Havoc"] = "Interface\\Icons\\ability_demonhunter_specdps",
+		["Vengeance"] = "Interface\\Icons\\ability_demonhunter_spectank",
 	},
 }
 function GetSpecIcon (class, spec)

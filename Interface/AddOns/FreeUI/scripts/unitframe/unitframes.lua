@@ -10,7 +10,21 @@ local realm = GetRealmName()
 local class = select(2, UnitClass("player"))
 
 local locale = GetLocale()
-local nameFont = C.media.font2
+
+fonts = {
+	standard = {
+		C.media.font2,
+		11,
+		"OUTLINE",
+	},
+	pixel = {
+		"Fonts\\pixfontCN.ttf",
+		10,
+		"OUTLINEMONOCHROME",
+	},
+}
+
+local nameFont = fonts.pixel
 
 local shadow = C.unitframes.shadow
 local CBinterrupt = C.unitframes.castbarColorInterrupt
@@ -757,7 +771,7 @@ local UnitSpecific = {
 		Name:SetWidth(80)
 		Name:SetHeight(12)
 		Name:SetJustifyH"LEFT"
-		Name:SetFont(nameFont, 11, "OUTLINE")
+		Name:SetFont(unpack(nameFont))
 		Name:SetTextColor(1, 1, 1)
 
 		self:Tag(Name, '[name]')
@@ -902,21 +916,13 @@ local UnitSpecific = {
 			runes:SetHeight(2)
 			runes:SetPoint("BOTTOMRIGHT", Debuffs, "TOPRIGHT", 0, 3)
 
-			-- local rbd = CreateFrame("Frame", nil, runes)
-			-- rbd:SetBackdrop({
-			-- 	edgeFile = C.media.backdrop,
-			-- 	edgeSize = 1,
-			-- })
-			-- rbd:SetBackdropBorderColor(0, 0, 0)
-			-- rbd:SetPoint("TOPLEFT", -1, 1)
-			-- rbd:SetPoint("BOTTOMRIGHT", 1, -1)
 			F.CreateBDFrame(runes)
 
 			for i = 1, 6 do
 				runes[i] = CreateFrame("StatusBar", nil, self)
 				runes[i]:SetHeight(2)
 				runes[i]:SetStatusBarTexture(C.media.texture)
-				runes[i]:SetStatusBarColor(0 ,0 ,0, 1)
+				runes[i]:SetStatusBarColor(255/255,101/255,101/255)
 
 				local rbd = CreateFrame("Frame", nil, runes[i])
 				rbd:SetBackdrop({
@@ -939,7 +945,7 @@ local UnitSpecific = {
 			self.Runes = runes
 			self.SpecialPowerBar = runes
 		elseif class == "DRUID" and C.classmod.druidMana then
- 			local druidMana
+			local druidMana
 
 			local function moveDebuffAnchors()
 				if druidMana and druidMana:IsShown() then
@@ -961,6 +967,20 @@ local UnitSpecific = {
 						self.Debuffs:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 0, -3)
 					end
 				end
+			end
+
+			if C.classmod.druidMana then
+				druidMana = CreateFrame("StatusBar", nil, self)
+				druidMana:SetStatusBarTexture(C.media.backdrop)
+				druidMana:SetStatusBarColor(0, 0.76, 1)
+				druidMana:SetSize(playerWidth, 1)
+				druidMana:SetPoint("BOTTOMRIGHT", Debuffs, "TOPRIGHT", 0, 3)
+
+				F.CreateBDFrame(druidMana, .25)
+
+				self.DruidMana = druidMana
+
+				druidMana.PostUpdate = moveDebuffAnchors
 			end
 
 			self.AltPowerBar:HookScript("OnShow", moveDebuffAnchors)
@@ -1099,7 +1119,6 @@ local UnitSpecific = {
 
 			self.HolyPower = glow
 			glow.Override = UpdateHoly
-
 		elseif class == "WARLOCK" and C.classmod.warlock then
 			local bars = CreateFrame("Frame", nil, self)
 			bars:SetWidth(playerWidth)
@@ -1276,7 +1295,7 @@ local UnitSpecific = {
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 86, 2)
-		ttt:SetFont(nameFont, 11, "OUTLINE")
+		ttt:SetFont(unpack(nameFont))
 		ttt:SetWidth(80)
 		ttt:SetHeight(12)
 
@@ -1296,7 +1315,7 @@ local UnitSpecific = {
 		local Name = F.CreateFS(self)
 		Name:SetPoint("BOTTOMLEFT", PowerText, "BOTTOMRIGHT")
 		Name:SetPoint("RIGHT", self)
-		Name:SetFont(nameFont, 11, "OUTLINE")
+		Name:SetFont(unpack(nameFont))
 		Name:SetJustifyH("RIGHT")
 		Name:SetTextColor(1, 1, 1)
 		Name:SetWordWrap(false)
@@ -1451,7 +1470,7 @@ local UnitSpecific = {
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
 		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 118, 2)
-		ttt:SetFont(nameFont, 11, "OUTLINE")
+		ttt:SetFont(unpack(nameFont))
 		ttt:SetWidth(112)
 		ttt:SetHeight(12)
 
@@ -1469,7 +1488,7 @@ local UnitSpecific = {
 
 		local Name = F.CreateFS(self)
 		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 3)
-		Name:SetFont(nameFont, 11, "OUTLINE")
+		Name:SetFont(unpack(nameFont))
 		Name:SetWidth(112)
 		Name:SetHeight(12)
 		Name:SetJustifyH"LEFT"
@@ -1538,7 +1557,7 @@ local UnitSpecific = {
 		Name:SetHeight(12)
 
 		if locale == "zhCN" or locale == "zhTW" then
-			Name:SetFont(nameFont, 11, "OUTLINE")
+			Name:SetFont(unpack(nameFont))
 		end
 
 		self:Tag(Name, '[name]')
@@ -1665,7 +1684,7 @@ local UnitSpecific = {
 		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 2)
 		Name:SetWidth(110)
 		Name:SetHeight(12)
-		Name:SetFont(nameFont, 11, "OUTLINE")
+		Name:SetFont(unpack(nameFont))
 
 		self:Tag(Name, '[name]')
 		self.Name = Name
@@ -1733,7 +1752,7 @@ do
 
 		local Text = F.CreateFS(Health, C.FONT_SIZE_NORMAL, "CENTER")
 		Text:SetPoint("CENTER", 1, 0)
-		Text:SetFont(C.media.font2, 10, "OUTLINE")
+		Text:SetFont(unpack(nameFont))
 
 		self.Text = Text
 
