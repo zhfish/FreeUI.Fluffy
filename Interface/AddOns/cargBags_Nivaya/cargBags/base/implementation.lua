@@ -302,7 +302,6 @@ local defaultItem = cargBags:NewItemTable()
 ]]
 do
 	local function GatherItemInfo(bagID, slotID, i)
---		cargBags.debug("GatherItemInfo", bagID, slotID, i)
 		for k in pairs(i) do i[k] = nil end
 
 		i.bagID = bagID
@@ -351,16 +350,13 @@ do
 	end
 
 	function Implementation:GetItemInfo(bagID, slotID, reset)
---		cargBags.debug("GetItemInfo", bagID, slotID, reset)
 		if not ItemInfo[bagID] then
---			cargBags.debug("ItemInfo bag", bagID)
 			ItemInfo[bagID] = {}
 		end
 
 		if reset or not ItemInfo[bagID][slotID] then
 			return GatherItemInfo(bagID, slotID, ItemInfo[bagID][slotID] or {})
 		else
---			cargBags.debug("ItemInfo cached", slotID, ItemInfo[bagID][slotID].name)
 			return ItemInfo[bagID][slotID]
 		end
 	end
@@ -372,7 +368,6 @@ end
 	@param slotID <number>
 ]]
 function Implementation:UpdateSlot(bagID, slotID)
---	cargBags.debug("Implementation:UpdateSlot", bagID, slotID)
 	local item = self:GetItemInfo(bagID, slotID, true)
 	local button = self:GetButton(bagID, slotID)
 	local container = self:GetContainerForItem(item, button)
@@ -404,7 +399,6 @@ local closed
 	@param bagID <number>
 ]]
 function Implementation:UpdateBag(bagID)
---	cargBags.debug("Implementation:UpdateBag", bagID)
 	local numSlots
 	if (closed) then
 		numSlots, closed = 0
@@ -434,7 +428,6 @@ end
 	@callback Container:OnBagUpdate(bagID, slotID)
 ]]
 function Implementation:BAG_UPDATE(event, bagID, slotID)
---	cargBags.debug("Implementation:BAG_UPDATE", event, bagID, slotID)
 	if (bagID and slotID) then
 		self:UpdateSlot(bagID, slotID)
 	elseif (bagID) then
@@ -451,7 +444,6 @@ end
 	@param bagID <number>
 ]]
 function Implementation:BAG_CLOSED(event, bagID)
---	cargBags.debug("Implementation:BAG_CLOSED", event, bagID)
 	closed = bagID
 	self:BAG_UPDATE(event, bagID)
 end
@@ -461,7 +453,6 @@ end
 	@param bagID <number> [optional]
 ]]
 function Implementation:BAG_UPDATE_COOLDOWN(event, bagID)
---	cargBags.debug("Implementation:BAG_UPDATE_COOLDOWN", event, bagID)
 	if (bagID) then
 		for slotID = 1, GetContainerNumSlots(bagID) do
 			local button = self:GetButton(bagID, slotID)
@@ -481,7 +472,6 @@ end
 	@param slotID <number> [optional]
 ]]
 function Implementation:ITEM_LOCK_CHANGED(event, bagID, slotID)
---	cargBags.debug("Implementation:ITEM_LOCK_CHANGED", event, bagID, slotID)
 	if(not slotID) then return end
 
 	local button = self:GetButton(bagID, slotID)
@@ -497,7 +487,6 @@ end
 	@param slotID <number> [optional]
 ]]
 function Implementation:PLAYERBANKSLOTS_CHANGED(event, bagID, slotID)
---	cargBags.debug("Implementation:PLAYERBANKSLOTS_CHANGED", event, bagID, slotID)
 	if(bagID <= NUM_BANKGENERIC_SLOTS) then
 		slotID = bagID
 		bagID = -1
@@ -514,7 +503,6 @@ end
 	@param slotID <number> [optional]
 ]]
 function Implementation:PLAYERREAGENTBANKSLOTS_CHANGED(event, slotID)
---	cargBags.debug("Implementation:PLAYERREAGENTBANKSLOTS_CHANGED", event, slotID)
 	local bagID = -3
 
 	self:BAG_UPDATE(event, bagID, slotID)
@@ -524,7 +512,6 @@ end
 	Fired when the quest log of a unit changes
 ]]
 function Implementation:UNIT_QUEST_LOG_CHANGED(event)
---	cargBags.debug("Implementation:UNIT_QUEST_LOG_CHANGED", event)
 	for id, container in pairs(self.contByID) do
 		for i, button in pairs(container.buttons) do
 			local item = self:GetItemInfo(button.bagID, button.slotID)

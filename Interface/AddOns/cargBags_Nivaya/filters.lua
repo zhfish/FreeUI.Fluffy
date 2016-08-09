@@ -51,34 +51,33 @@ end
 function cbNivaya:ClassifyItem(item)
 
 	if item.bagID == -2 then
- 		-- keyring
- 		cB_ItemClass[item.id] = "Keyring"
- 	elseif cBniv_CatInfo[item.id] then
- 		-- user assigned containers
- 		cB_ItemClass[item.id] = cBniv_CatInfo[item.id]
- 	elseif (item.rarity == 0) then
- 		-- junk
- 		cB_ItemClass[item.id] = "Junk"
- 	elseif item.typeID then
- 		-- type based filters
---		cargBags.debug("typeID", item.typeID)
- 		if (item.typeID == _G.LE_ITEM_CLASS_ARMOR) or (item.typeID == _G.LE_ITEM_CLASS_WEAPON)	then
- 			cB_ItemClass[item.id] = "Armor"
- 		elseif (item.typeID == _G.LE_ITEM_CLASS_QUESTITEM) then
- 			cB_ItemClass[item.id] = "Quest"
- 		elseif (item.typeID == _G.LE_ITEM_CLASS_TRADEGOODS) then
- 			cB_ItemClass[item.id] = "TradeGoods"
- 		elseif (item.typeID == _G.LE_ITEM_CLASS_CONSUMABLE) then
- 			cB_ItemClass[item.id] = "Consumables"
- 		elseif(item.typeID == _G.LE_ITEM_CLASS_BATTLEPET) then
- 			cB_ItemClass[item.id] = "BattlePet"
+		-- keyring
+		cB_ItemClass[item.id] = "Keyring"
+	elseif cBniv_CatInfo[item.id] then
+		-- user assigned containers
+		cB_ItemClass[item.id] = cBniv_CatInfo[item.id]
+	elseif (item.rarity == 0) then
+		-- junk
+		cB_ItemClass[item.id] = "Junk"
+	elseif item.typeID then
+		-- type based filters
+		if (item.typeID == _G.LE_ITEM_CLASS_ARMOR) or (item.typeID == _G.LE_ITEM_CLASS_WEAPON)	then
+			cB_ItemClass[item.id] = "Armor"
+		elseif (item.typeID == _G.LE_ITEM_CLASS_QUESTITEM) then
+			cB_ItemClass[item.id] = "Quest"
+		elseif (item.typeID == _G.LE_ITEM_CLASS_TRADEGOODS) then
+			cB_ItemClass[item.id] = "TradeGoods"
+		elseif (item.typeID == _G.LE_ITEM_CLASS_CONSUMABLE) then
+			cB_ItemClass[item.id] = "Consumables"
+		elseif(item.typeID == _G.LE_ITEM_CLASS_BATTLEPET) then
+			cB_ItemClass[item.id] = "BattlePet"
 		end
 	end
-	
-	if not cB_ItemClass[item.id] then
- 		cB_ItemClass[item.id] = "NoClass"
- 	end
 
+	if not cB_ItemClass[item.id] then
+		cB_ItemClass[item.id] = "NoClass"
+	end
+	
 end
 
 ------------------------------------------
@@ -93,7 +92,7 @@ function cbNivaya:getItemCount(itemName)
 				local tLink = GetContainerItemLink(i,j)
 				local tName
 				if tLink then
-					if (strsub(tLink, 13, 21) == "battlepet") then
+					if tLink:find("battlepet") then
 						tName = select(2, strmatch(tLink, "|H(.-)|h(.-)|h"))
 					else
 						tName = GetItemInfo(tLink)

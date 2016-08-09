@@ -1,3 +1,4 @@
+local F, C, L = unpack(FreeUI)
 --[[
 LICENSE
 	cargBags: An inventory framework addon for World of Warcraft
@@ -60,15 +61,13 @@ local function CreateInfoString(button, position)
 		str:SetJustifyH("RIGHT")
 		str:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 1.5, 1.5)
 	end	
-	str:SetFont("Interface\\AddOns\\cargBags_Nivaya\\media\\pixel.ttf", 8, "OUTLINEMONOCHROME")
+	F.SetFS(str)
 
 	return str
 end
 
 local function ItemButton_Scaffold(self)
 	self:SetSize(37, 37)
-	-- local _, height = RealUI:GetResolutionVals(true)
-	-- local bordersize = 768 / height / (GetCVar("uiScale")*cBnivCfg.scale)
 	local bordersize = 1
 	local name = self:GetName()
 	self.Icon = _G[name.."IconTexture"]
@@ -130,8 +129,8 @@ local function ItemButton_Update(self, item)
 		end
 
 		if (item.equipLoc ~= "") and (item.level and item.level > 0) then
- 			self.BottomString:SetText(item.level)
- 			self.BottomString:SetTextColor(GetItemQualityColor(item.rarity))
+			self.BottomString:SetText(item.level)
+			self.BottomString:SetTextColor(GetItemQualityColor(item.rarity))
 		else
 			self.BottomString:SetText("")
 		end

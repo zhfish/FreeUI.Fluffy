@@ -22,7 +22,6 @@ local Textures = {
 	Left =			mediaPath .. "Left",
 	Right =			mediaPath .. "Right",
 }
-local font = ns.options.fonts.pixel
 
 local itemSlotSize = ns.options.itemSlotSize
 ------------------------------------------
@@ -244,13 +243,11 @@ local UpdateDimensions = function(self)
 	end
 	if self.bagToggle then
 		local tBag = (self.name == "cBniv_Bag")
-		local fheight = ns.options.fonts.pixel[2] + 4
-		local extraHeight = (tBag and self.hintShown) and (ns.options.fonts.pixel[2] + 4) or 0
+		local extraHeight = (tBag and self.hintShown) and (8 + 4) or 0
 		height = height + 24 + extraHeight
 	end
 	if self.Caption then		-- Space for captions
-		local fheight = ns.options.fonts.pixel[2] + 12
-		height = height + ns.options.fonts.pixel[2] + 12
+		height = height + 8 + 12
 	end
 	self:SetHeight(self.ContainerHeight + height)
 end
@@ -345,7 +342,7 @@ local createIconButton = function (name, parent, texture, point, hint, isBag)
 	
 	button.tooltip = button:CreateFontString()
 	-- button.tooltip:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", isBag and -76 or -59, 4.5)
-	button.tooltip:SetFont(unpack(font))
+	F.SetFS(button.tooltip)
 	button.tooltip:SetJustifyH("RIGHT")
 	button.tooltip:SetText(hint)
 	button.tooltip:SetTextColor(0.8, 0.8, 0.8)
@@ -447,10 +444,10 @@ function MyContainer:OnCreate(name, settings)
 
 	-- The frame background
 	local tBankCustom = (tBankBags and not cBnivCfg.BankBlack)
-	local color_rb = ns.options.colors.background[1]
-	local color_gb = tBankCustom and .2 or ns.options.colors.background[2]
-	local color_bb = tBankCustom and .3 or ns.options.colors.background[3]
-	local alpha_fb = ns.options.colors.background[4]
+	local color_rb = 0
+	local color_gb = tBankCustom and .2 or 0
+	local color_bb = tBankCustom and .3 or 0
+	local alpha_fb = .75
 
 	-- The frame background
 	local background = CreateFrame("Frame", nil, self)
@@ -474,7 +471,7 @@ function MyContainer:OnCreate(name, settings)
 
 	-- Caption, close button
 	local caption = background:CreateFontString(background, "OVERLAY", nil)
-	caption:SetFont(unpack(font))
+	F.SetFS(caption)
 	if(caption) then
 		local t = L.bagCaptions[self.name] or (tBankBags and strsub(self.name, 5))
 		if not t then t = self.name end
@@ -702,7 +699,7 @@ function MyContainer:OnCreate(name, settings)
 		self.DropTarget:SetScript("OnReceiveDrag", DropTargetProcessItem)
 		
 		local fs = self:CreateFontString(nil, "OVERLAY")
-		fs:SetFont(unpack(font))
+		F.SetFS(fs)
 		fs:SetJustifyH("LEFT")
 		fs:SetPoint("BOTTOMRIGHT", self.DropTarget, "BOTTOMRIGHT", 1.5, 1.5)
 		self.EmptySlotCounter = fs
@@ -737,7 +734,8 @@ function MyContainer:OnCreate(name, settings)
 		-- Hint
 		self.hint = background:CreateFontString(nil, "OVERLAY", nil)
 		self.hint:SetPoint("BOTTOMLEFT", infoFrame, -0.5, 31.5)
-		self.hint:SetFont(unpack(font))
+		F.SetFS(self.hint)
+		self.hint:SetFont("Interface\\AddOns\\cargBags_Nivaya\\media\\pixel.ttf", 8, "OUTLINEMONOCHROME")
 		self.hint:SetTextColor(1, 1, 1, 0.4)
 		self.hint:SetText("Ctrl + Alt + Right Click an item to assign category")
 		self.hintShown = true
@@ -745,7 +743,7 @@ function MyContainer:OnCreate(name, settings)
 		-- The money display
 		local money = self:SpawnPlugin("TagDisplay", "[money]", self)
 		money:SetPoint("TOPRIGHT", self, -25.5, -2.5)
-		money:SetFont(unpack(font))
+		F.SetFS(money)
 		money:SetJustifyH("RIGHT")
 		money:SetShadowColor(0, 0, 0, 0)
 	end

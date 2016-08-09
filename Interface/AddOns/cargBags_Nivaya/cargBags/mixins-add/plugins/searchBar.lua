@@ -91,7 +91,6 @@ cargBags:RegisterPlugin("SearchBar", function(self, target)
 	search.DoSearch = search.doSearch
 
 	local left = search:CreateTexture(nil, "BACKGROUND")
---	left:SetTexture("Interface\\Buttons\\WHITE8x8")
 	left:SetTexCoord(0, 0.0625, 0, 0.625)
 	left:SetWidth(8)
 	left:SetHeight(20)
@@ -99,7 +98,6 @@ cargBags:RegisterPlugin("SearchBar", function(self, target)
 	search.Left = left
 
 	local right = search:CreateTexture(nil, "BACKGROUND")
---	right:SetTexture("Interface\\Buttons\\WHITE8x8")
 	right:SetTexCoord(0.9375, 1, 0, 0.625)
 	right:SetWidth(8)
 	right:SetHeight(20)
@@ -107,7 +105,6 @@ cargBags:RegisterPlugin("SearchBar", function(self, target)
 	search.Right = right
 
 	local center = search:CreateTexture(nil, "BACKGROUND")
---	center:SetTexture("Interface\\Buttons\\WHITE8x8")
 	center:SetTexCoord(0.0625, 0.9375, 0, 0.625)
 	center:SetHeight(20)
 	center:SetPoint("RIGHT", right, "LEFT", 0, 0)

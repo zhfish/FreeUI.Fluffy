@@ -15,7 +15,6 @@ do	--Replacement for UIDropDownMenu
 	local frameHeight = 14
 	local defaultWidth = 120
 	local frameInset = 16
-	local font = ns.options.fonts.pixel
 
 	local f = cbNivCatDropDown or CreateFrame("Frame", "cbNivCatDropDown", UIParent)
 	f.ActiveButtons = 0
@@ -42,7 +41,7 @@ do	--Replacement for UIDropDownMenu
 		local fstr = button:CreateFontString()
 		fstr:SetJustifyH("LEFT")
 		fstr:SetJustifyV("MIDDLE")
-		fstr:SetFont(unpack(font))
+		F.SetFS(fstr)
 		fstr:SetPoint("LEFT", button, "LEFT", 0, 0)
 		button.Text = fstr
 		
@@ -617,6 +616,7 @@ local function HandleSlash(str)
 			cB_Bags.bank.EmptySlotCounter:Hide()
 		end
 		StatusMsg('Empty bagspace compression is now ', '.', cBnivCfg.CompressEmpty, true, false)
+		updateBags = true
 	elseif str == 'unlock' then
 		cBnivCfg.Unlocked = not cBnivCfg.Unlocked
 		SetFrameMovable(cB_Bags.main, cBnivCfg.Unlocked)
@@ -701,8 +701,8 @@ local function HandleSlash(str)
 	end
 
 	if updateBags then
- 		cbNivaya:UpdateBags()
- 	end
+		cbNivaya:UpdateBags()
+	end
 end
 
 SLASH_CBNIV1 = '/cbniv'
@@ -755,9 +755,7 @@ Event:SetScript('OnEvent', function(self, event, ...)
 				NivayacBniv_Bank.reagentBtn:Show()
 				buyReagent:Hide()
 			end)
-
-				F.Reskin(buyReagent)
-
+			F.Reskin(buyReagent)
 			buyReagent:RegisterEvent("REAGENTBANK_PURCHASED")
 		end
 

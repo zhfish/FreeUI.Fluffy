@@ -1,3 +1,5 @@
+local F, C, L = unpack(FreeUI)
+
 --[[
 	cargBags: An inventory framework addon for World of Warcraft
 
@@ -89,7 +91,7 @@ function ItemButton:Create(tpl, parent)
 	bFS = _G[button:GetName().."Count"]
 	bFS:ClearAllPoints()
 	bFS:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 1.5, 1.5);
-	bFS:SetFont("Interface\\AddOns\\cargBags_Nivaya\\media\\pixel.ttf", 8, "OUTLINEMONOCHROME")
+	F.SetFS(bFS)
 
 	return button
 end

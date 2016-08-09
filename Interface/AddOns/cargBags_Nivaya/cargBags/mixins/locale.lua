@@ -33,6 +33,7 @@ local cargBags = ns.cargBags
 local L
 do
 end
+
 --[[!
 	Fetches/creates a table of localized type names
 	@return locale <table>
@@ -43,27 +44,27 @@ function cargBags:GetLocalizedTypes()
 	L = {}
 
 	-- Credit: Torhal http://www.wowinterface.com/forums/showpost.php?p=317527&postcount=6
- 	local classIndex = 0
- 	local className = _G.GetItemClassInfo(classIndex)
- 
- 	while className and className ~= "" do
- 		L[classIndex] = {
- 			name = className,
- 			subClasses = {},
- 		}
- 
- 		local subClassIndex = 0
- 		local subClassName = _G.GetItemSubClassInfo(classIndex, subClassIndex)
- 
- 		while subClassName and subClassName ~= "" do
- 			L[classIndex].subClasses[subClassIndex] = subClassName
- 
- 			subClassIndex = subClassIndex + 1
- 			subClassName = _G.GetItemSubClassInfo(classIndex, subClassIndex)
- 		end
- 
- 		classIndex = classIndex + 1
- 		className = _G.GetItemClassInfo(classIndex)
+	local classIndex = 0
+	local className = _G.GetItemClassInfo(classIndex)
+
+	while className and className ~= "" do
+		L[classIndex] = {
+			name = className,
+			subClasses = {},
+		}
+
+		local subClassIndex = 0
+		local subClassName = _G.GetItemSubClassInfo(classIndex, subClassIndex)
+
+		while subClassName and subClassName ~= "" do
+			L[classIndex].subClasses[subClassIndex] = subClassName
+
+			subClassIndex = subClassIndex + 1
+			subClassName = _G.GetItemSubClassInfo(classIndex, subClassIndex)
+		end
+
+		classIndex = classIndex + 1
+		className = _G.GetItemClassInfo(classIndex)
 	end
 
 	return L
