@@ -22,26 +22,32 @@ libs\oUF\oUF.xml
 libs\load_libs.xml
 
 scripts\actionbar\load_actionbar.xml
+scripts\automation\load_automation.xml
 scripts\buff\load_buff.xml
-scripts\minimap\load_minimap.xml
+scripts\chat\load_chat.xml
+scripts\combat\load_combat.xml
+scripts\map\load_map.xml
+scripts\misc\load_misc.xml
+scripts\quest\load_quest.xml
+scripts\skin\load_skin.xml
 scripts\tooltip\load_tooltip.xml
+scripts\tweak\load_tweak.xml
 scripts\unitframe\load_unitframe.xml
+
+
+
 
 
 
 
 scripts\archaeologybar.lua
 
-scripts\automation.lua
 scripts\bags.lua
-scripts\bubbles.lua
 
 
-scripts\chat.lua
-scripts\chattabs.lua
 scripts\colours.lua
 scripts\combo.lua
-scripts\dbm.lua
+
 scripts\disable.lua
 scripts\durability.lua
 #scripts\errors.lua
@@ -72,42 +78,6 @@ scripts\threatmeter.lua
 
 scripts\worldmarker.lua
 scripts\worldstateframe.lua
-
-
-scripts\extra\myMedia.lua
-
-
-
-scripts\extra\Align.lua
-scripts\extra\AlreadyKnown.lua
-scripts\extra\AlertMover.lua
-#scripts\extra\AutoPet.lua
-scripts\extra\BGSpamFix.lua
-scripts\extra\BgSpecIcon.lua
-scripts\extra\ColorPicker.lua
-scripts\extra\CVarfix.lua
-scripts\extra\DragEmAll.lua
-scripts\extra\Doom_CooldownPulse.lua
-scripts\extra\Foglight.lua
-scripts\extra\HiddenRaidNames.lua
-scripts\extra\idTip.lua
-scripts\extra\MerchantItemlevel.lua
-scripts\extra\ncHoverBind.lua
-scripts\extra\NoAsianFonts.lua
-scripts\extra\ncShadow.lua
-scripts\extra\QuestLevel.lua
-scripts\extra\saySapped.lua
-scripts\extra\SafeQueue.lua
-scripts\extra\Screenshots.lua
-scripts\extra\SpamageMeters.lua
-scripts\extra\TabBinder.lua
-scripts\extra\UnitSounds.lua
-scripts\extra\VehicleMove.lua
-scripts\extra\WhisperSound.lua
-
-scripts\extra\skin\Bugger.lua
-
-scripts\extra\_dev\test.lua
 
 class\paladin.lua
 

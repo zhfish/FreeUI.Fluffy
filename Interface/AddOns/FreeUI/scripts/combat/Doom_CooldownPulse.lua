@@ -2,39 +2,34 @@ local F, C, L = unpack(select(2, ...))
 
 if not C.general.cooldownpulse then return end
 
--- Doom_CooldownPulse
--- Woffle of Dark Iron[US]
--- Flash an ability's icon in the middle of the screen when it comes off cooldown.
-
 local fadeInTime, fadeOutTime, maxAlpha, animScale, iconSize, holdTime, ignoredSpells
 local cooldowns, animating, watching = { }, { }, { }
 local GetTime = GetTime
 
-local defaultsettings = {
-	fadeInTime = 0.3,
-	fadeOutTime = 0.7,
-	maxAlpha = 1,
-	animScale = 1.5,
-	iconSize = 34,
+local defaultsettings = { 
+	fadeInTime = 0.3, 
+	fadeOutTime = 0.7, 
+	maxAlpha = 1, 
+	animScale = 1.5, 
+	iconSize = 34, 
 	holdTime = 0,
 	petOverlay = {1,1,1},
 	ignoredSpells = "Hearthstone",
 	showSpellName = nil,
-	x = UIParent:GetWidth()/2,
-	y = UIParent:GetHeight()/2
+	x = UIParent:GetWidth()/2, 
+	y = UIParent:GetHeight()/2 
 }
-
 
 local DCP = CreateFrame("frame")
 DCP:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 DCP:SetMovable(true)
 DCP:RegisterForDrag("LeftButton")
 DCP:SetScript("OnDragStart", function(self) self:StartMoving() end)
-DCP:SetScript("OnDragStop", function(self)
-	self:StopMovingOrSizing()
-	DCP_Saved.x = self:GetLeft()+self:GetWidth()/2
-	DCP_Saved.y = self:GetBottom()+self:GetHeight()/2
-	self:ClearAllPoints()
+DCP:SetScript("OnDragStop", function(self) 
+	self:StopMovingOrSizing() 
+	DCP_Saved.x = self:GetLeft()+self:GetWidth()/2 
+	DCP_Saved.y = self:GetBottom()+self:GetHeight()/2 
+	self:ClearAllPoints() 
 	self:SetPoint("CENTER",UIParent,"BOTTOMLEFT",DCP_Saved.x,DCP_Saved.y)
 end)
 DCP.TextFrame = DCP:CreateFontString(nil, "ARTWORK")
@@ -93,23 +88,24 @@ local function OnUpdate(_,update)
 	if (elapsed > 0.05) then
 		for i,v in pairs(watching) do
 			if (GetTime() >= v[1] + 0.5) then
-				if ignoredSpells[i] then
+				local start, duration, enabled, texture, isPet, name
+				if (v[2] == "spell") then
+					name = GetSpellInfo(v[3])
+					texture = GetSpellTexture(v[3])
+					start, duration, enabled = GetSpellCooldown(v[3])
+				elseif (v[2] == "item") then
+					name = GetItemInfo(i)
+					texture = v[3]
+					start, duration, enabled = GetItemCooldown(i)
+				elseif (v[2] == "pet") then
+					name, _, texture = GetPetActionInfo(v[3])
+					start, duration, enabled = GetPetActionCooldown(v[3])
+					isPet = true
+				end
+
+				if ignoredSpells[name] then
 					watching[i] = nil
 				else
-					local start, duration, enabled, texture, isPet, name
-					if (v[2] == "spell") then
-						name = GetSpellInfo(v[3])
-						texture = GetSpellTexture(v[3])
-						start, duration, enabled = GetSpellCooldown(v[3])
-					elseif (v[2] == "item") then
-						name = GetItemInfo(i)
-						texture = v[3]
-						start, duration, enabled = GetItemCooldown(i)
-					elseif (v[2] == "pet") then
-						texture = select(3,GetPetActionInfo(v[3]))
-						start, duration, enabled = GetPetActionCooldown(v[3])
-						isPet = true
-					end
 					if (enabled ~= 0) then
 						if (duration and duration > 2.0 and texture) then
 							cooldowns[i] = { start, duration, texture, isPet, name }
@@ -128,14 +124,14 @@ local function OnUpdate(_,update)
 				cooldowns[i] = nil
 			end
 		end
-
+		
 		elapsed = 0
 		if (#animating == 0 and tcount(watching) == 0 and tcount(cooldowns) == 0) then
 			DCP:SetScript("OnUpdate", nil)
 			return
 		end
 	end
-
+	
 	if (#animating > 0) then
 		runtimer = runtimer + update
 		if (runtimer > (fadeInTime + holdTime + fadeOutTime)) then
@@ -153,7 +149,7 @@ local function OnUpdate(_,update)
 				if animating[1][2] then
 					DCPT:SetVertexColor(unpack(DCP_Saved.petOverlay))
 				end
-				PlaySoundFile("")
+				PlaySoundFile("Interface\\AddOns\\Doom_CooldownPulse\\lubdub.wav")
 			end
 			local alpha = maxAlpha
 			if (runtimer < fadeInTime) then
@@ -183,6 +179,7 @@ function DCP:ADDON_LOADED(addon)
 		end
 	end
 	RefreshLocals()
+--	self:SetPoint("CENTER",UIParent,"BOTTOMLEFT",DCP_Saved.x,DCP_Saved.y)
 	self:SetPoint("CENTER",UIParent,"CENTER", 0, 80)
 	self:UnregisterEvent("ADDON_LOADED")
 end
@@ -190,7 +187,7 @@ DCP:RegisterEvent("ADDON_LOADED")
 
 function DCP:UNIT_SPELLCAST_SUCCEEDED(unit,spell,rank,lineID,spellID)
 	if (unit == "player") then
-		watching[spell] = {GetTime(),"spell",spellID}
+		watching[spellID] = {GetTime(),"spell",spellID}
 		if (not self:IsMouseEnabled()) then
 			self:SetScript("OnUpdate", OnUpdate)
 		end
@@ -205,9 +202,9 @@ function DCP:COMBAT_LOG_EVENT_UNFILTERED(...)
 			local name = GetSpellInfo(spellID)
 			local index = GetPetActionIndexByName(name)
 			if (index and not select(7,GetPetActionInfo(index))) then
-				watching[name] = {GetTime(),"pet",index}
-			elseif (not index and name) then
-				watching[name] = {GetTime(),"spell",spellID}
+				watching[spellID] = {GetTime(),"pet",index}
+			elseif (not index and spellID) then
+				watching[spellID] = {GetTime(),"spell",spellID}
 			else
 				return
 			end
@@ -270,50 +267,50 @@ function DCP:CreateOptionsFrame()
 		{ text = "Max Opacity Hold Time", value = "holdTime", min = 0, max = 1.5, step = 0.1 },
 		{ text = "Animation Scaling", value = "animScale", min = 0, max = 2, step = 0.1 },
 	}
-
+	
 	local buttons = {
 		{ text = "Close", func = function(self) self:GetParent():Hide() end },
-		{ text = "Test", func = function(self)
-			DCP_OptionsFrameButton3:SetText("Unlock")
-			DCP:EnableMouse(false)
-			RefreshLocals()
-			tinsert(animating,{"Interface\\Icons\\Spell_Nature_Earthbind",nil,"Spell Name"})
-			DCP:SetScript("OnUpdate", OnUpdate)
+		{ text = "Test", func = function(self) 
+			DCP_OptionsFrameButton3:SetText("Unlock") 
+			DCP:EnableMouse(false) 
+			RefreshLocals() 
+			tinsert(animating,{"Interface\\Icons\\Spell_Nature_Earthbind",nil,"Spell Name"}) 
+			DCP:SetScript("OnUpdate", OnUpdate) 
 			end },
-		{ text = "Unlock", func = function(self)
+		{ text = "Unlock", func = function(self) 
 			if (self:GetText() == "Unlock") then
 				RefreshLocals()
-				DCP:SetWidth(iconSize)
-				DCP:SetHeight(iconSize)
-				self:SetText("Lock")
-				DCP:SetScript("OnUpdate", nil)
-				DCP:SetAlpha(1)
-				DCPT:SetTexture("Interface\\Icons\\Spell_Nature_Earthbind")
-				DCP:EnableMouse(true)
-			else
-				DCP:SetAlpha(0)
-				self:SetText("Unlock")
-				DCP:EnableMouse(false)
+				DCP:SetWidth(iconSize) 
+				DCP:SetHeight(iconSize) 
+				self:SetText("Lock") 
+				DCP:SetScript("OnUpdate", nil) 
+				DCP:SetAlpha(1) 
+				DCPT:SetTexture("Interface\\Icons\\Spell_Nature_Earthbind") 
+				DCP:EnableMouse(true) 
+			else 
+				DCP:SetAlpha(0) 
+				self:SetText("Unlock") 
+				DCP:EnableMouse(false) 
 			end end },
-		{ text = "Defaults", func = function(self)
-			for i,v in pairs(defaultsettings) do
-				DCP_Saved[i] = v
-			end
-			for i,v in pairs(sliders) do
-				getglobal("DCP_OptionsFrameSlider"..i):SetValue(DCP_Saved[v.value])
+		{ text = "Defaults", func = function(self) 
+			for i,v in pairs(defaultsettings) do 
+				DCP_Saved[i] = v 
+			end 
+			for i,v in pairs(sliders) do 
+				getglobal("DCP_OptionsFrameSlider"..i):SetValue(DCP_Saved[v.value]) 
 			end
 			DCP_OptionsFramePetColorBox:GetNormalTexture():SetVertexColor(unpack(DCP_Saved.petOverlay))
 			DCP_OptionsFrameIgnoreBox:SetText("")
 			DCP:ClearAllPoints()
-			DCP:SetPoint("CENTER",UIParent,"BOTTOMLEFT",DCP_Saved.x,DCP_Saved.y)
+			DCP:SetPoint("CENTER",UIParent,"BOTTOMLEFT",DCP_Saved.x,DCP_Saved.y) 
 			end },
 	}
 
 	local optionsframe = CreateFrame("frame","DCP_OptionsFrame")
 	optionsframe:SetBackdrop({
-	  bgFile="Interface\\DialogFrame\\UI-DialogBox-Background",
-	  edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",
-	  tile=1, tileSize=32, edgeSize=32,
+	  bgFile="Interface\\DialogFrame\\UI-DialogBox-Background", 
+	  edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border", 
+	  tile=1, tileSize=32, edgeSize=32, 
 	  insets={left=11, right=12, top=12, bottom=11}
 	})
 	optionsframe:SetWidth(220)
@@ -354,33 +351,33 @@ function DCP:CreateOptionsFrame()
 		slider:SetMinMaxValues(v.min,v.max)
 		slider:SetValueStep(v.step)
 		slider:SetValue(DCP_Saved[v.value])
-		slider:SetScript("OnValueChanged",function()
-			local val=slider:GetValue() DCP_Saved[v.value]=val
-			valuetext:SetText(format("%.1f",val))
-			if (DCP:IsMouseEnabled()) then
-				DCP:SetWidth(DCP_Saved.iconSize)
-				DCP:SetHeight(DCP_Saved.iconSize)
+		slider:SetScript("OnValueChanged",function() 
+			local val=slider:GetValue() DCP_Saved[v.value]=val 
+			valuetext:SetText(format("%.1f",val)) 
+			if (DCP:IsMouseEnabled()) then 
+				DCP:SetWidth(DCP_Saved.iconSize) 
+				DCP:SetHeight(DCP_Saved.iconSize) 
 			end end)
 	end
-
+	
 	local spellnametext = optionsframe:CreateFontString(nil,"ARTWORK","GameFontNormalSmall")
 	spellnametext:SetPoint("TOPLEFT","DCP_OptionsFrameSlider"..#sliders,"BOTTOMLEFT",-15,-25)
 	spellnametext:SetText("Show spell name:")
-
+	
 	local spellnamecbt = CreateFrame("CheckButton","DCP_OptionsFrameSpellNameCheckButton",optionsframe,"OptionsCheckButtonTemplate")
 	spellnamecbt:SetPoint("LEFT",spellnametext,"RIGHT",6,0)
 	spellnamecbt:SetChecked(DCP_Saved.showSpellName)
-	spellnamecbt:SetScript("OnClick", function(self)
+	spellnamecbt:SetScript("OnClick", function(self) 
 		local newState = (self:GetChecked() == 1) or nil
 		self:SetChecked(newState)
 		DCP_Saved.showSpellName = newState
 		RefreshLocals()
 	end)
-
+	
 	local ignoretext = optionsframe:CreateFontString(nil,"ARTWORK","GameFontNormalSmall")
 	ignoretext:SetPoint("TOPLEFT",spellnametext,"BOTTOMLEFT",0,-10)
 	ignoretext:SetText("Cooldowns to ignore:")
-
+	
 	local ignorebox = CreateFrame("EditBox","DCP_OptionsFrameIgnoreBox",optionsframe,"InputBoxTemplate")
 	ignorebox:SetAutoFocus(false)
 	ignorebox:SetPoint("TOPLEFT",ignoretext,"BOTTOMLEFT",0,3)
@@ -394,11 +391,11 @@ function DCP:CreateOptionsFrame()
 		DCP_Saved.ignoredSpells = ignorebox:GetText()
 		RefreshLocals()
 	end)
-
+	
 	local pettext = optionsframe:CreateFontString(nil,"ARTWORK","GameFontNormalSmall")
 	pettext:SetPoint("TOPLEFT",ignorebox,"BOTTOMLEFT",0,-5)
 	pettext:SetText("Pet color overlay:")
-
+	
 	local petcolorselect = CreateFrame('Button',"DCP_OptionsFramePetColorBox",optionsframe)
 	petcolorselect:SetPoint("LEFT",pettext,"RIGHT",5,-2)
 	petcolorselect:SetWidth(20)
@@ -407,20 +404,20 @@ function DCP:CreateOptionsFrame()
 	petcolorselect:GetNormalTexture():SetVertexColor(unpack(DCP_Saved.petOverlay))
 	petcolorselect:SetScript("OnEnter",function(self) GameTooltip:SetOwner(self, "ANCHOR_CURSOR") GameTooltip:SetText("Note: Use white if you don't want any overlay for pet cooldowns") end)
 	petcolorselect:SetScript("OnLeave",function(self) GameTooltip:Hide() end)
-	petcolorselect:SetScript('OnClick', function(self)
-		self.r,self.g,self.b = unpack(DCP_Saved.petOverlay)
-		OpenColorPicker(self)
+	petcolorselect:SetScript('OnClick', function(self) 
+		self.r,self.g,self.b = unpack(DCP_Saved.petOverlay) 
+		OpenColorPicker(self) 
 		ColorPickerFrame:SetPoint("TOPLEFT",optionsframe,"TOPRIGHT")
 		end)
 	petcolorselect.swatchFunc = function(self) DCP_Saved.petOverlay={ColorPickerFrame:GetColorRGB()} petcolorselect:GetNormalTexture():SetVertexColor(ColorPickerFrame:GetColorRGB()) end
 	petcolorselect.cancelFunc = function(self) DCP_Saved.petOverlay={self.r,self.g,self.b} petcolorselect:GetNormalTexture():SetVertexColor(unpack(DCP_Saved.petOverlay)) end
-
+	
 	local petcolorselectbg = petcolorselect:CreateTexture(nil, 'BACKGROUND')
 	petcolorselectbg:SetWidth(17)
 	petcolorselectbg:SetHeight(17)
 	petcolorselectbg:SetTexture(1,1,1)
 	petcolorselectbg:SetPoint('CENTER')
-
+	
 	for i,v in pairs(buttons) do
 		local button = CreateFrame("Button", "DCP_OptionsFrameButton"..i, optionsframe, "UIPanelButtonTemplate")
 		button:SetHeight(24)

@@ -1,5 +1,9 @@
+local F, C, L = unpack(select(2, ...))
+
+if C.tooltip.enable == false then return end
+
 local ADDON_NAME, ns = ...
-local db
+local _DB
 
 local setframe
 do
@@ -40,14 +44,14 @@ do
 			end
 		end
 
-		db.point = point
-		db.anchorTo = anchorTo
-		db.x = xOffset
-		db.y = yOffset
+		_DB.point = point
+		_DB.anchorTo = anchorTo
+		_DB.x = xOffset
+		_DB.y = yOffset
 
 		local tooltip = _G["GameTooltip"]
 		tooltip:ClearAllPoints()
-		tooltip:SetPoint(point, Anchor, point)
+		tooltip:SetPoint(point, _anchor, point)
 	end
 
 	setframe = function(frame)
@@ -77,58 +81,60 @@ do
 	end
 end
 
-local Anchor = CreateFrame("Frame", nil, UIParent)
-setframe(Anchor)
-Anchor.text:SetText(ADDON_NAME)
+local _anchor = CreateFrame("Frame", nil, UIParent)
+setframe(_anchor)
+_anchor.text:SetText(ADDON_NAME)
 
 local _LOCK
 SLASH_FREEBTIP1 = "/freebtip"
 SlashCmdList["FREEBTIP"] = function(inp)
 	if not _LOCK then
-		Anchor:Show()
+		_anchor:Show()
 		_LOCK = true
 	else
-		Anchor:Hide()
+		_anchor:Hide()
 		_LOCK = nil
 	end
 end
 
-local frame = CreateFrame"Frame"
-frame:RegisterEvent"ADDON_LOADED"
-frame:SetScript("OnEvent", function(self, event, addon)
-	if addon ~= ADDON_NAME then return end
+do
+	local frame = CreateFrame"Frame"
+	frame:RegisterEvent"ADDON_LOADED"
+	frame:SetScript("OnEvent", function(self, event, addon)
+		if addon ~= ADDON_NAME then return end
 
-	db = FreebTipDB or {}
-	FreebTipDB = db
+		_DB = FreebTipDB or {}
+		FreebTipDB = _DB
 
-	Anchor:ClearAllPoints()
+		_anchor:ClearAllPoints()
 
-	if db.point then
-		Anchor:SetPoint(db.point, UIParent, db.point, db.x, db.y)
-	else
-		Anchor:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -25, 200)
-	end
-
-	hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
-		local frame = GetMouseFocus()
-		if ns.cfg.cursor and frame == WorldFrame then
-			tooltip:SetOwner(parent, "ANCHOR_CURSOR")
+		if _DB.point then
+			_anchor:SetPoint(_DB.point, UIParent, _DB.point, _DB.x, _DB.y)
 		else
-			local anchorTo = db.anchorTo or Anchor:GetPoint()
-
-			if(anchorTo == "CENTER") then
-				anchorTo = "BOTTOMRIGHT"
-			end
-
-			tooltip:ClearAllPoints()
-			tooltip:SetOwner(parent, "ANCHOR_NONE")
-			if ns.cfg.point then
-				local cfg = ns.cfg
-				tooltip:SetPoint(cfg.point[1], UIParent, cfg.point[1], cfg.point[2], cfg.point[3])
-			else
-				tooltip:SetPoint(anchorTo, Anchor, anchorTo)
-			end
+			_anchor:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -25, 200)
 		end
+
+		hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
+			local frame = GetMouseFocus()
+			if ns.cfg.cursor and frame == WorldFrame then
+				tooltip:SetOwner(parent, "ANCHOR_CURSOR")
+			else
+				local anchorTo = _DB.anchorTo or _anchor:GetPoint()
+
+				if(anchorTo == "CENTER") then
+					anchorTo = "BOTTOMRIGHT"
+				end
+
+				tooltip:ClearAllPoints()
+				tooltip:SetOwner(parent, "ANCHOR_NONE")
+				if ns.cfg.point then
+					local cfg = ns.cfg
+					tooltip:SetPoint(cfg.point[1], UIParent, cfg.point[1], cfg.point[2], cfg.point[3])
+				else
+					tooltip:SetPoint(anchorTo, _anchor, anchorTo)
+				end
+			end
+		end)
 	end)
-end)
+end
 
