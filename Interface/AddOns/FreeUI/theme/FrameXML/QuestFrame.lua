@@ -81,6 +81,8 @@ tinsert(C.themes["FreeUI"], function()
 		F.Reskin(_G[questButton])
 	end
 
+	F.Reskin(QuestFrameDetailPanel.IgnoreButton)
+
 	F.ReskinScroll(QuestProgressScrollFrameScrollBar)
 	F.ReskinScroll(QuestRewardScrollFrameScrollBar)
 	F.ReskinScroll(QuestDetailScrollFrameScrollBar)

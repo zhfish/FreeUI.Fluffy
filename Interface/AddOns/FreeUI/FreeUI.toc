@@ -132,6 +132,7 @@ theme\FrameXML\LFGFrame.lua
 theme\FrameXML\LFGList.lua
 theme\FrameXML\LFRFrame.lua
 theme\FrameXML\LootHistory.lua
+theme\FrameXML\LossOfControlFrame.lua
 theme\FrameXML\MailFrame.lua
 theme\FrameXML\MerchantFrame.lua
 theme\FrameXML\ModelPreviewFrame.lua

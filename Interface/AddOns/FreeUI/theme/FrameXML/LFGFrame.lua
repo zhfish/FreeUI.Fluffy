@@ -16,18 +16,27 @@ tinsert(C.themes["FreeUI"], function()
 		na:SetColorTexture(0, 0, 0, .25)
 		na:SetSize(118, 39)
 
-		if cta then
-			cta:SetAlpha(0)
+		if not button.bg2 then
+ 			button.bg2 = CreateFrame("Frame", nil, button)
+ 			button.bg2:SetPoint("TOPLEFT", na, "TOPLEFT", 11, 0)
+ 			button.bg2:SetPoint("BOTTOMRIGHT", na, "BOTTOMRIGHT", -1, 0)
+ 			F.CreateBD(button.bg2, 0)
 		end
 
-		button.bg2 = CreateFrame("Frame", nil, button)
-		button.bg2:SetPoint("TOPLEFT", na, "TOPLEFT", 10, 0)
-		button.bg2:SetPoint("BOTTOMRIGHT", na, "BOTTOMRIGHT")
-		F.CreateBD(button.bg2, 0)
+		for i = 1, 3 do
+ 			local roleicon = _G[buttonName.."RoleIcon"..i]
+ 			if roleicon then
+ 				roleicon = _G[buttonName.."RoleIcon"..i.."Texture"]:SetTexture(nil)
+ 			end
+ 		end
+ 		
+ 		if cta then
+ 			cta:SetTexture(nil)
+ 		end	
 	end
 
 	hooksecurefunc("LFDQueueFrameRandom_UpdateFrame", function()
-		for i = 1, LFD_MAX_REWARDS do
+		for i = 1, 5 do
 			local button = _G["LFDQueueFrameRandomScrollFrameChildFrameItem"..i]
 
 			if button and not button.styled then
@@ -37,7 +46,7 @@ tinsert(C.themes["FreeUI"], function()
 		end
 	end)
 	hooksecurefunc("ScenarioQueueFrameRandom_UpdateFrame", function()
-		for i = 1, 2 do
+		for i = 1, 5 do
 			local button = _G["ScenarioQueueFrameRandomScrollFrameChildFrameItem"..i]
 
 			if button and not button.styled then
@@ -47,7 +56,7 @@ tinsert(C.themes["FreeUI"], function()
 		end
 	end)
 	hooksecurefunc("RaidFinderQueueFrameRewards_UpdateFrame", function()
-		for i = 1, LFD_MAX_REWARDS do
+		for i = 1, 5 do
 			local button = _G["RaidFinderQueueFrameScrollFrameChildFrameItem"..i]
 
 			if button and not button.styled then
