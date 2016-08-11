@@ -4,7 +4,7 @@
 	<Script file="settings.lua"/>
 	<Script file="FreebTip.lua"/>
 	<Script file="multiItem.lua"/>
-	<Script file="tooltipicon.lua"/>
+	<Script file="IDCard.lua"/>
 	<Script file="ilvl.lua"/>
 	<Script file="spec.lua"/>
 
