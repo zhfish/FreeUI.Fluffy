@@ -45,6 +45,8 @@ local colors = setmetatable({
 		["ENERGY"] = {.9, .9, .1},
 		["RUNIC_POWER"] = {0, 0.81, 1},
 		["LUNAR_POWER"] = {.5, .52, .9},
+		["FURY"] = {78/255, 32/255, 233/255},
+		["PAIN"] = {255/255, 156/255, 0},
 	}, {__index = oUF.colors.power}),
 }, {__index = oUF.colors})
 
