@@ -1,7 +1,7 @@
 local F, C, L = unpack(select(2, ...))
 
 local class = select(2, UnitClass("player"))
-local r, g, b = RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b
+local r, g, b = C.classcolours[class].r, C.classcolours[class].g, C.classcolours[class].b
 
 if not C.general.objectivetracker then return end
 

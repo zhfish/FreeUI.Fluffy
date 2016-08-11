@@ -42,22 +42,20 @@ F.AddOptionsCallback("appearance", "fontUseAlternativeFont", function()
 	end
 end)
 
--- C.classcolours = {
--- 	["DEATHKNIGHT"] = {r = 196/255, g = 30/255,  b = 59/255},
--- 	["DEMONHUNTER"] = {r = 77/255,  g = 216/255, b = 39/255},
--- 	["DRUID"]       = {r = 255/255, g = 124/255, b = 10/255},
--- 	["HUNTER"]      = {r = 170/255, g = 211/255, b = 114/255},
--- 	["MAGE"]        = {r = 104/255, g = 204/255, b = 239/255},
--- 	["MONK"]        = {r = 0/255,   g = 255/255, b = 186/255},
--- 	["PALADIN"]     = {r = 244/255, g = 140/255, b = 186/255},
--- 	["PRIEST"]      = {r = 240/255, g = 235/255, b = 224/255},
--- 	["ROGUE"]       = {r = 255/255, g = 244/255, b = 104/255},
--- 	["SHAMAN"]      = {r = 35/255,  g = 89/255,  b = 255/255},
--- 	["WARLOCK"]     = {r = 147/255, g = 130/255, b = 201/255},
--- 	["WARRIOR"]     = {r = 196/255, g = 155/255, b = 109/255},
--- }
-
-local RAID_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
+C.classcolours = {
+	["DEATHKNIGHT"] = {r = 187/255, g = 0, b = 42/255},
+	["DEMONHUNTER"] = {r = 0.64, g = 0.19, b = 0.79},
+	["DRUID"]       = {r = 0.94, g = 0.39, b = 0.1},
+	["HUNTER"]      = {r = 126/255, g = 185/255, b = 18/255},
+	["MAGE"]        = {r = 0.35, g = 0.76, b = 0.93},
+	["MONK"]        = {r = 0.04, g = 0.85 , b = 0.53},
+	["PALADIN"]     = {r = 241/255, g = 0, b = 168/255},
+	["PRIEST"]      = {r = 219/255, g = 243/255, b = 1},
+	["ROGUE"]       = {r = 1, g = 238/255, b = 0},
+	["SHAMAN"]      = {r = 0.07, g = 0.42, b = 0.96},
+	["WARLOCK"]     = {r = 136/255, g = 73/255, b = 223/255},
+	["WARRIOR"]     = {r = 0.79, g = 0.61, b = 0.5},
+}
 
 FACTION_BAR_COLORS = {
 	[1] = {r = 0.63, g = 0, b = 0},
@@ -74,7 +72,7 @@ local _, class = UnitClass("player")
 if C.appearance.colourScheme == 2 then
 	C.class = {C.appearance.customColour.r, C.appearance.customColour.g, C.appearance.customColour.b}
 else
-	C.class = {RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b}
+	C.class = {C.classcolours[class].r, C.classcolours[class].g, C.classcolours[class].b}
 end
 
 C.r, C.g, C.b = unpack(C.class)

@@ -726,7 +726,7 @@ init:SetScript("OnEvent", function()
 	end
 
 	for _, setting in pairs(ns.classOptions) do
-		local colour = RAID_CLASS_COLORS[setting.className]
+		local colour = C.classcolours[setting.className]
 		setting.Text:SetTextColor(colour.r, colour.g, colour.b)
 	end
 
