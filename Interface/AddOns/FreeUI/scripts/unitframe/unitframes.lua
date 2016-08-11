@@ -26,7 +26,7 @@ fonts = {
 
 local nameFont
 
-if name == "Nekretaal" or name == "Dostoyevsky" then
+if name == "Nekretaal" or name == "Dostoyevsky" or name == "Maginary" then
 	nameFont = fonts.pixel
 else
 	nameFont = fonts.standard
@@ -45,6 +45,8 @@ local colors = setmetatable({
 		["ENERGY"] = {.9, .9, .1},
 		["RUNIC_POWER"] = {0, 0.81, 1},
 		["LUNAR_POWER"] = {.5, .52, .9},
+		["FURY"] = {78/255, 32/255, 233/255},
+		["PAIN"] = {255/255, 156/255, 0},
 	}, {__index = oUF.colors.power}),
 }, {__index = oUF.colors})
 
@@ -297,7 +299,7 @@ local PostUpdateHealth = function(Health, unit, min, max)
 		r, g, b = C.classcolours[class].r, C.classcolours[class].g, C.classcolours[class].b
 	elseif UnitIsPlayer(unit) then
 		local _, class = UnitClass(unit)
-		if class then r, g, b = C.classcolours[class].r, C.classcolours[class].g, C.classcolours[class].b else r, g, b = 1, 1, 1 end
+		if class then r, g, b = RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b else r, g, b = 1, 1, 1 end
 	elseif unit:find("boss%d") then
 		r, g, b = self.ColorGradient(min, max, unpack(self.colors.smooth))
 	else

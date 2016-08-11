@@ -272,7 +272,7 @@ function GetColoredName(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, a
 		local localizedClass, englishClass, localizedRace, englishRace, sex = GetPlayerInfoByGUID(arg12)
 
 		if ( englishClass ) then
-			local classColorTable = C.classcolours[englishClass];
+			local classColorTable = RAID_CLASS_COLORS[englishClass];
 			if ( not classColorTable ) then
 				return arg2;
 			end
