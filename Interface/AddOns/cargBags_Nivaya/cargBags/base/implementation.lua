@@ -354,7 +354,7 @@ do
 			ItemInfo[bagID] = {}
 		end
 
-		if reset or not ItemInfo[bagID][slotID] then
+		if reset or (ItemInfo[bagID][slotID] and not ItemInfo[bagID][slotID].typeID) or (not ItemInfo[bagID][slotID]) then
 			return GatherItemInfo(bagID, slotID, ItemInfo[bagID][slotID] or {})
 		else
 			return ItemInfo[bagID][slotID]
