@@ -32,9 +32,9 @@ cB_Filters.fHideEmpty = function(item) if cBnivCfg.CompressEmpty then return ite
 ------------------------------------
 cB_Filters.fItemClass = function(item, container)
 	if not item.id  then	return false	end
-    if not cB_ItemClass[item.id] then
-        cbNivaya:ClassifyItem(item)
-    end
+	if not cB_ItemClass[item.id] then
+		cbNivaya:ClassifyItem(item)
+	end
 	
 	local t, bag = cB_ItemClass[item.id]
 
@@ -51,12 +51,19 @@ end
 do
 	local itemUpdater, last = CreateFrame("Frame"), 0
 	itemUpdater:SetScript("OnUpdate", function(self, elapsed)
-	    last = last + elapsed
-	    if last > 1 and #itemUpdater > 0 then
-	    	local item = table.remove(itemUpdater)
-	    	cbNivaya:GetItemInfo(item.bagID, item.slotID, true)
-	    	last = 0
-	    end
+		last = last + elapsed
+		if last > 1 and #itemUpdater > 0 then
+			local item = table.remove(itemUpdater)
+			cbNivaya:GetItemInfo(item.bagID, item.slotID, true)
+			if item.id then
+				C_Timer.After(0.1, function()
+					cbNivaya:ClassifyItem(item)
+				end)
+			else
+				table.insert(itemUpdater, item)
+			end
+			last = 0
+		end
 	end)
 	function cbNivaya:ClassifyItem(item)
 
