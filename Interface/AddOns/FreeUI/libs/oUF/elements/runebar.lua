@@ -2,17 +2,10 @@ local F, C = unpack(select(2, ...))
 
 if not C.unitframes.enable then return end
 
---[[ Runebar:
-	Authors: Zariel, Haste
-]]
-
 if select(2, UnitClass("player")) ~= "DEATHKNIGHT" then return end
-local isBetaClient = select(4, GetBuildInfo()) >= 70000
 
 local parent, ns = ...
 local oUF = ns.oUF
-
-local runemap, UpdateType
 
 local OnUpdate = function(self, elapsed)
 	local duration = self.duration + elapsed
@@ -81,16 +74,16 @@ local Enable = function(self, unit)
 
 		for i=1, 6 do
 			local rune = runes[i]
+
+			local r, g, b = unpack(self.colors.power.RUNES)
 			if(rune:IsObjectType'StatusBar' and not rune:GetStatusBarTexture()) then
 				rune:SetStatusBarTexture[[Interface\TargetingFrame\UI-StatusBar]]
+				rune:SetStatusBarColor(r, g, b)
+			end
 
-				local colors = oUF.colors.power.RUNES
-				rune:SetStatusBarColor(colors[1], colors[2], colors[3])
-
-				if(rune.bg) then
-					local mu = rune.bg.multiplier or 1
-					rune.bg:SetVertexColor(r * mu, g * mu, b * mu)
-				end
+			if(rune.bg) then
+				local mu = rune.bg.multiplier or 1
+				rune.bg:SetVertexColor(r * mu, g * mu, b * mu)
 			end
 		end
 

@@ -20,7 +20,6 @@ for power, color in next, PowerBarColor do
 	end
 end
 
-oUF.colors.power.COMBO_POINTS = {1, 0.96, 0.41}
 -- sourced from FrameXML/Constants.lua
 oUF.colors.power[0] = oUF.colors.power.MANA
 oUF.colors.power[1] = oUF.colors.power.RAGE
@@ -47,7 +46,8 @@ local GetDisplayPower = function(unit)
 end
 
 local Update = function(self, event, unit)
-	if(self.unit ~= unit) then return end
+	local arenaPrep = event == 'ArenaPreparation'
+	if(self.unit ~= unit and not arenaPrep) then return end
 	local power = self.Power
 
 	if(power.PreUpdate) then power:PreUpdate(unit) end
@@ -56,7 +56,14 @@ local Update = function(self, event, unit)
 	if power.displayAltPower then
 		displayType, min = GetDisplayPower(unit)
 	end
-	local cur, max = UnitPower(unit, displayType), UnitPowerMax(unit, displayType)
+
+	local cur, max
+	if(arenaPrep) then
+		cur, max = 1, 1
+	else
+		cur, max = UnitPower(unit, displayType), UnitPowerMax(unit, displayType)
+	end
+
 	local disconnected = not UnitIsConnected(unit)
 	power:SetMinMaxValues(min or 0, max)
 
@@ -69,7 +76,11 @@ local Update = function(self, event, unit)
 	power.disconnected = disconnected
 
 	local r, g, b, t
-	if(power.colorTapping and not UnitPlayerControlled(unit) and UnitIsTapDenied(unit)) then
+
+	if(power.colorClass and arenaPrep) then
+		local _, _, _, _, _, _, class = GetSpecializationInfoByID(GetArenaOpponentSpec(self.id))
+		t = self.colors.class[class]
+	elseif(power.colorTapping and not UnitPlayerControlled(unit) and UnitIsTapDenied(unit)) then
 		t = self.colors.tapped
 	elseif(power.colorDisconnected and disconnected) then
 		t = self.colors.disconnected
@@ -96,7 +107,7 @@ local Update = function(self, event, unit)
 	elseif(power.colorReaction and UnitReaction(unit, 'player')) then
 		t = self.colors.reaction[UnitReaction(unit, "player")]
 	elseif(power.colorSmooth) then
-        local adjust = 0 - (min or 0)
+		local adjust = 0 - (min or 0)
 		r, g, b = self.ColorGradient(cur + adjust, max + adjust, unpack(power.smoothGradient or self.colors.smooth))
 	end
 
