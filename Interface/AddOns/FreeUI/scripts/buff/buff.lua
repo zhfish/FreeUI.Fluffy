@@ -89,7 +89,7 @@ local function applySkin(b)
 	--duration
 	F.SetFS(b.duration)
 	b.duration:ClearAllPoints()
-	b.duration:SetPoint("BOTTOM", 0, 2)
+	b.duration:SetPoint("BOTTOM", 2, 2)
 
 	hooksecurefunc(b.duration, "SetFormattedText", durationSetText)
 
