@@ -1,7 +1,6 @@
 
 	local _, class = UnitClass'player'
 	local color = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
-	local font  = [[Interface\AddOns\Lyn\assets\bigfont.ttf]]
 	
 	-- shape
 	MinimapCluster:ClearAllPoints()
@@ -11,7 +10,7 @@
 	MinimapCluster:SetSize(256,256)
 	Minimap:SetClampedToScreen(false)	
 	Minimap:SetSize(256, 256)
-	Minimap:SetMaskTexture[[Interface\AddOns\LynMinimap\assets\rectangle]]
+	Minimap:SetMaskTexture[[Interface\AddOns\FreeUI\media\rectangle]]
 	Minimap:SetHitRectInsets(0, 0, 24, 24)
 	Minimap:ClearAllPoints()
 	Minimap:SetAllPoints(MinimapCluster)
@@ -99,7 +98,7 @@
 		local icon = self:CreateTexture(nil,'OVERLAY',nil,7)
 		icon:SetSize(24, 24)
 		icon:SetPoint('CENTER')
-		icon:SetTexture([[Interface/AddOns/LynMinimap/assets/garrison2]])
+		icon:SetTexture([[Interface/AddOns/FreeUI/media/garrison2]])
 		icon:SetVertexColor(1, 1, 1)
 		self.icon = icon
 		
@@ -160,7 +159,7 @@
 	MiniMapMailFrame:SetPoint('BOTTOMRIGHT', Minimap, -5, 25)
 	MiniMapMailIcon:ClearAllPoints()
 	MiniMapMailIcon:SetTexCoord(.1, .9, .1, .9)
-	MiniMapMailIcon:SetTexture([[Interface\AddOns\LynMinimap\assets\mail]])
+	MiniMapMailIcon:SetTexture([[Interface\AddOns\FreeUI\media\mail]])
 	MiniMapMailIcon:SetPoint("TOPLEFT", MiniMapMailFrame, "TOPLEFT", 8, -8)
 	MiniMapMailIcon:SetPoint("BOTTOMRIGHT", MiniMapMailFrame, "BOTTOMRIGHT", -8, 8)
 

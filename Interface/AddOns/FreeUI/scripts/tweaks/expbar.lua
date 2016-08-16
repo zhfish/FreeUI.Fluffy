@@ -8,7 +8,7 @@ local POSITION		= {"TOP", Minimap, "BOTTOM", 0, 32}
 local OFFSET		= 10
 --local TIP			= {'BOTTOMRIGHT', UIParent, -265, 85}
 local TIP			= {'TOPRIGHT', UIParent, -275, -235}
-local TEXTURE 		= [[Interface/AddOns/LynExperience/assets/statusbar]]
+local TEXTURE 		= [[Interface/AddOns/FreeUI/media/statusbar]]
 
 f = CreateFrame('Frame', nil, UIParent)
 f:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], POSITION[5])
