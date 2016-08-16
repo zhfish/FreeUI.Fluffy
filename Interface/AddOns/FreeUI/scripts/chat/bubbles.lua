@@ -8,7 +8,7 @@ local tslu = 0
 local bubbles = {}
 
 local function styleBubble(frame)
-	local scale = UIParent:GetScale()
+--	local scale = UIParent:GetScale()
 
 	for i = 1, frame:GetNumRegions() do
 		local region = select(i, frame:GetRegions())
@@ -16,9 +16,12 @@ local function styleBubble(frame)
 			region:SetTexture(nil)
 		elseif region:GetObjectType() == "FontString" then
 			frame.text = region
-			region:SetShadowOffset(scale, -scale)
+--			region:SetShadowOffset(scale, -scale)
 		end
 	end
+
+	frame.text:SetFont("Fonts\\yaheibold.ttf", 12, "OUTLINE")
+	frame.text:SetJustifyH("LEFT")
 
 	frame:SetBackdrop({
 		bgFile = C.media.backdrop,
@@ -38,9 +41,9 @@ end
 local function isChatBubble(frame)
 	if frame:GetName() then return end
 	local region = frame:GetRegions()
- 	if region and region:IsObjectType("Texture") then
- 		return region:GetTexture() == [[Interface\Tooltips\ChatBubble-Background]]
- 	end
+	if region and region:IsObjectType("Texture") then
+		return region:GetTexture() == [[Interface\Tooltips\ChatBubble-Background]]
+	end
 end
 
 bubbleHook:SetScript("OnUpdate", function(self, elapsed)

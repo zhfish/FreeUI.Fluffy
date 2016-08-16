@@ -6,7 +6,6 @@ local F, C, L = unpack(select(2, ...))
 --[[ Global config ]]
 
 C["general"] = {
-	["helmcloakbuttons"] = true, 	-- show buttons to toggle helm/cloak on character frame
 	["interrupt"] = true,			-- announce your interrupts
 		["interrupt_sound"] = true,		-- play sound
 		["interrupt_party"] = false,	-- enable in 5 mans / scenarios
@@ -37,11 +36,11 @@ C["appearance"] = {
 }
 
 C["automation"] = {
-	["autoAccept"] = true,			-- auto accept invites from friends and guildies
+	["autoAccept"] = false,			-- auto accept invites from friends and guildies
 	["autoRepair"] = true,			-- automatically repair items
-		["autoRepair_guild"] = false,		-- use guild funds for auto repairs
-	["autoRoll"] = true, 			-- automatically DE or greed on BoE greens (DE priority)
-		["autoRoll_maxLevel"] = true, 		-- only automatically roll on items at max level
+		["autoRepair_guild"] = true,		-- use guild funds for auto repairs
+	["autoRoll"] = false, 			-- automatically DE or greed on BoE greens (DE priority)
+		["autoRoll_maxLevel"] = false, 		-- only automatically roll on items at max level
 	["autoSell"] = true,			-- automatically sell greys
 	["autoSetRole"] = true,			-- automatically set role and hide dialog where possible
 		["autoSetRole_useSpec"] = true,		-- attempt to set role based on your current spec
@@ -69,6 +68,10 @@ C["actionbars"] = {
 
 	["mainbar_pos"] = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 24 },		-- mainbar(bar1) position
 	["rightbar_pos"] = { a1 = "RIGHT", a2 = "RIGHT", af = "UIParent", x = -6, y = -200 },	-- rightbar(bar4) position
+}
+
+C["minimap"] = {
+	["position"] = { a1 = "TOPRIGHT", a2 = "TOPRIGHT", af = "UIParent", x = 0, y = 0 },
 }
 
 C["bags"] = {

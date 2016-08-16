@@ -1,0 +1,7 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\..\FrameXML\UI.xsd">
+	<Script file="actionbars\actionbars.lua"/>
+	<Script file="actionbars\buttons.lua"/>
+	<Script file="actionbars\rangecolor.lua"/>
+	<Script file="actionbars\ncHoverBind.lua"/>
+</Ui>
