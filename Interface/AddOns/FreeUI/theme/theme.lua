@@ -303,12 +303,12 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		hooksecurefunc("PanelTemplates_DeselectTab", function(tab)
 			local text = tab.Text or _G[tab:GetName().."Text"]
- 			text:SetPoint("CENTER", tab, "CENTER")
+			text:SetPoint("CENTER", tab, "CENTER")
 		end)
 
 		hooksecurefunc("PanelTemplates_SelectTab", function(tab)
 			local text = tab.Text or _G[tab:GetName().."Text"]
- 			text:SetPoint("CENTER", tab, "CENTER")
+			text:SetPoint("CENTER", tab, "CENTER")
 		end)
 
 		-- [[ Custom skins ]]
@@ -769,7 +769,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		local function styleTab(bu)
 			bu.selected:SetColorTexture(r, g, b, .2)
 			bu.selected:SetDrawLayer("BACKGROUND")
-			bu.text:SetFont(C.media.font2, 14)
+			bu.text:SetFont(C.media.font.normal, 14)
 			F.Reskin(bu, true)
 			bu:SetScript("OnEnter", colourTab)
 			bu:SetScript("OnLeave", clearTab)
@@ -780,8 +780,8 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		end
 		styleTab(HelpFrameButton16)
 
-		HelpFrameAccountSecurityOpenTicket.text:SetFont(C.media.font2, 14)
-		HelpFrameOpenTicketHelpOpenTicket.text:SetFont(C.media.font2, 14)
+		HelpFrameAccountSecurityOpenTicket.text:SetFont(C.media.font.normal, 14)
+		HelpFrameOpenTicketHelpOpenTicket.text:SetFont(C.media.font.normal, 14)
 
 		HelpFrameCharacterStuckHearthstone:SetSize(56, 56)
 		F.CreateBG(HelpFrameCharacterStuckHearthstone)
@@ -836,7 +836,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		TradeFrameRecipientPortrait:Hide()
 
 		TradeFramePortraitFrame:Hide()
- 		TradeFrameLeftBorder:Hide()
+		TradeFrameLeftBorder:Hide()
 
 		F.ReskinPortraitFrame(TradeFrame, true)
 		F.Reskin(TradeFrameTradeButton)
@@ -1076,9 +1076,9 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		F.CreateBDFrame(BonusRollFrame.PromptFrame.Timer, .25)
 
 		BonusRollFrame.SpecRing:SetTexture(nil)
- 		BonusRollFrame.SpecIcon:SetTexCoord(.08, .92, .08, .92)
- 		BonusRollFrame.SpecIcon.bg = F.CreateBG(BonusRollFrame.SpecIcon)
- 		BonusRollFrame.SpecIcon.bg:SetDrawLayer("OVERLAY", 1)
+		BonusRollFrame.SpecIcon:SetTexCoord(.08, .92, .08, .92)
+		BonusRollFrame.SpecIcon.bg = F.CreateBG(BonusRollFrame.SpecIcon)
+		BonusRollFrame.SpecIcon.bg:SetDrawLayer("OVERLAY", 1)
 
 		-- Chat config
 
@@ -1401,9 +1401,9 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		end
 		local titles = false
 		PaperDollTitlesPane:HookScript("OnShow", function(self)
- 			for x, object in pairs(PaperDollTitlesPane.buttons) do
- 				object:DisableDrawLayer("BACKGROUND")
- 				object.text:SetFont(C.media.font, 11)
+			for x, object in pairs(PaperDollTitlesPane.buttons) do
+				object:DisableDrawLayer("BACKGROUND")
+				F.SetFS(object.text)
 			end
 		end)
 		SendScrollBarBackgroundTop:Hide()

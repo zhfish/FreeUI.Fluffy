@@ -2,7 +2,7 @@ local F, C, L = unpack(select(2, ...))
 
 local _G = _G
 
-local chatFont = "Fonts\\yaheibold.ttf"
+local chatFont = C.media.font.normal
 
 DEFAULT_CHATFRAME_ALPHA = 0
 CHAT_FRAME_FADE_OUT_TIME = CHAT_FRAME_FADE_TIME -- speed up fading out

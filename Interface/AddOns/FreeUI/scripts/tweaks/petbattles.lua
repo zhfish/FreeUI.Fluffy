@@ -107,7 +107,7 @@ for index, unit in pairs(units) do
 	unit.Border2:SetPoint("TOPLEFT", unit.Icon, -1, 1)
 	unit.Border2:SetPoint("BOTTOMRIGHT", unit.Icon, 1, -1)
 
-	unit.Level:SetFont(C.media.font2, 16)
+	unit.Level:SetFont(C.media.font.normal, 16)
 	unit.Level:SetTextColor(1, 1, 1)
 
 	local bg = CreateFrame("Frame", nil, unit)

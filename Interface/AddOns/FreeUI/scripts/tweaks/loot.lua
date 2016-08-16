@@ -37,9 +37,6 @@ local iconsize = 32
 local width = 200
 local sq, ss, sn, st
 
-local locale = GetLocale()
-local font = C.media.font2
-
 local addon = CreateFrame("Button", "Butsu", UIParent)
 addon:SetFrameStrata("HIGH")
 addon:SetClampedToScreen(true)
@@ -127,11 +124,6 @@ local createSlot = function(id)
 	local name = F.CreateFS(frame, C.FONT_SIZE_NORMAL, "LEFT")
 	name:SetPoint("RIGHT", frame)
 	name:SetPoint("LEFT", icon, "RIGHT", 8, 0)
-
-	if locale == "zhCN" or locale == "zhTW" then
-		name:SetFont(font, 11, "OUTLINE")
-	end
-
 	name:SetNonSpaceWrap(true)
 	frame.name = name
 

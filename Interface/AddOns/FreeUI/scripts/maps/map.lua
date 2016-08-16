@@ -16,9 +16,10 @@ WorldMapPlayerLower:EnableMouse(false)
 
 local fontsize = C.appearance.fontSizeNormal / WORLDMAP_WINDOWED_SIZE
 
-MapBarFrame.Description:SetFont(C.media.font, fontsize, "OUTLINEMONOCHROME")
+
+F.SetFS(MapBarFrame.Description)
 MapBarFrame.Description:SetShadowOffset(0, 0)
-MapBarFrame.Title:SetFont(C.media.font, fontsize, "OUTLINEMONOCHROME")
+F.SetFS(MapBarFrame.Title)
 MapBarFrame.Title:SetShadowOffset(0, 0)
 
 -- keep it centered

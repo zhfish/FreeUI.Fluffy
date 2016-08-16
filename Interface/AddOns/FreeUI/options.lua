@@ -3,6 +3,38 @@ local F, C, L = unpack(select(2, ...))
 -- All exceptions and special rules for these options are in profiles.lua!
 -- Consider using the in-game options instead, accessed through the game menu or by typing /freeui.
 
+-- [[ Constants ]]
+C.media = {
+	["arrowUp"]    = "Interface\\AddOns\\FreeUI\\media\\arrow-up-active",
+	["arrowDown"]  = "Interface\\AddOns\\FreeUI\\media\\arrow-down-active",
+	["arrowLeft"]  = "Interface\\AddOns\\FreeUI\\media\\arrow-left-active",
+	["arrowRight"] = "Interface\\AddOns\\FreeUI\\media\\arrow-right-active",
+	["backdrop"]   = "Interface\\AddOns\\FreeUI\\media\\blank", 					-- default backdrop
+	["checked"]    = "Interface\\AddOns\\FreeUI\\media\\CheckButtonHilight", 		-- replace default checked texture
+	["glow"]       = "Interface\\AddOns\\FreeUI\\media\\glowTex", 					-- glow/shadow texture
+	["gradient"]   = "Interface\\AddOns\\FreeUI\\media\\gradient",
+	["roleIcons"]  = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
+	["texture"]    = "Interface\\AddOns\\FreeUI\\media\\Texture1", 					-- statusbar texture
+
+--	["font"]       = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 				-- default pixel font
+--	["font2"]      = "Fonts\\FRIZQT__.ttf", 										-- default font
+
+	["font"]      = {
+		["normal"] = "Fonts\\FRIZQT__.ttf",
+		["pixel"]  = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf",
+		["header"] = "Interface\\AddOns\\FreeUI\\media\\ExocetBlizzardMedium.ttf",
+		["damage"] = "Interface\\AddOns\\FreeUI\\media\\PEPSI_pl.ttf",
+	},
+}
+
+if GetLocale() == "zhCN" then
+	C.media.font.normal = "Fonts\\ARKai_T.ttf"		-- 简体中文客户端主字体
+elseif GetLocale() == "zhTW" then
+	C.media.font.normal = "Fonts\\blei00d.ttf"		-- 繁体中文客户端主字体
+else
+	C.media.font.normal = "Fonts\\FRIZQT__.ttf"		-- 英语客户端主字体
+end
+
 --[[ Global config ]]
 
 C["general"] = {

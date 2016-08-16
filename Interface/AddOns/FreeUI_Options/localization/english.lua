@@ -79,7 +79,7 @@ ns.localization.appearancefontOutlineStyle2 = "Monochrome"
 ns.localization.appearancefontOutlineStyle1Tooltip = "Best used with regular fonts (not pixel fonts)."
 ns.localization.appearancefontOutlineStyle2Tooltip = "Best used with pixel fonts."
 ns.localization.appearancefontShadow = "Font shadow"
-ns.localization.appearancesampleText = "sample SAMPLE"
+ns.localization.appearancesampleText = "sample SAMPLE 示例文字"
 
 ns.localization.automation = "Automation"
 ns.localization.automationSubText = "With these features, the UI can perform common tasks automatically."

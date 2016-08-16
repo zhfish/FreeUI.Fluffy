@@ -72,7 +72,7 @@ end)
 -- Header
 
 --F.SetFS(ot.HeaderMenu.Title)
-ot.HeaderMenu.Title:SetFont(C.media.font2, 14, "OUTLINE")
+ot.HeaderMenu.Title:SetFont(C.media.font.normal, 14, "OUTLINE")
 
 -- Minimize button
 
@@ -99,8 +99,8 @@ for _, headerName in pairs({"QuestHeader", "AchievementHeader", "ScenarioHeader"
 
 	header.Background:Hide()
 --	F.SetFS(header.Text)
-	header.Text:SetFont(C.media.font2, 14, "OUTLINE")
-	header.Text:SetTextColor(r, g, b)
+	header.Text:SetFont(C.media.font.normal, 14, "OUTLINE")
+--	header.Text:SetTextColor(r, g, b)
 end
 
 do
@@ -108,14 +108,14 @@ do
 
 	header.Background:Hide()
 --	F.SetFS(header.Text)
-	header.Text:SetFont(C.media.font2, 14, "OUTLINE")
+	header.Text:SetFont(C.media.font.normal, 14, "OUTLINE")
 	header.Text:SetTextColor(r, g, b)
 end
 
 hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "SetBlockHeader", function(_, block)
 	if not block.headerStyled then
 --		F.SetFS(block.HeaderText)
-		block.HeaderText:SetFont(C.media.font2, 14, "OUTLINE")
+		block.HeaderText:SetFont(C.media.font.normal, 14, "OUTLINE")
 		block.HeaderText:SetTextColor(r, g, b)
 		block.headerStyled = true
 	end
@@ -124,7 +124,7 @@ end)
 hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", function(_, block)
 	if not block.headerStyled then
 --		F.SetFS(block.HeaderText)
-		block.HeaderText:SetFont(C.media.font2, 14, "OUTLINE")
+		block.HeaderText:SetFont(C.media.font.normal, 14, "OUTLINE")
 		block.headerStyled = true
 	end
 
@@ -183,7 +183,7 @@ hooksecurefunc("ObjectiveTracker_AddBlock", function(block)
 		for _, line in pairs(block.lines) do
 			if not line.styled then
 --				F.SetFS(line.Text)
-				line.Text:SetFont(C.media.font2, 12, "OUTLINE")
+				line.Text:SetFont(C.media.font.normal, 12, "OUTLINE")
 				line.Text:SetSpacing(2)
 
 				if line.Dash then
@@ -264,10 +264,10 @@ ScenarioStageBlock:HookScript("OnShow", function()
 		ScenarioStageBlock.NormalBG:SetAlpha(0)
 		ScenarioStageBlock.FinalBG:SetAlpha(0)
 		ScenarioStageBlock.GlowTexture:SetTexture(nil)
-		ScenarioStageBlock.Stage:SetFont(C.media.font2, 18, "OUTLINE")
+		ScenarioStageBlock.Stage:SetFont(C.media.font.normal, 18, "OUTLINE")
 		ScenarioStageBlock.Stage:SetTextColor(1, 1, 1)
-		ScenarioStageBlock.Name:SetFont(C.media.font2, 12, "OUTLINE")
-		ScenarioStageBlock.CompleteLabel:SetFont(C.media.font2, 18, "OUTLINE")
+		ScenarioStageBlock.Name:SetFont(C.media.font.normal, 12, "OUTLINE")
+		ScenarioStageBlock.CompleteLabel:SetFont(C.media.font.normal, 18, "OUTLINE")
 		ScenarioStageBlock.CompleteLabel:SetTextColor(1, 1, 1)
 		ScenarioStageBlock.skinned = true
 	end

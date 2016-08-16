@@ -1,44 +1,20 @@
 local F, C = unpack(select(2, ...))
 
--- [[ Constants ]]
-C.media = {
-	["arrowUp"]    = "Interface\\AddOns\\FreeUI\\media\\arrow-up-active",
-	["arrowDown"]  = "Interface\\AddOns\\FreeUI\\media\\arrow-down-active",
-	["arrowLeft"]  = "Interface\\AddOns\\FreeUI\\media\\arrow-left-active",
-	["arrowRight"] = "Interface\\AddOns\\FreeUI\\media\\arrow-right-active",
-	["backdrop"]   = "Interface\\AddOns\\FreeUI\\media\\blank", 					-- default backdrop
-	["checked"]    = "Interface\\AddOns\\FreeUI\\media\\CheckButtonHilight", 		-- replace default checked texture
-	["font"]       = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 				-- default pixel font
---	["font2"]      = "Fonts\\FRIZQT__.ttf", 										-- default font
-	["glow"]       = "Interface\\AddOns\\FreeUI\\media\\glowTex", 					-- glow/shadow texture
-	["gradient"]   = "Interface\\AddOns\\FreeUI\\media\\gradient",
-	["roleIcons"]  = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
-	["texture"]    = "Interface\\AddOns\\FreeUI\\media\\Texture1", 					-- statusbar texture
-}
-
 local locale = GetLocale()
-
-if locale == "zhCN" then
-	C.media.font2 = "Fonts\\ARKai_T.ttf"		-- 简体中文客户端主字体
-elseif locale == "zhTW" then
-	C.media.font2 = "Fonts\\blei00d.ttf"		-- 繁体中文客户端主字体
-else
-	C.media.font2 = "Fonts\\FRIZQT__.ttf"		-- 英语客户端主字体
-end
 
 local mainFont
 
 if C.appearance.fontUseAlternativeFont then
-	mainFont = C.media.font2
+	mainFont = C.media.font.normal
 else
-	mainFont = C.media.font
+	mainFont = C.media.font.pixel
 end
 
 F.AddOptionsCallback("appearance", "fontUseAlternativeFont", function()
 	if C.appearance.fontUseAlternativeFont then
-		mainFont = C.media.font2
+		mainFont = C.media.font.normal
 	else
-		mainFont = C.media.font
+		mainFont = C.media.font.pixel
 	end
 end)
 
@@ -116,16 +92,16 @@ local CreateBD = function(f, a)
 	f:SetBackdropBorderColor(0, 0, 0)
 
 	if not a then
-        f.tex = f.tex or f:CreateTexture(nil, "BACKGROUND", nil, 1)
-        f.tex:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true, true)
-        f.tex:SetAlpha(.45)
-        f.tex:SetAllPoints()
-        f.tex:SetHorizTile(true)
-        f.tex:SetVertTile(true)
-        f.tex:SetBlendMode("ADD")
-    else
-        f:SetBackdropColor(0, 0, 0, a)
-    end
+		f.tex = f.tex or f:CreateTexture(nil, "BACKGROUND", nil, 1)
+		f.tex:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true, true)
+		f.tex:SetAlpha(.45)
+		f.tex:SetAllPoints()
+		f.tex:SetHorizTile(true)
+		f.tex:SetVertTile(true)
+		f.tex:SetBlendMode("ADD")
+	else
+		f:SetBackdropColor(0, 0, 0, a)
+	end
 end
 
 F.CreateBD = CreateBD
@@ -158,12 +134,12 @@ F.CreateSD = function(parent, size, r, g, b, alpha, offset)
 end
 
 F.CreateFS = function(parent, fontSize, justify)
-    local f = parent:CreateFontString(nil, "OVERLAY")
-    F.SetFS(f, fontSize)
+	local f = parent:CreateFontString(nil, "OVERLAY")
+	F.SetFS(f, fontSize)
 
-    if justify then f:SetJustifyH(justify) end
+	if justify then f:SetJustifyH(justify) end
 
-    return f
+	return f
 end
 
 F.SetFS = function(fontObject, fontSize)
@@ -179,11 +155,7 @@ F.SetFS = function(fontObject, fontSize)
 
 	local outline = nil
 	if C.appearance.fontOutline then
-		if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
-			outline = "OUTLINE"
-		else
-		 	outline = C.appearance.fontOutlineStyle == 2 and "OUTLINEMONOCHROME" or "OUTLINE"
-		end
+		outline = C.appearance.fontOutlineStyle == 2 and "OUTLINEMONOCHROME" or "OUTLINE"
 	end
 
 	fontObject:SetFont(mainFont, size, outline)
@@ -276,7 +248,7 @@ F.Reskin = function(f, noGlow)
 		f.glow:SetAlpha(0)
 
 		f:HookScript("OnEnter", StartGlow)
- 		f:HookScript("OnLeave", StopGlow)
+		f:HookScript("OnLeave", StopGlow)
 	end
 end
 
@@ -310,13 +282,13 @@ F.ReskinScroll = function(f, parent)
 	local frame = f:GetName()
 
 	local track = (f.trackBG or f.Background) or (_G[frame.."Track"] or _G[frame.."BG"])
- 	if track then track:Hide() end
- 	local top = (f.ScrollBarTop or f.Top) or _G[frame.."Top"]
- 	if top then top:Hide() end
- 	local middle = (f.ScrollBarMiddle or f.Middle) or _G[frame.."Middle"]
- 	if middle then middle:Hide() end
- 	local bottom = (f.ScrollBarBottom or f.Bottom) or _G[frame.."Bottom"]
- 	if bottom then bottom:Hide() end
+	if track then track:Hide() end
+	local top = (f.ScrollBarTop or f.Top) or _G[frame.."Top"]
+	if top then top:Hide() end
+	local middle = (f.ScrollBarMiddle or f.Middle) or _G[frame.."Middle"]
+	if middle then middle:Hide() end
+	local bottom = (f.ScrollBarBottom or f.Bottom) or _G[frame.."Bottom"]
+	if bottom then bottom:Hide() end
 
 	local bu = f.ThumbTexture or f.thumbTexture or _G[frame.."ThumbTexture"]
 	bu:SetAlpha(0)
@@ -332,7 +304,7 @@ F.ReskinScroll = function(f, parent)
 	tex:SetPoint("BOTTOMRIGHT", bu.bg, -1, 1)
 
 	local up = f.ScrollUpButton or f.UpButton or _G[(frame or parent).."ScrollUpButton"]
- 	local down = f.ScrollDownButton or f.DownButton or _G[(frame or parent).."ScrollDownButton"]
+	local down = f.ScrollDownButton or f.DownButton or _G[(frame or parent).."ScrollDownButton"]
 
 	up:SetWidth(17)
 	down:SetWidth(17)
@@ -395,16 +367,16 @@ F.ReskinDropDown = function(f)
 	if right then right:SetAlpha(0) end
 
 	local bg = CreateFrame("Frame", nil, f)
- 	bg:SetPoint("TOPLEFT", 10, -4)
- 	bg:SetPoint("BOTTOMRIGHT", -12, 8)
- 	bg:SetFrameLevel(f:GetFrameLevel()-1)
- 	F.CreateBD(bg, 0)
+	bg:SetPoint("TOPLEFT", 10, -4)
+	bg:SetPoint("BOTTOMRIGHT", -12, 8)
+	bg:SetFrameLevel(f:GetFrameLevel()-1)
+	F.CreateBD(bg, 0)
   
- 	local gradient = F.CreateGradient(f)
- 	gradient:SetPoint("TOPLEFT", bg, 1, -1)
- 	gradient:SetPoint("BOTTOMRIGHT", bg, -1, 1)
+	local gradient = F.CreateGradient(f)
+	gradient:SetPoint("TOPLEFT", bg, 1, -1)
+	gradient:SetPoint("BOTTOMRIGHT", bg, -1, 1)
  
- 	local down = _G[frame.."Button"]
+	local down = _G[frame.."Button"]
 
 	down:SetSize(20, 20)
 	down:ClearAllPoints()
@@ -472,22 +444,22 @@ F.ReskinClose = function(f, a1, p, a2, x, y)
 	f.pixels = {}
 
 	local lineOfs = 2.5
- 	for i = 1, 2 do
- 		local line = f:CreateLine()
- 		line:SetColorTexture(1, 1, 1)
- 		line:SetThickness(0.5)
- 		if i == 1 then
- 			line:SetStartPoint("TOPLEFT", lineOfs, -lineOfs)
- 			line:SetEndPoint("BOTTOMRIGHT", -lineOfs, lineOfs)
- 		else
- 			line:SetStartPoint("TOPRIGHT", -lineOfs, -lineOfs)
- 			line:SetEndPoint("BOTTOMLEFT", lineOfs, lineOfs)
- 		end
- 		tinsert(f.pixels, line)
+	for i = 1, 2 do
+		local line = f:CreateLine()
+		line:SetColorTexture(1, 1, 1)
+		line:SetThickness(0.5)
+		if i == 1 then
+			line:SetStartPoint("TOPLEFT", lineOfs, -lineOfs)
+			line:SetEndPoint("BOTTOMRIGHT", -lineOfs, lineOfs)
+		else
+			line:SetStartPoint("TOPRIGHT", -lineOfs, -lineOfs)
+			line:SetEndPoint("BOTTOMLEFT", lineOfs, lineOfs)
+		end
+		tinsert(f.pixels, line)
 	end
 
 	f:HookScript("OnEnter", colourClose)
- 	f:HookScript("OnLeave", clearClose)
+	f:HookScript("OnLeave", clearClose)
 end
 
 F.ReskinInput = function(f, height, width)

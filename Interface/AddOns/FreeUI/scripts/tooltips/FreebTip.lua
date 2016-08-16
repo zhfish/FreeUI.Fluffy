@@ -5,7 +5,7 @@ if not C.tooltip.enable then return end
 local ADDON_NAME, ns = ...
 
 local settings = {
-	font = C.media.font2,
+	font = C.media.font.normal,
 	fontflag = "OUTLINE",
 	scale = 1,
 	backdrop = {
@@ -687,10 +687,10 @@ end)
 --[[ Aura Tooltip info ]] --
 
 local function addAuraInfo(self, caster, spellID)
-	if(spellID) then
-		GameTooltip:AddLine("ID: "..spellID)
-		GameTooltip:Show()
-	end
+	-- if(spellID) then
+	-- 	GameTooltip:AddLine("ID: "..spellID)
+	-- 	GameTooltip:Show()
+	-- end
 
 	if(caster) then
 		local color = hex(unitColor(caster))

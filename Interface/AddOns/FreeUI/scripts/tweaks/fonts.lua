@@ -9,15 +9,15 @@ local fontDiablo
 local fontDamage
 
 if locale == "zhCN" or locale == "zhTW" then
-	fontStandard = C.media.font2
-	fontUnitName = C.media.font2
-	fontDiablo   = C.media.font2
-	fontDamage   = C.media.font2
+	fontStandard = C.media.font.normal
+	fontUnitName = C.media.font.normal
+	fontDiablo   = C.media.font.normal
+	fontDamage   = C.media.font.normal
 else
-	fontStandard = C.media.font2
-	fontUnitName = C.media.font2
-	fontDiablo   = 'Interface\\Addons\\FreeUI\\media\\ExocetBlizzardMedium.ttf'
-	fontDamage   = 'Interface\\Addons\\FreeUI\\media\\PEPSI_pl.ttf'
+	fontStandard = C.media.font.normal
+	fontUnitName = C.media.font.normal
+	fontDiablo   = C.media.font.header
+	fontDamage   = C.media.font.damage
 
 	F.SetFS(UIErrorsFrame)
 end

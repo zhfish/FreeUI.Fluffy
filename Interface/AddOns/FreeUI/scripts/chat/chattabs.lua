@@ -19,10 +19,6 @@ local updateFS = function(self, _, _, ...)
 
 	if((...)) then
 		fstring:SetTextColor(...)
-
-		if locale == "zhCN" or locale == "zhTW" then
-			fstring:SetFont(C.media.font2, 11, "OUTLINE")
-		end
 	end
 
 	fstring:SetShadowColor(0, 0, 0, 0)

@@ -85,15 +85,15 @@ tinsert(C.themes["FreeUI"], function()
 				f.OldAchievement:SetTexture(nil)
 				f.GuildBorder:SetTexture(nil)
 
-				f.Unlocked:SetFont(C.media.font2, 10, "OUTLINE")
+				f.Unlocked:SetFont(C.media.font.normal, 10, "OUTLINE")
 				f.Unlocked:SetShadowOffset(0, 0)
 				f.Unlocked:SetTextColor(1,1,1)
 
-				f.Name:SetFont(C.media.font2, 15, "OUTLINE")
+				f.Name:SetFont(C.media.font.normal, 15, "OUTLINE")
 				f.Name:SetShadowOffset(0, 0)
 				f.Name:SetTextColor(1,1,1)
 
-				f.GuildName:SetFont(C.media.font2, 15, "OUTLINE")
+				f.GuildName:SetFont(C.media.font.normal, 15, "OUTLINE")
 				f.GuildName:SetShadowOffset(0, 0)
 				f.GuildName:SetTextColor(1,1,1)
 				f.GuildName:ClearAllPoints()
@@ -103,7 +103,7 @@ tinsert(C.themes["FreeUI"], function()
 				f.Icon.Texture:SetTexCoord(.1, .9, .1, .9)
 				F.CreateBG(f.Icon.Texture)
 	
-				f.Shield.Points:SetFont(C.media.font2, 20, "OUTLINE")
+				f.Shield.Points:SetFont(C.media.font.normal, 20, "OUTLINE")
 				f.Shield.Points:SetShadowOffset(0, 0)
 				f.Shield.Points:SetTextColor(1,1,0)
 				
@@ -124,11 +124,11 @@ tinsert(C.themes["FreeUI"], function()
 				
 				f.Background:SetTexture(nil)
 				
-				f.Unlocked:SetFont(C.media.font2, 10, "OUTLINE")
+				f.Unlocked:SetFont(C.media.font.normal, 10, "OUTLINE")
 				f.Unlocked:SetShadowOffset(0, 0)
 				f.Unlocked:SetTextColor(1,1,1)
 
-				f.Name:SetFont(C.media.font2, 15, "OUTLINE")
+				f.Name:SetFont(C.media.font.normal, 15, "OUTLINE")
 				f.Name:SetShadowOffset(0, 0)
 				f.Name:SetTextColor(1,1,1)
 
@@ -217,11 +217,11 @@ tinsert(C.themes["FreeUI"], function()
 				F.CreateBG(f.Icon)
 				f.IconBorder:SetTexture(nil)
 				
-				f.Label:SetFont(C.media.font2, 12, "OUTLINE")
+				f.Label:SetFont(C.media.font.normal, 12, "OUTLINE")
 				f.Label:SetShadowOffset(0, 0)
 				f.Label:SetTextColor(1,1,1)
 				
-				f.Amount:SetFont(C.media.font2, 15, "OUTLINE")
+				f.Amount:SetFont(C.media.font.normal, 15, "OUTLINE")
 				f.Amount:SetShadowOffset(0, 0)
 				f.Amount:SetTextColor(1,1,1)
 				
@@ -295,11 +295,11 @@ tinsert(C.themes["FreeUI"], function()
 			F.CreateBG(f.Icon)
 			f.IconBorder:SetTexture(nil)
 			
-			f.Label:SetFont(C.media.font2, 12, "OUTLINE")
+			f.Label:SetFont(C.media.font.normal, 12, "OUTLINE")
 			f.Label:SetShadowOffset(0, 0)
 			f.Label:SetTextColor(1,1,1)
 			
-			f.Amount:SetFont(C.media.font2, 15, "OUTLINE")
+			f.Amount:SetFont(C.media.font.normal, 15, "OUTLINE")
 			f.Amount:SetShadowOffset(0, 0)
 			f.Amount:SetTextColor(1,1,1)
 			
@@ -326,15 +326,15 @@ tinsert(C.themes["FreeUI"], function()
 	F.CreateBG(GuildChallengeAlertFrameEmblemIcon)
 	
 	local fs = select(5, GuildChallengeAlertFrame:GetRegions())
-	fs:SetFont(C.media.font2, 14, "OUTLINE")
+	fs:SetFont(C.media.font.normal, 14, "OUTLINE")
 	fs:SetShadowOffset(0, 0)
 	fs:SetTextColor(1,1,1)
 	
-	GuildChallengeAlertFrameType:SetFont(C.media.font2, 12, "OUTLINE")
+	GuildChallengeAlertFrameType:SetFont(C.media.font.normal, 12, "OUTLINE")
 	GuildChallengeAlertFrameType:SetShadowOffset(0, 0)
 	GuildChallengeAlertFrameType:SetTextColor(1,1,1)
 	
-	GuildChallengeAlertFrameCount:SetFont(C.media.font2, 15, "OUTLINE")
+	GuildChallengeAlertFrameCount:SetFont(C.media.font.normal, 15, "OUTLINE")
 	GuildChallengeAlertFrameCount:SetShadowOffset(0, 0)
 	GuildChallengeAlertFrameCount:SetTextColor(1,1,0)
 	
@@ -353,12 +353,12 @@ tinsert(C.themes["FreeUI"], function()
 	DungeonCompletionAlertFrame.dungeonArt4:SetTexture(nil)
 
 	local fs = select(7, DungeonCompletionAlertFrame:GetRegions())
-	fs:SetFont(C.media.font2, 10, "OUTLINE")
+	fs:SetFont(C.media.font.normal, 10, "OUTLINE")
 	fs:SetShadowOffset(0, 0)
 	fs:SetTextColor(1,1,1)
 
 	local InstanceName = select(8, DungeonCompletionAlertFrame:GetRegions())
-	InstanceName:SetFont(C.media.font2, 15, "OUTLINE")
+	InstanceName:SetFont(C.media.font.normal, 15, "OUTLINE")
 	InstanceName:SetShadowOffset(0, 0)
 	InstanceName:SetTextColor(1,1,1)
 
@@ -406,12 +406,12 @@ tinsert(C.themes["FreeUI"], function()
 	F.CreateBG(ScenarioAlertFrame.dungeonTexture)
 
 	local fs = select(4, ScenarioAlertFrame:GetRegions())
-	fs:SetFont(C.media.font2, 10, "OUTLINE")
+	fs:SetFont(C.media.font.normal, 10, "OUTLINE")
 	fs:SetShadowOffset(0, 0)
 	fs:SetTextColor(1,1,1)
 
 	local ScenarioName = select(5, ScenarioAlertFrame:GetRegions())
-	ScenarioName:SetFont(C.media.font2, 15, "OUTLINE")
+	ScenarioName:SetFont(C.media.font.normal, 15, "OUTLINE")
 	ScenarioName:SetShadowOffset(0, 0)
 	ScenarioName:SetTextColor(1,1,1)
 

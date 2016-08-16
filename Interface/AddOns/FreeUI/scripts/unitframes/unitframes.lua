@@ -9,11 +9,9 @@ local name = UnitName("player")
 local realm = GetRealmName()
 local class = select(2, UnitClass("player"))
 
-local locale = GetLocale()
-
 fonts = {
 	standard = {
-		C.media.font2,
+		C.media.font.normal,
 		11,
 		"OUTLINE",
 	},
@@ -1563,11 +1561,6 @@ local UnitSpecific = {
 		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
 		Name:SetWidth((bossWidth / 2) + 10)
 		Name:SetHeight(12)
-
-		if locale == "zhCN" or locale == "zhTW" then
-			Name:SetFont(unpack(nameFont))
-		end
-
 		self:Tag(Name, '[name]')
 		self.Name = Name
 

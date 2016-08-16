@@ -87,7 +87,7 @@ ns.localization.appearancefontOutlineStyle2 = "单色"
 ns.localization.appearancefontOutlineStyle1Tooltip = "搭配普通字体使用（非像素型字体）"
 ns.localization.appearancefontOutlineStyle2Tooltip = "搭配像素字体使用"
 ns.localization.appearancefontShadow = "阴影"
-ns.localization.appearancesampleText = "示例文字"
+ns.localization.appearancesampleText = "sample SAMPLE 示例文字"
 
 ns.localization.automation = "便利功能"
 ns.localization.automationSubText = "这些设置帮助你自动执行一些常用动作"
