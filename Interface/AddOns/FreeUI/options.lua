@@ -30,10 +30,10 @@ C.media = {
 
 if GetLocale() == "zhCN" then
 	C.media.font.normal = "Fonts\\ARKai_T.ttf"		-- 简体中文客户端主字体
+	C.media.font.chat = "Fonts\\ARKai_T.ttf"
 elseif GetLocale() == "zhTW" then
 	C.media.font.normal = "Fonts\\blei00d.ttf"		-- 繁体中文客户端主字体
-else
-	C.media.font.normal = "Fonts\\FRIZQT__.ttf"		-- 英语客户端主字体
+	C.media.font.chat = "Fonts\\blei00d.ttf"
 end
 
 --[[ Global config ]]
