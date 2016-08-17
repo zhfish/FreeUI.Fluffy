@@ -19,8 +19,9 @@ C.media = {
 --	["font"]       = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 				-- default pixel font
 --	["font2"]      = "Fonts\\FRIZQT__.ttf", 										-- default font
 
-	["font"]      = {
+	["font"]       = {
 		["normal"] = "Fonts\\FRIZQT__.ttf",
+		["chat"]   = "Fonts\\FRIZQT__.ttf",
 		["pixel"]  = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf",
 		["header"] = "Interface\\AddOns\\FreeUI\\media\\ExocetBlizzardMedium.ttf",
 		["damage"] = "Interface\\AddOns\\FreeUI\\media\\PEPSI_pl.ttf",
@@ -65,6 +66,8 @@ C["appearance"] = {
 	["fontOutline"] = true,
 	["fontOutlineStyle"] = 2,		-- 1 = normal, 2 = monochrome
 	["fontShadow"] = false,
+
+	["colorFont"] = true,
 }
 
 C["automation"] = {
