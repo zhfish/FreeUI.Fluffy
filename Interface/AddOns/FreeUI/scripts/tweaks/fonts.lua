@@ -30,16 +30,17 @@ local CRIT   = C.media.font.damage
 -- Header Font: replaces MORPHEUS.ttf
 local HEADER
 
-if GetLocale() == "enUS" then
-	HEADER = C.media.font.header
-else
+if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
 	HEADER = C.media.font.normal
+else
+	HEADER = C.media.font.header
 end
 
 _G.STANDARD_TEXT_FONT = NORMAL
 _G.UNIT_NAME_FONT = NORMAL
 _G.NAMEPLATE_FONT = NORMAL
 _G.DAMAGE_TEXT_FONT = CRIT
+
 
 -- Base fonts, everything inhierits from these fonts.
 -- FrameXML\Fonts.xml
@@ -128,6 +129,13 @@ SetFont("SystemFont_OutlineThick_WTF2",    NORMAL, 36)
 SetFont("GameTooltipHeader",               NORMAL, 14)
 
 
+SetFont("ZoneTextFont",                    HEADER, 40, nil, nil, {0, 0, 0}, 1, -1)
+SetFont("SubZoneTextFont",                 HEADER, 40, nil, nil, {0, 0, 0}, 1, -1)
+SetFont("WorldMapTextFont",                HEADER, 40, nil, nil, {0, 0, 0}, 1, -1)
+
+F.SetFS(UIErrorsFrame)
+
+
 if C.appearance.colorFont then
 	local yellowFonts = {
 		"GameFontNormal",
@@ -152,5 +160,3 @@ if C.appearance.colorFont then
 	end
 end
 
-
-F.SetFS(UIErrorsFrame)
