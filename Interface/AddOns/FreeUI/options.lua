@@ -106,7 +106,9 @@ C["actionbars"] = {
 }
 
 C["minimap"] = {
-	["position"] = { a1 = "TOPRIGHT", a2 = "TOPRIGHT", af = "UIParent", x = 0, y = 0 },
+	["scale"] = 1,
+	["position"] = { a1 = "TOPRIGHT", a2 = "TOPRIGHT", af = "UIParent", x = -22, y = 0 },
+	["size"] = 256,
 }
 
 C["bags"] = {
