@@ -20,6 +20,7 @@
 	<Script file="tweaks\menubar.lua"/>
 	<Script file="tweaks\MerchantitemLevel.lua"/>
 	<Script file="tweaks\micromenu.lua"/>
+	<Script file="tweaks\mirrorbars.lua"/>
 	<Script file="tweaks\moneytext.lua"/>
 	<Script file="tweaks\myMedia.lua"/>
 	<Script file="tweaks\ncShadow.lua"/>
