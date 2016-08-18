@@ -61,24 +61,25 @@ Minimap:SetScript('OnMouseWheel', function(self, arg1)
 end)
 
 -- hide specific stuff
-MinimapBackdrop:Hide()
-MinimapBorder:Hide()
-MinimapBorderTop:Hide()
-MinimapZoomIn:Hide()
-MinimapZoomOut:Hide()
-MiniMapVoiceChatFrame:Hide()
---GameTimeFrame:Hide()
-MinimapZoneTextButton:Hide()
-MiniMapTracking:Hide()
-MiniMapMailBorder:Hide()
---MinimapNorthTag:SetAlpha(0)
---MiniMapInstanceDifficulty:SetAlpha(0)
---GuildInstanceDifficulty:SetAlpha(0)
-Minimap:SetArchBlobRingScalar(0)
-Minimap:SetArchBlobRingAlpha(0)
-Minimap:SetQuestBlobRingScalar(0)
-Minimap:SetQuestBlobRingAlpha(0)
---GarrisonLandingPageMinimapButton:Hide()
+do
+	local frames = {
+		"MiniMapInstanceDifficulty",
+		"MiniMapVoiceChatFrame",
+		"MiniMapWorldMapButton",
+		"MiniMapMailBorder",
+		"MinimapBorderTop",
+		"MinimapNorthTag",
+		"MiniMapTracking",
+		"MinimapZoomOut",
+		"MinimapZoomIn",
+		"MinimapBorder",
+	}
+
+	for i = 1, #frames do
+		_G[frames[i]]:Hide()
+		_G[frames[i]].Show = F.dummy
+	end
+end
 
 -- garrison/orderhall
 GarrisonLandingPageMinimapButton:ClearAllPoints()
@@ -147,15 +148,41 @@ QueueStatusMinimapButtonBorder:SetTexture(nil)
 --QueueStatusMinimapButtonBorder:SetVertexColor(0, 0, 0, 1)
 
 -- mail
+-- MiniMapMailFrame:ClearAllPoints()
+-- MiniMapMailFrame:SetParent(Minimap)
+-- MiniMapMailFrame:SetFrameStrata'HIGH'
+-- MiniMapMailFrame:SetPoint('BOTTOM', Minimap, 0, 27)
+-- MiniMapMailIcon:ClearAllPoints()
+-- MiniMapMailIcon:SetTexCoord(.1, .9, .1, .9)
+-- MiniMapMailIcon:SetTexture([[Interface\AddOns\FreeUI\media\mail]])
+-- MiniMapMailIcon:SetPoint("TOPLEFT", MiniMapMailFrame, "TOPLEFT", 8, -8)
+-- MiniMapMailIcon:SetPoint("BOTTOMRIGHT", MiniMapMailFrame, "BOTTOMRIGHT", -8, 8)
+
+local mail = CreateFrame("Frame", "FreeUIMailFrame", Minimap)
+mail:Hide()
+mail:RegisterEvent("UPDATE_PENDING_MAIL")
+mail:SetScript("OnEvent", function(self)
+	if HasNewMail() then
+		self:Show()
+	else
+		self:Hide()
+	end
+end)
+
+MiniMapMailFrame:HookScript("OnMouseUp", function(self)
+	self:Hide()
+	mail:Hide()
+end)
+
+local mt = F.CreateFS(mail)
+mt:SetText("Mail")
+mt:SetTextColor(r, g, b)
+mt:SetPoint("BOTTOM", Minimap, 0, 36)
+
+MiniMapMailFrame:SetAlpha(0)
+MiniMapMailFrame:SetSize(22, 10)
 MiniMapMailFrame:ClearAllPoints()
-MiniMapMailFrame:SetParent(Minimap)
-MiniMapMailFrame:SetFrameStrata'HIGH'
-MiniMapMailFrame:SetPoint('BOTTOMRIGHT', Minimap, -5, 25)
-MiniMapMailIcon:ClearAllPoints()
-MiniMapMailIcon:SetTexCoord(.1, .9, .1, .9)
-MiniMapMailIcon:SetTexture([[Interface\AddOns\FreeUI\media\mail]])
-MiniMapMailIcon:SetPoint("TOPLEFT", MiniMapMailFrame, "TOPLEFT", 8, -8)
-MiniMapMailIcon:SetPoint("BOTTOMRIGHT", MiniMapMailFrame, "BOTTOMRIGHT", -8, 8)
+MiniMapMailFrame:SetPoint("CENTER", mt)
 
 -- durability
 --[[
@@ -256,13 +283,13 @@ GameTimeFrame:SetHighlightTexture("")
 
 local _, _, _, _, dateText = GameTimeFrame:GetRegions()
 F.SetFS(dateText)
-dateText:SetTextColor(80/255, 232/255, 255/255)
+dateText:SetTextColor(r, g, b)
 dateText:SetShadowOffset(0, 0)
 dateText:SetPoint("CENTER")
 
 QueueStatusMinimapButtonBorder:SetAlpha(0)
 QueueStatusMinimapButton:ClearAllPoints()
-QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, 0, 34)
+QueueStatusMinimapButton:SetPoint("BOTTOMRIGHT", Minimap, 0, 36)
 QueueStatusMinimapButton:SetHighlightTexture("")
 QueueStatusMinimapButton.Eye.texture:SetTexture("")
 
@@ -271,7 +298,7 @@ QueueStatusFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -4, 33)
 
 local dots = {}
 for i = 1, 8 do
-	dots[i] = F.CreateFS(QueueStatusMinimapButton, C.FONT_SIZE_LARGE)
+	dots[i] = F.CreateFS(QueueStatusMinimapButton, 18)
 	dots[i]:SetText(".")
 end
 dots[1]:SetPoint("TOP", 2, 2)
@@ -334,61 +361,61 @@ end)
 TicketStatusFrame:ClearAllPoints()
 TicketStatusFrame:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -49, 0)
 
--- local rd = CreateFrame("Frame", nil, Minimap)
--- rd:SetSize(24, 8)
--- rd:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 5, -37)
--- rd:RegisterEvent("PLAYER_ENTERING_WORLD")
--- rd:RegisterEvent("PLAYER_DIFFICULTY_CHANGED")
--- rd:RegisterEvent("GUILD_PARTY_STATE_UPDATED")
--- rd:RegisterEvent("INSTANCE_GROUP_SIZE_CHANGED")
+local rd = CreateFrame("Frame", nil, Minimap)
+rd:SetSize(24, 8)
+rd:SetPoint("TOPLEFT", Minimap, "TOPLEFT", 5, -37)
+rd:RegisterEvent("PLAYER_ENTERING_WORLD")
+rd:RegisterEvent("PLAYER_DIFFICULTY_CHANGED")
+rd:RegisterEvent("GUILD_PARTY_STATE_UPDATED")
+rd:RegisterEvent("INSTANCE_GROUP_SIZE_CHANGED")
 
--- local rdt = F.CreateFS(rd, C.FONT_SIZE_NORMAL, "LEFT")
--- rdt:SetPoint("TOPLEFT")
+local rdt = F.CreateFS(rd, C.FONT_SIZE_NORMAL, "LEFT")
+rdt:SetPoint("TOPLEFT")
 
--- local instanceTexts = {
--- 	[0] = "",
--- 	[1] = "5",
--- 	[2] = "5H",
--- 	[3] = "10",
--- 	[4] = "25",
--- 	[5] = "10H",
--- 	[6] = "25H",
--- 	[7] = "RF",
--- 	[8] = "CM",
--- 	[9] = "40",
--- 	[11] = "3H",
--- 	[12] = "3",
--- 	[16] = "M",
--- 	[23] = "5M",	-- Mythic 5-player
--- 	[24] = "5T",	-- Timewalker 5-player
--- }
+local instanceTexts = {
+	[0] = "",
+	[1] = "5",
+	[2] = "5H",
+	[3] = "10",
+	[4] = "25",
+	[5] = "10H",
+	[6] = "25H",
+	[7] = "RF",
+	[8] = "CM",
+	[9] = "40",
+	[11] = "3H",
+	[12] = "3",
+	[16] = "M",
+	[23] = "5M",	-- Mythic 5-player
+	[24] = "5T",	-- Timewalker 5-player
+}
 
--- rd:SetScript("OnEvent", function()
--- 	local inInstance, instanceType = IsInInstance()
--- 	local _, _, difficultyID, _, maxPlayers, _, _, _, instanceGroupSize = GetInstanceInfo()
+rd:SetScript("OnEvent", function()
+	local inInstance, instanceType = IsInInstance()
+	local _, _, difficultyID, _, maxPlayers, _, _, _, instanceGroupSize = GetInstanceInfo()
 
--- 	if instanceTexts[difficultyID] ~= nil then
--- 		rdt:SetText(instanceTexts[difficultyID])
--- 	else
--- 		if difficultyID == 14 then
--- 			rdt:SetText(instanceGroupSize.."N")
--- 		elseif difficultyID == 15 then
--- 			rdt:SetText(instanceGroupSize.."H")
--- 		elseif difficultyID == 17 then
--- 			rdt:SetText(instanceGroupSize.."RF")
--- 		else
--- 			rdt:SetText("")
--- 		end
--- 	end
+	if instanceTexts[difficultyID] ~= nil then
+		rdt:SetText(instanceTexts[difficultyID])
+	else
+		if difficultyID == 14 then
+			rdt:SetText(instanceGroupSize.."N")
+		elseif difficultyID == 15 then
+			rdt:SetText(instanceGroupSize.."H")
+		elseif difficultyID == 17 then
+			rdt:SetText(instanceGroupSize.."RF")
+		else
+			rdt:SetText("")
+		end
+	end
 
--- 	rd:SetShown(inInstance and (instanceType == "party" or instanceType == "raid" or instanceType == "scenario"))
+	rd:SetShown(inInstance and (instanceType == "party" or instanceType == "raid" or instanceType == "scenario"))
 
--- 	if GuildInstanceDifficulty:IsShown() then
--- 		rdt:SetTextColor(0, .9, 0)
--- 	else
--- 		rdt:SetTextColor(1, 1, 1)
--- 	end
--- end)
+	if GuildInstanceDifficulty:IsShown() then
+		rdt:SetTextColor(0, .9, 0)
+	else
+		rdt:SetTextColor(1, 1, 1)
+	end
+end)
 
 HelpOpenTicketButtonTutorial:Hide()
 HelpOpenTicketButtonTutorial.Show = F.dummy
