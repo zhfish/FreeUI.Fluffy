@@ -33,7 +33,7 @@ tinsert(C.themes["FreeUI"], function()
 
 	BorderFrame.CloseButton:SetPoint("TOPRIGHT", -9, -6)
 
-	WorldMapLevelDropDown:SetPoint("TOPLEFT", -14, 2)
+	WorldMapLevelDropDown:SetPoint("TOPLEFT", -9, 2)
 
 	-- [[ Size up / down buttons ]]
 

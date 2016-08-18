@@ -16,8 +16,8 @@ local settings = {
 		edgeSize = 3,
 		insets = { left = 3, right = 3, top = 3, bottom = 3 },
 	},
-	bgcolor = { r=0, g=0, b=0, t=.8 }, -- background
-	bdrcolor = { r=0, g=0, b=0, t=.8 }, -- border
+	bgcolor = { r=0, g=0, b=0, t=.65 }, -- background
+	bdrcolor = { r=0, g=0, b=0, t=.65 }, -- border
 	statusbar = C.media.texture,
 	sbHeight = 2,
 	factionIconSize = 30,
