@@ -323,7 +323,7 @@ local PostUpdateHealth = function(Health, unit, min, max)
 			self.Power.colorPower = true
 			self.Power.bg:SetVertexColor(0, 0, 0, .1)
 		else
-			self.Power:SetStatusBarColor(r, g, b)
+			self.Power:SetStatusBarColor(unpack(C.class))
 			self.Power.bg:SetVertexColor(r/2, g/2, b/2)
 		end
 
