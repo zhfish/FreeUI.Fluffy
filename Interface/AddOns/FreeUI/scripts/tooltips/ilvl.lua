@@ -81,7 +81,7 @@ local function getItems(guid, data, age)
 		local link = data.items[id]
 
 		if(link) then
-			local ilvl = ItemUpgradeInfo:GetUpgradedItemLevel(link)
+			local ilvl = ItemUpgradeInfo:GetUpgradedItemLevel(link) or 0
 
 			numItems = numItems + 1
 			itemsTotal = itemsTotal + ilvl

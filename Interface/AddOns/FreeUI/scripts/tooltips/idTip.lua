@@ -20,16 +20,17 @@ local function addLine(tooltip, id, type)
 	local found = false
 
 	-- Check if we already added to this tooltip. Happens on the talent frame
-	for i = 1,15 do
-		local frame = _G[tooltip:GetName() .. "TextLeft" .. i]
-		local text
-		if frame then text = frame:GetText() end
-		if text and text == type then found = true break end
-	end
+	for i = 1, 99 do 
+		local frame = _G[tooltip:GetName() .. "TextLeft" .. i] 
+		local text 
+		if frame then text = frame:GetText() end 
+		if not text then break end 
+		if strfind(text, type) then found = true break end 
+	end 
 
-	if not found then
-		tooltip:AddDoubleLine(type, "|cffffffff" .. id)
-		tooltip:Show()
+	if not found then 
+		tooltip:AddLine(type .. "|cffffffff" .. id) 
+		tooltip:Show() 
 	end
 end
 
