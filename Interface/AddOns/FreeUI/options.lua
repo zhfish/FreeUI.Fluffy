@@ -144,16 +144,15 @@ C["tooltip"] = {
 	["enable"] = true,		-- enable tooltip and modules
 	["cursor"] = false,		-- tooltip at mouse
 	["position"] = {"BOTTOMRIGHT", -25, 30},	-- tooltip position
-	["hideTitles"] = true,	-- hide player title
-	["hideRealm"] = false,	-- hide realm
-	["showRank"] = false,	-- show guild rank
-	["hideFaction"] = true,	-- hide faction
-	["hidePvP"] = true,		-- hide PVP status
-	["colorborderClass"] = false,	-- color border by class
-	["combathideALL"] = false,  -- hide tooltip while in combat
-	["hideHealthbar"] = false,	-- hide healthbar
---	["powerbar"] = false,		-- show mana / power bar
-	["ilvlspec"] = true,		-- show gear info and specialization on tooltip
+	["ilvlspec"] = false,		-- show gear info and specialization on tooltip
+	["sbHeight"] = 2,
+	["scale"] = 1,
+	["pBar"] = false,
+	["fadeOnUnit"] = false,
+	["combathide"] = false,
+	["combathideALL"] = false,
+	["showGRank"] = false,
+	["showRealm"] = true,
 }
 
 C["quests"] = {

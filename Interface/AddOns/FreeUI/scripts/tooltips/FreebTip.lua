@@ -4,10 +4,10 @@ if not C.tooltip.enable then return end
 
 local ADDON_NAME, ns = ...
 
-local settings = {
+local cfg = {
 	font = C.media.font.normal,
 	fontflag = "OUTLINE",
-	scale = 1,
+	scale = C.tooltip.scale,
 	backdrop = {
 		bgFile = "Interface\\Buttons\\WHITE8x8",
 		edgeFile = C.media.glow,
@@ -19,18 +19,20 @@ local settings = {
 	bgcolor = { r=0, g=0, b=0, t=.65 }, -- background
 	bdrcolor = { r=0, g=0, b=0, t=.65 }, -- border
 	statusbar = C.media.texture,
-	sbHeight = 2,
+	sbHeight = C.tooltip.sbHeight,
 	factionIconSize = 30,
 	factionIconAlpha = 0,
-	pBar = false,
-	fadeOnUnit = false,
-	combathide = false,
-	combathideALL = false,
-	showGRank = false,
+	pBar = C.tooltip.pBar,
+	fadeOnUnit = C.tooltip.fadeOnUnit,
+	combathide = C.tooltip.combathide,
+	combathideALL = C.tooltip.combathideALL,
+	showGRank = C.tooltip.showGRank,
 	guildText = "|cffE41F9B<%s>|r |cffA0A0A0%s|r",
 	showRealm = true,
 	realmText = " (*)",
 	YOU = "<YOU>",
+	cursor = C.tooltip.cursor,
+	point = C.tooltip.position,
 }
 
 if(freebDebug) then
@@ -41,12 +43,13 @@ else
 	ns.Debug = function() end
 end
 
-local cfg = setmetatable(ns.cfg_override,
-{__index = function(t, key)
-	t[key] = settings[key] or false
-	return t[key]
-end})
+-- local cfg = setmetatable(ns.cfg_override,
+-- {__index = function(t, key)
+-- 	t[key] = settings[key] or false
+-- 	return t[key]
+-- end})
 ns.cfg = cfg
+
 
 local _G = _G
 local RAID_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
@@ -713,3 +716,32 @@ hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self,...)
 	local _,_,_,_,_,_,_, caster,_,_, spellID = UnitDebuff(...)
 	addAuraInfo(self, caster, spellID)
 end)
+
+
+
+-- position
+do
+	local frame = CreateFrame"Frame"
+	frame:RegisterEvent"ADDON_LOADED"
+	frame:SetScript("OnEvent", function(self, event, addon)
+		if addon ~= ADDON_NAME then return end
+
+		hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
+			local frame = GetMouseFocus()
+			if ns.cfg.cursor and frame == WorldFrame then
+				tooltip:SetOwner(parent, "ANCHOR_CURSOR")
+			else
+				tooltip:ClearAllPoints()
+				tooltip:SetOwner(parent, "ANCHOR_NONE")
+				if ns.cfg.point then
+					local cfg = ns.cfg
+					tooltip:SetPoint(cfg.point[1], UIParent, cfg.point[1], cfg.point[2], cfg.point[3])
+				else
+					tooltip:SetPoint(anchorTo, _anchor, anchorTo)
+				end
+			end
+		end)
+	end)
+end
+
+

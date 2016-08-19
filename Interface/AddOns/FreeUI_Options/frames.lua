@@ -671,44 +671,25 @@ do
 	local hideTitles = ns.CreateCheckBox(tooltip, "hideTitles", true, true)
 	hideTitles:SetPoint("TOPLEFT", cursor, "BOTTOMLEFT", 0, -8)
 
-	local hideRealm = ns.CreateCheckBox(tooltip, "hideRealm", true, true)
-	hideRealm:SetPoint("TOPLEFT", hideTitles, "BOTTOMLEFT", 0, -8)
+	local showRealm = ns.CreateCheckBox(tooltip, "showRealm", true, true)
+	showRealm:SetPoint("TOPLEFT", hideTitles, "BOTTOMLEFT", 0, -8)
 
 	local showRank = ns.CreateCheckBox(tooltip, "showRank", true, true)
-	showRank:SetPoint("TOPLEFT", hideRealm, "BOTTOMLEFT", 0, -8)
-
-	local hidePvP = ns.CreateCheckBox(tooltip, "hidePvP", true, true)
-	hidePvP:SetPoint("TOPLEFT", showRank, "BOTTOMLEFT", 0, -8)
-
-	local hideFaction = ns.CreateCheckBox(tooltip, "hideFaction", true, true)
-	hideFaction:SetPoint("TOPLEFT", hidePvP, "BOTTOMLEFT", 0, -8)
-
-	local colorborderClass = ns.CreateCheckBox(tooltip, "colorborderClass", true, true)
-	colorborderClass:SetPoint("TOPLEFT", hideFaction, "BOTTOMLEFT", 0, -8)
+	showRank:SetPoint("TOPLEFT", showRealm, "BOTTOMLEFT", 0, -8)
 
 	local combathideALL = ns.CreateCheckBox(tooltip, "combathideALL", true, true)
-	combathideALL:SetPoint("TOPLEFT", colorborderClass, "BOTTOMLEFT", 0, -8)
-
-	local hideHealthbar = ns.CreateCheckBox(tooltip, "hideHealthbar", true, true)
-	hideHealthbar:SetPoint("TOPLEFT", combathideALL, "BOTTOMLEFT", 0, -8)
-
-	-- local powerbar = ns.CreateCheckBox(tooltip, "powerbar", true, true)
-	-- powerbar:SetPoint("TOPLEFT", hideHealthbar, "BOTTOMLEFT", 0, -8)
+	combathideALL:SetPoint("TOPLEFT", showRank, "BOTTOMLEFT", 0, -8)
 
 	local ilvlspec = ns.CreateCheckBox(tooltip, "ilvlspec", true, true)
-	ilvlspec:SetPoint("TOPLEFT", hideHealthbar, "BOTTOMLEFT", 0, -8)
+	ilvlspec:SetPoint("TOPLEFT", combathideALL, "BOTTOMLEFT", 0, -8)
 
 	local function toggleTooltipOptions()
 		local shown = enable:GetChecked()
 		cursor:SetShown(shown)
 		hideTitles:SetShown(shown)
-		hideRealm:SetShown(shown)
+		showRealm:SetShown(shown)
 		showRank:SetShown(shown)
-		hidePvP:SetShown(shown)
-		hideFaction:SetShown(shown)
 		combathideALL:SetShown(shown)
-		colorborderClass:SetShown(shown)
-		hideHealthbar:SetShown(shown)
 		ilvlspec:SetShown(shown)
 	end
 

@@ -6,14 +6,14 @@ local hooksecurefunc, select, UnitBuff, UnitDebuff, UnitAura, UnitGUID, GetGlyph
 	  hooksecurefunc, select, UnitBuff, UnitDebuff, UnitAura, UnitGUID, GetGlyphSocketInfo, tonumber, strfind
 
 local types = {
-	spell       = "SpellID:",
-	item        = "ItemID:",
-	unit        = "NPC ID:",
-	quest       = "QuestID:",
-	talent      = "TalentID:",
-	achievement = "AchievementID:",
-	ability     = "AbilityID:",
-	currency    = "CurrencyID:"
+	spell       = "SpellID: ",
+	item        = "ItemID: ",
+	unit        = "NPC ID: ",
+	quest       = "QuestID: ",
+	talent      = "TalentID: ",
+	achievement = "AchievementID: ",
+	ability     = "AbilityID: ",
+	currency    = "CurrencyID: "
 }
 
 local function addLine(tooltip, id, type)
