@@ -10,7 +10,7 @@ local BlocksFrame = ot.BlocksFrame
 
 -- [[ Positioning ]]
 local frame = CreateFrame("Frame", "ObjectiveTrackerAnchor", UIParent)
-frame:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", -10, 0)
+frame:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", 0, 0)
 frame:SetHeight(150)
 frame:SetWidth(224)
 
@@ -98,8 +98,8 @@ for _, headerName in pairs({"QuestHeader", "AchievementHeader", "ScenarioHeader"
 	local header = BlocksFrame[headerName]
 
 	header.Background:Hide()
---	F.SetFS(header.Text)
-	header.Text:SetFont(C.media.font.normal, 14, "OUTLINE")
+	F.SetFS(header.Text)
+--	header.Text:SetFont(C.media.font.normal, 14, "OUTLINE")
 --	header.Text:SetTextColor(r, g, b)
 end
 
@@ -107,24 +107,24 @@ do
 	local header = BONUS_OBJECTIVE_TRACKER_MODULE.Header
 
 	header.Background:Hide()
---	F.SetFS(header.Text)
-	header.Text:SetFont(C.media.font.normal, 14, "OUTLINE")
-	header.Text:SetTextColor(r, g, b)
+	F.SetFS(header.Text)
+--	header.Text:SetFont(C.media.font.normal, 14, "OUTLINE")
+--	header.Text:SetTextColor(r, g, b)
 end
 
 hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "SetBlockHeader", function(_, block)
 	if not block.headerStyled then
---		F.SetFS(block.HeaderText)
-		block.HeaderText:SetFont(C.media.font.normal, 14, "OUTLINE")
-		block.HeaderText:SetTextColor(r, g, b)
+		F.SetFS(block.HeaderText)
+--		block.HeaderText:SetFont(C.media.font.normal, 14, "OUTLINE")
+--		block.HeaderText:SetTextColor(r, g, b)
 		block.headerStyled = true
 	end
 end)
 
 hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", function(_, block)
 	if not block.headerStyled then
---		F.SetFS(block.HeaderText)
-		block.HeaderText:SetFont(C.media.font.normal, 14, "OUTLINE")
+		F.SetFS(block.HeaderText)
+--		block.HeaderText:SetFont(C.media.font.normal, 14, "OUTLINE")
 		block.headerStyled = true
 	end
 
@@ -182,8 +182,8 @@ hooksecurefunc("ObjectiveTracker_AddBlock", function(block)
 	if block.lines then
 		for _, line in pairs(block.lines) do
 			if not line.styled then
---				F.SetFS(line.Text)
-				line.Text:SetFont(C.media.font.normal, 12, "OUTLINE")
+				F.SetFS(line.Text)
+--				line.Text:SetFont(C.media.font.normal, 12, "OUTLINE")
 				line.Text:SetSpacing(2)
 
 				if line.Dash then
@@ -244,6 +244,8 @@ end)
 -- 	bar.newIconBg:SetShown(icon:IsShown())
 -- end)
 
+
+
 -- Objective Tracker
 F.ReskinExpandOrCollapse(_G.ObjectiveTrackerFrame.HeaderMenu.MinimizeButton)
 for _, headerName in next, {"QuestHeader", "AchievementHeader", "ScenarioHeader"} do
@@ -261,13 +263,15 @@ end
 --
 ScenarioStageBlock:HookScript("OnShow", function()
 	if not ScenarioStageBlock.skinned then
-		ScenarioStageBlock.NormalBG:SetAlpha(0)
-		ScenarioStageBlock.FinalBG:SetAlpha(0)
+		ScenarioStageBlock.NormalBG:SetAlpha(.6)
+	--	ScenarioStageBlock.NormalBG:SetTexture([[Interface\Tooltips\UI-Tooltip-Background]])
+	--	ScenarioStageBlock.NormalBG:SetVertexColor(0, 0, 0, 1)
+		ScenarioStageBlock.FinalBG:SetAlpha(.6)
 		ScenarioStageBlock.GlowTexture:SetTexture(nil)
-		ScenarioStageBlock.Stage:SetFont(C.media.font.normal, 18, "OUTLINE")
+		ScenarioStageBlock.Stage:SetFont(C.media.font.normal, 15, "OUTLINE")
 		ScenarioStageBlock.Stage:SetTextColor(1, 1, 1)
 		ScenarioStageBlock.Name:SetFont(C.media.font.normal, 12, "OUTLINE")
-		ScenarioStageBlock.CompleteLabel:SetFont(C.media.font.normal, 18, "OUTLINE")
+		ScenarioStageBlock.CompleteLabel:SetFont(C.media.font.normal, 15, "OUTLINE")
 		ScenarioStageBlock.CompleteLabel:SetTextColor(1, 1, 1)
 		ScenarioStageBlock.skinned = true
 	end

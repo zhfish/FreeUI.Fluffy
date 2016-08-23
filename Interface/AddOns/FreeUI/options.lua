@@ -19,21 +19,26 @@ C.media = {
 --	["font"]       = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 				-- default pixel font
 --	["font2"]      = "Fonts\\FRIZQT__.ttf", 										-- default font
 
-	["font"]       = {
-		["normal"] = "Fonts\\FRIZQT__.ttf",
-		["chat"]   = "Fonts\\FRIZQT__.ttf",
-		["pixel"]  = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf",
-		["header"] = "Interface\\AddOns\\FreeUI\\media\\ExocetBlizzardMedium.ttf",
-		["damage"] = "Interface\\AddOns\\FreeUI\\media\\PEPSI_pl.ttf",
+	["font"] = {
+		["normal"]          = "Fonts\\FRIZQT__.ttf",
+		["chat"]            = "Fonts\\FRIZQT__.ttf",
+		["unitname"]        = "Fonts\\FRIZQT__.ttf",
+		["pixelCN"]         = "Fonts\\FRIZQT__.ttf",
+		["pixel"]           = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf",
+		["pixel_condensed"] = "Interface\\AddOns\\FreeUI\\media\\pixel_condensed.ttf",
+		["header"]          = "Interface\\AddOns\\FreeUI\\media\\ExocetBlizzardMedium.ttf",
+		["damage"]          = "Interface\\AddOns\\FreeUI\\media\\PEPSI_pl.ttf",
 	},
 }
 
 if GetLocale() == "zhCN" then
 	C.media.font.normal = "Fonts\\ARKai_T.ttf"		-- 简体中文客户端主字体
 	C.media.font.chat = "Fonts\\ARKai_T.ttf"
+	C.media.font.pixelCN = "Fonts\\ARKai_T.ttf"
 elseif GetLocale() == "zhTW" then
 	C.media.font.normal = "Fonts\\blei00d.ttf"		-- 繁体中文客户端主字体
 	C.media.font.chat = "Fonts\\blei00d.ttf"
+	C.media.font.pixelCN = "Fonts\\blei00d.ttf"
 end
 
 --[[ Global config ]]

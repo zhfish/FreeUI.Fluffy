@@ -24,7 +24,7 @@ fonts = {
 
 local nameFont
 
-if name == "Nekretaal" or name == "Dostoyevsky" or name == "Maginary" then
+if name == "Nekretaal" or name == "Rhonesaia" or name == "Maginary" then
 	nameFont = fonts.pixel
 else
 	nameFont = fonts.standard

@@ -27,6 +27,8 @@ local CHAT   = C.media.font.chat
 -- Crit Font: replaces skurri.ttf
 local CRIT   = C.media.font.damage
 
+local UNITNAME   = C.media.font.unitname
+
 -- Header Font: replaces MORPHEUS.ttf
 local HEADER
 
@@ -37,7 +39,7 @@ else
 end
 
 _G.STANDARD_TEXT_FONT = NORMAL
-_G.UNIT_NAME_FONT = NORMAL
+_G.UNIT_NAME_FONT = UNITNAME
 _G.NAMEPLATE_FONT = NORMAL
 _G.DAMAGE_TEXT_FONT = CRIT
 
