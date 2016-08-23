@@ -32,13 +32,30 @@ local function UpdatePoints()
 	end
 end
 
+-- combo:RegisterEvent("PLAYER_TARGET_CHANGED")
+-- combo:RegisterEvent("UNIT_COMBO_POINTS")
+-- combo:RegisterEvent("UNIT_EXITED_VEHICLE")
+-- combo:SetScript("OnEvent", function(self, event, unit)
+-- 	if event == "PLAYER_TARGET_CHANGED" then
+-- 		UpdatePoints()
+-- 	elseif event == "UNIT_COMBO_POINTS" then
+-- 		if unit == "player" or unit == "vehicle" then
+-- 			UpdatePoints()
+-- 		end
+-- 	elseif event == "UNIT_EXITED_VEHICLE" then
+-- 		if unit == "player" then
+-- 			UpdatePoints()
+-- 		end
+-- 	end
+-- end)
+
 combo:RegisterEvent("PLAYER_TARGET_CHANGED")
-combo:RegisterEvent("UNIT_COMBO_POINTS")
+combo:RegisterEvent("UNIT_POWER")
 combo:RegisterEvent("UNIT_EXITED_VEHICLE")
 combo:SetScript("OnEvent", function(self, event, unit)
 	if event == "PLAYER_TARGET_CHANGED" then
 		UpdatePoints()
-	elseif event == "UNIT_COMBO_POINTS" then
+	elseif event == "UNIT_POWER" then
 		if unit == "player" or unit == "vehicle" then
 			UpdatePoints()
 		end
