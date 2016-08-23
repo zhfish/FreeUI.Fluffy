@@ -81,6 +81,11 @@ do
 	end
 end
 
+LoadAddOn'Blizzard_TimeManager'
+local region = TimeManagerClockButton:GetRegions()
+region:Hide()
+TimeManagerClockButton:Hide()
+
 -- garrison/orderhall
 GarrisonLandingPageMinimapButton:ClearAllPoints()
 GarrisonLandingPageMinimapButton:SetParent(Minimap)
