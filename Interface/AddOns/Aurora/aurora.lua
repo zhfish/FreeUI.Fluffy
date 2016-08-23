@@ -123,7 +123,7 @@ F.CreateBD = function(f, a)
 	})
 	f:SetBackdropColor(0, 0, 0, a or AuroraConfig.alpha)
 	f:SetBackdropBorderColor(0, 0, 0)
-	if not a then _G.tinsert(C.frames, f) end
+--	if not a then _G.tinsert(C.frames, f) end
 
 	if not a then
 		_G.tinsert(C.frames, f)
