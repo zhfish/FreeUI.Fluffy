@@ -4,5 +4,5 @@
 	<Script file="maps\minimap.lua"/>
 	<Script file="maps\rest.lua"/>
 	<Script file="maps\worldmarker.lua"/>
-	<!-- <Script file="maps\Foglight.lua"/> -->
+	<Script file="maps\Foglight.lua"/>
 </Ui>

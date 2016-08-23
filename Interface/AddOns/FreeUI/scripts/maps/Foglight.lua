@@ -1,4 +1,5 @@
 local F, C, L = unpack(select(2, ...))
+local _G = _G
 
 ------------------------
 -- Adjustable settings
@@ -21,10 +22,11 @@ local showTerrain = false
 
 local moads = {'Hybrid', 'Disabled', 'All Terrain', 'No Terrain'}
 local menu = CreateFrame('frame', 'foglightmenu', WorldMapFrame.UIElementsFrame, 'UIDropDownMenuTemplate')
-menu:SetPoint('TOPLEFT', -9, 6)
+menu:SetPoint('BOTTOM', 0, -6)
 --menu:SetFrameLevel(WORLDMAP_POI_FRAMELEVEL + 2)
+menu:SetAlpha(0)
+
 F.ReskinDropDown(menu)
-menu:SetAlpha(0.8)
 
 local function setMode(mode)
 	if not moads[mode] then mode = 1 end
@@ -335,8 +337,8 @@ local function update_overlays()
 	
 	-- Draw terrain map
 	--local _, _, _, isMicroDungeon = GetMapInfo()
-	--if info and not isMicroDungeon then
-	if not (select(2, GetCurrentMapAreaID())) then
+	if info and not isMicroDungeon then
+	--if not (select(2, GetCurrentMapAreaID())) then
 		menu:Show()
 		local terrainMapID = GetAreaMapInfo(areaID) or -1
 		local _, TLx, TLy, BRx, BRy = GetCurrentMapZone()
