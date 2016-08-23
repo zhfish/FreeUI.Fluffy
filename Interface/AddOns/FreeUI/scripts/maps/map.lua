@@ -1,4 +1,5 @@
 local F, C, L = unpack(select(2, ...))
+local _G = _G
 
 -- twice is enough
 WorldMapPing.Ping:SetScript("OnLoop", function(self, loopState)
@@ -8,19 +9,30 @@ WorldMapPing.Ping:SetScript("OnLoop", function(self, loopState)
 	end
 end)
 
+--	Floors scroll
+WorldMapButton:SetScript("OnMouseWheel", function(self, delta)
+	if IsModifierKeyDown() then
+		local level = GetCurrentMapDungeonLevel() - delta
+		if level >= 1 then
+			SetDungeonMapLevel(level)
+			PlaySound("UChatScrollButton")
+		end
+	else
+		WorldMapScrollFrame_OnMouseWheel(self, delta)
+	end
+end)
+
 -- don't need this
 WorldMapPlayerUpper:EnableMouse(false)
 WorldMapPlayerLower:EnableMouse(false)
 
 -- map bar
 
-local fontsize = C.appearance.fontSizeNormal / WORLDMAP_WINDOWED_SIZE
-
-
-F.SetFS(MapBarFrame.Description)
-MapBarFrame.Description:SetShadowOffset(0, 0)
-F.SetFS(MapBarFrame.Title)
-MapBarFrame.Title:SetShadowOffset(0, 0)
+-- local fontsize = C.appearance.fontSizeNormal / WORLDMAP_WINDOWED_SIZE
+-- F.SetFS(MapBarFrame.Description)
+-- MapBarFrame.Description:SetShadowOffset(0, 0)
+-- F.SetFS(MapBarFrame.Title)
+-- MapBarFrame.Title:SetShadowOffset(0, 0)
 
 -- keep it centered
 
@@ -74,3 +86,5 @@ WorldMapDetailFrame:HookScript("OnUpdate", function(self, elapsed)
 		last = 0
 	end
 end)
+
+
