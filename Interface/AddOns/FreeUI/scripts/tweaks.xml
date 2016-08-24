@@ -9,7 +9,7 @@
 	<Script file="tweaks\disable.lua"/>
 	<Script file="tweaks\DragEmAll.lua"/>
 	<Script file="tweaks\durability.lua"/>
-	<!-- <Script file="tweaks\errors.lua"/> -->
+	<Script file="tweaks\errors.lua"/>
 	<Script file="tweaks\expbar.lua"/>
 	<Script file="tweaks\fonts.lua"/>
 	<Script file="tweaks\globals.lua"/>
