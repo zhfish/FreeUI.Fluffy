@@ -190,7 +190,7 @@ F.CreatePulse = function(frame) -- pulse function originally by nightcracker
 end
 
 local r, g, b = unpack(C.class)
-local buttonR, buttonG, buttonB, buttonA = .06, .06, .06, .8
+local buttonR, buttonG, buttonB, buttonA = .1, .1, .1, 1
 
 local CreateGradient = function(f)
 	local tex = f:CreateTexture(nil, "BORDER")
@@ -749,31 +749,25 @@ F.ReskinNavBar = function(f)
 end
 
 F.ReskinGarrisonPortrait = function(portrait)
-	local level = portrait.Level
-	local cover = portrait.PortraitRingCover
+	portrait:SetSize(portrait.Portrait:GetSize())
+	F.CreateBD(portrait, 1)
+
+	portrait.Portrait:ClearAllPoints()
+	portrait.Portrait:SetPoint("TOPLEFT")
 
 	portrait.PortraitRing:Hide()
 	portrait.PortraitRingQuality:SetTexture("")
+	portrait.PortraitRingCover:SetTexture("")
+ 	portrait.LevelBorder:SetAlpha(0)
 
-	portrait.LevelBorder:SetColorTexture(0, 0, 0, .5)
-	portrait.LevelBorder:SetSize(44, 11)
-	portrait.LevelBorder:ClearAllPoints()
-	portrait.LevelBorder:SetPoint("BOTTOM", 0, 12)
+	local lvlBG = portrait:CreateTexture(nil, "BORDER")
+ 	lvlBG:SetColorTexture(0, 0, 0, 0.5)
+ 	lvlBG:SetPoint("TOPLEFT", portrait, "BOTTOMLEFT", 1, 12)
+ 	lvlBG:SetPoint("BOTTOMRIGHT", portrait, -1, 1)
 
+ 	local level = portrait.Level
 	level:ClearAllPoints()
-	level:SetPoint("BOTTOM", portrait, 0, 12)
-
-	local squareBG = CreateFrame("Frame", nil, portrait)
-	squareBG:SetFrameLevel(portrait:GetFrameLevel()-1)
-	squareBG:SetPoint("TOPLEFT", 3, -3)
-	squareBG:SetPoint("BOTTOMRIGHT", -3, 11)
-	F.CreateBD(squareBG, 1)
-	portrait.squareBG = squareBG
-
-	if cover then
-		cover:SetColorTexture(0, 0, 0)
-		cover:SetAllPoints(squareBG)
-	end
+	level:SetPoint("CENTER", lvlBG)
 end
 
 F.ReskinIcon = function(icon)
