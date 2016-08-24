@@ -3,7 +3,8 @@
 	<Script file="tooltips\FreebTip.lua"/>
 	<Script file="tooltips\multiItem.lua"/>
 	<Script file="tooltips\IDCard.lua"/>
-	<Script file="tooltips\ilvl.lua"/>
-	<Script file="tooltips\spec.lua"/>
+	<!-- <Script file="tooltips\ilvl.lua"/>
+	<Script file="tooltips\spec.lua"/> -->
+	<Script file="tooltips\ilvlspec.lua"/>
 	<Script file="tooltips\idTip.lua"/>
 </Ui>
