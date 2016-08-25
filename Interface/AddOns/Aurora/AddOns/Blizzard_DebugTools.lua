@@ -13,6 +13,7 @@ C.themes["Blizzard_DebugTools"] = function()
 	_G.ScriptErrorsFrameTitleBG:Hide()
 	_G.ScriptErrorsFrameDialogBG:Hide()
 	F.CreateBD(_G.ScriptErrorsFrame)
+	F.CreateSD(_G.ScriptErrorsFrame)
 
 	_G.FrameStackTooltip:SetScale(_G.UIParent:GetScale())
 	_G.FrameStackTooltip:SetBackdrop(nil)

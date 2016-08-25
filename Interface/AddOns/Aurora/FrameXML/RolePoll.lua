@@ -9,6 +9,7 @@ local F, C = _G.unpack(private.Aurora)
 
 _G.tinsert(C.themes["Aurora"], function()
 	F.CreateBD(_G.RolePollPopup)
+	F.CreateSD(_G.RolePollPopup)
 	F.Reskin(_G.RolePollPopupAcceptButton)
 	F.ReskinClose(_G.RolePollPopupCloseButton)
 

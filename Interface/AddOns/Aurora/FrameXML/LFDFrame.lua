@@ -34,6 +34,7 @@ _G.tinsert(C.themes["Aurora"], function()
 	end)
 
 	F.CreateBD(_G.LFDRoleCheckPopup)
+	F.CreateSD(_G.LFDRoleCheckPopup)
 	F.Reskin(_G.LFDRoleCheckPopupAcceptButton)
 	F.Reskin(_G.LFDRoleCheckPopupDeclineButton)
 	F.Reskin(_G.LFDQueueFrameRandomScrollFrameChildFrame.bonusRepFrame.ChooseButton)

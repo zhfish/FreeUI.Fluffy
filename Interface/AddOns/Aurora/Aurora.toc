@@ -6,7 +6,7 @@
 ## SavedVariables: AuroraConfig
 
 aurora.lua
-gui.lua
+#gui.lua
 
 AddOns\Blizzard_AchievementUI.lua
 AddOns\Blizzard_ArchaeologyUI.lua

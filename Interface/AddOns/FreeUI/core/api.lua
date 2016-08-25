@@ -190,7 +190,7 @@ F.CreatePulse = function(frame) -- pulse function originally by nightcracker
 end
 
 local r, g, b = unpack(C.class)
-local buttonR, buttonG, buttonB, buttonA = .1, .1, .1, 1
+local buttonR, buttonG, buttonB, buttonA = .1, .1, .1, .8
 
 local CreateGradient = function(f)
 	local tex = f:CreateTexture(nil, "BORDER")

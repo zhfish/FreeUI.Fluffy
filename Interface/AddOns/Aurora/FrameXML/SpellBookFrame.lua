@@ -90,6 +90,7 @@ _G.tinsert(C.themes["Aurora"], function()
 				tab:SetCheckedTexture(C.media.checked)
 
 				F.CreateBG(tab)
+				F.CreateSD(tab)
 
 				local nt = tab:GetNormalTexture()
 				if nt then

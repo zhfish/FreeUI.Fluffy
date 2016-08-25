@@ -14,6 +14,7 @@ C.themes["Blizzard_GuildControlUI"] = function()
 	local r, g, b = C.r, C.g, C.b
 
 	F.CreateBD(_G.GuildControlUI)
+	F.CreateSD(_G.GuildControlUI)
 
 	for i = 1, 9 do
 		select(i, _G.GuildControlUI:GetRegions()):Hide()

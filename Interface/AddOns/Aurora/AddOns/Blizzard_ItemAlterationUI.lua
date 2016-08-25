@@ -100,6 +100,7 @@ C.themes["Blizzard_ItemAlterationUI"] = function()
 	end)
 
 	F.CreateBD(_G.TransmogrifyConfirmationPopup)
+	F.CreateSD(_G.TransmogrifyConfirmationPopup)
 	F.Reskin(_G.TransmogrifyConfirmationPopup.Button1)
 	F.Reskin(_G.TransmogrifyConfirmationPopup.Button2)
 

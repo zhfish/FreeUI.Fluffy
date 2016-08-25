@@ -121,7 +121,7 @@ F.CreateBD = function(f, a)
 		edgeFile = C.media.backdrop,
 		edgeSize = 1,
 	})
-	f:SetBackdropColor(0, 0, 0, a or AuroraConfig.alpha)
+	f:SetBackdropColor(0, 0, 0, a or .65)
 	f:SetBackdropBorderColor(0, 0, 0)
 --	if not a then _G.tinsert(C.frames, f) end
 
@@ -130,7 +130,7 @@ F.CreateBD = function(f, a)
 
 		f.tex = f.tex or f:CreateTexture(nil, "BACKGROUND", nil, 1)
 		f.tex:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true, true)
-		f.tex:SetAlpha(.8)
+		f.tex:SetAlpha(.7)
 		f.tex:SetAllPoints()
 		f.tex:SetHorizTile(true)
 		f.tex:SetVertTile(true)
@@ -200,7 +200,7 @@ F.CreateGradient = function(f)
 	tex:SetPoint("TOPLEFT", 1, -1)
 	tex:SetPoint("BOTTOMRIGHT", -1, 1)
 	tex:SetTexture(useButtonGradientColour and C.media.gradient or C.media.backdrop)
-	tex:SetVertexColor(buttonR, buttonG, buttonB, buttonA)
+	tex:SetVertexColor(.1, .1, .1, .8)
 
 	return tex
 end
@@ -672,6 +672,7 @@ F.SetBD = function(f, x, y, x2, y2)
 	end
 	bg:SetFrameLevel(f:GetFrameLevel()-1)
 	F.CreateBD(bg)
+	F.CreateSD(bg)
 end
 
 F.ReskinPortraitFrame = function(f, isButtonFrame)
@@ -704,6 +705,7 @@ F.ReskinPortraitFrame = function(f, isButtonFrame)
 	end
 
 	F.CreateBD(f)
+	F.CreateSD(f)
 end
 
 F.CreateBDFrame = function(f, a)
@@ -1037,6 +1039,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		for i = 1, #FrameBDs do
 			local FrameBD = _G[FrameBDs[i]]
 			F.CreateBD(FrameBD)
+			F.CreateSD(FrameBD)
 		end
 
 		-- Dropdown lists
@@ -1630,6 +1633,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		-- Battletag invite frame
 
 		F.CreateBD(_G.BattleTagInviteFrame)
+		F.CreateSD(_G.BattleTagInviteFrame)
 
 		local send, cancel = _G.BattleTagInviteFrame:GetChildren()
 		F.Reskin(send)
@@ -1964,6 +1968,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		end)
 
 		F.CreateBD(_G.CinematicFrameCloseDialog)
+		F.CreateSD(_G.CinematicFrameCloseDialog)
 		F.Reskin(_G.CinematicFrameCloseDialogConfirmButton)
 		F.Reskin(_G.CinematicFrameCloseDialogResumeButton)
 
@@ -2154,6 +2159,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		end)
 
 		F.CreateBD(MovieFrame.CloseDialog)
+		F.CreateSD(MovieFrame.CloseDialog)
 		F.Reskin(MovieFrame.CloseDialog.ConfirmButton)
 		F.Reskin(MovieFrame.CloseDialog.ResumeButton)
 
@@ -2161,6 +2167,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		local PetBattleQueueReadyFrame = _G.PetBattleQueueReadyFrame
 		F.CreateBD(PetBattleQueueReadyFrame)
+		F.CreateSD(PetBattleQueueReadyFrame)
 		F.CreateBG(PetBattleQueueReadyFrame.Art)
 		F.Reskin(PetBattleQueueReadyFrame.AcceptButton)
 		F.Reskin(PetBattleQueueReadyFrame.DeclineButton)
@@ -2205,6 +2212,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		end
 
 		F.CreateBD(PVPReadyDialog)
+		F.CreateSD(PVPReadyDialog)
 		PVPReadyDialog.SetBackdrop = F.dummy
 
 		F.Reskin(PVPReadyDialog.enterButton)

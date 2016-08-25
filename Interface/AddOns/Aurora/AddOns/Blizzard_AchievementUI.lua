@@ -14,6 +14,7 @@ C.themes["Blizzard_AchievementUI"] = function()
 	local r, g, b = C.r, C.g, C.b
 
 	F.CreateBD(_G.AchievementFrame)
+	F.CreateSD(_G.AchievementFrame)
 	_G.AchievementFrameCategories:SetBackdrop(nil)
 	_G.AchievementFrameSummary:SetBackdrop(nil)
 	for i = 1, 17 do

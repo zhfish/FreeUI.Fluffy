@@ -161,9 +161,12 @@ _G.tinsert(C.themes["Aurora"], function()
 	end)
 
 	F.CreateBD(_G.LFGDungeonReadyDialog)
+	F.CreateSD(_G.LFGDungeonReadyDialog)
 	_G.LFGDungeonReadyDialog.SetBackdrop = F.dummy
 	F.CreateBD(_G.LFGInvitePopup)
+	F.CreateSD(_G.LFGInvitePopup)
 	F.CreateBD(_G.LFGDungeonReadyStatus)
+	F.CreateSD(_G.LFGDungeonReadyStatus)
 
 	F.Reskin(_G.LFGDungeonReadyDialogEnterDungeonButton)
 	F.Reskin(_G.LFGDungeonReadyDialogLeaveQueueButton)
