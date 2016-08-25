@@ -5,4 +5,7 @@
 	<Script file="chat\chattabs.lua"/>
 	<Script file="chat\SpamageMeters.lua"/>
 	<Script file="chat\WhisperSound.lua"/>
+	<Script file="chat\ChatFilter\localization.lua"/>
+	<Script file="chat\ChatFilter\config.lua"/>
+	<Script file="chat\ChatFilter\core.lua"/>
 </Ui>
