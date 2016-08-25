@@ -2,7 +2,7 @@ local F, C, L = unpack(select(2, ...))
 local _G = _G
 local next, type = _G.next, _G.type
 local playername, _ = UnitName('player')
-local r, g, b = unpack(C.class)
+local r, g, b = C.appearance.colorFontrgb.r, C.appearance.colorFontrgb.g, C.appearance.colorFontrgb.b
 local locale = GetLocale()
 local font
 

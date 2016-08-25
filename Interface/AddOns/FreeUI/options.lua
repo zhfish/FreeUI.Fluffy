@@ -73,6 +73,7 @@ C["appearance"] = {
 	["fontShadow"] = false,
 
 	["colorFont"] = true,
+	["colorFontrgb"] = {r = 247/255, g = 225/255, b =171/255},
 }
 
 C["automation"] = {
