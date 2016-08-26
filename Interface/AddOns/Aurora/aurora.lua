@@ -133,7 +133,7 @@ F.CreateBD = function(f, a)
 		_G.tinsert(C.frames, f)
 
 		f.tex = f.tex or f:CreateTexture(nil, "BACKGROUND", nil, 1)
-		f.tex:SetTexture([[Interface\AddOns\FreeUI\media\StripesThin]], true, true)
+		f.tex:SetTexture([[Interface\AddOns\Aurora\media\StripesThin]], true, true)
 		f.tex:SetAlpha(.7)
 		f.tex:SetAllPoints()
 		f.tex:SetHorizTile(true)
