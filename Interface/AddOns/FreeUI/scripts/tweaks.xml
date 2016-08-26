@@ -1,6 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 	<Script file="tweaks\AlreadyKnown.lua"/>
+	<Script file="tweaks\archaeologybar.lua"/>
 	<Script file="tweaks\bags.lua"/>
 	<Script file="tweaks\BGSpamFix.lua"/>
 	<Script file="tweaks\BgSpecIcon.lua"/>
