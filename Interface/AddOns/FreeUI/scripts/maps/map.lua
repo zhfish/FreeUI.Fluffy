@@ -1,38 +1,81 @@
 local F, C, L = unpack(select(2, ...))
 local _G = _G
 
--- twice is enough
-WorldMapPing.Ping:SetScript("OnLoop", function(self, loopState)
-	self.loopCount = self.loopCount + 1
-	if self.loopCount >= 2 then
-		self:Stop()
-	end
-end)
+local function skin()
+	--print("Map:Skin")
+	_G.WorldMapPlayerUpper:EnableMouse(false)
+	_G.WorldMapPlayerLower:EnableMouse(false)
 
---	Floors scroll
-WorldMapButton:SetScript("OnMouseWheel", function(self, delta)
-	if IsModifierKeyDown() then
-		local level = GetCurrentMapDungeonLevel() - delta
-		if level >= 1 then
-			SetDungeonMapLevel(level)
-			PlaySound("UChatScrollButton")
+	if not _G.WorldMapFrame.skinned then
+		_G.WorldMapFrame:SetUserPlaced(true)
+		local trackingBtn = _G.WorldMapFrame.UIElementsFrame.TrackingOptionsButton
+
+		--Buttons
+		_G.WorldMapLevelDropDown:ClearAllPoints()
+		_G.WorldMapLevelDropDown:SetPoint("TOPLEFT", _G.WorldMapFrame.UIElementsFrame, -15, 3)
+		trackingBtn:ClearAllPoints()
+		trackingBtn:SetPoint("TOPRIGHT", _G.WorldMapFrame.UIElementsFrame, 3, 3)
+
+		--Foglight
+		if _G.foglightmenu and _G.Aurora then
+			_G.foglightmenu:ClearAllPoints()
+			_G.foglightmenu:SetPoint("TOPRIGHT", trackingBtn, "TOPLEFT", 20, 0)
+			F.ReskinDropDown(_G.foglightmenu)
 		end
-	else
-		WorldMapScrollFrame_OnMouseWheel(self, delta)
+		_G.WorldMapFrame.skinned = true
+	end
+end
+
+
+
+-- Size Adjust --
+local function SetLargeWorldMap()
+	--print("SetLargeWorldMap")
+	if _G.InCombatLockdown() then return end
+
+	-- reparent
+	_G.WorldMapFrame:SetParent(_G.UIParent)
+	_G.WorldMapFrame:SetFrameStrata("HIGH")
+	_G.WorldMapFrame:EnableKeyboard(true)
+
+	--reposition
+	_G.WorldMapFrame:ClearAllPoints()
+	_G.WorldMapFrame:SetPoint("CENTER", 0, 0)
+	_G.SetUIPanelAttribute(_G.WorldMapFrame, "area", "center")
+	_G.SetUIPanelAttribute(_G.WorldMapFrame, "allowOtherPanels", true)
+	_G.WorldMapFrame:SetSize(1022, 766)
+end
+
+local function SetQuestWorldMap()
+	if _G.InCombatLockdown() or not _G.IsAddOnLoaded("Aurora") then return end
+
+	_G.WorldMapFrameNavBar:SetPoint("TOPLEFT", _G.WorldMapFrame.BorderFrame, 3, -33)
+	_G.WorldMapFrameNavBar:SetWidth(700)
+end
+
+if _G.InCombatLockdown() then return end
+
+_G.BlackoutWorld:SetTexture(nil)
+
+_G.QuestMapFrame_Hide()
+if _G.GetCVar("questLogOpen") == 1 then
+	_G.QuestMapFrame_Show()
+end
+
+_G.hooksecurefunc("WorldMap_ToggleSizeUp", SetLargeWorldMap)
+_G.hooksecurefunc("WorldMap_ToggleSizeDown", SetQuestWorldMap)
+
+if _G.WORLDMAP_SETTINGS.size == _G.WORLDMAP_FULLMAP_SIZE then
+	_G.WorldMap_ToggleSizeUp()
+elseif _G.WORLDMAP_SETTINGS.size == _G.WORLDMAP_WINDOWED_SIZE then
+	_G.WorldMap_ToggleSizeDown()
+end
+
+_G.DropDownList1:HookScript("OnShow", function(self)
+	if _G.DropDownList1:GetScale() ~= _G.UIParent:GetScale() then
+		_G.DropDownList1:SetScale(_G.UIParent:GetScale())
 	end
 end)
-
--- don't need this
-WorldMapPlayerUpper:EnableMouse(false)
-WorldMapPlayerLower:EnableMouse(false)
-
--- map bar
-
--- local fontsize = C.appearance.fontSizeNormal / WORLDMAP_WINDOWED_SIZE
--- F.SetFS(MapBarFrame.Description)
--- MapBarFrame.Description:SetShadowOffset(0, 0)
--- F.SetFS(MapBarFrame.Title)
--- MapBarFrame.Title:SetShadowOffset(0, 0)
 
 -- keep it centered
 
