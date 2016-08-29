@@ -8,6 +8,8 @@ local button = CreateFrame("Button", "aMailButton", InboxFrame, "UIPanelButtonTe
 button:SetPoint("BOTTOM", InboxFrame, "BOTTOM", -10, 92)
 button:SetWidth(128)
 button:SetHeight(25)
+F.Reskin(button)
+
 
 local text = F.CreateFS(button)
 text:SetPoint("CENTER")
