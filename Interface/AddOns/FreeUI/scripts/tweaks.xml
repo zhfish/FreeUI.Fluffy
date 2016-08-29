@@ -5,12 +5,11 @@
 	<Script file="tweaks\bags.lua"/>
 	<Script file="tweaks\BGSpamFix.lua"/>
 	<Script file="tweaks\BgSpecIcon.lua"/>
-	<Script file="tweaks\CloudyTradeSkill.lua"/>
 	<Script file="tweaks\ColorPicker.lua"/>
 	<Script file="tweaks\colours.lua"/>
 	<Script file="tweaks\disable.lua"/>
 	<Script file="tweaks\DragEmAll.lua"/>
-	<Script file="tweaks\durability.lua"/>
+	<!-- <Script file="tweaks\durability.lua"/> -->
 	<Script file="tweaks\errors.lua"/>
 	<Script file="tweaks\expbar.lua"/>
 	<Script file="tweaks\fonts.lua"/>
@@ -27,6 +26,7 @@
 	<Script file="tweaks\myMedia.lua"/>
 	<Script file="tweaks\ncShadow.lua"/>
 	<Script file="tweaks\NoAsiaFonts.lua"/>
+	<Script file="tweaks\PaperDollFrame.lua"/>
 	<Script file="tweaks\petbattles.lua"/>
 	<Script file="tweaks\queuetimer.lua"/>
 	<Script file="tweaks\role.lua"/>
