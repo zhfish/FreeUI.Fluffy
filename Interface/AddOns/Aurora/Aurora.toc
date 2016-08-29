@@ -2,7 +2,7 @@
 ## Title: Aurora
 ## Notes: Minimalistic window theme.
 ## Author: Haleth/Lightsword
-## Version: 7.0.3
+## Version: 7.0.6
 ## SavedVariables: AuroraConfig
 
 aurora.lua
@@ -21,6 +21,7 @@ AddOns\Blizzard_Collections.lua
 AddOns\Blizzard_DeathRecap.lua
 AddOns\Blizzard_DebugTools.lua
 AddOns\Blizzard_EncounterJournal.lua
+AddOns\Blizzard_GarrisonTemplates.lua
 AddOns\Blizzard_GarrisonUI.lua
 AddOns\Blizzard_GMSurveyUI.lua
 AddOns\Blizzard_GuildBankUI.lua

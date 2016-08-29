@@ -16,6 +16,36 @@ local LATEST_API_VERSION = "6.0"
 -- see F.AddPlugin
 local AURORA_LOADED = false
 local AuroraConfig
+
+_G.AuroraConfig = {
+	["customColour"] = {
+		["r"] = 0,
+		["g"] = .5,
+		["b"] = 1,
+	},
+	["chatBubbles"] = false,
+	["acknowledgedSplashScreen"] = false,
+	["tooltips"] = false,
+	["bags"] = false,
+	["buttonGradientColour"] = {
+		0.3, -- [1]
+		0.3, -- [2]
+		0.3, -- [3]
+		0.3, -- [4]
+	},
+	["loot"] = false,
+	["buttonSolidColour"] = {
+		0.1, -- [1]
+		0.1, -- [2]
+		0.1, -- [3]
+		1, -- [4]
+	},
+	["useCustomColour"] = false,
+	["enableFont"] = false,
+	["useButtonGradientColour"] = false,
+	["alpha"] = 0.6,
+}
+
 _G.Aurora = {
 	{}, -- F, functions
 	{}, -- C, constants/config
@@ -553,7 +583,7 @@ F.ReskinArrow = function(f, direction)
 	f:HookScript("OnLeave", clearArrow)
 end
 
-F.ReskinCheck = function(f)
+F.ReskinCheck = function(f, isTriState)
 	f:SetNormalTexture("")
 	f:SetPushedTexture("")
 	f:SetHighlightTexture(C.media.backdrop)
@@ -575,6 +605,25 @@ F.ReskinCheck = function(f)
 	local ch = f:GetCheckedTexture()
 	ch:SetDesaturated(true)
 	ch:SetVertexColor(red, green, blue)
+
+	if isTriState then
+ 		function f:SetTriState(state)
+ 			if ( not state or state == 0 ) then
+ 				-- nil or 0 means not checked
+ 				self:SetChecked(false)
+ 			else
+ 				ch:SetDesaturated(true)
+ 				self:SetChecked(true)
+ 				if ( state == 2 ) then
+ 					-- 2 is a normal check
+ 					ch:SetVertexColor(red, green, blue)
+ 				else
+ 					-- 1 is a dark check
+ 					ch:SetVertexColor(red * 0.5, green * 0.5, blue * 0.5)
+ 				end
+ 			end
+ 		end
+ 	end
 end
 
 local function colourRadio(f)
@@ -788,7 +837,7 @@ F.ReskinNavBar = function(f)
 	overflowButton:HookScript("OnLeave", clearArrow)
 end
 
-F.ReskinGarrisonPortrait = function(portrait)
+F.ReskinGarrisonPortrait = function(portrait, isTroop)
 	portrait:SetSize(portrait.Portrait:GetSize())
 	F.CreateBD(portrait, 1)
 
@@ -800,14 +849,16 @@ F.ReskinGarrisonPortrait = function(portrait)
 	portrait.PortraitRingCover:SetTexture("")
 	portrait.LevelBorder:SetAlpha(0)
 
-	local lvlBG = portrait:CreateTexture(nil, "BORDER")
-	lvlBG:SetColorTexture(0, 0, 0, 0.5)
-	lvlBG:SetPoint("TOPLEFT", portrait, "BOTTOMLEFT", 1, 12)
-	lvlBG:SetPoint("BOTTOMRIGHT", portrait, -1, 1)
+	if not isTroop then
+ 		local lvlBG = portrait:CreateTexture(nil, "BORDER")
+ 		lvlBG:SetColorTexture(0, 0, 0, 0.5)
+ 		lvlBG:SetPoint("TOPLEFT", portrait, "BOTTOMLEFT", 1, 12)
+ 		lvlBG:SetPoint("BOTTOMRIGHT", portrait, -1, 1)
 
-	local level = portrait.Level
-	level:ClearAllPoints()
-	level:SetPoint("CENTER", lvlBG)
+		local level = portrait.Level
+ 		level:ClearAllPoints()
+ 		level:SetPoint("CENTER", lvlBG)
+ 	end
 end
 
 F.ReskinIcon = function(icon)
@@ -837,7 +888,8 @@ Skin:RegisterEvent("ADDON_LOADED")
 Skin:SetScript("OnEvent", function(self, event, addon)
 	if addon == ADDON_NAME then
 		-- [[ Load Variables ]]
-		AuroraConfig = _G.AuroraConfig or {}
+		_G.AuroraConfig = _G.AuroraConfig or {}
+ 		AuroraConfig = _G.AuroraConfig
 
 		-- remove deprecated or corrupt variables
 		for key, value in pairs(AuroraConfig) do
@@ -876,7 +928,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		-- [[ Custom style support ]]
 
-		local shouldSkipSplashScreen = false
+		local shouldSkipSplashScreen = true
 
 		local customStyle = _G.AURORA_CUSTOM_STYLE
 
@@ -921,7 +973,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		if not AuroraConfig.acknowledgedSplashScreen then
 			if shouldSkipSplashScreen then
-				AuroraConfig.acknowledgedSplashScreen = true
+				AuroraConfig.acknowledgedSplashScreen = false
 			else
 				_G.AuroraSplashScreen:Show()
 			end

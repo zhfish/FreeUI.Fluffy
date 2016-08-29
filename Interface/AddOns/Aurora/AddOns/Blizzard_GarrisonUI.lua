@@ -192,6 +192,7 @@ C.themes["Blizzard_GarrisonUI"] = function()
 
 	do
 		local icon = CapacitiveDisplay.ShipmentIconFrame.Icon
+		F.ReskinGarrisonPortrait(CapacitiveDisplay.ShipmentIconFrame.Follower, true)
 
 		icon:SetTexCoord(.08, .92, .08, .92)
 		F.CreateBG(icon)
@@ -593,6 +594,9 @@ C.themes["Blizzard_GarrisonUI"] = function()
 		select(4, xpBar:GetRegions()):Hide()
 
 		xpBar:SetStatusBarTexture(C.media.backdrop)
+		xpBar:ClearAllPoints()
+		xpBar:SetPoint("TOPLEFT", FollowerTab.PortraitFrame, "BOTTOMLEFT", 0, -3)
+		xpBar:SetPoint("TOPRIGHT", FollowerTab.Class, "BOTTOMRIGHT", 0, -3)
 
 		F.CreateBDFrame(xpBar)
 	end
@@ -609,19 +613,6 @@ C.themes["Blizzard_GarrisonUI"] = function()
 		bg:SetPoint("TOPLEFT", 41, -1)
 		bg:SetPoint("BOTTOMRIGHT", 0, 1)
 	end
-
-	-- Portraits
-
-	hooksecurefunc("GarrisonMissionPortrait_SetFollowerPortrait", function(portraitFrame, followerInfo)
-		if not portraitFrame.styled then
-			F.ReskinGarrisonPortrait(portraitFrame)
-			portraitFrame.styled = true
-		end
-
-		local color = _G.ITEM_QUALITY_COLORS[followerInfo.quality]
-
-		portraitFrame:SetBackdropBorderColor(color.r, color.g, color.b)
-	end)
 
 	-- Mechanic tooltip
 
