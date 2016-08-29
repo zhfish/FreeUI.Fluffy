@@ -17,35 +17,6 @@ local LATEST_API_VERSION = "6.0"
 local AURORA_LOADED = false
 local AuroraConfig
 
-_G.AuroraConfig = {
-	["customColour"] = {
-		["r"] = 0,
-		["g"] = .5,
-		["b"] = 1,
-	},
-	["chatBubbles"] = false,
-	["acknowledgedSplashScreen"] = false,
-	["tooltips"] = false,
-	["bags"] = false,
-	["buttonGradientColour"] = {
-		0.3, -- [1]
-		0.3, -- [2]
-		0.3, -- [3]
-		0.3, -- [4]
-	},
-	["loot"] = false,
-	["buttonSolidColour"] = {
-		0.1, -- [1]
-		0.1, -- [2]
-		0.1, -- [3]
-		1, -- [4]
-	},
-	["useCustomColour"] = false,
-	["enableFont"] = false,
-	["useButtonGradientColour"] = false,
-	["alpha"] = 0.6,
-}
-
 _G.Aurora = {
 	{}, -- F, functions
 	{}, -- C, constants/config
@@ -116,17 +87,17 @@ C.media = {
 C.defaults = {
 	["acknowledgedSplashScreen"] = false,
 
-	["alpha"] = 0.5,
-	["bags"] = true,
+	["alpha"] = 0.6,
+	["bags"] = false,
 	["buttonGradientColour"] = {.3, .3, .3, .3},
-	["buttonSolidColour"] = {.2, .2, .2, 1},
-	["useButtonGradientColour"] = true,
-	["chatBubbles"] = true,
-	["enableFont"] = true,
-	["loot"] = true,
+	["buttonSolidColour"] = {.1, .1, .1, 1},
+	["useButtonGradientColour"] = false,
+	["chatBubbles"] = false,
+	["enableFont"] = false,
+	["loot"] = false,
 	["useCustomColour"] = false,
 		["customColour"] = {r = 1, g = 1, b = 1},
-	["tooltips"] = true,
+	["tooltips"] = false,
 }
 
 C.frames = {}
