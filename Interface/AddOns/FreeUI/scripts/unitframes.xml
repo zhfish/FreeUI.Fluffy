@@ -2,5 +2,6 @@
 ..\FrameXML\UI.xsd">
 	<Script file="unitframes\unitframes.lua"/>
 	<Script file="unitframes\arena.lua"/>
+	<Script file="unitframes\focuser.lua"/>
 	<Script file="unitframes\unitsound.lua"/>
 </Ui>

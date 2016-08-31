@@ -24,7 +24,7 @@ fonts = {
 
 local nameFont
 
-if name == "Nekretaal" or name == "Rhonesaia" or name == "Maginary" then
+if name == "Nekretaal" or name == "Rhonesaia" or name == "Maginary" or name == "Arana" then
 	nameFont = fonts.pixel
 else
 	nameFont = fonts.standard
@@ -435,41 +435,6 @@ local Shared = function(self, unit, isSingle)
 	end
 
 	self.bd = bd
-
-	--[[ set/clear focus by shift + left click ]]
-
-	local modifier = "shift" -- shift, alt or ctrl
-	local mouseButton = "1" -- 1 = left, 2 = right, 3 = middle, 4 and 5 = thumb buttons if there are any
-
-	local function SetFocusHotkey(frame)
-		frame:SetAttribute(modifier.."-type"..mouseButton,"focus")
-	end
-
-	local function CreateFrame_Hook(type, name, parent, template)
-		if template == "SecureUnitButtonTemplate" then
-			SetFocusHotkey(_G[name])
-		end
-	end
-
-	hooksecurefunc("CreateFrame", CreateFrame_Hook)
-
-	-- Keybinding override so that models can be shift/alt/ctrl+clicked
-	local f = CreateFrame("CheckButton", "FocuserButton", UIParent, "SecureActionButtonTemplate")
-	f:SetAttribute("type1","macro")
-	f:SetAttribute("macrotext","/focus mouseover")
-	SetOverrideBindingClick(FocuserButton,true,modifier.."-BUTTON"..mouseButton,"FocuserButton")
-
-	-- for ouf unit
-	-- I really dont know why
-	local ModKey = "shift"
-    local MouseButton = 1
-    local key = ModKey .. "-type" .. (MouseButton or "")
-    if(self.unit == "focus") then
-        self:SetAttribute(key, "macro")
-        self:SetAttribute("macrotext", "/clearfocus")
-    else
-        self:SetAttribute(key, "focus")
-    end
 
 	--[[ Health ]]
 
