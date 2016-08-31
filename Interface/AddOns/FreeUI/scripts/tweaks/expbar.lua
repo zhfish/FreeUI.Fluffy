@@ -87,55 +87,74 @@ local setBackdrop = function(frame)
 	-- frame.shadow:SetBackdropColor(0, 0, 0, .6)
 end
 
-local xp = CreateFrame("StatusBar", nil, f)
+local xp = CreateFrame('StatusBar', nil, f, 'AnimatedStatusBarTemplate')
 setBar(xp)
 xp:SetFrameLevel(4)
 xp:SetStatusBarColor(.4, .1, .6)
+xp:SetAnimatedTextureColors(.4, .1, .6)
 xp:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], POSITION[5])
 setBackdrop(xp)
 
-local rest = CreateFrame("StatusBar", nil, xp)
+local rest = CreateFrame('StatusBar', nil, xp)
 setBar(rest)
 rest:SetFrameLevel(3)
 rest:EnableMouse(false)
 rest:SetStatusBarColor(.2, .4, .8)
 rest:SetAllPoints(xp)
 
-local artifact = CreateFrame("StatusBar", nil, f)
+local artifact = CreateFrame('StatusBar', nil, f, 'AnimatedStatusBarTemplate')
 setBar(artifact)
 artifact:SetFrameLevel(4)
 artifact:SetStatusBarColor(230/255, 204/255, 128/255)
-artifact:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], UnitLevel"player" == MAX_PLAYER_LEVEL and POSITION[5] or POSITION[5] + OFFSET)
+artifact:SetAnimatedTextureColors(230/255, 204/255, 128/255)
+artifact:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], UnitLevel'player' == MAX_PLAYER_LEVEL and POSITION[5] or POSITION[5] + OFFSET)
 setBackdrop(artifact)
 
-local rep = CreateFrame("StatusBar", nil, f)
+local rep = CreateFrame("StatusBar", nil, f, 'AnimatedStatusBarTemplate')
 setBar(rep)
 rep:SetFrameLevel(4)
 setBackdrop(rep)
 
 local numberize = function(v)
-	if v <= 9999 then return v end
-	if v >= 1000000 then
-		local value = string.format("%.1fm", v/1000000)
-		return value
-	elseif v >= 10000 then
-		local value = string.format("%.1fk", v/1000)
-		return value
-	end
+    if v <= 9999 then return v end
+    if v >= 1000000 then
+        local value = string.format('%.1fm', v/1000000)
+        return value
+    elseif v >= 10000 then
+        local value = string.format('%.1fk', v/1000)
+        return value
+    end
 end
 
 local xp_update = function()
-	if UnitLevel("player") < MAX_PLAYER_LEVEL and not IsXPUserDisabled() then
-		local c, m = UnitXP("player"), UnitXPMax("player")
-		local p, r = math.ceil(c/m*100), GetXPExhaustion()
+	if UnitLevel('player') == MAX_PLAYER_LEVEL then
+		local name, standing, min, max, cur = GetWatchedFactionInfo()
+		if name then
+			local faction = FACTION_BAR_COLORS[standing]
+			xp:SetStatusBarColor(faction.r, faction.g, faction.b)
+			xp:SetAnimatedTextureColors(faction.r, faction.g, faction.b)
+			xp:SetAnimatedValues(cur - min, min, max, standing)
+			-- xp:SetMinMaxValues(min, max)
+			-- xp:SetValue(cur)
+			xp:Show()
 
-		xp:SetMinMaxValues(min(0, c), m)
-		xp:SetValue(c)
+			rest:SetMinMaxValues(0, 1)
+			rest:SetValue(0)
+			return
+		end
+
+		xp:Hide()
+		rest:Hide()
+	else
+		local c, m, l	= UnitXP('player'), UnitXPMax('player'), UnitLevel('player')
+		local p 			= math.ceil(c/m*100)
+		local r			= GetXPExhaustion()
+
+		xp:SetAnimatedValues(c, 0, m, l)
+		-- xp:SetMinMaxValues(min(0, c), m)
+		-- xp:SetValue(c)
 		rest:SetMinMaxValues(min(0, c), m)
 		rest:SetValue(r and (c + r) or 0)
-	else
-		xp:Hide() 
-		rest:Hide()
 	end
 end
 
@@ -162,18 +181,29 @@ local artifact_update = function(self, event)
 		local num, xp, next = MainMenuBar_GetNumArtifactTraitsPurchasableFromXP(spent, total)
 		local percent = math.ceil(xp/next*100)
 
-		artifact:ClearAllPoints()
-		artifact:SetMinMaxValues(0, next)
-		artifact:SetValue(xp)
-
-		local y = POSITION[5]
-		if xp:IsShown() then
-			y = y + OFFSET
+		if not artifact:IsShown() then
+			artifact:Show()
 		end
+
+		artifact:SetAnimatedValues(xp, 0, next, num + spent)
+		-- artifact:SetMinMaxValues(0, next)
+		-- artifact:SetValue(xp)
+
+		local y = POSITION[5] + OFFSET
+		if UnitLevel'player' >= MAX_PLAYER_LEVEL or IsXPUserDisabled() then
+			y = POSITION[5]
+		end
+
 		artifact:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], y)
-		artifact:Show()
 	else
-		artifact:Hide()
+		if artifact:IsShown() then
+			artifact:Hide()
+		end
+	end
+	if event == 'ARTIFACT_XP_UPDATE' then
+		if not artifact:IsShown() then
+			artifact:Show()
+		end
 	end
 end
 
@@ -235,22 +265,26 @@ local showReputationTooltip = function(self)
 end
 
 -- events
-xp:RegisterEvent("PLAYER_ENTERING_WORLD")
-xp:RegisterEvent("PLAYER_LEVEL_UP")
-xp:RegisterEvent("PLAYER_XP_UPDATE")
-xp:RegisterEvent("UPDATE_EXHAUSTION")
-xp:SetScript("OnEvent", xp_update)
-xp:SetScript("OnEnter", function() showExperienceTooltip(xp) end)
-xp:SetScript("OnLeave", function() GameTooltip:Hide() end)
+xp:RegisterEvent('PLAYER_LEVEL_UP')
+xp:RegisterEvent('PLAYER_XP_UPDATE')
+xp:RegisterEvent('UPDATE_EXHAUSTION')
+xp:RegisterEvent('PLAYER_ENTERING_WORLD')
+xp:RegisterEvent('MODIFIER_STATE_CHANGED')
+xp:RegisterEvent('UPDATE_FACTION')
+xp:SetScript('OnEvent', xp_update)
+xp:SetScript('OnEnter', function() showExperienceTooltip(xp) end)
+xp:SetScript('OnLeave', function() GameTooltip:Hide() end)
+hooksecurefunc("SetWatchedFactionIndex", xp_update)
 
-artifact:RegisterEvent("PLAYER_ENTERING_WORLD")
-artifact:RegisterEvent("PLAYER_LEVEL_UP")
-artifact:RegisterEvent("ARTIFACT_XP_UPDATE")
-artifact:RegisterEvent("ARTIFACT_UPDATE")
-artifact:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
-artifact:SetScript("OnEvent", artifact_update)
-artifact:SetScript("OnEnter", function() showArtifactTooltip(artifact) end)
-artifact:SetScript("OnLeave", function() GameTooltip:Hide() end)
+artifact:RegisterEvent('PLAYER_ENTERING_WORLD')
+artifact:RegisterEvent('ARTIFACT_XP_UPDATE')
+artifact:RegisterEvent('ARTIFACT_UPDATE')
+artifact:RegisterEvent('PLAYER_EQUIPMENT_CHANGED')
+artifact:RegisterEvent('PLAYER_LEVEL_UP')
+artifact:SetScript('OnEvent', artifact_update)
+artifact:SetScript('OnEvent', artifact_update)
+artifact:SetScript('OnEnter', function() showArtifactTooltip(artifact) end)
+artifact:SetScript('OnLeave', function() GameTooltip:Hide() end)
 
 rep:RegisterEvent("PLAYER_ENTERING_WORLD")
 rep:RegisterEvent("PLAYER_LEVEL_UP")
