@@ -1,6 +1,37 @@
 local F, C, L = unpack(select(2, ...))
 local _G = _G
 
+do
+    local WorldMapFrame = _G.WorldMapFrame
+    local InCombatLockdown = _G.InCombatLockdown
+    
+    local WorldMapBountyBoardMixin = _G.WorldMapBountyBoardMixin
+    function WorldMapFrame.UIElementsFrame.BountyBoard.GetDisplayLocation(self)
+        if InCombatLockdown() then
+            return
+        end
+     
+        return WorldMapBountyBoardMixin.GetDisplayLocation(self)
+    end
+     
+    local WorldMapActionButtonMixin = _G.WorldMapActionButtonMixin
+    function WorldMapFrame.UIElementsFrame.ActionButton.GetDisplayLocation(self, useAlternateLocation)
+        if InCombatLockdown() then
+            return
+        end
+     
+        return WorldMapActionButtonMixin.GetDisplayLocation(self, useAlternateLocation)
+    end
+     
+    function WorldMapFrame.UIElementsFrame.ActionButton.Refresh(self)
+        if InCombatLockdown() then
+            return
+        end
+     
+        WorldMapActionButtonMixin.Refresh(self)
+    end
+end
+
 local function skin()
 	--print("Map:Skin")
 	_G.WorldMapPlayerUpper:EnableMouse(false)
@@ -25,8 +56,6 @@ local function skin()
 		_G.WorldMapFrame.skinned = true
 	end
 end
-
-
 
 -- Size Adjust --
 local function SetLargeWorldMap()
