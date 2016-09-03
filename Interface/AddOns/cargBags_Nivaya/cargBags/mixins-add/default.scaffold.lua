@@ -31,7 +31,27 @@ local cargBags = ns.cargBags
 local function noop() end
 
 -- Upgrade Level retrieval
-local LIU = LibStub("LibItemUpgradeInfo-1.0")
+local ScanTip, lvlPattern
+local function GetItemLevel(itemLink)
+	if not lvlPattern then
+		lvlPattern = gsub(ITEM_LEVEL, '%%d', '(%%d+)')
+	end
+
+	if not ScanTip then
+		ScanTip = CreateFrame("GameTooltip","ScanTip",nil,"GameTooltipTemplate")
+		ScanTip:SetOwner(UIParent,"ANCHOR_NONE")
+	end
+	ScanTip:ClearLines()
+	ScanTip:SetHyperlink(itemLink)
+
+	for i = 2, min(5, ScanTip:NumLines()) do
+		local line = _G["ScanTipTextLeft"..i]:GetText()
+		local itemLevel = strmatch(line, lvlPattern)
+		if itemLevel then
+			return tonumber(itemLevel)
+		end
+	end
+end
 
 local function Round(num, idp)
 	local mult = 10^(idp or 0)
@@ -124,9 +144,7 @@ local function ItemButton_Update(self, item)
 
 	-- Item Level
 	if item.link then
-		if LIU then
-			item.level = LIU:GetUpgradedItemLevel(item.link)
-		end
+		item.level = GetItemLevel(item.link)
 
 		if (item.equipLoc ~= "") and (item.level and item.level > 0) then
 			self.BottomString:SetText(item.level)
