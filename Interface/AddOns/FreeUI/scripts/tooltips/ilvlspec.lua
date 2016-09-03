@@ -2,8 +2,10 @@ local F, C = unpack(select(2, ...))
 if C.tooltip.enable ~= true or C.tooltip.ilvlspec ~= true then return end
 
 --- Variables ---
-local currentUNIT, currentGUID, scanTip
-local GearDB, SpecDB, ItemDB = {}, {}, {}
+local GearDB, SpecDB, PVPItemDB = {}, {}, {}
+local ScanTip, lvlPattern, PVPPattern
+local currentUNIT, currentGUID
+local PVP_ITEM_PATTERN
 
 local nextInspectRequest = 0
 lastInspectRequest = 0
@@ -12,37 +14,21 @@ local prefixColor = "|cffffeeaa"
 local detailColor = "|cffffffff"
 
 local locale = GetLocale()
-local gearPrefix
-local specPrefix
+local gearPrefix, specPrefix
 
-if locale == "zhCN" or locale == "zhTW" then
+if locale == "zhCN" then
 	gearPrefix = "装等: "
 	specPrefix = "专精: "
+	PVP_ITEM_PATTERN = "第%d赛季"
+elseif locale == "zhTW" then
+	gearPrefix = "裝等: "
+	specPrefix = "專精: "
+	PVP_ITEM_PATTERN = "第%d季"
 else
 	gearPrefix = STAT_AVERAGE_ITEM_LEVEL .. ": "
 	specPrefix = SPECIALIZATION .. ": "
+	PVP_ITEM_PATTERN = "Season %d"
 end
-
---- Create Frame ---
-local f = CreateFrame("Frame", "CloudyUnitInfo")
-f:RegisterEvent("UNIT_INVENTORY_CHANGED")
-f:RegisterEvent("INSPECT_READY")
-
-local UpgradeTable = {
-	[0]   =  0, [1]   =  8, [15]  = 10, [171] =  5, [373] =  4,
-	[374] =  8, [375] =  4, [376] =  4, [377] =  4, [379] =  4,
-	[380] =  4, [445] =  0, [446] =  4, [447] =  8, [451] =  0,
-	[452] =  8, [453] =  0, [454] =  4, [455] =  8, [456] =  0,
-	[457] =  8, [458] =  0, [459] =  4, [460] =  8, [461] = 12,
-	[462] = 16, [465] =  0, [466] =  4, [467] =  8, [468] =  0,
-	[469] =  4, [470] =  8, [471] = 12, [472] = 16, [476] =  0,
-	[477] =  4, [478] =  8, [479] =  0, [480] =  8, [491] =  0,
-	[492] =  4, [493] =  8, [494] =  0, [495] =  4, [496] =  8,
-	[497] = 12, [498] = 16, [501] =  0, [502] =  4, [503] =  8,
-	[504] = 12, [505] = 16, [506] = 20, [507] = 24, [529] =  0,
-	[530] =  5, [531] = 10, [535] = 15,	[536] = 30,	[537] = 45,
-	[538] =  0,
-}
 
 local Lv80_BOA = { 
 	[42943] = 1, [42944] = 1, [42945] = 1, [42946] = 1,
@@ -86,22 +72,10 @@ local Lv110_BOA = {
 	[133585] = 1, 
 }
 
-local Invasion = { 
-	[138152] = 1, [138153] = 1, [138154] = 1, [138155] = 1,
-	[138156] = 1, [138157] = 1, [138158] = 1, [138159] = 1,
-	[138163] = 1, [138164] = 1, [138165] = 1, [138166] = 1,
-	[138167] = 1, [138168] = 1, [138169] = 1, [138192] = 1,
-	[138172] = 1, [138173] = 1, [138174] = 1, [138175] = 1,
-	[138176] = 1, [138177] = 1, [138178] = 1, [138179] = 1,
-	[138180] = 1, [138181] = 1, [138182] = 1, [138183] = 1,
-	[138184] = 1, [138185] = 1, [138186] = 1, [138187] = 1,
-	[138450] = 1, [141606] = 1, [141607] = 1, [141608] = 1,
-	[141609] = 1, [141610] = 1, [141611] = 1, [141612] = 1,
-	[141613] = 1, [141614] = 1, [141615] = 1, [141617] = 1, 
-}
-
-local OtherLegion = { 
-}
+--- Create Frame ---
+local f = CreateFrame("Frame", "CloudyUnitInfo")
+f:RegisterEvent("UNIT_INVENTORY_CHANGED")
+f:RegisterEvent("INSPECT_READY")
 
 --- BOA Item Level ---
 local function BOALevel(ilvl, ulvl, id, upgrade)
@@ -109,17 +83,18 @@ local function BOALevel(ilvl, ulvl, id, upgrade)
 	if ilvl == 1 then
 		if Lv110_BOA[id] then
 			return 815 - (110 - ulvl) * 10
-		elseif ulvl > 100 then
-			ulvl = 100
 		elseif Lv100_BOA[id] then
+			if ulvl > 100 then ulvl = 100 end
 		elseif Lv85_BOA[id] then
 			if ulvl > 85 then ulvl = 85 end
 		elseif Lv80_BOA[id] then
 			if ulvl > 80 then ulvl = 80 end
-		elseif ulvl > 90 and upgrade ~= 583 then
-			ulvl = 90
 		elseif ulvl > 60 and upgrade ~= 583 and upgrade ~= 582 then
 			ulvl = 60
+		elseif ulvl > 90 and upgrade ~= 583 then
+			ulvl = 90
+		elseif ulvl > 100 then
+			ulvl = 100
 		end
 		if ulvl > 97 then
 			level = 605 - (100 - ulvl) * 5
@@ -138,7 +113,7 @@ local function BOALevel(ilvl, ulvl, id, upgrade)
 		else
 			level = 10
 		end
-	elseif ilvl > 1 then
+	else
 		if ulvl > 100 then
 			ulvl = 100
 		end
@@ -151,100 +126,50 @@ local function BOALevel(ilvl, ulvl, id, upgrade)
 	return floor(level + 0.5)
 end
 
-local function SpaceTimeLevel(upgrade, ilvl)
-	local level
-	if upgrade == 692 then
-		if ilvl > 99 then
-			level = 675
-		elseif ilvl > 98 then
-			level = 615
-		elseif ilvl > 97 then
-			level = 605
-		elseif ilvl > 90 then
-			level = 600 - (97 - ilvl) * 50 / 6
-		elseif ilvl > 85 then
-			level = 483 - (90 - ilvl) * 20.75
-		elseif ilvl > 80 then
-			level = 350 - (85 - ilvl) * 12.5
-		elseif ilvl == 80 then
-			level = 200
-		else
-			level = 10
-		end
-	else
-		if ilvl > 99 then
-			level = 660
-		elseif ilvl > 98 then
-			level = 605
-		elseif ilvl > 97 then
-			level = 598
-		elseif ilvl > 90 then
-			level = 590 - (97 - ilvl) * 10
-		elseif ilvl > 85 then
-			level = 463 - (90 - ilvl) * 19.75
-		elseif ilvl > 80 then
-			level = 333 - (85 - ilvl) * 13.5
-		elseif ilvl > 67 then
-			level = 187 - (80 - ilvl) * 4
-		elseif ilvl > 57 then
-			level = 105 - (67 - ilvl) * 26 / 9
-		elseif ilvl > 10 then
-			level = ilvl + 5
-		else
-			level = 10
-		end
-		if upgrade == 656 then
-			if ilvl > 99 then
-				level = level + 15
-			elseif ilvl > 98 then
-				level = level + 10
-			else
-				level = level + 6
-			end
+--- Scan Item Level ---
+local function GetItemLevel(itemLink)
+	if not lvlPattern then
+		lvlPattern = gsub(ITEM_LEVEL, "%%d", "(%%d+)")
+	end
+
+	if not ScanTip then
+		ScanTip = CreateFrame("GameTooltip","ScanTip",nil,"GameTooltipTemplate")
+		ScanTip:SetOwner(UIParent,"ANCHOR_NONE")
+	end
+	ScanTip:ClearLines()
+	ScanTip:SetHyperlink(itemLink)
+
+	for i = 2, min(5, ScanTip:NumLines()) do
+		local line = _G["ScanTipTextLeft"..i]:GetText()
+		local itemLevel = strmatch(line, lvlPattern)
+		if itemLevel then
+			return tonumber(itemLevel)
 		end
 	end
-	return floor(level + 0.5)
 end
 
-local function InvasionLevel(upgrade, ilvl)
-	local level
-	if ilvl > 99 then
-		level = 700
-	elseif ilvl > 97 then
-		level = 700 - (100 - ilvl) * 30
-	elseif ilvl > 90 then
-		level = 600 - (97 - ilvl) * 10
-	elseif ilvl > 85 then
-		level = 463 - (90 - ilvl) * 19.75
-	elseif ilvl > 80 then
-		level = 333 - (85 - ilvl) * 13.5
-	elseif ilvl > 67 then
-		level = 187 - (80 - ilvl) * 4
-	elseif ilvl > 57 then
-		level = 105 - (67 - ilvl) * 26 / 9
-	elseif ilvl > 10 then
-		level = ilvl + 5
-	else
-		level = 10
+--- Scan PVP Item  ---
+local function GetPVPItem(itemLink)
+	local itemID = strmatch(itemLink, "item:(%d+)")
+	itemID = tonumber(itemID) or 0
+	if PVPItemDB[itemID] then return PVPItemDB[itemID] end
+	if not PVPPattern then
+		PVPPattern = gsub(PVP_ITEM_PATTERN, "%%d", "(%%d+)")
 	end
-	if upgrade == 3388 then
-		if ilvl > 97 then
-			level = level + 10
-		end
-	elseif upgrade == 3389 then
-		if ilvl > 97 then
-			level = level + 20
-		elseif ilvl > 4 then
-			level = level + 10
-		elseif ilvl > 3 then
-			level = level + 8
-		elseif ilvl > 2 then
-			level = level + 5
-		elseif ilvl > 1 then
-			level = level + 2
-		end
+
+	if not ScanTip then
+		ScanTip = CreateFrame("GameTooltip","ScanTip",nil,"GameTooltipTemplate")
+		ScanTip:SetOwner(UIParent,"ANCHOR_NONE")
 	end
-	return floor(level + 0.5)
+	ScanTip:ClearLines()
+	ScanTip:SetHyperlink(itemLink)
+
+	local line = _G["ScanTipTextLeft"..2]:GetText()
+	local PVP = strmatch(line, PVPPattern)
+	if PVP then
+		PVPItemDB[itemID] = true
+		return true
+	end
 end
 
 --- Unit Gear Info ---
@@ -254,7 +179,8 @@ local function UnitGear(unit)
 	local ulvl = UnitLevel(unit)
 	local class = select(2, UnitClass(unit))
 
-	local boa, twohand, ilvl, total, delay = 0, 1, 0, 0, nil
+	local boa, pvp, twohand = 0, 0, 1
+	local ilvl, total, delay = 0, 0, nil
 
 	for i = 1, 17 do
 		if i ~= 4 then
@@ -266,39 +192,38 @@ local function UnitGear(unit)
 				if (not itemLink) then
 					delay = true
 				else
-					local id = strmatch(itemLink, "item:(%d+)")
-					id = tonumber(id) or 7
 					local _, _, quality, lvl, _, _, _, _, slot = GetItemInfo(itemLink)
-					local Instance, _, numBonus, bonus = select(12, strsplit(":", itemLink, 15))
-					Instance = tonumber(Instance) or 7
-					numBonus = tonumber(numBonus) or 0
-					local bonus1, bonus2
-					if numBonus > 0 then
-						bonus1, bonus2 = select(numBonus, strsplit(":", bonus))
-					else
-						bonus2 = select(1, strsplit(":", bonus))
-					end
-					bonus1 = tonumber(bonus1) or 0
-					bonus2 = tonumber(bonus2) or 0
+					local bonus = select(15, strsplit(":", itemLink))
+					local id = strmatch(itemLink, "item:(%d+)")
+					bonus = tonumber(bonus) or 0
+					id = tonumber(id) or 0
 
 					if (not quality) or (not lvl) then
 						delay = true
 					else
 						if quality == 7 then
 							boa = boa + 1
-							level = BOALevel(lvl, ulvl, id, bonus1)
-						elseif Invasion[id] then
-							level = InvasionLevel(bonus1, bonus2)
-						elseif Instance == 512 then
-							level = SpaceTimeLevel(bonus1, bonus2)
+							level = BOALevel(lvl, ulvl, id, bonus)
 						else
-							local upgradeScore
-							upgradeScore = UpgradeTable[bonus2] or 0
-							level = lvl + upgradeScore
+							if GetPVPItem(itemLink) then
+								pvp = pvp + 1
+							end
+
+							if i < 17 or quality < 6 then
+								level = GetItemLevel(itemLink)
+							else
+								local org_level = level
+								level = GetItemLevel(itemLink)
+								if level < org_level then
+									total = total + org_level - level
+								else
+									total = total + level - org_level
+								end
+							end
 						end
 
 						if i == 16 then
-							if slot == "INVTYPE_RANGED" or slot == "INVTYPE_RANGEDRIGHT" then
+							if slot == "INVTYPE_RANGED" or (slot == "INVTYPE_RANGEDRIGHT" and class == "HUNTER") then
 								twohand = 2
 							elseif slot == "INVTYPE_2HWEAPON" and GetInspectSpecialization(unit) ~= 72 then
 								twohand = 2
@@ -321,6 +246,7 @@ local function UnitGear(unit)
 
 		if ilvl > 0 then ilvl = string.format("%.1f", ilvl) end
 		if boa > 0 then ilvl = ilvl .. " |cffe6cc80" .. boa .. " BOA" end
+		if pvp > 0 then ilvl = ilvl .. " |cffa335ee" .. pvp .. " PVP" end
 	else
 		ilvl = nil
 	end
