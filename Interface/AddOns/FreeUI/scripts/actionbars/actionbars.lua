@@ -500,7 +500,7 @@ if C.actionbars.rightbars_mouseover then
 	SpellFlyout:HookScript("OnShow", function(self)
 		local frame = self:GetParent():GetParent():GetParent()
 		if frame and (frame == FreeUI_MultiBarLeft or frame == FreeUI_MultiBarRight) then
-			for i = 1, 10 do
+			for i = 1, 12 do
 				local bu = _G["SpellFlyoutButton"..i]
 				if bu and not bu.isHooked then
 					bu:HookScript("OnEnter", showButtonsFlyout)
@@ -518,8 +518,8 @@ end
 --[[ Extra bar ]]
 
 local barextra = CreateFrame("Frame", "FreeUI_ExtraActionBar", UIParent, "SecureHandlerStateTemplate")
-barextra:SetSize(45, 45)
-barextra:SetPoint("CENTER", UIParent, "CENTER", 0, 100)
+barextra:SetSize(C.actionbars.ebbs, C.actionbars.ebbs)
+barextra:SetPoint(C.actionbars.extra_pos.a1, C.actionbars.extra_pos.af, C.actionbars.extra_pos.a2, C.actionbars.extra_pos.x, C.actionbars.extra_pos.y)
 
 ExtraActionBarFrame:SetParent(barextra)
 ExtraActionBarFrame:EnableMouse(false)
@@ -527,7 +527,7 @@ ExtraActionBarFrame:ClearAllPoints()
 ExtraActionBarFrame:SetPoint("CENTER", 0, 0)
 ExtraActionBarFrame.ignoreFramePositionManager = true
 
-ExtraActionButton1:SetSize(45, 45)
+ExtraActionButton1:SetSize(C.actionbars.ebbs, C.actionbars.ebbs)
 
 RegisterStateDriver(barextra, "visibility", "[extrabar] show; hide")
 

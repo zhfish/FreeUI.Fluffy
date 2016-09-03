@@ -106,9 +106,11 @@ C["actionbars"] = {
 	["abbs_r"] = 24,	-- right bar button size
 	["pbbs"] = 24,		-- pet bar button size
 	["sbbs"] = 24,		-- stance bar button size
+	["ebbs"] = 45,		-- extra button size
 
 	["mainbar_pos"] = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 24 },		-- mainbar(bar1) position
 	["rightbar_pos"] = { a1 = "RIGHT", a2 = "RIGHT", af = "UIParent", x = -6, y = -200 },	-- rightbar(bar4) position
+	["extra_pos"] = { a1 = "CENTER", a2 = "CENTER", af = "UIParent", x = 0, y = 100 },
 }
 
 C["minimap"] = {
