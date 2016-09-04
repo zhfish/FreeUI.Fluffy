@@ -1,7 +1,5 @@
-local F, C, L = unpack(select(2, ...))
-
 local SCALE			= 1
-local WIDTH 		= 256
+local WIDTH 		= 254
 local HEIGHT 		= 2
 local _, CLASS 		= UnitClass("player")
 local COLOR			= CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[CLASS] or RAID_CLASS_COLORS[CLASS]
@@ -75,74 +73,54 @@ local setBackdrop = function(frame)
 	frame.bg:SetBackdropColor(0, 0, 0, .35)
 end
 
-local experience = CreateFrame('StatusBar', nil, f, 'AnimatedStatusBarTemplate')
-setBar(experience)
-experience:SetFrameLevel(4)
-experience:SetStatusBarColor(.4, .1, .6)
-experience:SetAnimatedTextureColors(.4, .1, .6)
-experience:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], POSITION[5])
-setBackdrop(experience)
+local Experience = CreateFrame("StatusBar", nil, f)
+setBar(Experience)
+Experience:SetFrameLevel(4)
+Experience:SetStatusBarColor(.4, .1, .6)
+Experience:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], POSITION[5])
+setBackdrop(Experience)
 
-local rest = CreateFrame('StatusBar', nil, experience)
-setBar(rest)
-rest:SetFrameLevel(3)
-rest:EnableMouse(false)
-rest:SetStatusBarColor(.2, .4, .8)
-rest:SetAllPoints(experience)
+local Rest = CreateFrame("StatusBar", nil, Experience)
+setBar(Rest)
+Rest:SetFrameLevel(3)
+Rest:EnableMouse(false)
+Rest:SetStatusBarColor(.2, .4, .8)
+Rest:SetAllPoints(Experience)
 
-local artifact = CreateFrame('StatusBar', nil, f, 'AnimatedStatusBarTemplate')
-setBar(artifact)
-artifact:SetFrameLevel(4)
-artifact:SetStatusBarColor(230/255, 204/255, 128/255)
-artifact:SetAnimatedTextureColors(230/255, 204/255, 128/255)
---artifact:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], UnitLevel'player' == MAX_PLAYER_LEVEL and POSITION[5] or POSITION[5] + OFFSET)
-setBackdrop(artifact)
+local Artifact = CreateFrame("StatusBar", nil, f)
+setBar(Artifact)
+Artifact:SetFrameLevel(4)
+Artifact:SetStatusBarColor(230/255, 204/255, 128/255)
+setBackdrop(Artifact)
 
-local reputation = CreateFrame("StatusBar", nil, f)
-setBar(reputation)
-reputation:SetFrameLevel(4)
-setBackdrop(reputation)
+local Reputation = CreateFrame("StatusBar", nil, f)
+setBar(Reputation)
+Reputation:SetFrameLevel(4)
+setBackdrop(Reputation)
 
 local numberize = function(v)
-    if v <= 9999 then return v end
-    if v >= 1000000 then
-        local value = string.format('%.1fm', v/1000000)
-        return value
-    elseif v >= 10000 then
-        local value = string.format('%.1fk', v/1000)
-        return value
-    end
+	if v <= 9999 then return v end
+	if v >= 1000000 then
+		local value = string.format("%.1fm", v/1000000)
+		return value
+	elseif v >= 10000 then
+		local value = string.format("%.1fk", v/1000)
+		return value
+	end
 end
 
 local experience_update = function()
-	if UnitLevel('player') == MAX_PLAYER_LEVEL then
-		local name, standing, min, max, cur = GetWatchedFactionInfo()
-		if name then
-			local faction = FACTION_BAR_COLORS[standing]
-			experience:SetStatusBarColor(faction.r, faction.g, faction.b)
-			experience:SetAnimatedTextureColors(faction.r, faction.g, faction.b)
-			experience:SetAnimatedValues(cur - min, min, max, standing)
-			-- experience:SetMinMaxValues(min, max)
-			-- experience:SetValue(cur)
-			experience:Show()
+	if UnitLevel("player") < MAX_PLAYER_LEVEL and not IsXPUserDisabled() then
+		local c, m = UnitXP("player"), UnitXPMax("player")
+		local p, r = math.ceil(c/m*100), GetXPExhaustion()
 
-			rest:SetMinMaxValues(0, 1)
-			rest:SetValue(0)
-			return
-		end
-
-		experience:Hide()
-		rest:Hide()
+		Experience:SetMinMaxValues(min(0, c), m)
+		Experience:SetValue(c)
+		Rest:SetMinMaxValues(min(0, c), m)
+		Rest:SetValue(r and (c + r) or 0)
 	else
-		local c, m, l	= UnitXP('player'), UnitXPMax('player'), UnitLevel('player')
-		local p 			= math.ceil(c/m*100)
-		local r			= GetXPExhaustion()
-
-		experience:SetAnimatedValues(c, 0, m, l)
-		-- xp:SetMinMaxValues(min(0, c), m)
-		-- xp:SetValue(c)
-		rest:SetMinMaxValues(min(0, c), m)
-		rest:SetValue(r and (c + r) or 0)
+		Experience:Hide() 
+		Rest:Hide()
 	end
 end
 
@@ -167,20 +145,19 @@ local reputation_update = function()
 	if GetWatchedFactionInfo() then
 		local name, rank, minRep, maxRep, value = GetWatchedFactionInfo()
 
-		reputation:ClearAllPoints()
-		reputation:SetMinMaxValues(minRep, maxRep)
-		reputation:SetValue(value)
-		reputation:SetStatusBarColor(FactionInfo[rank][1], FactionInfo[rank][2], FactionInfo[rank][3])
+		Reputation:ClearAllPoints()
+		Reputation:SetMinMaxValues(minRep, maxRep)
+		Reputation:SetValue(value)
+		Reputation:SetStatusBarColor(FactionInfo[rank][1], FactionInfo[rank][2], FactionInfo[rank][3])
 
 		local y = POSITION[5]
-		if experience:IsShown() then
+		if Experience:IsShown() then
 			y = y + OFFSET
 		end
-
-		reputation:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], y)
-		reputation:Show()
+		Reputation:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], y)
+		Reputation:Show()
 	else
-		reputation:Hide()
+		Reputation:Hide()
 	end
 end
 
@@ -206,26 +183,21 @@ local artifact_update = function(self, event)
 		local num, xp, next = MainMenuBar_GetNumArtifactTraitsPurchasableFromXP(spent, total)
 		local percent = math.ceil(xp/next*100)
 
-		artifact:SetAnimatedValues(xp, 0, next, num + spent)
-		-- artifact:SetMinMaxValues(0, next)
-		-- artifact:SetValue(xp)
+		Artifact:ClearAllPoints()
+		Artifact:SetMinMaxValues(0, next)
+		Artifact:SetValue(xp)
 
 		local y = POSITION[5]
-		-- if UnitLevel'player' >= MAX_PLAYER_LEVEL and IsXPUserDisabled() then
-		-- 	y = POSITION[5]
-		-- end
-		local y = POSITION[5]
-		if experience:IsShown() then
+		if Experience:IsShown() then
 			y = y + OFFSET
 		end
-		if reputation:IsShown() then
+		if Reputation:IsShown() then
 			y = y + OFFSET
 		end
-
-		artifact:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], y)
-		artifact:Show()
+		Artifact:SetPoint(POSITION[1], POSITION[2], POSITION[3], POSITION[4], y)
+		Artifact:Show()
 	else
-		artifact:Hide()
+		Artifact:Hide()
 	end
 end
 
@@ -247,38 +219,32 @@ local showArtifactTooltip = function(self)
 	end
 end
 
-
-
 -- events
-experience:RegisterEvent('PLAYER_LEVEL_UP')
-experience:RegisterEvent('PLAYER_XP_UPDATE')
-experience:RegisterEvent('UPDATE_EXHAUSTION')
-experience:RegisterEvent('PLAYER_ENTERING_WORLD')
-experience:RegisterEvent('MODIFIER_STATE_CHANGED')
-experience:RegisterEvent('UPDATE_FACTION')
-experience:SetScript('OnEvent', experience_update)
-experience:SetScript('OnEnter', function() showExperienceTooltip(experience) end)
-experience:SetScript('OnLeave', function() GameTooltip:Hide() end)
-hooksecurefunc("SetWatchedFactionIndex", experience_update)
+Experience:RegisterEvent("PLAYER_ENTERING_WORLD")
+Experience:RegisterEvent("PLAYER_LEVEL_UP")
+Experience:RegisterEvent("PLAYER_XP_UPDATE")
+Experience:RegisterEvent("UPDATE_EXHAUSTION")
+Experience:SetScript("OnEvent", experience_update)
+Experience:SetScript("OnEnter", function() showExperienceTooltip(Experience) end)
+Experience:SetScript("OnLeave", function() GameTooltip:Hide() end)
 
-artifact:RegisterEvent("PLAYER_ENTERING_WORLD")
-artifact:RegisterEvent("PLAYER_LEVEL_UP")
-artifact:RegisterEvent("UPDATE_EXHAUSTION")
-artifact:RegisterEvent("UPDATE_FACTION")
-artifact:RegisterEvent('MODIFIER_STATE_CHANGED')
-artifact:RegisterEvent("CHAT_MSG_COMBAT_FACTION_CHANGE")
-artifact:RegisterEvent("ARTIFACT_XP_UPDATE")
-artifact:RegisterEvent("ARTIFACT_UPDATE")
-artifact:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
-artifact:SetScript('OnEvent', artifact_update)
-artifact:SetScript('OnEnter', function() showArtifactTooltip(artifact) end)
-artifact:SetScript('OnLeave', function() GameTooltip:Hide() end)
+Reputation:RegisterEvent("PLAYER_ENTERING_WORLD")
+Reputation:RegisterEvent("PLAYER_LEVEL_UP")
+Reputation:RegisterEvent("UPDATE_EXHAUSTION")
+Reputation:RegisterEvent("UPDATE_FACTION")
+Reputation:RegisterEvent("CHAT_MSG_COMBAT_FACTION_CHANGE")
+Reputation:SetScript("OnEvent", reputation_update)
+Reputation:SetScript("OnEnter", function() showReputationTooltip(Reputation) end)
+Reputation:SetScript("OnLeave", function() GameTooltip:Hide() end)
 
-reputation:RegisterEvent("PLAYER_ENTERING_WORLD")
-reputation:RegisterEvent("PLAYER_LEVEL_UP")
-reputation:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
-reputation:RegisterEvent("UPDATE_FACTION")
-reputation:RegisterEvent("CHAT_MSG_COMBAT_FACTION_CHANGE")
-reputation:SetScript("OnEvent", reputation_update)
-reputation:SetScript("OnEnter", function() showReputationTooltip(reputation) end)
-reputation:SetScript("OnLeave", function() GameTooltip:Hide() end)
+Artifact:RegisterEvent("PLAYER_ENTERING_WORLD")
+Artifact:RegisterEvent("PLAYER_LEVEL_UP")
+Artifact:RegisterEvent("UPDATE_EXHAUSTION")
+Artifact:RegisterEvent("UPDATE_FACTION")
+Artifact:RegisterEvent("CHAT_MSG_COMBAT_FACTION_CHANGE")
+Artifact:RegisterEvent("ARTIFACT_XP_UPDATE")
+Artifact:RegisterEvent("ARTIFACT_UPDATE")
+Artifact:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
+Artifact:SetScript("OnEvent", artifact_update)
+Artifact:SetScript("OnEnter", function() showArtifactTooltip(Artifact) end)
+Artifact:SetScript("OnLeave", function() GameTooltip:Hide() end)
