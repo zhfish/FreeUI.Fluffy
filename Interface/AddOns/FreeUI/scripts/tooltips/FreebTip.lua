@@ -626,8 +626,12 @@ local function style(frame)
 		frame.BorderBottomRight:Hide()
 	end
 
-	if(frame.BackdropFrame) then
-		frame.BackdropFrame:Hide()
+	if(frame.BackdropFrame and not frame.ftipBDF) then
+		frame:SetBackdrop(nil)
+		frame.BackdropFrame:SetBackdrop(cfg.backdrop)
+		frame.BackdropFrame:SetBackdropColor(cfg.bgcolor.r, cfg.bgcolor.g, cfg.bgcolor.b, cfg.bgcolor.t)
+		frame.BackdropFrame:SetBackdropBorderColor(cfg.bdrcolor.r, cfg.bdrcolor.g, cfg.bdrcolor.b)
+		frame.ftipBDF = true
 	end
 end
 ns.style = style
