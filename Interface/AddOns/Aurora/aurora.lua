@@ -2182,7 +2182,7 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		_G.PaperDollTitlesPane:HookScript("OnShow", function(titles)
 			for x, object in pairs(titles.buttons) do
 				object:DisableDrawLayer("BACKGROUND")
-				object.text:SetFont(C.media.font, 11)
+				object.text:SetFont(STANDARD_TEXT_FONT, 11)
 			end
 		end)
 		_G.SendScrollBarBackgroundTop:Hide()
