@@ -8,6 +8,10 @@ local cfg = {
 	font = C.media.font.normal,
 	fontflag = "OUTLINE",
 	scale = C.tooltip.scale,
+	cursor = C.tooltip.cursor,
+	point = C.tooltip.position,
+	hpbarText = false,
+	powerbar = false,
 	backdrop = {
 		bgFile = "Interface\\Buttons\\WHITE8x8",
 		edgeFile = C.media.glow,
@@ -31,25 +35,9 @@ local cfg = {
 	showRealm = true,
 	realmText = " (*)",
 	YOU = "<YOU>",
-	cursor = C.tooltip.cursor,
-	point = C.tooltip.position,
 }
 
-if(freebDebug) then
-	ns.Debug = function(...)
-		freebDebug:Stuff(ADDON_NAME, ...)
-	end
-else
-	ns.Debug = function() end
-end
-
--- local cfg = setmetatable(ns.cfg_override,
--- {__index = function(t, key)
--- 	t[key] = settings[key] or false
--- 	return t[key]
--- end})
 ns.cfg = cfg
-
 
 local _G = _G
 local RAID_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
@@ -91,19 +79,29 @@ local factionIcon = {
 
 local hex = function(r, g, b)
 	if(r and not b) then
-			r, g, b = r.r, r.g, r.b
+		r, g, b = r.r, r.g, r.b
 	end
 
 	return (b and format('|cff%02x%02x%02x', r * 255, g * 255, b * 255)) or "|cffFFFFFF"
 end
 
 local numberize = function(val)
-	if(val >= 1e6) then
-		return ("%.0fm"):format(val / 1e6)
-	elseif(val >= 1e3) then
-		return ("%.0fk"):format(val / 1e3)
+	if (locale == "zhCN" or locale == "zhTW") then
+		if (val >= 1e7) then
+			return ("%.1fE"):format(val / 1e7)
+		elseif (val >= 1e4) then
+			return ("%.1fW"):format(val / 1e4)
+		else
+			return ("%d"):format(val)
+		end
 	else
-		return ("%d"):format(val)
+		if (val >= 1e6) then
+			return ("%.0fm"):format(val / 1e6)
+		elseif (val >= 1e3) then
+			return ("%.0fk"):format(val / 1e3)
+		else
+			return ("%d"):format(val)
+		end
 	end
 end
 
@@ -156,7 +154,7 @@ local function getPlayer(unit)
 		local class, _, race, _, _, name, realm = GetPlayerInfoByGUID(guid)
 		if not name then return end
 
-		if(realm and realm ~= "") then
+		if (realm and strlen(realm) > 0) then
 			if(cfg.showRealm) then
 				realm = ("-"..realm)
 			else
@@ -183,12 +181,11 @@ local function getTarget(unit)
 end
 
 local function ShowTarget(self, unit)
-	if(UnitExists(unit.."target")) then
+	if (UnitExists(unit.."target")) then
 		local tarRicon = GetRaidTargetIndex(unit.."target")
 		local tar = ("%s %s"):format((tarRicon and ICON_LIST[tarRicon].."10|t") or "", getTarget(unit.."target"))
 
-		self:AddDoubleLine(TARGET, tar, NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b,
-		unitColor(unit.."target"))
+		self:AddLine(TARGET .. ":" .. hex(unitColor(unit.."target")).. tar .."|r")
 	end
 end
 
@@ -462,23 +459,32 @@ gtSBbg:SetTexture(cfg.statusbar)
 gtSBbg:SetVertexColor(0.3, 0.3, 0.3, 0.5)
 
 local function gtSBValChange(self, value)
-	if(not value) then
+	if (not value) then
 		return
 	end
 	local min, max = self:GetMinMaxValues()
-	if(value < min) or (value > max) then
+	if (value < min) or (value > max) then
 		return
 	end
 
-	if(not self.text) then
+	if (not self.text) then
 		self.text = self:CreateFontString(nil, "OVERLAY")
 		self.text:SetPoint("CENTER", GameTooltipStatusBar, 0, 0)
-		self.text:SetFont(cfg.font, 10, "THICKOUTLINE")
+		self.text:SetFont(cfg.font or TooltipText[1], cfg.fontsize or TooltipTextSmall[2], "THICKOUTLINE")
 	end
-	--self.text:Show()
 	self.text:Hide()
-	local hp = numberize(self:GetValue())
-	self.text:SetText(hp)
+	if (cfg.hpbarText) then
+		local hp
+		self.text:Show()
+		if cfg.hpbarText == 1 then
+			hp = numberize(self:GetValue())
+		else
+			hp = numberize(self:GetValue()).." / "..numberize(max)
+		end
+		self.text:SetText(hp)
+	else
+		self.text:Hide()
+	end
 end
 GameTooltipStatusBar:HookScript("OnValueChanged", gtSBValChange)
 
@@ -648,14 +654,14 @@ end
 GameTooltip.GetBackdropBorderColor = OverrideGetBackdropBorderColor
 GameTooltip:SetBackdropBorderColor(OverrideGetBackdropBorderColor)
 
-local frameload = CreateFrame"Frame"
+local frameload = CreateFrame("Frame")
 frameload:RegisterEvent("PLAYER_ENTERING_WORLD")
 frameload:SetScript("OnEvent", function(self)
-	self:UnregisterEvent"PLAYER_ENTERING_WORLD"
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	local function hook(tip)
 		frame:HookScript("OnShow", function(self)
-			if(cfg.combathideALL and InCombatLockdown()) then
+			if (cfg.combathideALL and InCombatLockdown()) then
 				return self:Hide()
 			end
 			style(self)
@@ -664,45 +670,62 @@ frameload:SetScript("OnEvent", function(self)
 
 	for i, tip in ipairs(tooltips) do
 		frame = _G[tip]
-		if(frame) then
+		if (frame) then
 			hook(frame)
 		end
 	end
 	for i, tip in ipairs(shopping) do
 		frame = _G[tip]
-		if(frame) then
+		if (frame) then
 			hook(frame)
 			frame.shopping = true
 		end
 	end
 end)
 
-local itemEvent = CreateFrame"Frame"
+local itemEvent = CreateFrame("Frame")
 itemEvent:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 itemEvent:SetScript("OnEvent", function(self, event, arg1)
-	ns.Debug("item info received: ", arg1)
-
 	for k in next, itemUpdate do
 		local tip = _G[k]
-		if(tip and tip:IsShown()) then
+		if (tip and tip:IsShown()) then
 			style(tip)
 		end
 	end
 end)
 
 -------------------------------------------------------------------------------
+--[[ Anchor ]] --
+
+local anchor = CreateFrame("Frame")
+anchor:RegisterEvent("ADDON_LOADED")
+anchor:SetScript("OnEvent", function(self, event, addon)
+	if (addon ~= ADDON_NAME) then return end
+
+	hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
+		local frame = GetMouseFocus()
+		if (cfg.cursor and frame == WorldFrame) then
+			tooltip:SetOwner(parent, "ANCHOR_CURSOR")
+		else
+			tooltip:ClearAllPoints()
+			tooltip:SetOwner(parent, "ANCHOR_NONE")
+			if (cfg.point) then
+				tooltip:SetPoint(cfg.point[1], UIParent, cfg.point[1], cfg.point[2], cfg.point[3])
+			else
+				tooltip:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -25, 30)
+			end
+		end
+	end)
+end)
+
+-------------------------------------------------------------------------------
 --[[ Aura Tooltip info ]] --
 
 local function addAuraInfo(self, caster, spellID)
-	-- if(spellID) then
-	-- 	GameTooltip:AddLine("ID: "..spellID)
-	-- 	GameTooltip:Show()
-	-- end
-
 	if(caster) then
 		local color = hex(unitColor(caster))
 
-		GameTooltip:AddLine("Applied by "..color..UnitName(caster))
+		GameTooltip:AddLine("CastBy: "..color..UnitName(caster))
 		GameTooltip:Show()
 	end
 end
@@ -721,31 +744,5 @@ hooksecurefunc(GameTooltip, "SetUnitDebuff", function(self,...)
 	addAuraInfo(self, caster, spellID)
 end)
 
-
-
--- position
-do
-	local frame = CreateFrame"Frame"
-	frame:RegisterEvent"ADDON_LOADED"
-	frame:SetScript("OnEvent", function(self, event, addon)
-		if addon ~= ADDON_NAME then return end
-
-		hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
-			local frame = GetMouseFocus()
-			if ns.cfg.cursor and frame == WorldFrame then
-				tooltip:SetOwner(parent, "ANCHOR_CURSOR")
-			else
-				tooltip:ClearAllPoints()
-				tooltip:SetOwner(parent, "ANCHOR_NONE")
-				if ns.cfg.point then
-					local cfg = ns.cfg
-					tooltip:SetPoint(cfg.point[1], UIParent, cfg.point[1], cfg.point[2], cfg.point[3])
-				else
-					tooltip:SetPoint(anchorTo, _anchor, anchorTo)
-				end
-			end
-		end)
-	end)
-end
 
 

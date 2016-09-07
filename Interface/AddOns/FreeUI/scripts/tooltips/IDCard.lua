@@ -14,29 +14,12 @@ end
 
 local setItem = hookfactory(function(b,self)
     local _,id = self:GetItem()
-    if id then
+    if id and GetItemIcon(id) then
 		b:SetNormalTexture(GetItemIcon(id))
 		b.link = id
 		b.type = "item"
 	end
 end,"setItem")
-
---[[
-local setSpell = hookfactory(function(b,self)
-	local _,id = self:GetSpell()
-	b:SetNormalTexture(select(3,GetSpellInfo(id)))
-	b.link = GetSpellLink(id)
-	b.type = "spell"
-end,"setSpell")
-
-local setAch = hookfactry(function(b,self)
-	local _,id = self:GetAchievement()
-	b:SetNormalTexture(select(10,GetAchievementInfo(id)))
-	b.achOverlay:Show()
-	b.link = GetAchievementLink(id)
-	b.type = "achievement"
-end,"setAch")
-]]
 
 local function openToAchievement(link)
 	if not (AchievementFrame and AchievementFrame:IsShown()) then

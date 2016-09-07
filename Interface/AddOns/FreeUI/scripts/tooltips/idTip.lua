@@ -2,41 +2,56 @@ local F, C, L = unpack(select(2, ...))
 
 if not C.tooltip.enable then return end
 
-local hooksecurefunc, select, UnitBuff, UnitDebuff, UnitAura, UnitGUID, GetGlyphSocketInfo, tonumber, strfind =
-	  hooksecurefunc, select, UnitBuff, UnitDebuff, UnitAura, UnitGUID, GetGlyphSocketInfo, tonumber, strfind
+local ADDON_NAME, ns = ...
 
 local types = {
-	spell       = "SpellID: ",
-	item        = "ItemID: ",
-	unit        = "NPC ID: ",
-	quest       = "QuestID: ",
-	talent      = "TalentID: ",
-	achievement = "AchievementID: ",
-	ability     = "AbilityID: ",
-	currency    = "CurrencyID: "
+	unit = "NPC ID:",
+	item = "ItemID:",
+	spell = "SpellID:",
+	quest = "QuestID:",
+	talent = "TalentID:",
+	ability = "AbilityID:",
+	currency = "CurrencyID:",
+	achievement = "AchievementID:"
 }
 
+local prev_itemID, prev_numlines
 local function addLine(tooltip, id, type)
-	local found = false
+	local numlines, found = tooltip:NumLines()
+	if type == "ItemID:" then
+		local itemType = select(6, GetItemInfo(id))
+		if itemType == TRADESKILL_SERVICE_LEARN then
+			if not prev_numlines or numlines < prev_numlines then
+				found = true
+			end
+			if not prev_itemID or prev_itemID ~= id then
+				found = true
+			end
+			prev_itemID = id
+			prev_numlines = numlines
+		end
+	end
 
-	-- Check if we already added to this tooltip. Happens on the talent frame
-	for i = 1, 99 do 
-		local frame = _G[tooltip:GetName() .. "TextLeft" .. i] 
-		local text 
-		if frame then text = frame:GetText() end 
-		if not text then break end 
-		if strfind(text, type) then found = true break end 
-	end 
+	if not found then
+		for i = 3, numlines do
+			local frame = _G[tooltip:GetName() .. "TextLeft" .. i]
+			local text
+			if frame then text = frame:GetText() end
+			if not text then break end
+			if strfind(text, type) then found = true break end
+		end
+	end
 
-	if not found then 
-		tooltip:AddLine(type .. "|cffffffff" .. id) 
-		tooltip:Show() 
+	if not found then
+		tooltip:AddLine(type .. " |cffffffff" .. id)
+		tooltip:Show()
 	end
 end
+ns.addLine = addLine
 
 -- All types, primarily for detached tooltips
 local function onSetHyperlink(self, link)
-	local type, id = string.match(link,"^(%a+):(%d+)")
+	local type, id = strmatch(link,"^(%a+):(%d+)")
 	if not type or not id then return end
 	if type == "spell" or type == "enchant" or type == "trade" then
 		addLine(self, id, types.spell)
@@ -52,6 +67,7 @@ local function onSetHyperlink(self, link)
 		addLine(self, id, types.currency)
 	end
 end
+ns.onSetHyperlink = onSetHyperlink
 
 hooksecurefunc(ItemRefTooltip, "SetHyperlink", onSetHyperlink)
 hooksecurefunc(GameTooltip, "SetHyperlink", onSetHyperlink)
@@ -82,35 +98,24 @@ GameTooltip:HookScript("OnTooltipSetSpell", function(self)
 	if id then addLine(self, id, types.spell) end
 end)
 
--- NPCs
--- GameTooltip:HookScript("OnTooltipSetUnit", function(self)
--- 	if C_PetBattles.IsInBattle() then return end
--- 	local unit = select(2, self:GetUnit())
--- 	if unit then
--- 		local guid = UnitGUID(unit) or ""
--- 		local id = tonumber(guid:match("-(%d+)-%x+$"), 10)
--- 		if id and guid:match("%a+") ~= "Player" then addLine(GameTooltip, id, types.unit) end
--- 	end
--- end)
-
 -- Items
 local function attachItemTooltip(self)
-  local link = select(2, self:GetItem())
-  if link then
-	local id = string.match(link, "item:(%d*)")
-	if (id == "" or id == "0") and TradeSkillFrame ~= nil and TradeSkillFrame:IsVisible() and GetMouseFocus().reagentIndex then
-	  local selectedRecipe = TradeSkillFrame.RecipeList:GetSelectedRecipeID()
-	  for i = 1, 8 do
-		if GetMouseFocus().reagentIndex == i then
-		  id = C_TradeSkillUI.GetRecipeReagentItemLink(selectedRecipe, i):match("item:(%d+):") or nil
-		  break
+	local link = select(2, self:GetItem())
+	if link then
+		local id = strmatch(link, "item:(%d*)")
+		if (id == "" or id == "0") and TradeSkillFrame ~= nil and TradeSkillFrame:IsVisible() and GetMouseFocus().reagentIndex then
+			local selectedRecipe = TradeSkillFrame.RecipeList:GetSelectedRecipeID()
+			for i = 1, 8 do
+				if GetMouseFocus().reagentIndex == i then
+					id = C_TradeSkillUI.GetRecipeReagentItemLink(selectedRecipe, i):match("item:(%d+):") or nil
+					break
+				end
+			end
 		end
-	  end
+		if id and id ~= "" and id ~= "0" then
+			addLine(self, id, types.item)
+		end
 	end
-	if id then
-	  addLine(self, id, types.item)
-	end
-  end
 end
 
 GameTooltip:HookScript("OnTooltipSetItem", attachItemTooltip)
@@ -163,29 +168,28 @@ end)
 
 -- Currencies
 hooksecurefunc(GameTooltip, "SetCurrencyToken", function(self, index)
-	local id = tonumber(string.match(GetCurrencyListLink(index),"currency:(%d+)"))
+	local id = tonumber(strmatch(GetCurrencyListLink(index),"currency:(%d+)"))
 	if id then addLine(self, id, types.currency) end
 end)
 
 hooksecurefunc(GameTooltip, "SetCurrencyByID", function(self, id)
-   if id then addLine(self, id, types.currency) end
+	 if id then addLine(self, id, types.currency) end
 end)
 
 hooksecurefunc(GameTooltip, "SetCurrencyTokenByID", function(self, id)
-   if id then addLine(self, id, types.currency) end
+	 if id then addLine(self, id, types.currency) end
 end)
 
 -- Quests
-do
-	local function questhook(self)
-		if self.questID then addLine(GameTooltip, self.questID, types.quest) end
-	end
-	local titlebuttonshooked = {}
-	hooksecurefunc("QuestLogQuests_GetTitleButton", function(index)
-		local titles = QuestMapFrame.QuestsFrame.Contents.Titles;
-		if titles[index] and not titlebuttonshooked[index] then
-			titles[index]:HookScript("OnEnter", questhook)
-			titlebuttonshooked[index] = true
-		end
-	end)
+local function questhook(self)
+	if self.questID then addLine(GameTooltip, self.questID, types.quest) end
 end
+
+local titlebuttonshooked = {}
+hooksecurefunc("QuestLogQuests_GetTitleButton", function(index)
+	local titles = QuestMapFrame.QuestsFrame.Contents.Titles;
+	if titles[index] and not titlebuttonshooked[index] then
+		titles[index]:HookScript("OnEnter", questhook)
+		titlebuttonshooked[index] = true
+	end
+end)

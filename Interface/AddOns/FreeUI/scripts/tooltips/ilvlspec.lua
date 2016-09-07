@@ -128,6 +128,7 @@ end
 
 --- Scan Item Level ---
 local function GetItemLevel(itemLink)
+	local itemLevel
 	if not lvlPattern then
 		lvlPattern = gsub(ITEM_LEVEL, "%%d", "(%%d+)")
 	end
@@ -141,11 +142,21 @@ local function GetItemLevel(itemLink)
 
 	for i = 2, min(5, ScanTip:NumLines()) do
 		local line = _G["ScanTipTextLeft"..i]:GetText()
-		local itemLevel = strmatch(line, lvlPattern)
+		itemLevel = strmatch(line, lvlPattern)
 		if itemLevel then
 			return tonumber(itemLevel)
 		end
 	end
+
+	local itemID = strmatch(itemLink, "item:(%d+)")
+	if itemID then
+		itemLevel = select(4, GetItemInfo(itemID))
+		if itemLevel then
+			return tonumber(itemLevel)
+		end
+	end
+
+	return 0
 end
 
 --- Scan PVP Item  ---

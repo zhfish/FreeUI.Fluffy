@@ -69,7 +69,6 @@ local function CreateTip(link)
 end
 
 local function ShowTip(tip, link)
-	ns.Debug("Show tip", tip, link)
 	ShowUIPanel(tip)
 	if not (tip:IsShown()) then
 		tip:SetOwner(UIParent, "ANCHOR_PRESERVE")
@@ -81,13 +80,14 @@ local _SetItemRef = SetItemRef
 function SetItemRef(...)
 	local link, text, button = ...
 	local handled = strsplit(":", link)
-	ns.Debug("link - "..link.. " - text "..text.." - button "..button)
-	ns.Debug(handled)
 
 	if((not IsModifiedClick()) and handled and types[handled]) then
 		local tip = CreateTip(link)
 		if(tip) then
 			ShowTip(tip, link)
+			if tip ~= ItemRefTooltip and ns.onSetHyperlink then
+				ns.onSetHyperlink(tip, link)
+			end
 		end
 	else
 		return _SetItemRef(...)
