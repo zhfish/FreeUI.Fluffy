@@ -821,5 +821,5 @@ do
 
 	local othersSubText = credits:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 	othersSubText:SetPoint("TOP", others, "BOTTOM", 0, -8)
-	othersSubText:SetText("Allez, AlleyKat, Caellian, p3lim, Shantalya, tekkub, Tuller, Wildbreath")
+	othersSubText:SetText("Allez, AlleyKat, Caellian, p3lim, Shantalya, tekkub, Tuller, Wildbreath\nGethe, freebaser, aliluya555, aduth, silverwind")
 end
