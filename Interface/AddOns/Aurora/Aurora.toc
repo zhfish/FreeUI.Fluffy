@@ -85,4 +85,6 @@ FrameXML\WorldStateFrame.lua
 
 SharedXML\AddonList.lua
 
-Other\ChatBubbles.lua
+Other\LossOfControl.lua
+Other\OrderHallUI.lua
+Other\TalkingHeadUI.lua
