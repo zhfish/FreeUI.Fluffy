@@ -30,6 +30,7 @@
 	<Script file="tweaks\petbattles.lua"/>
 	<Script file="tweaks\queuetimer.lua"/>
 	<Script file="tweaks\removeorderhalltopbar.lua"/>
+	<Script file="tweaks\reputation.lua"/>
 	<Script file="tweaks\role.lua"/>
 	<Script file="tweaks\SafeQueue.lua"/>
 	<Script file="tweaks\setCVar.lua"/>
