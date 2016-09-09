@@ -4,5 +4,4 @@
 	<Script file="combat\tabbinder.lua"/>
 	<Script file="combat\interrupt.lua"/>
 	<Script file="combat\combo.lua"/>
-	<Script file="combat\LossOfControl.lua"/>
 </Ui>
