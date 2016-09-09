@@ -290,30 +290,30 @@ C.themes["Blizzard_TalentUI"] = function()
 
 	-- PvP Talents
 	
-	PlayerTalentFramePVPTalents.XPBar.Frame:Hide()
+	-- PlayerTalentFramePVPTalents.XPBar.Frame:Hide()
 	
-	local bg = CreateFrame("Frame", nil, PlayerTalentFramePVPTalents.XPBar.Bar)
-	bg:SetPoint("TOPLEFT", 0, 1)
-	bg:SetPoint("BOTTOMRIGHT", 0, -1)
-	bg:SetFrameLevel(PlayerTalentFramePVPTalents.XPBar.Bar:GetFrameLevel()-1)
-	F.CreateBD(bg, .3)
-	PlayerTalentFramePVPTalents.XPBar.Bar.Background:Hide()
+	-- local bg = CreateFrame("Frame", nil, PlayerTalentFramePVPTalents.XPBar.Bar)
+	-- bg:SetPoint("TOPLEFT", 0, 1)
+	-- bg:SetPoint("BOTTOMRIGHT", 0, -1)
+	-- bg:SetFrameLevel(PlayerTalentFramePVPTalents.XPBar.Bar:GetFrameLevel()-1)
+	-- F.CreateBD(bg, .3)
+	-- PlayerTalentFramePVPTalents.XPBar.Bar.Background:Hide()
 	
-	PlayerTalentFramePVPTalents.XPBar.NextAvailable.Frame:Hide()
-	F.CreateBD(PlayerTalentFramePVPTalents.XPBar.NextAvailable, .5)
-	PlayerTalentFramePVPTalents.XPBar.NextAvailable:ClearAllPoints()
-	PlayerTalentFramePVPTalents.XPBar.NextAvailable:SetPoint("LEFT", PlayerTalentFramePVPTalents.XPBar.Bar, "RIGHT")
-	PlayerTalentFramePVPTalents.XPBar.NextAvailable:SetSize(25, 25)
-	PlayerTalentFramePVPTalents.XPBar.NextAvailable.Icon:SetAllPoints()
+	-- PlayerTalentFramePVPTalents.XPBar.NextAvailable.Frame:Hide()
+	-- F.CreateBD(PlayerTalentFramePVPTalents.XPBar.NextAvailable, .5)
+	-- PlayerTalentFramePVPTalents.XPBar.NextAvailable:ClearAllPoints()
+	-- PlayerTalentFramePVPTalents.XPBar.NextAvailable:SetPoint("LEFT", PlayerTalentFramePVPTalents.XPBar.Bar, "RIGHT")
+	-- PlayerTalentFramePVPTalents.XPBar.NextAvailable:SetSize(25, 25)
+	-- PlayerTalentFramePVPTalents.XPBar.NextAvailable.Icon:SetAllPoints()
 	
-	PlayerTalentFramePVPTalents.XPBar.NextAvailable.Frame.Show = F.dummy
-	PlayerTalentFramePVPTalents.XPBar.Levelbg = CreateFrame("Frame", nil, PlayerTalentFramePVPTalents.XPBar)
-	PlayerTalentFramePVPTalents.XPBar.Levelbg:SetPoint("RIGHT", PlayerTalentFramePVPTalents.XPBar.Bar, "LEFT")
-	PlayerTalentFramePVPTalents.XPBar.Levelbg:SetSize(25, 25)
-	PlayerTalentFramePVPTalents.XPBar.Levelbg:SetFrameLevel(1)
-	PlayerTalentFramePVPTalents.XPBar.Level:SetPoint("CENTER", PlayerTalentFramePVPTalents.XPBar.Levelbg, "CENTER")
-	PlayerTalentFramePVPTalents.XPBar.Level:SetJustifyH("CENTER")
-	F.CreateBD(PlayerTalentFramePVPTalents.XPBar.Levelbg, .5)
+	-- PlayerTalentFramePVPTalents.XPBar.NextAvailable.Frame.Show = F.dummy
+	-- PlayerTalentFramePVPTalents.XPBar.Levelbg = CreateFrame("Frame", nil, PlayerTalentFramePVPTalents.XPBar)
+	-- PlayerTalentFramePVPTalents.XPBar.Levelbg:SetPoint("RIGHT", PlayerTalentFramePVPTalents.XPBar.Bar, "LEFT")
+	-- PlayerTalentFramePVPTalents.XPBar.Levelbg:SetSize(25, 25)
+	-- PlayerTalentFramePVPTalents.XPBar.Levelbg:SetFrameLevel(1)
+	-- PlayerTalentFramePVPTalents.XPBar.Level:SetPoint("CENTER", PlayerTalentFramePVPTalents.XPBar.Levelbg, "CENTER")
+	-- PlayerTalentFramePVPTalents.XPBar.Level:SetJustifyH("CENTER")
+	-- F.CreateBD(PlayerTalentFramePVPTalents.XPBar.Levelbg, .5)
 	
 	for i = 1, 7 do
 		select(i, PlayerTalentFramePVPTalents.Talents:GetRegions()):Hide()
