@@ -233,6 +233,7 @@ C.themes["Blizzard_GarrisonUI"] = function()
 	end
 
 	F.CreateBD(GarrisonLandingPage)
+	F.CreateSD(GarrisonLandingPage)
 	F.ReskinClose(GarrisonLandingPage.CloseButton)
 	F.ReskinTab(_G.GarrisonLandingPageTab1)
 	F.ReskinTab(_G.GarrisonLandingPageTab2)
