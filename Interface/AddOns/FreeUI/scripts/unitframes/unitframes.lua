@@ -24,7 +24,7 @@ fonts = {
 
 local nameFont
 
-if name == "Nekretaal" or name == "Rhonesaia" or name == "Maginary" or name == "Arana" then
+if name == "Nekretaal" or name == "Rhonesaia" or name == "Maginary" or name == "Ashariel" then
 	nameFont = fonts.pixel
 else
 	nameFont = fonts.standard
@@ -100,11 +100,11 @@ local siValue = function(val)
 end
 
 local function hex(r, g, b)
-    if not r then return '|cffFFFFFF' end
-    if(type(r) == 'table') then
-        if(r.r) then r, g, b = r.r, r.g, r.b else r, g, b = unpack(r) end
-    end
-    return ('|cff%02x%02x%02x'):format(r * 255, g * 255, b * 255)
+	if not r then return '|cffFFFFFF' end
+	if(type(r) == 'table') then
+		if(r.r) then r, g, b = r.r, r.g, r.b else r, g, b = unpack(r) end
+	end
+	return ('|cff%02x%02x%02x'):format(r * 255, g * 255, b * 255)
 end
 
 -- [[ Smooth ]]
@@ -200,25 +200,25 @@ oUF.Tags.Events['free:bosshealth'] = "UNIT_HEALTH_FREQUENT UNIT_MAXHEALTH UNIT_T
 
 -- utf8 short string
 local function usub(str, len)
-    local i = 1
-    local n = 0
-    while true do
-        local b,e = string.find(str, "([%z\1-\127\194-\244][\128-\191]*)", i)
-        if(b == nil) then
-            return str
-        end
-        i = e + 1
-        n = n + 1
-        if(n > len) then
-            local r = string.sub(str, 1, b-1)
-            return r
-        end
-    end
+	local i = 1
+	local n = 0
+	while true do
+		local b,e = string.find(str, "([%z\1-\127\194-\244][\128-\191]*)", i)
+		if(b == nil) then
+			return str
+		end
+		i = e + 1
+		n = n + 1
+		if(n > len) then
+			local r = string.sub(str, 1, b-1)
+			return r
+		end
+	end
 end
 
 local function getSummary(str)
-    local t = string.gsub(str, "<.->", "")
-    return usub(t, 100, "...")
+	local t = string.gsub(str, "<.->", "")
+	return usub(t, 100, "...")
 end
 
 local function shortName(unit)
@@ -650,6 +650,11 @@ local Shared = function(self, unit, isSingle)
 	RaidIcon:SetPoint("CENTER", self, "CENTER", 0, 20)
 
 	self.RaidIcon = RaidIcon
+
+	-- [[SpellRange]]
+	self.SpellRange = {
+		insideAlpha = 1,
+		outsideAlpha = .4}
 
 	-- [[ Counter bar ]]
 
