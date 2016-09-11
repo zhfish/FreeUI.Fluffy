@@ -5,10 +5,5 @@
 	<Script file="LibSharedMedia-3.0\LibSharedMedia-3.0.lua"/>
 	<Script file="LibItemUpgradeInfo-1.0\LibItemUpgradeInfo-1.0.lua"/>
 	<Script file="LibInspect\LibInspect.lua"/>
-
-	<!-- <Script file="rLib\core.lua"/>
-	<Script file="rLib\dragframe.lua"/>
-	<Script file="rLib\framefader.lua"/>
-	<Script file="rLib\slashcmd.lua"/> -->
 </Ui>
 
