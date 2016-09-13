@@ -42,7 +42,7 @@ AddOns\Blizzard_TradeSkillUI.lua
 AddOns\Blizzard_TrainerUI.lua
 AddOns\Blizzard_VoidStorageUI.lua
 
-FrameXML\AlertFrames.lua
+#FrameXML\AlertFrames.lua
 FrameXML\BankFrame.lua
 FrameXML\CharacterFrame.lua
 FrameXML\ChatConfigFrame.lua
