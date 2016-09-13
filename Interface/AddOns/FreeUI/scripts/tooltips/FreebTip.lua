@@ -32,9 +32,10 @@ local cfg = {
 	combathideALL = C.tooltip.combathideALL,
 	showGRank = C.tooltip.showGRank,
 	guildText = "|cffE41F9B<%s>|r |cffA0A0A0%s|r",
-	showRealm = true,
+	showRealm = C.tooltip.showRealm,
 	realmText = " (*)",
 	YOU = "<YOU>",
+	playerTitle = C.tooltip.playerTitle,
 }
 
 ns.cfg = cfg
@@ -148,11 +149,15 @@ end
 
 FreebTip_Cache = {}
 local Cache = FreebTip_Cache
-local function getPlayer(unit)
+local function getPlayer(unit, origName)
 	local guid = UnitGUID(unit)
 	if not (Cache[guid]) then
 		local class, _, race, _, _, name, realm = GetPlayerInfoByGUID(guid)
 		if not name then return end
+
+		if(cfg.playerTitle) then
+ 			name = origName:gsub("-(.*)", "")
+ 		end
 
 		if (realm and strlen(realm) > 0) then
 			if(cfg.showRealm) then
@@ -277,7 +282,7 @@ local function OnSetUnit(self)
 		local isPlayer = UnitIsPlayer(unit)
 
 		if(isPlayer) then
-			player, guid = getPlayer(unit)
+			player, guid = getPlayer(unit, GameTooltipTextLeft1:GetText())
 
 			local Name = player and (player.name .. (player.realm or ""))
 			if(Name) then GameTooltipTextLeft1:SetText(Name) end
@@ -565,13 +570,14 @@ local function style(frame)
 	local frameName = frame and frame:GetName()
 	if not (frameName) then return end
 
+	local bdFrame = frame.BackdropFrame or frame
 	if(not frame.ftipBD) then
-		frame:SetBackdrop(cfg.backdrop)
-		frame.ftipBD = true
+		bdFrame:SetBackdrop(cfg.backdrop)
+		bdFrame.ftipBD = true
 	end
-	frame:SetBackdropColor(cfg.bgcolor.r, cfg.bgcolor.g, cfg.bgcolor.b, cfg.bgcolor.t)
-	frame:SetBackdropBorderColor(cfg.bdrcolor.r, cfg.bdrcolor.g, cfg.bdrcolor.b)
-	frame:SetScale(cfg.scale)
+
+	bdFrame:SetBackdropColor(cfg.bgcolor.r, cfg.bgcolor.g, cfg.bgcolor.b, cfg.bgcolor.t)
+	bdFrame:SetBackdropBorderColor(cfg.bdrcolor.r, cfg.bdrcolor.g, cfg.bdrcolor.b)
 
 	if(frame.GetItem) then
 		local _, item = frame:GetItem()
@@ -611,17 +617,20 @@ local function style(frame)
 		frame.ftipFontSet = true
 	end
 
-	if(frame.BattlePet and not frame.ftipBPfont) then
-		frame.Name:SetFontObject(GameTooltipHeaderText)
-		frame.BattlePet:SetFontObject(GameTooltipText)
-		frame.PetType:SetFontObject(GameTooltipText)
-		frame.Health:SetFontObject(GameTooltipText)
-		frame.Level:SetFontObject(GameTooltipText)
-		frame.Power:SetFontObject(GameTooltipText)
-		frame.Speed:SetFontObject(GameTooltipText)
-		frame.Owned:SetFontObject(GameTooltipText)
-		frame.ftipBPfont = true
+	if(frame.BattlePet) then
+		if(not frame.ftipBPfont) then
+			frame.Name:SetFontObject(GameTooltipHeaderText)
+			frame.BattlePet:SetFontObject(GameTooltipText)
+			frame.PetType:SetFontObject(GameTooltipText)
+			frame.Health:SetFontObject(GameTooltipText)
+			frame.Level:SetFontObject(GameTooltipText)
+			frame.Power:SetFontObject(GameTooltipText)
+			frame.Speed:SetFontObject(GameTooltipText)
+			frame.Owned:SetFontObject(GameTooltipText)
+			frame.ftipBPfont = true
+		end
 
+		frame.Background:Hide()
 		frame.BorderTop:Hide()
 		frame.BorderRight:Hide()
 		frame.BorderBottom:Hide()
@@ -632,13 +641,7 @@ local function style(frame)
 		frame.BorderBottomRight:Hide()
 	end
 
-	if(frame.BackdropFrame and not frame.ftipBDF) then
-		frame:SetBackdrop(nil)
-		frame.BackdropFrame:SetBackdrop(cfg.backdrop)
-		frame.BackdropFrame:SetBackdropColor(cfg.bgcolor.r, cfg.bgcolor.g, cfg.bgcolor.b, cfg.bgcolor.t)
-		frame.BackdropFrame:SetBackdropBorderColor(cfg.bdrcolor.r, cfg.bdrcolor.g, cfg.bdrcolor.b)
-		frame.ftipBDF = true
-	end
+	frame:SetScale(cfg.scale)
 end
 ns.style = style
 

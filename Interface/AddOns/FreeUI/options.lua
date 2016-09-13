@@ -161,6 +161,7 @@ C["tooltip"] = {
 	["combathideALL"] = false,
 	["showGRank"] = false,
 	["showRealm"] = true,
+	["playerTitle"] = false,
 }
 
 C["quests"] = {

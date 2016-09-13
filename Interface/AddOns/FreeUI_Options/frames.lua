@@ -668,11 +668,11 @@ do
 	local cursor = ns.CreateCheckBox(tooltip, "cursor", true, true)
 	cursor:SetPoint("TOPLEFT", enable, "BOTTOMLEFT", 16, -8)
 
-	local hideTitles = ns.CreateCheckBox(tooltip, "hideTitles", true, true)
-	hideTitles:SetPoint("TOPLEFT", cursor, "BOTTOMLEFT", 0, -8)
+	local playerTitle = ns.CreateCheckBox(tooltip, "playerTitle", true, true)
+	playerTitle:SetPoint("TOPLEFT", cursor, "BOTTOMLEFT", 0, -8)
 
 	local showRealm = ns.CreateCheckBox(tooltip, "showRealm", true, true)
-	showRealm:SetPoint("TOPLEFT", hideTitles, "BOTTOMLEFT", 0, -8)
+	showRealm:SetPoint("TOPLEFT", playerTitle, "BOTTOMLEFT", 0, -8)
 
 	local showRank = ns.CreateCheckBox(tooltip, "showRank", true, true)
 	showRank:SetPoint("TOPLEFT", showRealm, "BOTTOMLEFT", 0, -8)
@@ -686,7 +686,7 @@ do
 	local function toggleTooltipOptions()
 		local shown = enable:GetChecked()
 		cursor:SetShown(shown)
-		hideTitles:SetShown(shown)
+		playerTitle:SetShown(shown)
 		showRealm:SetShown(shown)
 		showRank:SetShown(shown)
 		combathideALL:SetShown(shown)
