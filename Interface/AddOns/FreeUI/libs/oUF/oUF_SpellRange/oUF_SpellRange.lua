@@ -52,7 +52,7 @@ local HelpIDs = ({
 
 local HarmIDs = ({
     DEATHKNIGHT = { 49576 },    -- Death Grip (30yd) - Starter
-    DEMONHUNTER = { 204157 },   -- Throw Glaive
+    DEMONHUNTER = { 204157, 185123 },   -- Throw Glaive
     DRUID = { 5176 },           -- Moonfire (40yd) - Lvl 10
     HUNTER = {
         75,                     -- Auto Shot (40yd) - Starter
@@ -73,6 +73,7 @@ local HarmIDs = ({
     },
     WARLOCK = {                 -- Shadow Bolt (40yd)
         686,
+        689,
         196657,
     },
     WARRIOR = { 355 },          -- Taunt (30yd) - Lvl 14
