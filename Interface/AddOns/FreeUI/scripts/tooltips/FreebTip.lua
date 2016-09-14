@@ -10,8 +10,6 @@ local cfg = {
 	scale = C.tooltip.scale,
 	cursor = C.tooltip.cursor,
 	point = C.tooltip.position,
-	hpbarText = false,
-	powerbar = false,
 	backdrop = {
 		bgFile = "Interface\\Buttons\\WHITE8x8",
 		edgeFile = C.media.glow,
@@ -26,9 +24,11 @@ local cfg = {
 	sbHeight = C.tooltip.sbHeight,
 	factionIconSize = 30,
 	factionIconAlpha = 0,
-	pBar = C.tooltip.pBar,
-	fadeOnUnit = C.tooltip.fadeOnUnit,
-	combathide = C.tooltip.combathide,
+	sbText = false,
+	pBar = false, -- unit power bar
+ 	pBarMANAonly = true, -- pBar must be true
+	fadeOnUnit = C.tooltip.fadeOnUnit, -- fade from units instead of hiding instantly
+	combathide = C.tooltip.combathide, -- hide just interface toolitps in combat
 	combathideALL = C.tooltip.combathideALL,
 	showGRank = C.tooltip.showGRank,
 	guildText = "|cffE41F9B<%s>|r |cffA0A0A0%s|r",
@@ -51,8 +51,7 @@ local powerColors = {}
 for power, color in next, PowerBarColor do
 	powerColors[power] = color
 end
-powerColors['MANA'] = { r=.31, g=.45, b=.72 }
-powerColors['RAGE'] = { r=.69, g=.31, b=.31 }
+powerColors["MANA"] = { r=.31, g=.45, b=.63 }
 
 local classification = {
 	elite = ("|cffFFCC00 %s|r"):format(ELITE),
@@ -89,7 +88,7 @@ end
 local numberize = function(val)
 	if (locale == "zhCN" or locale == "zhTW") then
 		if (val >= 1e7) then
-			return ("%.1fE"):format(val / 1e7)
+			return ("%.1fm"):format(val / 1e6)
 		elseif (val >= 1e4) then
 			return ("%.1fW"):format(val / 1e4)
 		else
@@ -374,13 +373,16 @@ local function OnSetUnit(self)
 		end
 
 		if(cfg.pBar) then
+			local _, pToken = UnitPowerType(unit)
+ 			local isMANA = cfg.pBarMANAonly and pToken == "MANA"
+
 			local pMin, pMax = UnitPower(unit), UnitPowerMax(unit)
-			if(pMin > 0) then
+			if((pMin > 0 and isMANA) or (pMin > 0 and not cfg.pBarMANAonly)) then
 				self.ftipPowerBar:SetMinMaxValues(0, pMax)
 				self.ftipPowerBar:SetValue(pMin)
 
 				local pType, pToken = UnitPowerType(unit)
-				local pColor = powerColors[pToken]
+				local pColor = powerColors[pToken] or powerColors[pType]
 				self.ftipPowerBar:SetStatusBarColor(pColor.r, pColor.g, pColor.b)
 				self.ftipPowerBar:Show()
 			else
@@ -464,31 +466,25 @@ gtSBbg:SetTexture(cfg.statusbar)
 gtSBbg:SetVertexColor(0.3, 0.3, 0.3, 0.5)
 
 local function gtSBValChange(self, value)
-	if (not value) then
+	if(not value) then
 		return
 	end
 	local min, max = self:GetMinMaxValues()
-	if (value < min) or (value > max) then
+	if(value < min) or (value > max) then
 		return
 	end
 
-	if (not self.text) then
+	if(not self.text) then
 		self.text = self:CreateFontString(nil, "OVERLAY")
-		self.text:SetPoint("CENTER", GameTooltipStatusBar, 0, 0)
-		self.text:SetFont(cfg.font or TooltipText[1], cfg.fontsize or TooltipTextSmall[2], "THICKOUTLINE")
+		self.text:SetPoint("CENTER", self, 0, 0)
+		self.text:SetFont(cfg.font, 10, "OUTLINE")
 	end
-	self.text:Hide()
-	if (cfg.hpbarText) then
-		local hp
-		self.text:Show()
-		if cfg.hpbarText == 1 then
-			hp = numberize(self:GetValue())
-		else
-			hp = numberize(self:GetValue()).." / "..numberize(max)
-		end
+
+	if(cfg.sbText) then
+		local hp = numberize(self:GetValue())
 		self.text:SetText(hp)
 	else
-		self.text:Hide()
+		self.text:SetText(nil)
 	end
 end
 GameTooltipStatusBar:HookScript("OnValueChanged", gtSBValChange)
@@ -527,6 +523,18 @@ local function UpdatePower(self, elapsed)
 		if(pMin > 0) then
 			self:SetMinMaxValues(0, pMax)
 			self:SetValue(pMin)
+
+			if(not self.text) then
+ 				self.text = self:CreateFontString(nil, "OVERLAY")
+ 				self.text:SetPoint("CENTER", self, 0, 0)
+ 				self.text:SetFont(cfg.font, 10, "OUTLINE")
+ 			end
+ 
+ 			if(cfg.sbText) then
+ 				self.text:SetText(numberize(pMin))
+ 			else
+ 				self.text:SetText(nil)
+ 			end
 		end
 	end
 end
