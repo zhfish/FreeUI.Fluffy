@@ -72,10 +72,9 @@ local BOAItems = {
 
 --- BOA Item Level ---
 local function BOALevel(level, id)
-	if (level > 100) then level = 100 end
 	if (level > 97) then
 		if BOAItems[id] then
-			level = 715
+			level = 815 - (110 - level) * 10
 		else
 			level = 605 - (100 - level) * 5
 		end
@@ -146,7 +145,7 @@ local function UnitGear(unit)
 	local class = select(2, UnitClass(unit))
 
 	local boa, pvp = 0, 0
-	local flvl, fslot = 0, 0
+	local wlvl, wslot = 0, 0
 	local ilvl, total, delay = 0, 0, nil
 
 	for i = 1, 17 do
@@ -177,29 +176,37 @@ local function UnitGear(unit)
 						end
 
 						if (i == 16) then
-							if (class == 'WARRIOR') then
-								flvl = level
-								fslot = slot
+							if (quality == 6) or (SpecDB[currentGUID] == FURY) then
+								wlvl = level
+								wslot = slot
 							end
 							if (slot == 'INVTYPE_2HWEAPON') or (slot == 'INVTYPE_RANGED') or ((slot == 'INVTYPE_RANGEDRIGHT') and (class == 'HUNTER')) then
 								level = level * 2
 							end
 						end
 
-						if (i == 17) and (class == 'WARRIOR') then
-							if (fslot ~= 'INVTYPE_2HWEAPON') and (slot == 'INVTYPE_2HWEAPON') then
-								if (level > flvl) then
-									level = level * 2 - flvl
-								end
-							elseif (fslot == 'INVTYPE_2HWEAPON') then
-								if (level > flvl) then
-									if (slot == 'INVTYPE_2HWEAPON') then
-										level = level * 2 - flvl * 2
-									else
-										level = level - flvl
+						if (i == 17) then
+							if (SpecDB[currentGUID] == FURY) then
+								if (wslot ~= 'INVTYPE_2HWEAPON') and (slot == 'INVTYPE_2HWEAPON') then
+									if (level > wlvl) then
+										level = level * 2 - wlvl
 									end
+								elseif (wslot == 'INVTYPE_2HWEAPON') then
+									if (level > wlvl) then
+										if (slot == 'INVTYPE_2HWEAPON') then
+											level = level * 2 - wlvl * 2
+										else
+											level = level - wlvl
+										end
+									else
+										level = 0
+									end
+								end
+							elseif (quality == 6) and wlvl then
+								if level > wlvl then
+									level = level * 2 - wlvl
 								else
-									level = 0
+									level = wlvl
 								end
 							end
 						end
@@ -251,15 +258,18 @@ local function ScanUnit(unit, forced)
 	local cachedGear, cachedSpec
 
 	if UnitIsUnit(unit, 'player') then
-		cachedGear = UnitGear('player')
 		cachedSpec = UnitSpec('player')
+		SpecDB[currentGUID] = cachedSpec
+
+		cachedGear = UnitGear('player')
+		GearDB[currentGUID] = cachedGear
 
 		SetUnitInfo(cachedGear, cachedSpec)
 	else
 		if (not unit) or (UnitGUID(unit) ~= currentGUID) then return end
 
-		cachedGear = GearDB[currentGUID]
 		cachedSpec = SpecDB[currentGUID]
+		cachedGear = GearDB[currentGUID]
 
 		if cachedGear or forced then
 			SetUnitInfo(cachedGear, cachedSpec)
@@ -321,11 +331,11 @@ f:SetScript('OnEvent', function(self, event, ...)
 		local guid = ...
 		if (guid ~= currentGUID) then return end
 
-		local gear = UnitGear(currentUNIT)
-		GearDB[currentGUID] = gear
-
 		local spec = UnitSpec(currentUNIT)
 		SpecDB[currentGUID] = spec
+
+		local gear = UnitGear(currentUNIT)
+		GearDB[currentGUID] = gear
 
 		if (not gear) or (not spec) then
 			ScanUnit(currentUNIT, true)
