@@ -376,48 +376,48 @@ function lib:GetTalents(target, guid)
             specID = GetInspectSpecialization(target)
         end
         
-		if (specID) then
-			
-			local id, name, description, icon, background = GetSpecializationInfoByID(specID)
-			local role = GetSpecializationRoleByID(specID)
-			
-			local talents = {
-				id = id,
-				name = name,
-				description = description,
-				icon = icon,
-				background = background,
-				role = role,
-				glyphs = {},  -- Removed in 7.03, left for compatability
-				talents = {},
-			};
+        if (specID) then
+            
+            local id, name, description, icon, background = GetSpecializationInfoByID(specID)
+            local role = GetSpecializationRoleByID(specID)
+            
+            local talents = {
+                id = id,
+                name = name,
+                description = description,
+                icon = icon,
+                background = background,
+                role = role,
+                glyphs = {},  -- Removed in 7.03, left for compatability
+                talents = {},
+            };
 
-			-- Talents
-			local classDisplayName, class, classID = UnitClass(target);
-			if TalentFrame then
-				for tier=1, MAX_TALENT_TIERS do
-					local talentRow = TalentFrame["tier"..tier];
-					local rowAvailable = true;
-					
-					for column=1, NUM_TALENT_COLUMNS do
-						local talentID, name, iconTexture, selected, available = GetTalentInfo(tier, column, TalentFrame.talentGroup, TalentFrame.inspect, talentUnit);
-						-- local name, iconTexture, tier, column, selected, available = GetTalentInfo(tier, true, nil, target, self.cache[guid].classID);
-						talents.talents[tier] = {
-							name = name,
-							iconTexture = iconTexture,
-							tier = tier,
-							column = column,
-							selected = selected,
-							available = available,
-						}
-					end
-				end
-			end
+            -- Talents
+            local classDisplayName, class, classID = UnitClass(target);
+            if TalentFrame then
+                for tier=1, MAX_TALENT_TIERS do
+                    local talentRow = TalentFrame["tier"..tier];
+                    local rowAvailable = true;
+                    
+                    for column=1, NUM_TALENT_COLUMNS do
+                        local talentID, name, iconTexture, selected, available = GetTalentInfo(tier, column, TalentFrame.talentGroup, TalentFrame.inspect, talentUnit);
+                        -- local name, iconTexture, tier, column, selected, available = GetTalentInfo(tier, true, nil, target, self.cache[guid].classID);
+                        talents.talents[tier] = {
+                            name = name,
+                            iconTexture = iconTexture,
+                            tier = tier,
+                            column = column,
+                            selected = selected,
+                            available = available,
+                        }
+                    end
+                end
+            end
 
-			return talents;
-		else
-			return false;
-		end
+            return talents;
+        else
+            return false;
+        end
     else
         return false;
     end

@@ -6,5 +6,6 @@
 	<Script file="LibItemUpgradeInfo-1.0\LibItemUpgradeInfo-1.0.lua"/>
 	<Script file="LibItemLevel.lua"/>
 	<Script file="LibInspect\LibInspect.lua"/>
+	<Script file="Taint.lua"/>
 </Ui>
 
