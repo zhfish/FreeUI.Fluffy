@@ -20,7 +20,7 @@ local function styleBubble(frame)
 		end
 	end
 
-	frame.text:SetFont("Fonts\\yaheibold.ttf", 12, "OUTLINE")
+	frame.text:SetFont(C.media.font.normal, 12, "OUTLINE")
 	frame.text:SetJustifyH("LEFT")
 
 	frame:SetBackdrop({
