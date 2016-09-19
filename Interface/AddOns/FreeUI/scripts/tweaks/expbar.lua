@@ -211,7 +211,7 @@ local showArtifactTooltip = function(self)
 		GameTooltip:SetPoint(TIP[1], TIP[2], TIP[3], TIP[4], TIP[5])
 
 		GameTooltip:AddLine(name, COLOR.r, COLOR.g, COLOR.b)
-		GameTooltip:AddLine("Artifact Power: "..percent, 1, 1, 1)
+		GameTooltip:AddLine("Artifact Power: "..percent.."%", 1, 1, 1)
 		GameTooltip:AddLine("Points to spend: " .. num, 1, 1, 1)
 		GameTooltip:AddLine("Next trait: " .. xp .. "/" .. next, 1, 1, 1)
 

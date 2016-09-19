@@ -1,6 +1,3 @@
-local F, C, L = unpack(select(2, ...))
-local _G = _G
-
 ------------------------
 -- Adjustable settings
 local r, g, b, a = 0.7, 0.7, 0.7, 1 -- Overlay color & alpha
@@ -22,11 +19,9 @@ local showTerrain = false
 
 local moads = {'Hybrid', 'Disabled', 'All Terrain', 'No Terrain'}
 local menu = CreateFrame('frame', 'foglightmenu', WorldMapFrame.UIElementsFrame, 'UIDropDownMenuTemplate')
-menu:SetPoint('BOTTOM', 0, -6)
+menu:SetPoint('BOTTOMLEFT', -19, -6)
 --menu:SetFrameLevel(WORLDMAP_POI_FRAMELEVEL + 2)
-menu:SetAlpha(0)
-
-F.ReskinDropDown(menu)
+menu:SetAlpha(0.8)
 
 local function setMode(mode)
 	if not moads[mode] then mode = 1 end

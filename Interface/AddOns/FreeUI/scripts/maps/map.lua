@@ -1,36 +1,6 @@
 local F, C, L = unpack(select(2, ...))
 local _G = _G
 
-do
-    local WorldMapFrame = _G.WorldMapFrame
-    local InCombatLockdown = _G.InCombatLockdown
-    
-    local WorldMapBountyBoardMixin = _G.WorldMapBountyBoardMixin
-    function WorldMapFrame.UIElementsFrame.BountyBoard.GetDisplayLocation(self)
-        if InCombatLockdown() then
-            return
-        end
-     
-        return WorldMapBountyBoardMixin.GetDisplayLocation(self)
-    end
-     
-    local WorldMapActionButtonMixin = _G.WorldMapActionButtonMixin
-    function WorldMapFrame.UIElementsFrame.ActionButton.GetDisplayLocation(self, useAlternateLocation)
-        if InCombatLockdown() then
-            return
-        end
-     
-        return WorldMapActionButtonMixin.GetDisplayLocation(self, useAlternateLocation)
-    end
-     
-    function WorldMapFrame.UIElementsFrame.ActionButton.Refresh(self)
-        if InCombatLockdown() then
-            return
-        end
-     
-        WorldMapActionButtonMixin.Refresh(self)
-    end
-end
 
 local function skin()
 	--print("Map:Skin")
@@ -42,8 +12,6 @@ local function skin()
 		local trackingBtn = _G.WorldMapFrame.UIElementsFrame.TrackingOptionsButton
 
 		--Buttons
-		_G.WorldMapLevelDropDown:ClearAllPoints()
-		_G.WorldMapLevelDropDown:SetPoint("TOPLEFT", _G.WorldMapFrame.UIElementsFrame, -15, 3)
 		trackingBtn:ClearAllPoints()
 		trackingBtn:SetPoint("TOPRIGHT", _G.WorldMapFrame.UIElementsFrame, 3, 3)
 
@@ -107,14 +75,12 @@ _G.DropDownList1:HookScript("OnShow", function(self)
 end)
 
 -- keep it centered
-
 hooksecurefunc("WorldMap_ToggleSizeDown", function()
 	WorldMapFrame:ClearAllPoints()
 	WorldMapFrame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 end)
 
 -- coordinates
-
 local UIFrame = WorldMapFrame.UIElementsFrame
 
 local coords = F.CreateFS(UIFrame, C.FONT_SIZE_NORMAL, "LEFT")
