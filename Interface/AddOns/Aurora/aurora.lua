@@ -883,13 +883,13 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 			end
 		end
 
-		useButtonGradientColour = AuroraConfig.useButtonGradientColour
+		-- useButtonGradientColour = AuroraConfig.useButtonGradientColour
 
-		if useButtonGradientColour then
-			buttonR, buttonG, buttonB, buttonA = _G.unpack(AuroraConfig.buttonGradientColour)
-		else
+		-- if useButtonGradientColour then
+		-- 	buttonR, buttonG, buttonB, buttonA = _G.unpack(AuroraConfig.buttonGradientColour)
+		-- else
 			buttonR, buttonG, buttonB, buttonA = _G.unpack(AuroraConfig.buttonSolidColour)
-		end
+		-- end
 
 		if AuroraConfig.useCustomColour then
 			red, green, blue = AuroraConfig.customColour.r, AuroraConfig.customColour.g, AuroraConfig.customColour.b
@@ -942,13 +942,13 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		-- [[ Splash screen for first time users ]]
 
-		if not AuroraConfig.acknowledgedSplashScreen then
-			if shouldSkipSplashScreen then
-				AuroraConfig.acknowledgedSplashScreen = false
-			else
-				_G.AuroraSplashScreen:Show()
-			end
-		end
+		-- if not AuroraConfig.acknowledgedSplashScreen then
+		-- 	if shouldSkipSplashScreen then
+		-- 		AuroraConfig.acknowledgedSplashScreen = false
+		-- 	else
+		-- 		_G.AuroraSplashScreen:Show()
+		-- 	end
+		-- end
 
 		-- [[ Plugin helper ]]
 

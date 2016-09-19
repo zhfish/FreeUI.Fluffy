@@ -29,7 +29,6 @@ AddOns\Blizzard_GuildBankUI.lua
 AddOns\Blizzard_GuildControlUI.lua
 AddOns\Blizzard_GuildUI.lua
 AddOns\Blizzard_InspectUI.lua
-AddOns\Blizzard_ItemAlterationUI.lua
 AddOns\Blizzard_ItemSocketingUI.lua
 AddOns\Blizzard_ItemUpgradeUI.lua
 AddOns\Blizzard_LookingForGuildUI.lua
@@ -50,7 +49,7 @@ FrameXML\Constants.lua
 FrameXML\ContainerFrame.lua
 FrameXML\DressUpFrames.lua
 FrameXML\EquipmentFlyout.lua
-FrameXML\Fonts.lua
+#FrameXML\Fonts.lua
 FrameXML\GameTooltip.lua
 FrameXML\GarrisonFollowerTooltip.lua
 FrameXML\InterfaceOptionsFrame.lua

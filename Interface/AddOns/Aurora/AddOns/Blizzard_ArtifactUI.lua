@@ -12,6 +12,7 @@ local F, C = _G.unpack(private.Aurora)
 
 C.themes["Blizzard_ArtifactUI"] = function()
 	F.CreateBD(ArtifactFrame)
+	F.CreateSD(ArtifactFrame)
 	ArtifactFrame.Background:Hide()
 	ArtifactFrame.PerksTab.HeaderBackground:Hide()
 	ArtifactFrame.PerksTab.BackgroundBackShadow:Hide()
@@ -25,6 +26,8 @@ C.themes["Blizzard_ArtifactUI"] = function()
 	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:ClearAllPoints()
 	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:SetPoint("TOPLEFT", ArtifactFrame, "TOPLEFT", 5, -5 )
 	ArtifactFrame.AppearancesTab.Background:Hide()
+
+	F.ReskinClose(ArtifactFrame.CloseButton)
 	
 	ArtifactFrame.AppearancesTab:HookScript("OnShow", function()
 		for i = 1, 20 do
