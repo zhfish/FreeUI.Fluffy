@@ -1,5 +1,5 @@
 local SCALE			= 1
-local WIDTH 		= 254
+local WIDTH 		= 256
 local HEIGHT 		= 2
 local _, CLASS 		= UnitClass("player")
 local COLOR			= CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[CLASS] or RAID_CLASS_COLORS[CLASS]
@@ -211,8 +211,9 @@ local showArtifactTooltip = function(self)
 		GameTooltip:SetPoint(TIP[1], TIP[2], TIP[3], TIP[4], TIP[5])
 
 		GameTooltip:AddLine(name, COLOR.r, COLOR.g, COLOR.b)
-		GameTooltip:AddLine("Artifact Power: "..percent.."%", 1, 1, 1)
+		GameTooltip:AddLine("Spended Points: " .. spent, 1, 1, 1)
 		GameTooltip:AddLine("Points to spend: " .. num, 1, 1, 1)
+		GameTooltip:AddLine("Artifact Power: "..percent.."%", 1, 1, 1)
 		GameTooltip:AddLine("Next trait: " .. xp .. "/" .. next, 1, 1, 1)
 
 		GameTooltip:Show()
