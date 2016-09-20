@@ -15,7 +15,7 @@ cf.Config = {
 	["FilterPetTalentSpec"] = true, --Filter the messages:"Your pet has learned/unlearned..." // 不显示“你的宠物学会了/忘却了...”
 
 	["MergeAchievement"] = true, --Merge the messages:"...has earned the achievement..." // 合并显示获得成就
-	["MergeCraftMSG"] = true, --Merge the messages:"You has created..." // 合并显示“你制造了...”
+	["MergeCraftMSG"] = false, --Merge the messages:"You has created..." // 合并显示“你制造了...”
 	["OtherCraftMSG"] = true, --Filter the repeat messages:"... has created..." // 过滤掉重复的“...制造了...”
 
 	["FilterRaidAlert"] = true, --Filter the bullshit messages from RaidAlert. // 过滤煞笔RaidAlert的脑残信息
