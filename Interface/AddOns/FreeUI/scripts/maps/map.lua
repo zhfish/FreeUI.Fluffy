@@ -15,12 +15,6 @@ local function skin()
 		trackingBtn:ClearAllPoints()
 		trackingBtn:SetPoint("TOPRIGHT", _G.WorldMapFrame.UIElementsFrame, 3, 3)
 
-		--Foglight
-		if _G.foglightmenu and _G.Aurora then
-			_G.foglightmenu:ClearAllPoints()
-			_G.foglightmenu:SetPoint("TOPRIGHT", trackingBtn, "TOPLEFT", 20, 0)
-			F.ReskinDropDown(_G.foglightmenu)
-		end
 		_G.WorldMapFrame.skinned = true
 	end
 end
