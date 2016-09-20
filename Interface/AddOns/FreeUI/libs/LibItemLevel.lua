@@ -1,9 +1,8 @@
--- by aliluya555
-
-local REVISION = 1
-if (type(LibItemLevel) == "table") and (REVISION <= LibItemLevel.REVISION) then
-	return
-end
+---------------------------------
+-- 物品信息庫 Author: M
+---------------------------------
+local REVISION = 2
+if (type(LibItemLevel) == "table" and REVISION <= LibItemLevel.REVISION) then return end
 
 LibItemLevel = LibItemLevel or {}
 local LIL = LibItemLevel
@@ -12,8 +11,8 @@ LIL.ItemTip = LIL.ItemTip or CreateFrame("GameTooltip", "LibItemLevelItemTip", n
 LIL.UnitTip = LIL.UnitTip or CreateFrame("GameTooltip", "LibItemLevelUnitTip", nil, "GameTooltipTemplate")
 LIL.ItemTip:SetOwner(UIParent,"ANCHOR_NONE")
 LIL.UnitTip:SetOwner(UIParent,"ANCHOR_NONE")
+LIL.ItemDB = LIL.ItemDB or {}
 
-local ITEM_LEVEL = _G["ITEM_LEVEL"]
 local PVP_ITEM_PATTERN
 local locale = GetLocale()
 if (locale == "zhCN") then
@@ -24,10 +23,6 @@ else
 	PVP_ITEM_PATTERN = "Season %d"
 end
 
-LIL.ItemDB = LIL.ItemDB or {}
-LIL.LVLPattern = LIL.LVLPattern or gsub(ITEM_LEVEL, "%%d", "(%%d+)")
-LIL.PVPPattern = LIL.PVPPattern or gsub(PVP_ITEM_PATTERN, "%%d", "(%%d+)")
-
 local function hasLocally(itemID)
 	if (not itemID or itemID == "" or itemID == "0") then return true end
 	return select(10, GetItemInfo(tonumber(itemID)))
@@ -36,9 +31,7 @@ end
 --物品是否本地化
 function LIL:ItemLocally(itemLink)
 	local id, gem1, gem2, gem3 = string.match(itemLink, "item:(%d+):[^:]*:(%d-):(%d-):(%d-):")
-	if (hasLocally(id) and hasLocally(gem1) and hasLocally(gem2) and hasLocally(gem3)) then
-		return true
-	end
+	if (hasLocally(id) and hasLocally(gem1) and hasLocally(gem2) and hasLocally(gem3)) then return true end
 end
 
 --获取物品实际信息
@@ -50,6 +43,9 @@ function LIL:GetActualItemInfo(itemLink)
 	end
 
 	if (not LIL:ItemLocally(itemLink)) then return 0, 1 end
+
+	if (not LIL.LVLPattern) then LIL.LVLPattern = gsub(ITEM_LEVEL, "%%d", "(%%d+)") end
+	if (not LIL.PVPPattern) then LIL.PVPPattern = gsub(PVP_ITEM_PATTERN, "%%d", "(%%d+)") end
 
 	LIL.ItemTip:ClearLines()
 	LIL.ItemTip:SetHyperlink(itemLink)
@@ -65,9 +61,9 @@ function LIL:GetActualItemInfo(itemLink)
 		if (LVL) then break end
 	end
 
-	if (itemRarity ~= 7) then
+	if (LVL and itemRarity ~= 7) then
 		LIL.ItemDB[itemLink] = {
-			Level = LVL or itemLevel or 0,
+			Level = LVL,
 			Rarity = itemRarity,
 			Slot = itemSlot,
 			PVP = PVP,
@@ -92,6 +88,9 @@ function LIL:GetUnitItemInfo(unit, index)
 
 	if (not LIL:ItemLocally(itemLink)) then return 0, 1 end
 
+	if (not LIL.LVLPattern) then LIL.LVLPattern = gsub(ITEM_LEVEL, "%%d", "(%%d+)") end
+	if (not LIL.PVPPattern) then LIL.PVPPattern = gsub(PVP_ITEM_PATTERN, "%%d", "(%%d+)") end
+
 	local _, _, itemRarity, itemLevel, _, _, _, _, itemSlot = GetItemInfo(itemLink)
 	local text, LVL, PVP
 
@@ -103,9 +102,9 @@ function LIL:GetUnitItemInfo(unit, index)
 		if (LVL) then break end
 	end
 
-	if (itemRarity ~= 7) then
+	if (LVL and itemRarity ~= 7) then
 		LIL.ItemDB[itemLink] = {
-			Level = LVL or itemLevel or 0,
+			Level = LVL,
 			Rarity = itemRarity,
 			Slot = itemSlot,
 			PVP = PVP,
