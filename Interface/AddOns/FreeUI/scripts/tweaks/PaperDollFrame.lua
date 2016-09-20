@@ -1,194 +1,84 @@
+if (type(LibItemLevel) ~= "table") then return end
 local F, C, L = unpack(select(2, ...))
 
--- Lua Globals --
-local _G = _G
+local _, _G = _, _G
+local LIL = LibItemLevel
 
+local r, g, b = C.r, C.g, C.b
 
-	local r, g, b = C.r, C.g, C.b
+local f = _G.CreateFrame("Frame")
+f:RegisterEvent("ADDON_LOADED")
 
-	-- Lua Globals --
-	local next = _G.next
-
-	-- Libs --
-	local LIU = _G.LibStub("RealUI_LibItemUpgradeInfo-1.0")
-
---	local RealUI = _G.RealUI
-	local maxUpgrades = 6
-
-	local itemSlots = {
-		{slot = "Head", hasDura = true},
-		{slot = "Neck", hasDura = false},
-		{slot = "Shoulder", hasDura = true},
-		{}, -- shirt
-		{slot = "Chest", hasDura = true},
-		{slot = "Waist", hasDura = true},
-		{slot = "Legs", hasDura = true},
-		{slot = "Feet", hasDura = true},
-		{slot = "Wrist", hasDura = true},
-		{slot = "Hands", hasDura = true},
-		{slot = "Finger0", hasDura = false},
-		{slot = "Finger1", hasDura = false},
-		{slot = "Trinket0", hasDura = false},
-		{slot = "Trinket1", hasDura = false},
-		{slot = "Back", hasDura = false},
-		{slot = "MainHand", hasDura = true},
-		{slot = "SecondaryHand", hasDura = true},
-	}
-	-- Set up iLvl and Durability
-	for slotID = 1, #itemSlots do
-		local item = itemSlots[slotID]
-		if item.slot then
-			local itemSlot = _G["Character" .. item.slot .. "Slot"]
-			local iLvl = itemSlot:CreateFontString(item.slot .. "ItemLevel", "OVERLAY")
---			iLvl:SetFontObject(_G.SystemFont_Outline_Small) --SetFont(unpack(RealUI.font.pixel1))
-			F.SetFS(iLvl)
-			iLvl:SetPoint("BOTTOMRIGHT", 2, 1.5)
-			itemSlot.ilvl = iLvl
-
-			local upgradeBG = itemSlot:CreateTexture(nil, "OVERLAY", -8)
-			upgradeBG:SetColorTexture(0, 0, 0, 1)
-			if item.slot == "SecondaryHand" then
-				upgradeBG:SetPoint("TOPRIGHT", itemSlot, "TOPLEFT", 1, 0)
-				upgradeBG:SetPoint("BOTTOMLEFT", itemSlot, "BOTTOMLEFT", -1, 0)
-			else
-				upgradeBG:SetPoint("TOPLEFT", itemSlot, "TOPRIGHT", -1, 0)
-				upgradeBG:SetPoint("BOTTOMRIGHT", itemSlot, "BOTTOMRIGHT", 1, 0)
-			end
-			itemSlot.upgradeBG = upgradeBG
-
-			itemSlot.upgrade = {}
-			for i = 1, maxUpgrades do
-				local tex = itemSlot:CreateTexture(nil, "OVERLAY")
-				tex:SetWidth(1)
-				if i == 1 then
-					if item.slot == "SecondaryHand" then
-						tex:SetPoint("TOPRIGHT", itemSlot, "TOPLEFT", 0, 0)
-					else
-						tex:SetPoint("TOPLEFT", itemSlot, "TOPRIGHT", 0, 0)
-					end
-				else
-					tex:SetPoint("TOPLEFT", itemSlot.upgrade[i-1], "BOTTOMLEFT", 0, -1)
-				end
-				itemSlot["Upgrade"..i] = tex
-				itemSlot.upgrade[i] = tex
-			end
-			if item.hasDura then
-				local dura = _G.CreateFrame("StatusBar", nil, itemSlot)
-				
-				if item.slot == "SecondaryHand" then
-					dura:SetPoint("TOPLEFT", itemSlot, "TOPRIGHT", 2, 0)
-					dura:SetPoint("BOTTOMRIGHT", itemSlot, "BOTTOMRIGHT", 3, 0)
-				else
-					dura:SetPoint("TOPRIGHT", itemSlot, "TOPLEFT", -2, 0)
-					dura:SetPoint("BOTTOMLEFT", itemSlot, "BOTTOMLEFT", -3, 0)
-				end
-				
-				dura:SetStatusBarTexture(C.media.texture)
-				dura:SetOrientation("VERTICAL")
-				dura:SetMinMaxValues(0, 1)
-				dura:SetValue(0)
-				
-				F.CreateBDFrame(dura)
-				dura:SetFrameLevel(itemSlot:GetFrameLevel() + 4)
-				itemSlot.dura = dura
-			end
+local function PaperDollItemInfo(self, unit)
+	local id = self:GetID()
+    if (id == 4 or id > 17) then return end
+	if (not self.ilvl) then
+		self.ilvl = self:CreateFontString(nil, "OVERLAY")
+		F.SetFS(self.ilvl)
+		self.ilvl:SetPoint("BOTTOMRIGHT", 2, 1.5)
+	end
+	self.ilvl:SetText("")
+    if (unit and self.hasItem) then
+		local itemLevel, Unknow, itemRarity = LIL:GetUnitItemInfo(unit, id)
+		if (itemLevel and Unknow == 0 and itemLevel > 0) then
+			local itemColor = _G.ITEM_QUALITY_COLORS[itemRarity]
+			self.ilvl:SetTextColor(itemColor.r, itemColor.g, itemColor.b)
+			self.ilvl:SetText(itemLevel)
 		end
 	end
-
-	_G.PaperDollFrame.ilvl = _G.PaperDollFrame:CreateFontString("ARTWORK")
-	_G.PaperDollFrame.ilvl:SetFontObject(_G.SystemFont_Small)
-	_G.PaperDollFrame.ilvl:SetPoint("TOP", _G.PaperDollFrame, "TOP", 0, -20)
-
-	local function HideItemLevelInfo(itemSlot)
-		itemSlot.ilvl:SetText("")
-		itemSlot.upgradeBG:Hide()
-		for i, tex in next, itemSlot.upgrade do
-			tex:Hide()
+    if (unit == "player") then
+		if (id == 2 or (id > 10 and id < 16)) then return end
+		if (not self.dura) then
+			self.dura = self:CreateFontString(nil, "OVERLAY")
+			F.SetFS(self.dura)
+			self.dura:SetPoint("TOPLEFT", 2, -1.5)
+		end
+		self.dura:SetText("")
+		local v1, v2, dura = GetInventoryItemDurability(id)
+		if v1 and v2 and v2 ~= 0 then dura = v1 / v2 end
+		if (dura and dura < 0.5) then
+			local relperc = dura * 2 % 1
+			self.dura:SetTextColor(1, relperc, 0)
+			self.dura:SetText(format("%d%%", dura * 100))
+		end
+	elseif (id > 15 and GetInventoryItemTexture(unit, 17)) then
+		local mainhand, _, mainhandRarity = LIL:GetUnitItemInfo(unit, 16)
+		local offhand, _, offhandRarity = LIL:GetUnitItemInfo(unit, 17)
+		if (mainhandRarity == 6 or offhandRarity == 6) then
+			self.ilvl:SetText(max(mainhand, offhand))
 		end
 	end
+end
 
-	-- Update Item display
-	local f, timer = _G.CreateFrame("Frame")
-	local function UpdateItems()
-		if not _G.CharacterFrame:IsVisible() then return end
-		
-		for slotID = 1, #itemSlots do
-			local item = itemSlots[slotID]
-			if item.slot then
-				local itemSlot = _G["Character" .. item.slot .. "Slot"]
-				local itemLink = _G.GetInventoryItemLink("player", slotID)
-				if itemLink then
-					local _, _, itemRarity = _G.GetItemInfo(itemLink)
-					local itemLevel = LIU:GetUpgradedItemLevel(itemLink)
+f:SetScript("OnEvent", function(self, event, arg1)
+    if (arg1 == "Blizzard_InspectUI") then
+        self:UnregisterAllEvents()
+        _G.hooksecurefunc("InspectPaperDollItemSlotButton_Update", function(self)
+            PaperDollItemInfo(self, InspectFrame.unit)
+        end)
+    end
+end)
 
+_G.hooksecurefunc("PaperDollItemSlotButton_Update", function(self)
+    PaperDollItemInfo(self, "player")
+end)
 
-					if itemLevel and itemLevel > 0 then
-						itemSlot.ilvl:SetTextColor(_G.ITEM_QUALITY_COLORS[itemRarity].r, _G.ITEM_QUALITY_COLORS[itemRarity].g, _G.ITEM_QUALITY_COLORS[itemRarity].b)
-						itemSlot.ilvl:SetText(itemLevel)
+--- Character Info Sheet ---
+_G.hooksecurefunc("PaperDollFrame_SetArmor", function(_, unit)
+	if (unit ~= "player") then return end
 
-						-- item:itemID:0:0:0:0:0:0:uniqueID:linkLevel:specializationID:upgradeTypeID:0:numBonusIDs:bonusID1:bonusID2:...:upgradeID"
-						-- itemLink = "item:105385:0:0:0:0:0:0:1293870592:100:268:4:0:0:50"..(5 + (slotID % 2))
-						local cur, max, delta = LIU:GetItemUpgradeInfo(itemLink)
+	local total, equip = GetAverageItemLevel()
+	if (total > 0) then total = format("%.1f", total) end
+	if (equip > 0) then equip = format("%.1f", equip) end
 
-						itemSlot.upgradeBG:SetShown(cur and cur > 0)
-						for i, tex in next, itemSlot.upgrade do
-							if cur and i <= cur then
-								tex:SetColorTexture(r, g, b)
-								tex:SetHeight((itemSlot:GetHeight() / max) - (i < max and 1 or 0))
-								--tex:SetPoint("TOPLEFT", -1 + ((dotSize*.75)*(i-1)), 1)
-								tex:Show()
-							else
-								tex:Hide()
-							end
-						end
-					else
-						HideItemLevelInfo(itemSlot)
-					end
-				else
-					HideItemLevelInfo(itemSlot)
-				end
-				-- if item.hasDura then
-				-- 	local min, max = _G.GetInventoryItemDurability(slotID)
-				-- 	if max then
-				-- 		local percent = RealUI:GetSafeVals(min, max)
-				-- 		itemSlot.dura:SetValue(percent)
-				-- 		itemSlot.dura:SetStatusBarColor(RealUI:GetDurabilityColor(percent))
-				-- 		itemSlot.dura:Show()
-				-- 	else
-				-- 		itemSlot.dura:Hide()
-				-- 	end
-				-- end
-			end
-		end
-
-		timer = false
+	local itemLevel = equip
+	if (equip ~= total) then
+		itemLevel = equip.." / "..total
 	end
 
-	_G.hooksecurefunc("PaperDollFrame_SetItemLevel", function(statFrame, unit)
-		if ( unit ~= "player" ) then return end
-		local avgItemLevel, avgItemLevelEquipped = _G.GetAverageItemLevel()
-		statFrame.Value:SetFormattedText("%d (%d)", avgItemLevel, avgItemLevelEquipped)
-	end)
-
-	f:SetScript("OnEvent", function(self, event, ...)
-		if not timer then
-			_G.C_Timer.After(.25, UpdateItems)
-			timer = true
-		end
-	end)
-	_G.CharacterFrame:HookScript("OnShow", function()
-		f:RegisterEvent("UNIT_INVENTORY_CHANGED")
-		f:RegisterEvent("UPDATE_INVENTORY_DURABILITY")
-		f:RegisterEvent("ITEM_UPGRADE_MASTER_UPDATE")
-		UpdateItems()
-	end)
-	_G.CharacterFrame:HookScript("OnHide", function()
-		f:UnregisterEvent("UNIT_INVENTORY_CHANGED")
-		f:UnregisterEvent("UPDATE_INVENTORY_DURABILITY")
-		f:UnregisterEvent("ITEM_UPGRADE_MASTER_UPDATE")
-	end)
-
-
-
-
-
+	PaperDollFrame_SetItemLevel(CharacterStatsPane.ItemLevelFrame, unit)
+	CharacterStatsPane.ItemLevelCategory:Show()
+	CharacterStatsPane.ItemLevelFrame:Show()
+	CharacterStatsPane.ItemLevelFrame.Value:SetText(itemLevel)
+	CharacterStatsPane.AttributesCategory:SetPoint("TOP", CharacterStatsPane.ItemLevelFrame, "BOTTOM", 0, -10)
+end)
