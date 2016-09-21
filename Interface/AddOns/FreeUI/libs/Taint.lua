@@ -1,6 +1,5 @@
 -- Lua Globals --
 local _G = _G
-local next = _G.next
 
 do --[[ World Map ]]--
     -- original code by ls- (lightspark)
