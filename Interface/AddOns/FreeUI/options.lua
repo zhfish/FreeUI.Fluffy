@@ -258,6 +258,13 @@ C["performance"] = {
 	["nameplatesHealth"] = .2, 	-- update interval for nameplate health bar colour (only with name plates shown)
 }
 
+-- camera stuff
+C["camera"] = {
+	["speed"] = 50,
+	["increment"] = 5,
+	["distance"] = 50,
+}
+
 -- [[ Filters ]]
 
 -- Debuffs by other players or NPCs you want to show on enemy target

@@ -1,12 +1,14 @@
+local F, C, L = unpack(select(2, ...))
+
 -- Author: Ketho (EU-Boulderfist)
 -- License: Public Domain
 
 local db
 
 db = {
-	["speed"] = 50,
-	["increment"] = 5,
-	["distance"] = 50,
+	["speed"] = C.camera.speed,
+	["increment"] = C.camera.increment,
+	["distance"] = C.camera.distance,
 }
 
 	----------------
@@ -47,15 +49,6 @@ local cvar = {
 	"cameraDistanceMaxFactor",
 }
 
-local defaults = {
-	db_version = 1.3, -- update this on (major) savedvars changes
-	increment = 4,
-	speed = 20,
-	distance = 50,
-}
-
-
-
 	----------------------
 	--- Initialization ---
 	----------------------
@@ -73,10 +66,6 @@ end)
 local f = CreateFrame("Frame")
 
 function f:OnEvent(event, addon)
-
-	
-
-
 	self:SetScript("OnUpdate", f.OnUpdate)
 	self:UnregisterEvent(event)
 end
