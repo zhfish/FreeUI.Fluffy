@@ -561,6 +561,10 @@ local shopping = {
 }
 
 local tooltips = {
+	"ChatMenu",
+	"EmoteMenu",
+	"LanguageMenu",
+	"VoiceMacroMenu",
 	"GameTooltip",
 	"ItemRefTooltip",
 	"WorldMapTooltip",
@@ -625,20 +629,15 @@ local function style(frame)
 		frame.ftipFontSet = true
 	end
 
-	if(frame.BattlePet) then
-		if(not frame.ftipBPfont) then
-			frame.Name:SetFontObject(GameTooltipHeaderText)
-			frame.BattlePet:SetFontObject(GameTooltipText)
-			frame.PetType:SetFontObject(GameTooltipText)
-			frame.Health:SetFontObject(GameTooltipText)
-			frame.Level:SetFontObject(GameTooltipText)
-			frame.Power:SetFontObject(GameTooltipText)
-			frame.Speed:SetFontObject(GameTooltipText)
-			frame.Owned:SetFontObject(GameTooltipText)
-			frame.ftipBPfont = true
-		end
-
-		frame.Background:Hide()
+	if (frame.BattlePet and not frame.ftipBPfont) then
+		frame.Name:SetFontObject(GameTooltipHeaderText)
+		frame.BattlePet:SetFontObject(GameTooltipText)
+		frame.PetType:SetFontObject(GameTooltipText)
+		frame.Health:SetFontObject(GameTooltipText)
+		frame.Level:SetFontObject(GameTooltipText)
+		frame.Power:SetFontObject(GameTooltipText)
+		frame.Speed:SetFontObject(GameTooltipText)
+		frame.Owned:SetFontObject(GameTooltipText)
 		frame.BorderTop:Hide()
 		frame.BorderRight:Hide()
 		frame.BorderBottom:Hide()
@@ -647,8 +646,21 @@ local function style(frame)
 		frame.BorderTopRight:Hide()
 		frame.BorderBottomLeft:Hide()
 		frame.BorderBottomRight:Hide()
+		frame.ftipBPfont = true
 	end
 
+	if (frame.Garrison and not frame.ftipGarrison) then
+		frame.BorderTop:Hide()
+		frame.BorderRight:Hide()
+		frame.BorderBottom:Hide()
+		frame.BorderLeft:Hide()
+		frame.BorderTopLeft:Hide()
+		frame.BorderTopRight:Hide()
+		frame.BorderBottomLeft:Hide()
+		frame.BorderBottomRight:Hide()
+		frame.Background:Hide()
+		frame.ftipGarrison = true
+	end
 	frame:SetScale(cfg.scale)
 end
 ns.style = style
@@ -665,31 +677,48 @@ end
 GameTooltip.GetBackdropBorderColor = OverrideGetBackdropBorderColor
 GameTooltip:SetBackdropBorderColor(OverrideGetBackdropBorderColor)
 
-local frameload = CreateFrame("Frame")
-frameload:RegisterEvent("PLAYER_ENTERING_WORLD")
-frameload:SetScript("OnEvent", function(self)
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
-	local function hook(tip)
-		frame:HookScript("OnShow", function(self)
-			if (cfg.combathideALL and InCombatLockdown()) then
-				return self:Hide()
-			end
-			style(self)
-		end)
-	end
-
-	for i, tip in ipairs(tooltips) do
-		frame = _G[tip]
-		if (frame) then
-			hook(frame)
+local function framehook(frame)
+	frame:HookScript("OnShow", function(self)
+		if (cfg.combathideALL and cfg.combathideALL ~= 0 and InCombatLockdown()) then
+			return self:Hide()
 		end
-	end
-	for i, tip in ipairs(shopping) do
-		frame = _G[tip]
+		style(self)
+	end)
+end
+
+local frameload = CreateFrame("Frame")
+frameload:RegisterEvent("ADDON_LOADED")
+frameload:RegisterEvent("PLAYER_ENTERING_WORLD")
+frameload:SetScript("OnEvent", function(self, event, arg1)
+	if (event == "PLAYER_ENTERING_WORLD") then
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
+		for i, tip in ipairs(tooltips) do
+			local frame = _G[tip]
+			if (frame) then
+				framehook(frame)
+			end
+		end
+
+		for i, tip in ipairs(shopping) do
+			local frame = _G[tip]
+			if (frame) then
+				framehook(frame)
+				frame.shopping = true
+			end
+		end
+
+		local frame = _G["GarrisonFollowerAbilityWithoutCountersTooltip"]
 		if (frame) then
-			hook(frame)
-			frame.shopping = true
+			framehook(frame)
+			frame.Garrison = true
+		end
+	elseif (arg1 == "Blizzard_PVPUI") then
+		self:UnregisterEvent("ADDON_LOADED")
+
+		local frame = _G["PVPRewardTooltip"]
+		if (frame) then
+			framehook(frame)
 		end
 	end
 end)
