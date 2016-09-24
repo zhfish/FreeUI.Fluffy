@@ -76,13 +76,19 @@ C.media = {
 	["arrowRight"] = "Interface\\AddOns\\Aurora\\media\\arrow-right-active",
 	["backdrop"] = "Interface\\ChatFrame\\ChatFrameBackground",
 	["checked"] = "Interface\\AddOns\\Aurora\\media\\CheckButtonHilight",
-	["font"] = "Interface\\AddOns\\Aurora\\media\\font.ttf",
+	["font"] = "",
 	["gradient"] = "Interface\\AddOns\\Aurora\\media\\gradient",
 	["roleIcons"] = "Interface\\Addons\\Aurora\\media\\UI-LFG-ICON-ROLES",
 
 	["glow"]       = "Interface\\AddOns\\Aurora\\media\\glowTex",
 	["texture"]    = "Interface\\AddOns\\Aurora\\media\\Texture1", 	
 }
+
+if GetLocale() == "zhCN" then
+	C.media.font = "Fonts\\ARKai_T.ttf"
+elseif GetLocale() == "zhTW" then
+	C.media.font = "Fonts\\blei00d.ttf"
+end
 
 C.defaults = {
 	["acknowledgedSplashScreen"] = false,
@@ -1779,6 +1785,9 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 		_G.TradeFramePlayerPortrait:Hide()
 		_G.TradeFrameRecipientPortrait:Hide()
 
+		TradeFramePortraitFrame:Hide()
+		TradeFrameLeftBorder:Hide()
+
 		F.ReskinPortraitFrame(_G.TradeFrame, true)
 		F.Reskin(_G.TradeFrameTradeButton)
 		F.Reskin(_G.TradeFrameCancelButton)
@@ -2012,6 +2021,11 @@ Skin:SetScript("OnEvent", function(self, event, addon)
 
 		F.CreateBD(BonusRollFrame)
 		F.CreateBDFrame(BonusRollFrame.PromptFrame.Timer, .25)
+
+		BonusRollFrame.SpecRing:SetTexture(nil)
+		BonusRollFrame.SpecIcon:SetTexCoord(.08, .92, .08, .92)
+		BonusRollFrame.SpecIcon.bg = F.CreateBG(BonusRollFrame.SpecIcon)
+		BonusRollFrame.SpecIcon.bg:SetDrawLayer("OVERLAY", 1)
 
 		-- Level up display
 
