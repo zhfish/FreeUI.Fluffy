@@ -4,6 +4,8 @@ local F, C, L = unpack(select(2, ...))
 
 if not C.actionbars.enable then return end
 
+local menubartop = C.menubar.topPosition
+local mainbar_pos = C.actionbars.mainbar_pos
 local bar3fold = C.actionbars.bar3Fold
 local nab = NUM_ACTIONBAR_BUTTONS
 local margin = C.actionbars.margin
@@ -11,6 +13,10 @@ local abbs = C.actionbars.abbs
 local abbs_r = C.actionbars.abbs_r
 local pbbs = C.actionbars.pbbs
 local sbbs = C.actionbars.sbbs
+
+if not menubartop then
+	mainbar_pos.y = mainbar_pos.y + 14
+end
 
 
 
@@ -318,13 +324,13 @@ local function positionBars()
 
 	if leftShown and rightShown then
 		if bar3fold then
-			bar1:SetPoint(C.actionbars.mainbar_pos.a1,C.actionbars.mainbar_pos.af,C.actionbars.mainbar_pos.a2,C.actionbars.mainbar_pos.x-(abbs*nab/2 + (nab/2-1)*margin)/2/2,C.actionbars.mainbar_pos.y)
+			bar1:SetPoint(mainbar_pos.a1,mainbar_pos.af,mainbar_pos.a2,mainbar_pos.x-(abbs*nab/2 + (nab/2-1)*margin)/2/2,mainbar_pos.y)
 			bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
 			bar3:SetPoint("BOTTOMLEFT", bar1, "BOTTOMRIGHT", 4, 0)
 			stancebar:SetPoint("BOTTOMLEFT", bar2, "TOPLEFT", 10, 6)
 			petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", -10, 6)
 		else
-			bar1:SetPoint(C.actionbars.mainbar_pos.a1,C.actionbars.mainbar_pos.af,C.actionbars.mainbar_pos.a2,C.actionbars.mainbar_pos.x,C.actionbars.mainbar_pos.y)
+			bar1:SetPoint(mainbar_pos.a1,mainbar_pos.af,mainbar_pos.a2,mainbar_pos.x,mainbar_pos.y)
 			bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
 			bar3:SetPoint("BOTTOM", bar2, "TOP", 0, 4)
 			stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 10, 6)
@@ -332,17 +338,17 @@ local function positionBars()
 		end
 
 	elseif leftShown then
-		bar1:SetPoint(C.actionbars.mainbar_pos.a1,C.actionbars.mainbar_pos.af,C.actionbars.mainbar_pos.a2,C.actionbars.mainbar_pos.x,C.actionbars.mainbar_pos.y)
+		bar1:SetPoint(mainbar_pos.a1,mainbar_pos.af,mainbar_pos.a2,mainbar_pos.x,mainbar_pos.y)
 		bar2:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar2, "TOPLEFT", 10, 6)
 		petbar:SetPoint("BOTTOMRIGHT", bar2, "TOPRIGHT", 0, 6)
 	elseif rightShown then
-		bar1:SetPoint(C.actionbars.mainbar_pos.a1,C.actionbars.mainbar_pos.af,C.actionbars.mainbar_pos.a2,C.actionbars.mainbar_pos.x,C.actionbars.mainbar_pos.y)
+		bar1:SetPoint(mainbar_pos.a1,mainbar_pos.af,mainbar_pos.a2,mainbar_pos.x,mainbar_pos.y)
 		bar3:SetPoint("BOTTOM", bar1, "TOP", 0, 4)
 		stancebar:SetPoint("BOTTOMLEFT", bar3, "TOPLEFT", 10, 6)
 		petbar:SetPoint("BOTTOMRIGHT", bar3, "TOPRIGHT", 0, 6)
 	else
-		bar1:SetPoint(C.actionbars.mainbar_pos.a1,C.actionbars.mainbar_pos.af,C.actionbars.mainbar_pos.a2,C.actionbars.mainbar_pos.x,C.actionbars.mainbar_pos.y)
+		bar1:SetPoint(mainbar_pos.a1,mainbar_pos.af,mainbar_pos.a2,mainbar_pos.x,mainbar_pos.y)
 		stancebar:SetPoint("BOTTOMLEFT", bar1, "TOPLEFT", 10, 6)
 		petbar:SetPoint("BOTTOMRIGHT", bar1, "TOPRIGHT", 0, 6)
 	end

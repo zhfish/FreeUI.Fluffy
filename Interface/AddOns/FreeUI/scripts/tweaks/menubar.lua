@@ -2,6 +2,8 @@
 
 if not C.menubar.enable then return end
 
+local top = C.menubar.topPosition
+
 local r, g, b = unpack(C.class)
 
 local barAlpha, buttonAlpha
@@ -18,9 +20,16 @@ end
 
 local bar = CreateFrame("Frame", "FreeUIMenubar", UIParent)
 bar:SetFrameStrata("BACKGROUND")
-bar:SetPoint("BOTTOMLEFT", -1, -1)
-bar:SetPoint("BOTTOMRIGHT", 1, -1)
-bar:SetHeight(13)
+
+if top then
+	bar:SetPoint("TOPLEFT", -1, 1)
+	bar:SetPoint("TOPRIGHT", 1, 1)
+else
+	bar:SetPoint("BOTTOMLEFT", -1, -1)
+	bar:SetPoint("BOTTOMRIGHT", 1, -1)
+end
+
+bar:SetHeight(14)
 F.CreateBD(bar, barAlpha)
 
 bar.buttons = {}
@@ -300,6 +309,29 @@ end)
 
 FreeUIStatsButton:SetWidth(200)
 
+addButton("Micro menu", POSITION_LEFT, function(self, button)
+	if button == "RightButton" then
+		local openbags
+		for i = 1, NUM_CONTAINER_FRAMES do
+				local containerFrame = _G["ContainerFrame"..i]
+				if containerFrame:IsShown() then
+						openbags = true
+				end
+		end
+		if not openbags then
+			OpenAllBags()
+		else
+			CloseAllBags()
+		end
+	else
+		if DropDownList1:IsShown() then
+			ToggleFrame(DropDownList1)
+		else
+			F.MicroMenu()
+		end
+	end
+end)
+
 addButton("Chat menu", POSITION_LEFT, function(self, button)
 	if button == "RightButton" then
 		local editBox = ChatEdit_ChooseBoxForSend()
@@ -307,7 +339,11 @@ addButton("Chat menu", POSITION_LEFT, function(self, button)
 		ChatFrame_OpenChat(StatReport(), chatFrame)
 	 else
 		ChatMenu:ClearAllPoints()
-		ChatMenu:SetPoint("BOTTOMLEFT", UIParent, 30, 30)
+		if top then
+			ChatMenu:SetPoint("TOPLEFT", UIParent, 30, -30)
+		else
+			ChatMenu:SetPoint("BOTTOMLEFT", UIParent, 30, 30)
+		end
 		ToggleFrame(ChatMenu)
 	end
 end)
@@ -343,48 +379,31 @@ addButton("Toggle Skada", POSITION_LEFT, function(self, button)
 	end
 end)
 
-addButton("Micro menu", POSITION_RIGHT, function(self, button)
-	if button == "RightButton" then
-		local openbags
-		for i = 1, NUM_CONTAINER_FRAMES do
-				local containerFrame = _G["ContainerFrame"..i]
-				if containerFrame:IsShown() then
-						openbags = true
-				end
-		end
-		if not openbags then
-			OpenAllBags()
-		else
-			CloseAllBags()
-		end
-	else
-		if DropDownList1:IsShown() then
-			ToggleFrame(DropDownList1)
-		else
-			F.MicroMenu()
-		end
-	end
-end)
-
 local specButton = addButton("Specialization", POSITION_RIGHT, function(self, button)
 	local currentSpec = GetSpecialization()
 	if not currentSpec then return end
 
 	if button == "LeftButton" then
-		if currentSpec == 1 then
-			SetSpecialization(2)
-		end
-		if currentSpec == 2 then
-			SetSpecialization(3)
-		end
-		if currentSpec == 3 then
-			SetSpecialization(1)
+		if (UnitLevel("player") > 10) then
+			if currentSpec == 1 then
+				SetSpecialization(2)
+			end
+			if currentSpec == 2 then
+				SetSpecialization(3)
+			end
+			if currentSpec == 3 then
+				SetSpecialization(1)
+			end
 		end
 	elseif button =="RightButton" then
 		local id1 = GetSpecializationInfo(1)
 		local id2 = GetSpecializationInfo(2)
 		local id3 = GetSpecializationInfo(3)
 		local currentId = GetLootSpecialization()
+
+		if currentId == 0 then
+			currentId = GetSpecializationInfo(currentSpec)
+		end
 
 		if currentId == id1 then
 			SetLootSpecialization(id2)
@@ -420,7 +439,7 @@ specButton:SetScript("OnEvent", function(self)
 		local role = GetSpecializationRole(currentSpec)
 		local lootrole = GetSpecializationRoleByID(lootSpecID)
 		if name then
-			if not lootname or name == lootname --[[or role == lootrole]] then
+			if not lootname or name == lootname then
 				self.Text:SetText(format("S: %s", name))
 			else
 				self.Text:SetText(format("S: %s  L: %s", name, lootname))
@@ -432,7 +451,9 @@ specButton:SetScript("OnEvent", function(self)
 	end
 end)
 
-local garrisonButton = addButton(GARRISON_LANDING_PAGE_TITLE, POSITION_RIGHT, GarrisonLandingPage_Toggle)
+--local garrisonButton = addButton(GARRISON_LANDING_PAGE_TITLE, POSITION_RIGHT, GarrisonLandingPage_Toggle)
+local garrisonButton = addButton("Report", POSITION_RIGHT, GarrisonLandingPage_Toggle)
+
 garrisonButton:Hide()
 
 GarrisonLandingPageMinimapButton:SetSize(1, 1)

@@ -812,7 +812,7 @@ local UnitSpecific = {
 			if C.unitframes.castbarSeparate then
 				Castbar:SetStatusBarTexture(C.media.texture)
 				--Castbar:SetStatusBarColor(unpack(C.class))
-				Castbar:SetWidth(self:GetWidth())
+				Castbar:SetWidth(C.unitframes.player_castbar_width)
 				Castbar:SetHeight(self:GetHeight())
 				Castbar:SetPoint(unpack(C.unitframes.player_castbar))
 				Castbar.Text:SetAllPoints(Castbar)
@@ -1245,8 +1245,8 @@ local UnitSpecific = {
 			self.Iconbg:SetTexture(C.media.backdrop)
 
 			Castbar:SetStatusBarTexture(C.media.texture)
---			Castbar:SetStatusBarColor(219/255, 0, 11/255)
-			Castbar:SetWidth(C.unitframes.target_width)
+			--Castbar:SetStatusBarColor(219/255, 0, 11/255)
+			Castbar:SetWidth(C.unitframes.target_castbar_width)
 			Castbar:SetHeight(C.unitframes.castbarHeight)
 			Castbar:SetPoint(unpack(C.unitframes.target_castbar))
 			Castbar.Text:SetPoint("BOTTOM", Castbar, "TOP", 0, 4)
@@ -1266,13 +1266,13 @@ local UnitSpecific = {
 
 		local tt = CreateFrame("Frame", nil, self)
 		tt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 7 + C.appearance.fontSizeNormal + (C.unitframes.targettarget and 10 or 0))
-		tt:SetWidth(80)
+		tt:SetWidth(C.unitframes.targettarget_width)
 		tt:SetHeight(12)
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
-		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 86, 2)
+		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", C.unitframes.targettarget_width + 5, 2)
 		ttt:SetFont(unpack(nameFont))
-		ttt:SetWidth(80)
+		ttt:SetWidth(C.unitframes.targettarget_width)
 		ttt:SetHeight(12)
 
 		tt:RegisterEvent("UNIT_TARGET")
@@ -1420,8 +1420,8 @@ local UnitSpecific = {
 			self.Iconbg:SetTexture(C.media.backdrop)
 
 			Castbar:SetStatusBarTexture(C.media.texture)
---			Castbar:SetStatusBarColor(219/255, 0, 11/255)
-			Castbar:SetWidth(C.unitframes.target_width)
+			--Castbar:SetStatusBarColor(219/255, 0, 11/255)
+			Castbar:SetWidth(C.unitframes.focus_castbar_width)
 			Castbar:SetHeight(C.unitframes.castbarHeight)
 			Castbar:SetPoint(unpack(C.unitframes.focus_castbar))
 			Castbar.Text:SetPoint("TOP", Castbar, "BOTTOM", 0, -4)
@@ -1441,13 +1441,13 @@ local UnitSpecific = {
 
 		local tt = CreateFrame("Frame", nil, self)
 		tt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 7 + C.appearance.fontSizeNormal + (C.unitframes.focustarget and 10 or 0))
-		tt:SetWidth(80)
+		tt:SetWidth(C.unitframes.focus_width)
 		tt:SetHeight(12)
 
 		local ttt = F.CreateFS(tt, C.FONT_SIZE_NORMAL, "RIGHT")
-		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 118, 2)
+		ttt:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", C.unitframes.focus_width + 5, 2)
 		ttt:SetFont(unpack(nameFont))
-		ttt:SetWidth(112)
+		ttt:SetWidth(C.unitframes.focus_width)
 		ttt:SetHeight(12)
 
 		tt:RegisterEvent("UNIT_TARGET")
@@ -1465,7 +1465,7 @@ local UnitSpecific = {
 		local Name = F.CreateFS(self)
 		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 3)
 		Name:SetFont(unpack(nameFont))
-		Name:SetWidth(112)
+		Name:SetWidth(C.unitframes.focus_width)
 		Name:SetHeight(12)
 		Name:SetJustifyH"LEFT"
 		Name:SetTextColor(1, 1, 1)
@@ -1920,17 +1920,21 @@ end
 
 oUF:Factory(function(self)
 	local partyPos, raidPos
-	local player, target, focus
+	local player, target, focus, targettarget, focustarget, pet
 
 	player = spawnHelper(self, 'player', unpack(C.unitframes.player))
+	pet = spawnHelper(self, 'pet', unpack(C.unitframes.pet))
 	target = spawnHelper(self, 'target', unpack(C.unitframes.target))
+	targettarget = spawnHelper(self, 'targettarget', unpack(C.unitframes.targettarget))
 	focus = spawnHelper(self, 'focus', unpack(C.unitframes.focus))
+	focustarget = spawnHelper(self, 'focustarget', unpack(C.unitframes.focustarget))
+
 	partyPos = C.unitframes.party
 	raidPos = C.unitframes.raid
 
-	spawnHelper(self, 'pet', "RIGHT", player, "LEFT", -5, 0)
-	spawnHelper(self, 'targettarget', "LEFT", target, "RIGHT", 5, 0)
-	spawnHelper(self, 'focustarget', "LEFT", focus, "RIGHT", 5, 0)
+	-- spawnHelper(self, 'pet', "RIGHT", player, "LEFT", -5, 0)
+	-- spawnHelper(self, 'targettarget', "LEFT", target, "RIGHT", 5, 0)
+	-- spawnHelper(self, 'focustarget', "LEFT", focus, "RIGHT", 5, 0)
 
 	for n = 1, MAX_BOSS_FRAMES do
 		spawnHelper(self, 'boss' .. n, C.unitframes.boss.a, C.unitframes.boss.b, C.unitframes.boss.c, C.unitframes.boss.x, C.unitframes.boss.y + (66 * n))

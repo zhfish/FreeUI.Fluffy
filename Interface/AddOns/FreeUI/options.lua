@@ -108,7 +108,7 @@ C["actionbars"] = {
 	["sbbs"] = 24,		-- stance bar button size
 	["ebbs"] = 45,		-- extra button size
 
-	["mainbar_pos"] = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 24 },		-- mainbar(bar1) position
+	["mainbar_pos"] = { a1 = "BOTTOM", a2 = "BOTTOM", af = "UIParent", x = 0, y = 8 },		-- mainbar(bar1) position
 	["rightbar_pos"] = { a1 = "RIGHT", a2 = "RIGHT", af = "UIParent", x = -6, y = -200 },	-- rightbar(bar4) position
 	["extra_pos"] = { a1 = "CENTER", a2 = "CENTER", af = "UIParent", x = 0, y = 100 },
 }
@@ -130,6 +130,7 @@ C["bags"] = {
 
 C["menubar"] = {
 	["enable"] = true,
+	["topPosition"] = false,
 
 	["enableButtons"] = true,			-- show buttons for quick access on the menu bar
 		["buttons_mouseover"] = true,			-- only on mouseover
@@ -194,16 +195,25 @@ C["unitframes"] = {
 		["statusIndicatorCombat"] = true,				-- show combat status (else: only resting)
 
 	["player"] = {"BOTTOM", UIParent, "BOTTOM", 0, 200},						-- player unitframe position
+	["pet"] = {"RIGHT", "oUF_FreePlayer", "LEFT", -5, 0},									-- pet unitframe position
 	["target"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 26, 120},					-- target unitframe position
+	["targettarget"] = {"LEFT", "oUF_FreeTarget", "RIGHT", 5, 0},							-- target target unitframe position
 	["focus"] = {"LEFT", 'oUF_FreePlayer', "RIGHT", 26, -40},					-- focus unitframe position
-	["party"] = {"BOTTOMRIGHT", 'oUF_FreePlayer', "TOPLEFT", -110, 50},					-- party unitframe position
+	["focustarget"] = {"LEFT", "oUF_FreeFocus", "RIGHT", 5, 0},							-- focus target unitframe position
+	["party"] = {"BOTTOMRIGHT", 'oUF_FreePlayer', "TOPLEFT", -110, 50},			-- party unitframe position
 	["raid"] = {"BOTTOMRIGHT", 'oUF_FreePlayer', "TOPLEFT", -110, 80},			-- raid unitframe position		
 	["boss"] = {a='LEFT', b='oUF_FreeTarget', c="RIGHT", x=10, y=80},			-- boss unitframe position
 	["arena"] = {a='LEFT', b='UIParent', c="LEFT", x=20, y=100},				-- arena unitframe position		
 
 	["player_castbar"] = {"CENTER", 'oUF_FreePlayer', "CENTER", 0, -90},		-- player castbar position
-	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, 40},		-- target castbar position
+	["player_castbar_width"] = 229,
+
+	["target_castbar"] = {"CENTER", 'oUF_FreeTarget', "CENTER", 0, 40},			-- target castbar position
+	["target_castbar_width"] = 229,
+
 	["focus_castbar"] = {"LEFT", 'oUF_FreeFocus', "LEFT", 0, -40},				-- focus castbar position
+	["focus_castbar_width"] = 229,
+
 
 	["castbarColorInterrupt"] = {241/255, 80/255, 241/255},
 	["castbarColorNormal"] = {89/255, 216/255, 237/255},
