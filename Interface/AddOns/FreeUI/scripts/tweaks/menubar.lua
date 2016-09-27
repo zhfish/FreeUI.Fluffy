@@ -381,38 +381,36 @@ end)
 
 local specButton = addButton("Specialization", POSITION_RIGHT, function(self, button)
 	local currentSpec = GetSpecialization()
-	if not currentSpec then return end
+	local numSpec = GetNumSpecializations()
+	if not (currentSpec and numSpec) then return end
 
 	if button == "LeftButton" then
 		if (UnitLevel("player") > 10) then
-			if currentSpec == 1 then
-				SetSpecialization(2)
+			local index = currentSpec + 1
+			if index > numSpec then
+				index = 1
 			end
-			if currentSpec == 2 then
-				SetSpecialization(3)
-			end
-			if currentSpec == 3 then
-				SetSpecialization(1)
-			end
+			SetSpecialization(index)
 		end
 	elseif button =="RightButton" then
-		local id1 = GetSpecializationInfo(1)
-		local id2 = GetSpecializationInfo(2)
-		local id3 = GetSpecializationInfo(3)
-		local currentId = GetLootSpecialization()
+		local index = {}
+		for i = 1, numSpec do
+			index[i] = GetSpecializationInfo(i)
+		end
 
+		local currentId = GetLootSpecialization()
 		if currentId == 0 then
 			currentId = GetSpecializationInfo(currentSpec)
 		end
 
-		if currentId == id1 then
-			SetLootSpecialization(id2)
-		end
-		if currentId == id2 then
-			SetLootSpecialization(id3)
-		end
-		if currentId == id3 then
-			SetLootSpecialization(id1)
+		if currentId == index[1] then
+			SetLootSpecialization(index[2])
+		elseif currentId == index[2] then
+			SetLootSpecialization(index[3] or index[1])
+		elseif currentId == index[3] then
+			SetLootSpecialization(index[4] or index[1])
+		elseif currentId == index[4] then
+			SetLootSpecialization(index[1])
 		end
 	else
 		if not PlayerTalentFrame then
