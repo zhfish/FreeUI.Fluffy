@@ -42,6 +42,10 @@ do	--Replacement for UIDropDownMenu
 		fstr:SetJustifyH("LEFT")
 		fstr:SetJustifyV("MIDDLE")
 		F.SetFS(fstr)
+
+		if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+			fstr:SetFont(C.media.font.normal, 12, "OUTLINE")
+		end
 		fstr:SetPoint("LEFT", button, "LEFT", 0, 0)
 		button.Text = fstr
 		

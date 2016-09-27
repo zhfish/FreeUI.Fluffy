@@ -472,6 +472,11 @@ function MyContainer:OnCreate(name, settings)
 	-- Caption, close button
 	local caption = background:CreateFontString(background, "OVERLAY", nil)
 	F.SetFS(caption)
+
+	if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+		caption:SetFont(C.media.font.normal, 12, "OUTLINE")
+	end
+
 	if(caption) then
 		local t = L.bagCaptions[self.name] or (tBankBags and strsub(self.name, 5))
 		if not t then t = self.name end
@@ -732,13 +737,18 @@ function MyContainer:OnCreate(name, settings)
 		searchIcon:SetHeight(16)
 		
 		-- Hint
-		self.hint = background:CreateFontString(nil, "OVERLAY", nil)
-		self.hint:SetPoint("BOTTOMLEFT", infoFrame, -0.5, 31.5)
-		F.SetFS(self.hint)
-		self.hint:SetFont("Interface\\AddOns\\cargBags_Nivaya\\media\\pixel.ttf", 8, "OUTLINEMONOCHROME")
-		self.hint:SetTextColor(1, 1, 1, 0.4)
-		self.hint:SetText("Ctrl + Alt + Right Click an item to assign category")
-		self.hintShown = true
+		-- self.hint = background:CreateFontString(nil, "OVERLAY", nil)
+		-- self.hint:SetPoint("BOTTOMLEFT", infoFrame, -0.5, 31.5)
+		-- F.SetFS(self.hint)
+		-- self.hint:SetTextColor(1, 1, 1, 0.4)
+		
+		-- if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+		-- 	self.hint:SetFont(C.media.font.normal, 12, "OUTLINE")
+		-- 	self.hint:SetText("Ctrl + Alt + 鼠标右键给物品分类")
+		-- else
+		-- 	self.hint:SetText("Ctrl + Alt + Right Click an item to assign category")
+		-- end
+		-- self.hintShown = true
 		
 		-- The money display
 		local money = self:SpawnPlugin("TagDisplay", "[money]", self)
