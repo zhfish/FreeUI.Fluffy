@@ -1202,7 +1202,10 @@ local UnitSpecific = {
 
 		statusIndicator:SetScript("OnEvent", updateStatus)
 
-
+		-- Exit vehicle button
+		if C.actionbars.enable then
+			FreeUI_LeaveVehicle:SetPoint("LEFT", self, "RIGHT", 9, 0)
+		end
 	end,
 
 	target = function(self, ...)
