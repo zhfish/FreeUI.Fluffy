@@ -12,15 +12,15 @@ LSM:Register("border", "myMedia_border_roth", 		[[Interface\Addons\FreeUI\media\
 -- -----
 --   FONT
 -- -----
-LSM:Register("font", "ExocetBlizzardLight", 			[[Interface\Addons\FreeUI\media\ExocetBlizzardLight.ttf]])
-LSM:Register("font", "ExocetBlizzardMedium", 			[[Interface\Addons\FreeUI\media\ExocetBlizzardMedium.ttf]])
-LSM:Register("font", "FruityMicrofont", 				[[Interface\Addons\FreeUI\media\FruityMicrofont.ttf]])
-LSM:Register("font", "supereffective", 					[[Interface\Addons\FreeUI\media\supereffective.ttf]])
-LSM:Register("font", "pixel", 							[[Interface\Addons\FreeUI\media\pixel.ttf]])
-LSM:Register("font", "pixel_bold", 						[[Interface\Addons\FreeUI\media\pixel_bold.ttf]])
-LSM:Register("font", "pixel_large", 					[[Interface\Addons\FreeUI\media\pixel_large.ttf]])
-LSM:Register("font", "pixel_condensed", 				[[Interface\Addons\FreeUI\media\pixel_condensed.ttf]])
-LSM:Register("font", "SempliceRegular", 				[[Interface\Addons\FreeUI\media\SempliceRegular.ttf]])
+LSM:Register("font", "ExocetBlizzardLight", 			[[Interface\Addons\FreeUI\media\ExocetBlizzardLight.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "ExocetBlizzardMedium", 			[[Interface\Addons\FreeUI\media\ExocetBlizzardMedium.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "FruityMicrofont", 				[[Interface\Addons\FreeUI\media\FruityMicrofont.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "supereffective", 					[[Interface\Addons\FreeUI\media\supereffective.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "pixel", 							[[Interface\Addons\FreeUI\media\pixel.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "pixel_bold", 						[[Interface\Addons\FreeUI\media\pixel_bold.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "pixel_large", 					[[Interface\Addons\FreeUI\media\pixel_large.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "pixel_condensed", 				[[Interface\Addons\FreeUI\media\pixel_condensed.ttf]], zhCN + zhTW + western)
+LSM:Register("font", "SempliceRegular", 				[[Interface\Addons\FreeUI\media\SempliceRegular.ttf]], zhCN + zhTW + western)
 
 LSM:Register("font", "pixfontCN", 						[[Fonts\pixfontCN.ttf]], zhCN + zhTW + western)
 LSM:Register("font", "Hiragino", 						[[Fonts\Hiragino.ttf]], zhCN + zhTW + western)
