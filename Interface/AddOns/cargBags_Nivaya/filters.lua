@@ -32,9 +32,9 @@ cB_Filters.fHideEmpty = function(item) if cBnivCfg.CompressEmpty then return ite
 ------------------------------------
 cB_Filters.fItemClass = function(item, container)
 	if not item.id  then	return false	end
-    if not cB_ItemClass[item.id] then
-        cbNivaya:ClassifyItem(item)
-    end
+	if not cB_ItemClass[item.id] then
+		cbNivaya:ClassifyItem(item)
+	end
 	
 	local t, bag = cB_ItemClass[item.id]
 
@@ -48,34 +48,53 @@ cB_Filters.fItemClass = function(item, container)
 	return bag == container
 end
 
-function cbNivaya:ClassifyItem(item)
-
-	if item.bagID == -2 then
-		-- keyring
-		cB_ItemClass[item.id] = "Keyring"
-	elseif cBniv_CatInfo[item.id] then
-		-- user assigned containers
-		cB_ItemClass[item.id] = cBniv_CatInfo[item.id]
-	elseif (item.rarity == 0) then
-		-- junk
-		cB_ItemClass[item.id] = "Junk"
-	elseif item.typeID then
-		-- type based filters
-		if (item.typeID == _G.LE_ITEM_CLASS_ARMOR) or (item.typeID == _G.LE_ITEM_CLASS_WEAPON)	then
-			cB_ItemClass[item.id] = "Armor"
-		elseif (item.typeID == _G.LE_ITEM_CLASS_QUESTITEM) then
-			cB_ItemClass[item.id] = "Quest"
-		elseif (item.typeID == _G.LE_ITEM_CLASS_TRADEGOODS) then
-			cB_ItemClass[item.id] = "TradeGoods"
-		elseif (item.typeID == _G.LE_ITEM_CLASS_CONSUMABLE) then
-			cB_ItemClass[item.id] = "Consumables"
-		elseif(item.typeID == _G.LE_ITEM_CLASS_BATTLEPET) then
-			cB_ItemClass[item.id] = "BattlePet"
+do
+	local itemUpdater, last = CreateFrame("Frame"), 0
+	itemUpdater:SetScript("OnUpdate", function(self, elapsed)
+		last = last + elapsed
+		if last > 1 and #itemUpdater > 0 then
+			local item = table.remove(itemUpdater)
+			cbNivaya:GetItemInfo(item.bagID, item.slotID, true)
+			if item.id then
+				C_Timer.After(0.1, function()
+					cbNivaya:ClassifyItem(item)
+				end)
+			else
+				table.insert(itemUpdater, item)
+			end
+			last = 0
 		end
-	end
+	end)
+	function cbNivaya:ClassifyItem(item)
 
-	if not cB_ItemClass[item.id] then
-		cB_ItemClass[item.id] = "NoClass"
+		if item.bagID == -2 then
+			-- keyring
+			cB_ItemClass[item.id] = "Keyring"
+		elseif cBniv_CatInfo[item.id] then
+			-- user assigned containers
+			cB_ItemClass[item.id] = cBniv_CatInfo[item.id]
+		elseif (item.rarity == 0) then
+			-- junk
+			cB_ItemClass[item.id] = "Junk"
+		elseif item.typeID then
+			-- type based filters
+			if (item.typeID == _G.LE_ITEM_CLASS_ARMOR) or (item.typeID == _G.LE_ITEM_CLASS_WEAPON)	then
+				cB_ItemClass[item.id] = "Armor"
+			elseif (item.typeID == _G.LE_ITEM_CLASS_QUESTITEM) then
+				cB_ItemClass[item.id] = "Quest"
+			elseif (item.typeID == _G.LE_ITEM_CLASS_TRADEGOODS) then
+				cB_ItemClass[item.id] = "TradeGoods"
+			elseif (item.typeID == _G.LE_ITEM_CLASS_CONSUMABLE) then
+				cB_ItemClass[item.id] = "Consumables"
+			elseif(item.typeID == _G.LE_ITEM_CLASS_BATTLEPET) then
+				cB_ItemClass[item.id] = "BattlePet"
+			end
+		end
+
+		if not cB_ItemClass[item.id] then
+			table.insert(itemUpdater, item)
+			cB_ItemClass[item.id] = "NoClass"
+		end
 	end
 end
 
