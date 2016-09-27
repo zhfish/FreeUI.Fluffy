@@ -4,6 +4,9 @@ if not C.tooltip.enable then return end
 
 local ADDON_NAME, ns = ...
 
+local _, _G = _, _G
+local GameTooltip = _G["GameTooltip"]
+
 local cfg = {
 	font = C.media.font.normal,
 	fontflag = "OUTLINE",
@@ -40,7 +43,20 @@ local cfg = {
 
 ns.cfg = cfg
 
-local _G = _G
+local locale = GetLocale()
+local BOSS, ELITE = BOSS, ELITE
+local RARE, RAREELITE
+if (locale == "zhCN") then
+	RARE = "稀有"
+	RAREELITE = "稀有精英"
+elseif (locale == "zhTW") then
+	RARE = "稀有"
+	RAREELITE = "稀有精英"
+else
+	RARE = "Rare"
+	RAREELITE = "Rare Elite"
+end
+
 local RAID_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
 local qqColor = { r=1, g=0, b=0 }
 local nilColor = { r=1, g=1, b=1 }
@@ -55,8 +71,8 @@ powerColors["MANA"] = { r=.31, g=.45, b=.63 }
 
 local classification = {
 	elite = ("|cffFFCC00 %s|r"):format(ELITE),
-	rare = ("|cffCC00FF %s|r"):format(ITEM_QUALITY3_DESC),
-	rareelite = ("|cffCC00FF %s|r"):format(ELITE),
+	rare = ("|cffCC00FF %s|r"):format(RARE),
+	rareelite = ("|cffCC00FF %s|r"):format(RAREELITE),
 	worldboss = ("|cffFF0000?? %s|r"):format(BOSS)
 }
 
