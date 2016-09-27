@@ -816,6 +816,10 @@ local UnitSpecific = {
 				Castbar:SetHeight(self:GetHeight())
 				Castbar:SetPoint(unpack(C.unitframes.player_castbar))
 				Castbar.Text:SetAllPoints(Castbar)
+				if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+					Castbar.Text:SetFont(C.media.font.normal, 12, "OUTLINE")
+					Castbar.Text:SetPoint("BOTTOM", Castbar, "TOP", 0, 10)
+				end
 				local sf = Castbar:CreateTexture(nil, "OVERLAY")
 				sf:SetVertexColor(.5, .5, .5, .5)
 				Castbar.SafeZone = sf
@@ -1250,6 +1254,9 @@ local UnitSpecific = {
 			Castbar:SetHeight(C.unitframes.castbarHeight)
 			Castbar:SetPoint(unpack(C.unitframes.target_castbar))
 			Castbar.Text:SetPoint("BOTTOM", Castbar, "TOP", 0, 4)
+			if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+				Castbar.Text:SetFont(C.media.font.normal, 12, "OUTLINE")
+			end
 			local sf = Castbar:CreateTexture(nil, "OVERLAY")
 			sf:SetVertexColor(.5, .5, .5, .5)
 			Castbar.SafeZone = sf
@@ -1425,10 +1432,13 @@ local UnitSpecific = {
 			Castbar:SetHeight(C.unitframes.castbarHeight)
 			Castbar:SetPoint(unpack(C.unitframes.focus_castbar))
 			Castbar.Text:SetPoint("TOP", Castbar, "BOTTOM", 0, -4)
+			if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+				Castbar.Text:SetFont(C.media.font.normal, 12, "OUTLINE")
+			end
 			local sf = Castbar:CreateTexture(nil, "OVERLAY")
 			sf:SetVertexColor(.5, .5, .5, .5)
 			Castbar.SafeZone = sf
-			IconFrame:SetPoint("LEFT", Castbar, "RIGHT", 10, 0)
+			IconFrame:SetPoint("LEFT", Castbar, "RIGHT", 4, 0)
 			IconFrame:SetSize(14, 14)
 
 			local bg = CreateFrame("Frame", nil, Castbar)
