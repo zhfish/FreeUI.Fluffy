@@ -88,6 +88,8 @@ if GetLocale() == "zhCN" then
 	C.media.font = "Fonts\\ARKai_T.ttf"
 elseif GetLocale() == "zhTW" then
 	C.media.font = "Fonts\\blei00d.ttf"
+else
+	C.media.font= "Fonts\\FRIZQT__.ttf"
 end
 
 C.defaults = {
