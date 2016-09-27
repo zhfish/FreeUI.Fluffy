@@ -22,6 +22,9 @@ for i = 1, 3 do
 	_G[barname.."Border"]:Hide()
 
 	_G[barname.."Text"] = F.CreateFS(bar)
+	if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+		_G[barname.."Text"]:SetFont(C.media.font.normal, 11, "OUTLINE")
+	end
 	_G[barname.."Text"]:ClearAllPoints()
 	_G[barname.."Text"]:SetPoint("CENTER", _G[barname.."StatusBar"])
 

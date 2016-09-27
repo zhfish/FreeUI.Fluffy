@@ -221,14 +221,10 @@ SubZoneTextFrame:SetFrameStrata("MEDIUM")
 
 ZoneTextString:ClearAllPoints()
 ZoneTextString:SetPoint("CENTER", Minimap)
-ZoneTextString:SetWidth(138)
-F.SetFS(ZoneTextString)
-F.SetFS(SubZoneTextString)
-SubZoneTextString:SetWidth(138)
-F.SetFS(PVPInfoTextString)
-PVPInfoTextString:SetWidth(138)
-F.SetFS(PVPArenaTextString)
-PVPArenaTextString:SetWidth(138)
+ZoneTextString:SetWidth(230)
+SubZoneTextString:SetWidth(230)
+PVPInfoTextString:SetWidth(230)
+PVPArenaTextString:SetWidth(230)
 
 MinimapZoneTextButton:ClearAllPoints()
 MinimapZoneTextButton:SetPoint("CENTER", Minimap)
@@ -236,9 +232,23 @@ MinimapZoneTextButton:SetFrameStrata("HIGH")
 MinimapZoneTextButton:EnableMouse(false)
 MinimapZoneTextButton:SetAlpha(0)
 MinimapZoneText:SetPoint("CENTER", MinimapZoneTextButton)
-F.SetFS(MinimapZoneText)
+
 MinimapZoneText:SetShadowColor(0, 0, 0, 0)
 MinimapZoneText:SetJustifyH("CENTER")
+
+if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+	ZoneTextString:SetFont(C.media.font.normal, 14, "OUTLINE")
+	SubZoneTextString:SetFont(C.media.font.normal, 14, "OUTLINE")
+	PVPInfoTextString:SetFont(C.media.font.normal, 14, "OUTLINE")
+	PVPArenaTextString:SetFont(C.media.font.normal, 14, "OUTLINE")
+	MinimapZoneText:SetFont(C.media.font.normal, 14, "OUTLINE")
+else
+	F.SetFS(ZoneTextString)
+	F.SetFS(SubZoneTextString)
+	F.SetFS(PVPInfoTextString)
+	F.SetFS(PVPArenaTextString)
+	F.SetFS(MinimapZoneText)
+end
 
 Minimap:HookScript("OnEnter", function()
 	MinimapZoneTextButton:SetAlpha(1)

@@ -1,5 +1,7 @@
 local F, C = unpack(FreeUI)
 
+local top = C.menubar.topPosition
+
 local menuFrame = CreateFrame("Frame", "FreeUI_MicroMenu", UIParent, "UIDropDownMenuTemplate")
 
 local microMenu = {
@@ -51,6 +53,10 @@ end
 F.RegisterEvent("ADDON_LOADED", taint)
 
 F.MicroMenu = function()
-   menuFrame:SetPoint("BOTTOMRIGHT", UIParent)
+	if top then
+		menuFrame:SetPoint("TOPLEFT", UIParent)
+	else
+		menuFrame:SetPoint("BOTTOMLEFT", UIParent)
+	end
    EasyMenu(microMenu, menuFrame, menuFrame, 0, 0, "MENU")
 end

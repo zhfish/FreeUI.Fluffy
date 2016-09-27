@@ -125,6 +125,11 @@ local createSlot = function(id)
 	name:SetPoint("RIGHT", frame)
 	name:SetPoint("LEFT", icon, "RIGHT", 8, 0)
 	name:SetNonSpaceWrap(true)
+
+	if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+		name:SetFont(C.media.font.normal, 12, "OUTLINE")
+	end
+
 	frame.name = name
 
 	return frame

@@ -5,7 +5,12 @@ local function restyleStateFrames()
 		local f = _G["AlwaysUpFrame"..i]
 		if f and not f.styled then
 			local _, g = f:GetRegions()
-			F.SetFS(g)
+
+			if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+				g:SetFont(C.media.font.normal, 12, "OUTLINE")
+			else
+				F.SetFS(g)
+			end
 
 			g:SetShadowOffset(0, 0)
 			g:SetTextColor(1, 1, 1)

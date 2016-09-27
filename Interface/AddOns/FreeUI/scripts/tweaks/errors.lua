@@ -31,6 +31,12 @@ firstErrorFrame.text:SetPoint("TOP", UIParent, 0, -76)
 secondErrorFrame.text = F.CreateFS(secondErrorFrame)
 secondErrorFrame.text:SetPoint("TOP", UIParent, 0, -85)
 
+if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+	firstErrorFrame.text:SetFont(C.media.font.normal, 12, "OUTLINE")
+	secondErrorFrame.text:SetFont(C.media.font.normal, 12, "OUTLINE")
+	secondErrorFrame.text:SetPoint("TOP", UIParent, 0, -95)
+end
+
 local state = 0
 firstErrorFrame:SetScript("OnHide", function() state = 0 end)
 local Error = CreateFrame("Frame")

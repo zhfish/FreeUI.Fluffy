@@ -98,33 +98,44 @@ for _, headerName in pairs({"QuestHeader", "AchievementHeader", "ScenarioHeader"
 	local header = BlocksFrame[headerName]
 
 	header.Background:Hide()
-	F.SetFS(header.Text)
---	header.Text:SetFont(C.media.font.normal, 14, "OUTLINE")
---	header.Text:SetTextColor(r, g, b)
+	
+	if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+		header.Text:SetFont(C.media.font.normal, 14, "OUTLINE")
+	else
+		F.SetFS(header.Text)
+	end
 end
 
 do
 	local header = BONUS_OBJECTIVE_TRACKER_MODULE.Header
 
 	header.Background:Hide()
-	F.SetFS(header.Text)
---	header.Text:SetFont(C.media.font.normal, 14, "OUTLINE")
---	header.Text:SetTextColor(r, g, b)
+	
+	if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+		header.Text:SetFont(C.media.font.normal, 14, "OUTLINE")
+	else
+		F.SetFS(header.Text)
+	end
 end
 
 hooksecurefunc(DEFAULT_OBJECTIVE_TRACKER_MODULE, "SetBlockHeader", function(_, block)
 	if not block.headerStyled then
-		F.SetFS(block.HeaderText)
---		block.HeaderText:SetFont(C.media.font.normal, 14, "OUTLINE")
---		block.HeaderText:SetTextColor(r, g, b)
+		if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+			block.HeaderText:SetFont(C.media.font.normal, 13, "OUTLINE")
+		else
+			F.SetFS(block.HeaderText)
+		end
 		block.headerStyled = true
 	end
 end)
 
 hooksecurefunc(QUEST_TRACKER_MODULE, "SetBlockHeader", function(_, block)
 	if not block.headerStyled then
-		F.SetFS(block.HeaderText)
---		block.HeaderText:SetFont(C.media.font.normal, 14, "OUTLINE")
+		if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+			block.HeaderText:SetFont(C.media.font.normal, 13, "OUTLINE")
+		else
+			F.SetFS(block.HeaderText)
+		end
 		block.headerStyled = true
 	end
 
@@ -182,8 +193,11 @@ hooksecurefunc("ObjectiveTracker_AddBlock", function(block)
 	if block.lines then
 		for _, line in pairs(block.lines) do
 			if not line.styled then
-				F.SetFS(line.Text)
---				line.Text:SetFont(C.media.font.normal, 12, "OUTLINE")
+				if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+					line.Text:SetFont(C.media.font.normal, 12, "OUTLINE")
+				else
+					F.SetFS(line.Text)
+				end
 				line.Text:SetSpacing(2)
 
 				if line.Dash then
