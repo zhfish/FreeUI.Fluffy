@@ -350,6 +350,9 @@ C.themes["Blizzard_GarrisonUI"] = function()
 		select(4, xpBar:GetRegions()):Hide()
 
 		xpBar:SetStatusBarTexture(C.media.backdrop)
+		xpBar:ClearAllPoints()
+		xpBar:SetPoint("BOTTOMLEFT", FollowerTab.PortraitFrame, "BOTTOMRIGHT", 5, -10)
+		xpBar:SetPoint("TOPRIGHT", FollowerTab.Class, "BOTTOMRIGHT", 0, -5)
 
 		F.CreateBDFrame(xpBar)
 	end
