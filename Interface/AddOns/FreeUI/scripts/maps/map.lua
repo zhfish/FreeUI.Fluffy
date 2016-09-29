@@ -28,6 +28,9 @@ local function SetLargeWorldMap()
 	_G.WorldMapFrame:SetParent(_G.UIParent)
 	_G.WorldMapFrame:SetFrameStrata("HIGH")
 	_G.WorldMapFrame:EnableKeyboard(true)
+	_G.WorldMapTooltip:SetFrameStrata("TOOLTIP");
+	_G.WorldMapCompareTooltip1:SetFrameStrata("TOOLTIP");
+	_G.WorldMapCompareTooltip2:SetFrameStrata("TOOLTIP");
 
 	--reposition
 	_G.WorldMapFrame:ClearAllPoints()
