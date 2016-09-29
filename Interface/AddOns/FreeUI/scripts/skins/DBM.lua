@@ -1,4 +1,12 @@
-local F, C, L = unpack(FreeUI)
+local F, C, L = unpack(select(2, ...))
+
+local DBMBarFont
+
+if C.unitframes.UnitframesNameFont_Pixel then
+	DBMBarFont = C.UnitframesNameFont.pixel
+else
+	DBMBarFont = C.UnitframesNameFont.standard
+end
 
 local function InitStyle()
 	hooksecurefunc(DBT, "CreateBar", function(self)
@@ -9,6 +17,8 @@ local function InitStyle()
 			local text = _G[name.."Name"]
 
 			tbar:SetHeight(6)
+
+			text:SetFont(unpack(DBMBarFont))
 
 			text:SetPoint("CENTER", 0, 10)
 			text:SetPoint("LEFT", 2, 10)
@@ -70,8 +80,10 @@ local function InitStyle()
 			F.CreateBDFrame(DBMRangeCheckRadar)
 
 			F.SetFS(DBMRangeCheckRadar.text)
+			DBMRangeCheckRadar.text:SetFont(unpack(DBMBarFont))
 			DBMRangeCheckRadar.text:SetTextColor(1, 1, 1)
 			F.SetFS(DBMRangeCheckRadar.inRangeText)
+			DBMRangeCheckRadar.inRangeText:SetFont(unpack(DBMBarFont))
 			DBMRangeCheckRadar.inRangeText:SetTextColor(1, 1, 1)
 
 			firstRange = false
@@ -83,6 +95,7 @@ local function InitStyle()
 		if not anchor.styled then
 			local header = anchor:GetRegions()
 			F.SetFS(header)
+			header:SetFont(unpack(DBMBarFont))
 			header:SetTextColor(1, 1, 1)
 
 			anchor.styled = true
@@ -108,6 +121,8 @@ local function InitStyle()
 
 				F.SetFS(text)
 				F.SetFS(timer)
+				text:SetFont(unpack(DBMBarFont))
+				timer:SetFont(unpack(DBMBarFont))
 
 				F.CreateBDFrame(sb)
 

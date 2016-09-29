@@ -16,18 +16,28 @@ C.media = {
 	["roleIcons"]  = "Interface\\Addons\\FreeUI\\media\\UI-LFG-ICON-ROLES",
 	["texture"]    = "Interface\\AddOns\\FreeUI\\media\\Texture1", 					-- statusbar texture
 
---	["font"]       = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf", 				-- default pixel font
---	["font2"]      = "Fonts\\FRIZQT__.ttf", 										-- default font
-
 	["font"] = {
 		["normal"]          = "Fonts\\FRIZQT__.ttf",
 		["chat"]            = "Fonts\\FRIZQT__.ttf",
 		["unitname"]        = "Fonts\\FRIZQT__.ttf",
-		["pixelCN"]         = "Fonts\\FRIZQT__.ttf",
+		["pixelCN"]         = "Fonts\\pixfontCN.ttf",
 		["pixel"]           = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf",
 		["pixel_condensed"] = "Interface\\AddOns\\FreeUI\\media\\pixel_condensed.ttf",
 		["header"]          = "Interface\\AddOns\\FreeUI\\media\\ExocetBlizzardMedium.ttf",
 		["damage"]          = "Interface\\AddOns\\FreeUI\\media\\PEPSI_pl.ttf",
+	},
+}
+
+C.UnitframesNameFont = {
+	standard = {
+		C.media.font.normal,
+		11,
+		"OUTLINE",
+	},
+	pixel = {
+		C.media.font.pixelCN,
+		10,
+		"OUTLINEMONOCHROME",
 	},
 }
 
@@ -40,6 +50,7 @@ elseif GetLocale() == "zhTW" then
 	C.media.font.chat = "Fonts\\blei00d.ttf"
 	C.media.font.pixelCN = "Fonts\\blei00d.ttf"
 end
+
 
 --[[ Global config ]]
 
@@ -249,6 +260,8 @@ C["unitframes"] = {
 	["num_boss_buffs"] = 5,
 	["num_arena_buffs"] = 8,
 	["num_focus_debuffs"] = 4,
+
+	["UnitframesNameFont_Pixel"] = false,
 }
 
 C["classmod"] = {

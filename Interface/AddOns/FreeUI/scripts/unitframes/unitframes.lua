@@ -9,25 +9,13 @@ local name = UnitName("player")
 local realm = GetRealmName()
 local class = select(2, UnitClass("player"))
 
-fonts = {
-	standard = {
-		C.media.font.normal,
-		11,
-		"OUTLINE",
-	},
-	pixel = {
-		"Fonts\\pixfontCN.ttf",
-		10,
-		"OUTLINEMONOCHROME",
-	},
-}
 
 local nameFont
 
-if name == "Nekretaal" or name == "Rhonesaia" or name == "Maginary" or name == "Ashariel" then
-	nameFont = fonts.pixel
+if C.unitframes.UnitframesNameFont_Pixel then
+	nameFont = C.UnitframesNameFont.pixel
 else
-	nameFont = fonts.standard
+	nameFont = C.UnitframesNameFont.standard
 end
 
 local shadow = C.unitframes.shadow
@@ -816,10 +804,7 @@ local UnitSpecific = {
 				Castbar:SetHeight(self:GetHeight())
 				Castbar:SetPoint(unpack(C.unitframes.player_castbar))
 				Castbar.Text:SetAllPoints(Castbar)
-				if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
-					Castbar.Text:SetFont(C.media.font.normal, 12, "OUTLINE")
-					Castbar.Text:SetPoint("BOTTOM", Castbar, "TOP", 0, 10)
-				end
+				Castbar.Text:SetFont(unpack(nameFont))
 				local sf = Castbar:CreateTexture(nil, "OVERLAY")
 				sf:SetVertexColor(.5, .5, .5, .5)
 				Castbar.SafeZone = sf
@@ -1257,9 +1242,7 @@ local UnitSpecific = {
 			Castbar:SetHeight(C.unitframes.castbarHeight)
 			Castbar:SetPoint(unpack(C.unitframes.target_castbar))
 			Castbar.Text:SetPoint("BOTTOM", Castbar, "TOP", 0, 4)
-			if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
-				Castbar.Text:SetFont(C.media.font.normal, 12, "OUTLINE")
-			end
+			Castbar.Text:SetFont(unpack(nameFont))
 			local sf = Castbar:CreateTexture(nil, "OVERLAY")
 			sf:SetVertexColor(.5, .5, .5, .5)
 			Castbar.SafeZone = sf
@@ -1435,9 +1418,7 @@ local UnitSpecific = {
 			Castbar:SetHeight(C.unitframes.castbarHeight)
 			Castbar:SetPoint(unpack(C.unitframes.focus_castbar))
 			Castbar.Text:SetPoint("TOP", Castbar, "BOTTOM", 0, -4)
-			if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
-				Castbar.Text:SetFont(C.media.font.normal, 12, "OUTLINE")
-			end
+			Castbar.Text:SetFont(unpack(nameFont))
 			local sf = Castbar:CreateTexture(nil, "OVERLAY")
 			sf:SetVertexColor(.5, .5, .5, .5)
 			Castbar.SafeZone = sf
@@ -1541,6 +1522,7 @@ local UnitSpecific = {
 		Health.value = HealthPoints
 
 		local Name = F.CreateFS(self, C.FONT_SIZE_NORMAL, "LEFT")
+		Name:SetFont(unpack(nameFont))
 		Name:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, 4)
 		Name:SetWidth((bossWidth / 2) + 10)
 		Name:SetHeight(12)
@@ -1582,6 +1564,7 @@ local UnitSpecific = {
 		Spark:SetHeight(self.Health:GetHeight())
 
 		Castbar.Text = F.CreateFS(self)
+		Castbar.Text:SetFont(unpack(nameFont))
 		Castbar.Text:SetDrawLayer("ARTWORK")
 		Castbar.Text:SetAllPoints(Health)
 
@@ -1679,6 +1662,7 @@ local UnitSpecific = {
 		Spark:SetHeight(self.Health:GetHeight())
 
 		Castbar.Text = F.CreateFS(self)
+		Castbar.Text:SetFont(unpack(nameFont))
 		Castbar.Text:SetDrawLayer("ARTWORK")
 		Castbar.Text:SetAllPoints(Health)
 
