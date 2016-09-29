@@ -31,10 +31,14 @@ firstErrorFrame.text:SetPoint("TOP", UIParent, 0, -76)
 secondErrorFrame.text = F.CreateFS(secondErrorFrame)
 secondErrorFrame.text:SetPoint("TOP", UIParent, 0, -85)
 
+F.SetFS(UIErrorsFrame)
+
 if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
 	firstErrorFrame.text:SetFont(C.media.font.normal, 12, "OUTLINE")
 	secondErrorFrame.text:SetFont(C.media.font.normal, 12, "OUTLINE")
 	secondErrorFrame.text:SetPoint("TOP", UIParent, 0, -95)
+
+	UIErrorsFrame:SetFont(C.media.font.normal, 12, "OUTLINE")
 end
 
 local state = 0
