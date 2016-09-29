@@ -48,53 +48,34 @@ cB_Filters.fItemClass = function(item, container)
 	return bag == container
 end
 
-do
-	local itemUpdater, last = CreateFrame("Frame"), 0
-	itemUpdater:SetScript("OnUpdate", function(self, elapsed)
-		last = last + elapsed
-		if last > 1 and #itemUpdater > 0 then
-			local item = table.remove(itemUpdater)
-			cbNivaya:GetItemInfo(item.bagID, item.slotID, true)
-			if item.id then
-				C_Timer.After(0.1, function()
-					cbNivaya:ClassifyItem(item)
-				end)
-			else
-				table.insert(itemUpdater, item)
-			end
-			last = 0
-		end
-	end)
-	function cbNivaya:ClassifyItem(item)
+function cbNivaya:ClassifyItem(item)
 
-		if item.bagID == -2 then
-			-- keyring
-			cB_ItemClass[item.id] = "Keyring"
-		elseif cBniv_CatInfo[item.id] then
-			-- user assigned containers
-			cB_ItemClass[item.id] = cBniv_CatInfo[item.id]
-		elseif (item.rarity == 0) then
-			-- junk
-			cB_ItemClass[item.id] = "Junk"
-		elseif item.typeID then
-			-- type based filters
-			if (item.typeID == _G.LE_ITEM_CLASS_ARMOR) or (item.typeID == _G.LE_ITEM_CLASS_WEAPON)	then
-				cB_ItemClass[item.id] = "Armor"
-			elseif (item.typeID == _G.LE_ITEM_CLASS_QUESTITEM) then
-				cB_ItemClass[item.id] = "Quest"
-			elseif (item.typeID == _G.LE_ITEM_CLASS_TRADEGOODS) then
-				cB_ItemClass[item.id] = "TradeGoods"
-			elseif (item.typeID == _G.LE_ITEM_CLASS_CONSUMABLE) then
-				cB_ItemClass[item.id] = "Consumables"
-			elseif(item.typeID == _G.LE_ITEM_CLASS_BATTLEPET) then
-				cB_ItemClass[item.id] = "BattlePet"
-			end
+	if item.bagID == -2 then
+		-- keyring
+		cB_ItemClass[item.id] = "Keyring"
+	elseif cBniv_CatInfo[item.id] then
+		-- user assigned containers
+		cB_ItemClass[item.id] = cBniv_CatInfo[item.id]
+	elseif (item.rarity == 0) then
+		-- junk
+		cB_ItemClass[item.id] = "Junk"
+	elseif item.typeID then
+		-- type based filters
+		if (item.typeID == _G.LE_ITEM_CLASS_ARMOR) or (item.typeID == _G.LE_ITEM_CLASS_WEAPON)	then
+			cB_ItemClass[item.id] = "Armor"
+		elseif (item.typeID == _G.LE_ITEM_CLASS_QUESTITEM) then
+			cB_ItemClass[item.id] = "Quest"
+		elseif (item.typeID == _G.LE_ITEM_CLASS_TRADEGOODS) then
+			cB_ItemClass[item.id] = "TradeGoods"
+		elseif (item.typeID == _G.LE_ITEM_CLASS_CONSUMABLE) then
+			cB_ItemClass[item.id] = "Consumables"
+		elseif(item.typeID == _G.LE_ITEM_CLASS_BATTLEPET) then
+			cB_ItemClass[item.id] = "BattlePet"
 		end
+	end
 
-		if not cB_ItemClass[item.id] then
-			table.insert(itemUpdater, item)
-			cB_ItemClass[item.id] = "NoClass"
-		end
+	if not cB_ItemClass[item.id] then
+		cB_ItemClass[item.id] = "NoClass"
 	end
 end
 
@@ -131,7 +112,7 @@ cB_Filters.fNewItems = function(item)
 	if not ((item.bagID >= 0) and (item.bagID <= 4)) then return false end
 	if not item.link then return false end
 	if not cB_KnownItems[item.id] then return true end
-	local t = cbNivaya:getItemCount(item.id)
+	local t = cbNivaya:getItemCount(item.name)
 	return (t > cB_KnownItems[item.id]) and true or false
 end
 
@@ -155,7 +136,7 @@ cB_Filters.fItemSets = function(item)
 	local _,_,itemStr = string.find(item.link, "^|c%x+|H(.+)|h%[.*%]")
 	if item2setOF[itemStr] then return true end
 	-- Check Equipment Manager sets:
-	if cargBags.itemKeys["setID"](item) then return true end
+	if item.isInSet then return true end
    return false
 end
 

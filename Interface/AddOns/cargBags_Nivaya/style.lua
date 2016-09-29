@@ -56,25 +56,74 @@ local GetNumFreeSlots = function(bagType)
 	return free, max
 end
 
-local QuickSort;
+local QuickSort, invTypes
 do
+	invTypes = {
+		INVTYPE_HEAD 		= 1,
+		INVTYPE_NECK		= 2,
+		INVTYPE_SHOULDER	= 3,
+		INVTYPE_CLOAK		= 4,
+		INVTYPE_CHEST		= 5,
+		INVTYPE_BODY		= 6, -- Shirt
+		INVTYPE_TABARD		= 7,
+		INVTYPE_WRIST		= 8,
+		INVTYPE_HAND		= 9,
+		INVTYPE_WAIST		= 10,
+		INVTYPE_LEGS		= 11,
+		INVTYPE_FEET		= 12,
+		INVTYPE_FINGER		= 13,
+		INVTYPE_TRINKET 	= 14,
+
+		INVTYPE_2HWEAPON	= 15,
+		INVTYPE_RANGED		= 16, -- Bows
+		INVTYPE_RANGEDRIGHT = 16, -- Wands, Guns, and Crossbows
+
+		INVTYPE_WEAPON 		= 17, -- One-Hand
+		INVTYPE_WEAPONMAINHAND = 18,
+		INVTYPE_WEAPONOFFHAND = 19,
+		INVTYPE_SHIELD		= 20,
+		INVTYPE_HOLDABLE	= 21,
+
+		INVTYPE_BAG			= 25
+	}
 	local func = function(v1, v2)
-		if (v1 == nil) or (v2 == nil) then return (v1 and true or false) end
-		if v1[1] == -1 or v2[1] == -1 then
-			return v1[1] > v2[1] -- empty slots last
-		elseif v1[2] ~= v2[2] then
-			if v1[2] and v2[2] then
-				return v1[2] > v2[2] -- higher quality first
-			elseif (v1[2] == nil) or (v2[2] == nil) then
-				return (v1[2] and true or false)
+		local item1, item2 = v1[1], v2[1]
+		if (item1 == nil) or (item2 == nil) then return not not item1 end
+
+		-- higher quality first
+		if item1.rarity ~= item2.rarity then
+			if item1.rarity and item2.rarity then
+				return item1.rarity > item2.rarity
+			elseif (item1.rarity == nil) or (item2.rarity == nil) then
+				return not not item1.rarity
 			else
 				return false
 			end
-		elseif v1[1] ~= v2[1] then
-			return v1[1] > v2[1] -- group identical item ids
-		else
-			return v1[4] > v2[4] -- full/larger stacks first
 		end
+
+		-- group item types
+		if item1.typeID ~= item2.typeID then
+			return item1.typeID > item2.typeID
+		elseif item1.subTypeID ~= item2.subTypeID then
+			return item1.subTypeID > item2.subTypeID
+		end
+
+		-- group equipment types
+		if (item1.equipLoc ~= "" and item2.equipLoc ~= "") and (item1.equipLoc ~= item2.equipLoc) then
+			if not invTypes[item1.equipLoc] or not invTypes[item2.equipLoc] then
+				print(item1.link, item1.equipLoc, item2.link, item2.equipLoc)
+			else
+				return invTypes[item1.equipLoc] < invTypes[item2.equipLoc]
+			end
+		end
+
+		-- group same items
+		if item1.id ~= item2.id then
+			return item1.id > item2.id
+		end
+
+		-- sort larger stacks first
+		return item1.count > item2.count
 	end;
 	QuickSort = function(tbl) table.sort(tbl, func) end
 end
@@ -91,18 +140,21 @@ function MyContainer:OnContentsChanged()
 	local tReagent = (tName == "cBniv_BankReagent")
 
 	local buttonIDs = {}
-  	for i, button in pairs(self.buttons) do
+	for i, button in pairs(self.buttons) do
 		local item = cbNivaya:GetItemInfo(button.bagID, button.slotID)
 		if item.link then
-			buttonIDs[i] = { item.id, item.rarity, button, item.count }
+			if item.equipLoc ~= "" and not invTypes[item.equipLoc] then
+				print(item.link, item.equipLoc)
+			end
+			buttonIDs[i] = {item, button}
 		else
-			buttonIDs[i] = { -1, -2, button, -1 }
+			buttonIDs[i] = { nil, button }
 		end
 	end
 	if ((tBank or tReagent) and cBnivCfg.SortBank) or (not (tBank or tReagent) and cBnivCfg.SortBags) then QuickSort(buttonIDs) end
 
 	for _,v in ipairs(buttonIDs) do
-		local button = v[3]
+		local button = v[2]
 		button:ClearAllPoints()
 	  
 		local xPos = col * (itemSlotSize + 2) + 2
@@ -212,17 +264,26 @@ end
 -- Reset New
 local resetNewItems = function(self)
 	cB_KnownItems = cB_KnownItems or {}
+	if not cBniv.clean then
+		for item, numItem in next, cB_KnownItems do
+			if type(item) == "string" then
+				cB_KnownItems[item] = nil
+			end
+		end
+		cBniv.clean = true
+	end
 	for bag = 0, 4 do
 		local tNumSlots = GetContainerNumSlots(bag)
 		if tNumSlots > 0 then
 			for slot = 1, tNumSlots do
 				local item = cbNivaya:GetItemInfo(bag, slot)
 				--print("resetNewItems", item.id)
-				item.id = item.id or 0
-				if cB_KnownItems[item.id] then
-					cB_KnownItems[item.id] = cB_KnownItems[item.id] + (item.stackCount and item.stackCount or 0)
-				else
-					cB_KnownItems[item.id] = item.stackCount and item.stackCount or 0
+				if item.id then
+					if cB_KnownItems[item.id] then
+						cB_KnownItems[item.id] = cB_KnownItems[item.id] + (item.stackCount and item.stackCount or 0)
+					else
+						cB_KnownItems[item.id] = item.stackCount and item.stackCount or 0
+					end
 				end
 			end 
 		end
@@ -473,9 +534,9 @@ function MyContainer:OnCreate(name, settings)
 	local caption = background:CreateFontString(background, "OVERLAY", nil)
 	F.SetFS(caption)
 
-	if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
-		caption:SetFont(C.media.font.normal, 12, "OUTLINE")
-	end
+	-- if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
+	-- 	caption:SetFont(C.media.font.normal, 12, "OUTLINE")
+	-- end
 
 	if(caption) then
 		local t = L.bagCaptions[self.name] or (tBankBags and strsub(self.name, 5))
@@ -548,7 +609,7 @@ function MyContainer:OnCreate(name, settings)
 	end
 		
 	local tBtnOffs = 0
-  	if (tBag or tBank) then
+	if (tBag or tBank) then
 		-- Bag bar for changing bags
 		local bagType = tBag and "bags" or "bank"
 		
