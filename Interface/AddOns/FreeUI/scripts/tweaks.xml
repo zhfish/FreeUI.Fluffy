@@ -1,5 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
+	<Script file="tweaks\align.lua"/>
 	<Script file="tweaks\AlreadyKnown.lua"/>
 	<Script file="tweaks\archaeologybar.lua"/>
 	<Script file="tweaks\bags.lua"/>
@@ -14,6 +15,7 @@
 	<Script file="tweaks\fastercamera.lua"/>
 	<Script file="tweaks\fonts.lua"/>
 	<Script file="tweaks\globals.lua"/>
+	<Script file="tweaks\init.lua"/>
 	<Script file="tweaks\loot.lua"/>
 	<Script file="tweaks\lootroll.lua"/>
 	<Script file="tweaks\mail.lua"/>
@@ -32,9 +34,9 @@
 	<Script file="tweaks\reputation.lua"/>
 	<Script file="tweaks\role.lua"/>
 	<Script file="tweaks\SafeQueue.lua"/>
-	<Script file="tweaks\setCVar.lua"/>
 	<Script file="tweaks\stats.lua"/>
 	<Script file="tweaks\tekkrush.lua"/>
 	<Script file="tweaks\threatmeter.lua"/>
+	<Script file="tweaks\UIScaler.lua"/>
 	<Script file="tweaks\worldstateframe.lua"/>
 </Ui>
