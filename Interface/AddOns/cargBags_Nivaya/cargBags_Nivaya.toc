@@ -1,7 +1,7 @@
 ## Interface: 70000
 ## Title: cargBags_Nivaya: |cffF5FFFAFreeUI|r.|cffFF34B3Fluffy|r
 ## Author: Luzzifus (Modified by Dostoyevsky@烈焰峰)
-## Version: 70000.02
+## Version: 70000.11
 ## RequiredDeps: FreeUI
 ## OptionalDeps: ItemRack, Outfitter
 ## SavedVariables: cBnivCfg, cB_CustomBags, cBniv_CatInfo
