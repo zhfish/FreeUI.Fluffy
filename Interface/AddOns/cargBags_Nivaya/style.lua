@@ -23,6 +23,14 @@ local Textures = {
 	Right =			mediaPath .. "Right",
 }
 
+local captionFont
+
+if C.unitframes.UnitframesNameFont_Pixel then
+	captionFont = C.UnitframesNameFont.pixel
+else
+	captionFont = C.UnitframesNameFont.standard
+end
+
 local itemSlotSize = ns.options.itemSlotSize
 ------------------------------------------
 -- MyContainer specific
@@ -534,9 +542,7 @@ function MyContainer:OnCreate(name, settings)
 	local caption = background:CreateFontString(background, "OVERLAY", nil)
 	F.SetFS(caption)
 
-	-- if GetLocale() == "zhCN" or GetLocale() == "zhTW" then
-	-- 	caption:SetFont(C.media.font.normal, 12, "OUTLINE")
-	-- end
+	caption:SetFont(unpack(captionFont))
 
 	if(caption) then
 		local t = L.bagCaptions[self.name] or (tBankBags and strsub(self.name, 5))
