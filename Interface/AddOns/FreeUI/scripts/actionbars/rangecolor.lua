@@ -49,7 +49,7 @@ end
 function Addon:PLAYER_LOGIN()
 	self.sets = {
 		normal = {1, 1, 1},
-		oor = {1, 0.3, 0.1},
+		oor = {237/255, 33/255, 77/255},
 		oom = {0.1, 0.3, 1},
 		unusable = {0.4, 0.4, 0.4}
 	}
