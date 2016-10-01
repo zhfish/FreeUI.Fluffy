@@ -17,16 +17,25 @@ C.media = {
 	["texture"]    = "Interface\\AddOns\\FreeUI\\media\\Texture1", 					-- statusbar texture
 
 	["font"] = {
-		["normal"]          = "Fonts\\FRIZQT__.ttf",
-		["chat"]            = "Fonts\\FRIZQT__.ttf",
-		["unitname"]        = "Fonts\\FRIZQT__.ttf",
-		["pixelCN"]         = "Fonts\\pixfontCN.ttf",
-		["pixel"]           = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf",
-		["pixel_condensed"] = "Interface\\AddOns\\FreeUI\\media\\pixel_condensed.ttf",
-		["header"]          = "Interface\\AddOns\\FreeUI\\media\\ExocetBlizzardMedium.ttf",
-		["damage"]          = "Interface\\AddOns\\FreeUI\\media\\PEPSI_pl.ttf",
+		["normal"]          = "Fonts\\FRIZQT__.ttf",	-- 游戏主字体
+		["chat"]            = "Fonts\\FRIZQT__.ttf",	-- 聊天框
+		["unitname"]        = "Fonts\\FRIZQT__.ttf",	-- 人物头上的名字
+		["pixelCN"]         = "Fonts\\pixfontCN.ttf",	-- 中文像素
+		["pixel"]           = "Interface\\AddOns\\FreeUI\\media\\pixel.ttf",	-- 英文像素
+		["header"]          = "Interface\\AddOns\\FreeUI\\media\\ExocetBlizzardMedium.ttf",	-- 标题
+		["damage"]          = "Interface\\AddOns\\FreeUI\\media\\PEPSI_pl.ttf",		-- 伤害
 	},
 }
+
+if GetLocale() == "zhCN" then
+	C.media.font.normal = "Fonts\\ARKai_T.ttf"		-- 简体中文客户端主字体
+	C.media.font.chat = "Fonts\\ARKai_T.ttf"
+	C.media.font.header = "Fonts\\ARKai_T.ttf"
+elseif GetLocale() == "zhTW" then
+	C.media.font.normal = "Fonts\\blei00d.ttf"		-- 繁体中文客户端主字体
+	C.media.font.chat = "Fonts\\blei00d.ttf"
+	C.media.font.header = "Fonts\\blei00d.ttf"
+end
 
 C.UnitframesNameFont = {
 	standard = {
@@ -40,16 +49,6 @@ C.UnitframesNameFont = {
 		"OUTLINEMONOCHROME",
 	},
 }
-
-if GetLocale() == "zhCN" then
-	C.media.font.normal = "Fonts\\ARKai_T.ttf"		-- 简体中文客户端主字体
-	C.media.font.chat = "Fonts\\ARKai_T.ttf"
-	C.media.font.pixelCN = "Fonts\\ARKai_T.ttf"
-elseif GetLocale() == "zhTW" then
-	C.media.font.normal = "Fonts\\blei00d.ttf"		-- 繁体中文客户端主字体
-	C.media.font.chat = "Fonts\\blei00d.ttf"
-	C.media.font.pixelCN = "Fonts\\blei00d.ttf"
-end
 
 
 --[[ Global config ]]
