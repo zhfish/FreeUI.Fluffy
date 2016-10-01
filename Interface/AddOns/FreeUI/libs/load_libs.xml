@@ -7,5 +7,7 @@
 	<Script file="LibItemLevel.lua"/>
 	<Script file="LibInspect\LibInspect.lua"/>
 	<Script file="Taint.lua"/>
+	<Script file="rLib\core.lua"/>
+	<Script file="rLib\framefader.lua"/>
 </Ui>
 
