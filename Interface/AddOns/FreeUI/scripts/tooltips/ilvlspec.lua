@@ -1,22 +1,16 @@
-local F, C = unpack(select(2, ...))
-if C.tooltip.enable ~= true or C.tooltip.ilvlspec ~= true then return end
-
---[[
-	by aliluya555
-]]
-
-
 --- Variables ---
 if (type(LibItemLevel) ~= "table") then return end
 FreeUI_ftipUnitDB = FreeUI_ftipUnitDB or {}
 
 local _, _G = _, _G
 local LIL = LibItemLevel
+local GameTooltip = _G["GameTooltip"]
 
 local prefixColor, detailColor = "|cffffeeaa", "|cffffffff"
-local nextInspectRequest, lastInspectRequest = 0, 0
-local nextScanRequest, lastScanRequest = 0, 0
-local currentUNIT, currentGUID, inspectUpdate
+local lastScanRequest, nextScanRequest, nextScanInterval = 0, 0, 0
+local lastInspectRequest, nextInspectRequest = 0, 0
+local currentUNIT, currentGUID, currentINS, forceInspect
+
 local LFG_LIST_LOADING = _G["LFG_LIST_LOADING"]
 local UNKNOWN = _G["UNKNOWN"]
 local FAILED = _G["FAILED"]
@@ -143,49 +137,57 @@ local function ScanUnit(unit, forced)
 		if (not unit or UnitGUID(unit) ~= currentGUID) then return end
 		local Time, cachedGear, cachedSpec = GetTime()
 		local timeSinceLastInspect = Time - lastInspectRequest
-		inspectUpdate = not FreeUI_ftipUnitDB[currentGUID] or IsShiftKeyDown() or forced
+		forceInspect = forced or IsShiftKeyDown() or not FreeUI_ftipUnitDB[currentGUID]
 
 		if (FreeUI_ftipUnitDB[currentGUID]) then
-			if (Time - (FreeUI_ftipUnitDB[currentGUID].Update or 0) > 1800) then
-				inspectUpdate = true
+			local cachedTime = Time - (FreeUI_ftipUnitDB[currentGUID].Time or 0)
+			if (cachedTime > 1800) then
+				forceInspect = true
 			else
-				if ((FreeUI_ftipUnitDB[currentGUID].ScanUnit or 0) > 0) then
-					if (not FreeUI_ftipUnitDB[currentGUID].Spec) then
-						FreeUI_ftipUnitDB[currentGUID].Spec = UnitSpec(unit)
-					end
-
-					if (not FreeUI_ftipUnitDB[currentGUID].Gear) then
-						FreeUI_ftipUnitDB[currentGUID].Gear = UnitGear(unit)
-					end
-				end
-
 				cachedSpec = FreeUI_ftipUnitDB[currentGUID].Spec
 				cachedGear = FreeUI_ftipUnitDB[currentGUID].Gear
 
 				if (not cachedSpec) then
-					if (Time - lastScanRequest > 3.5) then
+					cachedSpec = UnitSpec(unit)
+				end
+				FreeUI_ftipUnitDB[currentGUID].Spec = cachedSpec
+
+				if (not cachedSpec) then
+					if (Time - lastScanRequest > 3) then
 						cachedSpec = FAILED
+					elseif (timeSinceLastInspect > 1.5) then
+						forceInspect = true
+					end
+				end
+
+				if (not currentINS or cachedTime > 0) then
+					if (not cachedGear) then
+						cachedGear = UnitGear(unit)
+					end
+					if (cachedGear and cachedGear ~= 0) then
+						FreeUI_ftipUnitDB[currentGUID].Gear = cachedGear
 					end
 				end
 
 				if (not cachedGear) then
-					if (Time - lastScanRequest > 3.5) then
+					if (Time - lastScanRequest > 3) then
 						_, cachedGear = UnitGear(unit)
 					elseif (timeSinceLastInspect > 1.5) then
-						inspectUpdate = true
+						forceInspect = true
 					end
 				elseif (cachedGear == 0) then
-					inspectUpdate = true
+					forceInspect = true
 					cachedGear = nil
 				end
 			end
 		end
+		currentINS = nil
 
 		if (cachedGear or cachedSpec) then
 			SetUnitInfo(cachedGear or LFG_LIST_LOADING, cachedSpec or LFG_LIST_LOADING)
 		end
 
-		if (not inspectUpdate) then
+		if (not forceInspect) then
 			if (cachedGear and cachedSpec) then return end
 			if (UnitAffectingCombat("player")) then return end
 		end
@@ -228,35 +230,32 @@ end)
 --- Handle Events ---
 f:SetScript("OnEvent", function(self, event, ...)
     if (event == "UPDATE_MOUSEOVER_UNIT" and CanInspect("mouseover")) then
-		lastScanRequest = GetTime()
 		currentUNIT, currentGUID = "mouseover", UnitGUID("mouseover")
-		if (FreeUI_ftipUnitDB[currentGUID]) then
-			FreeUI_ftipUnitDB[currentGUID].ScanUnit = 0
-		end
-		nextScanRequest = 0.5
+		lastScanRequest = GetTime()
+		nextScanInterval = 0
 		ScanUnit(currentUNIT)
 	elseif (event == "INSPECT_READY") then
 		local guid = ...
 		if (guid == currentGUID) then
-			if (not FreeUI_ftipUnitDB[currentGUID]) then
-				FreeUI_ftipUnitDB[currentGUID] = {}
-			end
+			currentINS = true
 
 			local spec = UnitSpec(currentUNIT)
 			local gear = UnitGear(currentUNIT)
 
-			FreeUI_ftipUnitDB[currentGUID].Gear = gear
-			FreeUI_ftipUnitDB[currentGUID].Spec = spec
-			FreeUI_ftipUnitDB[currentGUID].Update = GetTime()
-			FreeUI_ftipUnitDB[currentGUID].Inspect = (FreeUI_ftipUnitDB[currentGUID].Inspect or 0) + (spec and 1 or 0)
-			FreeUI_ftipUnitDB[currentGUID].ScanUnit = FreeUI_ftipUnitDB[currentGUID].ScanUnit or 0
+			if (spec or (gear and gear ~= 0)) then
+				if (not FreeUI_ftipUnitDB[guid]) then FreeUI_ftipUnitDB[guid] = {} end
+				if (gear and gear ~= 0) then FreeUI_ftipUnitDB[guid].Gear = gear end
+				if (spec) then FreeUI_ftipUnitDB[guid].Spec = spec end
+				FreeUI_ftipUnitDB[guid].Time = GetTime()
+				FreeUI_ftipUnitDB[guid].Update = (FreeUI_ftipUnitDB[guid].Update or 0) + 1
 
-			if (FreeUI_ftipUnitDB[currentGUID].Inspect <= 1 and (not spec or gear == 0)) then
-				ScanUnit(currentUNIT, true)
-			elseif (not (gear and spec)) then
-				ScanUnit(currentUNIT)
+				if (not (gear and spec) or (gear == 0 and FreeUI_ftipUnitDB[guid].Update == 1)) then
+					ScanUnit(currentUNIT)
+				else
+					SetUnitInfo(gear, spec)
+				end
 			else
-				SetUnitInfo(gear, spec)
+				ScanUnit(currentUNIT, true)
 			end
 		end
 	elseif (event == "UNIT_INVENTORY_CHANGED") then
@@ -269,7 +268,7 @@ end)
 
 f:SetScript("OnUpdate", function(self, elapsed)
 	if (currentUNIT and UnitGUID(currentUNIT) == currentGUID) then
-		if (inspectUpdate) then
+		if (forceInspect) then
 			nextInspectRequest = nextInspectRequest - elapsed
 			if (nextInspectRequest > 0) then return end
 			self:Hide()
@@ -278,15 +277,13 @@ f:SetScript("OnUpdate", function(self, elapsed)
 			NotifyInspect(currentUNIT)
 		else
 			nextScanRequest = nextScanRequest + elapsed
-			if (nextScanRequest < 0.5) then return end
+			if (nextScanRequest < nextScanInterval) then return end
 			self:Hide()
 
-			if (FreeUI_ftipUnitDB[currentGUID]) then
-				FreeUI_ftipUnitDB[currentGUID].ScanUnit = (FreeUI_ftipUnitDB[currentGUID].ScanUnit or 0) + 1
-				nextScanRequest = 0.5 - min(0.5, FreeUI_ftipUnitDB[currentGUID].ScanUnit / 10)
-			else
-				nextScanRequest = 0.5
+			if (nextScanInterval < 0.5) then
+				nextScanInterval = nextScanInterval + 0.1
 			end
+			nextScanRequest = 0
 			ScanUnit(currentUNIT)
 		end
 	end

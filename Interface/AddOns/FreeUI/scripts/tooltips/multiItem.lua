@@ -1,10 +1,7 @@
-local F, C = unpack(select(2, ...))
-
-if C.tooltip.enable == false then return end
-
 local ADDON_NAME, ns = ...
 
-local tips = { [1] = _G["ItemRefTooltip"] }
+local _, _G = _, _G
+local tips = {[1] = _G["ItemRefTooltip"]}
 
 local types = {
 	item = true,
@@ -51,15 +48,6 @@ local function CreateTip(link)
 	tip:RegisterForDrag("LeftButton")
 
 	table.insert(UISpecialFrames, tip:GetName())
-
-	tip.CloseButton = CreateFrame("Button", nil, tip)
-	tip.CloseButton:SetPoint("TOPRIGHT", 1, 0)
-	tip.CloseButton:SetSize(32,32)
-	tip.CloseButton:SetNormalTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Up")
-	tip.CloseButton:SetPushedTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Down")
-	tip.CloseButton:SetHighlightTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Highlight", "ADD")
-	F.ReskinClose(tip.CloseButton)
-	tip.CloseButton:SetScript("OnClick", function(self) HideUIPanel(self:GetParent()) end)
 
 	if (IDCard) then IDCard:RegisterTooltip(tip) end
 
